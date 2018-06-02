@@ -1,2 +1,2 @@
 # BITVA_groupProject
-Making a game with ellectron, react and jest.
+Making a game with electron, react and jest.
