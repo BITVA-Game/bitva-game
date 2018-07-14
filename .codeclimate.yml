@@ -4,7 +4,7 @@ plugins:
     enabled: true
     channel: "eslint-4"
     config:
-      config: ".eslinrc.js"
+      config: ".eslintrc.js"
       extensions: 
       - .js
       - .jsx
