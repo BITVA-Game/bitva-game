@@ -1,6 +1,5 @@
-# BITVA_groupProject
-Making a game with electron, react and jest.  
-Acold - Development team and QA, #frontend, #qa  
-Inga (Rukia3d) - Team Lead
-Tanita She (tanitash77) - Development team, #frontend, #backend, #devops
-JaneT (eugenie-te) - QA #QA
+Running the project
+[npm install] to install all packages.
+[npm tun start] to run the project.
+
+Use ctrl+C command to stop the process when you need to.
