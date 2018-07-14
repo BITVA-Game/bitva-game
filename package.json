@@ -12,9 +12,12 @@
   "scripts": {
     "start-react": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test-react": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start": "nf start"
+    "start": "nf start",
+    "test": "jest",
+    "lint": "eslint --ext .jsx,.js . || exit 0",
+    "lintfix": "eslint --fix --ext .jsx,.js . || exit 0"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -22,6 +25,7 @@
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
-    "foreman": "^3.0.1"
+    "foreman": "^3.0.1",
+    "jest": "^23.4.1"
   }
 }
