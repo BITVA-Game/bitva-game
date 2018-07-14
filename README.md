@@ -1,5 +1,5 @@
 Running the project
-[npm install] to install all packages.
+[npm install] to install all packages each time you pull.
 [npm run start] to run the project.
 [npm run lint] to test all the syntax in the project.
 [npm run lintfix] to automatically fix all the syntax that can be autofixed.
