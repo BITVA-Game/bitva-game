@@ -49,11 +49,10 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-ipcMain.on('MSG', (event, arg) => { 
+ipcMain.on('MSG', (event, arg) => {
     // Send the request to game engine to get relevant data.
-    var received = manager.msgReceived(arg); 
+    const received = manager.msgReceived(arg);
 
     // Send back the answer.
-    win.webContents.send("APP", received);
-
+    win.webContents.send('APP', received);
 });
