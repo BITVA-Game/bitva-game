@@ -3,6 +3,7 @@ plugins:
   eslint:
     enabled: true
     channel: "eslint-4"
-    extensions: 
-    - .js
-    - .jsx
+    config: 
+      extensions: 
+      - .js
+      - .jsx
