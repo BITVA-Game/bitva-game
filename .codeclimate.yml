@@ -1,8 +1,8 @@
----
-engines:
+version: 2
+plugins:
   eslint:
     enabled: true
     channel: "eslint-4"
     extensions: 
-      - .js
-      - .jsx
+    - .js
+    - .jsx
