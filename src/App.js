@@ -11,7 +11,7 @@ class App extends Component {
     // Bind the function to send messages
     constructor(props){
         super(props);
-        this.state = {gso: {state: "loading"} }
+        this.state = {app: {state: "loading"} }
         this.sendMessage = this.sendMessage.bind(this);
     }
 
@@ -22,8 +22,8 @@ class App extends Component {
 
     // When the page loads, get GSO from backend, save it to state.
     componentDidMount(){
-        ipcRenderer.on("GSO", (event, arg) => {
-            this.setState({ gso: arg });
+        ipcRenderer.on("APP", (event, arg) => {
+            this.setState({ app: arg });
         });
         this.sendMessage("Init");
     }
