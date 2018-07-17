@@ -4,7 +4,7 @@ const { app, ipcMain, BrowserWindow } = require('electron');
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 
-const application = require("./backend/application");
+const application = require('./backend/application');
 
 function createWindow() {
     // Create the browser window.
@@ -47,7 +47,7 @@ app.on('activate', () => {
     }
 });
 
-function sendMessage(received){
+function sendMessage(received) {
     win.webContents.send('APP', received);
 }
 
@@ -56,8 +56,5 @@ function sendMessage(received){
 ipcMain.on('APP', (event, arg) => {
     // Send the request to game engine to get relevant data
     // Give it the sendMessage to send Messages on its own.
-    const received = application.msgReceived(arg, sendMessage);
-
+    application.msgReceived(arg, sendMessage);
 });
-
-
