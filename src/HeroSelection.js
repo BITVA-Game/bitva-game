@@ -1,11 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 
 
-const HeroSelection = (props) => (
-	<div>
-		<button onClick={() => props.sendMessage({type: 'HEROSELECTED', hero: 'yaga'})}>Select imaginary hero</button>
-	</div>
-)
+const HeroSelection = props => (
+    <div>
+        <button type="button" onClick={() => props.sendMessage({ type: 'HEROSELECTED', hero: 'yaga' })}>
+Select imaginary hero
+        </button>
+    </div>
+);
+
+
+HeroSelection.propTypes = {
+    sendMessage: PropTypes.func.isRequired,
+};
 
 export default HeroSelection;
