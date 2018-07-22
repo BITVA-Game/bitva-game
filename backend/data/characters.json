@@ -1,25 +1,81 @@
 {
-	"Morevna": {
-		"name": "Marya Morevna",
-		"description": "blah",
+// character 2
+    "мorevna": {
+		"name": "Мarya Мorevna",
+		"description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
 		"cards": {
-			"bajun" : {
-				"name" : "Cat-Bajun"
-			},
+// actions cards
+            "bajun": {
+				 "count": 2
+            },
 			"sivka" : {
-				"name" : "Sivka-Burka"
-			}
-		}
-	},
-	"Yaga":{
-		"name": "Baba Yaga",
-		"description": "blah",
-		"cards": {
-			"bes" : {
-				"name" : "Bes"
+				"count": 1
 			},
-			"volkodlak" : {
-				"name" : "volkodlak"
+            "bogatyr": {
+                "count": 3
+            },
+            "apple": {
+                "count": 2
+             },
+            "bereginya": {
+				 "count": 2
+            },
+ // item cards
+            "l shield": {
+				 "count": 1
+            },  
+            "mirror": {
+				 "count": 1
+            },  
+            "l water": {
+				 "count": 1
+            },  
+             "firebird": {
+				 "count": 1
+            },  
+             "kladenets": {
+				 "count": 1
+            },  
+        }
+	},
+    
+// character 2
+	"yaga": {
+		"name": "Yaga",
+		"description": "Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.",
+		"cards": {
+// actions cards
+            "wolf": {
+				"count": 2
+			},
+			"bajun": {
+				"count": 3
+			},
+            "apple": {
+                "count": 2
+             },
+            "bereginya": {
+				 "count": 2
+            },
+            "bogatyr": {
+                "count": 1
+            },
+// item cards
+            "s shield": {
+				 "count": 1
+            },
+            "mirror": {
+				 "count": 1
+                
+            },  
+            "s water": {
+				 "count": 1
+            }, 
+            "firebird": {
+				 "count": 1
+            },  
+            "kladenets": {
+				 "count": 1
 			}
 		}
 	}
