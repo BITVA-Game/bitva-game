@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+import MainMenu from './MainMenu';
+import HeroSelection from './HeroSelection';
 
 // Import electron and establis connection to use app.js as Renderer
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 function sendMessage(msg) {
-    ipcRenderer.send('MSG', msg);
+    ipcRenderer.send('APP', msg);
 }
 
 class App extends Component {
@@ -14,7 +16,7 @@ class App extends Component {
     // Bind the function to send messages
     constructor(props) {
         super(props);
-        this.state = { app: { state: 'loading' } };
+        this.state = { app: { manager: { screen: 'loading' } } };
     }
 
 
@@ -26,11 +28,25 @@ class App extends Component {
         sendMessage('Init');
     }
 
+    showApplication() {
+        switch (this.state.app.manager.screen) {
+        case 'loading':
+            return 'LOADING';
+        case 'STARTSCREEN':
+            return <MainMenu sendMessage={sendMessage} app={this.state.app} />;
+        case 'HEROSELECT':
+            return <HeroSelection sendMessage={sendMessage} app={this.state.app} />;
+        default:
+            return `UNKNOWN SCREEN NAME ${this.state.app.manager.screen}`;
+        }
+    }
 
     render() {
         console.log(this.state.app);
         return (
-            <div className="App" />
+            <div className="App">
+                {this.showApplication()}
+            </div>
         );
     }
 }
