@@ -21,13 +21,13 @@
 				 "count": 2
             },
  // item cards
-            "l shield": {
+            "large shield": {
 				 "count": 1
             },  
             "mirror": {
 				 "count": 1
             },  
-            "l water": {
+            "living water": {
 				 "count": 1
             },  
              "firebird": {
@@ -61,14 +61,14 @@
                 "count": 1
             },
 // item cards
-            "s shield": {
+            "small shield": {
 				 "count": 1
             },
             "mirror": {
 				 "count": 1
                 
             },  
-            "s water": {
+            "dead water": {
 				 "count": 1
             }, 
             "firebird": {

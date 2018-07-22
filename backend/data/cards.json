@@ -45,23 +45,23 @@
     "description": "Plenty of Keepers lives in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
 },
 
-"l shield": {
+"large shield": {
     "name": "Large Shield",
     "description": "The shield, forged by Svarog -  divinity-blacksmith. After recognition of  his owner, it can reflect the damage and ensure protection  from witchcraft.",
 },
 
-"s shield": {
+"small shield": {
     "name": "Small Shield",
     "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battke dealing with the damage and also can ward off an attacks.",
     
 },
 
-"l water": {
+"living water": {
     "name": "Living water",
     "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
 },
 
-"d water": {
+"dead water": {
   "name": "Dead water",
   "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",    
 },
