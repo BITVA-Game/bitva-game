@@ -30,7 +30,9 @@ class App extends Component {
     render() {
         console.log(this.state.app);
         return (
-            <div className="App" />
+            <div className="App">
+                <textarea value={JSON.stringify(this.state.app)} />
+            </div>
         );
     }
 }

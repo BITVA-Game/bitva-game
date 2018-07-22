@@ -1,0 +1,28 @@
+{
+	"Morevna": {
+		"name": "Marya Morevna",
+		"description": "blah",
+		"cards": {
+			"bajun" : {
+				"name" : "Cat-Bajun"
+			},
+			"sivka" : {
+				"name" : "Sivka-Burka"
+			}
+		}
+	},
+	"Yaga":{
+		"name": "Baba Yaga",
+		"description": "blah",
+		"cards": {
+			"bes" : {
+				"name" : "Bes"
+			},
+			"volkodlak" : {
+				"name" : "volkodlak"
+			}
+		}
+	}
+}
+
+

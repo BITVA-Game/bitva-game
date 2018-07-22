@@ -1,29 +1,11 @@
+// JSON object with allication data
 let application = require('./data/app.json');
 
+// Additional files that have functions related to this part of application
+const screenManager = require('./screenManager');
+const profileManager = require('./profileManager');
+const gameEngine = require('./gameEngine');
 
-function profileHandler(app, message) {
-    switch (message.type) {
-    case 'INITIAL':
-        return app.profile;
-    default: return app.profile;
-    }
-}
-
-function managerHandler(app, message) {
-    switch (message.type) {
-    case 'INITIAL':
-        return app.manager;
-    default: return app.manager;
-    }
-}
-
-function gameHandler(app, message) {
-    switch (message.type) {
-    case 'INITIAL':
-        return app.game;
-    default: return app.game;
-    }
-}
 
 // This function is called from main.js
 // It redirects the message to all handlers
@@ -32,9 +14,9 @@ function gameHandler(app, message) {
 // so we can se what we're sending back.
 function msgReceived(message, sendReply) {
     const newApp = {
-        profile: profileHandler(application, message),
-        manager: managerHandler(application, message),
-        game: gameHandler(application, message),
+        profile: profileManager.handle(application, message),
+        manager: screenManager.handle(application, message),
+        game: gameEngine.handle(application, message),
     };
     sendReply(newApp);
     application = newApp;

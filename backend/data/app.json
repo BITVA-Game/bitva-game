@@ -1,9 +1,9 @@
 {
 	"profile": {
-		"characters": ["Morevna", "Yaga"],
+		"characters": ["morevna", "yaga"],
 		"deck": ["apple", "mirror"],
-		"coins": 5,
-		"points": 0
+		"silver": 5,
+		"gold": 0
 	},
 	"manager": {
 		"screen": "STARTSCREEN"

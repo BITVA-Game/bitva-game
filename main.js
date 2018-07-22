@@ -6,15 +6,27 @@ let win;
 
 const application = require('./backend/application');
 
+function sendMessage(received) {
+    win.webContents.send('APP', received);
+}
+
 function createWindow() {
     // Create the browser window.
-    win = new BrowserWindow({ width: 800, height: 600 });
+    win = new BrowserWindow({ width: 1366, height: 768, show: false });
 
     // and load the index.html of the app.
     win.loadURL('http://localhost:3000/');
 
     // Open the DevTools.
     win.webContents.openDevTools();
+
+    // When we are ready to show - display initial state
+    win.once('ready-to-show', () => {
+        win.show();
+
+        // Send the message to show the first screen
+        application.msgReceived({ type: 'INITIAL' }, sendMessage);
+    });
 
     // Emitted when the window is closed.
     win.on('closed', () => {
@@ -46,10 +58,6 @@ app.on('activate', () => {
         createWindow();
     }
 });
-
-function sendMessage(received) {
-    win.webContents.send('APP', received);
-}
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
