@@ -16,6 +16,7 @@ function msgReceived(message, sendReply) {
     const newApp = {
         profile: profileManager.handle(application, message),
         manager: screenManager.handle(application, message),
+        // heroselect also needs to be an individual part of the app
         game: gameEngine.handle(application, message),
     };
     sendReply(newApp);
