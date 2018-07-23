@@ -1,84 +1,84 @@
 {
-// character 2
-    "мorevna": {
+// character 1
+    "Morevna": {
 		"name": "Мarya Мorevna",
 		"description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
 		"cards": {
 // actions cards
-            "bajun": {
+            "Cat-Bajun": {
 				 "count": 2
             },
-			"sivka" : {
+			"Sivka-Burka" : {
 				"count": 1
 			},
-            "bogatyr": {
+            "Bogatyr": {
                 "count": 3
             },
-            "apple": {
+            "Apple": {
                 "count": 2
              },
-            "bereginya": {
+            "Bereginya": {
 				 "count": 2
             },
  // item cards
-            "large shield": {
+            "Large Shield": {
 				 "count": 1
             },  
-            "mirror": {
+            "Mirror": {
 				 "count": 1
             },  
-            "living water": {
+            "Living Water": {
 				 "count": 1
             },  
-             "firebird": {
+             "Firebird": {
 				 "count": 1
             },  
-             "kladenets": {
+             "Kladenets": {
 				 "count": 1
             },  
         }
 	},
     
 // character 2
-	"yaga": {
+	"Yaga": {
 		"name": "Yaga",
 		"description": "Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.",
 		"cards": {
 // actions cards
-            "wolf": {
+            "Grey Wolf": {
 				"count": 2
 			},
-			"bajun": {
+			"Cat-Bajun": {
 				"count": 3
 			},
-            "apple": {
+            "Apple": {
                 "count": 2
              },
-            "bereginya": {
+            "Bereginya": {
 				 "count": 2
             },
-            "bogatyr": {
+            "Bogatyr": {
                 "count": 1
             },
 // item cards
-            "small shield": {
+            "Small Shield": {
 				 "count": 1
             },
-            "mirror": {
+            "Mirror": {
 				 "count": 1
                 
             },  
-            "dead water": {
+            "Dead Water": {
 				 "count": 1
             }, 
-            "firebird": {
+            "Firebird": {
 				 "count": 1
             },  
-            "kladenets": {
+            "Kladenets": {
 				 "count": 1
 			}
 		}
-	}
+	},
 }
 
 
