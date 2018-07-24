@@ -5,7 +5,7 @@ import './App.css';
 
 const HeroSelection = props => (
     <div>
-        <button type="button" onClick={() => props.sendMessage({ type: 'HEROSELECTED', hero: 'yaga' })}>
+        <button type="button" onClick={() => props.sendMessage({ type: 'HEROSELECTED', hero: 'Yaga' })}>
 Select imaginary hero
         </button>
     </div>

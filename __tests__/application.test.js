@@ -18,8 +18,8 @@ test('Game loaded. Send the app in its initial state', () => {
     expect(sendReply.mock.calls[0][0]).toEqual(
         {
             profile: {
-                characters: ['morevna', 'yaga'],
-                deck: ['apple', 'mirror'],
+                characters: ['Morevna', 'Yaga'],
+                deck: ['Apple', 'Mirror'],
                 silver: 5,
                 gold: 0,
             },
@@ -48,8 +48,8 @@ test('Hero Select screen, the Player can select any of the characters he has', (
     expect(sendReply.mock.calls[0][0]).toEqual(
         {
             profile: {
-                characters: ['morevna', 'yaga'],
-                deck: ['apple', 'mirror'],
+                characters: ['Morevna', 'Yaga'],
+                deck: ['Apple', 'Mirror'],
                 silver: 5,
                 gold: 0,
             },
