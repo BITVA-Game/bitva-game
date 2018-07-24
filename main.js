@@ -15,7 +15,7 @@ function createWindow() {
     win = new BrowserWindow({ width: 1366, height: 768, show: false });
 
     // and load the index.html of the app.
-    win.loadURL('http://localhost:3000/');
+    win.loadURL('http://localhost:5000/');
 
     // Open the DevTools.
     win.webContents.openDevTools();
