@@ -1,2 +1,2 @@
 frontend: npm run start-react
-backend: sleep 3 && electron .
+backend: wait-on  http://localhost:5000/ && electron .
