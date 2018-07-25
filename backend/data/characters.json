@@ -1,28 +1,84 @@
 {
-	"Morevna": {
-		"name": "Marya Morevna",
-		"description": "blah",
+// character 1
+    "Morevna": {
+		"name": "Мarya Мorevna",
+		"description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
 		"cards": {
-			"bajun" : {
-				"name" : "Cat-Bajun"
+// actions cards
+            "Cat-Bajun": {
+				 "count": 2
+            },
+			"Sivka-Burka" : {
+				"count": 1
 			},
-			"sivka" : {
-				"name" : "Sivka-Burka"
+            "Bogatyr": {
+                "count": 3
+            },
+            "Apple": {
+                "count": 2
+             },
+            "Bereginya": {
+				 "count": 2
+            },
+ // item cards
+            "Large Shield": {
+				 "count": 1
+            },  
+            "Mirror": {
+				 "count": 1
+            },  
+            "Living Water": {
+				 "count": 1
+            },  
+             "Firebird": {
+				 "count": 1
+            },  
+             "Kladenets": {
+				 "count": 1
+            },  
+        }
+	},
+    
+// character 2
+	"Yaga": {
+		"name": "Yaga",
+		"description": "Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.",
+		"cards": {
+// actions cards
+            "Grey Wolf": {
+				"count": 2
+			},
+			"Cat-Bajun": {
+				"count": 3
+			},
+            "Apple": {
+                "count": 2
+             },
+            "Bereginya": {
+				 "count": 2
+            },
+            "Bogatyr": {
+                "count": 1
+            },
+// item cards
+            "Small Shield": {
+				 "count": 1
+            },
+            "Mirror": {
+				 "count": 1
+                
+            },  
+            "Dead Water": {
+				 "count": 1
+            }, 
+            "Firebird": {
+				 "count": 1
+            },  
+            "Kladenets": {
+				 "count": 1
 			}
 		}
 	},
-	"Yaga":{
-		"name": "Baba Yaga",
-		"description": "blah",
-		"cards": {
-			"bes" : {
-				"name" : "Bes"
-			},
-			"volkodlak" : {
-				"name" : "volkodlak"
-			}
-		}
-	}
 }
 
 

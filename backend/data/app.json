@@ -1,7 +1,7 @@
 {
 	"profile": {
-		"characters": ["morevna", "yaga"],
-		"deck": ["apple", "mirror"],
+		"characters": ["Morevna", "Yaga"],
+		"deck": ["Apple", "Mirror"],
 		"silver": 5,
 		"gold": 0
 	},
