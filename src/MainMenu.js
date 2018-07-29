@@ -37,10 +37,10 @@ const MainMenu = props => (
         <div className="Content">
             <img className="MainOrnament" src={ornament} alt="MainOrnament" />
             <ul>
-                <MenuButton name="Profile" type="PROFILE" />
-                <MenuButton name="Settings" type="SETTINGS" />
-                <MenuButton name="Play PvP" type="PLAY" />
-                <MenuButton name="Play Story" type="PLAY" />
+                <MenuButton name="Profile" type="PROFILE" sendMessage={props.sendMessage} />
+                <MenuButton name="Settings" type="SETTINGS" sendMessage={props.sendMessage} />
+                <MenuButton name="Play PvP" type="PLAY" sendMessage={props.sendMessage} />
+                <MenuButton name="Play Story" type="PLAY" sendMessage={props.sendMessage} />
             </ul>
         </div>
     </div>
