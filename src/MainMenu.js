@@ -17,6 +17,14 @@ const TopButton = props => (
     </div>
 );
 
+const MenuButton = props => (
+    <li>
+        <button className="MenuButton" type="button" onClick={() => props.sendMessage({ type: props.type })}>
+            {props.name}
+        </button>
+    </li>
+);
+
 const MainMenu = props => (
     <div>
         <div className="TopShelf">
@@ -29,26 +37,10 @@ const MainMenu = props => (
         <div className="Content">
             <img className="MainOrnament" src={ornament} alt="MainOrnament" />
             <ul>
-                <li>
-                    <button className="MenuButton" type="button" onClick={() => props.sendMessage({ type: 'PROFILE' })}>
-                        Profile
-                    </button>
-                </li>
-                <li>
-                    <button className="MenuButton" type="button" onClick={() => props.sendMessage({ type: 'SETTINGS' })}>
-                        Settings
-                    </button>
-                </li>
-                <li>
-                    <button className="MenuButton" type="button" onClick={() => props.sendMessage({ type: 'PLAY' })}>
-                        Play PvP
-                    </button>
-                </li>
-                <li>
-                    <button className="MenuButton" type="button" onClick={() => props.sendMessage({ type: 'PLAY' })}>
-                        Play Story
-                    </button>
-                </li>
+                <MenuButton name="Profile" type="PROFILE" />
+                <MenuButton name="Settings" type="SETTINGS" />
+                <MenuButton name="Play PvP" type="PLAY" />
+                <MenuButton name="Play Story" type="PLAY" />
             </ul>
         </div>
     </div>
@@ -63,6 +55,12 @@ TopButton.propTypes = {
     icon: PropTypes.object.isRequired,
     type: PropTypes.object.isRequired,
     text: PropTypes.object.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+};
+
+MenuButton.propTypes = {
+    name: PropTypes.object.isRequired,
+    type: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
 };
 
