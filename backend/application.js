@@ -5,7 +5,7 @@ let application = require('./data/app.json');
 const screenManager = require('./screenManager');
 const profileManager = require('./profileManager');
 const gameEngine = require('./gameEngine');
-
+const heroManager = require('./heroSelect');
 
 // This function is called from main.js
 // It redirects the message to all handlers
@@ -16,7 +16,7 @@ function msgReceived(message, sendReply) {
     const newApp = {
         profile: profileManager.handle(application, message),
         manager: screenManager.handle(application, message),
-        // heroselect also needs to be an individual part of the app
+        heroSelect: heroManager.handle(application, message),
         game: gameEngine.handle(application, message),
     };
     sendReply(newApp);
