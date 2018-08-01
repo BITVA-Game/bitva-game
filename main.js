@@ -1,4 +1,5 @@
 const { app, ipcMain, BrowserWindow } = require('electron');
+const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -12,7 +13,9 @@ function sendMessage(received) {
 
 function createWindow() {
     // Create the browser window.
-    win = new BrowserWindow({ width: 1366, height: 768, show: false });
+    win = new BrowserWindow({
+        width: 1366, height: 768, show: false, icon: path.join(__dirname, 'src/icons/png/64x64.png'),
+    });
 
     // and load the index.html of the app.
     win.loadURL('http://localhost:5000/');
