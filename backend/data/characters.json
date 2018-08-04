@@ -1,10 +1,8 @@
 {
-// character 1
     "Morevna": {
 		"name": "Мarya Мorevna",
 		"description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
 		"cards": {
-// actions cards
             "Cat-Bajun": {
 				 "count": 2
             },
@@ -20,7 +18,6 @@
             "Bereginya": {
 				 "count": 2
             },
- // item cards
             "Large Shield": {
 				 "count": 1
             },  
@@ -35,16 +32,14 @@
             },  
              "Kladenets": {
 				 "count": 1
-            },  
+            }  
         }
 	},
-    
-// character 2
+
 	"Yaga": {
 		"name": "Yaga",
 		"description": "Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.",
 		"cards": {
-// actions cards
             "Grey Wolf": {
 				"count": 2
 			},
@@ -60,7 +55,6 @@
             "Bogatyr": {
                 "count": 1
             },
-// item cards
             "Small Shield": {
 				 "count": 1
             },
@@ -78,7 +72,7 @@
 				 "count": 1
 			}
 		}
-	},
+    }
 }
 
 
