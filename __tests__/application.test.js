@@ -57,14 +57,14 @@ test('Hero Select screen, the Player can select any of the characters he has', (
                 screen: 'HEROSELECT',
             },
             game: {
-                
+
             },
         },
     );
 });
 
 
-// Test that msg PLAY returns list with characters 
+// Test that msg PLAY returns list with characters
 test('list with all characters added when PLAY msg received', () => {
 // We only need type for this test.
     const msg = { type: 'PLAY' };
@@ -76,107 +76,107 @@ test('list with all characters added when PLAY msg received', () => {
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toEqual(
         {
-        profile: {
+            profile: {
                 characters: ['Morevna', 'Yaga'],
                 deck: ['Apple', 'Mirror'],
                 silver: 5,
                 gold: 0,
-            },            
-        heroSelect:{
-            "Morevna": {
-                "name": "Мarya Мorevna",
-                "description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
-                "cards": {
-                    "Cat-Bajun": {
-                         "count": 2
-                    },
-                    "Sivka-Burka" : {
-                        "count": 1
-                    },
-                    "Bogatyr": {
-                        "count": 3
-                    },
-                    "Apple": {
-                        "count": 2
-                     },
-                    "Bereginya": {
-                         "count": 2
-                    },
-                    "Large Shield": {
-                         "count": 1
-                    },  
-                    "Mirror": {
-                         "count": 1
-                    },  
-                    "Living Water": {
-                         "count": 1
-                    },  
-                     "Firebird": {
-                         "count": 1
-                    },  
-                     "Kladenets": {
-                         "count": 1
-                    }  
-                }
             },
+            heroSelect: {
+                Morevna: {
+                    name: 'Мarya Мorevna',
+                    description: 'Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.',
+                    cards: {
+                        'Cat-Bajun': {
+                            count: 2,
+                        },
+                        'Sivka-Burka': {
+                            count: 1,
+                        },
+                        Bogatyr: {
+                            count: 3,
+                        },
+                        Apple: {
+                            count: 2,
+                        },
+                        Bereginya: {
+                            count: 2,
+                        },
+                        'Large Shield': {
+                            count: 1,
+                        },
+                        Mirror: {
+                            count: 1,
+                        },
+                        'Living Water': {
+                            count: 1,
+                        },
+                        Firebird: {
+                            count: 1,
+                        },
+                        Kladenets: {
+                            count: 1,
+                        },
+                    },
+                },
 
-            "Yaga": {
-                "name": "Yaga",
-                "description": "Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.",
-                "cards": {
-                    "Grey Wolf": {
-                        "count": 2
-                    },
-                    "Cat-Bajun": {
-                        "count": 3
-                    },
-                    "Apple": {
-                        "count": 2
-                     },
-                    "Bereginya": {
-                         "count": 2
-                    },
-                    "Bogatyr": {
-                        "count": 1
-                    },
-                    "Small Shield": {
-                         "count": 1
-                    },
-                    "Mirror": {
-                         "count": 1
+                Yaga: {
+                    name: 'Yaga',
+                    description: 'Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.',
+                    cards: {
+                        'Grey Wolf': {
+                            count: 2,
+                        },
+                        'Cat-Bajun': {
+                            count: 3,
+                        },
+                        Apple: {
+                            count: 2,
+                        },
+                        Bereginya: {
+                            count: 2,
+                        },
+                        Bogatyr: {
+                            count: 1,
+                        },
+                        'Small Shield': {
+                            count: 1,
+                        },
+                        Mirror: {
+                            count: 1,
 
-                    },  
-                    "Dead Water": {
-                         "count": 1
-                    }, 
-                    "Firebird": {
-                         "count": 1
-                    },  
-                    "Kladenets": {
-                         "count": 1
-                }
-            }
-        }
-    },
+                        },
+                        'Dead Water': {
+                            count: 1,
+                        },
+                        Firebird: {
+                            count: 1,
+                        },
+                        Kladenets: {
+                            count: 1,
+                        },
+                    },
+                },
+            },
             manager: {
                 screen: 'HEROSELECT',
             },
-             game: {
+            game: {
 
-            },    
+            },
         },
-   );
+    );
 });
 
 // Test that msg HEROSELECTED clear the characters list
 test('msg HEROSELECTED clears list with charactes', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED' };
-    
-// Mock sendReply function
+
+    // Mock sendReply function
     const sendReply = jest.fn();
-    
-// Call the message function from application with this message and mocked function.
+
+    // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toEqual(
@@ -187,13 +187,13 @@ test('msg HEROSELECTED clears list with charactes', () => {
                 silver: 5,
                 gold: 0,
             },
-            heroSelect:{    
-    },
+            heroSelect: {
+            },
             manager: {
                 screen: 'VERSUS',
             },
             game: {
-                
+
             },
         },
     );
