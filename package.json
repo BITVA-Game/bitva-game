@@ -19,6 +19,7 @@
     "start": "nf start",
     "test": "jest",
     "lint": "eslint --ext .jsx,.js . || exit 0",
+    "install-win": "export npm_config_platform=win32 && npm install",
     "lintfix": "eslint --fix --ext .jsx,.js . || exit 0"
   },
   "devDependencies": {
