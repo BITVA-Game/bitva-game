@@ -1,6 +1,7 @@
 html, body {
   min-height: 100%;
   background-color: black;
+  color: white;
 }
 .App {
   text-align: center;
@@ -65,6 +66,15 @@ html, body {
   top:0;
   left: 0;
   height: 650px;
+}
+
+.HeroSelection{
+  width: 100%;
+}
+
+.HeroBlock{
+  display: inline-block;
+  padding: 1em;
 }
 
 ul{
