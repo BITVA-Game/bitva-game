@@ -47,7 +47,7 @@ const OneHero = props => (
             Select
         </button>
     </div>
-); 
+);
 
 class HeroSelection extends Component {
     constructor(props) {

@@ -6,7 +6,7 @@ import cards from './images/IconCards.png';
 import silver from './images/IconMoney.png';
 import gold from './images/IconSpecial.png';
 import ornament from './images/MainOrnament.jpg';
-import TopButton from './TopButton.js';
+import TopButton from './TopButton';
 
 const MenuButton = props => (
     <li>
