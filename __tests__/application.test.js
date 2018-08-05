@@ -83,80 +83,91 @@ test('list with all characters added when PLAY msg received', () => {
                 gold: 0,
             },
             heroSelect: {
-                Morevna: {
-                    name: 'Мarya Мorevna',
-                    description: 'Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.',
-                    cards: {
-                        'Cat-Bajun': {
-                            count: 2,
+                "morevna": {
+                    "id": "morevna",
+                    "name": "Мarya Мorevna",
+                    "description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
+                    "cards": {
+                        "bajun": {
+                            "id":  "bajun",
+                            "name": "Cat-Bajun",
+                            "count": 2
                         },
-                        'Sivka-Burka': {
-                            count: 1,
+                        "sivka": {
+                            "id":  "sivka",
+                            "name": "Sivka-Burka",
+                            "count": 1
                         },
-                        Bogatyr: {
-                            count: 3,
+                        "bogatyr": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "count": 3
                         },
-                        Apple: {
-                            count: 2,
+                        "apple": {
+                            "id": "apple",
+                            "name": "Apple",
+                            "count": 2
+                         },
+                        "bereginya": {
+                            "id": "bereginya",
+                            "name": "Bereginya",
+                            "count": 2
                         },
-                        Bereginya: {
-                            count: 2,
-                        },
-                        'Large Shield': {
-                            count: 1,
-                        },
-                        Mirror: {
-                            count: 1,
-                        },
-                        'Living Water': {
-                            count: 1,
-                        },
-                        Firebird: {
-                            count: 1,
-                        },
-                        Kladenets: {
-                            count: 1,
-                        },
-                    },
+                        "sheetLarge": {
+                            "id": "sheetLarge",
+                            "name": "Large Shield",
+                            "count": 1
+                        }, 
+                        "sheetSmall": {
+                            "id": "sheetSmall",
+                            "name": "Living Water",
+                            "count": 1
+                        }
+                    }
                 },
 
-                Yaga: {
-                    name: 'Yaga',
-                    description: 'Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.',
-                    cards: {
-                        'Grey Wolf': {
-                            count: 2,
+                "yaga": {
+                    "id": "yaga",
+                    "name": "Yaga",
+                    "description": "Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.",
+                    "cards": {
+                        "bajun": {
+                            "id":  "bajun",
+                            "name": "Cat-Bajun",
+                            "count": 2
                         },
-                        'Cat-Bajun': {
-                            count: 3,
+                        "sivka": {
+                            "id":  "sivka",
+                            "name": "Sivka-Burka",
+                            "count": 1
                         },
-                        Apple: {
-                            count: 2,
+                        "bogatyr": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "count": 3
                         },
-                        Bereginya: {
-                            count: 2,
+                        "apple": {
+                            "id": "apple",
+                            "name": "Apple",
+                            "count": 2
+                         },
+                        "bereginya": {
+                            "id": "bereginya",
+                            "name": "Bereginya",
+                            "count": 2
                         },
-                        Bogatyr: {
-                            count: 1,
-                        },
-                        'Small Shield': {
-                            count: 1,
-                        },
-                        Mirror: {
-                            count: 1,
-
-                        },
-                        'Dead Water': {
-                            count: 1,
-                        },
-                        Firebird: {
-                            count: 1,
-                        },
-                        Kladenets: {
-                            count: 1,
-                        },
-                    },
-                },
+                        "sheetLarge": {
+                            "id": "sheetLarge",
+                            "name": "Large Shield",
+                            "count": 1
+                        }, 
+                        "sheetSmall": {
+                            "id": "sheetSmall",
+                            "name": "Living Water",
+                            "count": 1
+                        }
+                    }
+                }
             },
             manager: {
                 screen: 'HEROSELECT',
