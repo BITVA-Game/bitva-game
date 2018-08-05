@@ -9,7 +9,7 @@ const HeroSelection = props => (
 Select imaginary hero
         </button>
     </div>
-);
+); 
 
 
 HeroSelection.propTypes = {

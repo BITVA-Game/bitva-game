@@ -6,16 +6,7 @@ import cards from './images/IconCards.png';
 import silver from './images/IconMoney.png';
 import gold from './images/IconSpecial.png';
 import ornament from './images/MainOrnament.jpg';
-
-
-const TopButton = props => (
-    <div className="TopButton">
-        <img className="TopIcon" src={props.icon} alt={props.icon} />
-        <button type="button" onClick={() => props.sendMessage({ type: props.type })}>
-            {props.text}
-        </button>
-    </div>
-);
+import TopButton from './TopButton.js';
 
 const MenuButton = props => (
     <li>
