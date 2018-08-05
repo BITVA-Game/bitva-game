@@ -42,13 +42,6 @@ MainMenu.propTypes = {
     sendMessage: PropTypes.func.isRequired,
 };
 
-TopButton.propTypes = {
-    icon: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    sendMessage: PropTypes.func.isRequired,
-};
-
 MenuButton.propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
