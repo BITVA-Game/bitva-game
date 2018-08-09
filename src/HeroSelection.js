@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
+import './css/App.css';
+import './css/HeroSelection.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -40,12 +41,14 @@ const OneHero = props => (
             {props.hero.name}
         </h3>
         <img src={images[props.hero.id]} alt={props.hero.id} />
-        <button type="button" onClick={() => props.onBack()}>
-            Back
-        </button>
-        <button type="button" onClick={() => props.onSelect(props.hero)}>
-            Select
-        </button>
+        <div>
+            <button type="button" onClick={() => props.onBack()}>
+                Back
+            </button>
+            <button type="button" onClick={() => props.onSelect(props.hero)}>
+                Select
+            </button>
+        </div>
     </div>
 );
 

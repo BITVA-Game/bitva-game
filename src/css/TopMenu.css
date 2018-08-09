@@ -1,0 +1,41 @@
+.TopShelf {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  height: 58px;
+}
+
+.TopIcon {
+  height: 50px;
+  width: 50px;
+}
+
+.TopButton {
+  display: flex;
+  flex: none;
+}
+
+.TopButton img {
+  z-index: 50;
+}
+
+.TopButton Button {
+  background-color: #FBFBFB;
+  border: 1px solid #FBFBFB;
+  border-bottom-right-radius: 50px;
+  border-top-right-radius: 50px;
+  font-size: 1.5em;
+  height: 50px;
+  margin-left: -25px;
+  padding-left: 25px;
+  width: 175px;
+}
+
+.TopButton Button:hover {
+  color: #B74A45;
+}
+
+.TopButton Button:focus {
+  color: #B74A45;
+  outline: none;
+}
