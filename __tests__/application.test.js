@@ -213,7 +213,7 @@ test('msg HEROSELECTED clears list with charactes', () => {
 test('msg HEROSELECTED switches screen state to VERSUS', () => {
     // We only need type for this test.
     const msg = { type: 'HEROSELECTED' };
-    
+
     // Mock sendReply function
     const sendReply = jest.fn();
 
