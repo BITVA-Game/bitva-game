@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
 import MainMenu from './MainMenu';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';

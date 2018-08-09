@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
+import './css/App.css';
+import './css/TopMenu.css';
+import './css/MainMenu.css';
 import TopButton from './TopButton';
 
 import chars from './images/IconCharacters.png';
