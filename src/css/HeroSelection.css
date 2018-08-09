@@ -1,0 +1,66 @@
+.HeroSelection {
+ 	display: flex;
+ 	flex-flow: row wrap;
+ 	justify-content: center;
+}
+
+h3 {
+ 	flex: 2 100%;
+ 	font-size: 1.5em;
+}
+
+.HeroBlock {
+ 	flex: 1;
+}
+
+.HeroBlock button {
+	border: 2px solid #899591;
+	height: 376px;
+	outline: none;
+	padding: 0;
+}
+
+.HeroBlock button:hover {
+	border: 2px solid #B74A45;
+}
+
+.HeroBlock button:focus {
+	border: 2px solid #B74A45;
+}
+
+.HeroDetails {
+ 	display: flex;
+ 	flex-direction: column;
+ 	justify-content: center;
+}
+
+.HeroDetails img {
+ 	margin: auto;
+}
+
+.HeroDetails div {
+	display: flex;
+	justify-content: center;
+}
+
+.HeroDetails button {
+ 	flex: none;
+ 	background-color: #899591;
+ 	border-style: none;
+ 	color: #000;
+ 	font-size: 1.5em;
+ 	height: 45px;
+ 	margin-right: 0.1em;
+ 	margin-top: 0.1em;
+ 	width: 15%;
+}
+
+.HeroDetails button:hover {
+ 	background-color: #B74A45;
+ 	outline: none;
+}
+
+.HeroDetails button:focus {
+ 	background-color: #B74A45;
+ 	outline: none;
+}

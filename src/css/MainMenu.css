@@ -1,0 +1,44 @@
+.Content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.MainOrnament {
+  flex: 4;
+  height: 650px;
+}
+
+ul {
+  align-self: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  list-style: none;
+}
+
+li button {
+  background-color: #899591;
+  border-style: none;
+  color: #000;
+  font-size: 1.8em;
+  height: 75px;
+  margin-top: 0.1em;
+  min-width: 100%;
+}
+
+li:first-child button {
+  border-top-left-radius: 25px;
+}
+
+li:last-child button {
+  border-bottom-left-radius: 25px;
+}
+
+li button:hover {
+  background-color: #B74A45;
+}
+
+li button:focus {
+  background-color: #B74A45;
+  outline: none;
+}
