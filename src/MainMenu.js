@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './App.css';
 import TopButton from './TopButton';
+
 import chars from './images/IconCharacters.png';
 import cards from './images/IconCards.png';
 import silver from './images/IconMoney.png';
 import gold from './images/IconSpecial.png';
 import ornament from './images/MainOrnament.jpg';
-
 
 const MenuButton = props => (
     <li>
