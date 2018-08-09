@@ -1,10 +1,10 @@
 {
-"Cat-Bajun": {
+"bajun": {
     "name": "Cat-Bajun",
     "description": "Magic were-cat. Can attack the enemy with his songs and spells. Live at Yaga's hut."
 },
 
-"Sivka-Burka": {
+"sivka": {
     "name": "Sivka-Burka",
     "description": "Magic prophetic 'wild' - colored horse, mediating the living and realm of the dead."
 },
@@ -15,12 +15,12 @@
     "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable."
 },
 
-"Bogatyr": {
+"bogatyr": {
     "name": "Bogatyr",
     "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities."
 },
 
-"Apple": {
+"apple": {
     "name": "Apple",
     "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple - gets younger, and an ill - gets it health back."
 },
@@ -40,12 +40,12 @@
     "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil."
 },
 
-"Bereginya": {
+"bereginya": {
     "name": "Keeper Bereginya",
     "description": "Plenty of Keepers lives in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes."
 },
 
-"Large Shield": {
+"sheetLarge": {
     "name": "Large Shield",
     "description": "The shield, forged by Svarog -  divinity-blacksmith. After recognition of  his owner, it can reflect the damage and ensure protection  from witchcraft."
 },
@@ -56,7 +56,7 @@
     
 },
 
-"Living Water": {
+"sheetSmall": {
     "name": "Living Water",
     "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties."
 },
