@@ -1,3 +1,4 @@
 #Ignore production builds
 build/*
 bitva-game-darwin-x64/*
+release-builds/*

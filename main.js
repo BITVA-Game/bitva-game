@@ -20,17 +20,18 @@ function createWindow() {
 
     // and load the index.html of the app.
     if (process.env.REACT_URL) {
+        //dev env
         win.loadURL(process.env.REACT_URL);
+        // Open the DevTools.
+        win.webContents.openDevTools();
     } else {
+        // prod env
         win.loadURL(url.format({
             protocol: 'file:',
             slashes: true,
             pathname: path.join(__dirname, '/build/index.html'),
         }));
     }
-
-    // Open the DevTools.
-    win.webContents.openDevTools();
 
     // When we are ready to show - display initial state
     win.once('ready-to-show', () => {

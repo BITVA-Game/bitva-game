@@ -9,6 +9,7 @@
 # production
 /build
 /bitva-game-darwin-x64
+/release-builds
 
 # misc
 .DS_Store
