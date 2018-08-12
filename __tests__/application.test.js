@@ -18,8 +18,8 @@ test('Game loaded. Send the app in its initial state', () => {
     expect(sendReply.mock.calls[0][0]).toEqual(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -48,8 +48,8 @@ test('Hero Select screen, the Player can select any of the characters he has', (
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -77,8 +77,8 @@ test('list with all characters added when PLAY msg received', () => {
     expect(sendReply.mock.calls[0][0]).toEqual(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -193,14 +193,12 @@ test('msg HEROSELECTED clears list with charactes', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
             heroSelect: {
-            },
-            manager: {
             },
             game: {
 
@@ -223,8 +221,8 @@ test('msg HEROSELECTED switches screen state to VERSUS', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
