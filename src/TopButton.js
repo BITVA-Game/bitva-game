@@ -13,9 +13,9 @@ const TopButton = props => (
 );
 
 TopButton.propTypes = {
-    icon: PropTypes.object.isRequired,
-    type: PropTypes.object.isRequired,
-    text: PropTypes.object.isRequired,
+    icon: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
     sendMessage: PropTypes.func.isRequired,
 };
 
