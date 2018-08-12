@@ -190,7 +190,37 @@ test('msg HEROSELECTED clears list with charactes', () => {
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toEqual(
+    expect(sendReply.mock.calls[0][0]).toMatchObject(
+        {
+            profile: {
+                characters: ['Morevna', 'Yaga'],
+                deck: ['Apple', 'Mirror'],
+                silver: 5,
+                gold: 0,
+            },
+            heroSelect: {
+            },
+            manager: {
+            },
+            game: {
+
+            },
+        },
+    );
+});
+
+// screen swtich to state VERSUS after hero is selected
+test('msg HEROSELECTED switches screen state to VERSUS', () => {
+    // We only need type for this test.
+    const msg = { type: 'HEROSELECTED' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+    expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
                 characters: ['Morevna', 'Yaga'],
