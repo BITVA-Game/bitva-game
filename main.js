@@ -20,7 +20,7 @@ function createWindow() {
 
     // and load the index.html of the app.
     if (process.env.REACT_URL) {
-        //dev env
+        // dev env
         win.loadURL(process.env.REACT_URL);
         // Open the DevTools.
         win.webContents.openDevTools();
