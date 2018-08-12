@@ -193,14 +193,12 @@ test('msg HEROSELECTED clears list with charactes', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
             heroSelect: {
-            },
-            manager: {
             },
             game: {
 
