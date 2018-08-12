@@ -19,7 +19,7 @@ test('Game loaded. Send the app in its initial state', () => {
         {
             profile: {
                 characters: ['morevna', 'yaga'],
-                deck: ['apple', 'Mirror'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -49,7 +49,7 @@ test('Hero Select screen, the Player can select any of the characters he has', (
         {
             profile: {
                 characters: ['morevna', 'yaga'],
-                deck: ['apple', 'Mirror'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -78,7 +78,7 @@ test('list with all characters added when PLAY msg received', () => {
         {
             profile: {
                 characters: ['morevna', 'yaga'],
-                deck: ['apple', 'Mirror'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -224,7 +224,7 @@ test('msg HEROSELECTED switches screen state to VERSUS', () => {
         {
             profile: {
                 characters: ['morevna', 'yaga'],
-                deck: ['apple', 'Mirror'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
