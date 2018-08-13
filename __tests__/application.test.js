@@ -64,15 +64,15 @@ test('First game state Play. The Player can select any of the characters he has'
 });
 
 
-// Test that msg PLAY returns list with all available characters ans game state is turned to Hero Select.
+// Test msg PLAY returns list with all available characters.game state  Hero Select.
 test('PLAY msg received. List with all characters added - HERO SELECT state.', () => {
 // We only need type for this test.
     const msg = { type: 'PLAY' };
-    
- // Mock sendReply function
+
+    // Mock sendReply function
     const sendReply = jest.fn();
-    
- // Call the message function from application with this message and mocked function.
+
+    // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
 
     expect(sendReply.mock.calls.length).toBe(1);
@@ -211,7 +211,7 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
     );
 });
 
-//Test that msg HEROSELECTED changes screen and game state to VERSUS
+// Test that msg HEROSELECTED changes screen and game state to VERSUS
 test('msg HEROSELECTED received. Screen changed to Versus. State VERSUS.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED' };
@@ -241,4 +241,3 @@ test('msg HEROSELECTED received. Screen changed to Versus. State VERSUS.', () =>
         },
     );
 });
-
