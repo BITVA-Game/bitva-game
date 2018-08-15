@@ -1,6 +1,8 @@
 .MainMenuContainer {
   padding: 5% 7%;
   box-sizing: border-box;
+
+  background-color: #191919;
 }
 
 .Content {
@@ -58,7 +60,7 @@ li button:focus {
 }
 
 .DrakonImage {
-  width: 480px;
+  width: 400px;
   box-sizing: border-box;
 
   background-color: #000000;
