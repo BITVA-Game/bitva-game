@@ -1,13 +1,15 @@
 .MainMenuContainer {
-  padding: 5% 7%;
+  padding: 7% 10% 12%;
   box-sizing: border-box;
 
   background-color: #000;
-
+  background-image: url("../images/Uzor-1.png");
+  background-size: cover;
+  background-position: center top;
 }
 
 .Content {
-  margin-top: 5%;
+  margin-top: 3%;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -21,9 +23,9 @@
 ul {
   align-self: center;
   display: flex;
-  width: 225px;
+  width: 200px;
   flex-direction: column;
-  margin: 0 30px;
+  margin: 0 22px;
   padding: 0;
   box-sizing: border-box;
 
@@ -39,7 +41,7 @@ li:last-child {
 }
 
 li button {
-  height: 75px;
+  height: 65px;
   margin-top: 0.1em;
   width: 100%;
 
