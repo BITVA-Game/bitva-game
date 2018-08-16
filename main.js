@@ -1,5 +1,6 @@
 const { app, ipcMain, BrowserWindow } = require('electron');
 const path = require('path');
+const url = require('url');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -18,10 +19,19 @@ function createWindow() {
     });
 
     // and load the index.html of the app.
-    win.loadURL('http://localhost:5000/');
-
-    // Open the DevTools.
-    win.webContents.openDevTools();
+    if (process.env.REACT_URL) {
+        // dev env
+        win.loadURL(process.env.REACT_URL);
+        // Open the DevTools.
+        win.webContents.openDevTools();
+    } else {
+        // prod env
+        win.loadURL(url.format({
+            protocol: 'file:',
+            slashes: true,
+            pathname: path.join(__dirname, '/build/index.html'),
+        }));
+    }
 
     // When we are ready to show - display initial state
     win.once('ready-to-show', () => {

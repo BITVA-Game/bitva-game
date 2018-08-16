@@ -18,8 +18,8 @@ test('Game loaded. Send the app in its initial state', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -48,8 +48,8 @@ test('First game state Play. The Player can select any of the characters he has'
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -79,8 +79,8 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
     expect(sendReply.mock.calls[0][0]).toEqual(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
@@ -195,14 +195,13 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
             heroSelect: {
-            },
-            manager: {
             },
             game: {
 
@@ -211,9 +210,9 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
     );
 });
 
-// Test that msg HEROSELECTED changes screen and game state to VERSUS
-test('msg HEROSELECTED received. Screen changed to Versus. State VERSUS.', () => {
-// We only need type for this test.
+// screen swtich to state VERSUS after hero is selected
+test('msg HEROSELECTED switches screen state to VERSUS', () => {
+    // We only need type for this test.
     const msg = { type: 'HEROSELECTED' };
 
     // Mock sendReply function
@@ -225,8 +224,8 @@ test('msg HEROSELECTED received. Screen changed to Versus. State VERSUS.', () =>
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['Morevna', 'Yaga'],
-                deck: ['Apple', 'Mirror'],
+                characters: ['morevna', 'yaga'],
+                deck: ['apple'],
                 silver: 5,
                 gold: 0,
             },
