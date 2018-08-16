@@ -11,32 +11,25 @@
 }
 
 .TopButton {
+  align-items: center;
   display: flex;
   flex: none;
 }
-
- /* .TopButton:hover {
-  transform: scale(1.1);
-  transition: transform 0.6s ease-in-out;
-} */
 
 .TopButton img {
   z-index: 50;
 }
 
 .TopButton Button {
-  height: 25px;
-  margin-left: 0;
-  width: 175px;
-  align-self: center;
-
-  font-size: 1.3em;
-
   background-color: #FBFBFB;
   border: 1px solid #FBFBFB;
   border-radius: 7px;
+  box-sizing: border-box;
+  font-size: 1.4em;
+  height: 25px;
+  padding-bottom: 5px;
+  width: 175px;
 
-  cursor: pointer;
 }
 
 .TopButton Button:hover {
@@ -47,9 +40,3 @@
   color: #B74A45;
   outline: none;
 }
-
-/* .TopButton img:hover,
-.TopButton img:focus {
-  transform: scale(1.1);
-  transition: transform 0.6s ease-in-out;
-} */
