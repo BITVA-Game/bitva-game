@@ -2,7 +2,8 @@
   padding: 5% 7%;
   box-sizing: border-box;
 
-  background-color: #191919;
+  background-color: #000;
+
 }
 
 .Content {
@@ -62,8 +63,6 @@ li button:focus {
 .DrakonImage {
   width: 400px;
   box-sizing: border-box;
-
-  background-color: #000000;
 }
 
 .MainDrakonLeft,
