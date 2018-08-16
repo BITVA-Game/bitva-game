@@ -10,7 +10,8 @@ import cards from './images/IconCards.png';
 import silver from './images/IconMoney.png';
 import gold from './images/IconSpecial.png';
 import ornament from './images/MainOrnament.jpg';
-import drakon from './images/dragon-edit.png';
+import drakon from './images/dragon-1.png';
+import uzor from './images/Uzor-1.png';
 
 const MenuButton = props => (
     <li>
