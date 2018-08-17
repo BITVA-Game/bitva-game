@@ -240,3 +240,29 @@ test('msg HEROSELECTED switches screen state to VERSUS', () => {
         },
     );
 });
+
+// Test that one player has become active. Game state VERSUS.
+test('msg HEROSELECTED received: active player is set.', () => {
+// We only need type for this test.
+    const msg = { type: 'HEROSELECTED' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set it to 1
+    Math.random = jest.fn();
+    Math.random.mockReturnValue(1);
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+    expect(sendReply.mock.calls[0][0]).toMatchObject(
+        {
+            game: {
+                players: [
+                    { active: true },
+                    { active: false },
+                ],
+            },
+        },
+    );
+});
