@@ -12,6 +12,7 @@ import gold from './images/IconSpecial.png';
 import ornament from './images/MainOrnament.jpg';
 import drakon from './images/dragon-1.png';
 
+
 const MenuButton = props => (
     <li>
         <button className="MenuButton" type="button" onClick={() => props.sendMessage({ type: props.type })}>
