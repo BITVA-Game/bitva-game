@@ -11,9 +11,16 @@ const images = {
     morevna,
 };
 
+const HeroDetails = props => (
+    <div className="HeroDetails"><p>{props.hero.id}</p><p>{props.hero.description}</p></div>
+);
+
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className="HeroBlock">
+        <button type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
+            Info
+        </button>
         <button type="button" onClick={() => props.onShow(props.hero)}>
             <img src={images[props.hero.id]} alt={props.hero.id} />
         </button>
@@ -28,14 +35,14 @@ const ListOfHeroes = props => (
             Select one character
         </h3>
         {Object.values(props.app.heroSelect).map(hero => (
-            <HeroBlock key={hero.id} onShow={props.onShow} hero={hero} />
+            <HeroBlock key={hero.id} onShow={props.onShow} showDetails={props.showDetails} hero={hero} />
         ))}
     </div>
 );
 
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
-    <div className="HeroDetails">
+    <div className="OneHero">
         <h3>
             Character
             {props.hero.name}
@@ -55,9 +62,10 @@ const OneHero = props => (
 class HeroSelection extends Component {
     constructor(props) {
         super(props);
-        this.state = { hero: null };
+        this.state = { hero: null, details: null };
         this.showHero = this.showHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
+        this.showDetails = this.showDetails.bind(this);
     }
 
     showHero(hero) {
@@ -68,11 +76,22 @@ class HeroSelection extends Component {
         this.props.sendMessage({ type: 'HEROSELECTED', hero: hero.id });
     }
 
-    render() {
-        return this.state.hero
-            ? <OneHero hero={this.state.hero} onBack={this.showHero} onSelect={this.selectHero} />
-            : <ListOfHeroes app={this.props.app} onShow={this.showHero} />;
+    showDetails(hero) {
+        this.setState({details: hero})
     }
+
+    render() {
+        return (
+            <div>
+                {this.state.hero
+                    ? <OneHero hero={this.state.hero} onBack={this.showHero} onSelect={this.selectHero}/>
+                    : <ListOfHeroes app={this.props.app} onShow={this.showHero} showDetails={this.showDetails}/>}
+                {this.state.details
+                    ? <HeroDetails hero={this.state.details}/>
+                    : null}
+            </div>
+        )
+        }
 }
 
 HeroBlock.propTypes = {
