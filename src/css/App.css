@@ -9,18 +9,6 @@ html, body {
   text-align: center;
 }
 
-.HeroDetails {
-  position: absolute;
-  width: 300px;
-  height: 150px;
-  padding: 0 15px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  background-color: silver;
-  border-radius: 10px;
-}
-
 /*unused styles, might be useful in future*/
 
 /*
