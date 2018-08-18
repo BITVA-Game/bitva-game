@@ -9,7 +9,7 @@ import chars from './images/IconCharacters.png';
 import cards from './images/IconCards.png';
 import silver from './images/IconMoney.png';
 import gold from './images/IconSpecial.png';
-import ornament from './images/MainOrnament.jpg';
+
 import drakon from './images/dragon-1.png';
 
 
@@ -31,18 +31,18 @@ const MainMenu = props => (
         </div>
         {/* <textarea value={JSON.stringify(props.app.profile)} /> */}
         <div className="Content">
-          <div className="DrakonImage">
-            <img className="MainDrakonLeft" src={drakon} alt="MainDrakon" />
-          </div>
-          <ul>
-            <MenuButton name="Profile" type="PROFILE" sendMessage={props.sendMessage} />
-            <MenuButton name="Settings" type="SETTINGS" sendMessage={props.sendMessage} />
-            <MenuButton name="Play PvP" type="PLAY" sendMessage={props.sendMessage} />
-            <MenuButton name="Play Story" type="PLAY" sendMessage={props.sendMessage} />
-          </ul>
-          <div className="DrakonImage">
-            <img className="MainDrakonRight" src={drakon} alt="MainDrakon" />
-          </div>
+            <div className="DrakonImage">
+                <img className="MainDrakonLeft" src={drakon} alt="MainDrakon" />
+            </div>
+            <ul>
+                <MenuButton name="Profile" type="PROFILE" sendMessage={props.sendMessage} />
+                <MenuButton name="Settings" type="SETTINGS" sendMessage={props.sendMessage} />
+                <MenuButton name="Play PvP" type="PLAY" sendMessage={props.sendMessage} />
+                <MenuButton name="Play Story" type="PLAY" sendMessage={props.sendMessage} />
+            </ul>
+            <div className="DrakonImage">
+                <img className="MainDrakonRight" src={drakon} alt="MainDrakon" />
+            </div>
         </div>
     </div>
 );
