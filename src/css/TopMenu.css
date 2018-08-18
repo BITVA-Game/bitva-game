@@ -11,6 +11,7 @@
 }
 
 .TopButton {
+  align-items: center;
   display: flex;
   flex: none;
 }
@@ -22,13 +23,13 @@
 .TopButton Button {
   background-color: #FBFBFB;
   border: 1px solid #FBFBFB;
-  border-bottom-right-radius: 50px;
-  border-top-right-radius: 50px;
-  font-size: 1.5em;
-  height: 50px;
-  margin-left: -25px;
-  padding-left: 25px;
+  border-radius: 7px;
+  box-sizing: border-box;
+  font-size: 1.4em;
+  height: 25px;
+  padding-bottom: 5px;
   width: 175px;
+
 }
 
 .TopButton Button:hover {

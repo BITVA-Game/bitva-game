@@ -1,37 +1,56 @@
-.Content {
-  display: flex;
-  justify-content: space-between;
+.MainMenuContainer {
+  padding: 7% 10% 12%;
+  box-sizing: border-box;
+
+  background-color: #000;
+  background-image: url("../images/Uzor-1.png");
+  background-size: cover;
+  background-position: center top;
 }
 
-.MainOrnament {
+.Content {
+  margin-top: 3%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* .MainOrnament {
   flex: 4;
   height: 650px;
-}
+} */
 
 ul {
   align-self: center;
   display: flex;
-  flex: 1;
+  width: 200px;
   flex-direction: column;
+  margin: 0 22px;
+  padding: 0;
+  box-sizing: border-box;
+
   list-style: none;
 }
 
+li {
+  margin-bottom: 17px;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
 li button {
-  background-color: #899591;
-  border-style: none;
+  height: 65px;
+  margin-top: 0.1em;
+  width: 100%;
+
   color: #000;
   font-size: 1.8em;
-  height: 75px;
-  margin-top: 0.1em;
-  min-width: 100%;
-}
 
-li:first-child button {
-  border-top-left-radius: 25px;
-}
-
-li:last-child button {
-  border-bottom-left-radius: 25px;
+  background-color: #ffffff;
+  border-radius: 3px;
+  border-style: none;
 }
 
 li button:hover {
@@ -41,4 +60,18 @@ li button:hover {
 li button:focus {
   background-color: #B74A45;
   outline: none;
+}
+
+.DrakonImage {
+  width: 400px;
+  box-sizing: border-box;
+}
+
+.MainDrakonLeft,
+.MainDrakonRight {
+  width: 100%;
+}
+
+.MainDrakonRight {
+  transform: scaleX(-1);
 }
