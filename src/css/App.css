@@ -3,6 +3,7 @@ html, body {
   color: white;
   font-size: 14px;
   min-height: 100%;
+  font-family: 'Ruslan Display', cursive;
 }
 
 .App {

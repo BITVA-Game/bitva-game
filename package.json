@@ -9,7 +9,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "webfontloader": "^1.6.28"
   },
   "scripts": {
     "start-react": "cross-env PORT=5000 BROWSER=none react-scripts start",

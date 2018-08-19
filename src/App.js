@@ -3,6 +3,7 @@ import './css/App.css';
 import MainMenu from './MainMenu';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
+import WebFont from 'webfontloader';
 
 // Import electron and establis connection to use app.js as Renderer
 const electron = window.require('electron');
@@ -46,6 +47,12 @@ class App extends Component {
 
     render() {
         console.log(this.state.app.manager.screen);
+        WebFont.load({
+            custom: {
+               families: ['Ruslan Display'],
+               urls: ['/fonts/RuslanDisplay.css']
+             }
+          });
         return (
             <div className="App">
                 {this.showApplication()}
