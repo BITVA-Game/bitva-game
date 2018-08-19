@@ -11,12 +11,6 @@
     "description": "Magic prophetic 'wild' - colored horse, mediating the living and realm of the dead."
 },
 
-
-"Grey Wolf": {
-    "name": "Grey Wolf",
-    "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable."
-},
-
 "bogatyr": {
     "id": "bogatyr",
     "name": "Bogatyr",
@@ -27,21 +21,6 @@
     "id": "apple",
     "name": "Apple",
     "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple - gets younger, and an ill - gets it health back."
-},
-
-"Mirror": {
-    "name": "Mirror",
-    "description": "Magiс Mirror - item that can 'duplicate the reality'. The boundary between the earth and the other Subtle World."
-},
-
-"Firebird": {
-    "name": "Firebird",
-    "description": "Magic fire bird. Her feathers have the ability to glow and can blind the human vision.  Firebird dies every year in autumn and returns to life in spring."
-},
-
-"Kladenets": {
-    "name": "Magic sword 'Kladenets'",
-    "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil."
 },
 
 "bereginya": {
@@ -63,17 +42,4 @@
     
 },
 
-"Living Water": {
-    "name": "Living Water",
-    "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties."
-},
-
-"Dead Water": {
-  "name": "Dead water",
-  "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead."    
-},
-
 }
-
-},
-
