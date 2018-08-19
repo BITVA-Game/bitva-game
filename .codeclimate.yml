@@ -8,3 +8,5 @@ plugins:
       extensions: 
       - .js
       - .jsx
+  csslint:
+    enabled: true
