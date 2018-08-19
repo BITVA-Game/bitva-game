@@ -1,0 +1,6 @@
+{
+	"ignore": [
+		"compatible-vendor-prefixes",
+		"box-sizing"
+	]
+}
