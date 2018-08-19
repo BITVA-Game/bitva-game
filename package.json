@@ -22,11 +22,14 @@
     "test": "jest",
     "lint": "eslint --ext .jsx,.js . || exit 0",
     "install-win": "export npm_config_platform=win32 && npm install",
-    "lintfix": "eslint --fix --ext .jsx,.js . || exit 0"
+    "lintfix": "eslint --fix --ext .jsx,.js . || exit 0",
+    "csslint-all": "csslint src/css/*.css",
+    "csslint": "csslint"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "cross-env": "^5.2.0",
+    "csslint": "^1.0.5",
     "electron-packager": "^12.1.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
