@@ -49,8 +49,8 @@ const ListOfHeroes = props => (
             <HeroBlock
                 key={hero.id}
                 onShow={props.onShow}
-              showDetails={props.showDetails}
-              hero={hero}
+                showDetails={props.showDetails}
+                hero={hero}
             />
         ))}
     </div>
@@ -107,16 +107,16 @@ class HeroSelection extends Component {
                 {this.state.hero
                     ? (
                         <OneHero
-                          hero={this.state.hero}
-                          onBack={this.showHero}
-                          onSelect={this.selectHero}
+                            hero={this.state.hero}
+                            onBack={this.showHero}
+                            onSelect={this.selectHero}
                         />
                     )
                     : (
                         <ListOfHeroes
-                          app={this.props.app}
-                          onShow={this.showHero}
-                          showDetails={this.showDetails}
+                            app={this.props.app}
+                            onShow={this.showHero}
+                            showDetails={this.showDetails}
                         />
                     )}
                 {this.state.details
