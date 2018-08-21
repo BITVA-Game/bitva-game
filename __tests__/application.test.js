@@ -18,7 +18,7 @@ test('Game loaded. Send the app in its initial state', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['morevna', 'yaga'],
+                characters: ['morevna'],
                 deck: ['apple'],
                 silver: 5,
                 gold: 0,
@@ -48,7 +48,7 @@ test('First game state Play. The Player can select any of the characters he has'
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['morevna', 'yaga'],
+                characters: ['morevna'],
                 deck: ['apple'],
                 silver: 5,
                 gold: 0,
@@ -79,7 +79,7 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
     expect(sendReply.mock.calls[0][0]).toEqual(
         {
             profile: {
-                characters: ['morevna', 'yaga'],
+                characters: ['morevna'],
                 deck: ['apple'],
                 silver: 5,
                 gold: 0,
@@ -195,8 +195,7 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-
-                characters: ['morevna', 'yaga'],
+                characters: ['morevna'],
                 deck: ['apple'],
                 silver: 5,
                 gold: 0,
@@ -224,7 +223,7 @@ test('msg HEROSELECTED switches screen state to VERSUS', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['morevna', 'yaga'],
+                characters: ['morevna'],
                 deck: ['apple'],
                 silver: 5,
                 gold: 0,
