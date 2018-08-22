@@ -9,80 +9,103 @@ h3 {
  	font-size: 1.5em;
 }
 
-.HeroBlock {
- 	flex: 1;
-	position: relative;
-}
-
-.HeroBlock button {
-	border: 2px solid #899591;
-	/*height: 376px;*/
+button {
 	outline: none;
 }
 
-.HeroBlock .info-button {
-	position: absolute;
-	top: 0;
-	left: 20%;
-	padding: 10px;
-}
-
-.HeroBlock button:hover {
-	border: 2px solid #B74A45;
-}
-
-.HeroBlock button:focus {
-	border: 2px solid #B74A45;
-}
-
-.HeroDetails {
- 	display: flex;
+.HeroBlock {
+	display: flex;
  	flex-direction: column;
  	justify-content: center;
-  	position: absolute;
-  	width: 300px;
-  	height: 150px;
-  	padding: 0 15px;
-  	top: 50%;
-  	left: 50%;
-  	transform: translate(-50%,-50%);
-  	background-color: silver;
-  	border-radius: 10px;
 }
 
-.HeroDetails .close-button {
-  	position: absolute;
-  	top: 15px;
-	right: 15px;
+.HeroBlock .CharButton {
+	border: 2px solid #fff;
+	height: 376px;
+	margin: 0 1em;
+	padding: 0;
 }
 
-.HeroDetails img {
- 	margin: auto;
+.HeroBlock .CharButton:hover,
+.HeroBlock .CharButton:focus {
+	border: 2px solid #B74A45;
 }
 
-.HeroDetails div {
+.HeroBlock .InfoButton {
+ 	background-color: #fff;
+ 	border-style: none;
+ 	color: #000;
+ 	font-size: 1.5em;
+ 	height: 45px;
+ 	margin: 0 0 0 0.64em;
+ 	padding: 0;
+ 	width: 390px;
+}
+
+.OneHero {
+	display: flex;
+ 	flex-direction: column;
+ 	justify-content: center;
+}
+
+.OneHero img {
+	margin:auto;
+}
+
+.OneHero div {
 	display: flex;
 	justify-content: center;
 }
 
-.HeroDetails button {
- 	flex: none;
- 	background-color: #899591;
- 	border-style: none;
- 	color: #000;
- 	/*font-size: 1.5em;*/
+.OneHero button {
+	background-color: #fff;
+	border-style: none;
+	color: #000;
+ 	flex: none; 	
+ 	font-size: 1.5em;
  	height: 45px;
  	margin-right: 0.1em;
  	margin-top: 0.1em;
  	width: 15%;
 }
 
-.HeroDetails button:hover {
+.HeroBlock .InfoButton:hover,
+.HeroBlock .InfoButton:focus,
+.OneHero button:hover,
+.OneHero button:focus {
  	background-color: #B74A45;
- 	outline: none;
 }
 
-.HeroDetails button:focus {
- 	background-color: #B74A45;
- 	outline: none;
+/* Pop-up element */
+
+.HeroDetails {
+	background-color: #899591;
+	border-radius: 10px;
+	color: #000;
+ 	display: flex;
+ 	flex-direction: column;
+ 	/*height: 220px;*/
+ 	justify-content: center;
+  	left: 50%;
+  	padding: 0 1.1em 0.2em;
+  	position: absolute;
+  	top: 50%;
+  	transform: translate(-50%,-50%);
+  	width: 380px;
+}
+
+.HeroDetails .CloseButton {
+	background-color: #899591;
+	border: none;
+	color: #000;
+	font-size: 1.4em;
+	padding: 0;
+  	position: absolute;
+  	right: 15px;  	
+  	top: 15px;	
+}
+
+.HeroDetails p {
+	font-size: 1.3em;
+	padding: 0 1em;
 }
