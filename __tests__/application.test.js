@@ -108,22 +108,22 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                         apple: {
                             id: 'apple',
                             name: 'Apple',
-                            count: 2,
+                            count: 4,
                         },
                         bereginya: {
                             id: 'bereginya',
                             name: 'Bereginya',
-                            count: 2,
+                            count: 4,
                         },
                         sheetLarge: {
                             id: 'sheetLarge',
                             name: 'Large Shield',
-                            count: 1,
+                            count: 2,
                         },
                         sheetSmall: {
                             id: 'sheetSmall',
                             name: 'Living Water',
-                            count: 1,
+                            count: 3,
                         },
                     },
                 },
@@ -151,22 +151,22 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                         apple: {
                             id: 'apple',
                             name: 'Apple',
-                            count: 2,
+                            count: 4,
                         },
                         bereginya: {
                             id: 'bereginya',
                             name: 'Bereginya',
-                            count: 2,
+                            count: 4,
                         },
                         sheetLarge: {
                             id: 'sheetLarge',
                             name: 'Large Shield',
-                            count: 1,
+                            count: 2,
                         },
                         sheetSmall: {
                             id: 'sheetSmall',
                             name: 'Living Water',
-                            count: 1,
+                            count: 3,
                         },
                     },
                 },
@@ -184,7 +184,7 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
 test('msg HEROSELECTED received. List with charactes cleared. State Hero Selected.', () => {
 // We only need type for this test.
-    const msg = { type: 'HEROSELECTED' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -212,7 +212,7 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
 // screen swtich to state VERSUS after hero is selected
 test('msg HEROSELECTED switches screen state to VERSUS', () => {
     // We only need type for this test.
-    const msg = { type: 'HEROSELECTED' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -243,13 +243,13 @@ test('msg HEROSELECTED switches screen state to VERSUS', () => {
 // Test that one player has become active. Game state VERSUS.
 test('msg HEROSELECTED received: active player is set.', () => {
 // We only need type for this test.
-    const msg = { type: 'HEROSELECTED' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
+    // Mock will rewrite all math.random and set it to 0
     Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+    Math.random.mockReturnValue(0);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -264,4 +264,26 @@ test('msg HEROSELECTED received: active player is set.', () => {
             },
         },
     );
+});
+
+// Test that active player gets its character's deck. Game state VERSUS.
+test('msg HEROSELECTED received: active player has a character and 15 cards.', () => {
+// We only need type for this test.
+    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set it to 1
+    Math.random = jest.fn();
+    Math.random.mockReturnValue(1);
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    expect(result.game.players[1].hero).toEqual('morevna');
+    expect(result.game.players[1].cards.length).toEqual(15);
 });
