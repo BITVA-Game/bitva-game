@@ -6,20 +6,22 @@ import './css/HeroSelection.css';
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
 
+
 const images = {
     yaga,
     morevna,
 };
 
+// Pop-up with character details
 const HeroDetails = props => (
     <div className="HeroDetails">
-        <button className="close-button" type="button" onClick={() => props.closeDetails()}>
-            Close
+        <button className="CloseButton" type="button" onClick={() => props.closeDetails()}>
+            X
         </button>
         {/* <img src={images[props.hero.id]} alt={props.hero.id}/> */}
-        <p>
+        <h3>
             {props.hero.id}
-        </p>
+        </h3>
         <p>
             {props.hero.description}
         </p>
@@ -29,11 +31,11 @@ const HeroDetails = props => (
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className="HeroBlock">
-        <button className="info-button" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
-            Info
-        </button>
-        <button type="button" onClick={() => props.onShow(props.hero)}>
+        <button className="CharButton" type="button" onClick={() => props.onShow(props.hero)}>
             <img src={images[props.hero.id]} alt={props.hero.id} />
+        </button>
+        <button className="InfoButton" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
+            Info
         </button>
     </div>
 );
@@ -60,7 +62,6 @@ const ListOfHeroes = props => (
 const OneHero = props => (
     <div className="OneHero">
         <h3>
-            Character
             {props.hero.name}
         </h3>
         <img src={images[props.hero.id]} alt={props.hero.id} />
