@@ -6,7 +6,6 @@ import './css/HeroSelection.css';
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
 
-
 const images = {
     yaga,
     morevna,
