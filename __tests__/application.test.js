@@ -89,6 +89,7 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                     id: 'morevna',
                     name: 'Мarya Мorevna',
                     description: 'Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.',
+                    health: 13,
                     cards: {
                         bajun: {
                             id: 'bajun',
@@ -132,6 +133,7 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                     id: 'yaga',
                     name: 'Yaga',
                     description: 'Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.',
+                    health: 15,
                     cards: {
                         bajun: {
                             id: 'bajun',
