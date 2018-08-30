@@ -12,6 +12,13 @@ const images = {
     morevna,
 };
 
+function isAvailable(app, hero) {
+    return app.profile.characters.find((char) => {
+        console.log(char, hero.id);
+        return char === hero.id;
+    });
+}
+
 // Pop-up with character details
 const HeroDetails = props => (
     <div className="HeroDetails">
@@ -30,7 +37,7 @@ const HeroDetails = props => (
 
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
-    <div className="HeroBlock">
+    <div className={isAvailable(props.app, props.hero) ? 'HeroBlock' : 'HeroBlockInactive'}>
         <button className="CharButton" type="button" onClick={() => props.onShow(props.hero)}>
             <img src={images[props.hero.id]} alt={props.hero.id} />
         </button>
@@ -53,6 +60,7 @@ const ListOfHeroes = props => (
                 onShow={props.onShow}
                 showDetails={props.showDetails}
                 hero={hero}
+                app={props.app}
             />
         ))}
     </div>
