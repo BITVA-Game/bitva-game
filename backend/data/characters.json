@@ -23,22 +23,22 @@
             "apple": {
                 "id": "apple",
                 "name": "Apple",
-                "count": 2
+                "count": 4
              },
             "bereginya": {
                 "id": "bereginya",
                 "name": "Bereginya",
-				"count": 2
+				"count": 4
             },
             "sheetLarge": {
                 "id": "sheetLarge",
                 "name": "Large Shield",
-				"count": 1
+				"count": 2
             }, 
             "sheetSmall": {
                 "id": "sheetSmall",
                 "name": "Living Water",
-				"count": 1
+				"count": 3
             }
         }
 	},
@@ -67,22 +67,22 @@
             "apple": {
                 "id": "apple",
                 "name": "Apple",
-                "count": 2
+                "count": 4
              },
             "bereginya": {
                 "id": "bereginya",
                 "name": "Bereginya",
-                "count": 2
+                "count": 4
             },
             "sheetLarge": {
                 "id": "sheetLarge",
                 "name": "Large Shield",
-                "count": 1
+                "count": 2
             }, 
             "sheetSmall": {
                 "id": "sheetSmall",
                 "name": "Living Water",
-                "count": 1
+                "count": 3
             }
         }
     }
