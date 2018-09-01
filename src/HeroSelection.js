@@ -141,6 +141,7 @@ HeroDetails.propTypes = {
 };
 
 HeroBlock.propTypes = {
+    app: PropTypes.object.isRequired,
     hero: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     showDetails: PropTypes.func.isRequired,
