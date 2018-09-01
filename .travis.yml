@@ -11,7 +11,7 @@ cache:
 script:
   - npm run build
   - npm run package-mac && tar -zcf releases/mac.tar.gz releases/bitva-game-darwin-x64
-  - npm run package-win && ls -la releases/ && tar -zcf releases/win.tar.gz releases/bitva-game-win64
+  - npm run package-win && ls -la releases/ && tar -zcf releases/win.tar.gz releases/bitva-game-win32-ia32
 deploy:
   provider: releases
   api_key:
