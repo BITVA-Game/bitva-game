@@ -23,3 +23,6 @@ deploy:
   on:
     repo: BITVA-Game/bitva-game
     branch: master
+notifications:
+  slack:
+    secure: "YpRvMvVP6RzRoC8KeMOd+iupxcK1/IDHfhbkpF5A8LTmLvND9IADf8CYwnmIJLcevOIoxzB9+0FsH5WQg2l92NjXeLir+y+c4cwfmn6nidhBxQYmcJv8N8U1/mSC/64Z5EbJnaefzV8ckJqItml+quJPaZzCSi5WYp6XehKjv9tDldNhctlNPYZGAS44oYtwMt/dcRVXmkFeRz29vmiwfTucijLCGdmvCQ0XFr9ozpLOSIm5dNOCDCzCJGqkLeYQywjCv9KJGEHWt9nD2n9LV8ATrjZZc0h/f8rTco8I8yh5S+ast4Jo0feCAK/kmdgH2AuhATo7tIyCjBZn6gQUcl+Qby3sXrVD6/H8uBh0y1XBf6HkbhkP+AsKVbXviqktziveTBvFig/eCMrlWeJ7XSuK/6HUdKJjkrlDn+6WH0Zf2mzYAjtZ1Y0rWPvdh98q0GQ4YEy7WXxmOPtRFLHobrLrozZmICCb3W37E+3Z5FmM8+4sdmI1+V8HxCB7la9VGZcRPjMfAVsMJ0BnTo16Jb3zo5icYq7sOTDH4JxR4ehlL6EowT+Me2UioQjjBWPF1cIcaVpBOf1bH/XG4fyx9m1dPlNmy+CXf2x+LTg+YzlQXzTO/AJakXlkrvJTQiAXt/ge06LvRaP3OhfElmbnWYBY+roSahGs8FG8tCKiaqQ="
