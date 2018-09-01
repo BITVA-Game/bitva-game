@@ -1,6 +1,28 @@
 language: node_js
 node_js:
-  - "8.5"
-cache: 
-  directories: 
-    - "node_modules"
+  - '8.5'
+before_install:
+  - sudo add-apt-repository -y ppa:ricotz/unstable
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq wine
+cache:
+  directories:
+    - node_modules
+script:
+  - npm run build
+  - npm run package-mac && tar -zcf releases/mac.tar.gz releases/bitva-game-darwin-x64
+  - npm run package-win && tar -zcf releases/win.tar.gz releases/bitva-game-win32-x64
+deploy:
+  provider: releases
+  api_key:
+    secure: "LMgqqbhHPp3D1WTyYBhqB+FAY/Ca5GspFW1o9ObKqFOoHsvDB4ubdR8XrWTSDE8EyEohh141nIJvPIFEuD7u3IhRZ5fBrcaQiJFYMdLPEK/HKm+2+0y/x9sKhy8bDvxWW6P7YwkF6PJAVRBdTjxktNzEvOc79yvlBveYgZOTQazaG5NCpzTCWRPA8es3DZ5fk+8OV4xjba6T012uIkbgPpjFpiJZFoAUQ2ut6PVK7DD+Fuw7+AWggcdkDYBfZDATwrDYncpjnOZ8XXklrRNQWdB4KGdYTIZbUCaI4a+h92qDF7vS2yzUuccbIKKWMmggG/qm1Yf4K+/GBdNzgQnqLPvrz3/u2aU7C/2q+ca9KNpVm6hJq/n/KXweab4ukcDnyMmT1KiNCX+4OBW0ObBh6N/mB8uDUofg/Zp4s0nfjAKlmCgXq0CkPqTnctR7aIHM3n3yjY0BMxp3b0QdvPu9w6nUHZzD72O1xwEqQl8Ir/ChEYT6NsIeiviWjlUK7tfwFaNCHDjwvIO9K20EwyTJ+w8cqnaKHxx2g4lH40icN4l46aBupG5bn4HycJQdEz6NrMorJnAbtERSkCqcQ0n70wAPNXNM4b0gVycRCemJ9CMx0ZGkFj+yWuxuKvGrbywof94IM7o0c5oZzYFPm182kGN9VH4B/LEt8QhCBsAONA4="
+  file: 
+    - releases/mac.tar.gz
+    - releases/win.tar.gz
+  skip_cleanup: true
+  on:
+    repo: BITVA-Game/bitva-game
+    branch: master
+notifications:
+  slack:
+    secure: "YpRvMvVP6RzRoC8KeMOd+iupxcK1/IDHfhbkpF5A8LTmLvND9IADf8CYwnmIJLcevOIoxzB9+0FsH5WQg2l92NjXeLir+y+c4cwfmn6nidhBxQYmcJv8N8U1/mSC/64Z5EbJnaefzV8ckJqItml+quJPaZzCSi5WYp6XehKjv9tDldNhctlNPYZGAS44oYtwMt/dcRVXmkFeRz29vmiwfTucijLCGdmvCQ0XFr9ozpLOSIm5dNOCDCzCJGqkLeYQywjCv9KJGEHWt9nD2n9LV8ATrjZZc0h/f8rTco8I8yh5S+ast4Jo0feCAK/kmdgH2AuhATo7tIyCjBZn6gQUcl+Qby3sXrVD6/H8uBh0y1XBf6HkbhkP+AsKVbXviqktziveTBvFig/eCMrlWeJ7XSuK/6HUdKJjkrlDn+6WH0Zf2mzYAjtZ1Y0rWPvdh98q0GQ4YEy7WXxmOPtRFLHobrLrozZmICCb3W37E+3Z5FmM8+4sdmI1+V8HxCB7la9VGZcRPjMfAVsMJ0BnTo16Jb3zo5icYq7sOTDH4JxR4ehlL6EowT+Me2UioQjjBWPF1cIcaVpBOf1bH/XG4fyx9m1dPlNmy+CXf2x+LTg+YzlQXzTO/AJakXlkrvJTQiAXt/ge06LvRaP3OhfElmbnWYBY+roSahGs8FG8tCKiaqQ="

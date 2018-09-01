@@ -24,7 +24,9 @@
     "install-win": "export npm_config_platform=win32 && npm install",
     "lintfix": "eslint --fix --ext .jsx,.js . || exit 0",
     "csslint-all": "csslint src/css/*.css",
-    "csslint": "csslint"
+    "csslint": "csslint",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/icons/mac/logo.icns --prune=true --out=releases",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=src/icons/win/logo.ico --prune=true --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Bitva'"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -38,6 +40,7 @@
     "eslint-plugin-react": "^7.10.0",
     "foreman": "^3.0.1",
     "jest": "^23.4.1",
+    "url-parse": "^1.4.3",
     "wait-on": "^2.1.0"
   }
 }
