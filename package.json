@@ -26,7 +26,7 @@
     "csslint-all": "csslint src/css/*.css",
     "csslint": "csslint",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/icons/mac/logo.icns --prune=true --out=releases",
-    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=src/icons/win/logo.ico --prune=true --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Bitva'"
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=src/icons/win/logo.ico --prune=true --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Bitva'"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

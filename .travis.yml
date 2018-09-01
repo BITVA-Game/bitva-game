@@ -11,13 +11,14 @@ cache:
 script:
   - npm run build
   - npm run package-mac && tar -zcf releases/mac.tar.gz releases/bitva-game-darwin-x64
-  - npm run package-win && ls -la releases/ && tar -zcf releases/win.tar.gz releases/bitva-game-win32-ia32
+  - npm run package-win && tar -zcf releases/win.tar.gz releases/bitva-game-win32-x64
 deploy:
   provider: releases
   api_key:
     secure: "LMgqqbhHPp3D1WTyYBhqB+FAY/Ca5GspFW1o9ObKqFOoHsvDB4ubdR8XrWTSDE8EyEohh141nIJvPIFEuD7u3IhRZ5fBrcaQiJFYMdLPEK/HKm+2+0y/x9sKhy8bDvxWW6P7YwkF6PJAVRBdTjxktNzEvOc79yvlBveYgZOTQazaG5NCpzTCWRPA8es3DZ5fk+8OV4xjba6T012uIkbgPpjFpiJZFoAUQ2ut6PVK7DD+Fuw7+AWggcdkDYBfZDATwrDYncpjnOZ8XXklrRNQWdB4KGdYTIZbUCaI4a+h92qDF7vS2yzUuccbIKKWMmggG/qm1Yf4K+/GBdNzgQnqLPvrz3/u2aU7C/2q+ca9KNpVm6hJq/n/KXweab4ukcDnyMmT1KiNCX+4OBW0ObBh6N/mB8uDUofg/Zp4s0nfjAKlmCgXq0CkPqTnctR7aIHM3n3yjY0BMxp3b0QdvPu9w6nUHZzD72O1xwEqQl8Ir/ChEYT6NsIeiviWjlUK7tfwFaNCHDjwvIO9K20EwyTJ+w8cqnaKHxx2g4lH40icN4l46aBupG5bn4HycJQdEz6NrMorJnAbtERSkCqcQ0n70wAPNXNM4b0gVycRCemJ9CMx0ZGkFj+yWuxuKvGrbywof94IM7o0c5oZzYFPm182kGN9VH4B/LEt8QhCBsAONA4="
   file: 
     - releases/mac.tar.gz
+    - releases/win.tar.gz
   skip_cleanup: true
   on:
     repo: BITVA-Game/bitva-game
