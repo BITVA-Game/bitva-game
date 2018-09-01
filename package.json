@@ -24,7 +24,8 @@
     "install-win": "export npm_config_platform=win32 && npm install",
     "lintfix": "eslint --fix --ext .jsx,.js . || exit 0",
     "csslint-all": "csslint src/css/*.css",
-    "csslint": "csslint"
+    "csslint": "csslint",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/icons/mac/logo.icns --prune=true --out=releases"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",

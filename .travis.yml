@@ -1,9 +1,19 @@
 language: node_js
 node_js:
-  - "8.5"
-cache: 
-  directories: 
-    - "node_modules"
-script: 
+  - '8.5'
+cache:
+  directories:
+    - node_modules
+script:
   - npm run build
-  - electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/icons/mac/logo.icns --prune=true --out=release-builds
+  - npm run package-mac && tar -zcf releases/mac.tar.gz releases/bitva-game-darwin-x64
+deploy:
+  provider: releases
+  api_key:
+    secure: YoM3O0lz34QROv84mXtRAZRJWrTAGOLYbwxLI//Hp348B2PjitsF+OXVlE5q7jiOY/mN5wRVNjhKcRZwj7hWr/qrZL2dG3v8Cd/8d57VgX6tqusdScONgUs4WmvhQ6jTF4EBUzZTmxyLUS37Dm04ZKa+/jXGhz2AL4WmI4EWLGI632q07zBHRGIC++IdikwDoGoJeizJiP3PYAp2PwXmi6I+jMnQaSH+ZrnXQ3C4vv9u6yznnzgwf/WorqXHMbdXA0OOC9QTM/EAJ5ldfQpzSq/hhezB9lVuk6WQP1gYSo3BgyWDedWS55VIrFXhstFqDUSB2htdMz5DZefm69s1RlxMpcPqEWWqK78Z28pwicFwarOXlGu6V0dxgu6gVka6da4SQd75WFRGO0IuC/x6FNIt4HGwQpVBsjSOKAYd0OfxZ4LUJly2vkq4XeEa0rnnKcdCGEUqofJzOoJ5//mklA7rmpPYiPlFiyg0kwDJI0oi8iWeq4/ocgpqAcgcXj/dwLXIwapzuLDYaASAtKnOGFN3nP8M7qSvN846fclajpNw7XPFDhn3iKw6l3Uzyrh3OO0Hvfr2dYdMkLBqxsQj8F7r1RMcqeGV2hE0E/wBVoxtIne4EH09DMCv5j2ku3X4tZ4yKGs43L7SOLYLWW+JbiGD1nxJ07zAX2IFkg3dlVg=
+  file: 
+    - releases/mac.tar.gz
+  skip_cleanup: true
+  on:
+    repo: BITVA-Game/bitva-game
+    branch: buildTest
