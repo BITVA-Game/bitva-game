@@ -22,4 +22,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: BITVA-Game/bitva-game
-    branch: buildTest
+    branch: master
