@@ -4,3 +4,6 @@ node_js:
 cache: 
   directories: 
     - "node_modules"
+script: 
+  - npm run build
+  - electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/icons/mac/logo.icns --prune=true --out=release-builds
