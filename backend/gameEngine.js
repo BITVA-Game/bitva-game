@@ -56,23 +56,26 @@ const generatePlayers = function (heroName) {
         { active: !rand },
     ];
 
+    const allCharactersArray = Object.values(allCharacters);
+    function searchSecondHero(heroKey, CharacterArray) {
+        for (let i = 0; i < CharacterArray.length; i += 1) {
+            if (CharacterArray[i].id !== heroKey) {
+                return CharacterArray[i].id;
+            }
+        }
+        return true;
+    }
+    const heroSecondName = searchSecondHero(heroName, allCharactersArray);
+
+
     players.forEach((p) => {
         if (p.active) {
             p.hero = heroName;
             p.cards = assignCards(heroName);
-        } else if (p.active === false) {
-            const allCharactersArray = Object.values(allCharacters);
-            function searchSecondHero(heroKey, CharacterArray) {
-                for (let i = 0; i < CharacterArray.length; i += 1) {
-                    if (CharacterArray[i].id !== heroKey) {
-                        return CharacterArray[i].id;
-                    }
-                }
-                return true;
-            }
-            const heroSecondName = searchSecondHero(heroName, allCharactersArray);
-            p.hero = heroSecondName;
-            p.cards = assignCards(heroSecondName);
+        }
+        if (p.active === false) {
+        	p.hero = heroSecondName;
+        	p.cards = assignCards(heroSecondName);
         }
     });
 

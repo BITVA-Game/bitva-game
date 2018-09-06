@@ -290,8 +290,8 @@ test('msg HEROSELECTED received: active player has a character and 15 cards.', (
     expect(result.game.players[1].cards.length).toEqual(15);
 });
 
-// Test that шinactive player gets its character and it's deck. Game state VERSUS.
-test('msg HEROSELECTED received: inactive player has available character and 15 cards.', () => {
+// Test that inactive player gets its character and it's deck. Game state VERSUS.
+test('msg HEROSELECTED received: inactive player gets available character and 15 cards.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
