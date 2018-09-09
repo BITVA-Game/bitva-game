@@ -1,5 +1,6 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
+/* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
 
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
@@ -15,12 +16,12 @@ function getRandomBool() {
 }
 
 function assignCards(heroName) {
-    // const cards = {};
-    // find all cardTypes for this heroName
+// const cards = {};
+// find all cardTypes for this heroName
     const heroCardTypes = allCharacters[heroName].cards;
     // for each cardType in all CardTypes take count
     const cardsArray = [];
-    /*
+
     for (const cardType in heroCardTypes) {
         // take count, create a new card for this type
         for (let i = 0; i < heroCardTypes[cardType].count; i += 1) {
@@ -28,27 +29,23 @@ function assignCards(heroName) {
             // cards[newCard.id] = newCard;
             cardsArray.push(newCard);
         }
-        // console.log(cardsArray);
     }
-    */
-
-    const cards = Object.keys(heroCardTypes);
-    for (let j = 0; j < cards.length; j += 1) {
-    // for (cardType in Object.keys(heroCardTypes)) {
-        // take count, create a new card for this type
-        const cardType = cards[j];
-        if ({}.hasOwnProperty.call(heroCardTypes, cardType)) {
-            for (let i = 0; i < heroCardTypes[cardType].count; i += 1) {
-                const newCard = allCards[cardType];
-                // cards[newCard.id] = newCard;
-                cardsArray.push(newCard);
-            }
-        }
-    // console.log(cardsArray);
-    }
+    /* const cards = Object.keys(heroCardTypes);
+for (let j = 0; j < cards.length; j += 1) {
+// for (cardType in Object.keys(heroCardTypes)) {
+// take count, create a new card for this type
+const cardType = cards[j];
+if ({}.hasOwnProperty.call(heroCardTypes, cardType)) {
+for (let i = 0; i < heroCardTypes[cardType].count; i += 1) {
+const newCard = allCards[cardType];
+// cards[newCard.id] = newCard;
+cardsArray.push(newCard);
+}
+}
+} */
     const deck = cardsArray.sort(() => Math.random() - 0.5);
     const deckHero = deck.slice(0, 15);
-    // console.log(deckHero);
+
     return deckHero;
 }
 
@@ -59,13 +56,29 @@ const generatePlayers = function (heroName) {
         { active: !rand },
     ];
 
+    const allCharactersArray = Object.values(allCharacters);
+    function searchSecondHero(heroKey, CharacterArray) {
+        for (let i = 0; i < CharacterArray.length; i += 1) {
+            if (CharacterArray[i].id !== heroKey) {
+                return CharacterArray[i].id;
+            }
+        }
+        return true;
+    }
+    const heroSecondName = searchSecondHero(heroName, allCharactersArray);
+
+
     players.forEach((p) => {
         if (p.active) {
             p.hero = heroName;
             p.cards = assignCards(heroName);
         }
+        if (p.active === false) {
+        	p.hero = heroSecondName;
+        	p.cards = assignCards(heroSecondName);
+        }
     });
-    
+
     return { players };
 };
 
@@ -76,7 +89,7 @@ function handle(app, message) {
     }
     case 'HEROSELECTED': {
         const heroName = message.hero;
-        // console.log(heroName);
+
         return Object.assign({}, app.game, generatePlayers(heroName));
     }
     default: { return app.game; }

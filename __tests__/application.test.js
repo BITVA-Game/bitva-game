@@ -289,3 +289,25 @@ test('msg HEROSELECTED received: active player has a character and 15 cards.', (
     expect(result.game.players[1].hero).toEqual('morevna');
     expect(result.game.players[1].cards.length).toEqual(15);
 });
+
+// Test that inactive player gets its character and it's deck. Game state VERSUS.
+test('msg HEROSELECTED received: inactive player gets available character and 15 cards.', () => {
+// We only need type for this test.
+    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set it to 1
+    Math.random = jest.fn();
+    Math.random.mockReturnValue(1);
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    expect(result.game.players[0].hero).toEqual('yaga');
+    expect(result.game.players[0].cards.length).toEqual(15);
+});
