@@ -1,9 +1,10 @@
 .MainMenuContainer {
+  background-color: rgb(33, 33, 33);
   background-color: rgba(33, 33, 33, 0.55);
   box-sizing: border-box;
   display: flex;
-  height: 100vh;
   flex-direction: column;
+  height: 100vh;
   width: 21em;
 }
 
