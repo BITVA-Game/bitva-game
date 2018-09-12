@@ -7,15 +7,15 @@ import './css/StartScreen.css';
 
 
 const StartScreen = props => (
-	<div className="StartScreen">
-		<MainMenu sendMessage={props.sendMessage} />
-		{/* <textarea value={JSON.stringify(props.app.profile)} /> */}
-	</div>
+    <div className="StartScreen">
+        <MainMenu sendMessage={props.sendMessage} />
+        {/* <textarea value={JSON.stringify(props.app.profile)} /> */}
+    </div>
 );
 
 StartScreen.propTypes = {
-	// app: PropTypes.object.isRequired,
-	sendMessage: PropTypes.func.isRequired,
+    // app: PropTypes.object.isRequired,
+    sendMessage: PropTypes.func.isRequired,
 };
 
 export default StartScreen;

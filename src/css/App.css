@@ -6,13 +6,13 @@ html, body {
   font-family: 'Ruslan Display', cursive;
 }
 
-.App {
-  /*text-align: center;*/
-}
-
 /*unused styles, might be useful in future*/
 
 /*
+.App {
+  text-align: center;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
