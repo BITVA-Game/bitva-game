@@ -1,78 +1,47 @@
 .MainMenuContainer {
-  padding: 7% 10% 12%;
+  background-color: rgba(33, 33, 33, 0.55);
   box-sizing: border-box;
-
-  background-color: #000;
-  background-image: url("../images/Uzor-1.png");
-  background-size: cover;
-  background-position: center top;
-}
-
-.Content {
-  margin-top: 3%;
   display: flex;
-  align-items: center;
-  justify-content: space-around;
+  height: 100vh;
+  flex-direction: column;
+  width: 21em;
 }
 
-/* .MainOrnament {
-  flex: 4;
-  height: 650px;
-} */
+.Logo {
+  font-size: 4em;
+  text-align: center;
+}
+
+.MenuButtons {
+  display: flex;
+  flex-direction: column;
+}
 
 ul {
-  align-self: center;
   display: flex;
-  width: 200px;
   flex-direction: column;
-  margin: 0 22px;
-  padding: 0;
-  box-sizing: border-box;
-
   list-style: none;
-}
-
-li {
-  margin-bottom: 17px;
-}
-
-li:last-child {
-  margin-bottom: 0;
+  margin: 0 0 2em 0;
+  padding: 0 0 3em 0;
 }
 
 li button {
-  height: 65px;
-  margin-top: 0.1em;
-  width: 100%;
-
-  color: #000;
-  font-size: 1.8em;
-
-  background-color: #ffffff;
-  border-radius: 3px;
-  border-style: none;
+  background-color: transparent;
+  border: none;
+  color: #fff;
   font-family: 'Ruslan Display', cursive;
+  font-size: 1.6em;
+  margin-top: 0.1em;
+  padding: 0.3em 0 0.3em 1.5em;
+  text-align: left;
+  width: 100%;
 }
 
 li button:hover {
-  background-color: #B74A45;
+  color: rgb(183, 74, 69);
 }
 
 li button:focus {
-  background-color: #B74A45;
+  color: rgb(183, 74, 69);
   outline: none;
-}
-
-.DrakonImage {
-  width: 400px;
-  box-sizing: border-box;
-}
-
-.MainDrakonLeft,
-.MainDrakonRight {
-  width: 100%;
-}
-
-.MainDrakonRight {
-  transform: scaleX(-1);
 }

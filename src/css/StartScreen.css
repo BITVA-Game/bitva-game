@@ -1,0 +1,5 @@
+.StartScreen {
+	background: #000 url("../images/start_screen.jpg") no-repeat;
+  box-sizing: border-box;
+  display: flex;
+}
