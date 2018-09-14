@@ -30,33 +30,24 @@ function assignCards(heroName) {
             cardsArray.push(newCard);
         }
     }
-    /* const cards = Object.keys(heroCardTypes);
-for (let j = 0; j < cards.length; j += 1) {
-// for (cardType in Object.keys(heroCardTypes)) {
-// take count, create a new card for this type
-const cardType = cards[j];
-if ({}.hasOwnProperty.call(heroCardTypes, cardType)) {
-for (let i = 0; i < heroCardTypes[cardType].count; i += 1) {
-const newCard = allCards[cardType];
-// cards[newCard.id] = newCard;
-cardsArray.push(newCard);
-}
-}
-} */
     const deck = cardsArray.sort(() => Math.random() - 0.5);
     const deckHero = deck.slice(0, 15);
 
     return deckHero;
 }
 
+
 const generatePlayers = function (heroName) {
     const rand = getRandomBool();
     const players = [
         { active: rand },
         { active: !rand },
-    ];
 
+    ];
+    // We create array from all characters objects.
     const allCharactersArray = Object.values(allCharacters);
+
+    // we retrieve the name of the 2nd character not taken from the list previoulsy.
     function searchSecondHero(heroKey, CharacterArray) {
         for (let i = 0; i < CharacterArray.length; i += 1) {
             if (CharacterArray[i].id !== heroKey) {
@@ -67,20 +58,22 @@ const generatePlayers = function (heroName) {
     }
     const heroSecondName = searchSecondHero(heroName, allCharactersArray);
 
-
     players.forEach((p) => {
         if (p.active) {
             p.hero = heroName;
             p.cards = assignCards(heroName);
+            p.health = allCharacters[heroName].health;
         }
         if (p.active === false) {
-        	p.hero = heroSecondName;
-        	p.cards = assignCards(heroSecondName);
+            p.hero = heroSecondName;
+            p.cards = assignCards(heroSecondName);
+            p.health = allCharacters[heroSecondName].health;
         }
     });
-
+    console.log(players);
     return { players };
 };
+
 
 function handle(app, message) {
     switch (message.type) {
