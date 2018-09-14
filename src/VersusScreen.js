@@ -24,12 +24,11 @@ const OneHero = props => (
 );
 
 const VersusScreen = props => (
-    <body>
-    
+    <body>    
         <h3>
             Versus Screen
         </h3>
-      <div class="flex-container">
+      <div class="containerVersus">
         <div>
             {' '}
             <OneHero hero={props.app.game.players[0].hero} />

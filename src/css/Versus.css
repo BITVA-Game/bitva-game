@@ -38,6 +38,8 @@
 	 	flex: 2 100%;
 	 	font-size: 1.5em;
 	 	padding-top: 1em;
+		justify-content: center;
+		display: flex;
 
 	}
 
@@ -45,14 +47,18 @@
 		color: rgb(255, 255, 255);
 		 font-size: 2.25em;
 		 font-family: Sedan SC;
+		 display: flex;
+		 justify-content: center;
 		 
 	}
 	
 	.PlayButtonLayer {
 		display: bottom;
 		margin-top: 15em;
+		display: flex;
+		justify-content: center;
 	}
-	.flex-container {
+	.containerVersus {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
