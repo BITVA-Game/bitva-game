@@ -1,27 +1,60 @@
 	
-	.OneHero {
+	.OneHeroVersus {
 		display: flex;
 	 	flex-direction: column;
 	 	flex-flow: row wrap;
 	 	justify-content: center;
-	 	display: inline-block;
-	 	padding: 6em 10em;
-
+	 	padding-top: 3em;
+	 	
 	}
 
-	.OneHero img {
+	.OneHeroVersus img {
 		margin: auto;
-		
-	}
-
-	.OneHero div {
-		display: flex;
 		justify-content: center;
 		
+	}
+
+	.OneHeroVersus body {
+		display: flex;
+		justify-content: center;
+
+	}
+
+	.OneHeroVersus div {
+		display: flex;
+		justify-content: center;
+		padding-top: 1em;
+		
+	}
+	
+	p {
+		font-family: Sedan SC;
+		font-size: 9em;
+		padding: 0.2em 1em;
+		/*color: rgb(0, 0, 0);*/
 	}
 
 	h3 {
 	 	flex: 2 100%;
 	 	font-size: 1.5em;
+	 	padding-top: 1em;
+
+	}
+
+	.PlayButton {
+		color: rgb(255, 255, 255);
+		 font-size: 2.25em;
+		 font-family: Sedan SC;
+		 
 	}
 	
+	.PlayButtonLayer {
+		display: bottom;
+		margin-top: 15em;
+	}
+	.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  
+}

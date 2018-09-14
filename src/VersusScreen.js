@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/Versus.css';
 
@@ -11,29 +11,44 @@ const images = {
     morevna,
 };
 
-const renderHeroes = function (players){
-	players.forEach(function(p){
-		<OneHero hero={p.hero}/>
-	})
-}
+const renderHeroes = function (players) {
+    players.forEach((p) => {
+        <OneHero hero={p.hero} />;
+    });
+};
 
 const OneHero = props => (
-    <div className="OneHero">
+    <div className="OneHeroVersus">
         <img src={images[props.hero]} alt={props.hero} />
-        </div>
+    </div>
 );
 
 const VersusScreen = props => (
-    <div>
+    <body>
+    
         <h3>
             Versus Screen
-         </h3>
-            <OneHero hero={props.app.game.players[0].hero}/>
-            <OneHero hero={props.app.game.players[1].hero}/>
-            
-        
-    </div> 
-);
+        </h3>
+      <div class="flex-container">
+        <div>
+            {' '}
+            <OneHero hero={props.app.game.players[0].hero} />
+            {' '}
+        </div>
+        <p> VS </p>
+        <div>
+            {' '}
+            <OneHero hero={props.app.game.players[1].hero} />
+            {' '}
+        </div>
 
+     </div>
+        <div className="PlayButtonLayer">
+            <button className="PlayButton" type="button" onClick={() => props.sendMessage({ type: 'DEALALL' })}>
+                PLAY
+            </button>
+         </div>
+    </body>
+);
 
 export default VersusScreen;
