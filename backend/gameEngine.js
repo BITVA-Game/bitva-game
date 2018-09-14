@@ -72,14 +72,20 @@ const generatePlayers = function (heroName) {
         if (p.active) {
             p.hero = heroName;
             p.cards = assignCards(heroName);
+            p.playerHand = {};
         }
         if (p.active === false) {
         	p.hero = heroSecondName;
         	p.cards = assignCards(heroSecondName);
+            p.playerHand = {};
         }
     });
 
     return { players };
+};
+
+const giveCardsToAll = function () {
+
 };
 
 function handle(app, message) {
@@ -91,6 +97,10 @@ function handle(app, message) {
         const heroName = message.hero;
 
         return Object.assign({}, app.game, generatePlayers(heroName));
+    }
+    case 'DEALALL': {
+        return Object.assign({}, app.game, giveCardsToAll());
+
     }
     default: { return app.game; }
     }
