@@ -18,14 +18,14 @@
 	}
 
 
-	.HeroBlock {
+	.HeroBlock, .HeroBlockInactive {
 		display: flex;
 	 	flex-direction: column;
 	 	justify-content: center;
 	}
 
 
-	.HeroBlock .CharButton {
+	.HeroBlock .CharButton, .HeroBlockInactive .CharButton {
 		border: 2px solid #fff;
 		height: 376px;
 		margin: 0 1em;
@@ -37,7 +37,7 @@
 		border: 2px solid #B74A45;
 	}
 
-	.HeroBlock .InfoButton {
+	.HeroBlock .InfoButton, .HeroBlockInactive .InfoButton {
 	 	background-color: #fff;
 	 	border-style: none;
 	 	color: #000;

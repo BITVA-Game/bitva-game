@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import MainMenu from './MainMenu';
+import StartScreen from './StartScreen';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import WebFont from 'webfontloader';
@@ -35,7 +35,7 @@ class App extends Component {
         case 'loading':
             return 'LOADING';
         case 'STARTSCREEN':
-            return <MainMenu sendMessage={sendMessage} app={this.state.app} />;
+            return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'HEROSELECT':
             return <HeroSelection sendMessage={sendMessage} app={this.state.app} />;
         case 'VERSUS':
