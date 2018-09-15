@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/Versus.css';
 
@@ -11,11 +11,11 @@ const images = {
     morevna,
 };
 
-const renderHeroes = function (players) {
+/* const renderHeroes = function (players) {
     players.forEach((p) => {
         <OneHero hero={p.hero} />;
     });
-};
+}; */
 
 const OneHero = props => (
     <div className="OneHeroVersus">
@@ -24,30 +24,44 @@ const OneHero = props => (
 );
 
 const VersusScreen = props => (
-    <body>    
-        <h3>
+    <div className="VersusScreenDiv">
+        <div className="TitleDiv">
+            <h3 className="Title">
             Versus Screen
-        </h3>
-      <div class="containerVersus">
-        <div>
-            {' '}
-            <OneHero hero={props.app.game.players[0].hero} />
-            {' '}
+            </h3>
         </div>
-        <p> VS </p>
-        <div>
-            {' '}
-            <OneHero hero={props.app.game.players[1].hero} />
-            {' '}
-        </div>
+        <div className="containerVersus">
+            <div>
 
-     </div>
+                <OneHero hero={props.app.game.players[0].hero} />
+
+            </div>
+            <div className="vs">
+                <p>
+                VS
+                </p>
+            </div>
+            <div>
+
+                <OneHero hero={props.app.game.players[1].hero} />
+
+            </div>
+
+        </div>
         <div className="PlayButtonLayer">
-            <button className="PlayButton" type="button" onClick={() => props.sendMessage({ type: 'DEALALL' })}>
+            <div className="ButtonDiv">
+                <button className="PlayButton" type="button" onClick={() => props.sendMessage({ type: 'DEALALL' })}>
                 PLAY
-            </button>
-         </div>
-    </body>
+                </button>
+            </div>
+        </div>
+    </div>
 );
+
+VersusScreen.propTypes = {
+    hero: PropTypes.string.isRequired,
+    app: PropTypes.object.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+};
 
 export default VersusScreen;
