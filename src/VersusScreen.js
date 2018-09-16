@@ -64,4 +64,8 @@ VersusScreen.propTypes = {
     sendMessage: PropTypes.func.isRequired,
 };
 
+OneHero.propTypes = {
+    hero: PropTypes.string.isRequired,
+};
+
 export default VersusScreen;

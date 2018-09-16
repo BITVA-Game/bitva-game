@@ -15,7 +15,9 @@ const MenuButton = props => (
 const MainMenu = props => (
     <div className="MainMenuContainer">
         <div className="Logo">
-            <p>Bitva</p>
+            <p>
+                Bitva
+            </p>
         </div>
         <div className="MenuButtons">
             <ul>
