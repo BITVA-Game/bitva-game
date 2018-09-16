@@ -1,16 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
-import './css/TopMenu.css';
 import './css/MainMenu.css';
-import TopButton from './TopButton';
-
-import chars from './images/IconCharacters.png';
-import cards from './images/IconCards.png';
-import silver from './images/IconMoney.png';
-import gold from './images/IconSpecial.png';
-
-import drakon from './images/dragon-1.png';
 
 
 const MenuButton = props => (
@@ -23,32 +14,29 @@ const MenuButton = props => (
 
 const MainMenu = props => (
     <div className="MainMenuContainer">
-        <div className="TopShelf">
-            <TopButton icon={chars} sendMessage={props.sendMessage} type="PROPFILECHARACTERS" text="Characters" />
-            <TopButton icon={cards} sendMessage={props.sendMessage} type="PROPFILECARDS" text="Cards" />
-            <TopButton icon={silver} sendMessage={props.sendMessage} type="SHOP" text="Coins" />
-            <TopButton icon={gold} sendMessage={props.sendMessage} type="SHOP" text="Shards" />
+        <div className="Logo">
+            <p>
+                Bitva
+            </p>
         </div>
-        {/* <textarea value={JSON.stringify(props.app.profile)} /> */}
-        <div className="Content">
-            <div className="DrakonImage">
-                <img className="MainDrakonLeft" src={drakon} alt="MainDrakon" />
-            </div>
+        <div className="MenuButtons">
             <ul>
+                <MenuButton name="Single Play" type="PLAY" sendMessage={props.sendMessage} />
+                <MenuButton name="Player vs Player" type="PLAY" sendMessage={props.sendMessage} />
+                <MenuButton name="Tournament" type="PLAY" sendMessage={props.sendMessage} />
+                <MenuButton name="Daily Challenge" type="PLAY" sendMessage={props.sendMessage} />
+            </ul>
+            <ul>
+                <MenuButton name="Store" type="" sendMessage={props.sendMessage} />
                 <MenuButton name="Profile" type="PROFILE" sendMessage={props.sendMessage} />
                 <MenuButton name="Settings" type="SETTINGS" sendMessage={props.sendMessage} />
-                <MenuButton name="Play PvP" type="PLAY" sendMessage={props.sendMessage} />
-                <MenuButton name="Play Story" type="PLAY" sendMessage={props.sendMessage} />
+                <MenuButton name="Quit" type="" sendMessage={props.sendMessage} />
             </ul>
-            <div className="DrakonImage">
-                <img className="MainDrakonRight" src={drakon} alt="MainDrakon" />
-            </div>
         </div>
     </div>
 );
 
 MainMenu.propTypes = {
-    // app: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
 };
 

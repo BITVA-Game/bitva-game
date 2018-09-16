@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './css/App.css';
-import MainMenu from './MainMenu';
+import WebFont from 'webfontloader';
+
+import StartScreen from './StartScreen';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
-import WebFont from 'webfontloader';
 
 // Import electron and establis connection to use app.js as Renderer
 const electron = window.require('electron');
@@ -35,7 +36,7 @@ class App extends Component {
         case 'loading':
             return 'LOADING';
         case 'STARTSCREEN':
-            return <MainMenu sendMessage={sendMessage} app={this.state.app} />;
+            return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'HEROSELECT':
             return <HeroSelection sendMessage={sendMessage} app={this.state.app} />;
         case 'VERSUS':
@@ -49,10 +50,10 @@ class App extends Component {
         console.log(this.state.app.manager.screen);
         WebFont.load({
             custom: {
-               families: ['Ruslan Display'],
-               urls: ['/fonts/RuslanDisplay.css']
-             }
-          });
+                families: ['Ruslan Display'],
+                urls: ['/fonts/RuslanDisplay.css'],
+            },
+        });
         return (
             <div className="App">
                 {this.showApplication()}
