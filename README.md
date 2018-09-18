@@ -5,7 +5,7 @@ Running the project
 `npm run lintfix` to automatically fix all the syntax that can be autofixed.  
 `eslint nameyourfile.js` to test a specific file.  
 `eslint nameyourfile.js --fix` to automatically fix the syntax that can be autofixed in this file.  
-`npm run  csslint-all` to check all the css files.
+`npm run  csslint-all` to check all the css files.  
 `npm run  pathtoyourfile/filename.css` to check one css file.  
 `jest` from the project folder to run all the backend tests.  
 
