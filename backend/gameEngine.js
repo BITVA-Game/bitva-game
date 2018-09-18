@@ -66,20 +66,28 @@ const generatePlayers = function (heroName) {
             p.playerHand = {};
         }
         if (p.active === false) {
-        	p.hero = heroSecondName;
-        	p.cards = assignCards(heroSecondName);
+            p.hero = heroSecondName;
+            p.cards = assignCards(heroSecondName);
             p.health = allCharacters[heroSecondName].health;
             p.playerHand = {};
         }
     });
-    console.log(players);
+
     return { players };
 };
 
 
-const giveCardsToAll = function () {
+function giveCardsTo(player) {
+    player.playerHand = player.cards.splice(0, 5);
+    return player;
+}
 
-};
+function giveCardsToAll(playersArray) {
+    playersArray.forEach((p) => {
+        giveCardsTo(p);
+    });
+    return playersArray;
+}
 
 
 function handle(app, message) {
@@ -93,8 +101,9 @@ function handle(app, message) {
         return Object.assign({}, app.game, generatePlayers(heroName));
     }
     case 'DEALALL': {
-        return Object.assign({}, app.game, giveCardsToAll());
+        const playersArray = app.game.players;
 
+        return Object.assign({}, app.game, giveCardsToAll(playersArray));
     }
     default: { return app.game; }
     }

@@ -340,7 +340,7 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
 // Test that each player has its hand empty. State Hero Selected.
 test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
 // We only need type for this test.
-const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -362,12 +362,12 @@ const msg = { type: 'HEROSELECTED', hero: 'morevna' };
     expect(result.game.players[1].playerHand).toEqual({});
 });
 
-//Test that both players get 5 cards from deck to their hands. Players decks now with 5 cards less. Game state Deal All.
-test.only('msg DEALALL received: Players hands have 5 cards each. Players decks have 5 cards less. State Deal All.', () => {
+// Test that both players get 5 cards from deck to their hands. Game state Deal All.
+test('msg DEALALL received: Players hands have 5 cards each. Players decks have 5 cards less. State Deal All.', () => {
     const msg = { type: 'DEALALL', hero: 'morevna' };
     // Mock sendReply function
     const sendReply = jest.fn();
-     // Mock will rewrite all math.random and set it to 1
+    // Mock will rewrite all math.random and set it to 1
     Math.random = jest.fn();
     Math.random.mockReturnValue(1);
 
@@ -379,10 +379,10 @@ test.only('msg DEALALL received: Players hands have 5 cards each. Players decks 
     const result = sendReply.mock.calls[0][0];
 
     expect(result.game.players[0].hero).toEqual('yaga');
-    expect(result.game.players[0].playerHand).toEqual(5);
+    expect(result.game.players[0].playerHand.length).toEqual(5);
     expect(result.game.players[0].cards.length).toEqual(10);
 
     expect(result.game.players[1].hero).toEqual('morevna');
-    expect(result.game.players[1].playerHand).toEqual(5);
+    expect(result.game.players[1].playerHand.length).toEqual(5);
     expect(result.game.players[1].cards.length).toEqual(10);
-});    
+});
