@@ -79,6 +79,8 @@ button {
 
 .HeroBlock .InfoButton:hover,
 .HeroBlock .InfoButton:focus,
+.HeroBlockInactive .InfoButton:hover,
+.HeroBlockInactive .InfoButton:focus,
 .OneHero button:hover,
 .OneHero button:focus {
 	background-color: #B74A45;
