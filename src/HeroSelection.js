@@ -50,7 +50,7 @@ const HeroBlock = props => (
 // Click will take the player into character info screen
 const ListOfHeroes = props => (
     <div className="HeroSelection">
-        <h3>
+        <h3 className='heroselection-title'>
             Select one character
         </h3>
         {Object.values(props.app.heroSelect).map(hero => (
