@@ -76,9 +76,9 @@ const generatePlayers = function (heroName) {
     return { players };
 };
 
-
 function giveCardsTo(player) {
-    player.playerHand = player.cards.splice(0, 5);
+    const x = player.playerHand.length >= 0 ? 5 - player.playerHand.length : 5;
+    player.playerHand = player.cards.splice(0, x);
     return player;
 }
 
