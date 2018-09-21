@@ -47,6 +47,8 @@ class App extends Component {
 
     render() {
         console.log(this.state.app.manager.screen);
+        console.log("Here's the app object for testing");
+        console.log(this.state.app);
         WebFont.load({
             custom: {
                families: ['Ruslan Display'],
