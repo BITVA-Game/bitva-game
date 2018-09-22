@@ -1,66 +1,45 @@
-.HeroSelection {
+button {
+	outline: none;
+}
+
+/* main container */
+
+.heroselection-container {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
 }
 
-.HeroBlockInactive {
-	opacity:0.5;
-}
-
-.CharButton {
-	position: relative;
-}
-
-.HeroBlockInactive .CharButton:hover::after {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-	height: 100px;
-    width: 100px;
-	background: url(../images/lock-shield.jpg) transparent no-repeat;
-	background-size: 100px 100px;
-    content: '';
-	z-index: 999;
-}
-
 .heroselection-title {
 	cursor: default;
+	flex: 2 100%;
+	font-size: 1.5em;
+    text-align: center;
 	user-select: none;
 }
 
-h3 {
-	flex: 2 100%;
-	font-size: 1.5em;
-  text-align: center;
-}
+/* hero character block */
 
-button {
-	outline: none;
-}
-
-.HeroBlock,
-.HeroBlockInactive {
+.hero-block {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-.HeroBlock .CharButton,
-.HeroBlockInactive .CharButton {
+.hero-block .btn-character {
 	border: 2px solid #fff;
 	height: 376px;
 	margin: 0 1em;
 	padding: 0;
+	position: relative;
 }
 
-.HeroBlock .CharButton:hover,
-.HeroBlock .CharButton:focus {
+.hero-block .btn-character:hover,
+.hero-block .btn-character:focus {
 	border: 2px solid #B74A45;
 }
 
-.HeroBlock .InfoButton,
-.HeroBlockInactive .InfoButton {
+.hero-block .btn-character-info {
 	background-color: #fff;
 	border-style: none;
 	color: #000;
@@ -71,22 +50,51 @@ button {
 	width: 390px;
 }
 
-.OneHero {
+.hero-block .btn-character-info:hover,
+.hero-block .btn-character-info:focus {
+	background-color: #B74A45;
+}
+
+/* inactive hero properties */
+
+.hero-inactive {
+	opacity:0.5;
+}
+
+.hero-inactive .btn-character:hover::after {
+	background: url(../images/lock-shield.jpg) transparent no-repeat;
+	background-size: 100px 100px;
+    bottom: 0;
+    content: '';
+	height: 100px;
+    position: absolute;
+    right: 0;
+    width: 100px;
+	z-index: 999;
+}
+
+/* hero details screen */
+
+.hero-details {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-.OneHero img {
+.hero-details-title {
+	text-align: center;
+}
+
+.hero-details img {
 	margin:auto;
 }
 
-.OneHero div {
+.hero-details-btn-block {
 	display: flex;
 	justify-content: center;
 }
 
-.OneHero button {
+.hero-details-btn-block button {
 	background-color: #fff;
 	border-style: none;
 	color: #000;
@@ -98,18 +106,14 @@ button {
 	width: 15%;
 }
 
-.HeroBlock .InfoButton:hover,
-.HeroBlock .InfoButton:focus,
-.HeroBlockInactive .InfoButton:hover,
-.HeroBlockInactive .InfoButton:focus,
-.OneHero button:hover,
-.OneHero button:focus {
+.hero-details-btn-block button:hover,
+.hero-details-btn-block button:focus {
 	background-color: #B74A45;
 }
 
 /* Pop-up element */
 
-.HeroDetails {
+.hero-info {
 	background-color: #899591;
 	border-radius: 10px;
 	color: #000;
@@ -125,7 +129,7 @@ button {
 	width: 380px;
 }
 
-.HeroDetails .CloseButton {
+.hero-info .btn-close {
 	background-color: #899591;
 	border: none;
 	color: #000;
@@ -136,7 +140,7 @@ button {
 	top: 15px;	
 }
 
-.HeroDetails p {
+.hero-info p {
 	font-size: 1.3em;
 	padding: 0 1em;
 }
