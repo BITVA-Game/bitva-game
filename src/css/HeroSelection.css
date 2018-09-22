@@ -8,6 +8,27 @@
 	opacity:0.5;
 }
 
+.CharButton {
+	position: relative;
+}
+
+.HeroBlockInactive .CharButton:hover::after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+	height: 100px;
+    width: 100px;
+	background: url(../images/lock-shield.jpg) transparent no-repeat;
+	background-size: 100px 100px;
+    content: '';
+	z-index: 999;
+}
+
+.heroselection-title {
+	cursor: default;
+	user-select: none;
+}
+
 h3 {
 	flex: 2 100%;
 	font-size: 1.5em;
