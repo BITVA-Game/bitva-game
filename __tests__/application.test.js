@@ -364,7 +364,7 @@ test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', (
 
 // Test that both players get 5 cards from deck to their hands. Game state Deal All.
 test('msg DEALALL received: Players hands have 5 cards each. Players decks have 5 cards less. State Deal All.', () => {
-    const msg = { type: 'DEALALL', hero: 'morevna' };
+    const msg = { type: 'DEALALL' };
     // Mock sendReply function
     const sendReply = jest.fn();
     // Mock will rewrite all math.random and set it to 1
@@ -385,4 +385,6 @@ test('msg DEALALL received: Players hands have 5 cards each. Players decks have 
     expect(result.game.players[1].hero).toEqual('morevna');
     expect(result.game.players[1].playerHand.length).toEqual(5);
     expect(result.game.players[1].cards.length).toEqual(10);
+
+    expect(result.manager.screen).toEqual('PLAYERACT');
 });
