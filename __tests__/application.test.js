@@ -336,3 +336,55 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
     expect(result.game.players[1].hero).toEqual('morevna');
     expect(result.game.players[1].health).toEqual(13);
 });
+
+// Test that each player has its hand empty. State Hero Selected.
+test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
+// We only need type for this test.
+    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set it to 1
+    Math.random = jest.fn();
+    Math.random.mockReturnValue(1);
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    expect(result.game.players[0].hero).toEqual('yaga');
+    expect(result.game.players[0].playerHand).toEqual({});
+
+    expect(result.game.players[1].hero).toEqual('morevna');
+    expect(result.game.players[1].playerHand).toEqual({});
+});
+
+// Test that both players get 5 cards from deck to their hands. Game state Deal All.
+test('msg DEALALL received: Players hands have 5 cards each. Players decks have 5 cards less. State Deal All.', () => {
+    const msg = { type: 'DEALALL' };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set it to 1
+    Math.random = jest.fn();
+    Math.random.mockReturnValue(1);
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    expect(result.game.players[0].hero).toEqual('yaga');
+    expect(result.game.players[0].playerHand.length).toEqual(5);
+    expect(result.game.players[0].cards.length).toEqual(10);
+
+    expect(result.game.players[1].hero).toEqual('morevna');
+    expect(result.game.players[1].playerHand.length).toEqual(5);
+    expect(result.game.players[1].cards.length).toEqual(10);
+
+    expect(result.manager.screen).toEqual('PLAYERACT');
+});
