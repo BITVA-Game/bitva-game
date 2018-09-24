@@ -6,27 +6,27 @@ import './css/MainMenu.css';
 
 const MenuButton = props => (
     <li>
-        <button className="MenuButton" type="button" onClick={() => props.sendMessage({ type: props.type })}>
+        <button className="menu-button" type="button" onClick={() => props.sendMessage({ type: props.type })}>
             {props.name}
         </button>
     </li>
 );
 
 const MainMenu = props => (
-    <div className="MainMenuContainer">
-        <div className="Logo">
+    <div className="main-menu-container">
+        <div className="logo">
             <p>
                 Bitva
             </p>
         </div>
-        <div className="MenuButtons">
-            <ul>
+        <div className="menu-buttons-container">
+            <ul className="menu-buttons-group">
                 <MenuButton name="Single Play" type="PLAY" sendMessage={props.sendMessage} />
                 <MenuButton name="Player vs Player" type="PLAY" sendMessage={props.sendMessage} />
                 <MenuButton name="Tournament" type="PLAY" sendMessage={props.sendMessage} />
                 <MenuButton name="Daily Challenge" type="PLAY" sendMessage={props.sendMessage} />
             </ul>
-            <ul>
+            <ul className="menu-buttons-group">
                 <MenuButton name="Store" type="" sendMessage={props.sendMessage} />
                 <MenuButton name="Profile" type="PROFILE" sendMessage={props.sendMessage} />
                 <MenuButton name="Settings" type="SETTINGS" sendMessage={props.sendMessage} />
