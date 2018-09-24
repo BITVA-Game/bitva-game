@@ -20,8 +20,8 @@ function isAvailable(app, hero) {
 
 // Pop-up with character details
 const HeroDetails = props => (
-    <div className="HeroDetails">
-        <button className="CloseButton" type="button" onClick={() => props.closeDetails()}>
+    <div className="hero-info">
+        <button className="btn-close" type="button" onClick={() => props.closeDetails()}>
             X
         </button>
         {/* <img src={images[props.hero.id]} alt={props.hero.id}/> */}
@@ -36,11 +36,11 @@ const HeroDetails = props => (
 
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
-    <div className={isAvailable(props.app, props.hero) ? 'HeroBlock' : 'HeroBlockInactive'}>
-        <button className="CharButton" type="button" onClick={() => (isAvailable(props.app, props.hero) ? props.onShow(props.hero) : props.showDetails(props.hero))}>
+    <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inactive'}>
+        <button className="btn-character" type="button" onClick={() => (isAvailable(props.app, props.hero) ? props.onShow(props.hero) : props.showDetails(props.hero))}>
             <img src={images[props.hero.id]} alt={props.hero.id} />
         </button>
-        <button className="InfoButton" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
+        <button className="btn-character-info" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
             Info
         </button>
     </div>
@@ -49,8 +49,8 @@ const HeroBlock = props => (
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
 const ListOfHeroes = props => (
-    <div className="HeroSelection">
-        <h3>
+    <div className="heroselection-container">
+        <h3 className="heroselection-title">
             Select one character
         </h3>
         {Object.values(props.app.heroSelect).map(hero => (
@@ -67,12 +67,12 @@ const ListOfHeroes = props => (
 
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
-    <div className="OneHero">
-        <h3>
+    <div className="hero-details">
+        <h3 className="hero-details-title">
             {props.hero.name}
         </h3>
         <img src={images[props.hero.id]} alt={props.hero.id} />
-        <div>
+        <div className="hero-details-btn-block">
             <button type="button" onClick={() => props.onBack()}>
                 Back
             </button>
