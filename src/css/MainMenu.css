@@ -1,47 +1,47 @@
 .MainMenuContainer {
-  background-color: rgb(33, 33, 33);
-  background-color: rgba(33, 33, 33, 0.55);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 21em;
+    background-color: rgb(33, 33, 33);
+    background-color: rgba(33, 33, 33, 0.55);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 21em;
 }
 
 .Logo {
-  font-size: 4em;
-  text-align: center;
+    font-size: 4em;
+    text-align: center;
 }
 
 .MenuButtons {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 ul {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  margin: 0 0 2em 0;
-  padding: 0 0 3em 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0 0 2em 0;
+    padding: 0 0 3em 0;
 }
 
 li button {
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  font-family: 'Ruslan Display', cursive;
-  font-size: 1.6em;
-  margin-top: 0.1em;
-  padding: 0.3em 0 0.3em 1.5em;
-  text-align: left;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-family: 'Ruslan Display', cursive;
+    font-size: 1.6em;
+    margin-top: 0.1em;
+    padding: 0.3em 0 0.3em 1.5em;
+    text-align: left;
 }
 
 li button:hover {
-  color: rgb(183, 74, 69);
+    color: rgb(183, 74, 69);
 }
 
 li button:focus {
-  color: rgb(183, 74, 69);
-  outline: none;
+    color: rgb(183, 74, 69);
+    outline: none;
 }

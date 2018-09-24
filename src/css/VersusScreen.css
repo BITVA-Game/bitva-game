@@ -1,0 +1,85 @@
+.OneHeroVersus {
+    border: 0.3em solid white;
+    display: flex;
+    flex-direction: column;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.containerVersus {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.OneHeroVersus img {
+    justify-content: center;
+    margin: auto;
+}
+
+.VersusScreenDiv {
+    background: #000 url("../images/start_screen.jpg") no-repeat;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.OneHeroVersus div {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.vs {
+    color: rgb(0, 0, 0);
+    font-family: Sedan SC;
+    font-size: 9em;
+	margin: 0 0.5em;
+    text-align: center;
+    text-shadow: 0 0 10px white;
+}
+
+.TitleDiv {
+    margin-top: 0;
+}
+
+.Title {
+    color: black;
+    display: flex;
+    flex: 2 100%;
+    font-size: 1.5em;
+    justify-content: center;
+}
+
+.PlayButton {
+    background-color: rgb(33, 33, 33);
+    border: none;
+	color: white/*rgb(255, 255, 255)*/ ;
+    font-family: Sedan SC;
+	font-size: 2.25em;
+	margin: auto;
+}
+
+.PlayButtonLayer {
+    background-color: rgb(33, 33, 33);
+    /*background-color: rgba(33, 33, 33, 0.55);*/
+    bottom: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 10vh;
+    margin-top: 10em;
+    opacity: 0.5;
+	position: fixed;
+    width: 100%;
+    /*width: 2em;*/
+}
+
+.ButtonDiv {
+    margin: auto;
+    opacity: 1;
+}
