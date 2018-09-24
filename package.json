@@ -24,6 +24,7 @@
     "install-win": "export npm_config_platform=win32 && npm install",
     "lintfix": "eslint --fix --ext .jsx,.js . || exit 0",
     "csslint-all": "csslint src/css/*.css",
+    "csslint-all-win": "csslint .\\src\\css\\App.css .\\src\\css\\HeroSelection.css .\\src\\css\\index.css .\\src\\css\\MainMenu.css .\\src\\css\\StartScreen.css .\\src\\css\\Versus.css",
     "csslint": "csslint",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/icons/mac/logo.icns --prune=true --out=releases",
     "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=src/icons/win/logo.ico --prune=true --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Bitva'"

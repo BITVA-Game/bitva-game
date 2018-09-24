@@ -37,7 +37,7 @@ const HeroDetails = props => (
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inactive'}>
-        <button className="btn-character" type="button" onClick={() => props.onShow(props.hero)}>
+        <button className="btn-character" type="button" onClick={() => (isAvailable(props.app, props.hero) ? props.onShow(props.hero) : props.showDetails(props.hero))}>
             <img src={images[props.hero.id]} alt={props.hero.id} />
         </button>
         <button className="btn-character-info" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
