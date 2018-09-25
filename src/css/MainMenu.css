@@ -1,7 +1,3 @@
-button {
-    outline: none;
-}
-
 /* main menu */
 
 .main-menu-container {
@@ -18,6 +14,8 @@ button {
     font-size: 4em;
     text-align: center;
 }
+
+/* buttons */
 
 .menu-buttons-container {
     display: flex;
@@ -38,8 +36,8 @@ button {
     color: rgb(255, 255, 255);
     font-family: 'Ruslan Display', cursive;
     font-size: 1.6em;
-    margin-top: 0.1em;
-    padding: 0.3em 0 0.3em 1.5em;
+    margin-top: .1em;
+    padding: .3em 0 .3em 1.5em;
     text-align: left;
 }
 
