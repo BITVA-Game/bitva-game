@@ -30,9 +30,10 @@ function assignCards(heroName) {
     const deck = cardsArray.sort(() => Math.random() - 0.5);
     const deckHero = deck.slice(0, 15);
     for (let j = 0; j < deckHero.length; j += 1) {
-        const keyId = `key ${j}`;
-        deckHero[j] = keyId;
+        const keyId = `key${j}`;
+        deckHero[j].key = keyId;
     }
+
     return deckHero;
 }
 
