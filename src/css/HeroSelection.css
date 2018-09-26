@@ -1,53 +1,121 @@
 button {
+	background: none;
+	border: 2px solid transparent;
+	color: #fff;
+	font-family: inherit;
+	font-size: inherit;
 	outline: none;
 }
 
-/* main container */
+/* container */
 
 .heroselection-container {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: center;
+	background: transparent url(../images/background.png) center no-repeat;
+	background-size: cover;
+	bottom: 0;
+	left: 0;
+	min-width: 800px;
+	position: fixed;
+	right: 0;
+	top: 0;
 }
 
-.heroselection-title {
+/* header */
+
+.heroselection-header {
+	background: #000;
+	display: inline-block;
+	height: 5em;
+	opacity: .5;
+	text-align: center;
+	width: 100%;
+}
+
+.heroselection-header-menu {
 	cursor: default;
-	flex: 2 100%;
+	display: inline-block;
 	font-size: 1.5em;
-    text-align: center;
+	margin: 0 2em;
+	position: relative;
+	text-align: center;
+    top: 40%;
 	user-select: none;
 }
 
-/* hero character block */
+.heroselection-title {
+	float: left;
+}
+
+.heroselection-nav-menu span {
+	position: relative;
+	top: -2px;
+}
+
+.btn-nav-menu {
+	height: 22px;
+}
+
+.btn-nav-menu:hover {
+	border-color: #B74A45;
+}
+
+.btn-hero {
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+    padding: 3px;
+}
+
+.btn-hero-left {
+	transform: rotate(135deg);
+}
+
+.btn-hero-right {
+	transform: rotate(-45deg);
+}
+
+.heroselection-char-details {
+	float: right;
+}
+
+/* main */
+
+.heroselection-main {
+	padding: 0 2em;
+	width: 100%;
+}
 
 .hero-block {
-	display: flex;
+	background-color: #000;
+	display: inline-flex;
 	flex-direction: column;
 	justify-content: center;
+	margin: .5em;
 }
 
 .hero-block .btn-character {
-	border: 2px solid #fff;
-	height: 376px;
-	margin: 0 1em;
+	border: 5px solid #fff;
+	height: 270px;
+	margin: 0;
 	padding: 0;
 	position: relative;
 }
 
 .hero-block .btn-character:hover,
 .hero-block .btn-character:focus {
-	border: 2px solid #B74A45;
+	border-color: #B74A45;
 }
 
 .hero-block .btn-character-info {
 	background-color: #fff;
 	border-style: none;
 	color: #000;
+	display: none;
 	font-size: 1.5em;
 	height: 45px;
 	margin: 0 0 0 0.64em;
 	padding: 0;
-	width: 390px;
+	width: 220px;
 }
 
 .hero-block .btn-character-info:hover,
@@ -55,21 +123,27 @@ button {
 	background-color: #B74A45;
 }
 
+.hero-image {
+	object-fit: cover;
+	height: 260px;
+	width: 220px;
+}
+
 /* inactive hero properties */
 
-.hero-inactive {
+.hero-inactive .btn-character {
 	opacity:0.5;
 }
 
 .hero-inactive .btn-character:hover::after {
-	background: url(../images/lock-shield.jpg) transparent no-repeat;
-	background-size: 100px 100px;
+	background: url(../images/lock-shield.png) transparent no-repeat;
+	background-size: cover;
     bottom: 0;
     content: '';
-	height: 100px;
+	height: 50px;
     position: absolute;
     right: 0;
-    width: 100px;
+    width: 50px;
 	z-index: 999;
 }
 
@@ -119,7 +193,6 @@ button {
 	color: #000;
 	display: flex;
 	flex-direction: column;
-	/*height: 220px;*/
 	justify-content: center;
 	left: 50%;
 	padding: 0 1.1em 0.2em;
@@ -143,4 +216,36 @@ button {
 .hero-info p {
 	font-size: 1.3em;
 	padding: 0 1em;
+}
+
+/* footer */
+
+.heroselection-footer {
+	background: #000;
+	bottom: 0;
+	display: inline-block;
+	height: 3em;
+	opacity: .5;
+	text-align: center;
+	position: fixed;
+	width: 100%;
+}
+
+.heroselection-footer-menu {
+	cursor: default;
+	display: inline-block;
+	font-size: 1.5em;
+	margin: 0 2em;
+	position: relative;
+	text-align: center;
+    top: 20%;
+	user-select: none;
+}
+
+.heroselection-play {
+	margin: 0 auto;
+}
+
+.btn-play:hover {
+	border-color: #B74A45;
 }
