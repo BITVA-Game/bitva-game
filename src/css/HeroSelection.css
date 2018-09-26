@@ -124,8 +124,8 @@ button {
 }
 
 .hero-image {
-	object-fit: cover;
 	height: 260px;
+	object-fit: cover;
 	width: 220px;
 }
 
@@ -226,8 +226,8 @@ button {
 	display: inline-block;
 	height: 3em;
 	opacity: .5;
-	text-align: center;
 	position: fixed;
+	text-align: center;
 	width: 100%;
 }
 
