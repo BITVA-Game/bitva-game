@@ -38,7 +38,7 @@ const HeroDetails = props => (
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inactive'}>
         <button className="btn-character" type="button" onClick={() => (isAvailable(props.app, props.hero) ? props.onShow(props.hero) : props.showDetails(props.hero))}>
-            <img src={images[props.hero.id]} alt={props.hero.id} />
+            <img className="hero-image" src={images[props.hero.id]} alt={props.hero.id} />
         </button>
         <button className="btn-character-info" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
             Info
@@ -50,18 +50,49 @@ const HeroBlock = props => (
 // Click will take the player into character info screen
 const ListOfHeroes = props => (
     <div className="heroselection-container">
-        <h3 className="heroselection-title">
-            Select one character
-        </h3>
-        {Object.values(props.app.heroSelect).map(hero => (
-            <HeroBlock
-                key={hero.id}
-                onShow={props.onShow}
-                showDetails={props.showDetails}
-                hero={hero}
-                app={props.app}
-            />
-        ))}
+        <div className="heroselection-header">
+            <div className="heroselection-header-menu heroselection-title">
+                <span>
+                    Select character
+                </span>
+            </div>
+            <div className="heroselection-header-menu heroselection-nav-menu">
+                <button type="button" className="btn-nav-menu">
+                    <span className="btn-hero btn-hero-left" />
+                </button>
+                <span>
+                    nav menu
+                </span>
+                <button type="button" className="btn-nav-menu">
+                    <span className="btn-hero btn-hero-right" />
+                </button>
+            </div>
+            <div className="heroselection-header-menu heroselection-char-details">
+                <span>
+                    character details
+                </span>
+            </div>
+        </div>
+        <div className="heroselection-main">
+            {Object.values(props.app.heroSelect).map(hero => (
+                <HeroBlock
+                    key={hero.id}
+                    onShow={props.onShow}
+                    showDetails={props.showDetails}
+                    hero={hero}
+                    app={props.app}
+                />
+            ))}
+        </div>
+        <div className="heroselection-footer">
+            <div className="heroselection-footer-menu heroselection-play">
+                <button type="button" className="btn-play">
+                    <span>
+                        PLAY
+                    </span>
+                </button>
+            </div>
+        </div>
     </div>
 );
 
