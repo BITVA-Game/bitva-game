@@ -16,22 +16,23 @@ function getRandomBool() {
 }
 
 function assignCards(heroName) {
-// const cards = {};
 // find all cardTypes for this heroName
     const heroCardTypes = allCharacters[heroName].cards;
     // for each cardType in all CardTypes take count
     const cardsArray = [];
-
     for (const cardType in heroCardTypes) {
         // take count, create a new card for this type
         for (let i = 0; i < heroCardTypes[cardType].count; i += 1) {
             const newCard = allCards[cardType];
-            // cards[newCard.id] = newCard;
             cardsArray.push(newCard);
         }
     }
     const deck = cardsArray.sort(() => Math.random() - 0.5);
     const deckHero = deck.slice(0, 15);
+    for (let j = 0; j < deckHero.length; j += 1) {
+        const keyId = `key${j}`;
+        deckHero[j].key = keyId;
+    }
 
     return deckHero;
 }
@@ -76,9 +77,11 @@ const generatePlayers = function (heroName) {
     return { players };
 };
 
+
 function giveCardsTo(player) {
     const x = player.playerHand.length >= 0 ? 5 - player.playerHand.length : 5;
     player.playerHand = player.cards.splice(0, x);
+
     return player;
 }
 
