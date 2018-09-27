@@ -30,12 +30,12 @@
                 "name": "Bereginya",
 				"count": 4
             },
-            "sheetLarge": {
+            "shieldLarge": {
                 "id": "sheetLarge",
                 "name": "Large Shield",
 				"count": 2
             }, 
-            "sheetSmall": {
+            "shieldSmall": {
                 "id": "sheetSmall",
                 "name": "Living Water",
 				"count": 3
@@ -46,7 +46,7 @@
 	"yaga": {
         "id": "yaga",
 		"name": "Yaga",
-		"description": "Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.",
+		"description": "Yaga can lead a person between realm of the dead and the living. She is a Witch, Keeper of the Living and Dead water.",
 		"health": 15,
         "cards": {
             "bajun": {
@@ -74,14 +74,14 @@
                 "name": "Bereginya",
                 "count": 4
             },
-            "sheetLarge": {
+            "shieldLarge": {
                 "id": "sheetLarge",
                 "name": "Large Shield",
                 "count": 2
             }, 
-            "sheetSmall": {
-                "id": "sheetSmall",
-                "name": "Living Water",
+            "shieldSmall": {
+                "id": "shieldSmall",
+                "name": "Small Shield",
                 "count": 3
             }
         }

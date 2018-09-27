@@ -26,7 +26,7 @@ const HeroDetails = props => (
         </button>
         {/* <img src={images[props.hero.id]} alt={props.hero.id}/> */}
         <h3>
-            {props.hero.id}
+            {props.hero.name}
         </h3>
         <p>
             {props.hero.description}
