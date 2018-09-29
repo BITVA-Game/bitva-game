@@ -1,10 +1,17 @@
+body {
+	cursor: default;
+	user-select: none;
+}
+
 button {
 	background: none;
 	border: 2px solid transparent;
 	color: #fff;
 	font-family: inherit;
 	font-size: inherit;
+	margin: 0;
 	outline: none;
+	padding: 0;
 }
 
 /* container */
@@ -32,14 +39,14 @@ button {
 }
 
 .heroselection-header-menu {
-	cursor: default;
+	/* cursor: default; */
 	display: inline-block;
 	font-size: 1.5em;
 	margin: 0 2em;
 	position: relative;
 	text-align: center;
     top: 40%;
-	user-select: none;
+	/* user-select: none; */
 }
 
 .heroselection-title {
@@ -80,8 +87,8 @@ button {
 
 /* main */
 
-.heroselection-main {
-	padding: 0 2em;
+.heroselection-list {
+	padding: 1em 2em;
 	width: 100%;
 }
 
@@ -147,44 +154,6 @@ button {
 	z-index: 999;
 }
 
-/* hero details screen */
-
-.hero-details {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.hero-details-title {
-	text-align: center;
-}
-
-.hero-details img {
-	margin:auto;
-}
-
-.hero-details-btn-block {
-	display: flex;
-	justify-content: center;
-}
-
-.hero-details-btn-block button {
-	background-color: #fff;
-	border-style: none;
-	color: #000;
-	flex: none; 	
-	font-size: 1.5em;
-	height: 45px;
-	margin-right: 0.1em;
-	margin-top: 0.1em;
-	width: 15%;
-}
-
-.hero-details-btn-block button:hover,
-.hero-details-btn-block button:focus {
-	background-color: #B74A45;
-}
-
 /* Pop-up element */
 
 .hero-info {
@@ -216,6 +185,109 @@ button {
 .hero-info p {
 	font-size: 1.3em;
 	padding: 0 1em;
+}
+
+/* hero details (OneHero) screen */
+
+.hero-details {
+	background-color: rgba(255,255,255,0.5);
+	padding: 1em 2em;
+	width: 100%;
+
+}
+
+.hero-details-hero {
+	display: inline-block;
+}
+
+.hero-details-name {
+	display: none;
+	text-align: center;
+}
+
+.hero-details-avatar {
+	height: 532px;
+	object-fit: cover;
+	width: 450px;
+}
+
+.hero-details-btn-block {
+	/* display: flex; */
+	display: none;
+	/* justify-content: center; */
+}
+
+.hero-details-btn-block button {
+	background-color: #fff;
+	border-style: none;
+	color: #000;
+	flex: none; 	
+	font-size: 1.5em;
+	height: 45px;
+	margin-right: 0.1em;
+	margin-top: 0.1em;
+	width: 15%;
+}
+
+.hero-details-btn-block button:hover,
+.hero-details-btn-block button:focus {
+	background-color: #B74A45;
+}
+
+.hero-details-info-block {
+	display: inline-block;
+	height: 320px;
+	margin: 0 22px;
+	width: 60%;
+}
+
+.hero-details-description {
+	color: #000;
+	height: 30%;
+    margin: auto;
+	width: 60%;
+}
+
+.hero-details-cards {
+}
+
+.hero-details-card {
+	height: 308px;
+	margin-left: 15px;
+	object-fit: cover;
+	width: 220px;
+}
+
+.hero-details-card:last-of-type {
+	margin-right: 15px;
+}
+
+.hero-details-cards-btn {
+	border: solid transparent;
+	border-left-color: whitesmoke;
+	border-right-color: whitesmoke;
+	border-width: 50px 20px;
+    bottom: 100px;
+	display: inline-block;
+    position: relative;
+}
+
+.hero-details-cards-btn:hover {
+	border-left-color: #B74A45;
+	border-right-color: #B74A45;
+}
+
+.hero-details-cards-btn:active {
+	border-left-color: whitesmoke;
+	border-right-color: whitesmoke;
+}
+
+.hero-details-cards-btn-left {
+	border-left-width: 0;
+}
+
+.hero-details-cards-btn-right {
+	border-right-width: 0;
 }
 
 /* footer */

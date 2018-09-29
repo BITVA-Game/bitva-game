@@ -19,7 +19,7 @@ function isAvailable(app, hero) {
 }
 
 // Pop-up with character details
-const HeroDetails = props => (
+const HeroInfo = props => (
     <div className="hero-info">
         <button className="btn-close" type="button" onClick={() => props.closeDetails()}>
             X
@@ -74,15 +74,17 @@ const ListOfHeroes = props => (
             </div>
         </div>
         <div className="heroselection-main">
-            {Object.values(props.app.heroSelect).map(hero => (
-                <HeroBlock
-                    key={hero.id}
-                    onShow={props.onShow}
-                    showDetails={props.showDetails}
-                    hero={hero}
-                    app={props.app}
-                />
-            ))}
+            <div className="heroselection-list">
+                {Object.values(props.app.heroSelect).map(hero => (
+                    <HeroBlock
+                        key={hero.id}
+                        onShow={props.onShow}
+                        showDetails={props.showDetails}
+                        hero={hero}
+                        app={props.app}
+                    />
+                ))}
+            </div>
         </div>
         <div className="heroselection-footer">
             <div className="heroselection-footer-menu heroselection-play">
@@ -98,18 +100,70 @@ const ListOfHeroes = props => (
 
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
-    <div className="hero-details">
-        <h3 className="hero-details-title">
-            {props.hero.name}
-        </h3>
-        <img src={images[props.hero.id]} alt={props.hero.id} />
-        <div className="hero-details-btn-block">
-            <button type="button" onClick={() => props.onBack()}>
-                Back
-            </button>
-            <button type="button" onClick={() => props.onSelect(props.hero)}>
-                Select
-            </button>
+    <div className="heroselection-container">
+        <div className="heroselection-header">
+            <div className="heroselection-header-menu heroselection-title">
+                <span>
+                    Select character
+                </span>
+            </div>
+            <div className="heroselection-header-menu heroselection-nav-menu">
+                <button type="button" className="btn-nav-menu">
+                    <span className="btn-hero btn-hero-left" />
+                </button>
+                <span>
+                    nav menu
+                </span>
+                <button type="button" className="btn-nav-menu">
+                    <span className="btn-hero btn-hero-right" />
+                </button>
+            </div>
+            <div className="heroselection-header-menu heroselection-char-details">
+                <span>
+                    character details
+                </span>
+            </div>
+        </div>
+        <div className="heroselection-main">
+            <div className="hero-details">
+                <div className="hero-details-hero">
+                    <span className="hero-details-name">
+                        {props.hero.name}
+                    </span>
+                    <img className="hero-details-avatar" src={images[props.hero.id]} alt={props.hero.id} />
+                    <div className="hero-details-btn-block">
+                        <button type="button" onClick={() => props.onBack()}>
+                            Back
+                        </button>
+                        <button type="button" onClick={() => props.onSelect(props.hero)}>
+                            Select
+                        </button>
+                    </div>
+                </div>
+                <section className="hero-details-info-block">
+                    <section className="hero-details-description">
+                        <span>
+                            {props.hero.description}
+                        </span>
+                    </section>
+                    <section className="hero-details-cards">
+                        <div className="hero-details-cards-btn hero-details-cards-btn-left" />
+                        <img className="hero-details-card" src={images[props.hero.id]} alt={props.hero.id} />
+                        <img className="hero-details-card" src={images[props.hero.id]} alt={props.hero.id} />
+                        <img className="hero-details-card" src={images[props.hero.id]} alt={props.hero.id} />
+                        <div className="hero-details-cards-btn hero-details-cards-btn-right" />
+                    </section>
+                </section>
+            </div>
+        </div>
+        <div className="heroselection-footer">
+            <div className="heroselection-footer-menu heroselection-play">
+                <button type="button" className="btn-play">
+                    <span>
+                        PLAY
+                    </span>
+                </button>
+            </div>
         </div>
     </div>
 );
@@ -159,14 +213,14 @@ class HeroSelection extends Component {
                         />
                     )}
                 {this.state.details
-                    ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
+                    ? <HeroInfo hero={this.state.details} closeDetails={this.closeDetails} />
                     : null}
             </div>
         );
     }
 }
 
-HeroDetails.propTypes = {
+HeroInfo.propTypes = {
     hero: PropTypes.object.isRequired,
     closeDetails: PropTypes.func.isRequired,
 };
