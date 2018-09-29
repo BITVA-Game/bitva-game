@@ -62,6 +62,11 @@ const ListOfHeroes = props => (
                 app={props.app}
             />
         ))}
+        <div>
+        <button type="button" onClick={() => props.onPrevious()}>
+            TO START SCREEN
+        </button>
+        </div>
     </div>
 );
 
@@ -91,6 +96,8 @@ class HeroSelection extends Component {
         this.selectHero = this.selectHero.bind(this);
         this.showDetails = this.showDetails.bind(this);
         this.closeDetails = this.closeDetails.bind(this);
+        this.goStartScreen = this.goStartScreen.bind(this);
+
     }
 
     showHero(hero) {
@@ -109,6 +116,10 @@ class HeroSelection extends Component {
         this.setState({ details: null });
     }
 
+    goStartScreen() {
+        this.props.sendMessage({ type: 'INITIAL' });
+    }
+
     render() {
         return (
             <div>
@@ -125,6 +136,8 @@ class HeroSelection extends Component {
                             app={this.props.app}
                             onShow={this.showHero}
                             showDetails={this.showDetails}
+                            onPrevious={this.goStartScreen}
+
                         />
                     )}
                 {this.state.details
@@ -151,6 +164,7 @@ ListOfHeroes.propTypes = {
     app: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     showDetails: PropTypes.func.isRequired,
+    sendMessage: PropTypes.func.isRequired,
 };
 
 OneHero.propTypes = {
