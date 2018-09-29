@@ -1,24 +1,6 @@
-.OneHeroVersus {
-    border: 0.3em solid white;
-    display: flex;
-    flex-direction: column;
-    flex-flow: row wrap;
-    justify-content: center;
-    margin-top: 1em;
-}
+/* versus */
 
-.containerVersus {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-}
-
-.OneHeroVersus img {
-    justify-content: center;
-    margin: auto;
-}
-
-.VersusScreenDiv {
+.versus-screen-container {
     background: #000 url("../images/start_screen.jpg") no-repeat;
     background-size: cover;
     bottom: 0;
@@ -28,58 +10,67 @@
     top: 0;
 }
 
-.OneHeroVersus div {
+/* heroes */
+
+.versus-heroes-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin-top: 4.5em;
+}
+
+.versus-one-hero {
+    border: .3em solid #fff;
+    display: flex;
+    flex-direction: column;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.versus-one-hero img {
+    justify-content: center;
+    margin: auto;
+}
+
+.versus-one-hero div {
     display: flex;
     justify-content: center;
     margin-top: 1em;
 }
 
 .vs {
-    color: rgb(0, 0, 0);
+    color: #000;
     font-family: Sedan SC;
     font-size: 9em;
-	margin: 0 0.5em;
+	margin: 0 .5em;
     text-align: center;
-    text-shadow: 0 0 10px white;
+    text-shadow: 0 0 10px #fff;
 }
 
-.TitleDiv {
-    margin-top: 0;
-}
+/* play button */
 
-.Title {
-    color: black;
-    display: flex;
-    flex: 2 100%;
-    font-size: 1.5em;
-    justify-content: center;
-}
-
-.PlayButton {
+.play-button-container {
+    align-content: center;
     background-color: rgb(33, 33, 33);
-    border: none;
-	color: white/*rgb(255, 255, 255)*/ ;
-    font-family: Sedan SC;
-	font-size: 2.25em;
-	margin: auto;
-}
-
-.PlayButtonLayer {
-    background-color: rgb(33, 33, 33);
-    /*background-color: rgba(33, 33, 33, 0.55);*/
+    background-color: rgba(33, 33, 33, 0.55);
     bottom: 0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: 10vh;
+    justify-content: center;
     margin-top: 10em;
-    opacity: 0.5;
 	position: fixed;
     width: 100%;
     /*width: 2em;*/
 }
 
-.ButtonDiv {
+.play-button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-family: Sedan SC;
+    font-size: 2.25em;
     margin: auto;
-    opacity: 1;
 }

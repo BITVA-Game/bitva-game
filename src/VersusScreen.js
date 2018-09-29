@@ -18,42 +18,26 @@ const images = {
 }; */
 
 const OneHero = props => (
-    <div className="OneHeroVersus">
+    <div className="versus-one-hero">
         <img src={images[props.hero]} alt={props.hero} />
     </div>
 );
 
 const VersusScreen = props => (
-    <div className="VersusScreenDiv">
-        <div className="TitleDiv">
-            <h3 className="Title">
-            Versus Screen
-            </h3>
-        </div>
-        <div className="containerVersus">
-            <div>
-
-                <OneHero hero={props.app.game.players[0].hero} />
-
-            </div>
+    <div className="versus-screen-container">
+        <div className="versus-heroes-container">
+            <OneHero hero={props.app.game.players[0].hero} />
             <div className="vs">
                 <p>
                 VS
                 </p>
             </div>
-            <div>
-
-                <OneHero hero={props.app.game.players[1].hero} />
-
-            </div>
-
+            <OneHero hero={props.app.game.players[1].hero} />
         </div>
-        <div className="PlayButtonLayer">
-            <div className="ButtonDiv">
-                <button className="PlayButton" type="button" onClick={() => props.sendMessage({ type: 'DEALALL' })}>
-                PLAY
-                </button>
-            </div>
+        <div className="play-button-container">
+            <button className="play-button" type="button" onClick={() => props.sendMessage({ type: 'DEALALL' })}>
+            PLAY
+            </button>
         </div>
     </div>
 );
