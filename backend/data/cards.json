@@ -34,15 +34,15 @@
         "description": "Plenty of Keepers lives in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes."
     },
 
-    "sheetLarge": {
-        "id": "sheetLarge",
+    "shieldLarge": {
+        "id": "shieldLarge",
         "name": "Large Shield",
         "type": "item",
         "description": "The shield, forged by Svarog -  divinity-blacksmith. After recognition of  his owner, it can reflect the damage and ensure protection  from witchcraft."
     },
 
-    "sheetSmall": {
-        "id": "sheetSmall",
+    "shieldSmall": {
+        "id": "shieldSmall",
         "name": "Small Shield",
         "type": "item",
         "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battke dealing with the damage and also can ward off an attacks."
