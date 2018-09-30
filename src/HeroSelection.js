@@ -117,7 +117,7 @@ class HeroSelection extends Component {
     }
 
     goStartScreen() {
-        this.props.sendMessage({ type: 'INITIAL' });
+        this.props.sendMessage({ type: 'STARTSCREEN' });
     }
 
     render() {
