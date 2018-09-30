@@ -9,9 +9,8 @@ function handle(app, message) {
     case 'DEALALL':
         return Object.assign({}, app.manager, { screen: 'PLAYERACT' });
     case 'STARTSCREEN':
-        return  Object.assign({}, app.manager, { screen: 'STARTSCREEN' });
+        return Object.assign({}, app.manager, { screen: 'STARTSCREEN' });
     default: return app.manager;
-
     }
 }
 
