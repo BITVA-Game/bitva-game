@@ -105,7 +105,7 @@ function handle(app, message) {
     }
     case 'DEALALL': {
         const playersArray = app.game.players;
-
+        console.log(playersArray);
         return Object.assign({}, app.game, giveCardsToAll(playersArray));
     }
     default: { return app.game; }

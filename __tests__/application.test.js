@@ -388,3 +388,24 @@ test('msg DEALALL received: Players hands have 5 cards each. Players decks have 
 
     expect(result.manager.screen).toEqual('PLAYERACT');
 });
+
+/*
+//Test that card in action can act against other player card and then goes to graveyard. Game state Phase1.
+test('msg PHASE1 received: card of active player can make action to card of inactive player. State Phase1.', () => {
+ const msg = { type: 'PHASE1', {hero : "morevna", playerHand[0].key: "key0"  };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set it to 1
+    Math.random = jest.fn();
+    Math.random.mockReturnValue(1);
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    expect(result.manager.screen).toEqual('GAMESCREEN');
+});
+*/
