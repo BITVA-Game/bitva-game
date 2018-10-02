@@ -59,8 +59,8 @@ section {
 	display: inline-block;
 	height: 5rem;
     left: 0;
-    right: 0;
 	position: fixed;
+    right: 0;
 	text-align: center;
     top: 0;
 	width: 100%;
@@ -69,8 +69,8 @@ section {
 .header-menu {
 	font-size: 1.5rem;
 	position: absolute;
-	top: 2rem;
 	text-align: center;
+	top: 2rem;
 }
 
 .hero-select-title {
@@ -83,10 +83,10 @@ section {
 }
 
 .hero-nav-menu-name {
-	text-align: center;
-	position: fixed;
 	left: 43%;
+	position: fixed;
 	right: 43%;
+	text-align: center;
 	width: 14rem;
 }
 
@@ -96,9 +96,9 @@ section {
 }
 
 .hero-btn-arrow {
-	transform: scale(.5, 3);
 	position: relative;
 	top: -.35rem;
+	transform: scale(.5, 3);
 }
 
 .hero-btn-arrow-left {
@@ -132,10 +132,10 @@ section {
 }
 
 .footer-menu {
-	position: absolute;
 	bottom: .5rem;
-	text-align: center;
 	font-size: 1.5rem;
+	position: absolute;
+	text-align: center;
 }
 
 .btn-play {
@@ -192,8 +192,8 @@ section {
 .btn-hero:focus .hero-name,
 .btn-hero:hover .hero-name {
 	display: inline-block;
-	position: fixed;
 	left: 43%;
+	position: fixed;
 	right: 43%;
 	width: 14rem;
 }
@@ -267,32 +267,32 @@ section {
 }
 
 .details-hero {
+	bottom: 0;
+	left: 0;
 	margin: auto 0;
 	position: absolute;
 	top: 0;
-	left: 0;
-	bottom: 0;
 	width: 35%;
 }
 
 .details-hero-avatar {
-	position: absolute;
+	height: 35rem;
 	bottom: 1rem;
 	left: 5rem;
+	position: absolute;
 	right: 1rem;
-	height: 35rem;
 	width: 10rem;
 }
 
 .details-hero-avatar img {
 	height: 100%;
-    width: fit-content;
     object-fit: cover;
+    width: fit-content;
 }
 
 .btn-back {
-	position: fixed;
 	left: 2rem;
+	position: fixed;
 }
 
 .btn-select {
@@ -302,33 +302,33 @@ section {
 /* details information block */
 
 .details-info-block {
+	bottom: 0;
 	position: absolute;
     right: 0;
-	bottom: 0;
 	top: 0;
 	width: 65%;
 }
 
 .details-description {
+	bottom: 25rem;
 	color: #000;
 	font-size: 22px;
-	position: absolute;
-	bottom: 25rem;
-	padding: 2rem;
 	height: 12rem;
+	position: absolute;
+	padding: 2rem;
 }
 
 .details-cards {
-	position: absolute;
 	bottom: 1rem;
+	position: absolute;
 	right: 9rem;
 }
 
 .details-card {
-	object-fit: cover;
-	width: 15.7rem;
 	height: 22rem;
 	margin-left: 1rem;
+	object-fit: cover;
+	width: 15.7rem;
 }
 
 .details-card:last-of-type {
@@ -336,10 +336,10 @@ section {
 }
 
 .cards-btn {
-	position: absolute;
 	bottom: 10rem;
-    transform: scale(2,10);
+	position: absolute;
 	text-shadow: 0 0 3px #B74A45;
+    transform: scale(2,10);
 }
 
 .cards-btn-left {
