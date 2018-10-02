@@ -389,16 +389,16 @@ test('msg DEALALL received: Players hands have 5 cards each. Players decks have 
     expect(result.manager.screen).toEqual('PLAYERACT');
 });
 
-/*
+
 //Test that card in action can act against other player card and then goes to graveyard. Game state Phase1.
-test('msg PHASE1 received: card of active player can make action to card of inactive player. State Phase1.', () => {
- const msg = { type: 'PHASE1', {hero : "morevna", playerHand[0].key: "key0"  };
+test.only('msg PHASE1 received: active card can make action against of inactive card. State Phase1.', () => {
+ const msg = { type: 'PHASE1', key: "key10-graveyard", key: "key3" };
     // Mock sendReply function
     const sendReply = jest.fn();
     // Mock will rewrite all math.random and set it to 1
     Math.random = jest.fn();
     Math.random.mockReturnValue(1);
-
+    
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
@@ -406,6 +406,15 @@ test('msg PHASE1 received: card of active player can make action to card of inac
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+    //1-ожидаем, что карта активная - это карта action
+    expect(result.game.players[1].playerHand[0].type).toEqual('action');
+    //2- ожидаем, что пассивная карта - это карта item
+    expect(result.game.players[0].playerHand[0].type).toEqual('item');
+    //3- ожидаем, что  активная карта имеет тег "graveyard"
+    expect(result.game.players[1].playerHand[0].key).stringMatching(key | /graveyard/g);
+    //4-ожидаем, что активная карта action, из руки ушла на кладбище
+    expect(result.game.players[1].playerHand.length).toEqual(4);
+    expect(result.game.players[1].graveyard.length).toEqual(1);
+    //5 - ожидаем, что экран сменится на GAMESCREEN
     expect(result.manager.screen).toEqual('GAMESCREEN');
 });
-*/
