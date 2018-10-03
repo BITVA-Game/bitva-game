@@ -230,16 +230,17 @@ button {
 	position: fixed;
 	text-align: center;
 	width: 100%;
+	z-index: -1;	/* for buttons injection */
 }
 
 .heroselection-footer-menu {
+	bottom: .5rem;
 	cursor: default;
 	display: inline-block;
 	font-size: 1.5em;
 	margin: 0 2em;
-	position: relative;
+	position: fixed;
 	text-align: center;
-    top: 20%;
 	user-select: none;
 }
 
@@ -252,7 +253,7 @@ button {
 }
 
 .selection-btn-start-screen {
-	float: left;
+	left: 1rem;
 }
 
 .btn-start-screen:hover {
