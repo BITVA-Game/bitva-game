@@ -18,6 +18,48 @@ function isAvailable(app, hero) {
     });
 }
 
+// common elements
+
+// header section
+const Header = props => (
+    <section className="heroselection-header">
+        <div className="heroselection-header-menu heroselection-title">
+            <span>
+                Select character
+            </span>
+        </div>
+        <div className="heroselection-header-menu header-nav-menu">
+            <button type="button" className="btn-nav-menu" onClick={props.prev}>
+                <span className="btn-hero btn-hero-left" />
+            </button>
+            <span>
+                nav menu
+            </span>
+            <button type="button" className="btn-nav-menu" onClick={props.next}>
+                <span className="btn-hero btn-hero-right" />
+            </button>
+        </div>
+        <div className="heroselection-header-menu heroselection-char-details">
+            <span>
+                character details
+            </span>
+        </div>
+    </section>
+);
+
+// footer section
+const Footer = props => (
+    <section className="heroselection-footer">
+        <div className="heroselection-footer-menu heroselection-play">
+            <button type="button" className="btn-play" onClick={console.log('play', props.something)}>
+                <span>
+                    PLAY
+                </span>
+            </button>
+        </div>
+    </section>
+);
+
 // Pop-up with character details
 const HeroDetails = props => (
     <div className="hero-info">
@@ -109,29 +151,10 @@ class HeroSelection extends Component {
     render() {
         return (
             <div className="heroselection-container">
-                <div className="heroselection-header">
-                    <div className="heroselection-header-menu heroselection-title">
-                        <span>
-                            Select character
-                        </span>
-                    </div>
-                    <div className="heroselection-header-menu heroselection-nav-menu">
-                        <button type="button" className="btn-nav-menu">
-                            <span className="btn-hero btn-hero-left" />
-                        </button>
-                        <span>
-                            nav menu
-                        </span>
-                        <button type="button" className="btn-nav-menu">
-                            <span className="btn-hero btn-hero-right" />
-                        </button>
-                    </div>
-                    <div className="heroselection-header-menu heroselection-char-details">
-                        <span>
-                            character details
-                        </span>
-                    </div>
-                </div>
+                <Header
+                    prev={this.null}
+                    next={this.null}
+                />
                 <div className="heroselection-main">
                     {this.state.hero
                         ? (
@@ -153,19 +176,20 @@ class HeroSelection extends Component {
                         : null
                     }
                 </div>
-                <div className="heroselection-footer">
-                    <div className="heroselection-footer-menu heroselection-play">
-                        <button type="button" className="btn-play">
-                            <span>
-                                PLAY
-                            </span>
-                        </button>
-                    </div>
-                </div>
+                <Footer />
             </div>
         );
     }
 }
+
+Header.propTypes = {
+    next: PropTypes.object.isRequired,
+    prev: PropTypes.object.isRequired,
+};
+
+Footer.propTypes = {
+    something: PropTypes.string.isRequired,
+};
 
 HeroDetails.propTypes = {
     hero: PropTypes.object.isRequired,
