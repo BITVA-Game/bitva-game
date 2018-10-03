@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/HeroSelection.css';
+import MainMenu from './MainMenu';
+import './css/MainMenu.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -161,6 +163,9 @@ class HeroSelection extends Component {
                 {this.state.details
                     ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
                     : null}
+                <section className="section-menu">
+                    <MainMenu sendMessage={this.props.sendMessage} />
+                </section>
             </div>
         );
     }
