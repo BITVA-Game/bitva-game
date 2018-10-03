@@ -390,14 +390,15 @@ test('msg DEALALL received: Players hands have 5 cards each. Players decks have 
 });
 
 
-//Test that card in action can act against other player card and then goes to graveyard. Game state Phase1.
-test.only('msg PHASE1 received: active card can make action against of inactive card. State Phase1.', () => {
- const msg = { type: 'PHASE1', key: "key10-graveyard", key: "key3" };
+//Test that active card is from active player's hand, his counter less than 2, then card goes to graveyard. Game state Phase1.
+test.only('msg PHASE1 received: active card is in active playerHand. Counter <2. State Phase1.', () => {
+ const msg = { type: 'PHASE1',  key: "key10", type: "graveyard", active: true };
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+    // Mock will rewrite all math.random and set active player card's key to key10
+    function setApp(newApp) {
+    application = newApp;
+    }
     
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -406,15 +407,16 @@ test.only('msg PHASE1 received: active card can make action against of inactive 
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    //1-ожидаем, что карта активная - это карта action
-    expect(result.game.players[1].playerHand[0].type).toEqual('action');
-    //2- ожидаем, что пассивная карта - это карта item
-    expect(result.game.players[0].playerHand[0].type).toEqual('item');
-    //3- ожидаем, что  активная карта имеет тег "graveyard"
-    expect(result.game.players[1].playerHand[0].key).stringMatching(key | /graveyard/g);
-    //4-ожидаем, что активная карта action, из руки ушла на кладбище
-    expect(result.game.players[1].playerHand.length).toEqual(4);
-    expect(result.game.players[1].graveyard.length).toEqual(1);
-    //5 - ожидаем, что экран сменится на GAMESCREEN
-    expect(result.manager.screen).toEqual('GAMESCREEN');
+    //До действия -1-ожидаем, что активная карта пришла от активного игрока
+    expect(result.game.players[1].playerHand).toMatchObject({key: "key10"});
+    //2- ожидаем, что активный игрок может действовать (его каунтер не равен 2)
+    expect(result.game.players[1].moveCounter).toBeLessThan(2);
+    /*(после действия)
+    //1 - ожидаем, что активная карта сохранилась на кладбище
+    expect(result.game.players[1].graveyard).toMatchObject({key: "key10"});
+    //2-ожидаем, что активная карта убралась из руки.
+    expect(result.game.players[1].playerHand).not.toMatchObject({key: "key10"});
+    //3 - ожидаем, что каунтер увеличен
+    expect(result.game.players[1].moveCounter).toBeGreaterThan(0);
+    */
 });
