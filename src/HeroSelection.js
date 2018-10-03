@@ -151,24 +151,13 @@ class HeroSelection extends Component {
     render() {
         return (
             <div className="heroselection-container">
-                <Header
-                    prev={this.null}
-                    next={this.null}
-                />
+                <Header prev={this.null} next={this.null} />
                 <div className="heroselection-main">
                     {this.state.hero
                         ? (
-                            <OneHero
-                                hero={this.state.hero}
-                                onBack={this.showHero}
-                                onSelect={this.selectHero}
-                            />
+                            <OneHero hero={this.state.hero} onBack={this.showHero} onSelect={this.selectHero} />
                         ) : (
-                            <ListOfHeroes
-                                app={this.props.app}
-                                onShow={this.showHero}
-                                showDetails={this.showDetails}
-                            />
+                            <ListOfHeroes app={this.props.app} onShow={this.showHero} showDetails={this.showDetails} />
                         )
                     }
                     {this.state.details
