@@ -49,50 +49,16 @@ const HeroBlock = props => (
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
 const ListOfHeroes = props => (
-    <div className="heroselection-container">
-        <div className="heroselection-header">
-            <div className="heroselection-header-menu heroselection-title">
-                <span>
-                    Select character
-                </span>
-            </div>
-            <div className="heroselection-header-menu heroselection-nav-menu">
-                <button type="button" className="btn-nav-menu">
-                    <span className="btn-hero btn-hero-left" />
-                </button>
-                <span>
-                    nav menu
-                </span>
-                <button type="button" className="btn-nav-menu">
-                    <span className="btn-hero btn-hero-right" />
-                </button>
-            </div>
-            <div className="heroselection-header-menu heroselection-char-details">
-                <span>
-                    character details
-                </span>
-            </div>
-        </div>
-        <div className="heroselection-main">
-            {Object.values(props.app.heroSelect).map(hero => (
-                <HeroBlock
-                    key={hero.id}
-                    onShow={props.onShow}
-                    showDetails={props.showDetails}
-                    hero={hero}
-                    app={props.app}
-                />
-            ))}
-        </div>
-        <div className="heroselection-footer">
-            <div className="heroselection-footer-menu heroselection-play">
-                <button type="button" className="btn-play">
-                    <span>
-                        PLAY
-                    </span>
-                </button>
-            </div>
-        </div>
+    <div className="heroes-list">
+        {Object.values(props.app.heroSelect).map(hero => (
+            <HeroBlock
+                key={hero.id}
+                onShow={props.onShow}
+                showDetails={props.showDetails}
+                hero={hero}
+                app={props.app}
+            />
+        ))}
     </div>
 );
 
@@ -142,25 +108,60 @@ class HeroSelection extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.hero
-                    ? (
-                        <OneHero
-                            hero={this.state.hero}
-                            onBack={this.showHero}
-                            onSelect={this.selectHero}
-                        />
-                    )
-                    : (
-                        <ListOfHeroes
-                            app={this.props.app}
-                            onShow={this.showHero}
-                            showDetails={this.showDetails}
-                        />
-                    )}
-                {this.state.details
-                    ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
-                    : null}
+            <div className="heroselection-container">
+                <div className="heroselection-header">
+                    <div className="heroselection-header-menu heroselection-title">
+                        <span>
+                            Select character
+                        </span>
+                    </div>
+                    <div className="heroselection-header-menu heroselection-nav-menu">
+                        <button type="button" className="btn-nav-menu">
+                            <span className="btn-hero btn-hero-left" />
+                        </button>
+                        <span>
+                            nav menu
+                        </span>
+                        <button type="button" className="btn-nav-menu">
+                            <span className="btn-hero btn-hero-right" />
+                        </button>
+                    </div>
+                    <div className="heroselection-header-menu heroselection-char-details">
+                        <span>
+                            character details
+                        </span>
+                    </div>
+                </div>
+                <div className="heroselection-main">
+                    {this.state.hero
+                        ? (
+                            <OneHero
+                                hero={this.state.hero}
+                                onBack={this.showHero}
+                                onSelect={this.selectHero}
+                            />
+                        ) : (
+                            <ListOfHeroes
+                                app={this.props.app}
+                                onShow={this.showHero}
+                                showDetails={this.showDetails}
+                            />
+                        )
+                    }
+                    {this.state.details
+                        ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
+                        : null
+                    }
+                </div>
+                <div className="heroselection-footer">
+                    <div className="heroselection-footer-menu heroselection-play">
+                        <button type="button" className="btn-play">
+                            <span>
+                                PLAY
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }
