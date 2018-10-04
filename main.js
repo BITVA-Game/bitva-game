@@ -18,6 +18,11 @@ function createWindow() {
         width: 1366, height: 768, show: false, icon: path.join(__dirname, 'src/icons/png/64x64.png'),
     });
 
+    // remove menubar
+    if (process.platform !== 'darwin') {
+        win.setMenu(null);
+    }
+
     // and load the index.html of the app.
     if (process.env.REACT_URL) {
         // dev env
