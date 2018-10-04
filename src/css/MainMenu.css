@@ -29,11 +29,13 @@ body {
 }
 
 .MainMenuContainer:hover {
+  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.55);
   /* width: 15rem; */
 }
 
 .sidebar-opened {
+  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.55);
   width: 15rem;
 }
