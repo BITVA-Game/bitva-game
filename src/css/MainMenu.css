@@ -1,47 +1,47 @@
-.MainMenuContainer {
-  background-color: rgb(33, 33, 33);
-  background-color: rgba(33, 33, 33, 0.55);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 21em;
+/* main menu */
+
+.main-menu-container {
+    background-color: rgb(33, 33, 33);
+    background-color: rgba(33, 33, 33, 0.55);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 21em;
 }
 
-.Logo {
-  font-size: 4em;
-  text-align: center;
+.logo {
+    font-size: 4em;
+    text-align: center;
 }
 
-.MenuButtons {
-  display: flex;
-  flex-direction: column;
+/* buttons */
+
+.menu-buttons-container {
+    display: flex;
+    flex-direction: column;
 }
 
-ul {
-  display: flex;
-  flex-direction: column;
-  list-style: none;
-  margin: 0 0 2em 0;
-  padding: 0 0 3em 0;
+.menu-buttons-group {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0 0 2em 0;
+    padding: 0 0 3em 0;
 }
 
-li button {
-  background-color: transparent;
-  border: none;
-  color: #fff;
-  font-family: 'Ruslan Display', cursive;
-  font-size: 1.6em;
-  margin-top: 0.1em;
-  padding: 0.3em 0 0.3em 1.5em;
-  text-align: left;
+.menu-button {
+    background-color: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-family: 'Ruslan Display', cursive;
+    font-size: 1.6em;
+    margin-top: .1em;
+    padding: .3em 0 .3em 1.5em;
+    text-align: left;
 }
 
-li button:hover {
-  color: rgb(183, 74, 69);
-}
-
-li button:focus {
-  color: rgb(183, 74, 69);
-  outline: none;
+.menu-button:hover,
+.menu-button:focus {
+    color: rgb(183, 74, 69);
 }
