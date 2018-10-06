@@ -116,14 +116,14 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                             name: 'Bereginya',
                             count: 4,
                         },
-                        sheetLarge: {
-                            id: 'sheetLarge',
+                        shieldLarge: {
+                            id: 'shieldLarge',
                             name: 'Large Shield',
                             count: 2,
                         },
-                        sheetSmall: {
-                            id: 'sheetSmall',
-                            name: 'Living Water',
+                        shieldSmall: {
+                            id: 'shieldSmall',
+                            name: 'Small Shield',
                             count: 3,
                         },
                     },
@@ -132,7 +132,7 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                 yaga: {
                     id: 'yaga',
                     name: 'Yaga',
-                    description: 'Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.',
+                    description: 'Yaga can lead a person between realm of the dead and the living. She is a Witch, Keeper of the Living and Dead water.',
                     health: 15,
                     cards: {
                         bajun: {
@@ -160,14 +160,14 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                             name: 'Bereginya',
                             count: 4,
                         },
-                        sheetLarge: {
-                            id: 'sheetLarge',
+                        shieldLarge: {
+                            id: 'shieldLarge',
                             name: 'Large Shield',
                             count: 2,
                         },
-                        sheetSmall: {
-                            id: 'sheetSmall',
-                            name: 'Living Water',
+                        shieldSmall: {
+                            id: 'shieldSmall',
+                            name: 'Small Shield',
                             count: 3,
                         },
                     },
@@ -387,4 +387,35 @@ test('msg DEALALL received: Players hands have 5 cards each. Players decks have 
     expect(result.game.players[1].cards.length).toEqual(10);
 
     expect(result.manager.screen).toEqual('PLAYERACT');
+});
+
+// screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
+test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
+    // We only need type for this test.
+    const msg = { type: 'STARTSCREEN' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+    expect(sendReply.mock.calls[0][0]).toMatchObject(
+        {
+            profile: {
+                characters: ['morevna'],
+                deck: ['apple'],
+                silver: 5,
+                gold: 0,
+            },
+            heroSelect: {
+            },
+            manager: {
+                screen: 'STARTSCREEN',
+            },
+            game: {
+
+            },
+        },
+    );
 });

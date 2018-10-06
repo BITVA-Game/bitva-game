@@ -5,7 +5,7 @@ import './css/MainMenu.css';
 
 const MenuButton = props => (
     <li>
-        <button className="MenuButton" type="button" onClick={() => props.sendMessage({ type: props.type })}>
+        <button className="menu-button" type="button" onClick={() => props.sendMessage({ type: props.type })}>
             {props.name}
         </button>
     </li>
@@ -29,14 +29,14 @@ class MainMenu extends Component {
 
     render() {
         return (
-            <div className={this.state.opened ? 'MainMenuContainer sidebar-opened' : 'MainMenuContainer'}>
-                <div className="Logo">
+            <div className={this.state.opened ? 'main-menu-container sidebar-opened' : 'main-menu-container'}>
+                <div className="logo">
                     <p>
                         Bitva
                     </p>
                 </div>
-                <div className="MenuButtons">
-                    <ul>
+                <div className="menu-buttons-container">
+                    <ul className="menu-buttons-group">
                         <MenuButton name="Single Play" type="PLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Player vs Player" type="PLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Tournament" type="PLAY" sendMessage={this.props.sendMessage} />
@@ -45,7 +45,7 @@ class MainMenu extends Component {
                     <div className="btn btn-sidebar-toggle" role="button" onClick={() => this.toggle()} onKeyDown={() => this.toggle()} tabIndex="-1">
                         ▶
                     </div>
-                    <ul>
+                    <ul className="menu-buttons-group">
                         <MenuButton name="Store" type="" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Profile" type="PROFILE" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Settings" type="SETTINGS" sendMessage={this.props.sendMessage} />
