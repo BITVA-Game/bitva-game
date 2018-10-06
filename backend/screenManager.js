@@ -10,9 +10,9 @@ function handle(app, message) {
         return Object.assign({}, app.manager, { screen: 'PLAYERACT' });
     case 'PHASE1':
         return Object.assign({}, app.manager, { screen: 'GAMESCREEN' });
+
     default: return app.manager;
     }
 }
-
 
 exports.handle = handle;

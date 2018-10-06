@@ -116,14 +116,14 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                             name: 'Bereginya',
                             count: 4,
                         },
-                        sheetLarge: {
-                            id: 'sheetLarge',
+                        shieldLarge: {
+                            id: 'shieldLarge',
                             name: 'Large Shield',
                             count: 2,
                         },
-                        sheetSmall: {
-                            id: 'sheetSmall',
-                            name: 'Living Water',
+                        shieldSmall: {
+                            id: 'shieldSmall',
+                            name: 'Small Shield',
                             count: 3,
                         },
                     },
@@ -132,7 +132,7 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                 yaga: {
                     id: 'yaga',
                     name: 'Yaga',
-                    description: 'Yaga can lead a person between realm of the dead and the living. She is a witch, Keeper of the living and dead water.',
+                    description: 'Yaga can lead a person between realm of the dead and the living. She is a Witch, Keeper of the Living and Dead water.',
                     health: 15,
                     cards: {
                         bajun: {
@@ -160,14 +160,14 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                             name: 'Bereginya',
                             count: 4,
                         },
-                        sheetLarge: {
-                            id: 'sheetLarge',
+                        shieldLarge: {
+                            id: 'shieldLarge',
                             name: 'Large Shield',
                             count: 2,
                         },
-                        sheetSmall: {
-                            id: 'sheetSmall',
-                            name: 'Living Water',
+                        shieldSmall: {
+                            id: 'shieldSmall',
+                            name: 'Small Shield',
                             count: 3,
                         },
                     },

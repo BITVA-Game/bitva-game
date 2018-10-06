@@ -218,6 +218,7 @@ button {
 	padding: 0 1em;
 }
 
+
 /* footer */
 
 .heroselection-footer {
@@ -243,9 +244,17 @@ button {
 }
 
 .heroselection-play {
-	margin: 0 auto;
+	margin: 0 10em 0 -5em;	
 }
 
 .btn-play:hover {
+	border-color: #B74A45;
+}
+
+.selection-btn-start-screen {
+	float: left;
+}
+
+.btn-start-screen:hover {
 	border-color: #B74A45;
 }
