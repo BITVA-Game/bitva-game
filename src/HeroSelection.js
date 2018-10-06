@@ -25,10 +25,10 @@ const HeroDetails = props => (
             X
         </button>
         {/* <img src={images[props.hero.id]} alt={props.hero.id}/> */}
-        <h3>
+        <h3 className="hero-name">
             {props.hero.name}
         </h3>
-        <p>
+        <p className="hero-description">
             {props.hero.description}
         </p>
     </div>
