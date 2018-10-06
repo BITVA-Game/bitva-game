@@ -52,8 +52,8 @@ class App extends Component {
         console.log(this.state.app);
         WebFont.load({
             custom: {
-                families: ['Ruslan Display'],
-                urls: ['/fonts/RuslanDisplay.css'],
+                families: ['Ruslan Display', 'Sedan SC'],
+                urls: ['/fonts/RuslanDisplay.css', '/fonts/Sedan-SC.css'],
             },
         });
         return (
