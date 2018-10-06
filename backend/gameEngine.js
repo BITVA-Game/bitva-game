@@ -106,12 +106,13 @@ function makeMove(game, msg) {
             p.playerHand.forEach((c) => {
                 if (c.key === msg.key && msg.category === 'graveyard') {
                     p.graveyard = p.playerHand.splice(c, 1);
-                    console.log(p.graveyard);
                 }
             });
             increaseCounter(p);
         }
     });
+    return game;
+
 }
 
 function handle(app, message) {
@@ -130,7 +131,7 @@ function handle(app, message) {
         return Object.assign({}, app.game, giveCardsToAll(playersArray));
     }
     case 'PHASE1':
-
+        
         return Object.assign({}, app.game, makeMove(app.game, message));
     default: { return app.game; }
     }

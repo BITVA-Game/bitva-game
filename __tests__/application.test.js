@@ -392,7 +392,7 @@ test('msg DEALALL received: Players hands have 5 cards each. Players decks have 
 
 // Test that active card is from active player's hand, his counter less than 2,
 // then card goes to graveyard. Game state Phase1.
-test.only('msg PHASE1 received: active card is in active playerHand. Counter <2. State Phase1.', () => {
+test('msg PHASE1 received: active card is in active playerHand. Counter <2. State Phase1.', () => {
     const msg = {
         type: 'PHASE1', key: 'key10', category: 'graveyard', active: true,
     };
