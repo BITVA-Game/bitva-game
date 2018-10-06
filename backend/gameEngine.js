@@ -65,12 +65,16 @@ const generatePlayers = function (heroName) {
             p.cards = assignCards(heroName);
             p.health = allCharacters[heroName].health;
             p.playerHand = {};
+            p.graveyard = {};
+            p.moveCounter = 0;
         }
         if (p.active === false) {
             p.hero = heroSecondName;
             p.cards = assignCards(heroSecondName);
             p.health = allCharacters[heroSecondName].health;
             p.playerHand = {};
+            p.graveyard = {};
+            p.moveCounter = 0;
         }
     });
 
@@ -92,6 +96,23 @@ function giveCardsToAll(playersArray) {
     return playersArray;
 }
 
+function increaseCounter(player) {
+    player.moveCounter += 1;
+}
+
+function makeMove(game, msg) {
+    game.players.forEach((p) => {
+        if (p.active) {
+            p.playerHand.forEach((c) => {
+                if (c.key === msg.key && msg.category === 'graveyard') {
+                    p.graveyard = p.playerHand.splice(c, 1);
+                    console.log(p.graveyard);
+                }
+            });
+            increaseCounter(p);
+        }
+    });
+}
 
 function handle(app, message) {
     switch (message.type) {
@@ -105,9 +126,12 @@ function handle(app, message) {
     }
     case 'DEALALL': {
         const playersArray = app.game.players;
-        console.log(playersArray);
+
         return Object.assign({}, app.game, giveCardsToAll(playersArray));
     }
+    case 'PHASE1':
+
+        return Object.assign({}, app.game, makeMove(app.game, message));
     default: { return app.game; }
     }
 }
