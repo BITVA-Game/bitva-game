@@ -15,28 +15,36 @@ function getRandomBool() {
     return rand === 0;
 }
 
-function assignCards(heroName) {
-// find all cardTypes for this heroName
-    const heroCardTypes = allCharacters[heroName].cards;
-    // for each cardType in all CardTypes take count
-    const cardsArray = [];
-    for (const cardType in heroCardTypes) {
-        // take count, create a new card for this type
-        for (let i = 0; i < heroCardTypes[cardType].count; i += 1) {
-            const newCard = allCards[cardType];
-            cardsArray.push(newCard);
-        }
-    }
-    const deck = cardsArray.sort(() => Math.random() - 0.5);
-    const deckHero = deck.slice(0, 15);
-    for (let j = 0; j < deckHero.length; j += 1) {
-        const keyId = `key${j}`;
-        deckHero[j].key = keyId;
-    }
+function assignCards(deck) {
+    const d = Object.keys(deck).sort(() => Math.random() - 0.5);
+    const cards = d.slice(0, 15);
 
-    return deckHero;
+    return cards;
 }
 
+function giveCards(cards) {
+    const c = cards.sort(() => Math.random() - 0.5);
+    const hand = c.splice(0, 5);
+
+    return hand;
+}
+
+function createDeck(heroName) {
+    const cards = allCharacters[heroName].cards;
+    const deck = {};
+    let key = 0;
+    for (const cardType in cards) {
+        // take count, create a new card for this type
+        for (let i = 0; i < cards[cardType].count; i += 1) {
+            const keyId = `key${key}`;
+            const card = allCards[cardType];
+            deck[keyId] = card;
+            key += 1;
+        }
+    }
+
+    return deck;
+}
 
 const generatePlayers = function (heroName) {
     const rand = getRandomBool();
@@ -62,15 +70,17 @@ const generatePlayers = function (heroName) {
     players.forEach((p) => {
         if (p.active) {
             p.hero = heroName;
-            p.cards = assignCards(heroName);
+            p.deck = createDeck(heroName);
+            p.cards = assignCards(p.deck);
+            p.hand = giveCards(p.cards);
             p.health = allCharacters[heroName].health;
-            p.playerHand = {};
         }
         if (p.active === false) {
             p.hero = heroSecondName;
-            p.cards = assignCards(heroSecondName);
+            p.deck = createDeck(heroSecondName);
+            p.cards = assignCards(p.deck);
+            p.hand = giveCards(p.cards);
             p.health = allCharacters[heroSecondName].health;
-            p.playerHand = {};
         }
     });
 
