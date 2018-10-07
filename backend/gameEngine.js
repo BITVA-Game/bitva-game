@@ -16,13 +16,20 @@ function getRandomBool() {
 }
 
 function assignCards(deck) {
-    const d = Object.keys(deck).sort(() => Math.random() - 0.5);
-    const cards = d.slice(0, 15);
+    const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, 15);
+    const cards = {};
+    // console.log(d);
+    d.forEach((c) => {
+        cards[c] = deck[c];
+        // console.log(c, cards[c]);
+    });
+
+    cards.sort(() => Math.random() - 0.5);
 
     return cards;
 }
 
-function giveCards(cards) {
+function assignHand(cards) {
     const c = cards.sort(() => Math.random() - 0.5);
     const hand = c.splice(0, 5);
 
@@ -72,16 +79,16 @@ const generatePlayers = function (heroName) {
             p.hero = heroName;
             p.deck = createDeck(heroName);
             p.cards = assignCards(p.deck);
-            p.hand = giveCards(p.cards);
+            // p.hand = assignHand(p.cards);
             p.health = allCharacters[heroName].health;
         }
-        if (p.active === false) {
-            p.hero = heroSecondName;
-            p.deck = createDeck(heroSecondName);
-            p.cards = assignCards(p.deck);
-            p.hand = giveCards(p.cards);
-            p.health = allCharacters[heroSecondName].health;
-        }
+        // if (p.active === false) {
+        //     p.hero = heroSecondName;
+        //     p.deck = createDeck(heroSecondName);
+        //     p.cards = assignCards(p.deck);
+        //     p.hand = assignHand(p.cards);
+        //     p.health = allCharacters[heroSecondName].health;
+        // }
     });
 
     return { players };
