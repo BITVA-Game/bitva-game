@@ -33,8 +33,7 @@ function createDeck(heroName) {
         // take count, create a new card for this type
         for (let i = 0; i < cards[cardType].count; i += 1) {
             const keyId = `key${key}`;
-            const card = allCards[cardType];
-            deck[keyId] = card;
+            deck[keyId] = allCards[cardType];
             key += 1;
         }
     }
