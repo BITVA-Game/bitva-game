@@ -1,1 +1,0 @@
-`Ctrl+Shift+I` open Developer Tools
