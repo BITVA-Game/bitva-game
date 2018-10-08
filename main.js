@@ -49,7 +49,7 @@ function createWindow() {
         const temp = ctxMenu(app, win, e);
         const c = electron.Menu.buildFromTemplate(temp);
         c.popup(win);
-    })
+    });
 
     // Emitted when the window is closed.
     win.on('closed', () => {
