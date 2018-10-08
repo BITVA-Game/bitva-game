@@ -25,17 +25,6 @@ function assignCards(deck) {
     return cards;
 }
 
-function assignHand(cards) {
-    const c = Object.keys(cards).sort(() => Math.random() - 0.5).slice(0, 5);
-    const hand = {};
-    c.forEach((key) => {
-        hand[key] = c[key];
-        delete c[key];
-    });
-
-    return hand;
-}
-
 function createDeck(heroName) {
     const cards = allCharacters[heroName].cards;
     const deck = {};
@@ -80,6 +69,7 @@ const generatePlayers = function (heroName) {
             p.deck = createDeck(heroName);
             p.cards = assignCards(p.deck);
             p.hand = {};
+            p.grave = {};
             p.health = allCharacters[heroName].health;
         }
         if (p.active === false) {
@@ -87,6 +77,7 @@ const generatePlayers = function (heroName) {
             p.deck = createDeck(heroSecondName);
             p.cards = assignCards(p.deck);
             p.hand = {};
+            p.grave = {};
             p.health = allCharacters[heroSecondName].health;
         }
     });
