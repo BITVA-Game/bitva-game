@@ -18,20 +18,20 @@ function getRandomBool() {
 function assignCards(deck) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, 15);
     const cards = {};
-    // console.log(d);
-    d.forEach((c) => {
-        cards[c] = deck[c];
-        // console.log(c, cards[c]);
+    d.forEach((key) => {
+        cards[key] = deck[key];
     });
-
-    cards.sort(() => Math.random() - 0.5);
 
     return cards;
 }
 
 function assignHand(cards) {
-    const c = cards.sort(() => Math.random() - 0.5);
-    const hand = c.splice(0, 5);
+    const c = Object.keys(cards).sort(() => Math.random() - 0.5).slice(0, 5);
+    const hand = {};
+    c.forEach((key) => {
+        hand[key] = c[key];
+        delete c[key];
+    });
 
     return hand;
 }
@@ -79,25 +79,32 @@ const generatePlayers = function (heroName) {
             p.hero = heroName;
             p.deck = createDeck(heroName);
             p.cards = assignCards(p.deck);
-            // p.hand = assignHand(p.cards);
+            p.hand = {};
             p.health = allCharacters[heroName].health;
         }
-        // if (p.active === false) {
-        //     p.hero = heroSecondName;
-        //     p.deck = createDeck(heroSecondName);
-        //     p.cards = assignCards(p.deck);
-        //     p.hand = assignHand(p.cards);
-        //     p.health = allCharacters[heroSecondName].health;
-        // }
+        if (p.active === false) {
+            p.hero = heroSecondName;
+            p.deck = createDeck(heroSecondName);
+            p.cards = assignCards(p.deck);
+            p.hand = {};
+            p.health = allCharacters[heroSecondName].health;
+        }
     });
 
     return { players };
 };
 
+function randomKey(hashtable) {
+    const keys = Object.keys(hashtable);
+    return keys[Math.floor(keys.length * Math.random())];
+}
 
 function giveCardsTo(player) {
-    const x = player.playerHand.length >= 0 ? 5 - player.playerHand.length : 5;
-    player.playerHand = player.cards.splice(0, x);
+    while (Object.keys(player.hand).length < 5) {
+        const key = randomKey(player.cards);
+        player.hand[key] = player.cards[key];
+        delete player.cards[key];
+    }
 
     return player;
 }
@@ -108,7 +115,6 @@ function giveCardsToAll(playersArray) {
     });
     return playersArray;
 }
-
 
 function handle(app, message) {
     switch (message.type) {
