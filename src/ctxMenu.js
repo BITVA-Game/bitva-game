@@ -1,5 +1,5 @@
 const dialog = require('electron').dialog;
-// const shortcutsMsg = require('./')
+const fs = require('fs');
 
 const about = {
     type: 'info',
@@ -14,13 +14,13 @@ const shortcuts = {
     buttons: ['ok'],
 };
 
-function showDialog(win, msg) {
-    dialog.showMessageBox(win, msg, (m) => {
+function showDialog(win, msg, e) {
+    dialog.showMessageBox(win, msg, e.x, e.y, (m) => {
         console.log(m);
     });
 }
 
-module.exports = function menu(app, win) {
+module.exports = function menu(app, win, e) {
     return (
         [{
             label: 'devTools',
@@ -31,7 +31,15 @@ module.exports = function menu(app, win) {
         {
             label: 'shortcuts',
             click() {
-                showDialog(shortcuts);
+                shortcuts.message = fs.readFileSync(`${app.getAppPath()}/src/shortcuts`).toString();
+                showDialog(win, shortcuts, e);
+            },
+        },
+        {
+            label: 'inspect element',
+            click() {
+                console.log(e);
+                win.webContents.inspectElement(e.x, e.y);
             },
         },
         {

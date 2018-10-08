@@ -44,9 +44,9 @@ function createWindow() {
         application.msgReceived({ type: 'INITIAL' }, sendMessage);
     });
 
-    win.webContents.on('context-menu', (e) => {
-        e.preventDefault();
-        const temp = ctxMenu(app, win);
+    win.webContents.on('context-menu', (s, e) => {
+        s.preventDefault();
+        const temp = ctxMenu(app, win, e);
         const c = electron.Menu.buildFromTemplate(temp);
         c.popup(win);
     })
