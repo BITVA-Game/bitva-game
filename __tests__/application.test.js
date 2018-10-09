@@ -389,33 +389,75 @@ test('msg DEALALL received: Players hands have 5 cards each. Players decks have 
     expect(result.manager.screen).toEqual('PLAYERACT');
 });
 
-// screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
-    // We only need type for this test.
-    const msg = { type: 'STARTSCREEN' };
 
+// Test that active card is from active player's hand, his counter less than 2,
+// then card goes to graveyard. Game state Phase1.
+test('msg PHASE1 received: active card is in active playerHand. Counter <2. State Phase1.', () => {
+    const msg = {
+        type: 'PHASE1', key: 'key10', category: 'graveyard', active: true,
+    };
     // Mock sendReply function
     const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+
+            players: [
+                {
+                    active: true,
+                    cards: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}],
+                    health: 13,
+                    hero: 'morevna',
+                    playerHand: [
+                        {
+                            description: 'In far off lands there is a garden with magic yout…- gets younger, and an ill - gets it health back.',
+                            id: 'apple',
+                            key: 'key10',
+                            name: 'Apple',
+                            type: 'action',
+                        },
+                        {}, {}, {}, {}],
+                    moveCounter: 0,
+                    graveyard: [{}, {}],
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                },
+            ],
+
+        },
+
+    });
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            profile: {
-                characters: ['morevna'],
-                deck: ['apple'],
-                silver: 5,
-                gold: 0,
-            },
-            heroSelect: {
-            },
-            manager: {
-                screen: 'STARTSCREEN',
-            },
-            game: {
 
-            },
-        },
-    );
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+
+    // До действия -ожидаем, что активная карта пришла от активного игрока
+    expect(result.game.players[0].active).toBeTruthy();
+    // ожидаем, что активный игрок может действовать (его каунтер не равен 2)
+    expect(result.game.players[0].moveCounter).toBeLessThan(2);
+    // после действия ожидаем, что счетчик увеличен на 1
+    expect(result.game.players[0].moveCounter).toEqual(1);
+    // ожидаем, что активная карта сохранилась на кладбище
+    expect(result.game.players[0].graveyard).toMatchObject([{
+        description: 'In far off lands there is a garden with magic yout…- gets younger, and an ill - gets it health back.',
+        id: 'apple',
+        key: 'key10',
+        name: 'Apple',
+        type: 'action',
+    }]);
+    // ожидаем, что активная карта убралась из руки.
+    expect(result.game.players[0].playerHand).not.toContain({
+        description: 'In far off lands there is a garden with magic yout…- gets younger, and an ill - gets it health back.',
+        id: 'apple',
+        key: 'key10',
+        name: 'Apple',
+        type: 'action',
+    });
 });
