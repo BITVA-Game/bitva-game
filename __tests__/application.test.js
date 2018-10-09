@@ -287,7 +287,7 @@ test('msg HEROSELECTED received: active player has a character and 15 cards.', (
     const result = sendReply.mock.calls[0][0];
 
     expect(result.game.players[1].hero).toEqual('morevna');
-    expect(result.game.players[1].cards.length).toEqual(15);
+    expect(Object.keys(result.game.players[1].cards).length).toEqual(15);
 });
 
 // Test that inactive player gets its character and it's deck. Game state VERSUS.
@@ -309,7 +309,7 @@ test('msg HEROSELECTED received: inactive player gets available character and 15
     const result = sendReply.mock.calls[0][0];
 
     expect(result.game.players[0].hero).toEqual('yaga');
-    expect(result.game.players[0].cards.length).toEqual(15);
+    expect(Object.keys(result.game.players[0].cards).length).toEqual(15);
 });
 
 // Test that players gets their characters health. Game state VERSUS.
@@ -356,20 +356,67 @@ test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', (
     const result = sendReply.mock.calls[0][0];
 
     expect(result.game.players[0].hero).toEqual('yaga');
-    expect(result.game.players[0].playerHand).toEqual({});
+    expect(result.game.players[0].hand).toEqual({});
 
     expect(result.game.players[1].hero).toEqual('morevna');
-    expect(result.game.players[1].playerHand).toEqual({});
+    expect(result.game.players[1].hand).toEqual({});
 });
 
 // Test that both players get 5 cards from deck to their hands. Game state Deal All.
-test('msg DEALALL received: Players hands have 5 cards each. Players decks have 5 cards less. State Deal All.', () => {
+test('msg DEALALL received: Players hands have 5 cards each. Players cards have 5 cards less. State Deal All.', () => {
     const msg = { type: 'DEALALL' };
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+
+
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                    },
+                    hand: {
+                        key4: {}, key11: {}, key10: {}, key16: {}, key5: {},
+                    },
+                    health: 15,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    hand: {
+                        key11: {}, key10: {}, key1: {}, key8: {}, key13: {},
+                    },
+                    health: 13,
+                },
+            ],
+        },
+    });
+
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -379,12 +426,12 @@ test('msg DEALALL received: Players hands have 5 cards each. Players decks have 
     const result = sendReply.mock.calls[0][0];
 
     expect(result.game.players[0].hero).toEqual('yaga');
-    expect(result.game.players[0].playerHand.length).toEqual(5);
-    expect(result.game.players[0].cards.length).toEqual(10);
+    expect(Object.keys(result.game.players[0].hand).length).toEqual(5);
+    expect(Object.keys(result.game.players[0].cards).length).toEqual(10);
 
     expect(result.game.players[1].hero).toEqual('morevna');
-    expect(result.game.players[1].playerHand.length).toEqual(5);
-    expect(result.game.players[1].cards.length).toEqual(10);
+    expect(Object.keys(result.game.players[1].hand).length).toEqual(5);
+    expect(Object.keys(result.game.players[1].cards).length).toEqual(10);
 
     expect(result.manager.screen).toEqual('PLAYERACT');
 });
@@ -402,20 +449,10 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
-            profile: {
-                characters: ['morevna'],
-                deck: ['apple'],
-                silver: 5,
-                gold: 0,
-            },
-            heroSelect: {
-            },
             manager: {
                 screen: 'STARTSCREEN',
             },
-            game: {
 
-            },
         },
     );
 });

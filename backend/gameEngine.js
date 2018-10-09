@@ -103,6 +103,7 @@ function giveCardsToAll(playersArray) {
     playersArray.forEach((p) => {
         giveCardsTo(p);
     });
+
     return playersArray;
 }
 
