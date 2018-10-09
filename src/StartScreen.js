@@ -7,8 +7,8 @@ import './css/StartScreen.css';
 
 
 const StartScreen = props => (
-    <div className="StartScreen">
-        <MainMenu sendMessage={props.sendMessage} />
+    <div className="start-screen">
+        <MainMenu sendMessage={props.sendMessage} opened />
         {/* <textarea value={JSON.stringify(props.app.profile)} /> */}
     </div>
 );

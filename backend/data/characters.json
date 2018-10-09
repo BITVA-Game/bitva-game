@@ -31,13 +31,13 @@
 				"count": 4
             },
             "shieldLarge": {
-                "id": "sheetLarge",
+                "id": "shieldLarge",
                 "name": "Large Shield",
 				"count": 2
             }, 
             "shieldSmall": {
-                "id": "sheetSmall",
-                "name": "Living Water",
+                "id": "shieldSmall",
+                "name": "Small Shield",
 				"count": 3
             }
         }
@@ -75,7 +75,7 @@
                 "count": 4
             },
             "shieldLarge": {
-                "id": "sheetLarge",
+                "id": "shieldLarge",
                 "name": "Large Shield",
                 "count": 2
             }, 

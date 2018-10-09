@@ -156,6 +156,8 @@ button {
 }
 
 .hero-details-title {
+	font-family:'Sedan SC', cursive;
+	font-size: 1.7em;
 	text-align: center;
 }
 
@@ -193,6 +195,7 @@ button {
 	color: #000;
 	display: flex;
 	flex-direction: column;
+	font-family: 'Ruslan Display', 'Sedan SC', cursive;
 	justify-content: center;
 	left: 50%;
 	padding: 0 1.1em 0.2em;
@@ -200,6 +203,19 @@ button {
 	top: 50%;
 	transform: translate(-50%,-50%);
 	width: 380px;
+}
+
+.hero-name::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+}
+
+.hero-description::first-letter {
+    font-size: 3em;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .hero-info .btn-close {

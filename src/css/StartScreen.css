@@ -1,4 +1,4 @@
-.StartScreen {
-  background: #000 url("../images/start_screen.jpg") no-repeat;
-  display: flex;
+.start-screen {
+    background: #000 url("../images/start_screen.jpg") no-repeat;
+    display: flex;
 }

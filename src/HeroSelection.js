@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/HeroSelection.css';
+import MainMenu from './MainMenu';
+import './css/MainMenu.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -67,10 +69,10 @@ const HeroDetails = props => (
             X
         </button>
         {/* <img src={images[props.hero.id]} alt={props.hero.id}/> */}
-        <h3>
+        <h3 className="hero-name">
             {props.hero.name}
         </h3>
-        <p>
+        <p className="hero-description">
             {props.hero.description}
         </p>
     </div>
@@ -183,6 +185,9 @@ class HeroSelection extends Component {
                         ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
                         : null
                     }
+                    <section className="section-menu">
+                        <MainMenu sendMessage={this.props.sendMessage} />
+                    </section>
                 </div>
                 <Footer />
             </div>
