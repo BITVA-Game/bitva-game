@@ -185,10 +185,8 @@ class HeroSelection extends Component {
                         ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
                         : null
                     }
-                    <section className="section-menu">
-                        <MainMenu sendMessage={this.props.sendMessage} />
-                    </section>
                 </div>
+                <MainMenu sendMessage={this.props.sendMessage} />
                 <Footer />
             </div>
         );
