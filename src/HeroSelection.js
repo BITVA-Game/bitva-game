@@ -14,9 +14,9 @@ const images = {
 };
 
 function isAvailable(app, hero) {
-    return app.profile.characters.find((char) => {
-        console.log(char, hero.id);
-        return char === hero.id;
+    return app.profile.characters.find((character) => {
+        console.log(character, hero.id);
+        return character === hero.id;
     });
 }
 
