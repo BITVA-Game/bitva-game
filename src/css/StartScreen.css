@@ -1,4 +1,8 @@
 .start-screen {
     background: #000 url("../images/start_screen.jpg") no-repeat;
-    display: flex;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
 }
