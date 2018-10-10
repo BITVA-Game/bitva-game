@@ -163,7 +163,7 @@ button {
 }
 
 .hero-details img {
-	margin:auto;
+	margin: auto;
 }
 
 .hero-details-btn-block {
@@ -194,19 +194,18 @@ button {
 	background-color: #899591;
 	border-radius: 10px;
 	color: #000;
+	display: none;
 	/* flex-direction: column; */
 	font-family: 'Ruslan Display', 'Sedan SC', cursive;
 	/* justify-content: center; */
+	left: 30%;
 	/* left: 50%; */
 	padding: 0 1.1em 0.2em;
+	position: absolute;
+	top: 70%;
 	/* top: 50%; */
 	/* transform: translate(-50%,-50%); */
 	width: 380px;
-
-	display: none;
-	position: absolute;
-	left: 30%;
-	top: 70%;
 }
 
 .hero-block:hover .hero-info {
@@ -222,10 +221,10 @@ button {
 .hero-info-overlay {
 	bottom: 0;
 	display: none;
-	left: -120%;
+	left: 0;
 	position: fixed;
 	right: 0;
-	top: -120%;
+	top: 0;
 	z-index: -1;
 }
 
