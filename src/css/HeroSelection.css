@@ -209,11 +209,19 @@ button {
 	display: block;
 }
 
+.hero-info-overlay {
+	bottom: 0;
+	left: -120%;
+	position: fixed;
+	right: 0;
+	top: -120%;
+	z-index: -1;
+}
+
 .hero-name::first-letter {
     font-size: 2em;
     font-weight: bold;
-    text-transform: uppercase;
-    
+    text-transform: uppercase;    
 }
 
 .hero-description::first-letter {

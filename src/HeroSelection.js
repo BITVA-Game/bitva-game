@@ -33,6 +33,7 @@ const HeroInfo = props => (
         <p className="hero-description">
             {props.hero.description}
         </p>
+        <div className="hero-info-overlay" role="button" onClick={() => props.closeInfo()} onKeyDown={() => props.closeInfo()} tabIndex="-1" />
     </div>
 );
 
