@@ -193,7 +193,7 @@ button {
 	background-color: #899591;
 	border-radius: 10px;
 	color: #000;
-	display: flex;
+	/* display: none; */
 	flex-direction: column;
 	font-family: 'Ruslan Display', 'Sedan SC', cursive;
 	justify-content: center;
@@ -203,6 +203,10 @@ button {
 	top: 50%;
 	transform: translate(-50%,-50%);
 	width: 380px;
+}
+
+.hero-info:focus {
+	display: block;
 }
 
 .hero-name::first-letter {

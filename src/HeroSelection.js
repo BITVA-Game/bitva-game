@@ -20,10 +20,10 @@ function isAvailable(app, hero) {
     });
 }
 
-// Pop-up with character details
-const HeroDetails = props => (
+// Pop-up with character info
+const HeroInfo = props => (
     <div className="hero-info">
-        <button className="btn-close" type="button" onClick={() => props.closeDetails()}>
+        <button className="btn-close" type="button" onClick={() => props.closeInfo()}>
             X
         </button>
         {/* <img src={images[props.hero.id]} alt={props.hero.id}/> */}
@@ -39,10 +39,10 @@ const HeroDetails = props => (
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inactive'}>
-        <button className="btn-character" type="button" onClick={() => (isAvailable(props.app, props.hero) ? props.onShow(props.hero) : props.showDetails(props.hero))}>
+        <button className="btn-character" type="button" onClick={() => (isAvailable(props.app, props.hero) ? props.onShow(props.hero) : props.showInfo(props.hero))}>
             <img className="hero-image" src={images[props.hero.id]} alt={props.hero.id} />
         </button>
-        <button className="btn-character-info" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
+        <button className="btn-character-info" type="button" hero={props.hero} onClick={() => props.showInfo(props.hero)}>
             Info
         </button>
     </div>
@@ -80,7 +80,7 @@ const ListOfHeroes = props => (
                 <HeroBlock
                     key={hero.id}
                     onShow={props.onShow}
-                    showDetails={props.showDetails}
+                    showInfo={props.showInfo}
                     hero={hero}
                     app={props.app}
                 />
@@ -124,11 +124,11 @@ const OneHero = props => (
 class HeroSelection extends Component {
     constructor(props) {
         super(props);
-        this.state = { hero: null, details: null };
+        this.state = { hero: null, info: null };
         this.showHero = this.showHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
-        this.showDetails = this.showDetails.bind(this);
-        this.closeDetails = this.closeDetails.bind(this);
+        this.showInfo = this.showInfo.bind(this);
+        this.closeInfo = this.closeInfo.bind(this);
         this.goStartScreen = this.goStartScreen.bind(this);
     }
 
@@ -140,12 +140,12 @@ class HeroSelection extends Component {
         this.props.sendMessage({ type: 'HEROSELECTED', hero: hero.id });
     }
 
-    showDetails(hero) {
-        this.setState({ details: hero });
+    showInfo(hero) {
+        this.setState({ info: hero });
     }
 
-    closeDetails() {
-        this.setState({ details: null });
+    closeInfo() {
+        this.setState({ info: null });
     }
 
     goStartScreen() {
@@ -167,13 +167,13 @@ class HeroSelection extends Component {
                         <ListOfHeroes
                             app={this.props.app}
                             onShow={this.showHero}
-                            showDetails={this.showDetails}
+                            showInfo={this.showInfo}
                             onPrevious={this.goStartScreen}
 
                         />
                     )}
-                {this.state.details
-                    ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
+                {this.state.info
+                    ? <HeroInfo hero={this.state.info} closeInfo={this.closeInfo} />
                     : null}
                 <section className="section-menu">
                     <MainMenu sendMessage={this.props.sendMessage} />
@@ -183,23 +183,23 @@ class HeroSelection extends Component {
     }
 }
 
-HeroDetails.propTypes = {
+HeroInfo.propTypes = {
     hero: PropTypes.object.isRequired,
-    closeDetails: PropTypes.func.isRequired,
+    closeInfo: PropTypes.func.isRequired,
 };
 
 HeroBlock.propTypes = {
     app: PropTypes.object.isRequired,
     hero: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
-    showDetails: PropTypes.func.isRequired,
+    showInfo: PropTypes.func.isRequired,
 };
 
 ListOfHeroes.propTypes = {
     app: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     onPrevious: PropTypes.func.isRequired,
-    showDetails: PropTypes.func.isRequired,
+    showInfo: PropTypes.func.isRequired,
 };
 
 OneHero.propTypes = {
