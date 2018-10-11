@@ -19,12 +19,8 @@ class MainMenu extends Component {
     }
 
     toggle() {
-        console.log('opened:', this.state.opened);
-        if (this.state.opened) {
-            this.setState({ opened: false });
-        } else {
-            this.setState({ opened: true });
-        }
+        const opened = this.state.opened;
+        this.setState({ opened: !opened });
     }
 
     render() {
