@@ -49,7 +49,7 @@ class MainMenu extends Component {
                         <MenuButton name="Store" type="" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Profile" type="PROFILE" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Settings" type="SETTINGS" sendMessage={this.props.sendMessage} />
-                        <MenuButton name="Quit" type="" sendMessage={this.props.sendMessage} />
+                        <MenuButton name="Quit" type="QUIT" sendMessage={this.props.sendMessage} />
                     </ul>
                 </div>
             </div>

@@ -77,5 +77,10 @@ app.on('activate', () => {
 ipcMain.on('APP', (event, arg) => {
     // Send the request to game engine to get relevant data
     // Give it the sendMessage to send Messages on its own.
-    application.msgReceived(arg, sendMessage);
+    switch (arg.type) {
+    case 'QUIT':
+        return app.quit();
+    default:
+        return application.msgReceived(arg, sendMessage);
+    }
 });
