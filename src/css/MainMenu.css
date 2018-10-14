@@ -19,11 +19,14 @@ body {
 .main-menu-container {
     background-color: rgb(33, 33, 33);
     background-color: rgba(33, 33, 33, 0.55);
+    bottom: 0;
     box-sizing: border-box;
     /* display: flex; */
     /* flex-direction: column; */
-    height: 100vh;
-    position: relative;
+    /* height: 100vh; */
+    left: 0;
+    position: fixed;
+    top: 0;
     transition: width .5s;
     width: 1rem;
 }
