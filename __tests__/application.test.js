@@ -456,3 +456,68 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
         },
     );
 });
+
+// // Test msg with action card from active player's hand with category: 'action', class: 'cure'
+// card cure hero for its points not > maximum, then card goes to graveyard. Game state Case2.
+test('msg CASE2 received: action card is action and can cure, applies points to hero then moved to graveyard. State Case2.', () => {
+    const msg = {
+        type: 'CASE2', key: 'key1', category: 'cure', active: true,
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: 5,
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', points: 3 },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // ожидаем, что активный игрок может действовать (его каунтер не равен 2)
+    // expect(game.players[0].moveCounter).toBeLessThan(2);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // после действия ожидаем, что счетчик увеличен на 1
+    expect(result.game.players[0].moveCounter).toEqual(2);
+    // ожидаем, что карта с очками здоровья - это карта-действие
+    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    // ожидаем, что очки здоровья активной карты переданы в health героя
+    expect(result.game.players[0].health).toEqual(8);
+    // ожидаем, что очки здоровья health героя не больше максимума
+    expect(result.game.players[0].health).toBeLessThanOrEqual(13);
+    // ожидаем, что активная карта сохранилась на кладбище
+    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    // ожидаем, что активная карта убралась из руки.
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+});

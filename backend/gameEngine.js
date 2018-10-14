@@ -69,6 +69,7 @@ const generatePlayers = function (heroName) {
             p.cards = assignCards(p.deck);
             p.hand = {};
             p.grave = {};
+            p.moveCounter = 0;
             p.health = allCharacters[heroName].health;
         }
         if (p.active === false) {
@@ -77,6 +78,7 @@ const generatePlayers = function (heroName) {
             p.cards = assignCards(p.deck);
             p.hand = {};
             p.grave = {};
+            p.moveCounter = 0;
             p.health = allCharacters[heroSecondName].health;
         }
     });
@@ -107,6 +109,36 @@ function giveCardsToAll(playersArray) {
     return playersArray;
 }
 
+function increaseCounter(player) {
+    player.moveCounter += 1;
+}
+
+function moveGraveyard(player, key) {
+    player.grave[key] = player.hand[key];
+    delete player.hand[key];
+}
+
+function makeMove(game, msg) {
+    game.players.forEach((p) => {
+        if (p.active && p.moveCounter < 2) {
+            switch (msg.category) {
+            case 'graveyard':
+                moveGraveyard(p, msg.key);
+                break;
+
+            case 'cure':
+                p.health += p.hand[msg.key].points;
+                moveGraveyard(p, msg.key);
+                break;
+
+            default: null;
+            }
+            increaseCounter(p);
+        }
+    });
+    return game;
+}
+
 function handle(app, message) {
     switch (message.type) {
     case 'INITIAL': {
@@ -122,6 +154,13 @@ function handle(app, message) {
 
         return Object.assign({}, app.game, giveCardsToAll(playersArray));
     }
+    case 'CASE1': {
+        return Object.assign({}, app.game, makeMove(app.game, message));
+    }
+    case 'CASE2': {
+        return Object.assign({}, app.game, makeMove(app.game, message));
+    }
+
     default: { return app.game; }
     }
 }
