@@ -10,6 +10,8 @@ function handle(app, message) {
         return Object.assign({}, app.manager, { screen: 'PLAYERACT' });
     case 'STARTSCREEN':
         return Object.assign({}, app.manager, { screen: 'STARTSCREEN' });
+    case 'CASE1':
+        return Object.assign({}, app.manager, { screen: 'GAMESCREEN' });
     default: return app.manager;
     }
 }
