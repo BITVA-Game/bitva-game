@@ -14,11 +14,53 @@ const images = {
 };
 
 function isAvailable(app, hero) {
-    return app.profile.characters.find((char) => {
-        console.log(char, hero.id);
-        return char === hero.id;
+    return app.profile.characters.find((character) => {
+        console.log(character, hero.id);
+        return character === hero.id;
     });
 }
+
+// common elements
+
+// header section
+const Header = props => (
+    <section className="heroselection-header">
+        <div className="heroselection-header-menu heroselection-title">
+            <span>
+                Select character
+            </span>
+        </div>
+        <div className="heroselection-header-menu header-nav-menu">
+            <button type="button" className="btn-nav-menu" onClick={props.prev}>
+                <span className="btn-hero btn-hero-left" />
+            </button>
+            <span>
+                nav menu
+            </span>
+            <button type="button" className="btn-nav-menu" onClick={props.next}>
+                <span className="btn-hero btn-hero-right" />
+            </button>
+        </div>
+        <div className="heroselection-header-menu heroselection-char-details">
+            <span>
+                character details
+            </span>
+        </div>
+    </section>
+);
+
+// footer section
+const Footer = props => (
+    <section className="heroselection-footer">
+        <div className="heroselection-footer-menu heroselection-play">
+            <button type="button" className="btn-play" onClick={console.log('play', props.something)}>
+                <span>
+                    PLAY
+                </span>
+            </button>
+        </div>
+    </section>
+);
 
 // Pop-up with character details
 const HeroDetails = props => (
@@ -51,54 +93,20 @@ const HeroBlock = props => (
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
 const ListOfHeroes = props => (
-    <div className="heroselection-container">
-        <div className="heroselection-header">
-            <div className="heroselection-header-menu heroselection-title">
-                <span>
-                    Select character
-                </span>
-            </div>
-            <div className="heroselection-header-menu heroselection-nav-menu">
-                <button type="button" className="btn-nav-menu">
-                    <span className="btn-hero btn-hero-left" />
-                </button>
-                <span>
-                    nav menu
-                </span>
-                <button type="button" className="btn-nav-menu">
-                    <span className="btn-hero btn-hero-right" />
-                </button>
-            </div>
-            <div className="heroselection-header-menu heroselection-char-details">
-                <span>
-                    character details
-                </span>
-            </div>
-        </div>
-        <div className="heroselection-main">
-            {Object.values(props.app.heroSelect).map(hero => (
-                <HeroBlock
-                    key={hero.id}
-                    onShow={props.onShow}
-                    showDetails={props.showDetails}
-                    hero={hero}
-                    app={props.app}
-                />
-            ))}
-        </div>
-        <div className="heroselection-footer">
-            <div className="heroselection-footer-menu heroselection-play">
-                <button type="button" className="btn-play">
-                    <span>
-                        PLAY
-                    </span>
-                </button>
-            </div>
-            <div className="heroselection-footer-menu selection-btn-start-screen">
-                <button type="button" className="btn-start-screen" onClick={() => props.onPrevious()}>
-                    TO START SCREEN
-                </button>
-            </div>
+    <div className="heroes-list">
+        {Object.values(props.app.heroSelect).map(hero => (
+            <HeroBlock
+                key={hero.id}
+                onShow={props.onShow}
+                showDetails={props.showDetails}
+                hero={hero}
+                app={props.app}
+            />
+        ))}
+        <div className="heroselection-footer-menu selection-btn-start-screen">
+            <button type="button" className="btn-start-screen" onClick={() => props.onPrevious()}>
+                TO START SCREEN
+            </button>
         </div>
     </div>
 );
@@ -154,34 +162,45 @@ class HeroSelection extends Component {
 
     render() {
         return (
-            <div>
-                {this.state.hero
-                    ? (
-                        <OneHero
-                            hero={this.state.hero}
-                            onBack={this.showHero}
-                            onSelect={this.selectHero}
-                        />
-                    )
-                    : (
-                        <ListOfHeroes
-                            app={this.props.app}
-                            onShow={this.showHero}
-                            showDetails={this.showDetails}
-                            onPrevious={this.goStartScreen}
-
-                        />
-                    )}
-                {this.state.details
-                    ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
-                    : null}
-                <section className="section-menu">
-                    <MainMenu sendMessage={this.props.sendMessage} />
-                </section>
+            <div className="heroselection-container">
+                <Header prev={this.null} next={this.null} />
+                <div className="heroselection-main">
+                    {this.state.hero
+                        ? (
+                            <OneHero
+                                hero={this.state.hero}
+                                onBack={this.showHero}
+                                onSelect={this.selectHero}
+                            />
+                        ) : (
+                            <ListOfHeroes
+                                app={this.props.app}
+                                onShow={this.showHero}
+                                showDetails={this.showDetails}
+                                onPrevious={this.goStartScreen}
+                            />
+                        )
+                    }
+                    {this.state.details
+                        ? <HeroDetails hero={this.state.details} closeDetails={this.closeDetails} />
+                        : null
+                    }
+                </div>
+                <MainMenu sendMessage={this.props.sendMessage} />
+                <Footer />
             </div>
         );
     }
 }
+
+Header.propTypes = {
+    next: PropTypes.object.isRequired,
+    prev: PropTypes.object.isRequired,
+};
+
+Footer.propTypes = {
+    something: PropTypes.string.isRequired,
+};
 
 HeroDetails.propTypes = {
     hero: PropTypes.object.isRequired,
