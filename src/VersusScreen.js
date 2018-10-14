@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/VersusScreen.css';
+import MainMenu from './MainMenu';
+import './css/MainMenu.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -39,6 +41,7 @@ const VersusScreen = props => (
             PLAY
             </button>
         </div>
+        <MainMenu sendMessage={props.sendMessage} />
     </div>
 );
 
