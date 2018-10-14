@@ -1,6 +1,9 @@
+const electron = require('electron');
 const { app, ipcMain, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
+
+const ctxMenu = require('./src/ctxMenu');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -46,6 +49,13 @@ function createWindow() {
         application.msgReceived({ type: 'INITIAL' }, sendMessage);
     });
 
+    win.webContents.on('context-menu', (s, e) => {
+        s.preventDefault();
+        const temp = ctxMenu(app, win, e);
+        const c = electron.Menu.buildFromTemplate(temp);
+        c.popup(win);
+    });
+
     // Emitted when the window is closed.
     win.on('closed', () => {
         // Dereference the window object, usually you would store windows
@@ -59,6 +69,8 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
+
+console.log(app);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
