@@ -135,18 +135,6 @@ button {
 	opacity:0.5;
 }
 
-.hero-inactive .btn-character:hover::after {
-	background: url(../images/lock-shield.png) transparent no-repeat;
-	background-size: cover;
-    bottom: 0;
-    content: '';
-	height: 50px;
-    position: absolute;
-    right: 0;
-    width: 50px;
-	z-index: 999;
-}
-
 /* hero details screen */
 
 .hero-details {
