@@ -460,7 +460,7 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 
 // Test that active card is from active player's hand, his counter less than 2,
 // then card goes to graveyard. Game state Case1.
-test.only('msg CASE1 received: active card was in active player hand, then moved to graveyard. Counter <2. State Case1.', () => {
+test('msg CASE1 received: active card was in active player hand, then moved to graveyard. Counter <2. State Case1.', () => {
     const msg = {
         type: 'CASE1', key: 'key10', category: 'graveyard', active: true,
     };
@@ -483,13 +483,15 @@ test.only('msg CASE1 received: active card was in active player hand, then moved
                         key6: {},
                         key14: {},
                         key12: {},
-                        key9: {}
+                        key9: {},
                     },
                     health: 13,
                     hero: 'morevna',
-                    hand: {key11: {}, key1: {}, key8: {}, key13: {}},
+                    hand: {
+                        key11: {}, key1: {}, key8: {}, key13: {},
+                    },
                     moveCounter: 0,
-                    grave: {key10: {}},
+                    grave: { key10: {} },
                 },
                 {
                     active: false,
@@ -518,3 +520,4 @@ test.only('msg CASE1 received: active card was in active player hand, then moved
     expect(Object.keys(result.game.players[0].grave)).toContain('key10');
     // ожидаем, что активная карта убралась из руки.
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key10');
+});
