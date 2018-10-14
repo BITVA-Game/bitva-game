@@ -99,10 +99,10 @@ const ListOfHeroes = props => (
         {Object.values(props.app.heroSelect).map(hero => (
             <HeroBlock
                 key={hero.id}
-                    info={props.info}
+                info={props.info}
                 onShow={props.onShow}
                 showInfo={props.showInfo}
-                    closeInfo={props.closeInfo}
+                closeInfo={props.closeInfo}
                 hero={hero}
                 app={props.app}
             />
@@ -179,10 +179,10 @@ class HeroSelection extends Component {
                         ) : (
                             <ListOfHeroes
                                 app={this.props.app}
-                            info={this.state.info}
+                                info={this.state.info}
                                 onShow={this.showHero}
-                            closeInfo={this.closeInfo}
-                            showInfo={this.showInfo}
+                                closeInfo={this.closeInfo}
+                                showInfo={this.showInfo}
                                 onPrevious={this.goStartScreen}
                             />
                         )
@@ -242,6 +242,5 @@ HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
 };
-
 
 export default HeroSelection;
