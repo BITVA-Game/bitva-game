@@ -91,6 +91,7 @@ button {
 	flex-direction: column;
 	justify-content: center;
 	margin: .5em;
+	position: relative;
 }
 
 .hero-block .btn-character {
@@ -162,7 +163,7 @@ button {
 }
 
 .hero-details img {
-	margin:auto;
+	margin: auto;
 }
 
 .hero-details-btn-block {
@@ -193,23 +194,48 @@ button {
 	background-color: #899591;
 	border-radius: 10px;
 	color: #000;
-	display: flex;
-	flex-direction: column;
+	display: none;
+	/* flex-direction: column; */
 	font-family: 'Ruslan Display', 'Sedan SC', cursive;
-	justify-content: center;
-	left: 50%;
+	/* justify-content: center; */
+	left: 30%;
+	/* left: 50%; */
 	padding: 0 1.1em 0.2em;
 	position: absolute;
-	top: 50%;
-	transform: translate(-50%,-50%);
+	top: 70%;
+	/* top: 50%; */
+	/* transform: translate(-50%,-50%); */
 	width: 380px;
+}
+
+.hero-block:hover .hero-info {
+	display: block;
+	z-index: 999;
+}
+
+.hero-info-shown {
+	display: block;
+	z-index: 9999;
+}
+
+.hero-info-overlay {
+	bottom: 0;
+	display: none;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	z-index: -1;
+}
+
+.hero-info-shown .hero-info-overlay {
+	display: block;
 }
 
 .hero-name::first-letter {
     font-size: 2em;
     font-weight: bold;
-    text-transform: uppercase;
-    
+    text-transform: uppercase;    
 }
 
 .hero-description::first-letter {
