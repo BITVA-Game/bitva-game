@@ -331,10 +331,10 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
     const result = sendReply.mock.calls[0][0];
 
     expect(result.game.players[0].hero).toEqual('yaga');
-    expect(result.game.players[0].health).toEqual(15);
+    expect(result.game.players[0].health.current).toEqual(15);
 
     expect(result.game.players[1].hero).toEqual('morevna');
-    expect(result.game.players[1].health).toEqual(13);
+    expect(result.game.players[1].health.current).toEqual(13);
 });
 
 // Test that each player has its hand empty. State Hero Selected.
@@ -483,7 +483,7 @@ test('msg CASE2 received: action card is action and can cure, applies points to 
                         key12: {},
                         key9: {},
                     },
-                    health: 5,
+                    health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
                         key11: {}, key8: {}, key13: {}, key1: { type: 'action', points: 3 },
@@ -502,20 +502,21 @@ test('msg CASE2 received: action card is action and can cure, applies points to 
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
 
-    // ожидаем, что активный игрок может действовать (его каунтер не равен 2)
-    // expect(game.players[0].moveCounter).toBeLessThan(2);
-
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+
+    // ожидаем, что активный игрок может действовать (его каунтер не более 2 после хода)
+    expect(result.game.players[0].moveCounter).toBeLessThanOrEqual(2);
     // после действия ожидаем, что счетчик увеличен на 1
     expect(result.game.players[0].moveCounter).toEqual(2);
     // ожидаем, что карта с очками здоровья - это карта-действие
     expect(result.game.players[0].grave.key1.type).toEqual('action');
     // ожидаем, что очки здоровья активной карты переданы в health героя
-    expect(result.game.players[0].health).toEqual(8);
+    expect(result.game.players[0].health.current).toEqual(8);
+    // expect(result.game.players[0].grave.key1.points).toEqual(0);
     // ожидаем, что очки здоровья health героя не больше максимума
-    expect(result.game.players[0].health).toBeLessThanOrEqual(13);
+    expect(result.game.players[0].health.current).toBeLessThanOrEqual(13);
     // ожидаем, что активная карта сохранилась на кладбище
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
     // ожидаем, что активная карта убралась из руки.

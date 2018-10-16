@@ -70,7 +70,9 @@ const generatePlayers = function (heroName) {
             p.hand = {};
             p.grave = {};
             p.moveCounter = 0;
-            p.health = allCharacters[heroName].health;
+            p.health = {};
+            p.health.current = allCharacters[heroName].health;
+            p.health.maximum = allCharacters[heroName].health;
         }
         if (p.active === false) {
             p.hero = heroSecondName;
@@ -79,7 +81,9 @@ const generatePlayers = function (heroName) {
             p.hand = {};
             p.grave = {};
             p.moveCounter = 0;
-            p.health = allCharacters[heroSecondName].health;
+            p.health = {};
+            p.health.current = allCharacters[heroSecondName].health;
+            p.health.maximum = allCharacters[heroSecondName].health;
         }
     });
 
@@ -127,8 +131,14 @@ function makeMove(game, msg) {
                 break;
 
             case 'cure':
-                p.health += p.hand[msg.key].points;
+                if (p.health.current < p.health.maximum) {
+                    p.health.current += p.hand[msg.key].points;
+                } else {
+                    p.health.current = p.health.maximum;
+                }
                 moveGraveyard(p, msg.key);
+                // p.grave[msg.key].points == 0;
+
                 break;
 
             default: null;
