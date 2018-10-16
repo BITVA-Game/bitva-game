@@ -21,8 +21,19 @@ button {
 .App-logo {
     animation: App-logo-spin infinite 20s linear;
     height: 80px;
+} */
+
+.app-background {
+    background: transparent center no-repeat fixed;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
 }
 
+/*
 .App-header {
     background-color: #222;
     color: white;
