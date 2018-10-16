@@ -69,6 +69,7 @@ const generatePlayers = function (heroName) {
             p.cards = assignCards(p.deck);
             p.hand = {};
             p.grave = {};
+            p.moveCounter = 0;
             p.health = allCharacters[heroName].health;
         }
         if (p.active === false) {
@@ -77,6 +78,7 @@ const generatePlayers = function (heroName) {
             p.cards = assignCards(p.deck);
             p.hand = {};
             p.grave = {};
+            p.moveCounter = 0;
             p.health = allCharacters[heroSecondName].health;
         }
     });
@@ -90,6 +92,7 @@ function randomKey(hashtable) {
 }
 
 function giveCardsTo(player) {
+    // console.log(Object.keys(player.hand));
     while (Object.keys(player.hand).length < 5) {
         const key = randomKey(player.cards);
         player.hand[key] = player.cards[key];
@@ -107,6 +110,26 @@ function giveCardsToAll(playersArray) {
     return playersArray;
 }
 
+function increaseCounter(player) {
+    player.moveCounter += 1;
+}
+
+function makeMove(game, msg) {
+    game.players.forEach((p) => {
+        if (p.active) {
+            Object.keys(p.hand).forEach((key) => {
+                if (key === msg.key && msg.category === 'graveyard') {
+                    p.grave[key] = p.hand[key];
+                    delete p.hand[key];
+                }
+            });
+            increaseCounter(p);
+        }
+    });
+    return game;
+}
+
+
 function handle(app, message) {
     switch (message.type) {
     case 'INITIAL': {
@@ -121,6 +144,9 @@ function handle(app, message) {
         const playersArray = app.game.players;
 
         return Object.assign({}, app.game, giveCardsToAll(playersArray));
+    }
+    case 'CASE1': {
+        return Object.assign({}, app.game, makeMove(app.game, message));
     }
     default: { return app.game; }
     }
