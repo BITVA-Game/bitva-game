@@ -27,7 +27,8 @@
     "csslint-all-win": "csslint .\\src\\css\\App.css .\\src\\css\\HeroSelection.css .\\src\\css\\index.css .\\src\\css\\MainMenu.css .\\src\\css\\StartScreen.css .\\src\\css\\VersusScreen.css",
     "csslint": "csslint",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=src/icons/mac/logo.icns --prune=true --out=releases",
-    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=src/icons/win/logo.ico --prune=true --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Bitva'"
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=src/icons/win/logo.ico --prune=true --out=releases --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='Bitva'",
+    "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=src/icons/png/1024x1024.png --prune=true --out=releases"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
