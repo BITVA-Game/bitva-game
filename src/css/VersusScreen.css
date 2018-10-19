@@ -20,17 +20,12 @@
 }
 
 .versus-one-hero {
-    border: .3em solid #fff;
-    display: flex;
-    flex-direction: column;
-    flex-flow: row wrap;
-    justify-content: center;
     margin-top: 1em;
 }
 
 .versus-one-hero img {
+    border: .3em solid #fff;
     justify-content: center;
-    margin: auto;
 }
 
 .versus-one-hero div {
