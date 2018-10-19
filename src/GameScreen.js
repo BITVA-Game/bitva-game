@@ -20,6 +20,30 @@ const GameTable = props => (
     </div>
 );
 
+const Card = props => (
+    <div className="card">
+        <div className="card-name">
+            {props.card.name}
+        </div>
+    </div>
+);
+
+const Deck = props => (
+    <div className="deck">
+        <div className="deck-name">
+            deck
+        </div>
+    </div>
+);
+
+const Grave = props => (
+    <div className="grave">
+        <div className="grave-name">
+            grave
+        </div>
+    </div>
+);
+
 class Player extends Component {
     constructor(props) {
         super(props);
@@ -67,6 +91,16 @@ class Player extends Component {
                         </div>
                     </div>
                 </div>
+                <div className="item">
+                    <Card card={this.player.hand[Object.keys(this.player.hand)[0]]} />
+                </div>
+                <Deck />
+                <div className="hand">
+                    {Object.values(this.player.hand).map(card => (
+                        <Card card={card} />
+                    ))}
+                </div>
+                <Grave />
             </div>
         );
     }
@@ -74,6 +108,18 @@ class Player extends Component {
 
 Player.propTypes = {
     player: PropTypes.object.isRequired,
+};
+
+Card.propTypes = {
+    card: PropTypes.object.isRequired,
+};
+
+Deck.propTypes = {
+    deck: PropTypes.object.isRequired,
+};
+
+Grave.propTypes = {
+    grave: PropTypes.object.isRequired,
 };
 
 GameTable.propTypes = {

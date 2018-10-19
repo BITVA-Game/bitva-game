@@ -15,6 +15,7 @@
 }
 
 .player-inactive {
+    right: 70px;
     top: 0;
     transform: rotate(180deg);
 }
@@ -22,9 +23,10 @@
 /* hero */
 .hero {
     border-radius: 50%;
+    bottom: 197px;
     display: inline-block;
     left: 220px;
-    position: relative;
+    position: absolute;
 }
 
 .player-inactive .hero {
@@ -93,4 +95,98 @@
     top: -7px;
     transform: rotate(-45deg);
     width: 20px;
+}
+
+/* item */
+.item {
+    bottom: 200px;
+    left: 444px;
+    position: absolute;
+}
+
+/* hand */
+.hand {
+    bottom: 22px;
+    left: 442px;
+    position: absolute;
+}
+
+/* card */
+.card {
+    background-color: antiquewhite;
+    border-radius: 10px;
+    display: inline-block;
+    height: 140px;
+    margin-right: 26px;
+    position: relative;
+    width: 110px;
+}
+
+.player-inactive .card {
+    transform: rotate(180deg);
+}
+
+.card-name {
+    color: black;
+    font-size: 14px;
+    text-align: center;
+    line-height: 12px;
+    position: absolute;
+    top: 7px;
+    width: 100%;
+}
+
+/* deck */
+.deck {
+    background-color: #97abb8;
+    border-radius: 10px;
+    bottom: 27px;
+    display: inline-block;
+    height: 140px;
+    left: 35px;
+    position: absolute;
+    width: 110px;
+}
+
+.player-inactive .deck {
+    display: none;
+}
+
+.deck-name {
+    color: black;
+    font-size: 24px;
+    position: absolute;
+    text-align: center;
+    text-transform: lowercase;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+/* grave */
+.grave {
+    background-color: #566678;
+    border-radius: 10px;
+    bottom: 27px;
+    display: inline-block;
+    height: 140px;
+    right: 35px;
+    position: absolute;
+    width: 110px;
+}
+
+.player-inactive .grave {
+    right: 105px;
+    transform: rotate(180deg);
+}
+
+.grave-name {
+    color: black;
+    font-size: 24px;
+    position: absolute;
+    text-align: center;
+    text-transform: lowercase;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
 }
