@@ -2,3 +2,95 @@
 .game-table {
     background-image: url(../images/game-background.png);
 }
+
+/* player */
+.player {
+    height: 50vh;
+    position: fixed;
+    width: 100%;
+}
+
+.player-active {
+    bottom: 0;
+}
+
+.player-inactive {
+    top: 0;
+    transform: rotate(180deg);
+}
+
+/* hero */
+.hero {
+    border-radius: 50%;
+    display: inline-block;
+    left: 220px;
+    position: relative;
+}
+
+.player-inactive .hero {
+    transform: rotate(180deg);
+}
+
+.hero:hover {
+    box-shadow: 0 0 15px greenyellow; /* #b74a45; */
+}
+
+.hero-image {
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+.hero-health {
+    left: 0;
+    position: absolute;
+}
+
+.hero-health-points {
+    stroke: #b74a45;
+}
+
+.heart {
+    background-color: #ff0101;
+    bottom: -12px;
+    height: 20px;
+    left: 50%;
+    position: absolute;
+    text-align: center;
+    transform: translate(-50%) rotate(45deg);
+    width: 20px;
+}
+
+.heart::after {
+    background-color: #ff0101;
+    border-radius: 50%;
+    content: '';
+    height: 20px;
+    left: -10px;
+    position: absolute;
+    top: 0;
+    width: 20px;
+    z-index: -1;
+}
+
+.heart::before {
+    background-color: #ff0101;
+    border-radius: 50%;
+    content: '';
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: -10px;
+    width: 20px;
+    z-index: -1;
+}
+
+.heart-health {
+    font-size: 24px;
+    height: 20px;
+    left: -7px;
+    position: absolute;
+    top: -7px;
+    transform: rotate(-45deg);
+    width: 20px;
+}
