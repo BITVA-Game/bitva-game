@@ -18,6 +18,7 @@ function isAvailable(app, hero) {
     });
 }
 
+
 // Pop-up with character details
 const HeroInfo = props => (
     <div className="hero-info">
@@ -65,12 +66,7 @@ const ListOfHeroes = props => (
             />
         ))}
         <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.app.heroSelect[props.selected]); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="3">
-            character details
-        </div>
-	<div className="heroselection-footer-menu selection-btn-start-screen">
-            <button type="button" className="btn-start-screen" onClick={() => props.onPrevious()}>
-                TO START SCREEN
-            </button>
+            CHARACTER DETAILS
         </div>
     </div>
 );
@@ -87,10 +83,10 @@ const OneHero = props => (
             </div>
             <div className="details-hero-btn-block">
                 <div className="btn btn-back footer-menu" role="button" onClick={() => props.onBack()} onKeyPress={() => props.onBack()} tabIndex="9">
-                    Back
+                    BACK
                 </div>
                 <button className="btn btn-select" type="button" onClick={() => props.onSelect(props.hero)}>
-                    Select
+                    SELECT
                 </button>
             </div>
         </div>
@@ -129,6 +125,7 @@ class HeroSelection extends Component {
         this.closeDetails = this.closeDetails.bind(this);
 	    this.goStartScreen = this.goStartScreen.bind(this);
     }
+
     showHero(hero) {
         this.setState({ hero });
     }
@@ -173,7 +170,7 @@ class HeroSelection extends Component {
             <div className="container-root">
                 <section className="section-header">
                     <div className="header-menu hero-select-title">
-                            Select character
+                            SELECT CHARACTER
                     </div>
                     <div className="header-menu hero-nav-menu">
                         <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-left" role="button" onClick={() => { this.selectLeftHero(); }} onKeyPress={() => { console.log('key nav-left'); }} tabIndex="1">
@@ -205,15 +202,21 @@ class HeroSelection extends Component {
                                 showDetails={this.showDetails}
                                 onPrevious={this.goStartScreen}
                             />
-                        )
-                    }
-                    {this.state.info
-                        ? <HeroInfo hero={this.state.info} closeInfo={this.closeInfo} />
-                        : null
-                    }
-                </div>
-                <MainMenu sendMessage={this.props.sendMessage} />
-                <Footer />
+                        )}
+                    {this.state.details
+                        ? <HeroInfo hero={this.state.details} closeDetails={this.closeDetails} />
+                        : null}
+                </section>
+                <section className="section-footer">
+                    <div className="btn btn-play footer-menu" role="button" onClick={console.log('play', this.props.something)} onKeyPress={() => { console.log('key play'); }} tabIndex="-1">
+                            PLAY
+                    </div>
+                    <div className="footer-menu selection-btn-start-screen">
+                        <button type="button" className="btn-start-screen" onClick={() => this.goStartScreen()}>
+                            TO START SCREEN
+                        </button>
+                    </div>
+                </section>
             </div>
         );
     }
@@ -238,7 +241,6 @@ ListOfHeroes.propTypes = {
     app: PropTypes.object.isRequired,
     changeSelected: PropTypes.func.isRequired,
     onShow: PropTypes.func.isRequired,
-    onPrevious: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
     showDetails: PropTypes.func.isRequired,
 };
@@ -252,6 +254,8 @@ OneHero.propTypes = {
 HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
+    onPrevious: PropTypes.func.isRequired,
+    something: PropTypes.string.isRequired,
 };
 
 export default HeroSelection;
