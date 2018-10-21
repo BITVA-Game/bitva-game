@@ -457,7 +457,72 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     );
 });
 
-// // Test msg with action card from active player's hand with category: 'action', class: 'cure'
+
+// Test that active card is from active player's hand, his counter less than 2,
+// then card goes to graveyard. Game state Case1.
+test('msg CASE1 received: active card was in active player hand, then moved to graveyard. Counter <2. State Case1.', () => {
+    const msg = {
+        type: 'CASE1', key: 'key10', category: 'graveyard', active: true,
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: 13,
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key1: {}, key8: {}, key13: {},
+                    },
+                    moveCounter: 0,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                },
+            ],
+
+        },
+
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // До действия -ожидаем, что активная карта пришла от активного игрока
+    expect(result.game.players[0].active).toBeTruthy();
+    // ожидаем, что активный игрок может действовать (его каунтер не равен 2)
+    expect(result.game.players[0].moveCounter).toBeLessThan(2);
+    // после действия ожидаем, что счетчик увеличен на 1
+    expect(result.game.players[0].moveCounter).toEqual(1);
+    // ожидаем, что активная карта сохранилась на кладбище
+    expect(Object.keys(result.game.players[0].grave)).toContain('key10');
+    // ожидаем, что активная карта убралась из руки.
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key10');
+});
+
+// Test msg with action card from active player's hand with category: 'action', class: 'cure'
 // card cure hero for its points not > maximum, then card goes to graveyard. Game state Case2.
 test('msg CASE2 received: action card is action and can cure, applies points to hero then moved to graveyard. State Case2.', () => {
     const msg = {

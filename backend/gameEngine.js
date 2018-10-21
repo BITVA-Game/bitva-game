@@ -140,7 +140,6 @@ function makeMove(game, msg) {
                 // p.grave[msg.key].points == 0;
 
                 break;
-
             default: null;
             }
             increaseCounter(p);
