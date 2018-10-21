@@ -9,7 +9,7 @@ button {
 	background: none;
 	border: 2px solid transparent;
 	color: antiquewhite;
-	font-family: Sedanc CS, inherit;
+	font-family: 'Sedan SC';
 	font-size: inherit;
 	margin: 0;
 	outline: none;
@@ -152,11 +152,6 @@ section {
 
 .btn-play:hover {
 	border-color: #B74A45;
-}
-
-.selection-btn-start-screen {
-	left: 1rem;
-	
 }
 
 .btn-start-screen:hover {
@@ -314,7 +309,8 @@ section {
     width: fit-content;
 }
 
-.btn-back {
+.btn-back, 
+.btn-start-screen {
 	left: 2rem;
 	position: fixed;
 }

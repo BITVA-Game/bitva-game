@@ -68,6 +68,10 @@ const ListOfHeroes = props => (
         <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.app.heroSelect[props.selected]); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="3">
             CHARACTER DETAILS
         </div>
+        <div type="button" className="btn footer-menu btn-start-screen" role="button" onClick={() => props.onPrevious} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="10">
+                TO START SCREEN
+        </div>
+        
     </div>
 );
 
@@ -149,8 +153,8 @@ class HeroSelection extends Component {
         this.setState({ selected: heroes[index] });
     }
 
-    selectHero(hero) {
-        this.props.sendMessage({ type: 'HEROSELECTED', hero: hero.id });
+    selectHero(selected) {
+        this.props.sendMessage({ type: 'HEROSELECTED', hero: selected });
     }
 
     showDetails(hero) {
@@ -208,13 +212,8 @@ class HeroSelection extends Component {
                         : null}
                 </section>
                 <section className="section-footer">
-                    <div className="btn btn-play footer-menu" role="button" onClick={console.log('play', this.props.something)} onKeyPress={() => { console.log('key play'); }} tabIndex="-1">
+                    <div className="btn btn-play footer-menu" role="button" onClick={() => this.selectHero(this.state.selected)} onKeyPress={() => { console.log('key play'); }} tabIndex="-1">
                             PLAY
-                    </div>
-                    <div className="footer-menu selection-btn-start-screen">
-                        <button type="button" className="btn-start-screen" onClick={() => this.goStartScreen()}>
-                            TO START SCREEN
-                        </button>
                     </div>
                 </section>
             </div>
@@ -243,6 +242,7 @@ ListOfHeroes.propTypes = {
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
     showDetails: PropTypes.func.isRequired,
+    onPrevious: PropTypes.func.isRequired,
 };
 
 OneHero.propTypes = {
@@ -254,7 +254,6 @@ OneHero.propTypes = {
 HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
-    onPrevious: PropTypes.func.isRequired,
     something: PropTypes.string.isRequired,
 };
 
