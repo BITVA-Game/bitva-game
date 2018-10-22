@@ -6,7 +6,6 @@
 /* player */
 .player {
     height: 50vh;
-    position: fixed;
     width: 100%;
 }
 
@@ -15,8 +14,7 @@
 }
 
 .player-inactive {
-    right: 70px;
-    top: 0;
+    margin-left: -70px;
     transform: rotate(180deg);
 }
 
@@ -34,13 +32,11 @@
 }
 
 .hero:hover {
-    box-shadow: 0 0 15px greenyellow; /* #b74a45; */
+    box-shadow: 0 0 15px 7px #b74a45;
 }
 
 .hero-image {
     border-radius: 50%;
-    height: 200px;
-    width: 200px;
 }
 
 .hero-health {
@@ -53,55 +49,22 @@
 }
 
 .heart {
-    background-color: #ff0101;
     bottom: -12px;
-    height: 20px;
+    height: 25px;
     left: 50%;
     position: absolute;
-    text-align: center;
-    transform: translate(-50%) rotate(45deg);
-    width: 20px;
+    width: 25px;
 }
 
-.heart::after {
-    background-color: #ff0101;
-    border-radius: 50%;
-    content: '';
-    height: 20px;
-    left: -10px;
-    position: absolute;
-    top: 0;
-    width: 20px;
-    z-index: -1;
-}
-
-.heart::before {
-    background-color: #ff0101;
-    border-radius: 50%;
-    content: '';
-    height: 20px;
-    left: 0;
-    position: absolute;
-    top: -10px;
-    width: 20px;
-    z-index: -1;
-}
-
-.heart-health {
+.heart-text {
     font-size: 24px;
-    height: 20px;
-    left: -7px;
-    position: absolute;
-    top: -7px;
-    transform: rotate(-45deg);
-    width: 20px;
 }
 
 /* item */
 .item {
-    bottom: 200px;
-    left: 444px;
-    position: absolute;
+    bottom: 200px !important;
+    left: 444px !important;
+    position: absolute !important;
 }
 
 /* hand */
@@ -111,14 +74,23 @@
     position: absolute;
 }
 
+/* card-place */
+.card-place {
+    background-color: rgba(211, 226, 243, 0.55);
+    display: inline-block;
+    margin-right: 26px;
+}
+
 /* card */
 .card {
     background-color: antiquewhite;
-    border-radius: 10px;
-    display: inline-block;
+    transform: rotate(0);
+    width: 110px;
+}
+
+.card-like {
+    border-radius: 9%;
     height: 140px;
-    margin-right: 26px;
-    position: relative;
     width: 110px;
 }
 
@@ -139,13 +111,10 @@
 /* deck */
 .deck {
     background-color: #97abb8;
-    border-radius: 10px;
     bottom: 27px;
     display: inline-block;
-    height: 140px;
     left: 35px;
     position: absolute;
-    width: 110px;
 }
 
 .player-inactive .deck {
@@ -166,13 +135,10 @@
 /* grave */
 .grave {
     background-color: #566678;
-    border-radius: 10px;
     bottom: 27px;
     display: inline-block;
-    height: 140px;
     right: 35px;
     position: absolute;
-    width: 110px;
 }
 
 .player-inactive .grave {
