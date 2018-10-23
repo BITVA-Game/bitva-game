@@ -7,7 +7,7 @@ let startY;
 let x;
 let y;
 
-function dragCard(drag) {
+function startDrag(drag) {
     x = drag.clientX - startX;
     y = drag.clientY - startY;
     dragged.style.transform = `translate(${x}px,${y}px) scale(1.1,1.1)`;
@@ -15,7 +15,7 @@ function dragCard(drag) {
 
 function stopDrag() {
     document.removeEventListener('mouseup', stopDrag);
-    document.removeEventListener('mousemove', dragCard, true);
+    document.removeEventListener('mousemove', startDrag, true);
     if (dragged) {
         dragged.style.zIndex = -1;
         dragged.style.transform = null;
@@ -80,6 +80,6 @@ document.addEventListener('mousedown', (down) => {
         startX = down.clientX;
         startY = down.clientY;
         document.addEventListener('mouseup', dropCard);
-        document.addEventListener('mousemove', dragCard, true);
+        document.addEventListener('mousemove', startDrag, true);
     }
 }, true);
