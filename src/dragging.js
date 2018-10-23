@@ -25,15 +25,29 @@ function stopDrag() {
     }
 }
 
+function droppedTo(drop, target) {
+    // console.log(`${target.offsetLeft} < ${drop.clientX} < (${target.offsetLeft} + ${target.offsetWidth}) = ${target.offsetLeft + target.offsetWidth}`);
+    // console.log(`${target.offsetTop} < ${drop.clientY} < (${target.offsetTop} + ${target.offsetHeight}) = ${target.offsetTop + target.offsetHeight}`);
+    const dropped = (
+        target.offsetLeft < drop.clientX
+        && drop.clientX < (target.offsetLeft + target.offsetWidth)
+        && target.offsetTop < drop.clientY
+        && drop.clientY < (target.offsetTop + target.offsetHeight)
+    );
+    if (dropped) console.log('dragging:', 'dropped to', target.id);
+    return dropped;
+}
+
 function dropCard(drop) {
     const item = document.getElementById('item');
-    console.log(`${item.offsetLeft} < ${drop.clientX} < (${item.offsetLeft} + ${item.offsetWidth}) = ${item.offsetLeft + item.offsetWidth}`);
-    console.log(`${item.offsetTop} < ${drop.clientY} < (${item.offsetTop} + ${item.offsetHeight}) = ${item.offsetTop + item.offsetHeight}`);
-    if (!item.hasChildNodes()) {
-        if ((item.offsetLeft < drop.clientX && drop.clientX < (item.offsetLeft + item.offsetWidth))
-            && (item.offsetTop < drop.clientY && drop.clientY < (item.offsetTop + item.offsetHeight))) {
+    const grave = document.getElementById('grave');
+    if (droppedTo(drop, item)) {
+        if (!item.hasChildNodes()) {
             item.appendChild(dragged);
         }
+    } else if (droppedTo(drop, grave)) {
+        grave.appendChild(dragged);
+        dragged.style.display = 'none';
     }
     stopDrag();
 }

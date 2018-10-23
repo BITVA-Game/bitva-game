@@ -122,7 +122,11 @@ class Player extends Component {
                         </div>
                     ))}
                 </div>
-                <Grave grave={this.player.grave} />
+                <div className="grave card-like" id={this.player.active ? 'grave' : null}>
+                    <div className="grave-name">
+                        grave
+                    </div>
+                </div>
             </div>
         );
     }
