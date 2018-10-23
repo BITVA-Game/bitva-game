@@ -63,20 +63,20 @@ class Player extends Component {
         this.cx = this.width / 2;
         this.cy = this.height / 2;
         this.sw = 6;
-        this.r = this.cx - this.sw / 2;
+        this.r = this.cx - (this.sw / 2);
         const cl = 2 * Math.PI * this.r;
 
         this.player = props.player;
         this.current = 7; // this.player.health.current;
         const maximum = this.player.health; // this.player.health.maximum
-        const angle = (360 / maximum * this.current) - 90;
+        const angle = (360 / maximum) * this.current - 90;
         const long = angle + 90 > 180 ? 1 : 0;
-        const x = this.cx + (this.r * Math.cos(angle * Math.PI / 180));
-        const y = this.cy + (this.r * Math.sin(angle * Math.PI / 180));
+        const x = this.cx + (this.r * Math.cos((angle * Math.PI) / 180));
+        const y = this.cy + (this.r * Math.sin((angle * Math.PI) / 180));
 
         this.d = `M ${this.cx} ${this.sw / 2} A ${this.r} ${this.r} 0 ${long} 1 ${x} ${y}`;
-        this.sda = `${cl / maximum - 1},1`;
-        this.sdo = cl / 360 * 90;
+        this.sda = `${(cl / maximum) - 1},1`;
+        this.sdo = (cl / 360) * 90;
         this.style = {
             hero: {
                 height: `${this.height}px`,
