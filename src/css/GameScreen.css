@@ -9,13 +9,7 @@
     width: 100%;
 }
 
-.player-active {
-    /* bottom: 0; */
-    /* height: 90vh; */
-}
-
 .player-inactive {
-    /* height: 10vh; */
     margin-left: -70px;
     transform: rotate(180deg);
 }
@@ -64,9 +58,9 @@
 
 /* item */
 .item {
-    bottom: 200px !important;
-    left: 444px !important;
-    position: absolute !important;
+    bottom: 200px;
+    left: 444px;
+    position: absolute;
 }
 
 /* hand */
@@ -78,6 +72,7 @@
 
 /* card-place */
 .card-place {
+    background-color: rgb(211, 226, 243);
     background-color: rgba(211, 226, 243, 0.55);
     display: inline-block;
     margin-right: 26px;
@@ -103,9 +98,9 @@
 .card-name {
     color: black;
     font-size: 14px;
-    text-align: center;
     line-height: 12px;
     position: absolute;
+    text-align: center;
     top: 7px;
     width: 100%;
 }
@@ -139,8 +134,8 @@
     background-color: #566678;
     bottom: 27px;
     display: inline-block;
-    right: 35px;
     position: absolute;
+    right: 35px;
 }
 
 .player-inactive .grave {
