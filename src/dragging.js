@@ -33,7 +33,6 @@ function dropCard(drop) {
         if ((item.offsetLeft < drop.clientX && drop.clientX < (item.offsetLeft + item.offsetWidth))
             && (item.offsetTop < drop.clientY && drop.clientY < (item.offsetTop + item.offsetHeight))) {
             item.appendChild(dragged);
-            dragged.draggable = false;
         }
     }
     stopDrag();
