@@ -69,7 +69,7 @@ class Player extends Component {
         this.player = props.player;
         this.current = 7; // this.player.health.current;
         const maximum = this.player.health; // this.player.health.maximum
-        const angle = (360 / maximum) * this.current - 90;
+        const angle = ((360 / maximum) * this.current) - 90;
         const long = angle + 90 > 180 ? 1 : 0;
         const x = this.cx + (this.r * Math.cos((angle * Math.PI) / 180));
         const y = this.cy + (this.r * Math.sin((angle * Math.PI) / 180));
