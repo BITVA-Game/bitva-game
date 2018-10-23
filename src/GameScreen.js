@@ -98,7 +98,7 @@ class Player extends Component {
     render() {
         return (
             <div className={this.player.active ? 'player player-active' : 'player player-inactive'}>
-                <div className="hero" style={this.style.hero}>
+                <div className="hero" style={this.style.hero} id={this.player.active ? 'hero' : 'enemy'}>
                     <img className="hero-image" src={images[this.player.hero]} alt={this.player.hero} style={this.style.hero} />
                     <svg className="hero-health" width={(this.cx) * 2} height={(this.cy) * 2}>
                         <circle cx={this.cx} cy={this.cy} r={this.r} stroke="black" strokeWidth={this.sw + 1} fill="transparent" />

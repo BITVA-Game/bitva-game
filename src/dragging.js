@@ -26,8 +26,8 @@ function stopDrag() {
 }
 
 function droppedTo(drop, target) {
-    // console.log(`${target.offsetLeft} < ${drop.clientX} < (${target.offsetLeft} + ${target.offsetWidth}) = ${target.offsetLeft + target.offsetWidth}`);
-    // console.log(`${target.offsetTop} < ${drop.clientY} < (${target.offsetTop} + ${target.offsetHeight}) = ${target.offsetTop + target.offsetHeight}`);
+    // console.log(`${target.id}: ${target.offsetLeft} < ${drop.clientX} < (${target.offsetLeft} + ${target.offsetWidth}) = ${target.offsetLeft + target.offsetWidth}`);
+    // console.log(`${target.id}: ${target.offsetTop} < ${drop.clientY} < (${target.offsetTop} + ${target.offsetHeight}) = ${target.offsetTop + target.offsetHeight}`);
     const dropped = (
         target.offsetLeft < drop.clientX
         && drop.clientX < (target.offsetLeft + target.offsetWidth)
@@ -41,11 +41,27 @@ function droppedTo(drop, target) {
 function dropCard(drop) {
     const item = document.getElementById('item');
     const grave = document.getElementById('grave');
+    const hero = document.getElementById('hero');
+    let enemy = document.getElementById('enemy');
+    enemy = enemy.getBoundingClientRect();
+    enemy = {
+        id: 'enemy',
+        offsetLeft: enemy.left,
+        offsetWidth: enemy.width,
+        offsetTop: enemy.top,
+        offsetHeight: enemy.height,
+    };
     if (droppedTo(drop, item)) {
         if (!item.hasChildNodes()) {
             item.appendChild(dragged);
         }
     } else if (droppedTo(drop, grave)) {
+        grave.appendChild(dragged);
+        dragged.style.display = 'none';
+    } else if (droppedTo(drop, hero)) {
+        grave.appendChild(dragged);
+        dragged.style.display = 'none';
+    } else if (droppedTo(drop, enemy)) {
         grave.appendChild(dragged);
         dragged.style.display = 'none';
     }
