@@ -27,9 +27,11 @@ function stopDrag() {
 
 function dropCard(drop) {
     const item = document.getElementById('item');
+    console.log(`${item.offsetLeft} < ${drop.clientX} < (${item.offsetLeft} + ${item.offsetWidth}) = ${item.offsetLeft + item.offsetWidth}`);
+    console.log(`${item.offsetTop} < ${drop.clientY} < (${item.offsetTop} + ${item.offsetHeight}) = ${item.offsetTop + item.offsetHeight}`);
     if (!item.hasChildNodes()) {
-        if ((item.offsetLeft < drop.clientX < (item.offsetLeft + item.offsetWidth))
-            && (item.offsetTop < drop.clientY < (item.offsetTop + item.offsetHeight))) {
+        if ((item.offsetLeft < drop.clientX && drop.clientX < (item.offsetLeft + item.offsetWidth))
+            && (item.offsetTop < drop.clientY && drop.clientY < (item.offsetTop + item.offsetHeight))) {
             item.appendChild(dragged);
             dragged.draggable = false;
         }
