@@ -43,6 +43,13 @@ module.exports = function menu(app, win, e) {
             },
         },
         {
+            label: 'reload',
+            click() {
+                console.log(e);
+                win.reload();
+            },
+        },
+        {
             label: 'about',
             click() {
                 about.message = `${app.getName()} ${app.getVersion()}`;
