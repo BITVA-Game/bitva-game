@@ -46,7 +46,7 @@ module.exports = function menu(app, win, e) {
             label: 'about',
             click() {
                 about.message = `${app.getName()} ${app.getVersion()}`;
-                showDialog(win, about);
+                showDialog(win, about, e);
             },
         },
         {
