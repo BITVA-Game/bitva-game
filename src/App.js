@@ -5,6 +5,7 @@ import WebFont from 'webfontloader';
 import StartScreen from './StartScreen';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
+import GameScreen from './GameScreen';
 
 // Import electron and establis connection to use app.js as Renderer
 const electron = window.require('electron');
@@ -41,6 +42,8 @@ class App extends Component {
             return <HeroSelection sendMessage={sendMessage} app={this.state.app} />;
         case 'VERSUS':
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
+        case 'PLAYERACT':
+            return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
         default:
             return `UNKNOWN SCREEN NAME ${this.state.app.manager.screen}`;
         }
