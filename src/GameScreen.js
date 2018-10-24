@@ -126,6 +126,9 @@ class Player extends Component {
                     <div className="grave-name">
                         grave
                     </div>
+                    <div className="count">
+                        {this.player.active ? Object.keys(this.player.grave).length : null}
+                    </div>
                 </div>
             </div>
         );
