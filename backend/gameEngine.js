@@ -70,7 +70,9 @@ const generatePlayers = function (heroName) {
             p.hand = {};
             p.grave = {};
             p.moveCounter = 0;
-            p.health = allCharacters[heroName].health;
+            p.health = {};
+            p.health.current = allCharacters[heroName].health;
+            p.health.maximum = allCharacters[heroName].health;
         }
         if (p.active === false) {
             p.hero = heroSecondName;
@@ -79,7 +81,9 @@ const generatePlayers = function (heroName) {
             p.hand = {};
             p.grave = {};
             p.moveCounter = 0;
-            p.health = allCharacters[heroSecondName].health;
+            p.health = {};
+            p.health.current = allCharacters[heroSecondName].health;
+            p.health.maximum = allCharacters[heroSecondName].health;
         }
     });
 
@@ -92,7 +96,6 @@ function randomKey(hashtable) {
 }
 
 function giveCardsTo(player) {
-    // console.log(Object.keys(player.hand));
     while (Object.keys(player.hand).length < 5) {
         const key = randomKey(player.cards);
         player.hand[key] = player.cards[key];
@@ -114,21 +117,36 @@ function increaseCounter(player) {
     player.moveCounter += 1;
 }
 
+function moveGraveyard(player, key) {
+    player.grave[key] = player.hand[key];
+    delete player.hand[key];
+}
+
 function makeMove(game, msg) {
     game.players.forEach((p) => {
-        if (p.active) {
-            Object.keys(p.hand).forEach((key) => {
-                if (key === msg.key && msg.category === 'graveyard') {
-                    p.grave[key] = p.hand[key];
-                    delete p.hand[key];
+        if (p.active && p.moveCounter < 2) {
+            switch (msg.category) {
+            case 'graveyard':
+                moveGraveyard(p, msg.key);
+                break;
+
+            case 'cure':
+                if (p.health.current < p.health.maximum) {
+                    p.health.current += p.hand[msg.key].points;
+                } else {
+                    p.health.current = p.health.maximum;
                 }
-            });
+                moveGraveyard(p, msg.key);
+                // p.grave[msg.key].points == 0;
+                break;
+            default:
+                return new Error('You are under spell. Wait for redemption!');
+            }
             increaseCounter(p);
         }
     });
     return game;
 }
-
 
 function handle(app, message) {
     switch (message.type) {
@@ -148,6 +166,10 @@ function handle(app, message) {
     case 'CASE1': {
         return Object.assign({}, app.game, makeMove(app.game, message));
     }
+    case 'CASE2': {
+        return Object.assign({}, app.game, makeMove(app.game, message));
+    }
+
     default: { return app.game; }
     }
 }
