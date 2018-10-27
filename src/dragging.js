@@ -40,7 +40,8 @@ function droppedTo(drop, target) {
 
 function dropToGrave(grave, card) {
     grave.appendChild(card);
-    grave.childNodes[1].innerText = grave.childNodes.length - 2;
+    const counter = grave.childNodes[1];
+    counter.innerText = grave.childNodes.length - 2;
 }
 
 function dropCard(drop) {
