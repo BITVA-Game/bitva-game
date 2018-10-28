@@ -1,8 +1,8 @@
 body {
 	cursor: default;
+	font-family: Sedanc CS;
 	min-width: 1024px;
 	user-select: none;
-	font-family: Sedanc CS;
 }
 
 button {
@@ -124,6 +124,7 @@ section {
 /* footer */
 
 .section-footer {
+	background-color: rgb(0,0,0);
 	background-color: rgba(0,0,0,0.5);
 	bottom: 0;
 	height: 3rem;
@@ -182,11 +183,11 @@ section {
 .btn-hero-selected {
 	border-color: #B74A45;
 }
-
+/*
 .btn-hero:hover,
 .btn-hero:focus {
-	/* border-color: #B74A45; */
-}
+	border-color: #B74A45; 
+} */
 
 .btn-hero-info {
 	background-color: antiquewhite;
@@ -276,6 +277,7 @@ section {
 /* hero details (OneHero) screen */
 
 .details {
+	background-color: rgb(255,255,255);
 	background-color: rgba(255,255,255,0.5);
     bottom: 0;
 	left: 0;
@@ -295,8 +297,8 @@ section {
 }
 
 .details-hero-avatar {
-	height: 35rem;
 	bottom: 1rem;
+	height: 35rem;
 	left: 5rem;
 	position: absolute;
 	right: 1rem;
@@ -334,8 +336,8 @@ section {
 	color: #000;
 	font-size: 22px;
 	height: 12rem;
-	position: absolute;
 	padding: 2rem;
+	position: absolute;
 }
 
 .details-cards {

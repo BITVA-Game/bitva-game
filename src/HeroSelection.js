@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import MainMenu from './MainMenu';
 import './css/App.css';
 import './css/HeroSelection.css';
+
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -65,13 +67,9 @@ const ListOfHeroes = props => (
                 changeSelected={props.changeSelected}
             />
         ))}
-        <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.app.heroSelect[props.selected]); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="3">
+        <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.app.heroSelect[props.selected]); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
             CHARACTER DETAILS
         </div>
-        <div type="button" className="btn footer-menu btn-start-screen" role="button" onClick={() => props.onPrevious} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="10">
-                TO START SCREEN
-        </div>
-        
     </div>
 );
 
@@ -86,7 +84,7 @@ const OneHero = props => (
                 <img src={images[props.hero.id]} alt={props.hero.id} />
             </div>
             <div className="details-hero-btn-block">
-                <div className="btn btn-back footer-menu" role="button" onClick={() => props.onBack()} onKeyPress={() => props.onBack()} tabIndex="9">
+                <div className="btn btn-back footer-menu" role="button" onClick={() => props.onBack()} onKeyPress={() => props.onBack()} tabIndex="10">
                     BACK
                 </div>
                 <button className="btn btn-select" type="button" onClick={() => props.onSelect(props.hero)}>
@@ -101,13 +99,13 @@ const OneHero = props => (
                 </span>
             </article>
             <section className="details-cards">
-                <div className="btn cards-btn cards-btn-left" role="button" onClick={() => { console.log('click cards-left'); }} onKeyPress={() => { console.log('key cards-left'); }} tabIndex="4">
+                <div className="btn cards-btn cards-btn-left" role="button" onClick={() => { console.log('click cards-left'); }} onKeyPress={() => { console.log('key cards-left'); }} tabIndex="5">
                     ◀
                 </div>
-                <img className="details-card" src={images[props.hero.id]} alt={props.hero.id} tabIndex="5" />
                 <img className="details-card" src={images[props.hero.id]} alt={props.hero.id} tabIndex="6" />
                 <img className="details-card" src={images[props.hero.id]} alt={props.hero.id} tabIndex="7" />
-                <div className="btn cards-btn cards-btn-right" role="button" onClick={() => { console.log('click cards-right'); }} onKeyPress={() => { console.log('key cards-right'); }} tabIndex="8">
+                <img className="details-card" src={images[props.hero.id]} alt={props.hero.id} tabIndex="8" />
+                <div className="btn cards-btn cards-btn-right" role="button" onClick={() => { console.log('click cards-right'); }} onKeyPress={() => { console.log('key cards-right'); }} tabIndex="9">
                     ▶
                 </div>
             </section>
@@ -127,7 +125,7 @@ class HeroSelection extends Component {
         this.selectHero = this.selectHero.bind(this);
         this.showDetails = this.showDetails.bind(this);
         this.closeDetails = this.closeDetails.bind(this);
-	    this.goStartScreen = this.goStartScreen.bind(this);
+        this.goStartScreen = this.goStartScreen.bind(this);
     }
 
     showHero(hero) {
@@ -183,7 +181,7 @@ class HeroSelection extends Component {
                         <div className="hero-nav-menu-name header-menu">
                             {this.state.selected}
                         </div>
-                        <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { this.selectRightHero(); }} onKeyPress={() => { console.log('key nav-right'); }} tabIndex="3">
+                        <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { this.selectRightHero(); }} onKeyPress={() => { console.log('key nav-right'); }} tabIndex="2">
                             ▶
                         </div>
                     </div>
@@ -204,7 +202,6 @@ class HeroSelection extends Component {
                                 onShow={this.showHero}
                                 selected={this.state.selected}
                                 showDetails={this.showDetails}
-                                onPrevious={this.goStartScreen}
                             />
                         )}
                     {this.state.details
@@ -212,9 +209,10 @@ class HeroSelection extends Component {
                         : null}
                 </section>
                 <section className="section-footer">
-                    <div className="btn btn-play footer-menu" role="button" onClick={() => this.selectHero(this.state.selected)} onKeyPress={() => { console.log('key play'); }} tabIndex="-1">
+                    <div className="btn btn-play footer-menu" role="button" onClick={() => this.selectHero(this.state.selected)} onKeyPress={() => { console.log('key play'); }} tabIndex="5">
                             PLAY
                     </div>
+                    <MainMenu sendMessage={this.props.sendMessage} />
                 </section>
             </div>
         );
@@ -231,7 +229,6 @@ HeroBlock.propTypes = {
     app: PropTypes.object.isRequired,
     changeSelected: PropTypes.func.isRequired,
     hero: PropTypes.object.isRequired,
-    onShow: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
     showDetails: PropTypes.func.isRequired,
 };
@@ -242,7 +239,6 @@ ListOfHeroes.propTypes = {
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
     showDetails: PropTypes.func.isRequired,
-    onPrevious: PropTypes.func.isRequired,
 };
 
 OneHero.propTypes = {
