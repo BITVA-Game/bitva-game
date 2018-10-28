@@ -25,7 +25,7 @@ class MainMenu extends Component {
 
     render() {
         return (
-            <div className={this.state.opened ? 'main-menu-container sidebar-opened' : 'main-menu-container'}>
+            <div className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
                 <div className="logo">
                     <p>
                         Bitva
@@ -48,6 +48,7 @@ class MainMenu extends Component {
                         <MenuButton name="Quit" type="QUIT" sendMessage={this.props.sendMessage} />
                     </ul>
                 </div>
+                <div className="main-menu-overlay" role="button" onClick={this.toggle} onKeyPress={this.toggle} tabIndex="-1" />
             </div>
         );
     }
