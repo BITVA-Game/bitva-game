@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainMenu from './MainMenu';
+import './css/MainMenu.css';
 import './css/App.css';
 import './css/HeroSelection.css';
-
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -19,6 +19,45 @@ function isAvailable(app, hero) {
         return character === hero.id;
     });
 }
+
+// common elements
+// header section
+const Header = props => (
+    <section className="heroselection-header">
+        <div className="heroselection-header-menu heroselection-title">
+            <span>
+                SELECT CHARACTER
+            </span>
+        </div>
+        <div className="heroselection-header-menu header-nav-menu">
+            <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-left" role="button" onClick={() => { props.selectLeftHero(); }} onKeyPress={() => { console.log('key nav-left'); }} tabIndex="1">
+                            ◀
+            </div>
+            <div className="hero-nav-menu-name header-menu">
+                {props.selected}
+            </div>
+            <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { props.selectRightHero(); }} onKeyPress={() => { console.log('key nav-right'); }} tabIndex="2">
+                            ▶
+            </div>
+        </div>
+        <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.app.heroSelect[props.selected]); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
+            <span>
+                CHARACTER DETAILS
+            </span>
+        </div>
+    </section>
+);
+
+// footer section
+const Footer = props => (
+    <section className="heroselection-footer">
+        <div className="heroselection-footer-menu heroselection-play">
+            <div className="btn btn-play footer-menu" role="button" onClick={() => props.selectHero(props.selected)} onKeyPress={() => { console.log('key play'); }} tabIndex="5">
+                            PLAY
+            </div>
+        </div>
+    </section>
+);
 
 
 // Pop-up with character details
@@ -125,7 +164,6 @@ class HeroSelection extends Component {
         this.selectHero = this.selectHero.bind(this);
         this.showDetails = this.showDetails.bind(this);
         this.closeDetails = this.closeDetails.bind(this);
-        this.goStartScreen = this.goStartScreen.bind(this);
     }
 
     showHero(hero) {
@@ -163,30 +201,11 @@ class HeroSelection extends Component {
         this.setState({ details: null });
     }
 
-    goStartScreen() {
-        this.props.sendMessage({ type: 'STARTSCREEN' });
-    }
-
     render() {
         return (
-            <div className="container-root">
-                <section className="section-header">
-                    <div className="header-menu hero-select-title">
-                            SELECT CHARACTER
-                    </div>
-                    <div className="header-menu hero-nav-menu">
-                        <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-left" role="button" onClick={() => { this.selectLeftHero(); }} onKeyPress={() => { console.log('key nav-left'); }} tabIndex="1">
-                            ◀
-                        </div>
-                        <div className="hero-nav-menu-name header-menu">
-                            {this.state.selected}
-                        </div>
-                        <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { this.selectRightHero(); }} onKeyPress={() => { console.log('key nav-right'); }} tabIndex="2">
-                            ▶
-                        </div>
-                    </div>
-                </section>
-                <section className="section-main">
+            <div className="heroselection-container">
+                <Header prev={this.selectLeftHero} next={this.selectRightHero} selected={this.state.selected} />
+                <div className="heroselection-main">
                     {this.state.hero
                         ? (
                             <OneHero
@@ -194,31 +213,42 @@ class HeroSelection extends Component {
                                 onBack={this.showHero}
                                 onSelect={this.selectHero}
                             />
-                        )
-                        : (
+                        ) : (
                             <ListOfHeroes
                                 app={this.props.app}
-                                changeSelected={this.changeSelected}
+                                info={this.state.info}
                                 onShow={this.showHero}
-                                selected={this.state.selected}
-                                showDetails={this.showDetails}
+                                closeInfo={this.closeInfo}
+                                showInfo={this.showInfo}
+                                onPrevious={this.goStartScreen}
                             />
-                        )}
-                    {this.state.details
-                        ? <HeroInfo hero={this.state.details} closeDetails={this.closeDetails} />
-                        : null}
-                </section>
-                <section className="section-footer">
-                    <div className="btn btn-play footer-menu" role="button" onClick={() => this.selectHero(this.state.selected)} onKeyPress={() => { console.log('key play'); }} tabIndex="5">
-                            PLAY
-                    </div>
-                    <MainMenu sendMessage={this.props.sendMessage} />
-                </section>
+                        )
+                    }
+                    {this.state.info
+                        ? <HeroInfo hero={this.state.info} closeInfo={this.closeInfo} />
+                        : null
+                    }
+                </div>
+                <MainMenu sendMessage={this.props.sendMessage} />
+                <Footer selected={this.state.selected} selectHero={this.selectHero} />
             </div>
         );
     }
 }
 
+Header.propTypes = {
+    app: PropTypes.object.isRequired,
+    onShow: PropTypes.func.isRequired,
+    selected: PropTypes.string.isRequired,
+    selectRightHero: PropTypes.func.isRequired,
+    selectLeftHero: PropTypes.func.isRequired,
+};
+
+Footer.propTypes = {
+    something: PropTypes.string.isRequired,
+    selectHero: PropTypes.func.isRequired,
+    selected: PropTypes.string.isRequired,
+};
 
 HeroInfo.propTypes = {
     hero: PropTypes.object.isRequired,

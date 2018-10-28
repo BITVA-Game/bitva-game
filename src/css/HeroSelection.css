@@ -25,7 +25,7 @@ section {
 
 /* container */
 
-.container-root {
+.heroselection-container {
 	background: transparent url(../images/background.png) center no-repeat;
 	background-size: cover;
 	bottom: 0;
@@ -54,6 +54,63 @@ section {
 }
 
 /* header */
+/* header */
+
+.heroselection-header {
+	background: #000;
+	display: inline-block;
+	height: 5em;
+	opacity: .5;
+	text-align: center;
+	width: 100%;
+}
+
+.heroselection-header-menu {
+	cursor: default;
+	display: inline-block;
+	font-size: 1.5em;
+	margin: 0 2em;
+	position: relative;
+	text-align: center;
+    top: 40%;
+	user-select: none;
+}
+
+.heroselection-title {
+	float: left;
+}
+
+.heroselection-nav-menu span {
+	position: relative;
+	top: -2px;
+}
+
+.btn-nav-menu {
+	height: 22px;
+}
+
+.btn-nav-menu:hover {
+	border-color: #B74A45;
+}
+
+.btn-hero {
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+    padding: 3px;
+}
+
+.btn-hero-left {
+	transform: rotate(135deg);
+}
+
+.btn-hero-right {
+	transform: rotate(-45deg);
+}
+
+.heroselection-char-details {
+	float: right;
+}
 
 .section-header {
 	background-color: rgba(0,0,0,0.5);
