@@ -24,23 +24,23 @@ function isAvailable(app, hero) {
 // header section
 const Header = props => (
     <section className="heroselection-header">
-        <div className="heroselection-header-menu heroselection-title">
+        <div className="header-menu heroselection-title">
             <span>
                 SELECT CHARACTER
             </span>
         </div>
-        <div className="heroselection-header-menu header-nav-menu">
-            <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-left" role="button" onClick={() => { props.selectLeftHero(); }} onKeyPress={() => { console.log('key nav-left'); }} tabIndex="1">
+        <div className="header-menu header-nav-menu">
+            <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-left" role="button" onClick={() => { props.prev(); }} onKeyPress={() => { console.log('key nav-left'); }} tabIndex="1">
                             ◀
             </div>
             <div className="hero-nav-menu-name header-menu">
                 {props.selected}
             </div>
-            <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { props.selectRightHero(); }} onKeyPress={() => { console.log('key nav-right'); }} tabIndex="2">
+            <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { props.next(); }} onKeyPress={() => { console.log('key nav-right'); }} tabIndex="2">
                             ▶
             </div>
         </div>
-        <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.app.heroSelect[props.selected]); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
+        <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.selected); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
             <span>
                 CHARACTER DETAILS
             </span>
@@ -79,8 +79,8 @@ const HeroInfo = props => (
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <button className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero'} type="button" onClick={() => (props.changeSelected(props.hero.id))}>
-            <img className="hero-image" src={images[props.hero.id]} alt={props.hero.id} />
+        <button className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero'} type="button" onClick={() => (props.onShow(props.hero.id))}>
+            <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
             {/* <div className="hero-name hero-nav-menu-name header-menu">
                 {props.hero.name}
             </div> */}
@@ -106,9 +106,6 @@ const ListOfHeroes = props => (
                 changeSelected={props.changeSelected}
             />
         ))}
-        <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.app.heroSelect[props.selected]); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
-            CHARACTER DETAILS
-        </div>
     </div>
 );
 
@@ -166,7 +163,8 @@ class HeroSelection extends Component {
         this.closeDetails = this.closeDetails.bind(this);
     }
 
-    showHero(hero) {
+    showHero(heroID) {
+        const hero = this.app.heroSelect[heroID];
         this.setState({ hero });
     }
 
@@ -204,7 +202,7 @@ class HeroSelection extends Component {
     render() {
         return (
             <div className="heroselection-container">
-                <Header prev={this.selectLeftHero} next={this.selectRightHero} selected={this.state.selected} />
+                <Header prev={this.selectLeftHero} next={this.selectRightHero} selected={this.state.selected} onShow={this.showHero} />
                 <div className="heroselection-main">
                     {this.state.hero
                         ? (
@@ -220,7 +218,7 @@ class HeroSelection extends Component {
                                 onShow={this.showHero}
                                 closeInfo={this.closeInfo}
                                 showInfo={this.showInfo}
-                                onPrevious={this.goStartScreen}
+                                changeSelected={this.changeSelected}
                             />
                         )
                     }
@@ -237,11 +235,10 @@ class HeroSelection extends Component {
 }
 
 Header.propTypes = {
-    app: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
-    selectRightHero: PropTypes.func.isRequired,
-    selectLeftHero: PropTypes.func.isRequired,
+    next: PropTypes.func.isRequired,
+    prev: PropTypes.func.isRequired,
 };
 
 Footer.propTypes = {
@@ -259,6 +256,7 @@ HeroBlock.propTypes = {
     app: PropTypes.object.isRequired,
     changeSelected: PropTypes.func.isRequired,
     hero: PropTypes.object.isRequired,
+    onShow: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
     showDetails: PropTypes.func.isRequired,
 };

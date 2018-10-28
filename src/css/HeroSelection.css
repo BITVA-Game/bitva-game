@@ -35,6 +35,11 @@ section {
 	top: 0;
 }
 
+.heroselection-main {
+	padding: 0 2em;
+	width: 100%;
+}
+
 /* common */
 
 .btn {
@@ -54,7 +59,6 @@ section {
 }
 
 /* header */
-/* header */
 
 .heroselection-header {
 	background: #000;
@@ -65,19 +69,8 @@ section {
 	width: 100%;
 }
 
-.heroselection-header-menu {
-	cursor: default;
-	display: inline-block;
-	font-size: 1.5em;
-	margin: 0 2em;
-	position: relative;
-	text-align: center;
-    top: 40%;
-	user-select: none;
-}
-
 .heroselection-title {
-	float: left;
+	left: 2rem;
 }
 
 .heroselection-nav-menu span {
@@ -113,6 +106,7 @@ section {
 }
 
 .section-header {
+	background-color: rgb(0,0,0);
 	background-color: rgba(0,0,0,0.5);
 	display: inline-block;
 	height: 5rem;
@@ -136,7 +130,7 @@ section {
 	left: 2rem;
 }
 
-.hero-nav-menu {
+.header-nav-menu {
     left: 40%;
 	right: 40%;
 }
@@ -180,7 +174,7 @@ section {
 
 /* footer */
 
-.section-footer {
+.heroselection-footer {
 	background-color: rgb(0,0,0);
 	background-color: rgba(0,0,0,0.5);
 	bottom: 0;
@@ -198,6 +192,7 @@ section {
 	text-align: center;
 	
 }
+
 
 .btn-play {
 	left: 40%;
@@ -233,18 +228,19 @@ section {
 
 .btn-hero {
 	border: 5px solid antiquewhite;
-	height: 270px;
+	height: 275px;
 	position: relative;
+	width: 235px;
 }
 
 .btn-hero-selected {
 	border-color: #B74A45;
 }
-/*
+
 .btn-hero:hover,
 .btn-hero:focus {
 	border-color: #B74A45; 
-} */
+} 
 
 .btn-hero-info {
 	background-color: antiquewhite;
@@ -255,7 +251,7 @@ section {
 .btn-hero-info:focus {
 	background-color: #B74A45;
 }
-.hero-image {
+.heroselection-hero-image {
 	height: 260px;
 	object-fit: cover;
 	width: 220px;
@@ -336,12 +332,14 @@ section {
 .details {
 	background-color: rgb(255,255,255);
 	background-color: rgba(255,255,255,0.5);
-    bottom: 0;
+    /*bottom: 0;
 	left: 0;
 	padding: 1em;
 	position: absolute;
 	right: 0;
-    top: 0;
+	top: 0; */
+	padding: 1em 2em;
+	width: 100%;
 }
 
 .details-hero {
