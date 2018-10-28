@@ -39,12 +39,17 @@ body {
     width: 17rem;
 }
 
+.logo-container {
+    height: 120px;
+	width: 238px;
+}
 .logo {
-    font-family: 'Ruslan Display', cursive;
-    font-size: 4em;
-    position: absolute;
-    right: 3rem;
-    text-align: center;
+    align-items:center;
+    display:flex;
+    height: 120px;
+    justify-content:center;
+	object-fit: fill;
+    width: 230px;
 }
 
 .btn-sidebar-toggle {
@@ -60,12 +65,12 @@ body {
 
 /* overlay */
 .main-menu-overlay {
-    height: 100vh;
+    height: 90vh;
     width: 0;
 }
 
 .sidebar-opened .main-menu-overlay {
-    width: 100vw;
+    width: 90vw;
 }
 
 /* buttons */
@@ -73,7 +78,7 @@ body {
 .menu-buttons-container {
     position: absolute;
     right: 3rem;
-    top: 9rem;
+    top: 10rem;
   }
 
 .menu-buttons-group {
