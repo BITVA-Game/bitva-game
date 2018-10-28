@@ -153,3 +153,11 @@
     transform: translateY(-50%);
     width: 100%;
 }
+
+.count {
+    bottom: 0;
+    font-size: 36px;
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}

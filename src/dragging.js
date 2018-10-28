@@ -38,6 +38,12 @@ function droppedTo(drop, target) {
     return dropped;
 }
 
+function dropToGrave(grave, card) {
+    grave.appendChild(card);
+    const counter = grave.childNodes[1];
+    counter.innerText = grave.childNodes.length - 2;
+}
+
 function dropCard(drop) {
     const item = document.getElementById('item');
     const grave = document.getElementById('grave');
@@ -56,13 +62,13 @@ function dropCard(drop) {
             item.appendChild(dragged);
         }
     } else if (droppedTo(drop, grave)) {
-        grave.appendChild(dragged);
+        dropToGrave(grave, dragged);
         dragged.style.display = 'none';
     } else if (droppedTo(drop, hero)) {
-        grave.appendChild(dragged);
+        dropToGrave(grave, dragged);
         dragged.style.display = 'none';
     } else if (droppedTo(drop, enemy)) {
-        grave.appendChild(dragged);
+        dropToGrave(grave, dragged);
         dragged.style.display = 'none';
     }
     stopDrag();
