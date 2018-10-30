@@ -6,3 +6,44 @@
     right: 0;
     top: 0;
 }
+
+.hollow {
+    position: fixed;
+    top: 40px;
+    right: 440px;
+    height: 30px;
+    width: 30px;
+    transform: translateX(50%);
+    /* background-color: black; */
+    /* border: solid 1px aquamarine; */
+}
+
+.hollow::after {
+    animation: eyes 5s ease-in 15s infinite;
+    animation-play-state: running;
+    box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;
+    content: '';
+    right: 50%;
+    transform: translateX(50%);
+    position: absolute;
+    height: 0;
+    width: 0;
+}
+
+.hollow:hover::after {
+    box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;
+    animation-play-state: paused;
+}
+
+@keyframes eyes {
+    0% {box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;}
+    30% {box-shadow: -3px 0 1.3px 1px red, 3px 0 1.3px 1px red;}
+    50% {box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;}
+    60% {box-shadow: -3px 0 1.3px 1px red, 3px 0 1.3px 1px red;}
+    70% {box-shadow: -3px 0 1.5px 1.3px red, 3px 0 1.5px 1.3px red;}
+    80% {box-shadow: -3px 0 1.7px 1.5px red, 3px 0 1.7px 1.5px red;}
+    85% {box-shadow: -3px 0 2px 2px red, 3px 0 2px 2px red;}
+    90% {box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;}
+    95% {box-shadow: -3px 0 2px 2px red, 3px 0 2px 2px red;}
+    100% {box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;}
+}
