@@ -13,8 +13,8 @@
     position: fixed;
     right: 440px;
     top: 40px;
-    width: 30px;
     transform: translateX(50%);
+    width: 30px;
 }
 
 .hollow::after {
@@ -23,8 +23,8 @@
     box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;
     content: '';
     height: 0;
-    right: 50%;
     position: absolute;
+    right: 50%;
     transform: translateX(50%);
     width: 0;
 }
