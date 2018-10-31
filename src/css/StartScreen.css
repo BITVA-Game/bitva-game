@@ -7,6 +7,7 @@
     top: 0;
 }
 
+/* hollow */
 .hollow {
     position: fixed;
     top: 40px;
@@ -46,4 +47,75 @@
     90% {box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;}
     95% {box-shadow: -3px 0 2px 2px red, 3px 0 2px 2px red;}
     100% {box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;}
+}
+
+/* window */
+.window {
+    position: fixed;
+    height: 80px;
+    width: 50px;
+    transform: translateX(50%);
+    /* background-color: black; */
+    /* border: solid 1px aquamarine; */
+}
+
+.window-left {
+    top: 160px;
+    right: 440px;
+}
+
+.window-right {
+    top: 168px;
+    right: 190px;
+}
+
+.window::after {
+    animation: window 5s ease-in 9s infinite;
+    animation-play-state: running;
+    box-shadow: 
+        -14px -24px 10px 3px orange, 10px -25px 10px 3px orange,
+        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
+        -9px 28px 10px 3px orange, 15px 27px 10px 3px orange;
+    content: '';
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    position: absolute;
+    height: 0;
+    width: 0;
+}
+
+.window:hover::after {
+    box-shadow: 
+        -14px -24px 10px 3px orange, 10px -25px 10px 3px orange,
+        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
+        -9px 28px 10px 3px orange, 15px 27px 10px 3px orange;
+    animation-play-state: paused;
+}
+
+@keyframes window {
+    0%, 30%, 60% {
+        box-shadow: 
+        -14px -24px 10px 3px orange, 10px -25px 10px 3px orange,
+        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
+        -9px 28px 10px 3px orange, 15px 27px 10px 3px orange;
+    }
+    20%, 40%, 80% {
+        box-shadow: 
+        -14px -24px 10px 3.5px orange, 10px -25px 11px 4px orange,
+        -12px 3px 11.5px 5px orange, 12px 2px 11.5px 5px orange, 
+        -9px 28px 11px 4px orange, 15px 27px 10px 3.5px orange;
+    }
+    90% {
+        box-shadow: 
+        -14px -24px 11.5px 4px orange, 10px -25px 11px 4.5px orange,
+        -12px 3px 12px 6px orange, 12px 2px 12px 6px orange, 
+        -9px 28px 11px 4.5px orange, 15px 27px 11.5px 4px orange;
+    }
+    100% {
+        box-shadow: 
+        -14px -24px 9px 3px orange, 10px -25px 9px 3px orange,
+        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
+        -9px 28px 9px 3px orange, 15px 27px 9px 3px orange;
+    }
 }

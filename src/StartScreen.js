@@ -9,6 +9,8 @@ import './css/StartScreen.css';
 const StartScreen = props => (
     <div className="start-screen">
         <div className="hollow" />
+        <div className="window window-left" />
+        <div className="window window-right" />
         <MainMenu sendMessage={props.sendMessage} opened />
         {/* <textarea value={JSON.stringify(props.app.profile)} /> */}
     </div>
