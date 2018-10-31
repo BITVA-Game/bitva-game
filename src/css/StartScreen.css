@@ -9,14 +9,12 @@
 
 /* hollow */
 .hollow {
-    position: fixed;
-    top: 40px;
-    right: 440px;
     height: 30px;
+    position: fixed;
+    right: 440px;
+    top: 40px;
     width: 30px;
     transform: translateX(50%);
-    /* background-color: black; */
-    /* border: solid 1px aquamarine; */
 }
 
 .hollow::after {
@@ -24,16 +22,16 @@
     animation-play-state: running;
     box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;
     content: '';
-    right: 50%;
-    transform: translateX(50%);
-    position: absolute;
     height: 0;
+    right: 50%;
+    position: absolute;
+    transform: translateX(50%);
     width: 0;
 }
 
 .hollow:hover::after {
-    box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;
     animation-play-state: paused;
+    box-shadow: -3px 0 1px 1px red, 3px 0 1px 1px red;
 }
 
 @keyframes eyes {
@@ -51,22 +49,20 @@
 
 /* window */
 .window {
-    position: fixed;
     height: 80px;
-    width: 50px;
+    position: fixed;
     transform: translateX(50%);
-    /* background-color: black; */
-    /* border: solid 1px aquamarine; */
+    width: 50px;
 }
 
 .window-left {
-    top: 160px;
     right: 440px;
+    top: 160px;
 }
 
 .window-right {
-    top: 168px;
     right: 190px;
+    top: 168px;
 }
 
 .window::after {
@@ -77,20 +73,20 @@
         -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
         -9px 28px 10px 3px orange, 15px 27px 10px 3px orange;
     content: '';
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, 50%);
-    position: absolute;
     height: 0;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    transform: translate(50%, 50%);
     width: 0;
 }
 
 .window:hover::after {
+    animation-play-state: paused;
     box-shadow: 
         -14px -24px 10px 3px orange, 10px -25px 10px 3px orange,
         -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
         -9px 28px 10px 3px orange, 15px 27px 10px 3px orange;
-    animation-play-state: paused;
 }
 
 @keyframes window {
