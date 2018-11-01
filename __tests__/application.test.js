@@ -522,11 +522,11 @@ test('msg CASE1 received: active card was in active player hand, then moved to g
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key10');
 });
 
-// Test msg with action card from active player's hand with category: 'action', class: 'cure'
-// card cure hero for its points not > maximum, then card goes to graveyard. Game state Case2.
-test('msg CASE2 received: action card is action and can cure, applies points to hero then moved to graveyard. State Case2.', () => {
+// Test msg with action card from active player's hand with category: 'action', class: 'heal'
+// card heal hero for its points not > maximum, then card goes to graveyard. Game state Case2.
+test('msg CASE2 received: action card is action and can heal, applies points to hero then moved to graveyard. State Case2.', () => {
     const msg = {
-        type: 'CASE2', key: 'key1', category: 'cure', active: true,
+        type: 'CASE2', key: 'key1', category: 'heal', active: true,
     };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -585,4 +585,307 @@ test('msg CASE2 received: action card is action and can cure, applies points to 
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
     // ожидаем, что активная карта убралась из руки.
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+});
+
+// Test msg with action card from active player's hand with category: 'action', class: 'attack'
+// card attack inactive hero but not > maximum, then card goes to graveyard. Game state Case3.
+test('msg CASE3 received: card is action and can attack, no defense, points damages inactive hero health & card to graveyard. State Case3.', () => {
+    const msg = {
+        type: 'CASE3', key: 'key1', category: 'attack', active: true,
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 2 },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 6, maximum: 15 },
+                    hand: {
+                        key12: {}, key8: {}, key15: {}, key3: { type: 'action' },
+                    },
+                    item: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что активный игрок может действовать (его каунтер не более 2 после хода)
+    expect(result.game.players[0].moveCounter).toBeLessThanOrEqual(2);
+    // после действия ожидаем, что счетчик увеличен на 1
+    expect(result.game.players[0].moveCounter).toEqual(2);
+    // ожидаем, что карта имеет category атаки
+    expect(result.game.players[0].grave.key1.category).toEqual('attack');
+    // ожидаем, что карта с очками атаки - это карта-действие
+    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    // ожидаем, что У противника нет защитных карт.
+    expect(Object.values(result.game.players[1].item)).not.toContain('defense');
+    // ожидаем, что очки здоровья inactive hero после удара будут больше или равны 0
+    expect(result.game.players[1].health.current).toBeMoreThanOrEqual(0);
+    // ожидаем, что активная карта сохранилась на кладбище
+    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    // ожидаем, что активная карта убралась из руки.
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+});
+
+// Test msg with action card from active player's hand with category: 'action', class: 'attack'
+// Card attacks inactive hero for its points not but not mre than maximum,
+// then card goes to graveyard. Game state Case3.
+test('msg CASE3 received: card is action and can attack, inactive hero shield took points, shield & card go to graveyard. State Case3.', () => {
+    const msg = {
+        type: 'CASE3', key: 'key1', category: 'attack', active: true,
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 6, maximum: 15 },
+                    hand: {
+                        key12: {}, key8: {}, key15: {}, key3: {},
+                    },
+                    item: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'defense', points: 3,
+                        },
+                    },
+                    grave: { },
+                },
+            ],
+        },
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что активный игрок может действовать (его каунтер не более 2 после хода)
+    expect(result.game.players[0].moveCounter).toBeLessThanOrEqual(2);
+    // после действия ожидаем, что счетчик увеличен на 1
+    expect(result.game.players[0].moveCounter).toEqual(2);
+    // ожидаем, что карта имеет category атаки
+    expect(result.game.players[0].grave.key1.category).toEqual('attack');
+    // ожидаем, что карта с очками атаки - это карта-действие
+    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    // ожидаем - щит противника принял все повреждение, отразив от него атаку, и ушел на кладбище.
+    expect(Object.values(result.game.players[1].grave)).toContain('defense', 3);
+    expect(result.game.players[1].item).toEqual({});
+    // ожидаем, что активная карта сохранилась на кладбище
+    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    // ожидаем, что активная карта убралась из руки.
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+});
+
+// Test msg with action card from active player's hand with category: 'action', class: 'attack'
+// card attacks inactive hero shield, which has defense points more than attack card, points lessen.
+// Attack card goes to graveyard. Acrive player's Move counter +1. Game state Case3.
+test('msg CASE3 received: card is action and can attack, inactive hero shield defens points lessen, card go to graveyard. State Case3.', () => {
+    const msg = {
+        type: 'CASE3', key: 'key1', category: 'attack', active: true,
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 6, maximum: 15 },
+                    hand: {
+                        key12: {}, key8: {}, key15: {}, key3: {},
+                    },
+                    item: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'defense', points: 5,
+                        },
+                    },
+                    grave: { },
+                },
+            ],
+        },
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что активный игрок может действовать (его каунтер не более 2 после хода)
+    expect(result.game.players[0].moveCounter).toBeLessThanOrEqual(2);
+    // после действия ожидаем, что счетчик увеличен на 1
+    expect(result.game.players[0].moveCounter).toEqual(2);
+    // ожидаем, что карта имеет category атаки
+    expect(result.game.players[0].grave.key1.category).toEqual('attack');
+    // ожидаем, что карта с очками атаки - это карта-действие
+    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    // щит противника принял все повреждение, отразив от него атаку, его очки защиты уменьшаться.
+    expect(result.game.players[1].item.points).toEqual(2);
+    // ожидаем, что активная карта сохранилась на кладбище
+    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    // ожидаем, что активная карта убралась из руки.
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+});
+
+// У противника есть щит, здоровье щита меньше, чем сила удара.
+// Щит убирается на кладбище противника. Здоровье противника уменьшается
+// на разницу между силой удара и здоровьем щита.
+// Карта атаки отправляется на кладбище. Действие засчитано.
+test('msg CASE3 received: card is action and can attack, inactive hero shield took part of points, shield & card go to graveyard. State Case3.', () => {
+    const msg = {
+        type: 'CASE3', key: 'key1', category: 'attack', active: true,
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 5 },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 6, maximum: 15 },
+                    hand: {
+                        key12: {}, key8: {}, key15: {}, key3: {},
+                    },
+                    item: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'defense', points: 3,
+                        },
+                    },
+                    grave: { },
+                },
+            ],
+        },
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+    // ожидаем, что активный игрок может действовать (его каунтер не более 2 после хода)
+    expect(result.game.players[0].moveCounter).toBeLessThanOrEqual(2);
+    // после действия ожидаем, что счетчик увеличен на 1
+    expect(result.game.players[0].moveCounter).toEqual(2);
+    // ожидаем, что карта имеет category атаки
+    expect(result.game.players[0].grave.key1.category).toEqual('attack');
+    // ожидаем, что карта с очками атаки - это карта-действие
+    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    // ожидаем - щит противника принял часть повреждения, отразив от него атаку, и ушел на кладбище.
+    expect(Object.values(result.game.players[1].grave)).toContain('defense', 3);
+    expect(result.game.players[1].item).toEqual({});
+    // ожидаем, что активная карта сохранилась на кладбище
+    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    // ожидаем, что активная карта убралась из руки.
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+    // ожидаем, что здоровье неактивного перса уменьшилось на очки аттаки, неотраженные щитом
+    expect(result.game.players[1].health.current).toEqual(5);
 });
