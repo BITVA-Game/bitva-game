@@ -130,7 +130,7 @@ function makeMove(game, msg) {
                 moveGraveyard(p, msg.key);
                 break;
 
-            case 'cure':
+            case 'heal':
                 if (p.health.current < p.health.maximum) {
                     p.health.current += p.hand[msg.key].points;
                 } else {
@@ -139,6 +139,9 @@ function makeMove(game, msg) {
                 moveGraveyard(p, msg.key);
                 // p.grave[msg.key].points == 0;
                 break;
+            
+            case 'attack':
+                if ((Object.values(p.item))[category] === defense )
             default:
                 return new Error('You are under spell. Wait for redemption!');
             }
@@ -167,6 +170,9 @@ function handle(app, message) {
         return Object.assign({}, app.game, makeMove(app.game, message));
     }
     case 'CASE2': {
+        return Object.assign({}, app.game, makeMove(app.game, message));
+    }
+    case 'CASE3': {
         return Object.assign({}, app.game, makeMove(app.game, message));
     }
 
