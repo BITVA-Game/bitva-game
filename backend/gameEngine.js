@@ -68,6 +68,7 @@ const generatePlayers = function (heroName) {
             p.deck = createDeck(heroName);
             p.cards = assignCards(p.deck);
             p.hand = {};
+            p.item = {};
             p.grave = {};
             p.moveCounter = 0;
             p.health = {};
@@ -79,6 +80,7 @@ const generatePlayers = function (heroName) {
             p.deck = createDeck(heroSecondName);
             p.cards = assignCards(p.deck);
             p.hand = {};
+            p.item = {};
             p.grave = {};
             p.moveCounter = 0;
             p.health = {};
@@ -123,33 +125,50 @@ function moveGraveyard(player, key) {
 }
 
 function makeMove(game, msg) {
+    let pActive;
+    let pInactive;
     game.players.forEach((p) => {
-        if (p.active && p.moveCounter < 2) {
-            switch (msg.category) {
-            case 'graveyard':
-                moveGraveyard(p, msg.key);
-                break;
-
-            case 'heal':
-                if (p.health.current < p.health.maximum) {
-                    p.health.current += p.hand[msg.key].points;
-                } else {
-                    p.health.current = p.health.maximum;
-                }
-                moveGraveyard(p, msg.key);
-                // p.grave[msg.key].points == 0;
-                break;
-            
-            case 'attack':
-                if ((Object.values(p.item))[category] === defense )
-            default:
-                return new Error('You are under spell. Wait for redemption!');
-            }
-            increaseCounter(p);
-        }
+        if (p.active) {
+            pActive = p;
+        } else {
+            pInactive = p;
+        };
     });
+    if (pActive.moveCounter < 2) {
+        switch (msg.category) {
+        case 'graveyard':
+            moveGraveyard(pActive, msg.key);
+            break;
+
+        case 'heal':
+            if (pActive.health.current < pActive.health.maximum) {
+                pActive.health.current += pActive.hand[msg.key].points;
+            } else {
+                pActive.health.current = pActive.health.maximum;
+            }
+            moveGraveyard(pActive, msg.key);
+            // p.grave[msg.key].points == 0;
+            break;
+        
+        case 'attack':
+            if ((pInactive.item === null) || (pInactive.item.category !== 'defense')) {
+                const points = pActive.hand[msg.key].points;
+                if (pInactive.health.current > points) {
+                    pInactive.health.current -= pActive.hand[msg.key].points;
+                } else {
+                    pInactive.health.current = 0;
+                }
+                moveGraveyard(pActive, msg.key);
+            }
+            break;
+        default:
+            return new Error('You are under spell. Wait for redemption!');
+        }
+        increaseCounter(pActive);
+    }
     return game;
-}
+};
+    
 
 function handle(app, message) {
     switch (message.type) {
