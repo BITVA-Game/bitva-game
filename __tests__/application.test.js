@@ -589,7 +589,7 @@ test('msg CASE2 received: action card is action and can heal, applies points to 
 
 // Test msg with action card from active player's hand with category: 'action', class: 'attack'
 // card attack inactive hero but not > maximum, then card goes to graveyard. Game state Case3.
-test('msg CASE3 received: card is action and can attack, no defense, points damages inactive hero health & card to graveyard. State Case3.', () => {
+test.only('msg CASE3 received: card is action and can attack, no defense, points damages inactive hero health & card to graveyard. State Case3.', () => {
     const msg = {
         type: 'CASE3', key: 'key1', category: 'attack', active: true,
     };
@@ -629,7 +629,7 @@ test('msg CASE3 received: card is action and can attack, no defense, points dama
                         key12: {}, key8: {}, key15: {}, key3: { type: 'action' },
                     },
                     item: {},
-                },
+                }
             ],
         },
     });
@@ -651,7 +651,7 @@ test('msg CASE3 received: card is action and can attack, no defense, points dama
     // ожидаем, что У противника нет защитных карт.
     expect(Object.values(result.game.players[1].item)).not.toContain('defense');
     // ожидаем, что очки здоровья inactive hero после удара будут больше или равны 0
-    expect(result.game.players[1].health.current).toBeMoreThanOrEqual(0);
+    expect(result.game.players[1].health.current).toBeGreaterThanOrEqual(0);
     // ожидаем, что активная карта сохранилась на кладбище
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
     // ожидаем, что активная карта убралась из руки.
