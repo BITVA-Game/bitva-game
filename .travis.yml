@@ -12,6 +12,7 @@ script:
   - npm run build
   - npm run package-mac && tar -zcf releases/mac.tar.gz releases/bitva-game-darwin-x64
   - npm run package-win && tar -zcf releases/win.tar.gz releases/bitva-game-win32-x64
+  - npm run package-linux && tar -zcf releases/linux.tar.gz releases/bitva-game-linux-x64
 deploy:
   provider: releases
   api_key:
@@ -19,6 +20,7 @@ deploy:
   file: 
     - releases/mac.tar.gz
     - releases/win.tar.gz
+    - releases/linux.tar.gz
   skip_cleanup: true
   on:
     repo: BITVA-Game/bitva-game
