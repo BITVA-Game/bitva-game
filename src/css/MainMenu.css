@@ -41,13 +41,26 @@ body {
 
 .logo-container {
     height: 120px;
+    left: -238px;
+    position: relative;
 	width: 238px;
 }
+
+.sidebar-opened .logo-container {
+    animation: show .5s forwards;
+}
+
+@keyframes show {
+    from {
+        left: -238px;
+    }
+    to {
+        left: 0;
+    }
+}
+
 .logo {
-    align-items:center;
-    display:flex;
     height: 120px;
-    justify-content:center;
 	object-fit: fill;
     width: 230px;
 }
