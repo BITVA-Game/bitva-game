@@ -17,8 +17,8 @@ button {
 }
 
 article,
-body, 
-div, 
+body,
+div,
 section {
 	box-sizing: border-box;
 }
@@ -56,10 +56,10 @@ section {
 /* header */
 
 .heroselection-header {
-	background: #000;
+	background: rgb(0,0,0);
+	background: rgba(0,0,0,0.5);
 	display: inline-block;
 	height: 5em;
-	opacity: .5;
 	text-align: center;
 	width: 100%;
 }
@@ -78,22 +78,7 @@ section {
 }
 
 .btn-nav-menu:hover {
-	border-color: #B74A45;
-}
-
-.btn-hero {
-	border: solid white;
-	border-width: 0 3px 3px 0;
-	display: inline-block;
-    padding: 3px;
-}
-
-.btn-hero-left {
-	transform: rotate(135deg);
-}
-
-.btn-hero-right {
-	transform: rotate(-45deg);
+/*	box-shadow: 0 0 1px 1px #B74A45;*/
 }
 
 .heroselection-char-details {
@@ -185,7 +170,7 @@ section {
 	font-size: 24px; /*1.5rem;*/
 	position: absolute;
 	text-align: center;
-	
+
 }
 
 
@@ -195,7 +180,7 @@ section {
 }
 
 .heroselection-play {
-	margin: 0 10em 0 -5em;	
+	margin: 0 10em 0 -5em;
 }
 
 .btn-play:hover {
@@ -234,8 +219,8 @@ section {
 
 .btn-hero:hover,
 .btn-hero:focus {
-	border-color: #B74A45; 
-} 
+	box-shadow: 0 0 1px 3px #B74A45;
+}
 
 .btn-hero-info {
 	background-color: antiquewhite;
@@ -246,7 +231,11 @@ section {
 .btn-hero-info:focus {
 	background-color: #B74A45;
 }
-
+.heroselection-hero-image {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
 .hero-name {
 	display: none;
 }
@@ -308,8 +297,8 @@ section {
 	font-size: 1.4em;
 	padding: 0;
 	position: absolute;
-	right: 15px;  	
-	top: 15px;	
+	right: 15px;
+	top: 15px;
 }
 
 .hero-info p {
@@ -344,7 +333,7 @@ section {
     width: fit-content;
 }
 
-.btn-back, 
+.btn-back,
 .btn-start-screen {
 	left: 2rem;
 	position: fixed;
