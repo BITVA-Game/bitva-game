@@ -9,7 +9,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "2.0.3",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
@@ -31,11 +31,11 @@
     "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=src/icons/png/1024x1024.png --prune=true --out=releases"
   },
   "devDependencies": {
-    "babel-eslint": "^8.2.6",
+    "babel-eslint": "^9.0.0",
     "cross-env": "^5.2.0",
     "csslint": "^1.0.5",
     "electron-packager": "^12.1.0",
-    "eslint": "^4.19.1",
+    "eslint": "^5.6.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
@@ -44,5 +44,11 @@
     "jest": "^23.4.1",
     "url-parse": "^1.4.3",
     "wait-on": "^2.1.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
