@@ -589,7 +589,7 @@ test('msg CASE2 received: action card is action and can heal, applies points to 
 
 // Test msg with action card from active player's hand with category: 'action', class: 'attack'
 // card attack inactive hero but not > maximum, then card goes to graveyard. Game state Case3.
-test.only('msg CASE3 received: card is action and can attack, no defense, points damages inactive hero health & card to graveyard. State Case3.', () => {
+test('msg CASE3 received: card is action and can attack, no defense, points damages inactive hero health & card to graveyard. State Case3.', () => {
     const msg = {
         type: 'CASE3', key: 'key1', category: 'attack', active: true,
     };
@@ -629,7 +629,7 @@ test.only('msg CASE3 received: card is action and can attack, no defense, points
                         key12: {}, key8: {}, key15: {}, key3: { type: 'action' },
                     },
                     item: {},
-                }
+                },
             ],
         },
     });
@@ -658,10 +658,10 @@ test.only('msg CASE3 received: card is action and can attack, no defense, points
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
 
-// Test msg with action card from active player's hand with category: 'action', class: 'attack'
-// Card attacks inactive hero for its points not but not mre than maximum,
-// then card goes to graveyard. Game state Case3.
-test('msg CASE3 received: card is action and can attack, inactive hero shield took points, shield & card go to graveyard. State Case3.', () => {
+// У противника есть щит, здоровье щита равно силе удара.
+// Щит убирается на кладбище противника.
+// Карта атаки отправляется на кладбище. Действие засчитано.
+test.only('msg CASE3 received: card is action and can attack, inactive hero shield took part of points, shield & card go to graveyard. State Case3.', () => {
     const msg = {
         type: 'CASE3', key: 'key1', category: 'attack', active: true,
     };
@@ -717,7 +717,6 @@ test('msg CASE3 received: card is action and can attack, inactive hero shield to
 
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
-
     // ожидаем, что активный игрок может действовать (его каунтер не более 2 после хода)
     expect(result.game.players[0].moveCounter).toBeLessThanOrEqual(2);
     // после действия ожидаем, что счетчик увеличен на 1
@@ -726,10 +725,10 @@ test('msg CASE3 received: card is action and can attack, inactive hero shield to
     expect(result.game.players[0].grave.key1.category).toEqual('attack');
     // ожидаем, что карта с очками атаки - это карта-действие
     expect(result.game.players[0].grave.key1.type).toEqual('action');
-    // ожидаем - щит противника принял все повреждение, отразив от него атаку, и ушел на кладбище.
-    expect(Object.values(result.game.players[1].grave)).toContain('defense', 3);
+    // ожидаем - щит противника принял все очки повреждения, отразив атаку, и ушел на кладбище.
+    expect(Object.values(result.game.players[1].grave.category)).toEqual('defense');
     expect(result.game.players[1].item).toEqual({});
-    // ожидаем, что активная карта сохранилась на кладбище
+    // ожидаем, что активная карта сохранилась на кладбище игрока
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
     // ожидаем, что активная карта убралась из руки.
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
