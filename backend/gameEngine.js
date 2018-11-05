@@ -126,7 +126,7 @@ function moveHandGraveyard(player, key) {
 
 function moveItemGraveyard(player, key) {
     player.grave[key] = player.item[0];
-    delete player.item[0];
+    player.item = {};
 }
 
 function makeMove(game, msg) {
@@ -141,7 +141,7 @@ function makeMove(game, msg) {
     });
     if (pActive.moveCounter < 2) {
         const points = pActive.hand[msg.key].points;
-        console.log(Object.values(pInactive.item)[0]);
+        console.log(Object.values(pInactive.item)[0].points);
         switch (msg.category) {
         case 'graveyard':
             moveHandGraveyard(pActive, msg.key);
@@ -164,20 +164,24 @@ function makeMove(game, msg) {
                     pInactive.health.current = 0;
                 }
                 moveHandGraveyard(pActive, msg.key);
-            } else {
-                if (pInactive.item.points === points) {
-                    moveItemGraveyard(pInactive, Object.values(pInactive.item)[0]);
+            }
+            if ((pInactive.item !== null) || (pInactive.item.category === 'defense')) {
+                const inactiveDefense = Object.values(pInactive.item);
+                if (inactiveDefense[0].points === points) {
+                    moveItemGraveyard(pInactive, inactiveDefense[0]);
+                    moveHandGraveyard(pActive, msg.key);
+                    console.log(pActive.grave);
                 }
-                if (pInactive.item.points > points) {
-                    pInactive.health.current -= pInactive.item.points - points;
+                if (inactiveDefense[0].points > points) {
+                    pInactive.health.current -= inactiveDefense[0].points - points;
                 } else {
                     // eslint-disable-next-line no-lonely-if
                     if (pInactive.health.current > points) {
-                        pInactive.health.current -= points - pInactive.item.points;
+                        pInactive.health.current -= points - inactiveDefense[0].points;
                     } else {
                         pInactive.health.current = 0;
                     }
-                    moveItemGraveyard(pInactive, Object.values(pInactive.item)[0]);
+                    moveItemGraveyard(pInactive, inactiveDefense[0]);
                 }
                 moveHandGraveyard(pActive, msg.key);
             }

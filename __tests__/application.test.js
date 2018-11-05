@@ -726,7 +726,7 @@ test.only('msg CASE3 received: card is action and can attack, inactive hero shie
     // ожидаем, что карта с очками атаки - это карта-действие
     expect(result.game.players[0].grave.key1.type).toEqual('action');
     // ожидаем - щит противника принял все очки повреждения, отразив атаку, и ушел на кладбище.
-    expect(Object.values(result.game.players[1].grave.category)).toEqual('defense');
+    expect(Object.keys(result.game.players[1].grave)).toContain('key7');
     expect(result.game.players[1].item).toEqual({});
     // ожидаем, что активная карта сохранилась на кладбище игрока
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
