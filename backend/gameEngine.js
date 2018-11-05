@@ -119,9 +119,14 @@ function increaseCounter(player) {
     player.moveCounter += 1;
 }
 
-function moveGraveyard(player, key) {
+function moveHandGraveyard(player, key) {
     player.grave[key] = player.hand[key];
     delete player.hand[key];
+}
+
+function moveItemGraveyard(player, key) {
+    player.grave[key] = player.item[0];
+    delete player.item[0];
 }
 
 function makeMove(game, msg) {
@@ -132,12 +137,14 @@ function makeMove(game, msg) {
             pActive = p;
         } else {
             pInactive = p;
-        };
+        }
     });
     if (pActive.moveCounter < 2) {
+        const points = pActive.hand[msg.key].points;
+        console.log(Object.values(pInactive.item)[0]);
         switch (msg.category) {
         case 'graveyard':
-            moveGraveyard(pActive, msg.key);
+            moveHandGraveyard(pActive, msg.key);
             break;
 
         case 'heal':
@@ -146,19 +153,33 @@ function makeMove(game, msg) {
             } else {
                 pActive.health.current = pActive.health.maximum;
             }
-            moveGraveyard(pActive, msg.key);
+            moveHandGraveyard(pActive, msg.key);
             // p.grave[msg.key].points == 0;
             break;
-        
         case 'attack':
             if ((pInactive.item === null) || (pInactive.item.category !== 'defense')) {
-                const points = pActive.hand[msg.key].points;
                 if (pInactive.health.current > points) {
                     pInactive.health.current -= pActive.hand[msg.key].points;
                 } else {
                     pInactive.health.current = 0;
                 }
-                moveGraveyard(pActive, msg.key);
+                moveHandGraveyard(pActive, msg.key);
+            } else {
+                if (pInactive.item.points === points) {
+                    moveItemGraveyard(pInactive, Object.values(pInactive.item)[0]);
+                }
+                if (pInactive.item.points > points) {
+                    pInactive.health.current -= pInactive.item.points - points;
+                } else {
+                    // eslint-disable-next-line no-lonely-if
+                    if (pInactive.health.current > points) {
+                        pInactive.health.current -= points - pInactive.item.points;
+                    } else {
+                        pInactive.health.current = 0;
+                    }
+                    moveItemGraveyard(pInactive, Object.values(pInactive.item)[0]);
+                }
+                moveHandGraveyard(pActive, msg.key);
             }
             break;
         default:
@@ -167,8 +188,7 @@ function makeMove(game, msg) {
         increaseCounter(pActive);
     }
     return game;
-};
-    
+}
 
 function handle(app, message) {
     switch (message.type) {
