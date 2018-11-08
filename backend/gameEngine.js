@@ -124,9 +124,12 @@ function moveHandGraveyard(player, key) {
     delete player.hand[key];
 }
 
-function moveItemGraveyard(player, key) {
-    player.grave[key] = player.item[0];
-    player.item = {};
+function moveItemGraveyard(player) {
+    const key = Object.keys(player.item)[0];
+    if (key !== undefined) {
+        player.grave[key] = player.item[key];
+        delete player.item[key];
+    }
 }
 
 function makeMove(game, msg) {
@@ -141,7 +144,7 @@ function makeMove(game, msg) {
     });
     if (pActive.moveCounter < 2) {
         const points = pActive.hand[msg.key].points;
-        console.log(Object.values(pInactive.item)[0].points);
+        const itemInactive = Object.values(pInactive.item)[0];
         switch (msg.category) {
         case 'graveyard':
             moveHandGraveyard(pActive, msg.key);
@@ -157,7 +160,7 @@ function makeMove(game, msg) {
             // p.grave[msg.key].points == 0;
             break;
         case 'attack':
-            if ((pInactive.item === null) || (pInactive.item.category !== 'defense')) {
+            if ((itemInactive === null) || (itemInactive.category !== 'defense')) {
                 if (pInactive.health.current > points) {
                     pInactive.health.current -= pActive.hand[msg.key].points;
                 } else {
@@ -165,23 +168,13 @@ function makeMove(game, msg) {
                 }
                 moveHandGraveyard(pActive, msg.key);
             }
-            if ((pInactive.item !== null) || (pInactive.item.category === 'defense')) {
-                const inactiveDefense = Object.values(pInactive.item);
-                if (inactiveDefense[0].points === points) {
-                    moveItemGraveyard(pInactive, inactiveDefense[0]);
-                    moveHandGraveyard(pActive, msg.key);
-                    console.log(pActive.grave);
-                }
-                if (inactiveDefense[0].points > points) {
-                    pInactive.health.current -= inactiveDefense[0].points - points;
+            if ((itemInactive !== null) && (itemInactive.category === 'defense')) {
+                const pointsAttack = points - itemInactive.points;
+                if (pointsAttack >= 0) {
+                    pInactive.health.current -= pointsAttack;
+                    moveItemGraveyard(pInactive, itemInactive);
                 } else {
-                    // eslint-disable-next-line no-lonely-if
-                    if (pInactive.health.current > points) {
-                        pInactive.health.current -= points - inactiveDefense[0].points;
-                    } else {
-                        pInactive.health.current = 0;
-                    }
-                    moveItemGraveyard(pInactive, inactiveDefense[0]);
+                    itemInactive.points -= points;
                 }
                 moveHandGraveyard(pActive, msg.key);
             }

@@ -661,7 +661,7 @@ test('msg CASE3 received: card is action and can attack, no defense, points dama
 // У противника есть щит, здоровье щита равно силе удара.
 // Щит убирается на кладбище противника.
 // Карта атаки отправляется на кладбище. Действие засчитано.
-test.only('msg CASE3 received: card is action and can attack, inactive hero shield took part of points, shield & card go to graveyard. State Case3.', () => {
+test('msg CASE3 received: card is action and can attack, inactive hero shield took part of points, shield & card go to graveyard. State Case3.', () => {
     const msg = {
         type: 'CASE3', key: 'key1', category: 'attack', active: true,
     };
@@ -737,7 +737,7 @@ test.only('msg CASE3 received: card is action and can attack, inactive hero shie
 // Test msg with action card from active player's hand with category: 'action', class: 'attack'
 // card attacks inactive hero shield, which has defense points more than attack card, points lessen.
 // Attack card goes to graveyard. Acrive player's Move counter +1. Game state Case3.
-test('msg CASE3 received: card is action and can attack, inactive hero shield defens points lessen, card go to graveyard. State Case3.', () => {
+test.only('msg CASE3 received: card is action and can attack, inactive hero shield defens points lessen, card go to graveyard. State Case3.', () => {
     const msg = {
         type: 'CASE3', key: 'key1', category: 'attack', active: true,
     };
