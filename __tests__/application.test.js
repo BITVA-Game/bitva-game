@@ -879,7 +879,7 @@ test('msg CASE3 received: card is action and can attack, inactive hero shield to
     expect(result.game.players[0].grave.key1.category).toEqual('attack');
     // ожидаем, что карта с очками атаки - это карта-действие
     expect(result.game.players[0].grave.key1.type).toEqual('action');
-    // ожидаем - щит противника принял часть повреждения, отразив от него атаку, и ушел на кладбище.
+    // ожидаем, что щит противника принял часть повреждения, отразив от атаку, и ушел на кладбище.
     expect(result.game.players[1].grave.key7.category).toEqual('defense');
     expect(result.game.players[1].grave.key7.points).toEqual(3);
     expect(result.game.players[1].item).toEqual({});
