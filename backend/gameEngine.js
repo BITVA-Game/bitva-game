@@ -138,6 +138,15 @@ function moveItem(player, key) {
     delete player.hand[key];
 }
 
+function giveCardsToHand(player) {
+    while (Object.keys(player.hand).length <= 3) {
+        const key = randomKey(player.cards);
+        player.hand[key] = player.cards[key];
+        delete player.cards[key];
+    }
+    return player;
+}
+
 function makeMove(game, msg) {
     let pActive;
     let pInactive;
@@ -195,6 +204,9 @@ function makeMove(game, msg) {
             return new Error('You are under spell. Wait for redemption!');
         }
         increaseCounter(pActive);
+        if (pActive.moveCounter === 2) {
+            giveCardsToHand(pActive);
+        }
     }
     return game;
 }

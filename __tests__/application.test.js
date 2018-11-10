@@ -947,3 +947,69 @@ test('msg CASE4 received: active player choose item, if his item holder is empty
     // ожидаем, что карта-item убралась из руки.
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
+
+
+// Test that before game pass to inactive player,
+// active player gets 1 or 2 cards that missing from his hand. State Case any.
+test('msg CASE received: after his move active player has counter =2, he gets missing cards to his hand. State CASE any.', () => {
+    const msg = {
+        type: 'CASE3', key: 'key1', category: 'attack', active: true,
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 6, maximum: 15 },
+                    hand: {
+                        key12: {}, key8: {}, key15: {}, key3: {},
+                    },
+                    item: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'defense', points: 5,
+                        },
+                    },
+                    grave: { },
+                },
+            ],
+        },
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что активный игрок не может дальше ходить (его каунтер равен 2 после хода)
+    expect(result.game.players[0].moveCounter).toEqual(2);
+    // ожидаем, что перед передачей хода карты в руке активного игрока пополнятся до 4
+    expect(Object.keys(result.game.players[0].hand).length).toEqual(4);
+});
