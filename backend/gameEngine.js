@@ -164,7 +164,6 @@ function makeMove(game, msg) {
             moveHandGraveyard(pActive, msg.key);
             // p.grave[msg.key].points == 0;
             break;
-        // eslint-disable-next-line no-case-declarations
         case 'attack':
             const itemInactive = Object.values(pInactive.item)[0];
             if ((itemInactive === undefined) || (itemInactive.category !== 'defense')) {

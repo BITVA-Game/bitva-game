@@ -22,5 +22,4 @@ function handle(app, message) {
     }
 }
 
-
 exports.handle = handle;

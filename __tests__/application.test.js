@@ -929,7 +929,6 @@ test('msg CASE4 received: active player choose item, if his item holder is empty
                 {
                     active: false,
                     hero: 'yaga',
-                    item: {},
                 },
             ],
         },
