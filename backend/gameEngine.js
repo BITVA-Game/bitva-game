@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
