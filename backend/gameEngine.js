@@ -133,6 +133,11 @@ function moveItemGraveyard(player) {
     }
 }
 
+function moveItem(player, key) {
+    player.item[key] = player.hand[key];
+    delete player.hand[key];
+}
+
 function makeMove(game, msg) {
     let pActive;
     let pInactive;
@@ -181,6 +186,12 @@ function makeMove(game, msg) {
                 moveHandGraveyard(pActive, msg.key);
             }
             break;
+        case 'item':
+            if (Object.values(pActive.item).length === 0) {
+                moveItem(pActive, msg.key);
+            }
+            break;
+
         default:
             return new Error('You are under spell. Wait for redemption!');
         }
@@ -211,6 +222,9 @@ function handle(app, message) {
         return Object.assign({}, app.game, makeMove(app.game, message));
     }
     case 'CASE3': {
+        return Object.assign({}, app.game, makeMove(app.game, message));
+    }
+    case 'CASE4': {
         return Object.assign({}, app.game, makeMove(app.game, message));
     }
 

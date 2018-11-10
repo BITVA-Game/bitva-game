@@ -16,6 +16,11 @@ function handle(app, message) {
         return Object.assign({}, app.manager, { screen: 'GAMESCREEN' });
     case 'CASE3':
         return Object.assign({}, app.manager, { screen: 'GAMESCREEN' });
+<<<<<<< HEAD
+=======
+    case 'CASE4':
+        return Object.assign({}, app.manager, { screen: 'GAMESCREEN' });
+>>>>>>> b3935c146013abc7f59a14a418926b1a4ac0781b
     default: return app.manager;
     }
 }
