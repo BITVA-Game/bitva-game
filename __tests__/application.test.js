@@ -462,7 +462,7 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 // then card goes to graveyard. Game state Case1.
 test('msg CASE1 received: active card was in active player hand, then moved to graveyard. Counter <2. State Case1.', () => {
     const msg = {
-        type: 'CASE1', key: 'key10', category: 'graveyard', active: true,
+        type: 'CASE1', key: 'key10', category: 'graveyard', active: true, points: 3,
     };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -488,7 +488,7 @@ test('msg CASE1 received: active card was in active player hand, then moved to g
                     health: 13,
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key1: {}, key8: {}, key13: {},
+                        key11: {}, key1: {}, key8: {}, key13: {}, key10: { points: 3 },
                     },
                     moveCounter: 0,
                     grave: { key10: {} },
@@ -522,11 +522,11 @@ test('msg CASE1 received: active card was in active player hand, then moved to g
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key10');
 });
 
-// Test msg with action card from active player's hand with category: 'action', class: 'heal'
+// Test msg with action card from active player's hand with type: 'action', category: 'heal'
 // card heal hero for its points not > maximum, then card goes to graveyard. Game state Case2.
 test('msg CASE2 received: action card is action and can heal, applies points to hero then moved to graveyard. State Case2.', () => {
     const msg = {
-        type: 'CASE2', key: 'key1', category: 'heal', active: true,
+        type: 'CASE2', key: 'key1', category: 'heal', active: true, points: 3,
     };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -559,6 +559,7 @@ test('msg CASE2 received: action card is action and can heal, applies points to 
                 {
                     active: false,
                     hero: 'yaga',
+                    item: {},
                 },
             ],
         },
@@ -737,7 +738,7 @@ test('msg CASE3 received: card is action and can attack, inactive hero shield to
 // Test msg with action card from active player's hand with category: 'action', class: 'attack'
 // card attacks inactive hero shield, which has defense points more than attack card, points lessen.
 // Attack card goes to graveyard. Acrive player's Move counter +1. Game state Case3.
-test.only('msg CASE3 received: card is action and can attack, inactive hero shield defens points lessen, card go to graveyard. State Case3.', () => {
+test('msg CASE3 received: card is action and can attack, inactive hero shield defens points lessen, card go to graveyard. State Case3.', () => {
     const msg = {
         type: 'CASE3', key: 'key1', category: 'attack', active: true,
     };
@@ -803,7 +804,7 @@ test.only('msg CASE3 received: card is action and can attack, inactive hero shie
     // ожидаем, что карта с очками атаки - это карта-действие
     expect(result.game.players[0].grave.key1.type).toEqual('action');
     // щит противника принял все повреждение, отразив от него атаку, его очки защиты уменьшаться.
-    expect(result.game.players[1].item.points).toEqual(2);
+    expect(result.game.players[1].item.key7.points).toEqual(2);
     // ожидаем, что активная карта сохранилась на кладбище
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
     // ожидаем, что активная карта убралась из руки.
@@ -879,12 +880,13 @@ test('msg CASE3 received: card is action and can attack, inactive hero shield to
     // ожидаем, что карта с очками атаки - это карта-действие
     expect(result.game.players[0].grave.key1.type).toEqual('action');
     // ожидаем - щит противника принял часть повреждения, отразив от него атаку, и ушел на кладбище.
-    expect(Object.values(result.game.players[1].grave)).toContain('defense', 3);
+    expect(result.game.players[1].grave.key7.category).toEqual('defense');
+    expect(result.game.players[1].grave.key7.points).toEqual(3);
     expect(result.game.players[1].item).toEqual({});
     // ожидаем, что активная карта сохранилась на кладбище
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
     // ожидаем, что активная карта убралась из руки.
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
     // ожидаем, что здоровье неактивного перса уменьшилось на очки аттаки, неотраженные щитом
-    expect(result.game.players[1].health.current).toEqual(5);
+    expect(result.game.players[1].health.current).toEqual(4);
 });
