@@ -135,29 +135,29 @@ function moveCardGraveyard(player, key, from) {
 }
 
 function attackShield(player, itemKey, points) {
-    console.log('attackShield');
+    // console.log('attackShield');
     if (player.item[itemKey].points > points) {
-        console.log('item > points');
+        // console.log('item > points');
         player.item[itemKey].points -= points;
     } else if (player.item[itemKey].points === points) {
-        console.log('item == points');
+    // console.log('item == points');
         moveCardGraveyard(player, itemKey, 'item');
     } else {
-        console.log('item < points');
+        // console.log('item < points');
         damagePlayer(player, points - player.item[itemKey].points);
         moveCardGraveyard(player, itemKey, 'item');
     }
 }
 
 function attackOpponent(player, points) {
-    console.log('attackOpponent ', player, points);
+    // console.log('attackOpponent ', player, points);
     let itemCategory;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemCategory = player.item[itemKey].category : null;
     if (Object.keys(player.item).length === 0 || itemCategory != 'shield') {
         player.health.current -= points;
     } else if (Object.keys(player.item).length === 1 && itemCategory == 'shield') {
-        console.log('Were in attack shield');
+        // console.log('Were in attack shield');
         attackShield(player, itemKey, points);
     }
 }
@@ -185,13 +185,12 @@ function moveItemGraveyard(player) {
 }
 */
 function moveItem(player, key) {
-    // console.log('move item to item holder');
     player.item[key] = player.hand[key];
     delete player.hand[key];
 }
 
 function playerActs(game, player, opponent, active, target) {
-    console.log('playerActs called');
+    // console.log('playerActs called');
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
     // We send the card that has key1 to graveyard
@@ -224,8 +223,7 @@ function playerActs(game, player, opponent, active, target) {
         }
     }
     if (target === 'item' && activeCard.type === 'action') {
-        console.log('item ', player, activeCard);
-        moveItem(player, activeCard.key);
+        moveItem(player, active);
     }
     player.moveCounter += 1;
 
@@ -233,7 +231,7 @@ function playerActs(game, player, opponent, active, target) {
 }
 
 function makeMove(game, msg) {
-    console.log('makeMove called');
+    // console.log('makeMove called');
     let pActive;
     let pInactive;
     game.players.forEach((p) => {
