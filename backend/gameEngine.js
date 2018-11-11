@@ -116,13 +116,16 @@ function giveCardsToAll(playersArray) {
     return playersArray;
 }
 
-function increaseCounter(player) {
-    player.moveCounter += 1;
-}
 
-function moveHandGraveyard(player, key) {
+// This function taked the player and the key for his cards
+// And moves it so graveyard via deleting the key from array
+function moveCardGraveyard(player, key) {
+    console.log("moveCardGraveyard called");
+    console.log(key);
+    console.log(player.grave, player.hand);
     player.grave[key] = player.hand[key];
     delete player.hand[key];
+    console.log(player.grave, player.hand);
 }
 
 function moveItemGraveyard(player) {
@@ -138,7 +141,20 @@ function moveItem(player, key) {
     delete player.hand[key];
 }
 
+function playerActs(game, player, activeCard, target){
+  console.log("playerActs called");
+  // If the key for the second card is graveyard
+  // We send the card that has key1 to graveyard
+  if(target=='graveyard'){
+    moveCardGraveyard(player, activeCard);
+  }
+  player.moveCounter +=1;
+
+  return game;
+}
+
 function makeMove(game, msg) {
+    console.log("makeMove called");
     let pActive;
     let pInactive;
     game.players.forEach((p) => {
@@ -148,54 +164,57 @@ function makeMove(game, msg) {
             pInactive = p;
         }
     });
+    // We expect the first card is always the selected card that acts
+
     if (pActive.moveCounter < 2) {
-        const points = pActive.hand[msg.key].points;
-        switch (msg.category) {
-        case 'graveyard':
-            moveHandGraveyard(pActive, msg.key);
-            break;
+        game = playerActs(game, pActive, msg.activeCard, msg.target);
 
-        case 'heal':
-            if (pActive.health.current < pActive.health.maximum) {
-                pActive.health.current += pActive.hand[msg.key].points;
-            } else {
-                pActive.health.current = pActive.health.maximum;
-            }
-            moveHandGraveyard(pActive, msg.key);
-            // p.grave[msg.key].points == 0;
-            break;
-        // eslint-disable-next-line no-case-declarations
-        case 'attack':
-            const itemInactive = Object.values(pInactive.item)[0];
-            if ((itemInactive === undefined) || (itemInactive.category !== 'defense')) {
-                if (pInactive.health.current > points) {
-                    pInactive.health.current -= pActive.hand[msg.key].points;
-                } else {
-                    pInactive.health.current = 0;
-                }
-                moveHandGraveyard(pActive, msg.key);
-            }
-            if ((itemInactive !== undefined) && (itemInactive.category === 'defense')) {
-                const pointsAttack = points - itemInactive.points;
-                if (pointsAttack >= 0) {
-                    pInactive.health.current -= pointsAttack;
-                    moveItemGraveyard(pInactive, itemInactive);
-                } else {
-                    itemInactive.points -= points;
-                }
-                moveHandGraveyard(pActive, msg.key);
-            }
-            break;
-        case 'item':
-            if (Object.values(pActive.item).length === 0) {
-                moveItem(pActive, msg.key);
-            }
-            break;
+        // switch (msg.category) {
+        // case 'graveyard':
+        //     moveHandGraveyard(pActive, msg.key);
+        //     break;
+        //
+        // case 'heal':
+        //     if (pActive.health.current < pActive.health.maximum) {
+        //         pActive.health.current += pActive.hand[msg.key].points;
+        //     } else {
+        //         pActive.health.current = pActive.health.maximum;
+        //     }
+        //     moveHandGraveyard(pActive, msg.key);
+        //     // p.grave[msg.key].points == 0;
+        //     break;
+        // // eslint-disable-next-line no-case-declarations
+        // case 'attack':
+        //     const itemInactive = Object.values(pInactive.item)[0];
+        //     if ((itemInactive === undefined) || (itemInactive.category !== 'defense')) {
+        //         if (pInactive.health.current > points) {
+        //             pInactive.health.current -= pActive.hand[msg.key].points;
+        //         } else {
+        //             pInactive.health.current = 0;
+        //         }
+        //         moveHandGraveyard(pActive, msg.key);
+        //     }
+        //     if ((itemInactive !== undefined) && (itemInactive.category === 'defense')) {
+        //         const pointsAttack = points - itemInactive.points;
+        //         if (pointsAttack >= 0) {
+        //             pInactive.health.current -= pointsAttack;
+        //             moveItemGraveyard(pInactive, itemInactive);
+        //         } else {
+        //             itemInactive.points -= points;
+        //         }
+        //         moveHandGraveyard(pActive, msg.key);
+        //     }
+        //     break;
+        // case 'item':
+        //     if (Object.values(pActive.item).length === 0) {
+        //         moveItem(pActive, msg.key);
+        //     }
+        //     break;
+        //
+        // default:
+        //     return new Error('You are under spell. Wait for redemption!');
+        // }
 
-        default:
-            return new Error('You are under spell. Wait for redemption!');
-        }
-        increaseCounter(pActive);
     }
     return game;
 }
@@ -215,19 +234,10 @@ function handle(app, message) {
 
         return Object.assign({}, app.game, giveCardsToAll(playersArray));
     }
-    case 'CASE1': {
+    // All actions have the same action name as they all call the same function
+    case 'ACTION': {
         return Object.assign({}, app.game, makeMove(app.game, message));
     }
-    case 'CASE2': {
-        return Object.assign({}, app.game, makeMove(app.game, message));
-    }
-    case 'CASE3': {
-        return Object.assign({}, app.game, makeMove(app.game, message));
-    }
-    case 'CASE4': {
-        return Object.assign({}, app.game, makeMove(app.game, message));
-    }
-
     default: { return app.game; }
     }
 }

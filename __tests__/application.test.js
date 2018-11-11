@@ -459,14 +459,17 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 
 
 // Test that active card is from active player's hand, his counter less than 2,
-// then card goes to graveyard. Game state Case1.
+// then card goes to graveyard.
 test('msg CASE1 received: active card was in active player hand, then moved to graveyard. Counter <2. State Case1.', () => {
+    // active Card is always a card
+    // target can be a place (item place, graveyard, deck, herom etc) or a card
     const msg = {
-        type: 'CASE1', key: 'key10', category: 'graveyard', active: true, points: 3,
+        type:'ACTION',
+        activeCard: 'key10',
+        target: 'graveyard'
     };
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set active player card's key to key10
     application.setApp({
         game: {
 
@@ -487,11 +490,13 @@ test('msg CASE1 received: active card was in active player hand, then moved to g
                     },
                     health: 13,
                     hero: 'morevna',
+                    // We expect the card 10 will be moved to graveyard
                     hand: {
-                        key11: {}, key1: {}, key8: {}, key13: {}, key10: { points: 3 },
+                        key11: {}, key1: {}, key8: {}, key13: {}, key10: { points: 3,  },
                     },
                     moveCounter: 0,
-                    grave: { key10: {} },
+                    //graveyard is empty
+                    grave: {},
                 },
                 {
                     active: false,
@@ -510,23 +515,23 @@ test('msg CASE1 received: active card was in active player hand, then moved to g
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // До действия -ожидаем, что активная карта пришла от активного игрока
+    // expect that player[0] is active
     expect(result.game.players[0].active).toBeTruthy();
-    // ожидаем, что активный игрок может действовать (его каунтер не равен 2)
-    expect(result.game.players[0].moveCounter).toBeLessThan(2);
-    // после действия ожидаем, что счетчик увеличен на 1
+    // expect that his cunter added
     expect(result.game.players[0].moveCounter).toEqual(1);
-    // ожидаем, что активная карта сохранилась на кладбище
+    // оexpect the card to move to graveryard
     expect(Object.keys(result.game.players[0].grave)).toContain('key10');
-    // ожидаем, что активная карта убралась из руки.
+    // expect the card to move out of the hand
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key10');
 });
 
 // Test msg with action card from active player's hand with type: 'action', category: 'heal'
 // card heal hero for its points not > maximum, then card goes to graveyard. Game state Case2.
 test('msg CASE2 received: action card is action and can heal, applies points to hero then moved to graveyard. State Case2.', () => {
-    const msg = {
-        type: 'CASE2', key: 'key1', category: 'heal', active: true, points: 3,
+  const msg = {
+      type:'ACTION',
+      activeCard: 'key10',
+      target: 'graveyard'
     };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -551,7 +556,10 @@ test('msg CASE2 received: action card is action and can heal, applies points to 
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', points: 3 },
+                        key11: {}, key8: {}, key13: {}, key1: {
+                            type: 'action',
+                            points: 3,
+                            category: 'heal'},
                     },
                     moveCounter: 1,
                     grave: { key10: {} },
@@ -571,8 +579,6 @@ test('msg CASE2 received: action card is action and can heal, applies points to 
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // ожидаем, что активный игрок может действовать (его каунтер не более 2 после хода)
-    expect(result.game.players[0].moveCounter).toBeLessThanOrEqual(2);
     // после действия ожидаем, что счетчик увеличен на 1
     expect(result.game.players[0].moveCounter).toEqual(2);
     // ожидаем, что карта с очками здоровья - это карта-действие
