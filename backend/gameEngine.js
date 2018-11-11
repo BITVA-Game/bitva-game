@@ -183,12 +183,13 @@ function moveItemGraveyard(player) {
         delete player.item[key];
     }
 }
-
+*/
 function moveItem(player, key) {
+    // console.log('move item to item holder');
     player.item[key] = player.hand[key];
     delete player.hand[key];
 }
-*/
+
 function playerActs(game, player, opponent, active, target) {
     console.log('playerActs called');
     const activeCard = player.hand[active];
@@ -215,12 +216,16 @@ function playerActs(game, player, opponent, active, target) {
             case 'heal':
                 break;
             case 'attack':
-                console.log('attacking opponent');
+                // console.log('attacking opponent');
                 attackOpponent(opponent, activeCard.points);
                 moveCardGraveyard(player, active);
                 break;
             }
         }
+    }
+    if (target === 'item' && activeCard.type === 'action') {
+        console.log('item ', player, activeCard);
+        moveItem(player, activeCard.key);
     }
     player.moveCounter += 1;
 

@@ -971,7 +971,7 @@ test('msg ACTION CASE3 player attacks with less than shiald, card goes to gravey
 
 // Test, that when massage with item card  received, then
 // if item holder is empty, active player moves item there. State Case4.
-test.skip('msg ACTION CASE4 received: active player choose item, if his item holder is empty player moves item there.', () => {
+test.only('msg ACTION CASE4 received: active player choose item, if his item holder is empty player moves item there.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1000,7 +1000,7 @@ test.skip('msg ACTION CASE4 received: active player choose item, if his item hol
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { category: 'item', points: 3 },
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'item', points: 3 },
                     },
                     moveCounter: 1,
                     item: {},
@@ -1022,6 +1022,7 @@ test.skip('msg ACTION CASE4 received: active player choose item, if his item hol
     const result = sendReply.mock.calls[0][0];
 
     // ожидаем, что item holder активного игрока пустой
+    // console.log(Object.values(result.game.players[0].item).length);
     expect(Object.values(result.game.players[0].item).length).toEqual(1);
     // ожидаем, что карта предмет окажется в item holder активного игрока
     expect(result.game.players[0].item.key1.category).toEqual('item');
