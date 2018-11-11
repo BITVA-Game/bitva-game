@@ -4,6 +4,7 @@ import MainMenu from './MainMenu';
 import './css/MainMenu.css';
 import './css/App.css';
 import './css/HeroSelection.css';
+import styles from './css/HeroSelection.module.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -80,7 +81,7 @@ const HeroInfo = props => (
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
         <button className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero'} type="button" onClick={() => (props.onShow(props.hero.id))}>
-            <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
+            <img className={styles.image} src={images[props.hero.id]} alt={props.hero.id} />
             {/* <div className="hero-name hero-nav-menu-name header-menu">
                 {props.hero.name}
             </div> */}
@@ -111,7 +112,7 @@ const ListOfHeroes = props => (
 
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
-    <div className="details">
+    <div className={styles.details}>
         <div className="details-hero">
             {/* <div className="details-hero-name hero-nav-menu-name header-menu">
                 {props.hero.name}
@@ -203,7 +204,7 @@ class HeroSelection extends Component {
         return (
             <div className="heroselection-container">
                 <Header prev={this.selectLeftHero} next={this.selectRightHero} selected={this.state.selected} onShow={this.showHero} />
-                <div className="heroselection-main">
+                <div className={styles.main}>
                     {this.state.hero
                         ? (
                             <OneHero

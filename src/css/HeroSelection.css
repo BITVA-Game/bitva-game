@@ -35,11 +35,6 @@ section {
 	top: 0;
 }
 
-.heroselection-main {
-	padding: 0 2em;
-	width: 100%;
-}
-
 /* common */
 
 .btn {
@@ -251,11 +246,7 @@ section {
 .btn-hero-info:focus {
 	background-color: #B74A45;
 }
-.heroselection-hero-image {
-	height: 260px;
-	object-fit: cover;
-	width: 220px;
-}
+
 .hero-name {
 	display: none;
 }
@@ -328,19 +319,6 @@ section {
 
 
 /* hero details (OneHero) screen */
-
-.details {
-	background-color: rgb(255,255,255);
-	background-color: rgba(255,255,255,0.5);
-    /*bottom: 0;
-	left: 0;
-	padding: 1em;
-	position: absolute;
-	right: 0;
-	top: 0; */
-	padding: 1em 2em;
-	width: 100%;
-}
 
 .details-hero {
 	bottom: 0;
