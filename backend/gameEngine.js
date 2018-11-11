@@ -128,6 +128,11 @@ function moveCardGraveyard(player, key) {
     console.log(player.grave, player.hand);
 }
 
+function changeHealth(player, points){
+  console.log("changeHealth ", player, points);
+  player.health.current += points;
+}
+
 function moveItemGraveyard(player) {
     const key = Object.keys(player.item)[0];
     if (key !== undefined) {
@@ -141,12 +146,26 @@ function moveItem(player, key) {
     delete player.hand[key];
 }
 
-function playerActs(game, player, activeCard, target){
-  console.log("playerActs called");
+function playerActs(game, player, active, target){
+  console.log("playerActs called ");
+  let activeCard = player.hand[active];
+  console.log(activeCard);
   // If the key for the second card is graveyard
   // We send the card that has key1 to graveyard
   if(target=='graveyard'){
-    moveCardGraveyard(player, activeCard);
+    moveCardGraveyard(player, active);
+  }
+  if(target=='hero'){
+    if(activeCard.type=='action'){
+      switch(activeCard.category){
+        case 'heal':
+          changeHealth(player, activeCard.points);
+          moveCardGraveyard(player, active);
+          break;
+        case 'attack':
+          break;
+      }
+    }
   }
   player.moveCounter +=1;
 
@@ -167,6 +186,7 @@ function makeMove(game, msg) {
     // We expect the first card is always the selected card that acts
 
     if (pActive.moveCounter < 2) {
+
         game = playerActs(game, pActive, msg.activeCard, msg.target);
 
         // switch (msg.category) {

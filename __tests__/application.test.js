@@ -460,7 +460,7 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 
 // Test that active card is from active player's hand, his counter less than 2,
 // then card goes to graveyard.
-test('msg CASE1 received: active card was in active player hand, then moved to graveyard. Counter <2. State Case1.', () => {
+test.only('CASE1, player wants to move his card to graveyard', () => {
     // active Card is always a card
     // target can be a place (item place, graveyard, deck, herom etc) or a card
     const msg = {
@@ -517,7 +517,7 @@ test('msg CASE1 received: active card was in active player hand, then moved to g
 
     // expect that player[0] is active
     expect(result.game.players[0].active).toBeTruthy();
-    // expect that his cunter added
+    // expect that his cunter was increased
     expect(result.game.players[0].moveCounter).toEqual(1);
     // оexpect the card to move to graveryard
     expect(Object.keys(result.game.players[0].grave)).toContain('key10');
@@ -527,11 +527,11 @@ test('msg CASE1 received: active card was in active player hand, then moved to g
 
 // Test msg with action card from active player's hand with type: 'action', category: 'heal'
 // card heal hero for its points not > maximum, then card goes to graveyard. Game state Case2.
-test('msg CASE2 received: action card is action and can heal, applies points to hero then moved to graveyard. State Case2.', () => {
+test.only('msg CASE2 player wants to heal himself.', () => {
   const msg = {
       type:'ACTION',
-      activeCard: 'key10',
-      target: 'graveyard'
+      activeCard: 'key1',
+      target: 'hero'
     };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -579,18 +579,15 @@ test('msg CASE2 received: action card is action and can heal, applies points to 
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // после действия ожидаем, что счетчик увеличен на 1
+    // expect that his cunter was increased
     expect(result.game.players[0].moveCounter).toEqual(2);
-    // ожидаем, что карта с очками здоровья - это карта-действие
-    expect(result.game.players[0].grave.key1.type).toEqual('action');
-    // ожидаем, что очки здоровья активной карты переданы в health героя
+    // expect that the card was an action card
+    expect(result.game.players[0].grave['key1'].type).toEqual('action');
+    // expect that hero's health was increased
     expect(result.game.players[0].health.current).toEqual(8);
-    // expect(result.game.players[0].grave.key1.points).toEqual(0);
-    // ожидаем, что очки здоровья health героя не больше максимума
-    expect(result.game.players[0].health.current).toBeLessThanOrEqual(13);
-    // ожидаем, что активная карта сохранилась на кладбище
+    // expect that the card was moved to graveyard
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
-    // ожидаем, что активная карта убралась из руки.
+    // expect the card not to be in hand
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
 
