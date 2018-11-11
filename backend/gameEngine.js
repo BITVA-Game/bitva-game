@@ -119,22 +119,58 @@ function giveCardsToAll(playersArray) {
 
 // This function taked the player and the key for his cards
 // And moves it so graveyard via deleting the key from array
-function moveCardGraveyard(player, key) {
-    console.log("moveCardGraveyard called");
-    console.log(key);
-    console.log(player.grave, player.hand);
-    player.grave[key] = player.hand[key];
-    delete player.hand[key];
-    console.log(player.grave, player.hand);
+function moveCardGraveyard(player, key, from) {
+   if(from=="item"){
+     console.log("moveCardGraveyard called for item ", player, key);
+     player.grave[key] = player.item[key];
+     delete player.item[key];
+   } else {
+     console.log("moveCardGraveyard called ", player, key);
+     player.grave[key] = player.hand[key];
+     delete player.hand[key];
+   }
 }
 
-function changeHealth(player, points){
-  console.log("changeHealth ", player, points);
+function attackShield(player, itemKey, points){
+  console.log("attackShield");
+  if(player.item[itemKey].points > points){
+    console.log("item > points");
+    player.item[itemKey].points -= points;
+  } else if(player.item[itemKey].points == points){
+    console.log("item == points");
+    moveCardGraveyard(player, itemKey, "item");
+  } else {
+    console.log("item < points");
+    damagePlayer(player, points-player.item[itemKey].points)
+    moveCardGraveyard(player, itemKey, "item");
+
+  }
+}
+
+function attackOpponent(player, points){
+  console.log("attackOpponent");
+  let itemKey = Object.keys(player.item)[0];
+  let itemCategory = player.item[itemKey].category;
+  if(Object.keys(player.item).length === 0 || itemCategory!="shield"){
+      player.health.current -= points;
+  } else if(Object.keys(player.item).length === 1  && itemCategory=="shield"){
+      console.log("Were in attack shield");
+      attackShield(player, itemKey, points);
+  }
+}
+
+function healPlayer(player, points){
+  console.log("healPlayer");
   if(player.health.current+points > player.health.maximum){
     player.health.current = player.health.maximum;
   } else {
     player.health.current += points;
   }
+}
+
+function damagePlayer(player, points){
+  console.log("damagePlayer");
+  player.health.current -= points;
 }
 
 function moveItemGraveyard(player) {
@@ -150,10 +186,9 @@ function moveItem(player, key) {
     delete player.hand[key];
 }
 
-function playerActs(game, player, active, target){
-  console.log("playerActs called ");
+function playerActs(game, player, opponent, active, target){
+  console.log("playerActs called");
   let activeCard = player.hand[active];
-  console.log(activeCard);
   // If the key for the second card is graveyard
   // We send the card that has key1 to graveyard
   if(target=='graveyard'){
@@ -163,10 +198,23 @@ function playerActs(game, player, active, target){
     if(activeCard.type=='action'){
       switch(activeCard.category){
         case 'heal':
-          changeHealth(player, activeCard.points);
+          healPlayer(player, activeCard.points);
           moveCardGraveyard(player, active);
           break;
         case 'attack':
+          break;
+      }
+    }
+  }
+  if(target=='opponent'){
+    if(activeCard.type=='action'){
+      switch(activeCard.category){
+        case 'heal':
+          break;
+        case 'attack':
+          console.log("attacking opponent");
+          attackOpponent(opponent, activeCard.points);
+          moveCardGraveyard(player, active);
           break;
       }
     }
@@ -191,7 +239,7 @@ function makeMove(game, msg) {
 
     if (pActive.moveCounter < 2) {
 
-        game = playerActs(game, pActive, msg.activeCard, msg.target);
+        game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
 
         // switch (msg.category) {
         // case 'graveyard':
