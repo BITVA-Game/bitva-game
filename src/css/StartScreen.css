@@ -1,6 +1,6 @@
 .start-screen {
     background: #000 url("../images/start_screen.jpg") no-repeat;
-	background-size: cover; 
+    background-position: right 0 top 0;
     bottom: 0;
     left: 0;
     position: fixed;
@@ -69,9 +69,9 @@
 .window::after {
     animation: window 5s ease-in 9s infinite;
     animation-play-state: running;
-    box-shadow: 
+    box-shadow:
         -14px -24px 10px 3px orange, 10px -25px 10px 3px orange,
-        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
+        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange,
         -9px 28px 10px 3px orange, 15px 27px 10px 3px orange;
     content: '';
     height: 0;
@@ -84,35 +84,35 @@
 
 .window:hover::after {
     animation-play-state: paused;
-    box-shadow: 
+    box-shadow:
         -14px -24px 10px 3px orange, 10px -25px 10px 3px orange,
-        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
+        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange,
         -9px 28px 10px 3px orange, 15px 27px 10px 3px orange;
 }
 
 @keyframes window {
     0%, 30%, 60% {
-        box-shadow: 
+        box-shadow:
         -14px -24px 10px 3px orange, 10px -25px 10px 3px orange,
-        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
+        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange,
         -9px 28px 10px 3px orange, 15px 27px 10px 3px orange;
     }
     20%, 40%, 80% {
-        box-shadow: 
+        box-shadow:
         -14px -24px 10px 3.5px orange, 10px -25px 11px 4px orange,
-        -12px 3px 11.5px 5px orange, 12px 2px 11.5px 5px orange, 
+        -12px 3px 11.5px 5px orange, 12px 2px 11.5px 5px orange,
         -9px 28px 11px 4px orange, 15px 27px 10px 3.5px orange;
     }
     90% {
-        box-shadow: 
+        box-shadow:
         -14px -24px 11.5px 4px orange, 10px -25px 11px 4.5px orange,
-        -12px 3px 12px 6px orange, 12px 2px 12px 6px orange, 
+        -12px 3px 12px 6px orange, 12px 2px 12px 6px orange,
         -9px 28px 11px 4.5px orange, 15px 27px 11.5px 4px orange;
     }
     100% {
-        box-shadow: 
+        box-shadow:
         -14px -24px 9px 3px orange, 10px -25px 9px 3px orange,
-        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange, 
+        -12px 3px 11px 4px orange, 12px 2px 11px 4px orange,
         -9px 28px 9px 3px orange, 15px 27px 9px 3px orange;
     }
 }
