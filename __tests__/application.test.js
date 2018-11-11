@@ -1028,3 +1028,71 @@ test('msg ACTION CASE4 received: active player choose item, if his item holder i
     // ожидаем, что карта-item убралась из руки.
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
+
+// Test, that active player after moveCounter =2 gets missing cards to his hand.
+// Inactive Player becomes active. Move pass.
+test('msg ACTION ANY received: active player moveCounter =2 after his action, he gets missing cards to hand, inactive player becomes active.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'hero',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 12, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {
+                            type: 'action',
+                            points: 3,
+                            category: 'heal',
+                        },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    item: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // expect that active player counter after action = 2
+    expect(result.game.players[0].moveCounter).toEqual(2);
+
+    // expect that active player hand has 4  cards before game passes to opponent
+    expect(Object.keys(result.game.players[0].hand).length).toEqual(5);
+
+    // expect that inactive player becomes active
+    expect(result.game.players[1].active).toEqual(true);
+});

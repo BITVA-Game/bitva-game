@@ -103,9 +103,13 @@ function randomKey(hashtable) {
 
 function giveCardsTo(player) {
     while (Object.keys(player.hand).length < 5) {
-        const key = randomKey(player.cards);
-        player.hand[key] = player.cards[key];
-        delete player.cards[key];
+        if (Object.keys(player.cards).length > 0) {
+            const key = randomKey(player.cards);
+            player.hand[key] = player.cards[key];
+            delete player.cards[key];
+        } else {
+            break;
+        }
     }
 
     return player;
@@ -172,7 +176,7 @@ function healPlayer(player, points) {
 }
 
 function damagePlayer(player, points) {
-    console.log('damagePlayer');
+    // console.log('damagePlayer');
     player.health.current -= points;
 }
 /*
@@ -206,6 +210,8 @@ function playerActs(game, player, opponent, active, target) {
                 break;
             case 'attack':
                 break;
+            default:
+                return new Error('You are under spell. Wait for redemption!');
             }
         }
     }
@@ -219,13 +225,19 @@ function playerActs(game, player, opponent, active, target) {
                 attackOpponent(opponent, activeCard.points);
                 moveCardGraveyard(player, active);
                 break;
+            default:
+                return new Error('You are under spell. Wait for redemption!');
             }
         }
     }
-    if (target === 'item' && activeCard.type === 'action') {
-        moveItem(player, active);
-    }
     player.moveCounter += 1;
+    if (player.moveCounter === 2) {
+        console.log(player);
+        giveCardsTo(player);
+        player.active = false;
+        opponent.active = true;
+        // console.log(game.players);
+    }
 
     return game;
 }
