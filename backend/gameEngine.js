@@ -130,7 +130,11 @@ function moveCardGraveyard(player, key) {
 
 function changeHealth(player, points){
   console.log("changeHealth ", player, points);
-  player.health.current += points;
+  if(player.health.current+points > player.health.maximum){
+    player.health.current = player.health.maximum;
+  } else {
+    player.health.current += points;
+  }
 }
 
 function moveItemGraveyard(player) {
