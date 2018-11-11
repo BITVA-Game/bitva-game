@@ -148,9 +148,10 @@ function attackShield(player, itemKey, points){
 }
 
 function attackOpponent(player, points){
-  console.log("attackOpponent");
+  console.log("attackOpponent ", player, points);
+  let itemCategory
   let itemKey = Object.keys(player.item)[0];
-  let itemCategory = player.item[itemKey].category;
+  itemKey ? itemCategory = player.item[itemKey].category : null;
   if(Object.keys(player.item).length === 0 || itemCategory!="shield"){
       player.health.current -= points;
   } else if(Object.keys(player.item).length === 1  && itemCategory=="shield"){
