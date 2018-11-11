@@ -80,12 +80,12 @@ const HeroInfo = props => (
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <button className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero'} type="button" onClick={() => (props.onShow(props.hero.id))}>
-            <img className={styles.image} src={images[props.hero.id]} alt={props.hero.id} />
+        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero'} role="button" onClick={() => (props.onShow(props.hero.id))} onKeyPress={() => props.onShow(props.hero.id)} tabIndex="-1">
+            <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
             {/* <div className="hero-name hero-nav-menu-name header-menu">
                 {props.hero.name}
             </div> */}
-        </button>
+        </div>
         <button className="btn-hero-info" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
             Info
         </button>
@@ -220,6 +220,7 @@ class HeroSelection extends Component {
                                 closeInfo={this.closeInfo}
                                 showInfo={this.showInfo}
                                 changeSelected={this.changeSelected}
+                                selected={this.state.selected}
                             />
                         )
                     }
