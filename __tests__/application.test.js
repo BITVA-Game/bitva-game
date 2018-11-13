@@ -538,6 +538,12 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
         game: {
             players: [
                 {
+                    active: false,
+                    hero: 'yaga',
+                    item: {},
+                    hand: {},
+                },
+                {
                     active: true,
                     cards: {
                         key0: {},
@@ -566,11 +572,6 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                     moveCounter: 1,
                     grave: { key10: {} },
                 },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    item: {},
-                },
             ],
         },
     });
@@ -582,15 +583,15 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     const result = sendReply.mock.calls[0][0];
 
     // expect that his cunter was increased
-    expect(result.game.players[0].moveCounter).toEqual(2);
+    expect(result.game.players[1].moveCounter).toEqual(2);
     // expect that the card was an action card
-    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    expect(result.game.players[1].grave.key1.type).toEqual('action');
     // expect that hero's health was increased
-    expect(result.game.players[0].health.current).toEqual(8);
+    expect(result.game.players[1].health.current).toEqual(8);
     // expect that the card was moved to graveyard
-    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    expect(Object.keys(result.game.players[1].grave)).toContain('key1');
     // expect the card not to be in hand
-    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+    expect(Object.keys(result.game.players[1].hand)).not.toContain('key1');
 });
 
 // player heals for over the max

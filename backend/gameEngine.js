@@ -96,15 +96,16 @@ const generatePlayers = function (heroName) {
     return { players };
 };
 
-function randomKey(hashtable) {
-    const keys = Object.keys(hashtable);
-    return keys[Math.floor(keys.length * Math.random())];
-}
+// function randomKey(hashtable) {
+//     const keys = Object.keys(hashtable);
+//     return keys[Math.floor(keys.length * Math.random())];
+// }
 
 function giveCardsTo(player) {
     while (Object.keys(player.hand).length < 5) {
         if (Object.keys(player.cards).length > 0) {
-            const key = randomKey(player.cards);
+            // const key = randomKey(player.cards);
+            const key = Object.keys(player.cards)[0];
             player.hand[key] = player.cards[key];
             delete player.cards[key];
         } else {
@@ -138,13 +139,19 @@ function moveCardGraveyard(player, key, from) {
     }
 }
 
+
+function damagePlayer(player, points) {
+    // console.log('damagePlayer');
+    player.health.current -= points;
+}
+
 function attackShield(player, itemKey, points) {
     // console.log('attackShield');
     if (player.item[itemKey].points > points) {
         // console.log('item > points');
         player.item[itemKey].points -= points;
     } else if (player.item[itemKey].points === points) {
-    // console.log('item == points');
+        // console.log('item == points');
         moveCardGraveyard(player, itemKey, 'item');
     } else {
         // console.log('item < points');
@@ -158,16 +165,16 @@ function attackOpponent(player, points) {
     let itemCategory;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemCategory = player.item[itemKey].category : null;
-    if (Object.keys(player.item).length === 0 || itemCategory != 'shield') {
+    if (Object.keys(player.item).length === 0 || itemCategory !== 'shield') {
         player.health.current -= points;
-    } else if (Object.keys(player.item).length === 1 && itemCategory == 'shield') {
+    } else if (Object.keys(player.item).length === 1 && itemCategory === 'shield') {
         // console.log('Were in attack shield');
         attackShield(player, itemKey, points);
     }
 }
 
 function healPlayer(player, points) {
-    console.log('healPlayer');
+    // console.log('healPlayer');
     if (player.health.current + points > player.health.maximum) {
         player.health.current = player.health.maximum;
     } else {
@@ -175,19 +182,14 @@ function healPlayer(player, points) {
     }
 }
 
-function damagePlayer(player, points) {
-    // console.log('damagePlayer');
-    player.health.current -= points;
-}
-/*
-function moveItemGraveyard(player) {
-    const key = Object.keys(player.item)[0];
-    if (key !== undefined) {
-        player.grave[key] = player.item[key];
-        delete player.item[key];
-    }
-}
-*/
+// function moveItemGraveyard(player) {
+//     const key = Object.keys(player.item)[0];
+//     if (key !== undefined) {
+//         player.grave[key] = player.item[key];
+//         delete player.item[key];
+//     }
+// }
+
 function moveItem(player, key) {
     player.item[key] = player.hand[key];
     delete player.hand[key];
@@ -230,13 +232,15 @@ function playerActs(game, player, opponent, active, target) {
             }
         }
     }
+    if (target === 'item' && activeCard.type === 'action') {
+        moveItem(player, active);
+    }
     player.moveCounter += 1;
     if (player.moveCounter === 2) {
-        console.log(player);
+        // console.log(game);
         giveCardsTo(player);
         player.active = false;
         opponent.active = true;
-        // console.log(game.players);
     }
 
     return game;
