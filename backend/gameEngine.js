@@ -1,7 +1,11 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-case-declarations */
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
+
+import { sendMessage } from '../src/App';
 
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
@@ -117,10 +121,15 @@ function giveCardsToAll(playersArray) {
 }
 
 
+function damagePlayer(player, points) {
+    console.log('damagePlayer');
+    player.health.current -= points;
+}
+
 // This function taked the player and the key for his cards
 // And moves it so graveyard via deleting the key from array
 function moveCardGraveyard(player, key, from) {
-    if (from == 'item') {
+    if (from === 'item') {
         console.log('moveCardGraveyard called for item ', player, key);
         player.grave[key] = player.item[key];
         delete player.item[key];
@@ -136,7 +145,7 @@ function attackShield(player, itemKey, points) {
     if (player.item[itemKey].points > points) {
         console.log('item > points');
         player.item[itemKey].points -= points;
-    } else if (player.item[itemKey].points == points) {
+    } else if (player.item[itemKey].points === points) {
         console.log('item == points');
         moveCardGraveyard(player, itemKey, 'item');
     } else {
@@ -147,13 +156,16 @@ function attackShield(player, itemKey, points) {
 }
 
 function attackOpponent(player, points) {
-    console.log('attackOpponent ', player, points);
+    console.log('attackOpponent ', player.health.current);
     let itemCategory;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemCategory = player.item[itemKey].category : null;
-    if (Object.keys(player.item).length === 0 || itemCategory != 'shield') {
+    if (Object.keys(player.item).length === 0 || itemCategory !== 'shield') {
         player.health.current -= points;
-    } else if (Object.keys(player.item).length === 1 && itemCategory == 'shield') {
+        if (player.health.current <= 0) {
+            sendMessage('ENDGAME');
+        }
+    } else if (Object.keys(player.item).length === 1 && itemCategory === 'shield') {
         console.log('Were in attack shield');
         attackShield(player, itemKey, points);
     }
@@ -168,18 +180,13 @@ function healPlayer(player, points) {
     }
 }
 
-function damagePlayer(player, points) {
-    console.log('damagePlayer');
-    player.health.current -= points;
-}
-
-function moveItemGraveyard(player) {
-    const key = Object.keys(player.item)[0];
-    if (key !== undefined) {
-        player.grave[key] = player.item[key];
-        delete player.item[key];
-    }
-}
+// function moveItemGraveyard(player) {
+//     const key = Object.keys(player.item)[0];
+//     if (key !== undefined) {
+//         player.grave[key] = player.item[key];
+//         delete player.item[key];
+//     }
+// }
 
 function moveItem(player, key) {
     player.item[key] = player.hand[key];
@@ -191,11 +198,11 @@ function playerActs(game, player, opponent, active, target) {
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
     // We send the card that has key1 to graveyard
-    if (target == 'graveyard') {
+    if (target === 'graveyard') {
         moveCardGraveyard(player, active);
     }
-    if (target == 'hero') {
-        if (activeCard.type == 'action') {
+    if (target === 'hero') {
+        if (activeCard.type === 'action') {
             switch (activeCard.category) {
             case 'heal':
                 healPlayer(player, activeCard.points);
@@ -203,11 +210,13 @@ function playerActs(game, player, opponent, active, target) {
                 break;
             case 'attack':
                 break;
+            default:
+                return new Error('You are under spell. Wait for redemption!');
             }
         }
     }
-    if (target == 'opponent') {
-        if (activeCard.type == 'action') {
+    if (target === 'opponent') {
+        if (activeCard.type === 'action') {
             switch (activeCard.category) {
             case 'heal':
                 break;
@@ -216,6 +225,8 @@ function playerActs(game, player, opponent, active, target) {
                 attackOpponent(opponent, activeCard.points);
                 moveCardGraveyard(player, active);
                 break;
+            default:
+                return new Error('You are under spell. Wait for redemption!');
             }
         }
     }

@@ -1028,7 +1028,7 @@ test.skip('msg CASE4 received: active player choose item, if his item holder is 
 });
 
 // If Player does not have any life points left ===  ENDGAME. GSO is the same. Screen set to Victory
-test('msg ACTION ANY, player life points === 0, ENDGAME with same GSO. Screen = Victory', () => {
+test.only('msg ACTION ANY, player life points === 0, ENDGAME with same GSO. Screen = Victory', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1069,11 +1069,7 @@ test('msg ACTION ANY, player life points === 0, ENDGAME with same GSO. Screen = 
                     hand: {
                         key12: {}, key8: {}, key15: {}, key3: {},
                     },
-                    item: {
-                        key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1,
-                        },
-                    },
+                    item: { },
                     grave: { },
                 },
             ],
@@ -1088,7 +1084,14 @@ test('msg ACTION ANY, player life points === 0, ENDGAME with same GSO. Screen = 
     const result = sendReply.mock.calls[0][0];
 
     // expect the inactive player health ===0
-    expect(result.game.players[1].health.current.points).toEqual(0);
+    expect(result.game.players[1].health.current).toBeLessThanOrEqual(0);
 
     // expect manager, screen is now Victory
+    expect(sendReply.mock.calls[0][0]).toContain(
+        {
+            manager: {
+                screen: 'VICTORY',
+            },
+        },
+    );
 });
