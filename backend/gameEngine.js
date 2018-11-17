@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-expressions */
+/* eslint-disable default-case */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-case-declarations */
 /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -95,21 +96,16 @@ const generatePlayers = function (heroName) {
     return { players };
 };
 
-// function randomKey(hashtable) {
-//     const keys = Object.keys(hashtable);
-//     return keys[Math.floor(keys.length * Math.random())];
-// }
+function randomKey(hashtable) {
+    const keys = Object.keys(hashtable);
+    return keys[Math.floor(keys.length * Math.random())];
+}
 
 function giveCardsTo(player) {
     while (Object.keys(player.hand).length < 5) {
-        if (Object.keys(player.cards).length > 0) {
-            // const key = randomKey(player.cards);
-            const key = Object.keys(player.cards)[0];
-            player.hand[key] = player.cards[key];
-            delete player.cards[key];
-        } else {
-            break;
-        }
+        const key = randomKey(player.cards);
+        player.hand[key] = player.cards[key];
+        delete player.cards[key];
     }
 
     return player;
@@ -122,6 +118,7 @@ function giveCardsToAll(playersArray) {
 
     return playersArray;
 }
+
 
 // This function taked the player and the key for his cards
 // And moves it so graveyard via deleting the key from array
@@ -137,19 +134,13 @@ function moveCardGraveyard(player, key, from) {
     }
 }
 
-
-function damagePlayer(player, points) {
-    // console.log('damagePlayer');
-    player.health.current -= points;
-}
-
 function attackShield(player, itemKey, points) {
     // console.log('attackShield');
     if (player.item[itemKey].points > points) {
         // console.log('item > points');
         player.item[itemKey].points -= points;
     } else if (player.item[itemKey].points === points) {
-        // console.log('item == points');
+    // console.log('item == points');
         moveCardGraveyard(player, itemKey, 'item');
     } else {
         // console.log('item < points');
@@ -165,9 +156,6 @@ function attackOpponent(player, points) {
     itemKey ? itemCategory = player.item[itemKey].category : null;
     if (Object.keys(player.item).length === 0 || itemCategory !== 'shield') {
         player.health.current -= points;
-        if (player.health.current <= 0) {
-            player.health.current = 0;
-        }
     } else if (Object.keys(player.item).length === 1 && itemCategory === 'shield') {
         // console.log('Were in attack shield');
         attackShield(player, itemKey, points);
@@ -175,7 +163,7 @@ function attackOpponent(player, points) {
 }
 
 function healPlayer(player, points) {
-    // console.log('healPlayer');
+    console.log('healPlayer');
     if (player.health.current + points > player.health.maximum) {
         player.health.current = player.health.maximum;
     } else {
@@ -183,28 +171,113 @@ function healPlayer(player, points) {
     }
 }
 
-// function moveItemGraveyard(player) {
-//     const key = Object.keys(player.item)[0];
-//     if (key !== undefined) {
-//         player.grave[key] = player.item[key];
-//         delete player.item[key];
-//     }
-// }
-
-// we move item card from active player's hand to his item holder
+function damagePlayer(player, points) {
+    console.log('damagePlayer');
+    player.health.current -= points;
+}
+/*
+function moveItemGraveyard(player) {
+    const key = Object.keys(player.item)[0];
+    if (key !== undefined) {
+        player.grave[key] = player.item[key];
+        delete player.item[key];
+    }
+}
+*/
 function moveItem(player, key) {
-    // active player's item get the active card's key from his hand
+    console.log(player.item[key]);
     player.item[key] = player.hand[key];
     // we delete the card with active key from player's hand
     delete player.hand[key];
 }
 
-// function that allows active player to move his card from hand to misc. targets
+function cardIncreaseHealth(players) {
+    for (let i = 0; i < players.length; i += 1) {
+        players[i].health.current += 1;
+    }
+    return players;
+}
+
+function cardDecreaseHealth(players) {
+    for (let i = 0; i < players.length; i += 1) {
+        players[i].health.current -= 1;
+    }
+    return players;
+}
+
+// special water cards act with water function
+function waterCard(players) {
+    // console.log('We are in water function!');
+    // we check for each player if they have card in item holder and card points !=0
+    players.forEach((p) => {
+        // console.log(Object.values(p.item)[0]);
+        const itemCard = Object.values(p.item)[0];
+        if (Object.keys(p.item).length !== 0 && itemCard.points !== 0) {
+            // we run switch by all players item id card
+            switch (itemCard.id) {
+            // if it is Living Water card then we run function
+            // that increase players current health by 1 point
+            case 'livingWater':
+                //  console.log('We are in living water case!');
+                cardIncreaseHealth(players);
+                // we deduct 1 point from item card points
+                itemCard.points -= 1;
+                break;
+            // if it is Dead Water card then we run function
+            // that decrease players current health by 1 point
+            case 'deadWater':
+                // console.log('We are in dead water case!');
+                cardDecreaseHealth(players);
+                // we deduct 1 point from item card points
+                itemCard.points -= 1;
+                break;
+            }
+            if (itemCard.points === 0) {
+                // we move water item card to graveyard if its points == 0
+                console.log('We are in item card has 0 ponts!', p, (Object.keys(p.item)[0]));
+                moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
+            }
+        }
+    });
+    return { players };
+}
+// function waterCard(player, opponent) {
+//     const playerItemCard = Object.values(player.item)[0];
+//     if (Object.keys(player.item).length !== 0) {
+//         if (playerItemCard.id === 'livingWater' && playerItemCard.points !== 0) {
+//             console.log('we are in living water for player!');
+//             player.health.current += 1;
+//             opponent.health.current += 1;
+//             playerItemCard.points -= 1;
+//         }
+//         if (playerItemCard.id === 'deadWater' && playerItemCard.points !== 0) {
+//             console.log('we are in dead water for player!');
+//             player.health.current -= 1;
+//             opponent.health.current -= 1;
+//             playerItemCard.points -= 1;
+//         }
+//     }
+//     if (Object.keys(opponent.item).length !== 0) {
+//         // console.log('Here is water card for opponent');
+//         const opponentItemcard = Object.values(opponent.item)[0];
+//         if (opponentItemcard.id === 'livingWater' && opponentItemcard.points !== 0) {
+//             player.health.current += 1;
+//             opponent.health.current += 1;
+//             opponentItemcard.points -= 1;
+//         }
+//         if (opponentItemcard.id === 'deadWater' && opponentItemcard.points !== 0) {
+//             player.health.current -= 1;
+//             opponent.health.current -= 1;
+//             opponentItemcard.points -= 1;
+//         }
+//     }
+// }
+
 function playerActs(game, player, opponent, active, target) {
-    // console.log('playerActs called', opponent, active, target);
+    // console.log('playerActs called');
     const activeCard = player.hand[active];
-    // If the key for the active card is graveyard
-    // We send the card that has active key to graveyard
+    // If the key for the second card is graveyard
+    // We send the card that has key1 to graveyard
     if (target === 'graveyard') {
         // if active card is in item holder
         if (Object.keys(player.item)[0] === active) {
@@ -241,23 +314,23 @@ function playerActs(game, player, opponent, active, target) {
                 break;
             case 'attack':
                 // console.log('attacking opponent');
+                // in case of attack we call attackOpponent function
+                // and then we move card to graveyard with moveCardGraveyard function
                 attackOpponent(opponent, activeCard.points);
                 moveCardGraveyard(player, active);
-                // if opponent's health after attack is 0 then game is over
-                if (opponent.health.current === 0) {
+                // if opponent healnth is less or ==0 then game is over
+                if (opponent.health.current <= 0) {
                     game.phase = 'OVER';
                 }
                 break;
-            // if any mistake occurs during game process, player gets error message by default
+                // if any mistake occurs during game process, player gets error message by default
             default:
                 return new Error('You are under spell. Wait for redemption!');
             }
         }
     }
-    // if active player wants to move his active card to item holder
-    // he can do it only if card's type == item
     if (target === 'item' && activeCard.type === 'item') {
-        // we call move item function to move active card from hand to item holder
+        console.log('We are in move item case');
         moveItem(player, active);
     }
     // after each move we increase active player's counter for 1
@@ -270,6 +343,9 @@ function playerActs(game, player, opponent, active, target) {
         player.active = false;
         // inactive player becomes active once active player's counter ==2
         opponent.active = true;
+        // we check if there is special water cards in item holder of players
+        // and run function water if any
+        waterCard(game.players);
     }
     // we return the whole game to continue
     return game;
@@ -347,7 +423,7 @@ function handle(app, message) {
     }
     case 'HEROSELECTED': {
         const heroName = message.hero;
-
+        console.log(app.game.players);
         return Object.assign({}, app.game, generatePlayers(heroName));
     }
     case 'DEALALL': {
