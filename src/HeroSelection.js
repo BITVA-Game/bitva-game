@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/tabindex-no-positive */
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable max-len */
 /* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
