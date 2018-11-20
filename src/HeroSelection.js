@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainMenu from './MainMenu';
@@ -86,9 +87,9 @@ const HeroBlock = props => (
                 {props.hero.name}
             </div> */}
         </div>
-        <button className="btn-hero-info" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
+        {/* <button className="btn-hero-info" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
             Info
-        </button>
+        </button> */}
     </div>
 );
 
@@ -100,7 +101,7 @@ const ListOfHeroes = props => (
             <HeroBlock
                 key={hero.id}
                 onShow={props.onShow}
-                showDetails={props.showDetails}
+                // showDetails={props.showDetails}
                 hero={hero}
                 app={props.app}
                 selected={hero.id === props.selected}
@@ -160,7 +161,7 @@ class HeroSelection extends Component {
         this.selectLeftHero = this.selectLeftHero.bind(this);
         this.selectRightHero = this.selectRightHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
-        this.showDetails = this.showDetails.bind(this);
+        // this.showDetails = this.showDetails.bind(this);
         this.closeDetails = this.closeDetails.bind(this);
     }
 
@@ -192,9 +193,9 @@ class HeroSelection extends Component {
         this.props.sendMessage({ type: 'HEROSELECTED', hero: selected });
     }
 
-    showDetails(hero) {
-        this.setState({ details: hero });
-    }
+    // showDetails(hero) {
+    //     this.setState({ details: hero });
+    // }
 
     closeDetails() {
         this.setState({ details: null });
@@ -244,7 +245,7 @@ Header.propTypes = {
 };
 
 Footer.propTypes = {
-    something: PropTypes.string.isRequired,
+    // something: PropTypes.string.isRequired,
     selectHero: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
 };
@@ -256,11 +257,11 @@ HeroInfo.propTypes = {
 
 HeroBlock.propTypes = {
     app: PropTypes.object.isRequired,
-    changeSelected: PropTypes.func.isRequired,
+    // changeSelected: PropTypes.func.isRequired,
     hero: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
-    showDetails: PropTypes.func.isRequired,
+    // showDetails: PropTypes.func.isRequired,
 };
 
 ListOfHeroes.propTypes = {
@@ -268,7 +269,7 @@ ListOfHeroes.propTypes = {
     changeSelected: PropTypes.func.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
-    showDetails: PropTypes.func.isRequired,
+    // showDetails: PropTypes.func.isRequired,
 };
 
 OneHero.propTypes = {
@@ -280,7 +281,7 @@ OneHero.propTypes = {
 HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
-    something: PropTypes.string.isRequired,
+    // something: PropTypes.string.isRequired,
 };
 
 export default HeroSelection;
