@@ -538,6 +538,12 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
         game: {
             players: [
                 {
+                    active: false,
+                    hero: 'yaga',
+                    item: {},
+                    hand: {},
+                },
+                {
                     active: true,
                     cards: {
                         key0: {},
@@ -566,11 +572,6 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                     moveCounter: 1,
                     grave: { key10: {} },
                 },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    item: {},
-                },
             ],
         },
     });
@@ -582,15 +583,15 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     const result = sendReply.mock.calls[0][0];
 
     // expect that his cunter was increased
-    expect(result.game.players[0].moveCounter).toEqual(2);
+    expect(result.game.players[1].moveCounter).toEqual(2);
     // expect that the card was an action card
-    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    expect(result.game.players[1].grave.key1.type).toEqual('action');
     // expect that hero's health was increased
-    expect(result.game.players[0].health.current).toEqual(8);
+    expect(result.game.players[1].health.current).toEqual(8);
     // expect that the card was moved to graveyard
-    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    expect(Object.keys(result.game.players[1].grave)).toContain('key1');
     // expect the card not to be in hand
-    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+    expect(Object.keys(result.game.players[1].hand)).not.toContain('key1');
 });
 
 // player heals for over the max
@@ -971,9 +972,11 @@ test('msg ACTION CASE3 player attacks with less than shiald, card goes to gravey
 
 // Test, that when massage with item card  received, then
 // if item holder is empty, active player moves item there. State Case4.
-test.skip('msg CASE4 received: active player choose item, if his item holder is empty player moves item there. State Case4.', () => {
+test('msg ACTION CASE4 received: active player choose item, if his item holder is empty player moves item there.', () => {
     const msg = {
-        type: 'CASE4', key: 'key1', category: 'item', active: true,
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'item',
     };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -998,7 +1001,7 @@ test.skip('msg CASE4 received: active player choose item, if his item holder is 
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { category: 'item', points: 3 },
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'item', points: 3 },
                     },
                     moveCounter: 1,
                     item: {},
@@ -1025,6 +1028,74 @@ test.skip('msg CASE4 received: active player choose item, if his item holder is 
     expect(result.game.players[0].item.key1.category).toEqual('item');
     // ожидаем, что карта-item убралась из руки.
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+});
+
+// Test, that active player after moveCounter =2 gets missing cards to his hand.
+// Inactive Player becomes active. Move pass.
+test('msg ACTION ANY received: active player moveCounter =2 after his action, he gets missing cards to hand, inactive player becomes active.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'hero',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 12, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {
+                            type: 'action',
+                            points: 3,
+                            category: 'heal',
+                        },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    item: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // expect that active player counter after action = 2
+    expect(result.game.players[0].moveCounter).toEqual(2);
+
+    // expect that active player hand has 4  cards before game passes to opponent
+    expect(Object.keys(result.game.players[0].hand).length).toEqual(5);
+
+    // expect that inactive player becomes active
+    expect(result.game.players[1].active).toEqual(true);
 });
 
 // If Player does not have any life points left ===  ENDGAME. GSO is the same. Screen set to Victory
