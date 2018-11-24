@@ -177,7 +177,7 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                 screen: 'HEROSELECT',
             },
             game: {
-
+                phase: 'ACTIVE',
             },
         },
     );
@@ -1098,8 +1098,8 @@ test('msg ACTION ANY received: active player moveCounter =2 after his action, he
     expect(result.game.players[1].active).toEqual(true);
 });
 
-// If Player does not have any life points left ===  ENDGAME. GSO is the same. Screen set to Victory
-test.only('msg ACTION ANY, player life points === 0, ENDGAME with same GSO. Screen = Victory', () => {
+// If Player does not have any life points left game.phase = 'OVER'
+test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1110,6 +1110,7 @@ test.only('msg ACTION ANY, player life points === 0, ENDGAME with same GSO. Scre
     // Mock will rewrite all math.random and set active player arrack card's key to key1
     application.setApp({
         game: {
+            phase: 'ACTIVE',
             players: [
                 {
                     active: true,
@@ -1158,11 +1159,5 @@ test.only('msg ACTION ANY, player life points === 0, ENDGAME with same GSO. Scre
     expect(result.game.players[1].health.current).toBeLessThanOrEqual(0);
 
     // expect manager, screen is now Victory
-    expect(sendReply.mock.calls[0][0]).toContain(
-        {
-            manager: {
-                screen: 'VICTORY',
-            },
-        },
-    );
+    expect(result.game.phase).toEqual('OVER');
 });

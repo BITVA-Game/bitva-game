@@ -9,7 +9,7 @@
 		"screen": "STARTSCREEN"
 	},
 	"game": {
-		
+		"phase": "ACTIVE"		
 	}
 
 }

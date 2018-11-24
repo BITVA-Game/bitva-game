@@ -5,7 +5,6 @@
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
 
-const main = require('../main');
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
@@ -167,7 +166,7 @@ function attackOpponent(player, points) {
     if (Object.keys(player.item).length === 0 || itemCategory !== 'shield') {
         player.health.current -= points;
         if (player.health.current <= 0) {
-            main.sendMessage('ENDGAME');
+            player.health.current = 0;
         }
     } else if (Object.keys(player.item).length === 1 && itemCategory === 'shield') {
         // console.log('Were in attack shield');
@@ -228,6 +227,9 @@ function playerActs(game, player, opponent, active, target) {
                 // console.log('attacking opponent');
                 attackOpponent(opponent, activeCard.points);
                 moveCardGraveyard(player, active);
+                if (opponent.health.current === 0) {
+                    game.phase = 'OVER';
+                }
                 break;
             default:
                 return new Error('You are under spell. Wait for redemption!');
