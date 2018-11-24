@@ -1206,6 +1206,7 @@ test('msg ACTION CASE 5, player wants to move his card from item holder to grave
                 {
                     active: false,
                     hero: 'yaga',
+                    health: { current: 8 },
                 },
             ],
 
@@ -1226,6 +1227,8 @@ test('msg ACTION CASE 5, player wants to move his card from item holder to grave
     expect(result.game.players[0].moveCounter).toEqual(1);
     // оexpect the card to move to graveryard
     expect(Object.keys(result.game.players[0].grave)).toContain('key10');
-    // expect the card to move out of the hand
-    expect(Object.keys(result.game.players[0].hand)).not.toContain('key10');
+    // expect the card to move out of the item
+    expect(Object.keys(result.game.players[0].item)).not.toContain('key10');
+    // expect the opponent health !== 0
+    expect(result.game.players[1].health.current).toBeGreaterThan(0);
 });
