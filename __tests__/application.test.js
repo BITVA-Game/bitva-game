@@ -459,7 +459,6 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     );
 });
 
-
 // player moves a card to graveyard
 test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     // active Card is always a card
@@ -1162,4 +1161,71 @@ test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
 
     // expect manager, screen is now Victory
     expect(result.game.phase).toEqual('OVER');
+});
+
+// player moves a card to graveyard
+test('msg ACTION CASE 5, player wants to move his card from item holder to graveyard', () => {
+    // active Card is always a card
+    // target can be a place (item place, graveyard, deck, herom etc) or a card
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key10',
+        target: 'graveyard',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    application.setApp({
+        game: {
+
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: 13,
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key1: {}, key8: {}, key13: {},
+                    },
+                    // We expect the card 10 will be moved to graveyard
+                    item: { key10: { points: 3 } },
+                    moveCounter: 0,
+                    // graveyard is empty
+                    grave: {},
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                },
+            ],
+
+        },
+
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // expect that player[0] is active
+    expect(result.game.players[0].active).toBeTruthy();
+    // expect that his cunter was increased
+    expect(result.game.players[0].moveCounter).toEqual(1);
+    // оexpect the card to move to graveryard
+    expect(Object.keys(result.game.players[0].grave)).toContain('key10');
+    // expect the card to move out of the hand
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key10');
 });
