@@ -46,7 +46,6 @@ const VersusScreen = props => (
 );
 
 VersusScreen.propTypes = {
-    hero: PropTypes.string.isRequired,
     app: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
 };
