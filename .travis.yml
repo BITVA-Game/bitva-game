@@ -21,6 +21,7 @@ deploy:
     - releases/mac.tar.gz
     - releases/win.tar.gz
     - releases/linux.tar.gz
+  name: Build $(date +'%d.%m.%Y %R')
   skip_cleanup: true
   on:
     repo: BITVA-Game/bitva-game
