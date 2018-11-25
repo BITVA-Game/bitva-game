@@ -55,7 +55,12 @@ class MainMenu extends Component {
 
 MainMenu.propTypes = {
     sendMessage: PropTypes.func.isRequired,
+    // eslint-disable-next-line react/require-default-props
     opened: PropTypes.bool.isRequired,
+};
+
+MainMenu.defaultProps = {
+    opened: false,
 };
 
 MenuButton.propTypes = {
