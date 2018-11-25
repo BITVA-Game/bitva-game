@@ -101,5 +101,3 @@ ipcMain.on('APP', (event, arg) => {
         return application.msgReceived(arg, sendMessage);
     }
 });
-
-exports.sendMessage = sendMessage;
