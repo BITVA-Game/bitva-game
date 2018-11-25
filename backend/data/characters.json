@@ -3,7 +3,8 @@
         "id": "morevna",
 		"name": "Мarya Мorevna",
 		"description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
-		"health": 13,
+        "health": 13,
+        "cardsNumber": 15,
         "cards": {
             "bajun": {
                 "id":  "bajun",
@@ -47,7 +48,8 @@
         "id": "yaga",
 		"name": "Yaga",
 		"description": "Yaga can lead a person between realm of the dead and the living. She is a Witch, Keeper of the Living and Dead water.",
-		"health": 15,
+        "health": 15,
+        "cardsNumber": 15,
         "cards": {
             "bajun": {
                 "id":  "bajun",
