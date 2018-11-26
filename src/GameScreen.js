@@ -23,7 +23,7 @@ const GameTable = (props) => {
     return (
         <div className="game-table app-background">
             {props.app.game.players.map(player => (
-                <Player player={player} />
+                <Player key={player.hero} player={player} />
             ))}
         </div>
     );
@@ -87,11 +87,11 @@ class Player extends Component {
 
     componentDidMount() {
         if (this.player.active) {
-            const script = document.createElement('script');
-            script.async = true;
-            script.src = dragging;
-            script.type = 'text/javascript';
-            document.body.appendChild(script);
+            // const script = document.createElement('script');
+            // script.async = true;
+            // script.src = dragging;
+            // script.type = 'text/javascript';
+            // document.body.appendChild(script);
         }
     }
 
@@ -116,8 +116,8 @@ class Player extends Component {
                 </div>
                 <Deck deck={this.player.deck} />
                 <div className="hand">
-                    {Object.values(this.player.hand).map(card => (
-                        <div className="card-place card-like">
+                    {Object.values(this.player.hand).map((card, index) => (
+                        <div key={index} className="card-place card-like">
                             <Card card={card} draggable={this.player.active} />
                         </div>
                     ))}
