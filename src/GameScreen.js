@@ -6,7 +6,7 @@ import './css/GameScreen.css';
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
 
-import dragging from './dragging';
+import './dragging';
 
 const images = {
     yaga,
