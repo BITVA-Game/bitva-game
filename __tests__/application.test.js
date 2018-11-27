@@ -495,6 +495,7 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
                         key11: {}, key1: {}, key8: {}, key13: {}, key10: { points: 3 },
                     },
                     moveCounter: 0,
+                    item: {},
                     // graveyard is empty
                     grave: {},
                 },
@@ -697,6 +698,7 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
                         key11: {}, key8: {}, key13: { type: 'action', category: 'attack', points: 2 }, key1: {},
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
                 {
@@ -734,7 +736,7 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key13');
 });
 
-// player attacks enemy with attack power == shield
+// player attacks enemy with attack power == shield points
 test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     const msg = {
         type: 'ACTION',
@@ -767,6 +769,7 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
                         key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
                 {
@@ -813,8 +816,8 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
 
-// player attacks enemy with attack power == shield
-test('msg ACTION CASE3 player attacks with more than sheald, shield & card go to graveyard, opponent hit', () => {
+// player attacks enemy with attack power == shield points
+test('msg ACTION CASE3 player attacks with more than shield, shield & card go to graveyard, opponent hit', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -846,6 +849,7 @@ test('msg ACTION CASE3 player attacks with more than sheald, shield & card go to
                         key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
                 {
@@ -894,7 +898,7 @@ test('msg ACTION CASE3 player attacks with more than sheald, shield & card go to
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
 
-// player attacks enemy with attack power == shield
+// player attacks enemy with attack power == shield points
 test('msg ACTION CASE3 player attacks with less than shiald, card goes to graveyard, shield decresses', () => {
     const msg = {
         type: 'ACTION',
@@ -903,7 +907,7 @@ test('msg ACTION CASE3 player attacks with less than shiald, card goes to gravey
     };
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    // Mock will rewrite all math.random and set active player attack card's key to key1
     application.setApp({
         game: {
             players: [
@@ -927,6 +931,7 @@ test('msg ACTION CASE3 player attacks with less than shiald, card goes to gravey
                         key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
                 {
@@ -972,7 +977,7 @@ test('msg ACTION CASE3 player attacks with less than shiald, card goes to gravey
 });
 
 // Test, that when massage with item card  received, then
-// if item holder is empty, active player moves item there. State Case4.
+// if item holder is empty, active player moves item there
 test('msg ACTION CASE4 received: active player choose item, if his item holder is empty player moves item there.', () => {
     const msg = {
         type: 'ACTION',
@@ -1031,9 +1036,9 @@ test('msg ACTION CASE4 received: active player choose item, if his item holder i
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
 
-// Test, that active player after moveCounter =2 gets missing cards to his hand.
+// Test, that active player after his moveCounter = 2 gets missing cards to his hand.
 // Inactive Player becomes active. Move pass.
-test('msg ACTION ANY received: active player moveCounter =2 after his action, he gets missing cards to hand, inactive player becomes active.', () => {
+test('msg ACTION ANY received: active player moveCounter = 2 after his action, he gets missing cards to hand, inactive player becomes active.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1072,6 +1077,7 @@ test('msg ACTION ANY received: active player moveCounter =2 after his action, he
                         },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
                 {
@@ -1166,7 +1172,7 @@ test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
 // player moves a card to graveyard
 test('msg ACTION CASE 5, player wants to move his card from item holder to graveyard', () => {
     // active Card is always a card
-    // target can be a place (item place, graveyard, deck, herom etc) or a card
+    // target can be a place (item place, graveyard, deck, hero etc) or a card
     const msg = {
         type: 'ACTION',
         activeCard: 'key10',
