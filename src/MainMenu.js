@@ -4,6 +4,15 @@ import './css/App.css';
 import './css/MainMenu.css';
 import logo from './images/logo.png';
 
+
+/**
+* MenuButton component
+*
+* @param {string} name Button's text
+* @param {string} type Type of screen to load after clicking the button
+* @param {function} sendMessage Message to pass type of screen to load after clicking the button
+* @returns {object} MenuButton component
+*/
 const MenuButton = props => (
     <li>
         <button className="menu-button" type="button" onClick={() => props.sendMessage({ type: props.type })}>
@@ -12,18 +21,43 @@ const MenuButton = props => (
     </li>
 );
 
+/**
+* MainMenu component
+*
+* @param {bool} opened Set MainMenu's state
+* @param {function} sendMessage Message to pass type of screen to load after clicking the button
+* @returns {object} MainMenu component
+*/
 class MainMenu extends Component {
+    /**
+    * MainMenu constructor
+    *
+    * @param {bool} opened Set MainMenu's state
+    * @returns {object} MainMenu 
+    */
     constructor(props) {
         super(props);
         this.state = { opened: props.opened };
         this.toggle = this.toggle.bind(this);
     }
 
+    /**
+    * toggle MainMenu
+    *
+    * @param {none} none
+    * @returns {bool} opened Set MainMenu's state
+    */
     toggle() {
         const opened = this.state.opened;
         this.setState({ opened: !opened });
     }
 
+    /**
+    * toggle MainMenu
+    *
+    * @param {none} none
+    * @returns {object} MainMenu
+    */
     render() {
         return (
             <div className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
