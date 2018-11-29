@@ -85,8 +85,13 @@ const HeroInfo = props => (
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero'} role="button" onClick={() => (props.onShow(props.hero.id))} onKeyPress={() => props.onShow(props.hero.id)} tabIndex="-1">
+        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onClick={() => (props.onShow(props.hero.id))} onKeyPress={() => props.onShow(props.hero.id)} tabIndex="-1">
             <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
+            <div className="deck-icon">
+                <div className="deck-text">
+                    {props.hero.cardsNumber}
+                </div>
+            </div>
             <div className="health-container">
                 <img className="health" src={heart} alt="" />
                 <div className="health-text">
