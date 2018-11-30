@@ -1391,7 +1391,7 @@ test('msg ACTION received: active player has dead water in item, it decreased pl
 
 // Test, that when living water card is in any player item holder then
 // players get +1 to their current health each at next 3  moves as card has 3pnts.
-test('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
+test.only('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1465,7 +1465,7 @@ test('msg ACTION received: inactive player has living water in item, it increase
 
 // Test, that when dead water is in any player item holder then
 // players get -1 to their health current each at next 3  moves as card has 3pnts.
-test('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
+test.only('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
