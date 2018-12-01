@@ -299,6 +299,7 @@ function playerActs(game, player, opponent, active, target) {
     // then his active card moves to graveyard. Other scenarios are not allowed
     if (target === 'hero') {
         if (activeCard.type === 'action') {
+            // eslint-disable-next-line default-case
             switch (activeCard.category) {
             case 'heal':
                 healPlayer(player, activeCard.points);
@@ -316,6 +317,7 @@ function playerActs(game, player, opponent, active, target) {
     // then his active card moves to graveyard. Other scenarios are not allowed
     if (target === 'opponent') {
         if (activeCard.type === 'action') {
+            // eslint-disable-next-line default-case
             switch (activeCard.category) {
             case 'heal':
                 break;
