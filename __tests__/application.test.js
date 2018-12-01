@@ -1034,14 +1034,12 @@ test('msg ACTION CASE4 received: active player choose item, if his item holder i
                         key13: {},
                         key1: {
                             id: 'shieldLarge', type: 'item', category: 'shield', points: 3,
-                        },
-                    },
+                        },                       
                     moveCounter: 1,
                     item: {},
                     grave: { key10: {} },
                 },
-                {
-                    active: false,
+                {  active: false,
                     hero: 'yaga',
                     item: {},
                 },
@@ -1343,7 +1341,7 @@ test('msg ACTION received: active player put Living Water in item, it increases 
 
 // Test, that when dead water is in any player item holder then
 // players get -1 to their health current each at next 3  moves as card has 3pnts.
-test('msg ACTION received: inactive player has dead water in item, it decreased players health current for 1pnt next 3 moves.', () => {
+test('msg ACTION received: active player has dead water in item, it decreased players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1408,10 +1406,84 @@ test('msg ACTION received: inactive player has dead water in item, it decreased 
 
     // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
     expect(result.game.players[0].health.current).toEqual(9);
-    expect(result.game.players[1].health.current).toEqual(7);
+    expect(result.game.players[1].health.current).toEqual(4);
     // ожидаем, что при переходе хода на текущего активного,
     // карта -water стоит в item cо свойтсвом itemInstalled ==true
-    expect(result.game.players[1].item.key10.itemInstalled).toEqual(true);
+    // expect(result.game.players[1].item.key10.itemInstalled).toEqual(true);
+    // ожидаем, что карта-water находится в item пока у нее есть очки.
+    expect(result.game.players[0].item.key10.points).not.toEqual(0);
+});
+
+// Test, that when dead water is in any player item holder then
+// players get -1 to their health current each at next 3  moves as card has 3pnts.
+test('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 13 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 1,
+                    item: { },
+                    grave: {},
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    item: {
+                        key10: {
+                            id: 'livingWater', type: 'item', category: 'heal', itemInstalled: true, points: 2,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта dead water в item holder неактивного игрока
+    expect(result.game.players[1].item.key10.id).toEqual('livingWater');
+    // ожидаем, что карта dead water неактивного игрока имеет тип - damage
+    expect(result.game.players[1].item.key10.category).toEqual('heal');
+    // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
+    expect(result.game.players[0].health.current).toEqual(11);
+    expect(result.game.players[1].health.current).toEqual(6);
+    // ожидаем, что при переходе хода на текущего активного,
+    // карта -water стоит в item cо свойтсвом itemInstalled ==true
+    // expect(result.game.players[1].item.key10.itemInstalled).toEqual(true);
     // ожидаем, что карта-water находится в item пока у нее есть очки.
     expect(result.game.players[0].item.key10.points).not.toEqual(0);
 });

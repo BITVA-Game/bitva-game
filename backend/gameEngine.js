@@ -329,8 +329,9 @@ function playerActs(game, player, opponent, active, target) {
             }
         }
     }
+
     if (target === 'item' && activeCard.type === 'item') {
-        console.log('We are in move item case');
+        // console.log('We are in move item case');
         moveItem(player, active);
     }
     // after each move we increase active player's counter for 1
