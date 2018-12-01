@@ -344,7 +344,6 @@ function playerActs(game, player, opponent, active, target) {
         player.active = false;
         // inactive player becomes active once active player's counter ==2
         opponent.active = true;
-
         // we check if there is special water cards in item holder of players
         // and run function water if any
         waterCard(game.players);

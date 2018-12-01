@@ -1034,12 +1034,14 @@ test('msg ACTION CASE4 received: active player choose item, if his item holder i
                         key13: {},
                         key1: {
                             id: 'shieldLarge', type: 'item', category: 'shield', points: 3,
-                        },                       
+                        },
+                    },
                     moveCounter: 1,
                     item: {},
                     grave: { key10: {} },
                 },
-                {  active: false,
+                {
+                    active: false,
                     hero: 'yaga',
                     item: {},
                 },
