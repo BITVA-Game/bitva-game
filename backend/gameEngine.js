@@ -137,7 +137,6 @@ function moveCardGraveyard(player, key, from) {
     }
 }
 
-
 function damagePlayer(player, points) {
     // console.log('damagePlayer');
     player.health.current -= points;

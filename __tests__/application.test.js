@@ -1105,7 +1105,7 @@ test('msg ACTION ANY received: active player moveCounter = 2 after his action, h
     expect(result.game.players[1].active).toEqual(true);
 });
 
-// If Player does not have any life points left game.phase = 'OVER'
+// Test If Player does not have any life points left game.phase = 'OVER'
 test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
     const msg = {
         type: 'ACTION',
