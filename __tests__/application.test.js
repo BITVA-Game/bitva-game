@@ -1307,11 +1307,7 @@ test('msg ACTION received: active player put Living Water in item, it increases 
                         key8: {},
                         key13: {},
                         key1: {
-<<<<<<< HEAD
                             id: 'livingWater', type: 'item', category: 'heal', points: 3,
-=======
-                            id: 'livingWater', type: 'item', category: 'heal', itemInstalled: false, points: 3,
->>>>>>> tests done
                         },
                     },
                     moveCounter: 1,
@@ -1338,12 +1334,9 @@ test('msg ACTION received: active player put Living Water in item, it increases 
     expect(result.game.players[0].item.key1.id).toEqual('livingWater');
     // ожидаем, что карта dead water неактивного игрока имеет тип - heal
     expect(result.game.players[0].item.key1.category).toEqual('heal');
-<<<<<<< HEAD
     // ожидаем, что к текущему здоровью игроков прибваиться по 1му очку
     expect(result.game.players[0].health.current).toEqual(11);
     expect(result.game.players[1].health.current).toEqual(9);
-=======
->>>>>>> tests done
     // ожидаем, что карта-water находится в item пока у нее есть очки.
     expect(result.game.players[0].item.key1.points).not.toEqual(0);
 });
@@ -1387,7 +1380,7 @@ test('msg ACTION received: inactive player has dead water in item, it decreased 
                     moveCounter: 1,
                     item: {
                         key10: {
-                            id: 'deadWater', type: 'item', category: 'attack', itemInstalled: true, points: 2,
+                            id: 'deadWater', type: 'item', category: 'damage', points: 2,
                         },
                     },
                     grave: {},
@@ -1411,15 +1404,13 @@ test('msg ACTION received: inactive player has dead water in item, it decreased 
     // ожидаем, что карта dead water в item holder неактивного игрока
     expect(result.game.players[0].item.key10.id).toEqual('deadWater');
     // ожидаем, что карта dead water неактивного игрока имеет тип - damage
-<<<<<<< HEAD
     expect(result.game.players[0].item.key10.type).toEqual('damage');
-=======
-    expect(result.game.players[1].item.key10.category.toEqual('attack');
->>>>>>> tests done
+
     // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
     expect(result.game.players[0].health.current).toEqual(9);
     expect(result.game.players[1].health.current).toEqual(7);
-    //ожидаем, что при переходе хода на текущего активного, карта -water стоит в item cо свойтсвом itemInstalled ==true
+    // ожидаем, что при переходе хода на текущего активного,
+    // карта -water стоит в item cо свойтсвом itemInstalled ==true
     expect(result.game.players[1].item.key10.itemInstalled).toEqual(true);
     // ожидаем, что карта-water находится в item пока у нее есть очки.
     expect(result.game.players[0].item.key10.points).not.toEqual(0);
