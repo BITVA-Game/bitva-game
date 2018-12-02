@@ -117,22 +117,19 @@ const ListOfHeroes = props => (
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
     <div className={styles.details}>
-        <div className="details-hero">
-            {/* <div className="details-hero-name hero-nav-menu-name header-menu">
-                {props.hero.name}
-            </div> */}
-            <div className="details-hero-avatar">
-                <img src={images[props.hero.id]} alt={props.hero.id} />
-            </div>
-            <div className="details-hero-btn-block">
-                <div className="btn btn-back footer-menu" role="button" onClick={() => props.onBack()} onKeyPress={() => props.onBack()} tabIndex="10">
-                    BACK
-                </div>
-                <button className="btn btn-select" type="button" onClick={() => props.onSelect(props.hero)}>
-                    SELECT
-                </button>
-            </div>
+        {/* <div className="details-hero"> */}
+        <div className="details-hero-avatar">
+            <img src={images[props.hero.id]} alt={props.hero.id} />
         </div>
+        <div className="details-hero-btn-block">
+            <div className="btn btn-back footer-menu" role="button" onClick={() => props.onBack()} onKeyPress={() => props.onBack()} tabIndex="10">
+                    &#767;
+            </div>
+            <button className="btn btn-select" type="button" onClick={() => props.onSelect(props.hero)}>
+                    SELECT
+            </button>
+        </div>
+        {/* </div> */}
         <section className="details-info-block">
             <article className="details-description">
                 <span>

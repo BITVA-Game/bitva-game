@@ -1,6 +1,6 @@
 body {
 	cursor: default;
-	font-family: Sedanc CS;
+	font-family: "Sedan SC";
 	min-width: 1024px;
 	user-select: none;
 }
@@ -9,7 +9,7 @@ button {
 	background: none;
 	border: 2px solid transparent;
 	color: antiquewhite;
-	font-family: 'Sedan SC';
+	font-family: "Sedan SC";
 	font-size: inherit;
 	margin: 0;
 	outline: none;
@@ -58,8 +58,7 @@ section {
 .heroselection-header {
 	background: rgb(0,0,0);
 	background: rgba(0,0,0,0.5);
-	display: inline-block;
-	height: 5em;
+	height: 6rem;
 	text-align: center;
 	width: 100%;
 }
@@ -130,7 +129,6 @@ section {
 
 .hero-btn-arrow {
 	position: relative;
-	top: -.35rem;
 	transform: scale(.5, 3);
 }
 
@@ -158,7 +156,7 @@ section {
 	background-color: rgb(0,0,0);
 	background-color: rgba(0,0,0,0.5);
 	bottom: 0;
-	height: 3rem;
+	height: 3.6rem;
 	left: 0;
 	position: fixed;
 	right: 0;
@@ -170,7 +168,6 @@ section {
 	font-size: 24px; /*1.5rem;*/
 	position: absolute;
 	text-align: center;
-
 }
 
 
@@ -319,7 +316,7 @@ section {
 }
 
 .details-hero-avatar {
-	bottom: 1rem;
+	bottom: 8rem;
 	height: 35rem;
 	left: 5rem;
 	position: absolute;
@@ -335,8 +332,10 @@ section {
 
 .btn-back,
 .btn-start-screen {
-	left: 2rem;
+	font-size: 6rem;
+	left: 5rem;
 	position: fixed;
+	top: 44.8rem;
 }
 
 .btn-select {
@@ -354,18 +353,18 @@ section {
 }
 
 .details-description {
-	bottom: 25rem;
+	bottom: 33rem;
 	color: #000;
 	font-size: 22px;
 	height: 12rem;
-	padding: 2rem;
+	padding: 2rem 5rem;
 	position: absolute;
 }
 
 .details-cards {
-	bottom: 1rem;
+	bottom: 8rem;
 	position: absolute;
-	right: 9rem;
+	right: 6.8rem;
 }
 
 .details-card {
