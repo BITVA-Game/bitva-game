@@ -197,12 +197,19 @@ function moveItem(player, key) {
 }
 
 function playerActs(game, player, opponent, active, target) {
-    // console.log('playerActs called');
+    // console.log('playerActs called', opponent, active, target);
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
-    // We send the card that has key1 to graveyard
+    // We send the card that has active key to graveyard
     if (target === 'graveyard') {
-        moveCardGraveyard(player, active);
+        // if active card is in item holder
+        if (Object.keys(player.item)[0] === active) {
+            // We move active card from item holder to Graveyard
+            moveCardGraveyard(player, active, 'item');
+        } else {
+            // In other cases we move active card from hand to Graveyard
+            moveCardGraveyard(player, active);
+        }
     }
     if (target === 'hero') {
         if (activeCard.type === 'action') {
