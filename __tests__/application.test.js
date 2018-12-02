@@ -340,7 +340,7 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
 });
 
 // Test that each player has its hand empty. State Hero Selected.
-test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
+test.only('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
@@ -502,6 +502,7 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
                 {
                     active: false,
                     hero: 'yaga',
+                    item: {},
                 },
             ],
 
@@ -572,6 +573,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                         },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
             ],
@@ -636,6 +638,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                         },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
                 {
@@ -1466,6 +1469,75 @@ test.only('msg ACTION received: inactive player has living water in item, it inc
 // Test, that when dead water is in any player item holder then
 // players get -1 to their health current each at next 3  moves as card has 3pnts.
 test.only('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 13 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {},
+                    },
+                    moveCounter: 1,
+                    item: {
+                        key10: {
+                            id: 'deadWater', type: 'item', category: 'attack', itemInstalled: true, points: 1,
+                        },
+                    },
+                    grave: {},
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    item: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта dead water ушла из item holder активного игрока на кладбище
+    expect(result.game.players[0].grave.key10.id).toEqual('deadWater');
+    // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
+    expect(result.game.players[0].health.current).toEqual(9);
+    expect(result.game.players[1].health.current).toEqual(7);
+    // ожидаем, что карта-water обнулилась points == 0.
+    expect(result.game.players[0].grave.key10.points).toEqual(0);
+});
+
+// Test, that when dead water is in any player item holder then
+// players get -1 to their health current each at next 3  moves as card has 3pnts.
+test('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
