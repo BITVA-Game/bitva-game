@@ -12,6 +12,7 @@ import styles from './css/HeroSelection.module.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
+import heart from './images/icons/heart.png';
 
 const images = {
     yaga,
@@ -84,8 +85,19 @@ const HeroInfo = props => (
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero'} role="button" onClick={() => (props.onShow(props.hero.id))} onKeyPress={() => props.onShow(props.hero.id)} tabIndex="-1">
+        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onClick={() => (props.onShow(props.hero.id))} onKeyPress={() => props.onShow(props.hero.id)} tabIndex="-1">
             <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
+            <div className="deck-icon">
+                <div className="deck-text">
+                    {props.hero.cardsNumber}
+                </div>
+            </div>
+            <div className="health-container">
+                <img className="health" src={heart} alt="" />
+                <div className="health-text">
+                    {props.hero.health}
+                </div>
+            </div>
             {/* <div className="hero-name hero-nav-menu-name header-menu">
                 {props.hero.name}
             </div> */}
@@ -164,6 +176,7 @@ class HeroSelection extends Component {
         // this.showDetails = this.showDetails.bind(this);
         this.closeDetails = this.closeDetails.bind(this);
     }
+
 
     showHero(heroID) {
         const hero = this.app.heroSelect[heroID];

@@ -392,3 +392,50 @@ section {
 .cards-btn-right {
 	right: -2rem;
 }
+
+.health {
+	height: 38px;
+	width: 38px;
+	-webkit-filter: drop-shadow(0 0 2px #FFF);
+	filter: drop-shadow(0 0 2px #FFF);
+	
+}
+
+.health-container {
+	bottom: 5px;
+    height: 38px;
+    right: 5px;
+    position: absolute;
+    width: 38px;
+}
+
+.health-text {
+	bottom: 5px;
+	font-size: 21px;
+	height: 28px;
+    position: absolute;
+	right: 8px;
+}
+
+.deck-icon {
+	background-color: #97ABB8;
+    border: 1px solid white;
+	border-radius: 3px;
+	bottom: 5px;
+	height: 40px;
+	left: 5px;
+	position: absolute;
+    width: 30px;
+}
+
+.deck-text {
+	bottom: 1px;
+	font-size: 21px;
+	height: 30px;
+    position: absolute;
+	left: 3px;
+}
+
+.icons-inactive div{
+	display: none;
+}
