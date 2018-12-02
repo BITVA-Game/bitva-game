@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions */
-/* eslint-disable default-case */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-case-declarations */
 /* eslint no-param-reassign: ["error", { "props": false }] */
@@ -124,7 +123,6 @@ function giveCardsToAll(playersArray) {
     return playersArray;
 }
 
-
 // This function taked the player and the key for his cards
 // And moves it so graveyard via deleting the key from array
 function moveCardGraveyard(player, key, from) {
@@ -167,6 +165,9 @@ function attackOpponent(player, points) {
     itemKey ? itemCategory = player.item[itemKey].category : null;
     if (Object.keys(player.item).length === 0 || itemCategory !== 'shield') {
         player.health.current -= points;
+        if (player.health.current <= 0) {
+            player.health.current = 0;
+        }
     } else if (Object.keys(player.item).length === 1 && itemCategory === 'shield') {
         // console.log('Were in attack shield');
         attackShield(player, itemKey, points);
@@ -226,6 +227,9 @@ function playerActs(game, player, opponent, active, target) {
                 // console.log('attacking opponent');
                 attackOpponent(opponent, activeCard.points);
                 moveCardGraveyard(player, active);
+                if (opponent.health.current === 0) {
+                    game.phase = 'OVER';
+                }
                 break;
             default:
                 return new Error('You are under spell. Wait for redemption!');

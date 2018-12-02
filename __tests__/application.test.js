@@ -179,7 +179,7 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
                 screen: 'HEROSELECT',
             },
             game: {
-
+                phase: 'ACTIVE',
             },
         },
     );
@@ -1098,4 +1098,68 @@ test('msg ACTION ANY received: active player moveCounter =2 after his action, he
 
     // expect that inactive player becomes active
     expect(result.game.players[1].active).toEqual(true);
+});
+
+// If Player does not have any life points left game.phase = 'OVER'
+test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 1,
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 2, maximum: 15 },
+                    hand: {
+                        key12: {}, key8: {}, key15: {}, key3: {},
+                    },
+                    item: { },
+                    grave: { },
+                },
+            ],
+        },
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // expect the inactive player health ===0
+    expect(result.game.players[1].health.current).toBeLessThanOrEqual(0);
+
+    // expect manager, screen is now Victory
+    expect(result.game.phase).toEqual('OVER');
 });

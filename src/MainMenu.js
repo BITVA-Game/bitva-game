@@ -28,7 +28,9 @@ class MainMenu extends Component {
         return (
             <div className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
                 <div className="logo-container">
-                    <img className="logo logo-shadowFilter" src={logo} alt="bitva" />
+                    {this.state.opened ? (
+                        <img className="logo logo-shadowFilter" src={logo} alt={logo} />
+                    ) : null}
                 </div>
                 <div className="menu-buttons-container">
                     <ul className="menu-buttons-group">
