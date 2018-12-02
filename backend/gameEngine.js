@@ -191,26 +191,32 @@ function healPlayer(player, points) {
 //     }
 // }
 
+// we move item card from active player's hand to his item holder
 function moveItem(player, key) {
+    // active player's item get the active card's key from his hand
     player.item[key] = player.hand[key];
+    // we delete the card with active key from player's hand
     delete player.hand[key];
 }
 
+// function that allows active player to move his card from hand to misc. targets
 function playerActs(game, player, opponent, active, target) {
     // console.log('playerActs called', opponent, active, target);
     const activeCard = player.hand[active];
-    // If the key for the second card is graveyard
+    // If the key for the active card is graveyard
     // We send the card that has active key to graveyard
     if (target === 'graveyard') {
         // if active card is in item holder
         if (Object.keys(player.item)[0] === active) {
-            // We move active card from item holder to Graveyard
+            // We move active card from item holder to graveyard
             moveCardGraveyard(player, active, 'item');
         } else {
             // In other cases we move active card from hand to Graveyard
             moveCardGraveyard(player, active);
         }
     }
+    // if target is active player's hero, player can only heal his hero
+    // then his active card moves to graveyard. Other scenarios are not allowed
     if (target === 'hero') {
         if (activeCard.type === 'action') {
             switch (activeCard.category) {
@@ -220,11 +226,14 @@ function playerActs(game, player, opponent, active, target) {
                 break;
             case 'attack':
                 break;
+            // if any mistake occurs during game process, player gets error message by default
             default:
                 return new Error('You are under spell. Wait for redemption!');
             }
         }
     }
+    // if target is inactive player's hero - opponent, player can only attack opponent
+    // then his active card moves to graveyard. Other scenarios are not allowed
     if (target === 'opponent') {
         if (activeCard.type === 'action') {
             switch (activeCard.category) {
@@ -234,26 +243,35 @@ function playerActs(game, player, opponent, active, target) {
                 // console.log('attacking opponent');
                 attackOpponent(opponent, activeCard.points);
                 moveCardGraveyard(player, active);
+                // if opponent's health after attack is 0 then game is over
                 if (opponent.health.current === 0) {
                     game.phase = 'OVER';
                 }
                 break;
+            // if any mistake occurs during game process, player gets error message by default
             default:
                 return new Error('You are under spell. Wait for redemption!');
             }
         }
     }
-    if (target === 'item' && activeCard.type === 'action') {
+    // if active player wants to move his active card to item holder
+    // he can do it only if card's type == item
+    if (target === 'item' && activeCard.type === 'item') {
+        // we call move item function to move active card from hand to item holder
         moveItem(player, active);
     }
+    // after each move we increase active player's counter for 1
     player.moveCounter += 1;
+    // once active player's counter ==2 we call function to give cards to players up to 5
     if (player.moveCounter === 2) {
         // console.log(game);
         giveCardsTo(player);
+        // active player becomes inactive once active player's counter ==2
         player.active = false;
+        // inactive player becomes active once active player's counter ==2
         opponent.active = true;
     }
-
+    // we return the whole game to continue
     return game;
 }
 
@@ -268,8 +286,8 @@ function makeMove(game, msg) {
             pInactive = p;
         }
     });
-    // We expect the first card is always the selected card that acts
 
+    // We expect the first card is always the selected card that acts
     if (pActive.moveCounter < 2) {
         game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
 
