@@ -234,7 +234,7 @@ function waterCard(players) {
             }
             if (itemCard.points === 0) {
                 // we move water item card to graveyard if its points == 0
-                console.log('We are in item card has 0 ponts!', p, (Object.keys(p.item)[0]));
+                // console.log('We are in item card has 0 ponts!', p, (Object.keys(p.item)[0]));
                 moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
             }
         }
