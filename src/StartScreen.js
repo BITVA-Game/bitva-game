@@ -6,6 +6,12 @@ import './css/MainMenu.css';
 import './css/StartScreen.css';
 
 
+/**
+* StartScreen component: contains background, background's animations and MainMenu
+*
+* @param {function} props.sendMessage When the button is clicked this function sends message to pass type of screen to be loaded after clicking the button
+* @returns {object} StartScreen component
+*/
 const StartScreen = props => (
     <div className="start-screen">
         <div className="hollow" />

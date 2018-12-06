@@ -19,12 +19,25 @@ const images = {
     });
 }; */
 
+/**
+* OneHero component: contains character's portrait
+*
+* @param {string} props.hero Character's name
+* @returns {object} OneHero component
+*/
 const OneHero = props => (
     <div className="versus-one-hero">
         <img src={images[props.hero]} alt={props.hero} />
     </div>
 );
 
+/**
+* VersusScreen component: contains character's portraits, 'play' button and MainMenu
+*
+* @param {object} props.app All info for the game
+* @param {function} props.sendMessage When the button is clicked this function sends message to pass type of screen to be loaded after clicking the button
+* @returns {object} VersusScreen component
+*/
 const VersusScreen = props => (
     <div className="versus-screen-container">
         <div className="versus-heroes-container">
