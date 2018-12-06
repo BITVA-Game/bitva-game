@@ -6,12 +6,12 @@ import logo from './images/logo.png';
 
 
 /**
-* MenuButton component
+* MenuButton component: each Button in Main Menu
 *
-* @param {string} name Button's text
-* @param {string} type Type of screen to load after clicking the button
-* @param {function} sendMessage Message to pass type of screen to load after clicking the button
-* @returns {object} MenuButton component
+* @param {function} props.sendMessage When the button is clicked this function sends message to pass type of screen to be loaded after clicking the button
+* @param {string} props.type Type of screen to be loaded after clicking the button
+* @param {string} props.name Button's text (value)
+* @returns {object} MenuButton component: each Button in Main Menu
 */
 const MenuButton = props => (
     <li>
@@ -23,17 +23,15 @@ const MenuButton = props => (
 
 /**
 * MainMenu component
-*
-* @param {bool} opened Set MainMenu's state
-* @param {function} sendMessage Message to pass type of screen to load after clicking the button
-* @returns {object} MainMenu component
 */
 class MainMenu extends Component {
     /**
     * MainMenu constructor
     *
-    * @param {bool} opened Set MainMenu's state
-    * @returns {object} MainMenu 
+    * @param {bool} this.state Set MainMenu's state depending on props.opened
+    * @param {bool} props.opened MainMenu's state
+    * @param {function} this.toggle Bind toggle function
+    * @returns {object}  New MainMenu object
     */
     constructor(props) {
         super(props);
@@ -42,9 +40,10 @@ class MainMenu extends Component {
     }
 
     /**
-    * toggle MainMenu
+    * function to toggle MainMenu's state (opened/closed)
     *
-    * @param {none} none
+    * @property {bool} opened MainMenu's state
+    * @property {function} this.setState Toggle MainMenu's state
     * @returns {bool} opened Set MainMenu's state
     */
     toggle() {
@@ -53,10 +52,9 @@ class MainMenu extends Component {
     }
 
     /**
-    * toggle MainMenu
+    * function to render MainMenu component containing logo, buttons to next screens and button to open/close MainMenu
     *
-    * @param {none} none
-    * @returns {object} MainMenu
+    * @returns {object} rendered MainMenu component
     */
     render() {
         return (
