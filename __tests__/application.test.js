@@ -251,9 +251,9 @@ test('msg HEROSELECTED received: active player is set.', () => {
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 0
+    // Mock will rewrite all math.random and set it to 1
     Math.random = jest.fn();
-    Math.random.mockReturnValue(0);
+    Math.random.mockReturnValue(1);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -262,8 +262,8 @@ test('msg HEROSELECTED received: active player is set.', () => {
         {
             game: {
                 players: [
-                    { active: true },
                     { active: false },
+                    { active: true },
                 ],
             },
         },
@@ -271,15 +271,49 @@ test('msg HEROSELECTED received: active player is set.', () => {
 });
 
 // Test that active player gets its character's deck. Game state VERSUS.
-test('msg HEROSELECTED received: active player has a character and 15 cards.', () => {
+test.only('msg HEROSELECTED received: active player has a character and 15 cards.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    hand: {},
+                    health: 15,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                        key4: {},
+                        key11: {},
+                        key10: {},
+                        key16: {},
+                        key5: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+            ],
+        },
+    });
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -288,6 +322,7 @@ test('msg HEROSELECTED received: active player has a character and 15 cards.', (
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+    // we expect that active player gets hero Morevna and gets 15 cards
     expect(result.game.players[1].hero).toEqual('morevna');
     expect(Object.keys(result.game.players[1].cards).length).toEqual(15);
 });
@@ -299,9 +334,43 @@ test('msg HEROSELECTED received: inactive player gets available character and 15
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                        key4: {},
+                        key11: {},
+                        key10: {},
+                        key16: {},
+                        key5: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    hand: {},
+                    health: 13,
+                },
+            ],
+        },
+    });
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -321,9 +390,50 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+            ],
+        },
+    });
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -331,6 +441,7 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
 
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
+
 
     expect(result.game.players[0].hero).toEqual('yaga');
     expect(result.game.players[0].health.current).toEqual(15);
@@ -340,15 +451,56 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
 });
 
 // Test that each player has its hand empty. State Hero Selected.
-test.only('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
+test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                    },
+                    hand: {},
+                    health: 15,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+            ],
+        },
+    });
+
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -1469,75 +1621,6 @@ test.only('msg ACTION received: inactive player has living water in item, it inc
 // Test, that when dead water is in any player item holder then
 // players get -1 to their health current each at next 3  moves as card has 3pnts.
 test.only('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
-    const msg = {
-        type: 'ACTION',
-        activeCard: 'key1',
-        target: 'opponent',
-    };
-    // Mock sendReply function
-    const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set active player card's key to key10
-    application.setApp({
-        game: {
-            players: [
-                {
-                    active: true,
-                    hero: 'morevna',
-                    cards: {
-                        key0: {},
-                        key2: {},
-                        key17: {},
-                        key5: {},
-                        key7: {},
-                        key4: {},
-                        key6: {},
-                        key14: {},
-                        key12: {},
-                        key9: {},
-                    },
-                    health: { current: 10, maximum: 13 },
-                    hand: {
-                        key11: {},
-                        key8: {},
-                        key13: {},
-                        key1: {},
-                    },
-                    moveCounter: 1,
-                    item: {
-                        key10: {
-                            id: 'deadWater', type: 'item', category: 'attack', itemInstalled: true, points: 1,
-                        },
-                    },
-                    grave: {},
-                },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    health: { current: 8, maximum: 15 },
-                    item: {},
-                },
-            ],
-        },
-    });
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // ожидаем, что карта dead water ушла из item holder активного игрока на кладбище
-    expect(result.game.players[0].grave.key10.id).toEqual('deadWater');
-    // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
-    expect(result.game.players[0].health.current).toEqual(9);
-    expect(result.game.players[1].health.current).toEqual(7);
-    // ожидаем, что карта-water обнулилась points == 0.
-    expect(result.game.players[0].grave.key10.points).toEqual(0);
-});
-
-// Test, that when dead water is in any player item holder then
-// players get -1 to their health current each at next 3  moves as card has 3pnts.
-test('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
