@@ -255,7 +255,7 @@ test('msg HEROSELECTED received: active player is set.', () => {
     const oldRandom = Math.random;
     // Mock will rewrite all math.random and set it to 0
     Math.random = jest.fn();
-    Math.random.mockReturnValue(0);
+    Math.random.mockReturnValue(1);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -264,8 +264,8 @@ test('msg HEROSELECTED received: active player is set.', () => {
         {
             game: {
                 players: [
-                    { active: true },
                     { active: false },
+                    { active: true },
                 ],
             },
         },
@@ -275,7 +275,7 @@ test('msg HEROSELECTED received: active player is set.', () => {
 });
 
 // Test that active player gets its character's deck. Game state VERSUS.
-test('msg HEROSELECTED received: active player has a character and 15 cards.', () => {
+test.only('msg HEROSELECTED received: active player has a character and 15 cards.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
@@ -294,6 +294,7 @@ test('msg HEROSELECTED received: active player has a character and 15 cards.', (
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+    // we expect that active player gets hero Morevna and gets 15 cards
     expect(result.game.players[1].hero).toEqual('morevna');
     expect(Object.keys(result.game.players[1].cards).length).toEqual(15);
     // We return random to initial value, so it is not always set to 1
@@ -346,6 +347,7 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+
     expect(result.game.players[0].hero).toEqual('yaga');
     expect(result.game.players[0].health.current).toEqual(15);
 
@@ -356,7 +358,7 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
 });
 
 // Test that each player has its hand empty. State Hero Selected.
-test.only('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
+test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
@@ -1432,6 +1434,16 @@ test.only('msg ACTION received: inactive player has living water in item, it inc
         game: {
             players: [
                 {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    item: {
+                        key10: {
+                            id: 'livingWater', type: 'item', category: 'heal', points: 2,
+                        },
+                    },
+                },
+                {
                     active: true,
                     hero: 'morevna',
                     cards: {
@@ -1457,16 +1469,6 @@ test.only('msg ACTION received: inactive player has living water in item, it inc
                     item: { },
                     grave: {},
                 },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    health: { current: 8, maximum: 15 },
-                    item: {
-                        key10: {
-                            id: 'livingWater', type: 'item', category: 'heal', points: 2,
-                        },
-                    },
-                },
             ],
         },
     });
@@ -1478,12 +1480,12 @@ test.only('msg ACTION received: inactive player has living water in item, it inc
     const result = sendReply.mock.calls[0][0];
 
     // ожидаем, что карта dead water в item holder неактивного игрока
-    expect(result.game.players[1].item.key10.id).toEqual('livingWater');
+    expect(result.game.players[0].item.key10.id).toEqual('livingWater');
     // ожидаем, что карта dead water неактивного игрока имеет тип - damage
-    expect(result.game.players[1].item.key10.category).toEqual('heal');
+    expect(result.game.players[0].item.key10.category).toEqual('heal');
     // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
-    expect(result.game.players[0].health.current).toEqual(11);
-    expect(result.game.players[1].health.current).toEqual(6);
+    expect(result.game.players[1].health.current).toEqual(11);
+    expect(result.game.players[0].health.current).toEqual(6);
     // ожидаем, что при переходе хода на текущего активного,
     // карта -water стоит в item cо свойтсвом itemInstalled ==true
     // expect(result.game.players[1].item.key10.itemInstalled).toEqual(true);
