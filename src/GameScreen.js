@@ -8,12 +8,13 @@ import morevna from './images/heroes/morevna.jpg';
 
 import './dragging';
 
+// we create images containing obejct = yaga + morevna heroes jpeg pictures
 const images = {
     yaga,
     morevna,
 };
 
-// game table
+// game table with active player in the bottom and inactive on the top
 const GameTable = (props) => {
     props.app.game.players.sort((a, b) => {
         const x = a.active;
@@ -29,6 +30,7 @@ const GameTable = (props) => {
     );
 };
 
+// container for the card, that showscard received by active player
 const Card = props => (
     <div className="card card-like" draggable={props.draggable}>
         <div className="card-name">
@@ -37,6 +39,7 @@ const Card = props => (
     </div>
 );
 
+// common cards deck
 const Deck = props => (
     <div className="deck card-like">
         <div className="deck-name">
@@ -45,6 +48,7 @@ const Deck = props => (
     </div>
 );
 
+// graveyard for each player's cards
 const Grave = props => (
     <div className="grave card-like">
         <div className="grave-name">
@@ -53,6 +57,12 @@ const Grave = props => (
     </div>
 );
 
+/**
+ * @class Player
+ * @property constructor
+ * @param {object} props with parameters of all components
+ * @return {object} that shows heroes avatars with health
+ * */
 class Player extends Component {
     constructor(props) {
         super(props);
@@ -95,6 +105,10 @@ class Player extends Component {
         }
     }
 
+    /**
+ * component that renders to DOM game table
+ *@returns {object} that shows game tablewithc heroes avatars, deck, cards and gravyeard
+ * */
     render() {
         return (
             <div className={this.player.active ? 'player player-active' : 'player player-inactive'}>

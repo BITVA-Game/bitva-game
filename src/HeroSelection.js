@@ -14,11 +14,19 @@ import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
 import heart from './images/icons/heart.png';
 
+// we create images containing obejct = yaga + morevna heroes jpeg pictures
 const images = {
     yaga,
     morevna,
 };
-
+/**
+ * function that returns availble characters
+ *
+ * @param {string} app - application
+ * @param {string} hero - hero available for the player to choose from
+ * @returns {function} that find from characters profile available hero to choose from
+ * @returns {function} that return character if he is available ( true or false to hero.id received in function)
+ * */
 function isAvailable(app, hero) {
     return app.profile.characters.find((character) => {
         console.log(character, hero.id);
@@ -27,7 +35,7 @@ function isAvailable(app, hero) {
 }
 
 // common elements
-// header section
+// header section with select character and naviagation buttons and butto to show character details
 const Header = props => (
     <section className="heroselection-header">
         <div className="header-menu heroselection-title">
@@ -55,6 +63,7 @@ const Header = props => (
 );
 
 // footer section
+// with play button
 const Footer = props => (
     <section className="heroselection-footer">
         <div className="heroselection-footer-menu heroselection-play">
@@ -66,7 +75,7 @@ const Footer = props => (
 );
 
 
-// Pop-up with character details
+// Pop-up with character details (not in our application now)
 const HeroInfo = props => (
     <div className="hero-info">
         <button className="btn-close" type="button" onClick={() => props.closeDetails()}>
@@ -163,6 +172,12 @@ const OneHero = props => (
     </div>
 );
 
+/**
+ * @class HeroSelection
+ * @property constructor
+ * @param {object} props with parameters of all compnents
+ * @return {object} new HeroSelection with all deatails
+ * */
 class HeroSelection extends Component {
     constructor(props) {
         super(props);
@@ -177,17 +192,32 @@ class HeroSelection extends Component {
         this.closeDetails = this.closeDetails.bind(this);
     }
 
-
+    /**
+     * function showHero
+     * @param {string} heroID - id of our hero character
+     * @return {function} that set state for rendering as per hero
+     */
     showHero(heroID) {
         const hero = this.app.heroSelect[heroID];
         this.setState({ hero });
     }
 
+    /**
+     * function changeSelected
+     * @param {string} selected - hero that player selects
+     * @return {function} that set state for rendering as per selected hero
+     * @return {function} that shows hero for rendering as per selected hero
+     */
     changeSelected(selected) {
         this.setState({ selected });
         this.showHero(this.app.heroSelect[selected]);
     }
 
+    /**
+     * function selectRightHero for right arrow to select hero
+     * @return {function} that set state for rendering for hero next in list
+     * */
+    // we allow for right arrow click to select next in list hero
     selectRightHero() {
         const heroes = Object.keys(this.app.heroSelect);
         let index = heroes.indexOf(this.state.selected);
@@ -195,6 +225,11 @@ class HeroSelection extends Component {
         this.setState({ selected: heroes[index] });
     }
 
+    /**
+     * function selectLeftHero for left arrow to select hero
+     * @return {function} that set state for rendering for hero previous in list
+     * */
+    // we allow for right arrow click to select previous in list hero
     selectLeftHero() {
         const heroes = Object.keys(this.app.heroSelect);
         let index = heroes.indexOf(this.state.selected);
@@ -202,6 +237,12 @@ class HeroSelection extends Component {
         this.setState({ selected: heroes[index] });
     }
 
+    /**
+     * function selectHero
+     * @param {string} selected - hero selected byu the player
+     * @return {function} that send Message with type 'HEROSELECTED' and selected hero
+     * */
+    // once player select hero this function sends message with type 'HEROSELECTED' and selected hero
     selectHero(selected) {
         this.props.sendMessage({ type: 'HEROSELECTED', hero: selected });
     }
@@ -210,10 +251,15 @@ class HeroSelection extends Component {
     //     this.setState({ details: hero });
     // }
 
+    // not used in our code now
     closeDetails() {
         this.setState({ details: null });
     }
 
+    /**
+ * component that renders to DOM hero selection
+ *@returns {object} that shows hero selection
+ * */
     render() {
         return (
             <div className="heroselection-container">
