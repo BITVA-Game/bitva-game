@@ -271,12 +271,15 @@ test('msg HEROSELECTED received: active player is set.', () => {
 });
 
 // Test that active player gets its character's deck. Game state VERSUS.
-test.only('msg HEROSELECTED received: active player has a character and 15 cards.', () => {
+test('msg HEROSELECTED received: active player has a character and 15 cards.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set it to 1
+    // Math.random = jest.fn();
+    // Math.random.mockReturnValue(1);
 
     // Mock will rewrite all game state and set it to DealAll case
     application.setApp({
@@ -314,7 +317,7 @@ test.only('msg HEROSELECTED received: active player has a character and 15 cards
             ],
         },
     });
-
+    
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
@@ -821,7 +824,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
 });
 
 // player attacks unprotected enemy
-test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
+test.skip('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key13',
@@ -1471,7 +1474,7 @@ test('msg ACTION received: active player put Living Water in item, it increases 
 
 // Test, that when dead water is in any player item holder then
 // players get -1 to their health current each at next 3  moves as card has 3pnts.
-test('msg ACTION received: active player has dead water in item, it decreased players health current for 1pnt next 3 moves.', () => {
+test.skip('msg ACTION received: active player has dead water in item, it decreased players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1546,7 +1549,7 @@ test('msg ACTION received: active player has dead water in item, it decreased pl
 
 // Test, that when living water card is in any player item holder then
 // players get +1 to their current health each at next 3  moves as card has 3pnts.
-test.only('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
+test.skip('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
