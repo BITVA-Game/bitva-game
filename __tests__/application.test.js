@@ -253,7 +253,7 @@ test('msg HEROSELECTED received: active player is set.', () => {
     const sendReply = jest.fn();
     // we save normal random here before mock it
     const oldRandom = Math.random;
-    // Mock will rewrite all math.random and set it to 0
+    // Mock will rewrite all math.random and set it to 1
     Math.random = jest.fn();
     Math.random.mockReturnValue(1);
 
@@ -321,6 +321,7 @@ test('msg HEROSELECTED received: inactive player gets available character and 15
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+    // we expect that inactive player gets hero Yaga and gets 15 cards
     expect(result.game.players[0].hero).toEqual('yaga');
     expect(Object.keys(result.game.players[0].cards).length).toEqual(15);
     // We return random to initial value, so it is not always set to 1
@@ -347,10 +348,11 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-
+    // we expect that inactive hero is Yaga and her health current == 15
     expect(result.game.players[0].hero).toEqual('yaga');
     expect(result.game.players[0].health.current).toEqual(15);
 
+    // we expect that active hero is Morevna and her health current == 13
     expect(result.game.players[1].hero).toEqual('morevna');
     expect(result.game.players[1].health.current).toEqual(13);
     // We return random to initial value, so it is not always set to 1
@@ -691,7 +693,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
 });
 
 // player attacks unprotected enemy
-test.skip('msg ACTION CASE3 player attacks the enemy, no protection', () => {
+test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key13',
@@ -924,7 +926,7 @@ test('msg ACTION CASE3 player attacks with more than shield, shield & card go to
 });
 
 // player attacks enemy with attack power == shield points
-test('msg ACTION CASE3 player attacks with less than shiald, card goes to graveyard, shield decresses', () => {
+test('msg ACTION CASE3 player attacks with less than shiald, card goes to graveyard, shield points decreased', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1346,7 +1348,7 @@ test('msg ACTION received: active player put Living Water in item, it increases 
 
 // Test, that when dead water is in any player item holder then
 // players get -1 to their health current each at next 3  moves as card has 3pnts.
-test.skip('msg ACTION received: active player has dead water in item, it decreased players health current for 1pnt next 3 moves.', () => {
+test('msg ACTION received: active player has dead water in item, it decreased players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1421,7 +1423,7 @@ test.skip('msg ACTION received: active player has dead water in item, it decreas
 
 // Test, that when living water card is in any player item holder then
 // players get +1 to their current health each at next 3  moves as card has 3pnts.
-test.skip('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
+test('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1495,7 +1497,7 @@ test.skip('msg ACTION received: inactive player has living water in item, it inc
 
 // Test, that when dead water is in any player item holder then
 // players get -1 to their health current each at next 3  moves as card has 3pnts.
-test.skip('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
+test('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
