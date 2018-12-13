@@ -18,12 +18,28 @@ const shortcuts = {
     buttons: ['ok'],
 };
 
+/**
+* Context menu's Message (for 'shortcuts' and 'about')
+*
+* @param {object} win Application's window
+* @param {string} msg Content of the message box
+* @param {object} e Object that raised the event
+* @returns {object} Context menu's Message
+*/
 function showDialog(win, msg, e) {
     dialog.showMessageBox(win, msg, e.x, e.y, (m) => {
         console.log(m);
     });
 }
 
+/**
+* Context menu
+*
+* @param {object} app Application
+* @param {object} win Application's window
+* @param {object} e Object that raised the event
+* @returns {object} Context menu
+*/
 module.exports = function menu(app, win, e) {
     return (
         [{

@@ -28,10 +28,10 @@ class MainMenu extends Component {
     /**
     * MainMenu constructor
     *
-    * @param {bool} this.state Set MainMenu's state depending on props.opened
+    * @param {bool} this.state Sets MainMenu's state depending on props.opened
     * @param {bool} props.opened MainMenu's state
-    * @param {function} this.toggle Bind toggle function
-    * @returns {object}  New MainMenu object
+    * @param {function} this.toggle Binds toggle function
+    * @returns {object} New MainMenu object
     */
     constructor(props) {
         super(props);
@@ -44,7 +44,6 @@ class MainMenu extends Component {
     *
     * @property {bool} opened MainMenu's state
     * @property {function} this.setState Toggle MainMenu's state
-    * @returns {bool} opened Set MainMenu's state
     */
     toggle() {
         const opened = this.state.opened;

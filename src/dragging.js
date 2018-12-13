@@ -7,12 +7,21 @@ let startY;
 let x;
 let y;
 
+/**
+* Function to start dragging card
+*
+* @param {object} drag Object that raised dragging event 
+*/
 function startDrag(drag) {
     x = drag.clientX - startX;
     y = drag.clientY - startY;
     dragged.style.transform = `translate(${x}px,${y}px) scale(1.1,1.1)`;
 }
 
+/**
+* Function to stop dragging card
+*
+*/
 function stopDrag() {
     document.removeEventListener('mouseup', stopDrag);
     document.removeEventListener('mousemove', startDrag, true);
@@ -25,6 +34,13 @@ function stopDrag() {
     }
 }
 
+/**
+* Function to check if the card can be dropped to destination
+*
+* @param {object} drop Object that raised dropping event
+* @param {object} target Destination to drop card
+* @returns {bool} dropped
+*/
 function droppedTo(drop, target) {
     // console.log(`${target.id}: ${target.offsetLeft} < ${drop.clientX} < (${target.offsetLeft} + ${target.offsetWidth}) = ${target.offsetLeft + target.offsetWidth}`);
     // console.log(`${target.id}: ${target.offsetTop} < ${drop.clientY} < (${target.offsetTop} + ${target.offsetHeight}) = ${target.offsetTop + target.offsetHeight}`);
@@ -38,12 +54,23 @@ function droppedTo(drop, target) {
     return dropped;
 }
 
+/**
+* Function to drop card to graveyard
+*
+* @param {object} grave Graveyard
+* @param {object} card Card
+*/
 function dropToGrave(grave, card) {
     grave.appendChild(card);
     const counter = grave.childNodes[1];
     counter.innerText = grave.childNodes.length - 2;
 }
 
+/**
+* Function to drop card to any possible destination
+*
+* @param {object} drop Object that raised dropping event
+*/
 function dropCard(drop) {
     const item = document.getElementById('item');
     const grave = document.getElementById('grave');
@@ -74,6 +101,10 @@ function dropCard(drop) {
     stopDrag();
 }
 
+/**
+* Event listener to drag and drop cards
+*
+*/
 document.addEventListener('mousedown', (down) => {
     down.preventDefault();
     if (down.target.draggable && down.target.classList.contains('card')) {
