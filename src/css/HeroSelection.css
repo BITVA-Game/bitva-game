@@ -269,41 +269,6 @@ section {
 	/* z-index: 999; */
 }
 
-
-/* Pop-up element */
-
-.hero-info {
-	background-color: #899591;
-	border-radius: 10px;
-	color: #000;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	left: 50%;
-	padding: 0 1.1em 0.2em;
-	position: absolute;
-	top: 50%;
-	transform: translate(-50%,-50%);
-	width: 380px;
-}
-
-.hero-info .btn-close {
-	background-color: #899591;
-	border: none;
-	color: #000;
-	font-size: 1.4em;
-	padding: 0;
-	position: absolute;
-	right: 15px;
-	top: 15px;
-}
-
-.hero-info p {
-	font-size: 1.3em;
-	padding: 0 1em;
-}
-
-
 /* hero details (OneHero) screen */
 
 .details-hero {
@@ -336,10 +301,6 @@ section {
 	left: 5rem;
 	position: fixed;
 	top: 44.8rem;
-}
-
-.btn-select {
-	display: none;
 }
 
 /* details information block */
