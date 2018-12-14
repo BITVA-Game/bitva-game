@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/MainMenu.css';
-import logo from './images/logo.png';
+import logo from './images/dark_logo.png';
 
 const MenuButton = props => (
     <li>
@@ -29,7 +29,7 @@ class MainMenu extends Component {
             <div className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
                 <div className="logo-container">
                     {this.state.opened ? (
-                        <img className="logo logo-shadowFilter" src={logo} alt={logo} />
+                        <img className="logo" src={logo} alt={logo} />
                     ) : null}
                 </div>
                 <div className="menu-buttons-container">

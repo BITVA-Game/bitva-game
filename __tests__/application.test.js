@@ -1007,7 +1007,7 @@ test('msg ACTION CASE4 received: active player choose item, if his item holder i
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'item', points: 3 },
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'item', category: 'shield', points: 3 },
                     },
                     moveCounter: 1,
                     item: {},
@@ -1031,7 +1031,7 @@ test('msg ACTION CASE4 received: active player choose item, if his item holder i
     // ожидаем, что item holder активного игрока пустой
     expect(Object.values(result.game.players[0].item).length).toEqual(1);
     // ожидаем, что карта предмет окажется в item holder активного игрока
-    expect(result.game.players[0].item.key1.category).toEqual('item');
+    expect(result.game.players[0].item.key1.type).toEqual('item');
     // ожидаем, что карта-item убралась из руки.
     expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
