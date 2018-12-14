@@ -37,13 +37,13 @@ const Header = props => (
         </div>
         <div className="header-menu header-nav-menu">
             <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-left" role="button" onClick={() => { props.prev(); console.log('key nav-left'); }} tabIndex="1">
-                            ◀
+                ◀
             </div>
             <div className="hero-nav-menu-name header-menu">
                 {props.selected}
             </div>
             <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { props.next(); console.log('key nav-right'); }} tabIndex="2">
-                            ▶
+                ▶
             </div>
         </div>
         <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.selected); console.log('key hero-details'); }} tabIndex="4">
@@ -108,7 +108,7 @@ const ListOfHeroes = props => (
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
     <div className={styles.details}>
-        {console.log(props.selected)}
+        {console.log(props.selected, props.app)}
         {/* <div className="details-hero"> */}
         <div className="details-hero-avatar">
             <img src={images[props.hero.id]} alt={props.hero.id} />
@@ -119,7 +119,7 @@ const OneHero = props => (
             </div>
         </div>
         {/* </div> */}
-        <section className="details-info-block">
+        {/*<section className="details-info-block"> // blocks header/footer buttons
             <article className="details-description">
                 <span>
                     {props.hero.description}
@@ -136,7 +136,7 @@ const OneHero = props => (
                     ▶
                 </div>
             </section>
-        </section>
+        </section>*/}
     </div>
 );
 
@@ -191,15 +191,14 @@ class HeroSelection extends Component {
                             <OneHero
                                 hero={this.state.hero}
                                 onBack={this.showHero}
-                                selected={this.state.selected}
                             />
                         ) : (
                             <ListOfHeroes
                                 app={this.props.app}
-                                info={this.state.info}
+                                //info={this.state.info}
                                 onShow={this.showHero}
-                                closeInfo={this.closeInfo}
-                                showInfo={this.showInfo}
+                                //closeInfo={this.closeInfo}
+                                //showInfo={this.showInfo}
                                 changeSelected={this.changeSelected}
                                 selected={this.state.selected}
                             />
