@@ -344,13 +344,21 @@ function moveItem(player, key) {
  * and run case 'heal' - that executes healPlayer function with parameters: active player and points of heal card
  * plus function moveCardGraveyard with parameters player - active player and  active -key of chosen card
  * in case of attack switch breaks by deaffault ( very rare cases - a mistake happens) it returns error message
- * if target === 'opponent' is true then it runs if where type of chosen card === 'action' 
+ * if target === 'opponent' is true then it runs if where type of chosen card === 'action'
  * then it executes switch by category of the chosen card
  * in case of 'heal' it breaks
  * in case of 'attack' it attacks Opponent and then delete attacking card by key
  * and if opponent's current health === 0 then game phase is Over
  * and finally if any mistake occurs during game process, player gets error message by default
- * if conditions: 
+ * if conditions: target === 'item' && vhosen Cardtype === 'item' are true
+ * function moveItem runs with parameters: player (active player), active(chosen card key)
+ * then after each move (after if) active player's counter is increased for 1
+ * then if condition: active player's counter == 2 is true
+ * function giveCardsTo executed with parameter: player - active player
+ * and active player becomes inactive when inactive becomes active
+ * by asigning to active player property active = false and to the opponent active = true
+ * and the end it returns object game to continue
+ *
  */
 // function that allows active player to move his card from hand to misc. targets
 function playerActs(game, player, opponent, active, target) {
@@ -430,6 +438,21 @@ function playerActs(game, player, opponent, active, target) {
     return game;
 }
 
+/**
+ * function that helps player to make move
+ *
+ * @param {object} game - our game as object
+ * @param {object} msg - message that we receive from frontend
+ * @returns {object} pActive - active player
+ * @returns {object} pInactive - inactive player
+ * @returns {function} that takes array with all players and with method forEach check each player
+ * with if statement that assigns p to pActive when condition that one player is active true
+ * in other case p is assigned to pInactive
+ * @returns {function} if statement that assigns to constant game playerActs function
+ * with parameters: game (our game), pActive (active player), pInactive (inactive player),
+ * msg.activeCard (chosen card id in message ), msg.target (target to put card in message)
+ *  @returns {object} game - our whole game
+ */
 function makeMove(game, msg) {
     // console.log('makeMove called');
     let pActive;
@@ -495,21 +518,46 @@ function makeMove(game, msg) {
     return game;
 }
 
+/**
+ * function that helps to handle the game process
+ *
+ * @param {object} app - game application
+ * @param {object} message - message received
+ * @returns {function} switch with parameter - type of the message
+ * in case of message type 'INITIAL', it returns the whole game in application
+ * in case of message type 'HEROSELECTED', it returns hero id from message and assigns it to constant heroName
+ * and it returns method Object.assign(target, source_1, source_2) that merges the sources into the target {}: empty object
+ * It modifies target, by first copying all enumerable own (non-inherited) properties of source_1 - app.game (the whole game) into it,
+ * then all own properties of source_2 - function generatePlayers with parameter of heroName (hero id from message).
+ * At the end, it returns the target that is now the whole game with generated characters list in it.
+ * in case of message type 'DEALALL', it returns with method Object.assign that merges the sources into the target {}: empty object
+ * It modifies target, by first copying all enumerable own (non-inherited) properties of source_1 - app.game (the whole game) into it,
+ * then all own properties of source_2 - function giveCardsToAll with parameter of playersArray (array with all players).
+ * At the end, it returns the target that is now the whole game with generated players in it.
+ * In case of message type 'ACTION', it returns with method Object.assign that merges the sources into the target {}: empty object
+ * It modifies target, by first copying all enumerable own (non-inherited) properties of source_1 - app.game (the whole game) into it,
+ * then all own properties of source_2 - function makeMove with parameters of app.game, message
+ * At the end, it returns the target that is now the whole game with the move that player done in it.
+ * by default it returns the whole game
+ */
 function handle(app, message) {
     switch (message.type) {
+    // at the start we have an initial state with empty game in it
     case 'INITIAL': {
         return app.game;
     }
+    // msg 'HEROSELECTED' returns us updated game with the list of available characters / heroes
     case 'HEROSELECTED': {
         const heroName = message.hero;
         return Object.assign({}, app.game, generatePlayers(heroName));
     }
+    // msg 'DEALALL' returns us updated game with the list of all players, that got now assigned heroes and their properties
     case 'DEALALL': {
         const playersArray = app.game.players;
 
         return Object.assign({}, app.game, giveCardsToAll(playersArray));
     }
-    // All actions have the same action name as they all call the same function
+    // All actions have the same action name as they all call the same function, which represents players moves
     case 'ACTION': {
         return Object.assign({}, app.game, makeMove(app.game, message));
     }
