@@ -238,7 +238,7 @@ function damagePlayer(player, points) {
  * @returns {function} if statement to assign points to the card in player's item minus points of damage
  * if condition - points of the card in player's item > points of damage is true
  * if condition - points of the card in player's item === points of damage is true, then card from item moves to graveyard
- * in other cases ( points of the card in player's item < points of damage) function to damage player is called 
+ * in other cases ( points of the card in player's item < points of damage) function to damage player is called
  * and then function to move card from item to graveyard is called
  */
 function attackShield(player, itemKey, points) {
