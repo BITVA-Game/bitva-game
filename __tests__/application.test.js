@@ -251,9 +251,9 @@ test('msg HEROSELECTED received: active player is set.', () => {
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 0
+    // Mock will rewrite all math.random and set it to 1
     Math.random = jest.fn();
-    Math.random.mockReturnValue(0);
+    Math.random.mockReturnValue(1);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -262,8 +262,8 @@ test('msg HEROSELECTED received: active player is set.', () => {
         {
             game: {
                 players: [
-                    { active: true },
                     { active: false },
+                    { active: true },
                 ],
             },
         },
@@ -278,9 +278,46 @@ test('msg HEROSELECTED received: active player has a character and 15 cards.', (
     // Mock sendReply function
     const sendReply = jest.fn();
     // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+    // Math.random = jest.fn();
+    // Math.random.mockReturnValue(1);
 
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    hand: {},
+                    health: 15,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                        key4: {},
+                        key11: {},
+                        key10: {},
+                        key16: {},
+                        key5: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+            ],
+        },
+    });
+    
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
@@ -288,6 +325,7 @@ test('msg HEROSELECTED received: active player has a character and 15 cards.', (
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+    // we expect that active player gets hero Morevna and gets 15 cards
     expect(result.game.players[1].hero).toEqual('morevna');
     expect(Object.keys(result.game.players[1].cards).length).toEqual(15);
 });
@@ -299,9 +337,43 @@ test('msg HEROSELECTED received: inactive player gets available character and 15
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                        key4: {},
+                        key11: {},
+                        key10: {},
+                        key16: {},
+                        key5: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    hand: {},
+                    health: 13,
+                },
+            ],
+        },
+    });
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -321,9 +393,50 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+            ],
+        },
+    });
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -331,6 +444,7 @@ test('msg HEROSELECTED received: player gets character healths.', () => {
 
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
+
 
     expect(result.game.players[0].hero).toEqual('yaga');
     expect(result.game.players[0].health.current).toEqual(15);
@@ -346,9 +460,50 @@ test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', (
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    cards: {
+                        key1: {},
+                        key15: {},
+                        key18: {},
+                        key3: {},
+                        key7: {},
+                        key9: {},
+                        key2: {},
+                        key6: {},
+                        key14: {},
+                        key0: {},
+                    },
+                    hand: {},
+                    health: 15,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    hand: {},
+                    health: 13,
+                },
+            ],
+        },
+    });
+
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -502,6 +657,7 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
                 {
                     active: false,
                     hero: 'yaga',
+                    item: {},
                 },
             ],
 
@@ -572,6 +728,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                         },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
             ],
@@ -636,6 +793,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                         },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
                 {
@@ -666,7 +824,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
 });
 
 // player attacks unprotected enemy
-test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
+test.skip('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key13',
@@ -1105,7 +1263,7 @@ test('msg ACTION ANY received: active player moveCounter = 2 after his action, h
     expect(result.game.players[1].active).toEqual(true);
 });
 
-// If Player does not have any life points left game.phase = 'OVER'
+// Test If Player does not have any life points left game.phase = 'OVER'
 test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
     const msg = {
         type: 'ACTION',
@@ -1136,9 +1294,15 @@ test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 3,
+                        },
                     },
                     moveCounter: 1,
+                    item: {},
                     grave: { key10: {} },
                 },
                 {
@@ -1237,4 +1401,291 @@ test('msg ACTION CASE 5, player wants to move his card from item holder to grave
     expect(Object.keys(result.game.players[0].item)).not.toContain('key10');
     // expect the opponent health !== 0
     expect(result.game.players[1].health.current).toBeGreaterThan(0);
+});
+
+// Test, that  when living water is in item holder, then
+// players get +1 to their health current each at next 3  moves.
+test('msg ACTION received: active player put Living Water in item, it increases players health current for 1pnt next 3 moves.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'item',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {
+                            id: 'livingWater', type: 'item', category: 'heal', points: 3,
+                        },
+                    },
+                    moveCounter: 1,
+                    item: {},
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    item: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта living water в item holder активного игрока
+    expect(result.game.players[0].item.key1.id).toEqual('livingWater');
+    // ожидаем, что карта dead water неактивного игрока имеет тип - heal
+    expect(result.game.players[0].item.key1.category).toEqual('heal');
+    // ожидаем, что к текущему здоровью игроков прибваиться по 1му очку
+    expect(result.game.players[0].health.current).toEqual(11);
+    expect(result.game.players[1].health.current).toEqual(9);
+    // ожидаем, что карта-water находится в item пока у нее есть очки.
+    expect(result.game.players[0].item.key1.points).not.toEqual(0);
+});
+
+// Test, that when dead water is in any player item holder then
+// players get -1 to their health current each at next 3  moves as card has 3pnts.
+test.skip('msg ACTION received: active player has dead water in item, it decreased players health current for 1pnt next 3 moves.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 13 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 1,
+                    item: {
+                        key10: {
+                            id: 'deadWater', type: 'item', category: 'damage', points: 2,
+                        },
+                    },
+                    grave: {},
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    item: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта dead water в item holder активного игрока
+    expect(result.game.players[0].item.key10.id).toEqual('deadWater');
+    // ожидаем, что карта dead water неактивного игрока имеет тип - damage
+    expect(result.game.players[0].item.key10.type).toEqual('damage');
+
+    // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
+    expect(result.game.players[0].health.current).toEqual(9);
+    expect(result.game.players[1].health.current).toEqual(4);
+    // ожидаем, что при переходе хода на текущего активного,
+    // карта -water стоит в item cо свойтсвом itemInstalled ==true
+    // expect(result.game.players[1].item.key10.itemInstalled).toEqual(true);
+    // ожидаем, что карта-water находится в item пока у нее есть очки.
+    expect(result.game.players[0].item.key10.points).not.toEqual(0);
+});
+
+// Test, that when living water card is in any player item holder then
+// players get +1 to their current health each at next 3  moves as card has 3pnts.
+test.skip('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    item: {
+                        key10: {
+                            id: 'livingWater', type: 'item', category: 'heal', points: 2,
+                        },
+                    },
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 13 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 1,
+                    item: { },
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта dead water в item holder неактивного игрока
+    expect(result.game.players[0].item.key10.id).toEqual('livingWater');
+    // ожидаем, что карта dead water неактивного игрока имеет тип - damage
+    expect(result.game.players[0].item.key10.category).toEqual('heal');
+    // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
+    expect(result.game.players[1].health.current).toEqual(11);
+    expect(result.game.players[0].health.current).toEqual(6);
+    // ожидаем, что при переходе хода на текущего активного,
+    // карта -water стоит в item cо свойтсвом itemInstalled ==true
+    // expect(result.game.players[1].item.key10.itemInstalled).toEqual(true);
+    // ожидаем, что карта-water находится в item пока у нее есть очки.
+    expect(result.game.players[0].item.key10.points).not.toEqual(0);
+});
+
+// Test, that when dead water is in any player item holder then
+// players get -1 to their health current each at next 3  moves as card has 3pnts.
+test.only('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt next 3 moves.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 13 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {},
+                    },
+                    moveCounter: 1,
+                    item: {
+                        key10: {
+                            id: 'deadWater', type: 'item', category: 'attack', itemInstalled: true, points: 1,
+                        },
+                    },
+                    grave: {},
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    item: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта dead water ушла из item holder активного игрока на кладбище
+    expect(result.game.players[0].grave.key10.id).toEqual('deadWater');
+    // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
+    expect(result.game.players[0].health.current).toEqual(9);
+    expect(result.game.players[1].health.current).toEqual(7);
+    // ожидаем, что карта-water обнулилась points == 0.
+    expect(result.game.players[0].grave.key10.points).toEqual(0);
 });
