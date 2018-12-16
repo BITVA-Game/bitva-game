@@ -1,4 +1,5 @@
 /* eslint-disable default-case */
+/* eslint-disable max-len */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-case-declarations */
@@ -9,16 +10,44 @@
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
-
+/**
+* function to get Random Number Up To n
+*
+* @param {object} accept n - number, until that will be used as nearest integer
+* @returns {function} Math.floor that rounds a number downward to its nearest integer - 2 multiplied functions
+* @param {function} Math.random () that returns a random number between 0 (inclusive) and 1 (exclusive):
+* @param {function} Math.floor that rounds a number downward to its nearest integer = n
+}}
+*/
 function getRandomUpTo(n) {
     return Math.floor(Math.random() * Math.floor(n));
 }
 
+/**
+* function to get random Boolean
+*
+* @returns {function} to get Random Number Up To 2, put it into rand constant and then === 0
+*
+}}
+*/
 function getRandomBool() {
     const rand = getRandomUpTo(2);
     return rand === 0;
 }
 
+/**
+* function to assign cards
+*
+* @param {object} deck - deck of cards belonged to the hero
+@param {object} cardsNumber - cards number at each hero's deck
+* @returns {function} Object.keys assigned to constant d, which returns enumerable properties (deck)  as an array and then sort it
+* with Math.random () method creating mock - 0.5 and then applies slice method from 0 up to cards number for each hero
+* @returns {object} cards
+* @returns {function} method foreach that takes enumerable properties (d) and for each key object assigns cards key = deck key
+* @param {function} Math.random () that returns a random number between 0 (inclusive) and 1 (exclusive):
+* @returns {object} updated cards
+}}
+*/
 function assignCards(deck, cardsNumber) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
@@ -28,6 +57,18 @@ function assignCards(deck, cardsNumber) {
     return cards;
 }
 
+/**
+ * function to create deck of cards
+ *
+ * @param {object} heroName - name of the hero
+ * @returns {object} constant cards = cards assinged to spicific hero from the list of all characters, choosen by heroName
+ * @returns {object} deck = empty object
+ * @returns {object} key = 0
+ * @returns {function} for loop with parameter constant cardType in object cards
+ * for loop returns inner for loop that takes count, create a new card for this cardtype
+ * and then assigns key ID for each card in the deck, starting from 1
+ *  @returns {object} updated deck of cards
+ * */
 function createDeck(heroName) {
     const cards = allCharacters[heroName].cards;
     const deck = {};
@@ -44,6 +85,23 @@ function createDeck(heroName) {
     return deck;
 }
 
+/**
+ * function assigned to constant generatePlayers
+ *
+ * @param {object}  heroName - name of the chosen hero (character)
+ * @returns {function} constant rand = function to get random Boolean
+ * @returns {object} array of 2 players, where 1 player is active: true and another is active: false
+ * @returns {object} array of all characters in the game with Object.values method and assigns them to constant allCharactersArray
+ * @returns {function} to search for the second character -hero with parameters: hero Key ID and array with all characters
+ * using for loop that seach within Characters array length and return if of the character other than choosen hero key
+ * and then returns this character id
+ * @returns {object} constant name of the 2nd character not taken from the list previoulsy
+ * @returns {function} method forEach, that takes array with 2 players
+ * and assigns for each player properties required for the game
+ * for active player hero is the choosen character and her/his name, deck, cards, hand, item, graveyard, health
+ * for inactive player is the other character and her/his name, deck, cards, hand, item, graveyard, health
+ * and then returns players
+ */
 const generatePlayers = function (heroName) {
     const rand = getRandomBool();
     const players = [
@@ -100,6 +158,14 @@ const generatePlayers = function (heroName) {
 //     return keys[Math.floor(keys.length * Math.random())];
 // }
 
+/**
+ * function that give cards to player
+ * @param {object} player
+ * @returns {function} while loop loops through array (created with Object.keys method ) as long as player hand length is less than 6.
+ * and if the same array > 0 assigning key to each card in player's hand from the key of player's card,
+ * then delete this card by key from the cards and stops in any other condition
+ * @returns {object} player specified
+ *  */
 function giveCardsTo(player) {
     while (Object.keys(player.hand).length < 5) {
         if (Object.keys(player.cards).length > 0) {
@@ -115,6 +181,13 @@ function giveCardsTo(player) {
     return player;
 }
 
+/**
+ * function that deal cards to all players
+ *
+ * @param {object} playersArray  - array of all players
+ * @returns {function} method forEach that for each player from players array deal cards using giveCardsTo function
+ * @returns {object} playersArray array with all players, that have now cards in hands
+ */
 function giveCardsToAll(playersArray) {
     playersArray.forEach((p) => {
         giveCardsTo(p);
@@ -123,7 +196,16 @@ function giveCardsToAll(playersArray) {
     return playersArray;
 }
 
-// This function taked the player and the key for his cards
+/**
+ * function to move chosen card to graveyard
+ *
+ * @param {object} player - active player
+ * @param {object} key - key for his active chosen card
+ * @param {object} from  - from where player choses active card
+ * @returns {function} if statement to assign card in gravyeard key of the card in item and then delete this card from item
+ * if from === 'item' is true, in other cases it assigns card in gravyeard key of the card in hand and then delete this card from hand
+ */
+// This function takes the player and the key for his card
 // And moves it so graveyard via deleting the key from array
 function moveCardGraveyard(player, key, from) {
     if (from === 'item') {
@@ -137,11 +219,28 @@ function moveCardGraveyard(player, key, from) {
     }
 }
 
+/**
+ * function that damage the player
+ * @param {object} player - active player chosen
+ * @param {object} points - points of damage
+ * @returns {object} current health of the player minus points of damage
+ */
 function damagePlayer(player, points) {
     // console.log('damagePlayer');
     player.health.current -= points;
 }
 
+/**
+ * function that creates an attack to the shield
+ * @param {object} player - active player chosen
+ * @param {object} itemKey  - key of the card chosen
+ * @param {object} points - points of damage
+ * @returns {function} if statement to assign points to the card in player's item minus points of damage
+ * if condition - points of the card in player's item > points of damage is true
+ * if condition - points of the card in player's item === points of damage is true, then card from item moves to graveyard
+ * in other cases ( points of the card in player's item < points of damage) function to damage player is called 
+ * and then function to move card from item to graveyard is called
+ */
 function attackShield(player, itemKey, points) {
     // console.log('attackShield');
     if (player.item[itemKey].points > points) {
@@ -157,6 +256,20 @@ function attackShield(player, itemKey, points) {
     }
 }
 
+/**
+ * function to attack opponent - inactive player
+ *
+ * @param {object} player - inactive player
+ * @param {object} points - points of damage
+ * @returns {object} category of item
+ * @returns {function} method Object.keys that creates array from cards in player's item andassigns 1st card as itemKey constant
+ * @returns {function} that assigns category of 1st card in item to constant itemCategory if there is such card, otherwise it is null
+ * @returns {function} if statement to assign current health of the player minus damage points
+ * if condition - length of the item === 0 and category of the card in item is not 'shield' is true
+ * but if current health is less or equal 0 then player's current health = 0
+ * in other cases where condition - length of the item === 1 and category of the card in item is equal to 'shield' is true
+ * then function attackShield is called with paramters: player - inactive player, itemKey -key of the card chosen, points - damage points
+ *  */
 function attackOpponent(player, points) {
     // console.log('attackOpponent ', player, points);
     let itemCategory;
@@ -173,6 +286,14 @@ function attackOpponent(player, points) {
     }
 }
 
+/**
+ * function to heal the active player with heal ponts of his active chosed card
+ *  @param {object} player - active player
+ * @param {object} points - heal points
+ * @returns {function} if statement to assign current health of the player = maximum health of the player
+ * if condition - current health of the player + heal points > maximum health of the player is true
+ * in other cases current health of the player is increased for heal points
+ */
 function healPlayer(player, points) {
     // console.log('healPlayer');
     if (player.health.current + points > player.health.maximum) {
@@ -190,6 +311,14 @@ function healPlayer(player, points) {
 //     }
 // }
 
+/**
+ * function to move chosen card from item of the player
+ *
+ * @param {object} player - active player
+ * @param {object} key - key of the chosen active card
+ * @returns {object} key of the card in item = key of the chosen active card from player's hand
+ * @returns {statement} delete statement is used to delete active card from player's hand by its key
+ */
 // we move item card from active player's hand to his item holder
 function moveItem(player, key) {
     // active player's item get the active card's key from his hand
@@ -198,88 +327,32 @@ function moveItem(player, key) {
     delete player.hand[key];
 }
 
-function cardIncreaseHealth(players) {
-    for (let i = 0; i < players.length; i += 1) {
-        players[i].health.current += 1;
-    }
-    return players;
-}
-
-function cardDecreaseHealth(players) {
-    for (let i = 0; i < players.length; i += 1) {
-        players[i].health.current -= 1;
-    }
-    return players;
-}
-
-// special water cards act with water function
-function waterCard(players) {
-    // console.log('We are in water function!');
-    // we check for each player if they have card in item holder and card points !=0
-    players.forEach((p) => {
-        // console.log(Object.values(p.item)[0]);
-        const itemCard = Object.values(p.item)[0];
-        if (Object.keys(p.item).length !== 0 && itemCard.points !== 0) {
-            // we run switch by all players item id card
-            switch (itemCard.id) {
-            // if it is Living Water card then we run function
-            // that increase players current health by 1 point
-            case 'livingWater':
-                //  console.log('We are in living water case!');
-                cardIncreaseHealth(players);
-                // we deduct 1 point from item card points
-                itemCard.points -= 1;
-                break;
-            // if it is Dead Water card then we run function
-            // that decrease players current health by 1 point
-            case 'deadWater':
-                // console.log('We are in dead water case!');
-                cardDecreaseHealth(players);
-                // we deduct 1 point from item card points
-                itemCard.points -= 1;
-                break;
-            }
-            if (itemCard.points === 0) {
-                // we move water item card to graveyard if its points == 0
-                // console.log('We are in item card has 0 ponts!', p, (Object.keys(p.item)[0]));
-                moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
-            }
-        }
-    });
-    return { players };
-}
-// function waterCard(player, opponent) {
-//     const playerItemCard = Object.values(player.item)[0];
-//     if (Object.keys(player.item).length !== 0) {
-//         if (playerItemCard.id === 'livingWater' && playerItemCard.points !== 0) {
-//             console.log('we are in living water for player!');
-//             player.health.current += 1;
-//             opponent.health.current += 1;
-//             playerItemCard.points -= 1;
-//         }
-//         if (playerItemCard.id === 'deadWater' && playerItemCard.points !== 0) {
-//             console.log('we are in dead water for player!');
-//             player.health.current -= 1;
-//             opponent.health.current -= 1;
-//             playerItemCard.points -= 1;
-//         }
-//     }
-//     if (Object.keys(opponent.item).length !== 0) {
-//         // console.log('Here is water card for opponent');
-//         const opponentItemcard = Object.values(opponent.item)[0];
-//         if (opponentItemcard.id === 'livingWater' && opponentItemcard.points !== 0) {
-//             player.health.current += 1;
-//             opponent.health.current += 1;
-//             opponentItemcard.points -= 1;
-//         }
-//         if (opponentItemcard.id === 'deadWater' && opponentItemcard.points !== 0) {
-//             player.health.current -= 1;
-//             opponent.health.current -= 1;
-//             opponentItemcard.points -= 1;
-//         }
-//     }
-// }
-
+/**
+ * function that help player to act in the game
+ * @param {object} game - our game
+ * @param {object} player - active player
+ * @param {object} opponent - inactive player
+ * @param {object} active - chosen card
+ * @param {object} target - where player wants to move the card to
+ * @returns {object} constant activeCard equals to the chosen card in active player's hand
+ * @returns {function} if statement that runs moveCardGraveyard function
+ * with parameters: player - active player, active- chosen card, 'item' as target
+ * if conditions: 1)  target === 'graveyard' and 2) chosen card key belongs to active player's item are true
+ * if condition 1)  target === 'graveyard' is true only then it runs moveCardGraveyard function
+ * with parameters: player - active player, active- chosen card,
+ * if condition target === 'hero' is true then it activates switch with parameter - category of active card
+ * and run case 'heal' - that executes healPlayer function with parameters: active player and points of heal card
+ * plus function moveCardGraveyard with parameters player - active player and  active -key of chosen card
+ * in case of attack switch breaks by deaffault ( very rare cases - a mistake happens) it returns error message
+ * if target === 'opponent' is true then it runs if where type of chosen card === 'action' 
+ * then it executes switch by category of the chosen card
+ * in case of 'heal' it breaks
+ * in case of 'attack' it attacks Opponent and then delete attacking card by key
+ * and if opponent's current health === 0 then game phase is Over
+ * and finally if any mistake occurs during game process, player gets error message by default
+ * if conditions: 
+ */
+// function that allows active player to move his card from hand to misc. targets
 function playerActs(game, player, opponent, active, target) {
     // console.log('playerActs called');
     const activeCard = player.hand[active];
