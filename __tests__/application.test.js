@@ -1409,7 +1409,7 @@ test('msg ACTION received: active player has dead water in item, it decreased pl
     // ожидаем, что карта dead water в item holder активного игрока
     expect(result.game.players[0].item.key10.id).toEqual('deadWater');
     // ожидаем, что карта dead water неактивного игрока имеет тип - damage
-    expect(result.game.players[0].item.key10.type).toEqual('damage');
+    expect(result.game.players[0].item.key10.category).toEqual('damage');
 
     // ожидаем, что от текущего здоровья игроков отнимется по 1му очку
     expect(result.game.players[0].health.current).toEqual(9);
