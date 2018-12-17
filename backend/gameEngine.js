@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-case-declarations */
@@ -18,13 +19,12 @@ function getRandomBool() {
     return rand === 0;
 }
 
-function assignCards(deck) {
-    const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, 15);
+function assignCards(deck, cardsNumber) {
+    const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
     d.forEach((key) => {
         cards[key] = deck[key];
     });
-
     return cards;
 }
 
@@ -69,7 +69,7 @@ const generatePlayers = function (heroName) {
         if (p.active) {
             p.hero = heroName;
             p.deck = createDeck(heroName);
-            p.cards = assignCards(p.deck);
+            p.cards = assignCards(p.deck, allCharacters[heroName].cardsNumber);
             p.hand = {};
             p.item = {};
             p.grave = {};
@@ -81,7 +81,7 @@ const generatePlayers = function (heroName) {
         if (p.active === false) {
             p.hero = heroSecondName;
             p.deck = createDeck(heroSecondName);
-            p.cards = assignCards(p.deck);
+            p.cards = assignCards(p.deck, allCharacters[heroSecondName].cardsNumber);
             p.hand = {};
             p.item = {};
             p.grave = {};
@@ -336,7 +336,7 @@ function playerActs(game, player, opponent, active, target) {
         }
     }
     if (target === 'item' && activeCard.type === 'item') {
-        console.log('We are in move item case');
+        // console.log('We are in move item case');
         moveItem(player, active);
     }
     // after each move we increase active player's counter for 1
@@ -429,7 +429,6 @@ function handle(app, message) {
     }
     case 'HEROSELECTED': {
         const heroName = message.hero;
-        console.log(app.game.players);
         return Object.assign({}, app.game, generatePlayers(heroName));
     }
     case 'DEALALL': {
