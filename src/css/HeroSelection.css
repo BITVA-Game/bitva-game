@@ -346,18 +346,17 @@ section {
 }
 
 .health {
-	height: 38px;
-	width: 38px;
 	-webkit-filter: drop-shadow(0 0 2px #FFF);
 	filter: drop-shadow(0 0 2px #FFF);
-	
+	height: 38px;
+	width: 38px;
 }
 
 .health-container {
 	bottom: 5px;
     height: 38px;
-    right: 5px;
     position: absolute;
+    right: 5px;
     width: 38px;
 }
 
@@ -384,8 +383,8 @@ section {
 	bottom: 1px;
 	font-size: 21px;
 	height: 30px;
-    position: absolute;
 	left: 3px;
+    position: absolute;
 }
 
 .icons-inactive div{
