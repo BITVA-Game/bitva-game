@@ -328,6 +328,82 @@ function moveItem(player, key) {
 }
 
 /**
+ * function that helps to increase current health
+ * @param {object} players - array with all players in the game
+ * @returns {function} for loop through players array that returns players with their health current increased by 1 point
+ *
+ */
+function cardIncreaseHealth(players) {
+    for (let i = 0; i < players.length; i += 1) {
+        players[i].health.current += 1;
+    }
+    return players;
+}
+
+/**
+ * function that helps to dicrease current health
+ * @param {object} players - array with all players in the game
+ * @returns {function} for loop through players array that returns players with their health current direased by 1 point
+ *
+ */
+function cardDecreaseHealth(players) {
+    for (let i = 0; i < players.length; i += 1) {
+        players[i].health.current -= 1;
+    }
+    return players;
+}
+
+/**
+ * function that helps to find water card in players hand and increase or dicrease current health for all players
+ * @param {object} players - array with all players in the game
+ * @returns {function} forEach() method calls switch statement once for each player in the array, in order,
+ * only where if statement with conditions: player's hand is not empty and card in item is not =0, are true, then this switch is executed
+ * switch accepts id of item card as parameter and in case when id = 'livingWater' it returns function cardIncreaseHealth
+ * with players as parameter and points of the card in item dicreased by 1
+ * in case when id = 'deadWater', it returns function cardDecreaseHealth
+ * with players as parameter and points of the card in item dicreased by 1
+ * but if points of item card == 0 then it runs function moveCardGraveyard
+ * with parameters: p (player), Object.keys(p.item)[0] (key of the item card), 'item' (target to take the card from = 'item').
+ * @returns {object} players - array with all players in the game with updated data
+ */
+// special water cards act with water function
+function waterCard(players) {
+    // console.log('We are in water function!');
+    // we check for each player if they have card in item holder and card points !=0
+    players.forEach((p) => {
+        // console.log(Object.values(p.item)[0]);
+        const itemCard = Object.values(p.item)[0];
+        if (Object.keys(p.item).length !== 0 && itemCard.points !== 0) {
+            // we run switch by all players item id card
+            switch (itemCard.id) {
+            // if it is Living Water card then we run function
+            // that increase players current health by 1 point
+            case 'livingWater':
+                //  console.log('We are in living water case!');
+                cardIncreaseHealth(players);
+                // we deduct 1 point from item card points
+                itemCard.points -= 1;
+                break;
+            // if it is Dead Water card then we run function
+            // that decrease players current health by 1 point
+            case 'deadWater':
+                // console.log('We are in dead water case!');
+                cardDecreaseHealth(players);
+                // we deduct 1 point from item card points
+                itemCard.points -= 1;
+                break;
+            }
+            if (itemCard.points === 0) {
+                // we move water item card to graveyard if its points == 0
+                // console.log('We are in item card has 0 ponts!', p, (Object.keys(p.item)[0]));
+                moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
+            }
+        }
+    });
+    return { players };
+}
+
+/**
  * function that help player to act in the game
  * @param {object} game - our game
  * @param {object} player - active player
