@@ -272,12 +272,7 @@ section {
 /* hero details (OneHero) screen */
 
 .details-hero {
-	bottom: 0;
-	left: 0;
-	margin: auto 0;
-	position: absolute;
-	top: 0;
-	width: 35%;
+	flex: 1 1 35%;
 }
 
 .details-hero-avatar {
@@ -306,11 +301,7 @@ section {
 /* details information block */
 
 .details-info-block {
-	bottom: 0;
-	position: absolute;
-    right: 0;
-	top: 0;
-	width: 65%;
+	flex: 1 1 65%;
 }
 
 .details-description {

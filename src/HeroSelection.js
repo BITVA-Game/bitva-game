@@ -109,17 +109,18 @@ const ListOfHeroes = props => (
 const OneHero = props => (
     <div className={styles.details}>
         {console.log(props.selected, props.app)}
-        {/* <div className="details-hero"> */}
-        <div className="details-hero-avatar">
-            <img src={images[props.hero.id]} alt={props.hero.id} />
-        </div>
-        <div className="details-hero-btn-block">
-            <div className="btn btn-back footer-menu" role="button" onClick={() => { props.onBack(); console.log('key back'); }} tabIndex="10">
-                    &#767;
+        <div className="details-hero">
+            <div className="details-hero-avatar">
+                <img src={images[props.hero.id]} alt={props.hero.id} />
             </div>
         </div>
-        {/* </div> */}
-        {/*<section className="details-info-block"> // blocks header/footer buttons
+        {/* button to move in footer */}
+        <div className="details-hero-btn-block">
+            <div className="btn btn-back footer-menu" role="button" onClick={() => { props.onBack(); console.log('key back'); }} tabIndex="10">
+                &#767;
+            </div>
+        </div>
+        <div className="details-info-block">
             <article className="details-description">
                 <span>
                     {props.hero.description}
@@ -136,7 +137,7 @@ const OneHero = props => (
                     ▶
                 </div>
             </section>
-        </section>*/}
+        </div>
     </div>
 );
 
