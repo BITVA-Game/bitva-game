@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/VersusScreen.css';
@@ -25,25 +25,39 @@ const OneHero = props => (
     </div>
 );
 
-const VersusScreen = props => (
-    <div className="versus-screen-container">
-        <div className="versus-heroes-container">
-            <OneHero hero={props.app.game.players[0].hero} />
-            <div className="vs">
-                <p>
-                VS
-                </p>
-            </div>
-            <OneHero hero={props.app.game.players[1].hero} />
-        </div>
-        <div className="play-button-container">
-            <button className="play-button" type="button" onClick={() => props.sendMessage({ type: 'DEALALL' })}>
-            PLAY
-            </button>
-        </div>
-        <MainMenu sendMessage={props.sendMessage} />
-    </div>
-);
+class VersusScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.sendDealAllMessage = this.sendDealAllMessage.bind(this);
+  }
+
+  sendDealAllMessage() {
+    this.props.sendMessage({ type: 'DEALALL' });
+  }
+
+  render() {
+    return (
+      <div className="versus-screen-container">
+          <div className="versus-heroes-container">
+              <OneHero hero={this.props.app.game.players[0].hero} />
+              <div className="vs">
+                  <p>
+                  VS
+                  </p>
+              </div>
+              <OneHero hero={this.props.app.game.players[1].hero} />
+          </div>
+          <div className="play-button-container">
+              <button className="play-button" type="button" onClick={this.sendDealAllMessage}>
+              PLAY
+              </button>
+          </div>
+          <MainMenu sendMessage={this.props.sendMessage} />
+      </div>
+    )
+  }
+}
 
 VersusScreen.propTypes = {
     app: PropTypes.object.isRequired,
