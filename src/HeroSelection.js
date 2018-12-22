@@ -196,10 +196,7 @@ class HeroSelection extends Component {
                         ) : (
                             <ListOfHeroes
                                 app={this.props.app}
-                                //info={this.state.info}
                                 onShow={this.showHero}
-                                //closeInfo={this.closeInfo}
-                                //showInfo={this.showInfo}
                                 changeSelected={this.changeSelected}
                                 selected={this.state.selected}
                             />
