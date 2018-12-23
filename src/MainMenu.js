@@ -19,6 +19,14 @@ const LogoBlock = props => (
         : null
       }
   </div>
+);
+
+const ToggleButton = props => (
+  <div className="btn btn-sidebar-toggle" role="button"
+      onClick={props.toggle} onKeyDown={props.toggle}
+      tabIndex="-1">
+      ▶
+  </div>
 )
 
 class MainMenu extends Component {
@@ -44,9 +52,7 @@ class MainMenu extends Component {
                         <MenuButton name="Tournament" type="PLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Daily Challenge" type="PLAY" sendMessage={this.props.sendMessage} />
                     </ul>
-                    <div className="btn btn-sidebar-toggle" role="button" onClick={() => this.toggle()} onKeyDown={() => this.toggle()} tabIndex="-1">
-                        ▶
-                    </div>
+                    <ToggleButton toggle={this.toggle} />
                     <ul className="menu-buttons-group">
                         <MenuButton name="Store" type="" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Profile" type="PROFILE" sendMessage={this.props.sendMessage} />
