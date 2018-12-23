@@ -45,11 +45,14 @@ const Header = props => (
             </div>
             <HeaderHeroButton direction={"hero-btn-arrow-right"} funct={props.next} tabIndex={"2"} img={"▶"}/>
         </div>
-        <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.selected); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
-            <span>
-                CHARACTER DETAILS
-            </span>
-        </div>
+        { props.details
+          ? <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.selected); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
+              <span>
+                  CHARACTER DETAILS
+              </span>
+            </div>
+          : null
+        }
     </section>
 );
 
@@ -150,7 +153,7 @@ class HeroSelection extends Component {
         this.state = {
           hero: null,
           selected: this.app.heroSelect[Object.keys(this.app.heroSelect)[0]].id,
-          details: null
+          details: true,
         };
         this.showHero = this.showHero.bind(this);
         this.changeSelected = this.changeSelected.bind(this);
@@ -162,7 +165,11 @@ class HeroSelection extends Component {
 
     showHero(heroID) {
         const hero = this.app.heroSelect[heroID];
-        this.setState({ hero });
+        if(hero){
+            this.setState({ hero, details: false });
+        } else {
+            this.setState({ hero, details: true });
+        }
     }
 
     changeSelected(selected) {
@@ -189,9 +196,10 @@ class HeroSelection extends Component {
     }
 
     render() {
+        console.log("DETAILS: ", this.state.details);
         return (
             <div className="heroselection-container">
-                <Header prev={this.selectLeftHero} next={this.selectRightHero} selected={this.state.selected} onShow={this.showHero} />
+                <Header prev={this.selectLeftHero} next={this.selectRightHero} selected={this.state.selected} onShow={this.showHero} details={this.state.details}/>
                 <div className={styles.main}>
                     {this.state.hero
                         ? (
