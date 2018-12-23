@@ -12,6 +12,15 @@ const MenuButton = props => (
     </li>
 );
 
+const LogoBlock = props => (
+  <div className="logo-container">
+      {props.opened
+        ? <img className="logo" src={logo} alt={logo} />
+        : null
+      }
+  </div>
+)
+
 class MainMenu extends Component {
     constructor(props) {
         super(props);
@@ -27,11 +36,7 @@ class MainMenu extends Component {
     render() {
         return (
             <div className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
-                <div className="logo-container">
-                    {this.state.opened ? (
-                        <img className="logo" src={logo} alt={logo} />
-                    ) : null}
-                </div>
+                <LogoBlock opened={this.state.opened}/>
                 <div className="menu-buttons-container">
                     <ul className="menu-buttons-group">
                         <MenuButton name="Single Play" type="PLAY" sendMessage={this.props.sendMessage} />
