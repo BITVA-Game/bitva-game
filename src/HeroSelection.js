@@ -23,6 +23,12 @@ function isAvailable(app, hero) {
     return app.profile.characters.find(character => character === hero.id);
 }
 
+const HeaderHeroButton = props => (
+  <div className={"btn hero-nav-menu-btn hero-btn-arrow "+props.direction} role="button" onClick={props.funct} onKeyPress={props.funct} tabIndex={props.tabIndex}>
+      {props.img}
+  </div>
+)
+
 // common elements
 // header section
 const Header = props => (
@@ -33,15 +39,11 @@ const Header = props => (
             </span>
         </div>
         <div className="header-menu header-nav-menu">
-            <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-left" role="button" onClick={() => { props.prev(); }} onKeyPress={() => { console.log('key nav-left'); }} tabIndex="1">
-                ◀
-            </div>
+           <HeaderHeroButton direction={"hero-btn-arrow-left"} funct={props.prev} tabIndex={"1"} img={"◀"}/>
             <div className="hero-nav-menu-name header-menu">
                 {props.selected}
             </div>
-            <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { props.next(); }} onKeyPress={() => { console.log('key nav-right'); }} tabIndex="2">
-                ▶
-            </div>
+            <HeaderHeroButton direction={"hero-btn-arrow-right"} funct={props.next} tabIndex={"2"} img={"▶"}/>
         </div>
         <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.selected); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
             <span>
