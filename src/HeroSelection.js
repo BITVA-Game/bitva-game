@@ -59,6 +59,10 @@ const Header = props => (
 // footer section
 const Footer = props => (
     <section className="heroselection-footer">
+      {props.details
+        ? null
+        : <BackButton onBack={props.onBack}/>
+      }
         <div className="heroselection-footer-menu heroselection-play">
             <div className="btn btn-play footer-menu" role="button" onClick={() => props.selectHero(props.selected)} onKeyPress={() => { console.log('key play'); }} tabIndex="5">
                 PLAY
@@ -115,16 +119,20 @@ const HeroImage = props => (
   </div>
 )
 
+
+const BackButton = props => (
+  <div className="details-hero-btn-block">
+      <div className="btn btn-back footer-menu" role="button" onClick={props.onBack} onKeyPress={props.onBack} tabIndex="10">
+          &#767;
+      </div>
+  </div>
+)
+
+
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
     <div className={styles.details}>
         <HeroImage heroid={props.hero.id}/>
-        {/* button to move in footer */}
-        <div className="details-hero-btn-block">
-            <div className="btn btn-back footer-menu" role="button" onClick={() => props.onBack()} onKeyPress={() => props.onBack()} tabIndex="10">
-                &#767;
-            </div>
-        </div>
         <div className="details-info-block">
             <article className="details-description">
                 <span>
@@ -205,7 +213,6 @@ class HeroSelection extends Component {
                         ? (
                             <OneHero
                                 hero={this.state.hero}
-                                onBack={this.showHero}
                             />
                         ) : (
                             <ListOfHeroes
@@ -218,7 +225,7 @@ class HeroSelection extends Component {
                     }
                 </div>
                 <MainMenu sendMessage={this.props.sendMessage} />
-                <Footer selected={this.state.selected} selectHero={this.selectHero} />
+                <Footer selected={this.state.selected} selectHero={this.selectHero} onBack={this.showHero} details={this.state.details}/>
             </div>
         );
     }
