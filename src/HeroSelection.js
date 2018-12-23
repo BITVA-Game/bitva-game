@@ -20,10 +20,7 @@ const images = {
 };
 
 function isAvailable(app, hero) {
-    return app.profile.characters.find((character) => {
-        console.log(character, hero.id);
-        return character === hero.id;
-    });
+    return app.profile.characters.find(character => character === hero.id);
 }
 
 // common elements
@@ -37,13 +34,13 @@ const Header = props => (
         </div>
         <div className="header-menu header-nav-menu">
             <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-left" role="button" onClick={() => { props.prev(); }} onKeyPress={() => { console.log('key nav-left'); }} tabIndex="1">
-                            ◀
+                ◀
             </div>
             <div className="hero-nav-menu-name header-menu">
                 {props.selected}
             </div>
             <div className="btn hero-nav-menu-btn hero-btn-arrow hero-btn-arrow-right" role="button" onClick={() => { props.next(); }} onKeyPress={() => { console.log('key nav-right'); }} tabIndex="2">
-                            ▶
+                ▶
             </div>
         </div>
         <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.selected); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
@@ -59,27 +56,10 @@ const Footer = props => (
     <section className="heroselection-footer">
         <div className="heroselection-footer-menu heroselection-play">
             <div className="btn btn-play footer-menu" role="button" onClick={() => props.selectHero(props.selected)} onKeyPress={() => { console.log('key play'); }} tabIndex="5">
-                            PLAY
+                PLAY
             </div>
         </div>
     </section>
-);
-
-
-// Pop-up with character details
-const HeroInfo = props => (
-    <div className="hero-info">
-        <button className="btn-close" type="button" onClick={() => props.closeDetails()}>
-            X
-        </button>
-        {/* <img src={images[props.hero.id]} alt={props.hero.id}/> */}
-        <h3>
-            {props.hero.name}
-        </h3>
-        <p>
-            {props.hero.description}
-        </p>
-    </div>
 );
 
 // Individual hero block, repeates to display every character
@@ -102,9 +82,6 @@ const HeroBlock = props => (
                 {props.hero.name}
             </div> */}
         </div>
-        {/* <button className="btn-hero-info" type="button" hero={props.hero} onClick={() => props.showDetails(props.hero)}>
-            Info
-        </button> */}
     </div>
 );
 
@@ -116,7 +93,6 @@ const ListOfHeroes = props => (
             <HeroBlock
                 key={hero.id}
                 onShow={props.onShow}
-                // showDetails={props.showDetails}
                 hero={hero}
                 app={props.app}
                 selected={hero.id === props.selected}
@@ -129,20 +105,18 @@ const ListOfHeroes = props => (
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
     <div className={styles.details}>
-        {/* <div className="details-hero"> */}
-        <div className="details-hero-avatar">
-            <img src={images[props.hero.id]} alt={props.hero.id} />
+        <div className="details-hero">
+            <div className="details-hero-avatar">
+                <img src={images[props.hero.id]} alt={props.hero.id} />
+            </div>
         </div>
+        {/* button to move in footer */}
         <div className="details-hero-btn-block">
             <div className="btn btn-back footer-menu" role="button" onClick={() => props.onBack()} onKeyPress={() => props.onBack()} tabIndex="10">
-                    &#767;
+                &#767;
             </div>
-            <button className="btn btn-select" type="button" onClick={() => props.onSelect(props.hero)}>
-                    SELECT
-            </button>
         </div>
-        {/* </div> */}
-        <section className="details-info-block">
+        <div className="details-info-block">
             <article className="details-description">
                 <span>
                     {props.hero.description}
@@ -159,7 +133,7 @@ const OneHero = props => (
                     ▶
                 </div>
             </section>
-        </section>
+        </div>
     </div>
 );
 
@@ -173,8 +147,6 @@ class HeroSelection extends Component {
         this.selectLeftHero = this.selectLeftHero.bind(this);
         this.selectRightHero = this.selectRightHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
-        // this.showDetails = this.showDetails.bind(this);
-        this.closeDetails = this.closeDetails.bind(this);
     }
 
 
@@ -206,14 +178,6 @@ class HeroSelection extends Component {
         this.props.sendMessage({ type: 'HEROSELECTED', hero: selected });
     }
 
-    // showDetails(hero) {
-    //     this.setState({ details: hero });
-    // }
-
-    closeDetails() {
-        this.setState({ details: null });
-    }
-
     render() {
         return (
             <div className="heroselection-container">
@@ -224,23 +188,15 @@ class HeroSelection extends Component {
                             <OneHero
                                 hero={this.state.hero}
                                 onBack={this.showHero}
-                                onSelect={this.selectHero}
                             />
                         ) : (
                             <ListOfHeroes
                                 app={this.props.app}
-                                info={this.state.info}
                                 onShow={this.showHero}
-                                closeInfo={this.closeInfo}
-                                showInfo={this.showInfo}
                                 changeSelected={this.changeSelected}
                                 selected={this.state.selected}
                             />
                         )
-                    }
-                    {this.state.info
-                        ? <HeroInfo hero={this.state.info} closeInfo={this.closeInfo} />
-                        : null
                     }
                 </div>
                 <MainMenu sendMessage={this.props.sendMessage} />
@@ -263,18 +219,12 @@ Footer.propTypes = {
     selected: PropTypes.string.isRequired,
 };
 
-HeroInfo.propTypes = {
-    hero: PropTypes.object.isRequired,
-    closeDetails: PropTypes.func.isRequired,
-};
-
 HeroBlock.propTypes = {
     app: PropTypes.object.isRequired,
     // changeSelected: PropTypes.func.isRequired,
     hero: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
-    // showDetails: PropTypes.func.isRequired,
 };
 
 ListOfHeroes.propTypes = {
@@ -282,13 +232,11 @@ ListOfHeroes.propTypes = {
     changeSelected: PropTypes.func.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
-    // showDetails: PropTypes.func.isRequired,
 };
 
 OneHero.propTypes = {
     hero: PropTypes.object.isRequired,
     onBack: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
 };
 
 HeroSelection.propTypes = {

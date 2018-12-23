@@ -269,50 +269,10 @@ section {
 	/* z-index: 999; */
 }
 
-
-/* Pop-up element */
-
-.hero-info {
-	background-color: #899591;
-	border-radius: 10px;
-	color: #000;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	left: 50%;
-	padding: 0 1.1em 0.2em;
-	position: absolute;
-	top: 50%;
-	transform: translate(-50%,-50%);
-	width: 380px;
-}
-
-.hero-info .btn-close {
-	background-color: #899591;
-	border: none;
-	color: #000;
-	font-size: 1.4em;
-	padding: 0;
-	position: absolute;
-	right: 15px;
-	top: 15px;
-}
-
-.hero-info p {
-	font-size: 1.3em;
-	padding: 0 1em;
-}
-
-
 /* hero details (OneHero) screen */
 
 .details-hero {
-	bottom: 0;
-	left: 0;
-	margin: auto 0;
-	position: absolute;
-	top: 0;
-	width: 35%;
+	flex: 1 1 35%;
 }
 
 .details-hero-avatar {
@@ -338,18 +298,10 @@ section {
 	top: 44.8rem;
 }
 
-.btn-select {
-	display: none;
-}
-
 /* details information block */
 
 .details-info-block {
-	bottom: 0;
-	position: absolute;
-    right: 0;
-	top: 0;
-	width: 65%;
+	flex: 1 1 65%;
 }
 
 .details-description {
@@ -394,18 +346,17 @@ section {
 }
 
 .health {
-	height: 38px;
-	width: 38px;
 	-webkit-filter: drop-shadow(0 0 2px #FFF);
 	filter: drop-shadow(0 0 2px #FFF);
-	
+	height: 38px;
+	width: 38px;
 }
 
 .health-container {
 	bottom: 5px;
     height: 38px;
-    right: 5px;
     position: absolute;
+    right: 5px;
     width: 38px;
 }
 
@@ -432,8 +383,8 @@ section {
 	bottom: 1px;
 	font-size: 21px;
 	height: 30px;
-    position: absolute;
 	left: 3px;
+    position: absolute;
 }
 
 .icons-inactive div{
