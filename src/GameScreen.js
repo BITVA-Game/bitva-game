@@ -14,7 +14,7 @@ const images = {
 };
 
 // game table
-const GameTable = (props) => {
+const GameScreen = (props) => {
     props.app.game.players.sort((a, b) => {
         const x = a.active;
         const y = b.active;
@@ -152,9 +152,9 @@ Grave.propTypes = {
     grave: PropTypes.object.isRequired,
 };
 
-GameTable.propTypes = {
+GameScreen.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
 };
 
-export default GameTable;
+export default GameScreen;
