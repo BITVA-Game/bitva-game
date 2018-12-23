@@ -102,14 +102,18 @@ const ListOfHeroes = props => (
     </div>
 );
 
+const HeroImage = props => (
+  <div className="details-hero">
+      <div className="details-hero-avatar">
+          <img src={images[props.heroid]} alt={props.heroid} />
+      </div>
+  </div>
+)
+
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
     <div className={styles.details}>
-        <div className="details-hero">
-            <div className="details-hero-avatar">
-                <img src={images[props.hero.id]} alt={props.hero.id} />
-            </div>
-        </div>
+        <HeroImage heroid={props.hero.id}/>
         {/* button to move in footer */}
         <div className="details-hero-btn-block">
             <div className="btn btn-back footer-menu" role="button" onClick={() => props.onBack()} onKeyPress={() => props.onBack()} tabIndex="10">
@@ -141,7 +145,11 @@ class HeroSelection extends Component {
     constructor(props) {
         super(props);
         this.app = props.app;
-        this.state = { hero: null, selected: this.app.heroSelect[Object.keys(this.app.heroSelect)[0]].id, details: null };
+        this.state = {
+          hero: null,
+          selected: this.app.heroSelect[Object.keys(this.app.heroSelect)[0]].id,
+          details: null
+        };
         this.showHero = this.showHero.bind(this);
         this.changeSelected = this.changeSelected.bind(this);
         this.selectLeftHero = this.selectLeftHero.bind(this);
