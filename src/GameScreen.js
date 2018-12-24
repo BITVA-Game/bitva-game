@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Hero from './Hero';
 import './css/App.css';
 import './css/GameScreen.css';
 
-import yaga from './images/heroes/yaga.jpg';
-import morevna from './images/heroes/morevna.jpg';
-
 import './dragging';
 
-const images = {
-    yaga,
-    morevna,
-};
 
 // game table
 const GameScreen = (props) => {
@@ -77,48 +71,12 @@ class Player extends Component {
         super(props);
         this.state = { item: null };
         this.player = props.player;
-        this.current = this.player.health.current;
-
-        this.width = 200;
-        this.height = 200;
-        this.cx = this.width / 2;
-        this.cy = this.height / 2;
-        this.sw = 6;
-        this.r = this.cx - (this.sw / 2);
-        const cl = 2 * Math.PI * this.r;
-
-        const maximum = this.player.health.maximum;
-        const angle = ((360 / maximum) * this.current) - 90;
-        const long = angle + 90 > 180 ? 1 : 0;
-        const x = this.cx + (this.r * Math.cos(((angle * Math.PI) - 1) / 180));
-        const y = this.cy + (this.r * Math.sin(((angle * Math.PI) - 1) / 180));
-
-        this.d = `M ${this.cx} ${this.sw / 2} A ${this.r} ${this.r} 0 ${long} 1 ${x} ${y}`;
-        this.sda = `${(cl / maximum) - 1},1`;
-        this.sdo = (cl / 360) * 90;
-        this.style = {
-            hero: {
-                height: `${this.height}px`,
-                width: `${this.width}px`,
-            },
-        };
     }
 
     render() {
         return (
             <div className={this.player.active ? 'player player-active' : 'player player-inactive'}>
-                <div className="hero" style={this.style.hero} id={this.player.active ? 'hero' : 'enemy'}>
-                    <img className="hero-image" src={images[this.player.hero]} alt={this.player.hero} style={this.style.hero} />
-                    <svg className="hero-health" width={(this.cx) * 2} height={(this.cy) * 2}>
-                        <circle cx={this.cx} cy={this.cy} r={this.r} stroke="black" strokeWidth={this.sw + 1} fill="transparent" />
-                        <path className="hero-health-points" d={this.d} strokeWidth={this.sw} strokeDasharray={this.sda} strokeLinecap="butt" fill="transparent" />
-                    </svg>
-                    <div className="heart app-heart">
-                        <div className="heart-text app-heart-text">
-                            {this.current}
-                        </div>
-                    </div>
-                </div>
+                <Hero player={this.player}/>
                 <Item active={this.player.active} item={this.state.item}/>
                 <Deck deck={this.player.deck} />
                 <Hand active={this.player.active} hand={this.player.hand}/>
