@@ -33,38 +33,38 @@ const Card = props => (
 
 const Deck = props => (
     <div className="deck card-like">
-        <div className="deck-name">
+        <div className="deck-name" props={props}>
             deck
         </div>
     </div>
 );
 
 const Hand = props => (
-  <div className="hand">
-      {Object.values(props.hand).map((card, index) => (
-          <div key={index} className="card-place card-like">
-              <Card card={card} draggable={props.active} />
-          </div>
-      ))}
-  </div>
-)
+    <div className="hand">
+        {Object.keys(props.hand).map(cardId => (
+            <div key={cardId} className="card-place card-like">
+                <Card card={props.hand[cardId]} draggable={props.active} />
+            </div>
+        ))}
+    </div>
+);
 
 const Grave = props => (
-  <div className="grave card-like" id={props.active ? 'grave' : null}>
-      <div className="grave-name">
+    <div className="grave card-like" id={props.active ? 'grave' : null}>
+        <div className="grave-name">
           grave
-      </div>
-      <div className="count">
-          {props.active ? Object.keys(props.grave).length : null}
-      </div>
-  </div>
+        </div>
+        <div className="count">
+            {props.active ? Object.keys(props.grave).length : null}
+        </div>
+    </div>
 );
 
 const Item = props => (
-  <div className="item card-place card-like" id={props.active ? 'item' : null}>
-      {props.item ? <Card card={props.item} /> : null}
-  </div>
-)
+    <div className="item card-place card-like" id={props.active ? 'item' : null}>
+        {props.item ? <Card card={props.item} /> : null}
+    </div>
+);
 
 class Player extends Component {
     constructor(props) {
@@ -76,11 +76,11 @@ class Player extends Component {
     render() {
         return (
             <div className={this.player.active ? 'player player-active' : 'player player-inactive'}>
-                <Hero player={this.player}/>
-                <Item active={this.player.active} item={this.state.item}/>
+                <Hero player={this.player} />
+                <Item active={this.player.active} item={this.state.item} />
                 <Deck deck={this.player.deck} />
-                <Hand active={this.player.active} hand={this.player.hand}/>
-                <Grave active={this.player.active} grave={this.player.grave}/>
+                <Hand active={this.player.active} hand={this.player.hand} />
+                <Grave active={this.player.active} grave={this.player.grave} />
             </div>
         );
     }
@@ -90,21 +90,27 @@ Player.propTypes = {
     player: PropTypes.object.isRequired,
 };
 
+Hand.propTypes = {
+    active: PropTypes.bool.isRequired,
+    hand: PropTypes.object.isRequired,
+};
+
 Card.propTypes = {
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool.isRequired,
 };
 
-Deck.propTypes = {
-    deck: PropTypes.object.isRequired,
-};
-
 Grave.propTypes = {
     grave: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired,
+};
+
+Item.propTypes = {
+    item: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired,
 };
 
 GameScreen.propTypes = {
-    sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
 };
 
