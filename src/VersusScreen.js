@@ -26,37 +26,37 @@ const OneHero = props => (
 );
 
 class VersusScreen extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.sendDealAllMessage = this.sendDealAllMessage.bind(this);
-  }
+        this.sendDealAllMessage = this.sendDealAllMessage.bind(this);
+    }
 
-  sendDealAllMessage() {
-    this.props.sendMessage({ type: 'DEALALL' });
-  }
+    sendDealAllMessage() {
+        this.props.sendMessage({ type: 'DEALALL' });
+    }
 
-  render() {
-    return (
-      <div className="versus-screen-container">
-          <div className="versus-heroes-container">
-              <OneHero hero={this.props.app.game.players[0].hero} />
-              <div className="vs">
-                  <p>
+    render() {
+        return (
+            <div className="versus-screen-container">
+                <div className="versus-heroes-container">
+                    <OneHero hero={this.props.app.game.players[0].hero} />
+                    <div className="vs">
+                        <p>
                   VS
-                  </p>
-              </div>
-              <OneHero hero={this.props.app.game.players[1].hero} />
-          </div>
-          <div className="play-button-container">
-              <button className="play-button" type="button" onClick={this.sendDealAllMessage}>
+                        </p>
+                    </div>
+                    <OneHero hero={this.props.app.game.players[1].hero} />
+                </div>
+                <div className="play-button-container">
+                    <button className="play-button" type="button" onClick={this.sendDealAllMessage}>
               PLAY
-              </button>
-          </div>
-          <MainMenu sendMessage={this.props.sendMessage} />
-      </div>
-    )
-  }
+                    </button>
+                </div>
+                <MainMenu sendMessage={this.props.sendMessage} />
+            </div>
+        );
+    }
 }
 
 VersusScreen.propTypes = {

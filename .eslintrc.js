@@ -15,7 +15,8 @@ module.exports = {
       "react/forbid-prop-types": [0],
       "guard-for-in": [0],
       "no-restricted-syntax": [0],
-			"tabindex-no-positive": [0]
+			"jsx-a11y/tabindex-no-positive": [0],
+			"jsx-a11y/no-noninteractive-tabindex": [0]
     },
     "env": {
     	"browser": true,
