@@ -45,18 +45,39 @@ const Deck = props => (
     </div>
 );
 
+const Hand = props => (
+  <div className="hand">
+      {Object.values(props.hand).map((card, index) => (
+          <div key={index} className="card-place card-like">
+              <Card card={card} draggable={props.active} />
+          </div>
+      ))}
+  </div>
+)
+
 const Grave = props => (
-    <div className="grave card-like">
-        <div className="grave-name">
-            grave
-        </div>
-    </div>
+  <div className="grave card-like" id={props.active ? 'grave' : null}>
+      <div className="grave-name">
+          grave
+      </div>
+      <div className="count">
+          {props.active ? Object.keys(props.grave).length : null}
+      </div>
+  </div>
 );
+
+const Item = props => (
+  <div className="item card-place card-like" id={props.active ? 'item' : null}>
+      {props.item ? <Card card={props.item} /> : null}
+  </div>
+)
 
 class Player extends Component {
     constructor(props) {
         super(props);
         this.state = { item: null };
+        this.player = props.player;
+        this.current = this.player.health.current;
 
         this.width = 200;
         this.height = 200;
@@ -66,8 +87,6 @@ class Player extends Component {
         this.r = this.cx - (this.sw / 2);
         const cl = 2 * Math.PI * this.r;
 
-        this.player = props.player;
-        this.current = this.player.health.current;
         const maximum = this.player.health.maximum;
         const angle = ((360 / maximum) * this.current) - 90;
         const long = angle + 90 > 180 ? 1 : 0;
@@ -85,16 +104,6 @@ class Player extends Component {
         };
     }
 
-    componentDidMount() {
-        if (this.player.active) {
-            // const script = document.createElement('script');
-            // script.async = true;
-            // script.src = dragging;
-            // script.type = 'text/javascript';
-            // document.body.appendChild(script);
-        }
-    }
-
     render() {
         return (
             <div className={this.player.active ? 'player player-active' : 'player player-inactive'}>
@@ -102,7 +111,6 @@ class Player extends Component {
                     <img className="hero-image" src={images[this.player.hero]} alt={this.player.hero} style={this.style.hero} />
                     <svg className="hero-health" width={(this.cx) * 2} height={(this.cy) * 2}>
                         <circle cx={this.cx} cy={this.cy} r={this.r} stroke="black" strokeWidth={this.sw + 1} fill="transparent" />
-                        {/* <circle cx={this.cx} cy={this.cy} r={this.r} stroke="red" strokeWidth={this.sw} strokeDasharray={this.sda} strokeDashoffset={this.sdo} fill="transparent" /> */}
                         <path className="hero-health-points" d={this.d} strokeWidth={this.sw} strokeDasharray={this.sda} strokeLinecap="butt" fill="transparent" />
                     </svg>
                     <div className="heart app-heart">
@@ -111,25 +119,10 @@ class Player extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="item card-place card-like" id={this.player.active ? 'item' : null}>
-                    {this.state.item ? <Card card={this.state.item} /> : null}
-                </div>
+                <Item active={this.player.active} item={this.state.item}/>
                 <Deck deck={this.player.deck} />
-                <div className="hand">
-                    {Object.values(this.player.hand).map((card, index) => (
-                        <div key={index} className="card-place card-like">
-                            <Card card={card} draggable={this.player.active} />
-                        </div>
-                    ))}
-                </div>
-                <div className="grave card-like" id={this.player.active ? 'grave' : null}>
-                    <div className="grave-name">
-                        grave
-                    </div>
-                    <div className="count">
-                        {this.player.active ? Object.keys(this.player.grave).length : null}
-                    </div>
-                </div>
+                <Hand active={this.player.active} hand={this.player.hand}/>
+                <Grave active={this.player.active} grave={this.player.grave}/>
             </div>
         );
     }
