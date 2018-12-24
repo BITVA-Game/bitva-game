@@ -283,7 +283,7 @@ HeroSelection.propTypes = {
 
 HeaderHeroButton.propTypes = {
     funct: PropTypes.func.isRequired,
-    tabIndex: PropTypes.number.isRequired,
+    tabIndex: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
     direction: PropTypes.string.isRequired,
 };

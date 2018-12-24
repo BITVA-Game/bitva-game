@@ -106,8 +106,12 @@ Grave.propTypes = {
 };
 
 Item.propTypes = {
-    item: PropTypes.object.isRequired,
+    item: PropTypes.object,
     active: PropTypes.bool.isRequired,
+};
+
+Item.defaultProps = {
+    item: null,
 };
 
 GameScreen.propTypes = {

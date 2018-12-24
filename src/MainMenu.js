@@ -72,15 +72,23 @@ class MainMenu extends Component {
 
 MainMenu.propTypes = {
     sendMessage: PropTypes.func.isRequired,
-    opened: PropTypes.bool.isRequired,
+    opened: PropTypes.bool,
+};
+
+MainMenu.defaultProps = {
+    opened: false,
 };
 
 LogoBlock.propTypes = {
-    opened: PropTypes.bool.isRequired,
+    opened: PropTypes.bool,
+};
+
+LogoBlock.defaultProps = {
+    opened: false,
 };
 
 ToggleButton.propTypes = {
-    toggle: PropTypes.bool.isRequired,
+    toggle: PropTypes.func.isRequired,
 };
 
 MenuButton.propTypes = {

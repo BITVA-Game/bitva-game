@@ -73,7 +73,7 @@ Hero.propTypes = {
 };
 
 HealthMeter.propTypes = {
-    health: PropTypes.number.isRequired,
+    health: PropTypes.object.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
 };
