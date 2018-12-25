@@ -67,7 +67,6 @@ class HealthMeter extends Component {
     }
 }
 
-
 Hero.propTypes = {
     player: PropTypes.object.isRequired,
 };

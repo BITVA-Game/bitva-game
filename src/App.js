@@ -12,6 +12,7 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 function sendMessage(msg) {
+    console.log("MESSAGE", msg);
     ipcRenderer.send('APP', msg);
 }
 
@@ -44,6 +45,8 @@ class App extends Component {
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PLAYERACT':
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
+        case 'GAMESCREEN':
+            return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
         default:
             return `UNKNOWN SCREEN NAME ${this.state.app.manager.screen}`;
         }
@@ -52,7 +55,7 @@ class App extends Component {
     render() {
         console.log(this.state.app.manager.screen);
         console.log("Here's the app object for testing");
-        console.log(this.state.app);
+        console.log(this.state.app.game);
         WebFont.load({
             custom: {
                 families: ['Ruslan Display', 'Sedan SC'],
