@@ -154,6 +154,10 @@
     width: 100%;
 }
 
+.target {
+  background-color: green;
+}
+
 .count {
     bottom: 0;
     font-size: 36px;
