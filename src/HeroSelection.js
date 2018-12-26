@@ -27,14 +27,14 @@ const HeaderHeroButton = props => (
     </div>
 );
 
-const CharacterDetailsButton = props => (
-    <div className="btn btn-hero-details header-menu" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex={props.tabIndex}>
-        <span>
-              CHARACTER DETAILS
-        </span>
-    </div>
+// const CharacterDetailsButton = props => (
+//     <div className="btn btn-hero-details header-menu" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex={props.tabIndex}>
+//         <span>
+//               CHARACTER DETAILS
+//         </span>
+//     </div>
 
-);
+// );
 
 // common elements
 // header section
@@ -53,9 +53,19 @@ const Header = props => (
             <HeaderHeroButton direction="hero-btn-arrow-right" funct={props.next} tabIndex="2" img="▶" />
         </div>
         { props.details
-            ? <CharacterDetailsButton onShow={props.onShow} selected={props.selected} details={props.details} tabIndex="4" />
+            ? (
+                <div className="btn btn-hero-details header-menu" role="button" onShow={props.selected} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
+                    <span>
+                  CHARACTER DETAILS
+                    </span>
+                </div>
+            )
             : null
         }
+         {/* { props.details
+            ? <CharacterDetailsButton onShow={props.onShow} selected={props.selected} details={props.details} tabIndex="4" />
+            : null
+        }  */}
     </section>
 );
 
@@ -171,8 +181,13 @@ class HeroSelection extends Component {
         this.selectLeftHero = this.selectLeftHero.bind(this);
         this.selectRightHero = this.selectRightHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
+        this.onShow = this.onShow.bind(this);
     }
 
+    // onShow(selected) {
+    //     this.setState({ selected });
+    //     this.showHero(this.app.heroSelect[selected]);
+    // }
 
     showHero(heroID) {
         const hero = this.app.heroSelect[heroID];
@@ -249,10 +264,10 @@ HeaderHeroButton.propTypes = {
     funct: PropTypes.func.isRequired,
 };
 
-CharacterDetailsButton.propTypes = {
-    onShow: PropTypes.func.isRequired,
-    tabIndex: PropTypes.string.isRequired,
-};
+// CharacterDetailsButton.propTypes = {
+//     onShow: PropTypes.func.isRequired,
+//     tabIndex: PropTypes.string.isRequired,
+// };
 
 Footer.propTypes = {
     // something: PropTypes.string.isRequired,
