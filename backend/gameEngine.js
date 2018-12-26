@@ -127,7 +127,7 @@ function giveCardsToAll(playersArray) {
 // And moves it so graveyard via deleting the key from array
 function moveCardGraveyard(player, key, from) {
     if (from === 'item') {
-        //console.log('moveCardGraveyard called for item ', player, key);
+        // console.log('moveCardGraveyard called for item ', player, key);
         player.grave[key] = player.item[key];
         delete player.item[key];
     } else {
