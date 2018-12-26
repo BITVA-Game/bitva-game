@@ -26,8 +26,6 @@ function stopDrag() {
 }
 
 function droppedTo(drop, target) {
-    // console.log(`${target.id}: ${target.offsetLeft} < ${drop.clientX} < (${target.offsetLeft} + ${target.offsetWidth}) = ${target.offsetLeft + target.offsetWidth}`);
-    // console.log(`${target.id}: ${target.offsetTop} < ${drop.clientY} < (${target.offsetTop} + ${target.offsetHeight}) = ${target.offsetTop + target.offsetHeight}`);
     const dropped = (
         target.offsetLeft < drop.clientX
         && drop.clientX < (target.offsetLeft + target.offsetWidth)

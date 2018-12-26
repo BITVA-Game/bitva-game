@@ -13,21 +13,25 @@ const MenuButton = props => (
 );
 
 const LogoBlock = props => (
-  <div className="logo-container">
-      {props.opened
-        ? <img className="logo" src={logo} alt={logo} />
-        : null
-      }
-  </div>
+    <div className="logo-container">
+        {props.opened
+            ? <img className="logo" src={logo} alt={logo} />
+            : null
+        }
+    </div>
 );
 
 const ToggleButton = props => (
-  <div className="btn btn-sidebar-toggle" role="button"
-      onClick={props.toggle} onKeyDown={props.toggle}
-      tabIndex="-1">
+    <div
+        className="btn btn-sidebar-toggle"
+        role="button"
+        onClick={props.toggle}
+        onKeyDown={props.toggle}
+        tabIndex="-1"
+    >
       ▶
-  </div>
-)
+    </div>
+);
 
 class MainMenu extends Component {
     constructor(props) {
@@ -44,7 +48,7 @@ class MainMenu extends Component {
     render() {
         return (
             <div className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
-                <LogoBlock opened={this.state.opened}/>
+                <LogoBlock opened={this.state.opened} />
                 <div className="menu-buttons-container">
                     <ul className="menu-buttons-group">
                         <MenuButton name="Single Play" type="PLAY" sendMessage={this.props.sendMessage} />
@@ -68,12 +72,23 @@ class MainMenu extends Component {
 
 MainMenu.propTypes = {
     sendMessage: PropTypes.func.isRequired,
-    // eslint-disable-next-line react/require-default-props
-    opened: PropTypes.bool.isRequired,
+    opened: PropTypes.bool,
 };
 
 MainMenu.defaultProps = {
     opened: false,
+};
+
+LogoBlock.propTypes = {
+    opened: PropTypes.bool,
+};
+
+LogoBlock.defaultProps = {
+    opened: false,
+};
+
+ToggleButton.propTypes = {
+    toggle: PropTypes.func.isRequired,
 };
 
 MenuButton.propTypes = {
