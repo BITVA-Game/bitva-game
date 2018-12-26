@@ -41,15 +41,14 @@ const Header = props => (
             </div>
             <HeaderHeroButton direction="hero-btn-arrow-right" funct={props.next} tabIndex="2" img="▶" />
         </div>
-        { props.details
-            ? (
-                <div className="btn btn-hero-details header-menu" role="button" onClick={() => { props.onShow(props.selected); }} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
+        { props.hero
+            ? null : (
+                <div className="btn btn-hero-details header-menu" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex="4">
                     <span>
                   CHARACTER DETAILS
                     </span>
                 </div>
             )
-            : null
         }
     </section>
 );
@@ -57,12 +56,12 @@ const Header = props => (
 // footer section
 const Footer = props => (
     <section className="heroselection-footer">
-        {props.details
-            ? null
-            : <BackButton onBack={props.onBack} />
+        {props.hero
+            ? <BackButton onBack={props.onBack} />
+            : null
         }
         <div className="heroselection-footer-menu heroselection-play">
-            <div className="btn btn-play footer-menu" role="button" onClick={() => props.selectHero(props.selected)} onKeyPress={() => { console.log('key play'); }} tabIndex="5">
+            <div className="btn btn-play footer-menu" role="button" onClick={props.selectHero} onKeyPress={props.selectHero} tabIndex="5">
                 PLAY
             </div>
         </div>
@@ -72,7 +71,7 @@ const Footer = props => (
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onClick={() => (props.onShow(props.hero.id))} onKeyPress={() => props.onShow(props.hero.id)} tabIndex="-1">
+        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex="-1">
             <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
             <div className="deck-icon">
                 <div className="deck-text">
@@ -126,6 +125,63 @@ const BackButton = props => (
     </div>
 );
 
+const CardPreview = props => (
+    props.card
+    ? <img className="details-card" data-card={props.card} src={images["morevna"]} alt={props.card.name} tabIndex={props.tabIndex} />
+    : <img className="details-card" style={{opacity: "0.25"}} src={images["yaga"]} alt="card" />
+)
+
+const CardsRow = props => (
+  <>
+    <CardPreview card={props.cards[props.row[0]]} tabIndex="6"/>
+    <CardPreview card={props.cards[props.row[1]]} tabIndex="7"/>
+    <CardPreview card={props.cards[props.row[2]]} tabIndex="8"/>
+  </>
+)
+
+
+function prepairCards(cards){
+  let cardsKeys = Object.keys(cards);
+  let cardsBy3 = [];
+  for(let i=0; i<cardsKeys.length; i=i+3){
+    cardsBy3.push(cardsKeys.slice(i, i+3));
+  }
+  return cardsBy3;
+}
+
+class CardsBlock extends Component {
+  constructor(props){
+    super(props);
+    this.cardsBy3 = prepairCards(props.cards);
+    this.state = {row: 0}
+    this.changeRow = this.changeRow.bind(this);
+  }
+
+  changeRow(){
+    console.log("changeRow ", this.state.row);
+    let maxRotation = this.cardsBy3.length-1;
+    let currentRow = this.state.row;
+    if (currentRow==maxRotation){
+      this.setState({ row: 0 })
+    } else {
+      this.setState({ row: currentRow+1 })
+    }
+  }
+
+  render(){
+    return (
+      <section className="details-cards">
+          <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
+              ◀
+          </div>
+          <CardsRow heroId={this.props.heroId} row={this.cardsBy3[this.state.row]} cards={this.props.cards}/>
+          <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="9">
+              ▶
+          </div>
+      </section>
+    )
+  }
+}
 
 // Info about one hero. The click on the image should show a popup with char details
 const OneHero = props => (
@@ -135,19 +191,10 @@ const OneHero = props => (
             <article className="details-description">
                 <span>
                     {props.hero.description}
+                    {console.log("PROPS HERO ", props.hero.cards)}
                 </span>
             </article>
-            <section className="details-cards">
-                <div className="btn cards-btn cards-btn-left" role="button" onClick={() => { console.log('click cards-left'); }} onKeyPress={() => { console.log('key cards-left'); }} tabIndex="5">
-                    ◀
-                </div>
-                <img className="details-card" src={images[props.hero.id]} alt={props.hero.id} tabIndex="6" />
-                <img className="details-card" src={images[props.hero.id]} alt={props.hero.id} tabIndex="7" />
-                <img className="details-card" src={images[props.hero.id]} alt={props.hero.id} tabIndex="8" />
-                <div className="btn cards-btn cards-btn-right" role="button" onClick={() => { console.log('click cards-right'); }} onKeyPress={() => { console.log('key cards-right'); }} tabIndex="9">
-                    ▶
-                </div>
-            </section>
+            <CardsBlock heroId={props.hero.id} cards={props.hero.cards}/>
         </div>
     </div>
 );
@@ -156,26 +203,29 @@ class HeroSelection extends Component {
     constructor(props) {
         super(props);
         this.app = props.app;
+        this.defaultHeroID = this.app.heroSelect[Object.keys(this.app.heroSelect)[0]].id;
         this.state = {
             hero: null,
-            selected: this.app.heroSelect[Object.keys(this.app.heroSelect)[0]].id,
-            details: true,
+            selected: this.defaultHeroID,
         };
         this.showHero = this.showHero.bind(this);
         this.changeSelected = this.changeSelected.bind(this);
         this.selectLeftHero = this.selectLeftHero.bind(this);
         this.selectRightHero = this.selectRightHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
+        this.showHeroList = this.showHeroList.bind(this);
     }
 
 
-    showHero(heroID) {
+    showHero() {
+        const heroID = this.state.selected;
         const hero = this.app.heroSelect[heroID];
-        if (hero) {
-            this.setState({ hero, details: false });
-        } else {
-            this.setState({ hero, details: true });
-        }
+        this.setState({ hero });
+
+    }
+
+    showHeroList() {
+        this.setState({ hero: null })
     }
 
     changeSelected(selected) {
@@ -197,20 +247,19 @@ class HeroSelection extends Component {
         this.setState({ selected: heroes[index] });
     }
 
-    selectHero(selected) {
-        this.props.sendMessage({ type: 'HEROSELECTED', hero: selected });
+    selectHero() {
+        this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected });
     }
 
     render() {
-        console.log('DETAILS: ', this.state.details);
         return (
             <div className="heroselection-container">
                 <Header
+                    hero={this.state.hero}
                     prev={this.selectLeftHero}
                     next={this.selectRightHero}
                     selected={this.state.selected}
                     onShow={this.showHero}
-                    details={this.state.details}
                 />
                 <div className={styles.main}>
                     {this.state.hero
@@ -230,10 +279,9 @@ class HeroSelection extends Component {
                 </div>
                 <MainMenu sendMessage={this.props.sendMessage} />
                 <Footer
-                    selected={this.state.selected}
+                    hero={this.state.hero}
                     selectHero={this.selectHero}
-                    onBack={this.showHero}
-                    details={this.state.details}
+                    onBack={this.showHeroList}
                 />
             </div>
         );
@@ -289,11 +337,9 @@ HeaderHeroButton.propTypes = {
 };
 
 Header.propTypes = {
-    details: PropTypes.bool.isRequired,
 };
 
 Footer.propTypes = {
-    details: PropTypes.bool.isRequired,
     onBack: PropTypes.func.isRequired,
 };
 
