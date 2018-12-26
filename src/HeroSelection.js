@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainMenu from './MainMenu';
@@ -26,14 +28,14 @@ const HeaderHeroButton = props => (
     </div>
 );
 
-// const CharacterDetailsButton = props => (
-//     <div className="btn btn-hero-details header-menu" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex={props.tabIndex}>
-//         <span>
-//               CHARACTER DETAILS
-//         </span>
-//     </div>
+const CharacterDetailsButton = props => (
+    <div className="btn btn-hero-details header-menu" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex={props.tabIndex}>
+        <span>
+            CHARACTER DETAILS
+        </span>
+    </div>
 
-// );
+);
 
 // common elements
 // header section
@@ -52,19 +54,18 @@ const Header = props => (
             <HeaderHeroButton direction="hero-btn-arrow-right" funct={props.next} tabIndex="2" img="▶" />
         </div>
         { props.hero
-            ? null : (
-                <div className="btn btn-hero-details header-menu" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex="4">
-                    <span>
-                  CHARACTER DETAILS
-                    </span>
-                </div>
-            )
+            ? null : <CharacterDetailsButton onShow={props.onShow} tabIndex="4" />
+
         }
-         {/* { props.details
-            ? <CharacterDetailsButton onShow={props.onShow} selected={props.selected} details={props.details} tabIndex="4" />
-            : null
-        }  */}
     </section>
+);
+
+const Play = props => (
+    <div className="heroselection-footer-menu heroselection-play">
+        <div className="btn btn-play footer-menu" role="button" onClick={props.selectHero} onKeyPress={props.selectHero} tabIndex={props.tabIndex}>
+                PLAY
+        </div>
+    </div>
 );
 
 // footer section
@@ -74,11 +75,8 @@ const Footer = props => (
             ? <BackButton onBack={props.onBack} />
             : null
         }
-        <div className="heroselection-footer-menu heroselection-play">
-            <div className="btn btn-play footer-menu" role="button" onClick={props.selectHero} onKeyPress={props.selectHero} tabIndex="5">
-                PLAY
-            </div>
-        </div>
+        <Play selectHero={props.selectHero} tabIndex="5" />
+
     </section>
 );
 
@@ -98,9 +96,6 @@ const HeroBlock = props => (
                     {props.hero.health}
                 </div>
             </div>
-            {/* <div className="hero-name hero-nav-menu-name header-menu">
-                {props.hero.name}
-            </div> */}
         </div>
     </div>
 );
@@ -141,60 +136,60 @@ const BackButton = props => (
 
 const CardPreview = props => (
     props.card
-    ? <img className="details-card" data-card={props.card} src={images["morevna"]} alt={props.card.name} tabIndex={props.tabIndex} />
-    : <img className="details-card" style={{opacity: "0.25"}} src={images["yaga"]} alt="card" />
-)
+        ? <img className="details-card" data-card={props.card} src={images.morevna} alt={props.card.name} tabIndex={props.tabIndex} />
+        : <img className="details-card" style={{ opacity: '0.25' }} src={images.yaga} alt="card" />
+);
 
 const CardsRow = props => (
   <>
-    <CardPreview card={props.cards[props.row[0]]} tabIndex="6"/>
-    <CardPreview card={props.cards[props.row[1]]} tabIndex="7"/>
-    <CardPreview card={props.cards[props.row[2]]} tabIndex="8"/>
+      <CardPreview card={props.cards[props.row[0]]} tabIndex="6" />
+      <CardPreview card={props.cards[props.row[1]]} tabIndex="7" />
+      <CardPreview card={props.cards[props.row[2]]} tabIndex="8" />
   </>
-)
+);
 
 
-function prepairCards(cards){
-  let cardsKeys = Object.keys(cards);
-  let cardsBy3 = [];
-  for(let i=0; i<cardsKeys.length; i=i+3){
-    cardsBy3.push(cardsKeys.slice(i, i+3));
-  }
-  return cardsBy3;
+function prepairCards(cards) {
+    const cardsKeys = Object.keys(cards);
+    const cardsBy3 = [];
+    for (let i = 0; i < cardsKeys.length; i += 3) {
+        cardsBy3.push(cardsKeys.slice(i, i + 3));
+    }
+    return cardsBy3;
 }
 
 class CardsBlock extends Component {
-  constructor(props){
-    super(props);
-    this.cardsBy3 = prepairCards(props.cards);
-    this.state = {row: 0}
-    this.changeRow = this.changeRow.bind(this);
-  }
-
-  changeRow(){
-    console.log("changeRow ", this.state.row);
-    let maxRotation = this.cardsBy3.length-1;
-    let currentRow = this.state.row;
-    if (currentRow==maxRotation){
-      this.setState({ row: 0 })
-    } else {
-      this.setState({ row: currentRow+1 })
+    constructor(props) {
+        super(props);
+        this.cardsBy3 = prepairCards(props.cards);
+        this.state = { row: 0 };
+        this.changeRow = this.changeRow.bind(this);
     }
-  }
 
-  render(){
-    return (
-      <section className="details-cards">
-          <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
+    changeRow() {
+        console.log('changeRow ', this.state.row);
+        const maxRotation = this.cardsBy3.length - 1;
+        const currentRow = this.state.row;
+        if (currentRow === maxRotation) {
+            this.setState({ row: 0 });
+        } else {
+            this.setState({ row: currentRow + 1 });
+        }
+    }
+
+    render() {
+        return (
+            <section className="details-cards">
+                <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
               ◀
-          </div>
-          <CardsRow heroId={this.props.heroId} row={this.cardsBy3[this.state.row]} cards={this.props.cards}/>
-          <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="9">
+                </div>
+                <CardsRow heroId={this.props.heroId} row={this.cardsBy3[this.state.row]} cards={this.props.cards} />
+                <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="9">
               ▶
-          </div>
-      </section>
-    )
-  }
+                </div>
+            </section>
+        );
+    }
 }
 
 // Info about one hero. The click on the image should show a popup with char details
@@ -205,10 +200,10 @@ const OneHero = props => (
             <article className="details-description">
                 <span>
                     {props.hero.description}
-                    {console.log("PROPS HERO ", props.hero.cards)}
+                    {console.log('PROPS HERO ', props.hero.cards)}
                 </span>
             </article>
-            <CardsBlock heroId={props.hero.id} cards={props.hero.cards}/>
+            <CardsBlock heroId={props.hero.id} cards={props.hero.cards} />
         </div>
     </div>
 );
@@ -230,20 +225,14 @@ class HeroSelection extends Component {
         this.showHeroList = this.showHeroList.bind(this);
     }
 
-    // onShow(selected) {
-    //     this.setState({ selected });
-    //     this.showHero(this.app.heroSelect[selected]);
-    // }
-
     showHero() {
         const heroID = this.state.selected;
         const hero = this.app.heroSelect[heroID];
         this.setState({ hero });
-
     }
 
     showHeroList() {
-        this.setState({ hero: null })
+        this.setState({ hero: null });
     }
 
     changeSelected(selected) {
@@ -310,7 +299,7 @@ Header.propTypes = {
     selected: PropTypes.string.isRequired,
     next: PropTypes.func.isRequired,
     prev: PropTypes.func.isRequired,
-    details: PropTypes.func.isRequired,
+
     onShow: PropTypes.func.isRequired,
 };
 
@@ -321,20 +310,12 @@ HeaderHeroButton.propTypes = {
     funct: PropTypes.func.isRequired,
 };
 
-// CharacterDetailsButton.propTypes = {
-//     onShow: PropTypes.func.isRequired,
-//     tabIndex: PropTypes.string.isRequired,
-// };
-
 Footer.propTypes = {
-    // something: PropTypes.string.isRequired,
     selectHero: PropTypes.func.isRequired,
-    selected: PropTypes.string.isRequired,
 };
 
 HeroBlock.propTypes = {
     app: PropTypes.object.isRequired,
-    // changeSelected: PropTypes.func.isRequired,
     hero: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
@@ -367,15 +348,45 @@ HeaderHeroButton.propTypes = {
     direction: PropTypes.string.isRequired,
 };
 
+CharacterDetailsButton.propTypes = {
+    onShow: PropTypes.func.isRequired,
+    tabIndex: PropTypes.string.isRequired,
+};
+
+CardsBlock.propTypes = {
+    cards: PropTypes.object.isRequired,
+    heroId: PropTypes.string.isRequired,
+};
+
+CardPreview.propTypes = {
+    card: PropTypes.object.isRequired,
+    tabIndex: PropTypes.string.isRequired,
+};
+
 Header.propTypes = {
+    hero: PropTypes.object,
+};
+
+Header.defaultProps = {
+    hero: null,
 };
 
 Footer.propTypes = {
     onBack: PropTypes.func.isRequired,
+    hero: PropTypes.object,
+};
+
+Footer.defaultProps = {
+    hero: null,
 };
 
 BackButton.propTypes = {
     onBack: PropTypes.func.isRequired,
+};
+
+Play.propTypes = {
+    selectHero: PropTypes.func.isRequired,
+    tabIndex: PropTypes.string.isRequired,
 };
 
 
