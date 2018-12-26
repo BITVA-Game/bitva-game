@@ -54,7 +54,7 @@ const Header = props => (
         </div>
         { props.details
             ? (
-                <div className="btn btn-hero-details header-menu" role="button" onShow={props.selected} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
+                <div className="btn btn-hero-details header-menu" role="button" onClick={props.onShow} onKeyPress={() => { console.log('key hero-details'); }} tabIndex="4">
                     <span>
                   CHARACTER DETAILS
                     </span>
@@ -181,7 +181,6 @@ class HeroSelection extends Component {
         this.selectLeftHero = this.selectLeftHero.bind(this);
         this.selectRightHero = this.selectRightHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
-        this.onShow = this.onShow.bind(this);
     }
 
     // onShow(selected) {
@@ -189,7 +188,8 @@ class HeroSelection extends Component {
     //     this.showHero(this.app.heroSelect[selected]);
     // }
 
-    showHero(heroID) {
+    showHero() {
+        const heroID = this.state.selected;
         const hero = this.app.heroSelect[heroID];
         if (hero) {
             this.setState({ hero, details: false });
