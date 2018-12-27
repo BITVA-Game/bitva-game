@@ -65,7 +65,7 @@ test('First game state Play. The Player can select any of the characters he has'
 
 
 // Test msg PLAY returns list with all available characters.game state  Hero Select.
-test('PLAY msg received. List with all characters added - HERO SELECT state.', () => {
+test.only('PLAY msg received. List with all characters added - HERO SELECT state.', () => {
 // We only need type for this test.
     const msg = { type: 'PLAY' };
 
