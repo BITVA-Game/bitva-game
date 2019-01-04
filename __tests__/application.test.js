@@ -569,6 +569,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                     hero: 'yaga',
                     item: {},
                     hand: {},
+                    grave: {},
                 },
                 {
                     active: true,
@@ -610,8 +611,8 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that his cunter was increased
-    expect(result.game.players[1].moveCounter).toEqual(2);
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[1].moveCounter).toEqual(0);
     // expect that the card was an action card
     expect(result.game.players[1].grave.key1.type).toEqual('action');
     // expect that hero's health was increased
@@ -680,8 +681,8 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that his cunter was increased
-    expect(result.game.players[0].moveCounter).toEqual(2);
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[0].moveCounter).toEqual(0);
     // expect that the card was an action card
     expect(result.game.players[0].grave.key1.type).toEqual('action');
     // expect that hero's health was increased
@@ -724,7 +725,7 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
                     hand: {
                         key11: {}, key8: {}, key13: { type: 'action', category: 'attack', points: 2 }, key1: {},
                     },
-                    moveCounter: 1,
+                    moveCounter: 0,
                     item: {},
                     grave: { key10: {} },
                 },
@@ -748,7 +749,7 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const result = sendReply.mock.calls[0][0];
 
     // expect the counter of actions to grow
-    expect(result.game.players[0].moveCounter).toEqual(2);
+    expect(result.game.players[0].moveCounter).toEqual(1);
     // expect that it was the action card
     expect(result.game.players[0].grave.key13.type).toEqual('action');
     // expect that it was the attack card
@@ -824,8 +825,8 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that his cunter was increased
-    expect(result.game.players[0].moveCounter).toEqual(2);
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[0].moveCounter).toEqual(0);
 
     // expect that it was an action card as we performing the action
     expect(result.game.players[0].grave.key1.type).toEqual('action');
@@ -904,8 +905,8 @@ test('msg ACTION CASE3 player attacks with more than shield, shield & card go to
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that his cunter was increased
-    expect(result.game.players[0].moveCounter).toEqual(2);
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[0].moveCounter).toEqual(0);
 
     // expect that it was an action card as we performing the action
     expect(result.game.players[0].grave.key1.type).toEqual('action');
@@ -986,8 +987,8 @@ test('msg ACTION CASE3 player attacks with less than shiald, card goes to gravey
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that his cunter was increased
-    expect(result.game.players[0].moveCounter).toEqual(2);
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[0].moveCounter).toEqual(0);
 
     // expect that it was an action card as we performing the action
     expect(result.game.players[0].grave.key1.type).toEqual('action');
@@ -1127,8 +1128,8 @@ test('msg ACTION ANY received: active player moveCounter = 2 after his action, h
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that active player counter after action = 2
-    expect(result.game.players[0].moveCounter).toEqual(2);
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[0].moveCounter).toEqual(0);
 
     // expect that active player hand has 4  cards before game passes to opponent
     expect(Object.keys(result.game.players[0].hand).length).toEqual(5);
