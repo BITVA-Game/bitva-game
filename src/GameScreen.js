@@ -64,7 +64,7 @@ const Grave = props => (
           grave
         </div>
         <div className="count">
-            {props.active ? Object.keys(props.grave).length : null}
+            {props.active ? Object.keys(props.grave).length : Object.keys(props.grave).length}
         </div>
     </div>
 );
