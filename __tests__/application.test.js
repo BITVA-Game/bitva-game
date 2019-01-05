@@ -65,7 +65,7 @@ test('First game state Play. The Player can select any of the characters he has'
 
 
 // Test msg PLAY returns list with all available characters.game state  Hero Select.
-test.only('PLAY msg received. List with all characters added - HERO SELECT state.', () => {
+test('PLAY msg received. List with all characters added - HERO SELECT state.', () => {
 // We only need type for this test.
     const msg = { type: 'PLAY' };
 
@@ -76,14 +76,8 @@ test.only('PLAY msg received. List with all characters added - HERO SELECT state
     application.msgReceived(msg, sendReply);
 
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toEqual(
+    expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
-            profile: {
-                characters: ['morevna'],
-                deck: ['apple'],
-                silver: 5,
-                gold: 0,
-            },
             heroSelect: {
                 morevna: {
                     id: 'morevna',
@@ -134,7 +128,7 @@ test.only('PLAY msg received. List with all characters added - HERO SELECT state
                         },
                         bereginya: {
                             id: 'bereginya',
-                            name: 'Bereginya',
+                            name: 'Keeper Bereginya',
                             type: 'action',
                             category: 'heal',
                             description: 'Plenty of Keepers lives in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.',
@@ -214,7 +208,7 @@ test.only('PLAY msg received. List with all characters added - HERO SELECT state
                         },
                         bereginya: {
                             id: 'bereginya',
-                            name: 'Bereginya',
+                            name: 'Keeper Bereginya',
                             type: 'action',
                             category: 'heal',
                             description: 'Plenty of Keepers lives in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.',
@@ -244,12 +238,6 @@ test.only('PLAY msg received. List with all characters added - HERO SELECT state
                         },
                     },
                 },
-            },
-            manager: {
-                screen: 'HEROSELECT',
-            },
-            game: {
-                phase: 'ACTIVE',
             },
         },
     );
