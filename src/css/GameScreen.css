@@ -27,10 +27,6 @@
     transform: rotate(180deg);
 }
 
-.hero:hover {
-    box-shadow: 0 0 15px 7px #b74a45;
-}
-
 .hero-image {
     border-radius: 50%;
 }
@@ -80,7 +76,7 @@
 
 /* card */
 .card {
-    background-color: antiquewhite;
+    background-color: #fff;
     transform: rotate(0);
     width: 110px;
 }
@@ -96,7 +92,7 @@
 }
 
 .card-name {
-    color: black;
+    color: #000;
     font-size: 14px;
     line-height: 12px;
     position: absolute;
@@ -119,7 +115,7 @@
 }
 
 .deck-name {
-    color: black;
+    color: #000;
     font-size: 24px;
     position: absolute;
     text-align: center;
@@ -154,14 +150,15 @@
     width: 100%;
 }
 
-.target {
-  background-color: green;
-}
-
 .count {
     bottom: 0;
     font-size: 36px;
     left: 50%;
     position: absolute;
     transform: translateX(-50%);
+}
+
+.target {
+    box-shadow: 0 0 15px 7px #b74a45;
+    transition: box-shadow 1s;
 }
