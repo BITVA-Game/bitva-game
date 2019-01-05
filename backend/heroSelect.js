@@ -1,23 +1,16 @@
 const heroes = require('./data/characters.json');
 const cards = require('./data/cards.json');
 
-function getCards(heroes) {
-    const heroArr = Object.values(heroes);
-    const cardsArr = Object.values(cards);
-    heroArr.forEach((h) => {
-        for (let i = 0; i < heroArr.length; i += 1) {
-            h.cards = Object.values(heroArr[i].cards);
-            console.log(h.cards);
-            for (let j = 0; j < h.cards.length; j += 1) {
-                // console.log(h.cards[j], cardsArr[j]);
-                if (h.cards[j].id === cardsArr[j].id) {
-                    h.cards[j] = cardsArr[j];
-                }
-            }
+function heroWithCards() {
+    for (const hero in heroes) {
+        const heroCards = Object.keys(heroes[hero].cards);
+        for (let i = 0; i < heroCards.length; i++) {
+            const cardData = cards[heroCards[i]];
+            const heroCard = heroes[hero].cards[heroCards[i]];
+            heroes[hero].cards[heroCards[i]] = Object.assign({}, heroCard, cardData);
         }
-        console.log(h.cards);
-        return heroArr;
-    });
+    }
+    return heroes;
 }
 
 function handle(app, message) {
@@ -25,11 +18,11 @@ function handle(app, message) {
     case 'INITIAL':
         return app.heroSelect;
     case 'PLAY':
-        console.log(getCards(heroes));
-        return Object.assign({}, app.heroSelect, heroes);
+        return Object.assign({}, app.heroSelect, heroWithCards());
     case 'HEROSELECTED':
         return Object.assign({});
     default: return app.heroSelect;
     }
 }
+
 exports.handle = handle;
