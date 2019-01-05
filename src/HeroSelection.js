@@ -1,25 +1,13 @@
 /* eslint-disable max-len */
-/* eslint-disable react/no-multi-comp */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import MainMenu from './MainMenu';
+import ListOfHeroes from './ListOfHeroes';
+import OneHero from './OneHero';
 import './css/MainMenu.css';
 import './css/App.css';
 import './css/HeroSelection.css';
 import styles from './css/HeroSelection.module.css';
-
-import yaga from './images/heroes/yaga.jpg';
-import morevna from './images/heroes/morevna.jpg';
-import heart from './images/icons/heart.png';
-
-const images = {
-    yaga,
-    morevna,
-};
-
-function isAvailable(app, hero) {
-    return app.profile.characters.find(character => character === hero.id);
-}
 
 // button in the header to choose previous or next character in the list
 const HeaderHeroButton = props => (
@@ -34,7 +22,6 @@ const CharacterDetailsButton = props => (
             CHARACTER DETAILS
         </span>
     </div>
-
 );
 
 // common elements
@@ -63,7 +50,7 @@ const Header = props => (
 const Play = props => (
     <div className="heroselection-footer-menu heroselection-play">
         <div className="btn btn-play footer-menu" role="button" onClick={props.selectHero} onKeyPress={props.selectHero} tabIndex={props.tabIndex}>
-                PLAY
+            PLAY
         </div>
     </div>
 );
@@ -80,130 +67,10 @@ const Footer = props => (
     </section>
 );
 
-// Individual hero block, repeates to display every character
-const HeroBlock = props => (
-    <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex="-1">
-            <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
-            <div className="deck-icon">
-                <div className="deck-text">
-                    {props.hero.cardsNumber}
-                </div>
-            </div>
-            <div className="health-container">
-                <img className="health" src={heart} alt="" />
-                <div className="health-text">
-                    {props.hero.health}
-                </div>
-            </div>
-        </div>
-    </div>
-);
-
-// List of all characters, for each the HeroBlock is displayed.
-// Click will take the player into character info screen
-const ListOfHeroes = props => (
-    <div className="heroes-list">
-        {Object.values(props.app.heroSelect).map(hero => (
-            <HeroBlock
-                key={hero.id}
-                onShow={props.onShow}
-                hero={hero}
-                app={props.app}
-                selected={hero.id === props.selected}
-                changeSelected={props.changeSelected}
-            />
-        ))}
-    </div>
-);
-
-const HeroImage = props => (
-    <div className="details-hero">
-        <div className="details-hero-avatar">
-            <img src={images[props.heroid]} alt={props.heroid} />
-        </div>
-    </div>
-);
-
-
 const BackButton = props => (
     <div className="details-hero-btn-block">
         <div className="btn btn-back footer-menu" role="button" onClick={props.onBack} onKeyPress={props.onBack} tabIndex="10">
-          &#767;
-        </div>
-    </div>
-);
-
-const CardPreview = props => (
-    props.card
-        ? <img className="details-card" data-card={props.card} src={images.morevna} alt={props.card.name} tabIndex={props.tabIndex} />
-        : <img className="details-card" style={{ opacity: '0.25' }} src={images.yaga} alt="card" />
-);
-
-const CardsRow = props => (
-  <>
-      <CardPreview card={props.cards[props.row[0]]} tabIndex="6" />
-      <CardPreview card={props.cards[props.row[1]]} tabIndex="7" />
-      <CardPreview card={props.cards[props.row[2]]} tabIndex="8" />
-  </>
-);
-
-
-function prepairCards(cards) {
-    const cardsKeys = Object.keys(cards);
-    const cardsBy3 = [];
-    for (let i = 0; i < cardsKeys.length; i += 3) {
-        cardsBy3.push(cardsKeys.slice(i, i + 3));
-    }
-    return cardsBy3;
-}
-
-class CardsBlock extends Component {
-    constructor(props) {
-        super(props);
-        this.cardsBy3 = prepairCards(props.cards);
-        this.state = { row: 0 };
-        this.changeRow = this.changeRow.bind(this);
-    }
-
-    changeRow() {
-        console.log('changeRow ', this.state.row);
-        const maxRotation = this.cardsBy3.length - 1;
-        const currentRow = this.state.row;
-        if (currentRow === maxRotation) {
-            this.setState({ row: 0 });
-        } else {
-            this.setState({ row: currentRow + 1 });
-        }
-    }
-
-    render() {
-        return (
-            <section className="details-cards">
-                <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
-              ◀
-                </div>
-                <CardsRow heroId={this.props.heroId} row={this.cardsBy3[this.state.row]} cards={this.props.cards} />
-                <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="9">
-              ▶
-                </div>
-            </section>
-        );
-    }
-}
-
-// Info about one hero. The click on the image should show a popup with char details
-const OneHero = props => (
-    <div className={styles.details}>
-        <HeroImage heroid={props.hero.id} />
-        <div className="details-info-block">
-            <article className="details-description">
-                <span>
-                    {props.hero.description}
-                    {console.log('PROPS HERO ', props.hero.cards)}
-                </span>
-            </article>
-            <CardsBlock heroId={props.hero.id} cards={props.hero.cards} />
+            &#767;
         </div>
     </div>
 );
@@ -303,7 +170,6 @@ Header.propTypes = {
     onShow: PropTypes.func.isRequired,
 };
 
-
 HeaderHeroButton.propTypes = {
     direction: PropTypes.string.isRequired,
     img: PropTypes.string.isRequired,
@@ -312,28 +178,6 @@ HeaderHeroButton.propTypes = {
 
 Footer.propTypes = {
     selectHero: PropTypes.func.isRequired,
-};
-
-HeroBlock.propTypes = {
-    app: PropTypes.object.isRequired,
-    hero: PropTypes.object.isRequired,
-    onShow: PropTypes.func.isRequired,
-    selected: PropTypes.bool.isRequired,
-};
-
-ListOfHeroes.propTypes = {
-    app: PropTypes.object.isRequired,
-    changeSelected: PropTypes.func.isRequired,
-    onShow: PropTypes.func.isRequired,
-    selected: PropTypes.string.isRequired,
-};
-
-OneHero.propTypes = {
-    hero: PropTypes.object.isRequired,
-};
-
-HeroImage.propTypes = {
-    heroid: PropTypes.string.isRequired,
 };
 
 HeroSelection.propTypes = {
@@ -350,16 +194,6 @@ HeaderHeroButton.propTypes = {
 
 CharacterDetailsButton.propTypes = {
     onShow: PropTypes.func.isRequired,
-    tabIndex: PropTypes.string.isRequired,
-};
-
-CardsBlock.propTypes = {
-    cards: PropTypes.object.isRequired,
-    heroId: PropTypes.string.isRequired,
-};
-
-CardPreview.propTypes = {
-    card: PropTypes.object.isRequired,
     tabIndex: PropTypes.string.isRequired,
 };
 
