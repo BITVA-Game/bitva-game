@@ -303,17 +303,24 @@ function playerActs(game, player, opponent, active, target) {
     // after each move we increase active player's counter for 1
     player.moveCounter += 1;
     // once active player's counter ==2 we call function to give cards to players up to 5
-    // if (player.moveCounter === 2) {
-    //     // console.log(game);
-    //     giveCardsTo(player);
-    //     // active player becomes inactive once active player's counter ==2
-    //     player.active = false;
-    //     // inactive player becomes active once active player's counter ==2
-    //     opponent.active = true;
-    //     // we check if there is special water cards in item holder of players
-    //     // and run function water if any
-    //     waterCard(game.players);
-    // }
+    if (player.moveCounter === 2) {
+        // console.log(game);
+        giveCardsTo(player);
+        // active player becomes inactive once active player's counter ==2
+        player.active = false;
+        // player's counter set to 0
+        player.moveCounter = 0;
+        // save cards in personal graveyards for both players
+        let playerGrave = player.grave;
+        let opponentGrave = opponent.grave;
+        opponentGrave = playerGrave;
+        // inactive player becomes active once active player's counter ==2
+        opponent.active = true;
+        playerGrave = opponentGrave;
+        // we check if there is special water cards in item holder of players
+        // and run function water if any
+        waterCard(game.players);
+    }
     // we return the whole game to continue
     return game;
 }
