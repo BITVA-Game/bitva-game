@@ -131,7 +131,7 @@ function moveCardGraveyard(player, key, from) {
         player.grave[key] = player.item[key];
         delete player.item[key];
     } else {
-        console.log('moveCardGraveyard called ', player, key);
+        // console.log('moveCardGraveyard called ', player, key);
         player.grave[key] = player.hand[key];
         delete player.hand[key];
     }

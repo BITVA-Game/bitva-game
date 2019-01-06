@@ -8,37 +8,30 @@
         "cards": {
             "bajun": {
                 "id":  "bajun",
-                "name": "Cat-Bajun",
 			    "count": 2
             },
 			"sivka": {
                 "id":  "sivka",
-                "name": "Sivka-Burka",
 				"count": 1
 			},
             "bogatyr": {
                 "id": "bogatyr",
-                "name": "Bogatyr",
                 "count": 3
             },
             "apple": {
                 "id": "apple",
-                "name": "Apple",
                 "count": 4
              },
             "bereginya": {
                 "id": "bereginya",
-                "name": "Bereginya",
 				"count": 4
             },
             "shieldLarge": {
                 "id": "shieldLarge",
-                "name": "Large Shield",
 				"count": 2
-            }, 
+            },
             "shieldSmall": {
                 "id": "shieldSmall",
-                "name": "Small Shield",
 				"count": 3
             }
         }
@@ -53,41 +46,32 @@
         "cards": {
             "bajun": {
                 "id":  "bajun",
-                "name": "Cat-Bajun",
                 "count": 2
             },
             "sivka": {
                 "id":  "sivka",
-                "name": "Sivka-Burka",
                 "count": 1
             },
             "bogatyr": {
                 "id": "bogatyr",
-                "name": "Bogatyr",
                 "count": 3
             },
             "apple": {
                 "id": "apple",
-                "name": "Apple",
                 "count": 4
              },
             "bereginya": {
                 "id": "bereginya",
-                "name": "Bereginya",
                 "count": 4
             },
             "shieldLarge": {
                 "id": "shieldLarge",
-                "name": "Large Shield",
                 "count": 2
-            }, 
+            },
             "shieldSmall": {
                 "id": "shieldSmall",
-                "name": "Small Shield",
                 "count": 3
             }
         }
     }
 }
-
-
