@@ -94,8 +94,8 @@ const Grave = props => (
     </div>
 );
 
-const Item = props => (
-    <div className="item card-place card-like" id={props.active ? 'item' : null}>
+const Item = props => console.log(props.item) || (
+    <div className={`item card-place card-like ${props.isItem ? 'target' : null}`} id={props.active ? 'item' : null} onDrop={props.cardDropped} onDragOver={props.cardOver}>
         {props.item ? <Card card={props.item} /> : null}
     </div>
 );
@@ -103,16 +103,20 @@ const Item = props => (
 class Player extends Component {
     constructor(props) {
         super(props);
-        this.state = { item: null, dragging: null };
+        this.state = { item: null, dragging: null, type: null };
         this.cardDragStarted = this.cardDragStarted.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.cardOver = this.cardOver.bind(this);
-        this.isGraveTarget = this.isGraveTarget.bind(this);
+        this.isActiveCard = this.isActiveCard.bind(this);
         this.cardDragEnded = this.cardDragEnded.bind(this);
     }
 
-    isGraveTarget() {
+    isActiveCard() {
         return !!(this.props.player.active && this.state.dragging);
+    }
+
+    isItemTarget() {
+        return !!(this.isActiveCard() && this.state.type === 'item');
     }
 
     cardDragEnded(event) {
@@ -122,13 +126,17 @@ class Player extends Component {
     }
 
     cardDragStarted(event) {
+    const keyCard = event.target.dataset.key;        
+        console.log(this.props.player.hand[keyCard].type);
         this.setState({
             dragging: event.target.dataset.key,
+            item: null,
+            type: this.props.player.hand[keyCard].type,
         });
     }
 
     cardOver(event) {
-        if (!this.isGraveTarget()) {
+        if (!this.isActiveCard()) {
             return;
         }
         event.preventDefault();
@@ -136,7 +144,16 @@ class Player extends Component {
 
     cardDropped(event) {
         console.log('Sending message');
-        this.props.sendMessage({ type: 'ACTION', activeCard: this.state.dragging, target: 'graveyard' });
+        if (this.isItemTarget()) {
+            this.setState({
+                item: this.props.player.hand[this.state.dragging],
+            });
+            console.log(this.props.player.hand[this.state.dragging]);
+            this.props.sendMessage({ type: 'ACTION', activeCard: this.state.dragging, target: 'item' });
+        }
+        if (!this.isItemTarget()) {
+            this.props.sendMessage({ type: 'ACTION', activeCard: this.state.dragging, target: 'graveyard' });
+        }
         this.setState({
             dragging: null,
         });
@@ -149,7 +166,14 @@ class Player extends Component {
         return (
             <div className={`${playerPosition} ${playerClass}`}>
                 <Hero player={this.props.player} />
-                <Item active={this.props.player.active} item={this.state.item} />
+                <Item
+                    active={this.props.player.active}
+                    item={this.state.item}
+                    type={this.state.type}
+                    isItem={this.isItemTarget()}
+                    cardDropped={this.cardDropped}
+                    cardOver={this.cardOver}
+                />
                 <Deck deck={this.props.player.deck} />
                 <Hand
                     active={this.props.player.active}
@@ -160,7 +184,7 @@ class Player extends Component {
                 <Grave
                     active={this.props.player.active}
                     grave={this.props.player.grave}
-                    target={this.isGraveTarget()}
+                    target={this.isActiveCard()}
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
                 />
@@ -198,7 +222,7 @@ Grave.propTypes = {
 };
 
 Item.propTypes = {
-    item: PropTypes.object,
+    item: PropTypes.string,
     active: PropTypes.bool.isRequired,
 };
 
