@@ -182,14 +182,6 @@ function healPlayer(player, points) {
     }
 }
 
-// function moveItemGraveyard(player) {
-//     const key = Object.keys(player.item)[0];
-//     if (key !== undefined) {
-//         player.grave[key] = player.item[key];
-//         delete player.item[key];
-//     }
-// }
-
 // we move item card from active player's hand to his item holder
 function moveItem(player, key) {
     // active player's item get the active card's key from his hand
@@ -248,37 +240,6 @@ function waterCard(players) {
     });
     return { players };
 }
-// function waterCard(player, opponent) {
-//     const playerItemCard = Object.values(player.item)[0];
-//     if (Object.keys(player.item).length !== 0) {
-//         if (playerItemCard.id === 'livingWater' && playerItemCard.points !== 0) {
-//             console.log('we are in living water for player!');
-//             player.health.current += 1;
-//             opponent.health.current += 1;
-//             playerItemCard.points -= 1;
-//         }
-//         if (playerItemCard.id === 'deadWater' && playerItemCard.points !== 0) {
-//             console.log('we are in dead water for player!');
-//             player.health.current -= 1;
-//             opponent.health.current -= 1;
-//             playerItemCard.points -= 1;
-//         }
-//     }
-//     if (Object.keys(opponent.item).length !== 0) {
-//         // console.log('Here is water card for opponent');
-//         const opponentItemcard = Object.values(opponent.item)[0];
-//         if (opponentItemcard.id === 'livingWater' && opponentItemcard.points !== 0) {
-//             player.health.current += 1;
-//             opponent.health.current += 1;
-//             opponentItemcard.points -= 1;
-//         }
-//         if (opponentItemcard.id === 'deadWater' && opponentItemcard.points !== 0) {
-//             player.health.current -= 1;
-//             opponent.health.current -= 1;
-//             opponentItemcard.points -= 1;
-//         }
-//     }
-// }
 
 function playerActs(game, player, opponent, active, target) {
     // console.log('playerActs called');
@@ -347,8 +308,15 @@ function playerActs(game, player, opponent, active, target) {
         giveCardsTo(player);
         // active player becomes inactive once active player's counter ==2
         player.active = false;
+        // player's counter set to 0
+        player.moveCounter = 0;
+        // save cards in personal graveyards for both players
+        let playerGrave = player.grave;
+        let opponentGrave = opponent.grave;
+        opponentGrave = playerGrave;
         // inactive player becomes active once active player's counter ==2
         opponent.active = true;
+        playerGrave = opponentGrave;
         // we check if there is special water cards in item holder of players
         // and run function water if any
         waterCard(game.players);
@@ -372,52 +340,6 @@ function makeMove(game, msg) {
     // We expect the first card is always the selected card that acts
     if (pActive.moveCounter < 2) {
         game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
-
-        // switch (msg.category) {
-        // case 'graveyard':
-        //     moveHandGraveyard(pActive, msg.key);
-        //     break;
-        //
-        // case 'heal':
-        //     if (pActive.health.current < pActive.health.maximum) {
-        //         pActive.health.current += pActive.hand[msg.key].points;
-        //     } else {
-        //         pActive.health.current = pActive.health.maximum;
-        //     }
-        //     moveHandGraveyard(pActive, msg.key);
-        //     // p.grave[msg.key].points == 0;
-        //     break;
-        // // eslint-disable-next-line no-case-declarations
-        // case 'attack':
-        //     const itemInactive = Object.values(pInactive.item)[0];
-        //     if ((itemInactive === undefined) || (itemInactive.category !== 'defense')) {
-        //         if (pInactive.health.current > points) {
-        //             pInactive.health.current -= pActive.hand[msg.key].points;
-        //         } else {
-        //             pInactive.health.current = 0;
-        //         }
-        //         moveHandGraveyard(pActive, msg.key);
-        //     }
-        //     if ((itemInactive !== undefined) && (itemInactive.category === 'defense')) {
-        //         const pointsAttack = points - itemInactive.points;
-        //         if (pointsAttack >= 0) {
-        //             pInactive.health.current -= pointsAttack;
-        //             moveItemGraveyard(pInactive, itemInactive);
-        //         } else {
-        //             itemInactive.points -= points;
-        //         }
-        //         moveHandGraveyard(pActive, msg.key);
-        //     }
-        //     break;
-        // case 'item':
-        //     if (Object.values(pActive.item).length === 0) {
-        //         moveItem(pActive, msg.key);
-        //     }
-        //     break;
-        //
-        // default:
-        //     return new Error('You are under spell. Wait for redemption!');
-        // }
     }
     return game;
 }

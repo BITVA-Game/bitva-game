@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Hero from './Hero';
 import './css/App.css';
 import './css/GameScreen.css';
 
-import yaga from './images/heroes/yaga.jpg';
-import morevna from './images/heroes/morevna.jpg';
-
-import './dragging';
-
-const images = {
-    yaga,
-    morevna,
-};
-
-// game table
-const GameTable = (props) => {
+const GameScreen = (props) => {
     props.app.game.players.sort((a, b) => {
         const x = a.active;
         const y = b.active;
@@ -23,113 +13,130 @@ const GameTable = (props) => {
     return (
         <div className="game-table app-background">
             {props.app.game.players.map(player => (
-                <Player key={player.hero} player={player} />
+                <Player key={player.hero} player={player} sendMessage={props.sendMessage} />
             ))}
         </div>
     );
 };
 
 const Card = props => (
-    <div className="card card-like" draggable={props.draggable}>
+    <div
+        className="card card-like"
+        data-key={props.cardKey}
+        draggable={props.draggable}
+        onDragStart={props.cardDragStarted}
+        onDragEnd={props.cardDragEnded}
+    >
         <div className="card-name">
             {props.card.name}
+            {props.cardKey}
         </div>
     </div>
 );
 
 const Deck = props => (
     <div className="deck card-like">
-        <div className="deck-name">
+        <div className="deck-name" props={props}>
             deck
         </div>
     </div>
 );
 
+const Hand = props => (
+    <div className="hand">
+        {Object.keys(props.hand).map(cardId => (
+            <div key={cardId} className="card-place card-like">
+                <Card
+                    cardKey={cardId}
+                    card={props.hand[cardId]}
+                    draggable={props.active}
+                    cardDragStarted={props.cardDragStarted}
+                    cardDragEnded={props.cardDragEnded}
+                />
+            </div>
+        ))}
+    </div>
+);
+
 const Grave = props => (
-    <div className="grave card-like">
+    <div className={`grave card-like ${props.target ? 'target' : null}`} id={props.active ? 'grave' : null} onDrop={props.cardDropped} onDragOver={props.cardOver}>
         <div className="grave-name">
-            grave
+          grave
         </div>
+        <div className="count">
+            {props.active ? Object.keys(props.grave).length : Object.keys(props.grave).length}
+        </div>
+    </div>
+);
+
+const Item = props => (
+    <div className="item card-place card-like" id={props.active ? 'item' : null}>
+        {props.item ? <Card card={props.item} /> : null}
     </div>
 );
 
 class Player extends Component {
     constructor(props) {
         super(props);
-        this.state = { item: null };
-
-        this.width = 200;
-        this.height = 200;
-        this.cx = this.width / 2;
-        this.cy = this.height / 2;
-        this.sw = 6;
-        this.r = this.cx - (this.sw / 2);
-        const cl = 2 * Math.PI * this.r;
-
-        this.player = props.player;
-        this.current = this.player.health.current;
-        const maximum = this.player.health.maximum;
-        const angle = ((360 / maximum) * this.current) - 90;
-        const long = angle + 90 > 180 ? 1 : 0;
-        const x = this.cx + (this.r * Math.cos(((angle * Math.PI) - 1) / 180));
-        const y = this.cy + (this.r * Math.sin(((angle * Math.PI) - 1) / 180));
-
-        this.d = `M ${this.cx} ${this.sw / 2} A ${this.r} ${this.r} 0 ${long} 1 ${x} ${y}`;
-        this.sda = `${(cl / maximum) - 1},1`;
-        this.sdo = (cl / 360) * 90;
-        this.style = {
-            hero: {
-                height: `${this.height}px`,
-                width: `${this.width}px`,
-            },
-        };
+        this.state = { item: null, dragging: null };
+        this.cardDragStarted = this.cardDragStarted.bind(this);
+        this.cardDropped = this.cardDropped.bind(this);
+        this.cardOver = this.cardOver.bind(this);
+        this.isGraveTarget = this.isGraveTarget.bind(this);
+        this.cardDragEnded = this.cardDragEnded.bind(this);
     }
 
-    componentDidMount() {
-        if (this.player.active) {
-            // const script = document.createElement('script');
-            // script.async = true;
-            // script.src = dragging;
-            // script.type = 'text/javascript';
-            // document.body.appendChild(script);
+    isGraveTarget() {
+        return !!(this.props.player.active && this.state.dragging);
+    }
+
+    cardDragEnded(event) {
+        this.setState({
+            dragging: null,
+        });
+    }
+
+    cardDragStarted(event) {
+        this.setState({
+            dragging: event.target.dataset.key,
+        });
+    }
+
+    cardOver(event) {
+        if (!this.isGraveTarget()) {
+            return;
         }
+        event.preventDefault();
     }
+
+    cardDropped(event) {
+        console.log('Sending message');
+        this.props.sendMessage({ type: 'ACTION', activeCard: this.state.dragging, target: 'graveyard' });
+        this.setState({
+            dragging: null,
+        });
+    }
+
 
     render() {
         return (
-            <div className={this.player.active ? 'player player-active' : 'player player-inactive'}>
-                <div className="hero" style={this.style.hero} id={this.player.active ? 'hero' : 'enemy'}>
-                    <img className="hero-image" src={images[this.player.hero]} alt={this.player.hero} style={this.style.hero} />
-                    <svg className="hero-health" width={(this.cx) * 2} height={(this.cy) * 2}>
-                        <circle cx={this.cx} cy={this.cy} r={this.r} stroke="black" strokeWidth={this.sw + 1} fill="transparent" />
-                        {/* <circle cx={this.cx} cy={this.cy} r={this.r} stroke="red" strokeWidth={this.sw} strokeDasharray={this.sda} strokeDashoffset={this.sdo} fill="transparent" /> */}
-                        <path className="hero-health-points" d={this.d} strokeWidth={this.sw} strokeDasharray={this.sda} strokeLinecap="butt" fill="transparent" />
-                    </svg>
-                    <div className="heart app-heart">
-                        <div className="heart-text app-heart-text">
-                            {this.current}
-                        </div>
-                    </div>
-                </div>
-                <div className="item card-place card-like" id={this.player.active ? 'item' : null}>
-                    {this.state.item ? <Card card={this.state.item} /> : null}
-                </div>
-                <Deck deck={this.player.deck} />
-                <div className="hand">
-                    {Object.values(this.player.hand).map((card, index) => (
-                        <div key={index} className="card-place card-like">
-                            <Card card={card} draggable={this.player.active} />
-                        </div>
-                    ))}
-                </div>
-                <div className="grave card-like" id={this.player.active ? 'grave' : null}>
-                    <div className="grave-name">
-                        grave
-                    </div>
-                    <div className="count">
-                        {this.player.active ? Object.keys(this.player.grave).length : null}
-                    </div>
-                </div>
+            <div className={this.props.player.active ? 'player player-active' : 'player player-inactive'}>
+                <Hero player={this.props.player} />
+                <Item active={this.props.player.active} item={this.state.item} />
+                <Deck deck={this.props.player.deck} />
+                <Hand
+                    active={this.props.player.active}
+                    hand={this.props.player.hand}
+                    cardDragStarted={this.cardDragStarted}
+                    cardDragEnded={this.cardDragEnded}
+                />
+                <Grave
+                    active={this.props.player.active}
+                    grave={this.props.player.grave}
+                    target={this.isGraveTarget()}
+                    cardDropped={this.cardDropped}
+                    cardOver={this.cardOver}
+                />
             </div>
         );
     }
@@ -137,24 +144,44 @@ class Player extends Component {
 
 Player.propTypes = {
     player: PropTypes.object.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+};
+
+Hand.propTypes = {
+    active: PropTypes.bool.isRequired,
+    hand: PropTypes.object.isRequired,
+    cardDragStarted: PropTypes.func.isRequired,
+    cardDragEnded: PropTypes.func.isRequired,
 };
 
 Card.propTypes = {
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool.isRequired,
-};
-
-Deck.propTypes = {
-    deck: PropTypes.object.isRequired,
+    cardKey: PropTypes.string.isRequired,
+    cardDragStarted: PropTypes.func.isRequired,
+    cardDragEnded: PropTypes.func.isRequired,
 };
 
 Grave.propTypes = {
     grave: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired,
+    target: PropTypes.bool.isRequired,
+    cardDropped: PropTypes.func.isRequired,
+    cardOver: PropTypes.func.isRequired,
 };
 
-GameTable.propTypes = {
-    sendMessage: PropTypes.func.isRequired,
+Item.propTypes = {
+    item: PropTypes.object,
+    active: PropTypes.bool.isRequired,
+};
+
+Item.defaultProps = {
+    item: null,
+};
+
+GameScreen.propTypes = {
     app: PropTypes.object.isRequired,
+    sendMessage: PropTypes.func.isRequired,
 };
 
-export default GameTable;
+export default GameScreen;
