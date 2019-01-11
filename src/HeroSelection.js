@@ -11,16 +11,14 @@ import styles from './css/HeroSelection.module.css';
 
 // button in the header to choose previous or next character in the list
 const HeaderHeroButton = props => (
-    <div className={`btn hero-nav-menu-btn hero-btn-arrow ${props.direction}`} role="button" onClick={props.funct} onKeyPress={props.funct} tabIndex={props.tabIndex}>
+    <div className={`btn hero-btn-arrow ${props.direction}`} role="button" onClick={props.funct} onKeyPress={props.funct} tabIndex={props.tabIndex}>
         {props.img}
     </div>
 );
 
 const CharacterDetailsButton = props => (
-    <div className="btn btn-hero-details header-menu" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex={props.tabIndex}>
-        <span>
-            CHARACTER DETAILS
-        </span>
+    <div className="btn header-menu btn-hero-details" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex={props.tabIndex}>
+        CHARACTER DETAILS
     </div>
 );
 
@@ -29,13 +27,11 @@ const CharacterDetailsButton = props => (
 const Header = props => (
     <section className="heroselection-header">
         <div className="header-menu heroselection-title">
-            <span>
-                SELECT CHARACTER
-            </span>
+            Select character
         </div>
         <div className="header-menu header-nav-menu">
             <HeaderHeroButton direction="hero-btn-arrow-left" funct={props.prev} tabIndex="1" img="◀" />
-            <div className="hero-nav-menu-name header-menu">
+            <div className="header-menu hero-nav-menu-name">
                 {props.selected}
             </div>
             <HeaderHeroButton direction="hero-btn-arrow-right" funct={props.next} tabIndex="2" img="▶" />
@@ -48,10 +44,8 @@ const Header = props => (
 );
 
 const Play = props => (
-    <div className="heroselection-footer-menu heroselection-play">
-        <div className="btn btn-play footer-menu" role="button" onClick={props.selectHero} onKeyPress={props.selectHero} tabIndex={props.tabIndex}>
-            PLAY
-        </div>
+    <div className="btn btn-play footer-menu" role="button" onClick={props.selectHero} onKeyPress={props.selectHero} tabIndex={props.tabIndex}>
+        PLAY
     </div>
 );
 
@@ -68,10 +62,8 @@ const Footer = props => (
 );
 
 const BackButton = props => (
-    <div className="details-hero-btn-block">
-        <div className="btn btn-back footer-menu" role="button" onClick={props.onBack} onKeyPress={props.onBack} tabIndex="10">
-            &#767;
-        </div>
+    <div className="btn btn-back footer-menu" role="button" onClick={props.onBack} onKeyPress={props.onBack} tabIndex="10">
+        &#767;
     </div>
 );
 
