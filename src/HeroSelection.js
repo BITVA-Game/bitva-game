@@ -27,7 +27,7 @@ const CharacterDetailsButton = props => (
 const Header = props => (
     <section className="heroselection-header">
         <div className="header-menu heroselection-title">
-            Select character
+            { props.hero ? 'Character details' : 'Select character' }
         </div>
         <div className="header-menu header-nav-menu">
             <HeaderHeroButton direction="hero-btn-arrow-left" funct={props.prev} tabIndex="1" img="◀" />
@@ -38,7 +38,6 @@ const Header = props => (
         </div>
         { props.hero
             ? null : <CharacterDetailsButton onShow={props.onShow} tabIndex="4" />
-
         }
     </section>
 );
