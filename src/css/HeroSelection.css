@@ -142,8 +142,6 @@ section {
 .hero-block {
 	background-color: #fff;
 	display: inline-flex;
-	flex-direction: column;
-	justify-content: center;
 	margin: .5em;
 }
 
@@ -154,57 +152,74 @@ section {
 	width: 235px;
 }
 
-.btn-hero-selected {
-	border-color: #B74A45;
-}
-
 .btn-hero:hover,
 .btn-hero:focus {
 	border-color: #B74A45;
 }
 
-.btn-hero-info {
-	background-color: #fff;
-	display: none;
+.btn-hero-selected {
+	border-color: #B74A45;
 }
 
-.btn-hero-info:hover,
-.btn-hero-info:focus {
-	background-color: #B74A45;
-}
 .heroselection-hero-image {
     height: 100%;
     object-fit: cover;
     width: 100%;
 }
-.hero-name {
-	display: none;
+
+.deck-icon,
+.health-container {
+	align-items: center;
+	display: flex;
+	justify-content: center;
 }
 
-.btn-hero:focus .hero-name,
-.btn-hero:hover .hero-name {
-	display: inline-block;
-	left: 43%;
-	position: fixed;
-	right: 43%;
-	width: 14rem;
+.deck-icon {
+	background-color: #97ABB8;
+    border: 1px solid #fff;
+	border-radius: 3px;
+	bottom: 5px;
+	height: 40px;
+	left: 5px;
+	position: absolute;
+    width: 30px;
+}
+
+.deck-text,
+.health-text {
+	font-size: 21px;
+}
+
+.health-container {
+	bottom: 5px;
+    height: 38px;
+    position: absolute;
+    right: 5px;
+    width: 38px;
+}
+
+.health {
+	-webkit-filter: drop-shadow(0 0 2px #fff);
+	filter: drop-shadow(0 0 2px #fff);
+	height: 38px;
+	width: 38px;
+}
+
+.health-text {
+	bottom: 8px;
+	height: 28px;
+    position: absolute;
 }
 
 /* inaccessable hero properties */
 
 .hero-inaccessable .btn-hero {
-	opacity:0.5;
+	border-color: #747474;
+	opacity: .5;
 }
 
-.hero-inaccessable .btn-hero:hover::after {
-	background-size: cover;
-    bottom: 0;
-    content: '';
-	height: 50px;
-    position: absolute;
-    right: 0;
-    width: 50px;
-	/* z-index: 999; */
+.icons-inactive div{
+	display: none;
 }
 
 /* hero details (OneHero) screen */
@@ -249,21 +264,9 @@ section {
 	right: 6.8rem;
 }
 
-.details-card {
-	height: 22rem;
-	margin-left: 1rem;
-	object-fit: cover;
-	width: 15.7rem;
-}
-
-.details-card:last-of-type {
-	margin-right: 1rem;
-}
-
 .cards-btn {
 	bottom: 10rem;
 	position: absolute;
-	text-shadow: 0 0 3px #B74A45;
     transform: scale(2,10);
 }
 
@@ -275,48 +278,13 @@ section {
 	right: -2rem;
 }
 
-.health {
-	-webkit-filter: drop-shadow(0 0 2px #fff);
-	filter: drop-shadow(0 0 2px #fff);
-	height: 38px;
-	width: 38px;
+.details-card {
+	height: 22rem;
+	margin-left: 1rem;
+	object-fit: cover;
+	width: 15.7rem;
 }
 
-.health-container {
-	bottom: 5px;
-    height: 38px;
-    position: absolute;
-    right: 5px;
-    width: 38px;
-}
-
-.health-text {
-	bottom: 5px;
-	font-size: 21px;
-	height: 28px;
-    position: absolute;
-	right: 8px;
-}
-
-.deck-icon {
-	background-color: #97ABB8;
-    border: 1px solid #fff;
-	border-radius: 3px;
-	bottom: 5px;
-	height: 40px;
-	left: 5px;
-	position: absolute;
-    width: 30px;
-}
-
-.deck-text {
-	bottom: 1px;
-	font-size: 21px;
-	height: 30px;
-	left: 3px;
-    position: absolute;
-}
-
-.icons-inactive div{
-	display: none;
+.details-card:last-of-type {
+	margin-right: 1rem;
 }
