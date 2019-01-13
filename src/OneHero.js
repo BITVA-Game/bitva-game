@@ -15,6 +15,7 @@ import bereginya from './images/cards/bereginya.png';
 import bogatyr from './images/cards/bogatyr.png';
 import shieldLarge from './images/cards/shieldLarge.png';
 import shieldSmall from './images/cards/shieldSmall.png';
+import cardPlace from './images/cards/cardPlace.png';
 
 
 const images = {
@@ -30,6 +31,12 @@ const imagesCards = {
     bogatyr,
     shieldLarge,
     shieldSmall,
+    cardPlace,
+};
+
+const style = {
+    backgroundImage: ('+ imagesCards.sivka +'),
+    backgroundSize: '100% 100%',
 };
 
 // Show all cards by pairs (3 in row)
@@ -53,12 +60,12 @@ const HeroImage = props => (
 const CardPreview = props => (
     props.card
         ? (
-            <div className="details-card" style={{ backgroundImage: imagesCards.sivka }} >
+            <div className="details-card" style={{ style }}>
+                <img className="details-card" data-card={props.card} src={imagesCards[props.card.id]} alt={props.card.name} tabIndex={props.tabIndex} />
                 <p>{props.card.name}</p>
-                {/* <img className="details-card" data-card={props.card} src={imagesCards[props.card.id]} alt={props.card.name} tabIndex={props.tabIndex} /> */}
             </div>
         )
-        : <img className="details-card" style={{ opacity: '0.25' }} src={imagesCards.sivka} alt="card" />
+        : <img className="details-card" style={{ opacity: '0.25' }} src={imagesCards.cardPlace} alt="card" />
 );
 
 const CardsRow = props => (
