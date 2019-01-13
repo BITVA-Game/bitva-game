@@ -1,14 +1,13 @@
 body {
 	cursor: default;
 	font-family: "Sedan SC";
-	min-width: 1024px;
 	user-select: none;
 }
 
 button {
 	background: none;
 	border: 2px solid transparent;
-	color: antiquewhite;
+	color: #fff;
 	font-family: "Sedan SC";
 	font-size: inherit;
 	margin: 0;
@@ -38,19 +37,14 @@ section {
 /* common */
 
 .btn {
-	color: antiquewhite;
+	color: #fff;
 	outline: none;
 }
 
 .btn:focus,
-.btn:hover {
-	color: #B74A45;
-	text-shadow: 0 0 3px #B74A45;
-}
-
+.btn:hover,
 .btn:active {
-	color: antiquewhite;
-	text-shadow: 0 0 7px #B74A45;
+	color: #B74A45;
 }
 
 /* header */
@@ -58,55 +52,21 @@ section {
 .heroselection-header {
 	background: rgb(0,0,0);
 	background: rgba(0,0,0,0.5);
-	height: 6rem;
+	font-size: 36px;
+	height: 7.4rem;
 	text-align: center;
-	width: 100%;
-}
-
-.heroselection-title {
-	left: 2rem;
-}
-
-.heroselection-nav-menu span {
-	position: relative;
-	top: -2px;
-}
-
-.btn-nav-menu {
-	height: 22px;
-}
-
-.btn-nav-menu:hover {
-/*	box-shadow: 0 0 1px 1px #B74A45;*/
-}
-
-.heroselection-char-details {
-	float: right;
-}
-
-.section-header {
-	background-color: rgb(0,0,0);
-	background-color: rgba(0,0,0,0.5);
-	display: inline-block;
-	height: 5rem;
-    left: 0;
-	position: fixed;
-    right: 0;
-	text-align: center;
-    top: 0;
 	width: 100%;
 }
 
 .header-menu {
-	font-size: 24px; /* 1.5rem;*/
 	position: absolute;
 	text-align: center;
-	text-transform: uppercase;
 	top: 2rem;
 }
 
-.hero-select-title {
-	left: 2rem;
+.heroselection-title {
+	color: #9c9c9c;
+	left: 4rem;
 }
 
 .header-nav-menu {
@@ -117,19 +77,14 @@ section {
 .hero-nav-menu-name {
 	left: 50%;
 	position: fixed;
-	text-align: center;
 	transform: translateX(-50%);
-	/*width: 14rem;*/
-}
-
-.hero-nav-menu-btn {
-	display: inline-block;
-	vertical-align: middle;
 }
 
 .hero-btn-arrow {
+	display: inline-block;
 	position: relative;
-	transform: scale(.5, 3);
+	top: .3rem;
+	transform: scale(.8, 2.8);
 }
 
 .hero-btn-arrow-left {
@@ -140,14 +95,11 @@ section {
 	right: -7rem;
 }
 
-/* main */
-
-.section-main {
-	bottom: 3rem;
-	left: 0;
+.btn-hero-details {
+	font-size: 24px;
 	position: fixed;
-	right: 0;
-    top: 5rem;
+	right: 2rem;
+	top: 2.6rem;
 }
 
 /* footer */
@@ -156,36 +108,28 @@ section {
 	background-color: rgb(0,0,0);
 	background-color: rgba(0,0,0,0.5);
 	bottom: 0;
-	height: 3.6rem;
+	font-size: 36px;
+	height: 4.2rem;
 	left: 0;
 	position: fixed;
 	right: 0;
-	z-index: -1; /* for buttons injection */
-}
-
-.footer-menu {
-	bottom: .5rem;
-	font-size: 24px; /*1.5rem;*/
-	position: absolute;
 	text-align: center;
 }
 
+.footer-menu {
+	bottom: .2rem;
+	position: absolute;
+}
+
+.btn-back {
+	bottom: .1rem;
+	font-size: 6rem;
+	left: 5rem;
+}
 
 .btn-play {
 	left: 40%;
 	right: 40%;
-}
-
-.heroselection-play {
-	margin: 0 10em 0 -5em;
-}
-
-.btn-play:hover {
-	border-color: #B74A45;
-}
-
-.btn-start-screen:hover {
-	border-color: #B74A45;
 }
 
 /* list of heroes */
@@ -196,77 +140,86 @@ section {
 }
 
 .hero-block {
-	background-color: antiquewhite;
+	background-color: #fff;
 	display: inline-flex;
-	flex-direction: column;
-	justify-content: center;
 	margin: .5em;
 }
 
 .btn-hero {
-	border: 5px solid antiquewhite;
+	border: 5px solid #fff;
 	height: 275px;
 	position: relative;
 	width: 235px;
+}
+
+.btn-hero:hover,
+.btn-hero:focus {
+	border-color: #B74A45;
 }
 
 .btn-hero-selected {
 	border-color: #B74A45;
 }
 
-.btn-hero:hover,
-.btn-hero:focus {
-	box-shadow: 0 0 1px 3px #B74A45;
-}
-
-.btn-hero-info {
-	background-color: antiquewhite;
-	display: none;
-}
-
-.btn-hero-info:hover,
-.btn-hero-info:focus {
-	background-color: #B74A45;
-}
 .heroselection-hero-image {
     height: 100%;
     object-fit: cover;
     width: 100%;
 }
-.hero-name {
-	display: none;
+
+.deck-icon,
+.health-container {
+	align-items: center;
+	display: flex;
+	justify-content: center;
 }
 
-.btn-hero:focus .hero-name,
-.btn-hero:hover .hero-name {
-	display: inline-block;
-	left: 43%;
-	position: fixed;
-	right: 43%;
-	width: 14rem;
+.deck-icon {
+	background-color: #97ABB8;
+    border: 1px solid #fff;
+	border-radius: 3px;
+	bottom: 5px;
+	height: 40px;
+	left: 5px;
+	position: absolute;
+    width: 30px;
 }
 
-.btn-hero-details {
-	position: fixed;
-	right: 2rem;
+.deck-text,
+.health-text {
+	font-size: 21px;
+}
+
+.health-container {
+	bottom: 5px;
+    height: 38px;
+    position: absolute;
+    right: 5px;
+    width: 38px;
+}
+
+.health {
+	-webkit-filter: drop-shadow(0 0 2px #fff);
+	filter: drop-shadow(0 0 2px #fff);
+	height: 38px;
+	width: 38px;
+}
+
+.health-text {
+	bottom: 8px;
+	height: 28px;
+    position: absolute;
 }
 
 /* inaccessable hero properties */
 
 .hero-inaccessable .btn-hero {
-	opacity:0.5;
+	border-color: #747474;
+	opacity: .5;
 }
 
-.hero-inaccessable .btn-hero:hover::after {
-	/*background: url(../images/lock-shield.png) transparent no-repeat;*/
-	background-size: cover;
-    bottom: 0;
-    content: '';
-	height: 50px;
-    position: absolute;
-    right: 0;
-    width: 50px;
-	/* z-index: 999; */
+.icons-inactive div{
+	display: none;
 }
 
 /* hero details (OneHero) screen */
@@ -290,14 +243,6 @@ section {
     width: fit-content;
 }
 
-.btn-back,
-.btn-start-screen {
-	font-size: 6rem;
-	left: 5rem;
-	position: fixed;
-	top: 44.8rem;
-}
-
 /* details information block */
 
 .details-info-block {
@@ -319,22 +264,10 @@ section {
 	right: 6.8rem;
 }
 
-.details-card {
-	height: 22rem;
-	margin-left: 1rem;
-	object-fit: cover;
-	width: 15.7rem;
-}
-
-.details-card:last-of-type {
-	margin-right: 1rem;
-}
-
 .cards-btn {
 	bottom: 10rem;
 	position: absolute;
-	text-shadow: 0 0 3px #B74A45;
-    transform: scale(2,10);
+    transform: scale(3.4,12);
 }
 
 .cards-btn-left {
@@ -345,48 +278,13 @@ section {
 	right: -2rem;
 }
 
-.health {
-	-webkit-filter: drop-shadow(0 0 2px #FFF);
-	filter: drop-shadow(0 0 2px #FFF);
-	height: 38px;
-	width: 38px;
+.details-card {
+	height: 22rem;
+	margin-left: 1rem;
+	object-fit: cover;
+	width: 15.7rem;
 }
 
-.health-container {
-	bottom: 5px;
-    height: 38px;
-    position: absolute;
-    right: 5px;
-    width: 38px;
-}
-
-.health-text {
-	bottom: 5px;
-	font-size: 21px;
-	height: 28px;
-    position: absolute;
-	right: 8px;
-}
-
-.deck-icon {
-	background-color: #97ABB8;
-    border: 1px solid white;
-	border-radius: 3px;
-	bottom: 5px;
-	height: 40px;
-	left: 5px;
-	position: absolute;
-    width: 30px;
-}
-
-.deck-text {
-	bottom: 1px;
-	font-size: 21px;
-	height: 30px;
-	left: 3px;
-    position: absolute;
-}
-
-.icons-inactive div{
-	display: none;
+.details-card:last-of-type {
+	margin-right: 1rem;
 }
