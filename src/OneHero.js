@@ -34,10 +34,6 @@ const imagesCards = {
     cardPlace,
 };
 
-const style = {
-    backgroundImage: ('+ imagesCards.sivka +'),
-    backgroundSize: '100% 100%',
-};
 
 // Show all cards by pairs (3 in row)
 function prepairCards(cards) {
@@ -60,8 +56,8 @@ const HeroImage = props => (
 const CardPreview = props => (
     props.card
         ? (
-            <div className="details-card" style={{ style }}>
-                <img className="details-card" data-card={props.card} src={imagesCards[props.card.id]} alt={props.card.name} tabIndex={props.tabIndex} />
+            <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
+                {/* <img className="details-card" data-card={props.card} src={imagesCards[props.card.id]} alt={props.card.name} tabIndex={props.tabIndex} /> */}
                 <p>{props.card.name}</p>
             </div>
         )
