@@ -260,8 +260,11 @@ section {
 
 .details-cards {
 	bottom: 8rem;
+	display: flex;
+	justify-content: space-between;
 	position: absolute;
 	right: 6.8rem;
+	width: 700px;
 }
 
 .cards-btn {
@@ -279,12 +282,17 @@ section {
 }
 
 .details-card {
+	background-color: #fff;
 	height: 22rem;
-	margin-left: 1rem;
-	object-fit: cover;
 	width: 15.7rem;
+	
 }
 
 .details-card:last-of-type {
 	margin-right: 1rem;
+}
+
+.details-card p {
+	text-align: center;
+	color: #000;
 }

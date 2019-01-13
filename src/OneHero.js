@@ -8,9 +8,28 @@ import styles from './css/HeroSelection.module.css';
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
 
+import apple from './images/cards/apple.png';
+import bajun from './images/cards/bajun.png';
+import sivka from './images/cards/sivka.png';
+import bereginya from './images/cards/bereginya.png';
+import bogatyr from './images/cards/bogatyr.png';
+import shieldLarge from './images/cards/shieldLarge.png';
+import shieldSmall from './images/cards/shieldSmall.png';
+
+
 const images = {
     yaga,
     morevna,
+};
+
+const imagesCards = {
+    apple,
+    bajun,
+    sivka,
+    bereginya,
+    bogatyr,
+    shieldLarge,
+    shieldSmall,
 };
 
 // Show all cards by pairs (3 in row)
@@ -33,8 +52,13 @@ const HeroImage = props => (
 
 const CardPreview = props => (
     props.card
-        ? <img className="details-card" data-card={props.card} src={images.morevna} alt={props.card.name} tabIndex={props.tabIndex} />
-        : <img className="details-card" style={{ opacity: '0.25' }} src={images.yaga} alt="card" />
+        ? (
+            <div className="details-card" style={{ backgroundImage: imagesCards.sivka }} >
+                <p>{props.card.name}</p>
+                {/* <img className="details-card" data-card={props.card} src={imagesCards[props.card.id]} alt={props.card.name} tabIndex={props.tabIndex} /> */}
+            </div>
+        )
+        : <img className="details-card" style={{ opacity: '0.25' }} src={imagesCards.sivka} alt="card" />
 );
 
 const CardsRow = props => (
