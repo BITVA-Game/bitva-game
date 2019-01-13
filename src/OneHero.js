@@ -58,7 +58,7 @@ const CardPreview = props => (
         ? (
             <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
                 {/* <img className="details-card" data-card={props.card} src={imagesCards[props.card.id]} alt={props.card.name} tabIndex={props.tabIndex} /> */}
-                <p>{props.card.name}</p>
+                <p className="highlight">{props.card.name}</p>
             </div>
         )
         : <img className="details-card" style={{ opacity: '0.25' }} src={imagesCards.cardPlace} alt="card" />

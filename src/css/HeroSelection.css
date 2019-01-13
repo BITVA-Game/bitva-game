@@ -282,7 +282,6 @@ section {
 }
 
 .details-card {
-	/* background-color: #fff; */
 	height: 22rem;
 	width: 15.7rem;
 	
@@ -293,6 +292,14 @@ section {
 }
 
 .details-card p {
-	text-align: center;
 	color: #000;
+	font-size: 23px;
+	margin-top: 0.4rem;
+	text-align: center;    
+}
+
+.highlight {
+	text-shadow: 0 0 0.2em #747474, 0 0 0.2em #747474, 0 0 0.2em #747474;	
+    /* background-color: #fff;
+    background-image: linear-gradient(to right, #747474 0%, #c7c6c0 100%); */
 }
