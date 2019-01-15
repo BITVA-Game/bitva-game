@@ -11,10 +11,10 @@ import morevna from './images/heroes/morevna.jpg';
 import apple from './images/cards/apple.png';
 import bajun from './images/cards/bajun.png';
 import sivka from './images/cards/sivka.png';
-import bereginya from './images/cards/bereginya.png';
-import bogatyr from './images/cards/bogatyr.png';
-import shieldLarge from './images/cards/shieldLarge.png';
-import shieldSmall from './images/cards/shieldSmall.png';
+import bereginya from './images/cards/bitva-cardbase.jpg';
+import bogatyr from './images/cards/bitva-cardbase.jpg';
+import shieldLarge from './images/cards/bitva-cardbase.jpg';
+import shieldSmall from './images/cards/bitva-cardbase.jpg';
 import cardPlace from './images/cards/cardPlace.png';
 
 
@@ -57,8 +57,11 @@ const CardPreview = props => (
     props.card
         ? (
             <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
-                {/* <img className="details-card" data-card={props.card} src={imagesCards[props.card.id]} alt={props.card.name} tabIndex={props.tabIndex} /> */}
-                <p className="highlight">{props.card.name}</p>
+                <div className="card-header">
+                    <p>{props.card.name}</p>
+                    <div className={`icon icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>{props.card.points}</div>
+                </div>
+                <div className="card-description">{props.card.info}</div>
             </div>
         )
         : <img className="details-card" style={{ opacity: '0.25' }} src={imagesCards.cardPlace} alt="card" />
