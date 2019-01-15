@@ -133,6 +133,10 @@ CardPreview.propTypes = {
     card: PropTypes.object,
 };
 
+CardPreview.defaultProps = {
+    card: undefined,
+}
+
 CardsRow.propTypes = {
     card: PropTypes.object,
 };
