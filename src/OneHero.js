@@ -69,9 +69,9 @@ const CardPreview = props => (
 
 const CardsRow = props => (
     <>
-        <CardPreview card={props.cards[props.row[0]]} tabIndex="6" />
-        <CardPreview card={props.cards[props.row[1]]} tabIndex="7" />
-        <CardPreview card={props.cards[props.row[2]]} tabIndex="8" />
+        <CardPreview card={props.cards[props.row[0]]} />
+        <CardPreview card={props.cards[props.row[1]]} />
+        <CardPreview card={props.cards[props.row[2]]} />
     </>
 );
 
@@ -101,7 +101,7 @@ class CardsBlock extends Component {
                     ◀
                 </div>
                 <CardsRow heroId={this.props.heroId} row={this.cardsBy3[this.state.row]} cards={this.props.cards} />
-                <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="9">
+                <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="6">
                     ▶
                 </div>
             </section>
@@ -130,8 +130,11 @@ HeroImage.propTypes = {
 };
 
 CardPreview.propTypes = {
-    card: PropTypes.object.isRequired,
-    tabIndex: PropTypes.string.isRequired,
+    card: PropTypes.object,
+};
+
+CardsRow.propTypes = {
+    card: PropTypes.object,
 };
 
 CardsBlock.propTypes = {

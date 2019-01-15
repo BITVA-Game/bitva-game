@@ -284,13 +284,9 @@ section {
 .details-card {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	height: 22rem;
+	justify-content: space-between;
 	width: 15.7rem;
-}
-
-.details-card:last-of-type {
-	margin-right: 1rem;
 }
 
 .card-header {
@@ -316,12 +312,12 @@ section {
 	width: 40px;
 }
 
-.icon-heal {
-	background-image: url("../images/icons/heart.png");
-}
-
 .icon-attack {
 	background-image: url("../images/icons/skull.png");
+}
+
+.icon-heal {
+	background-image: url("../images/icons/heart.png");
 }
 
 .icon-shield {
