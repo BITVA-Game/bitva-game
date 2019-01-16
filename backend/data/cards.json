@@ -75,6 +75,18 @@
         "points": 3,
         "img": "shieldSmall.png"
 
+    },
+
+    "Grey Wolf": {
+        "id": "wolf",
+        "name": "Grey Wolf",
+        "category": "attack",
+        "type": "action",
+        "info": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+        "points": 3,
+        "img": "wolf.png"
+
     }
 
 }
