@@ -15,6 +15,7 @@ import bereginya from './images/cards/bitva-cardbase.jpg';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/bitva-cardbase.jpg';
 import shieldSmall from './images/cards/bitva-cardbase.jpg';
+import wolf from './images/cards/bitva-cardbase.jpg';
 import cardPlace from './images/cards/cardPlace.png';
 
 
@@ -31,6 +32,7 @@ const imagesCards = {
     bogatyr,
     shieldLarge,
     shieldSmall,
+    wolf,
     cardPlace,
 };
 
