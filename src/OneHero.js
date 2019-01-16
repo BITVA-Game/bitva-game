@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable import/no-duplicates */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
@@ -135,6 +136,7 @@ const OneHero = props => (
 
 HeroImage.propTypes = {
     heroid: PropTypes.string.isRequired,
+    hero: PropTypes.object.isRequired,
 };
 
 CardPreview.propTypes = {
