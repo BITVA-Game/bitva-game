@@ -7,7 +7,6 @@ import styles from './css/HeroSelection.module.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
-import heart from './images/icons/heart.png';
 
 import apple from './images/cards/apple.png';
 import bajun from './images/cards/bajun.png';
