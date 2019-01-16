@@ -74,10 +74,9 @@
         "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battke dealing with the damage and also can ward off an attacks.",
         "points": 3,
         "img": "shieldSmall.png"
-
     },
 
-    "Grey Wolf": {
+    "wolf": {
         "id": "wolf",
         "name": "Grey Wolf",
         "category": "attack",
@@ -86,7 +85,6 @@
         "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
         "points": 3,
         "img": "wolf.png"
-
     }
 
 }
