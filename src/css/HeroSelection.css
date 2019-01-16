@@ -25,7 +25,7 @@ section {
 /* container */
 
 .heroselection-container {
-	background: transparent url(../images/background.png) center no-repeat;
+	background: transparent url("../images/background.png") center no-repeat;
 	background-size: cover;
 	bottom: 0;
 	left: 0;
@@ -260,8 +260,11 @@ section {
 
 .details-cards {
 	bottom: 8rem;
+	display: flex;
+	justify-content: space-between;
 	position: absolute;
 	right: 6.8rem;
+	width: 700px;
 }
 
 .cards-btn {
@@ -271,20 +274,67 @@ section {
 }
 
 .cards-btn-left {
-	left: -2rem;
+	left: -3rem;
 }
 
 .cards-btn-right {
-	right: -2rem;
+	right: -3rem;
 }
 
 .details-card {
+	display: flex;
+	flex-direction: column;
 	height: 22rem;
-	margin-left: 1rem;
-	object-fit: cover;
+	justify-content: space-between;
 	width: 15.7rem;
 }
 
-.details-card:last-of-type {
-	margin-right: 1rem;
+.card-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.details-card p {
+	color: #000;
+	flex-basis: 163px;
+	font-size: 23px;
+	margin-top: 0.4rem;
+	text-align: center;
+}
+
+.icon {
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 40px 40px;
+	flex-basis: 40px;
+	height: 40px;
+	margin: 8px;
+	width: 40px;
+}
+
+.icon-attack {
+	background-image: url("../images/icons/skull.png");
+}
+
+.icon-heal {
+	background-image: url("../images/icons/heart.png");
+}
+
+.icon-shield {
+	background-image: url("../images/icons/shield.png");
+}
+
+.icon-text {
+	font-size: 26px;
+	text-align: center;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.card-description {
+	background-color: #c4c4c4;
+	border-radius: 5px;
+	color: #000;
+	margin: 8px;
+	padding: 5px;
+	text-align: center;
 }

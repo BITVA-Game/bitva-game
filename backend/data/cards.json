@@ -4,6 +4,7 @@
         "name": "Cat-Bajun",
         "type": "action",
         "category": "attack",
+        "info": "Magic were-cat attacks the enemy with his songs and spells.",
         "description": "Magic were-cat. Can attack the enemy with his songs and spells. Live at Yaga's hut.",
         "points": 1,
         "img": "bajun.png"
@@ -14,6 +15,7 @@
         "name": "Sivka-Burka",
         "type": "action",
         "category": "attack",
+        "info": "Magic prophetic 'wild' - colored horse, mediating the living and realm of the dead.",
         "description": "Magic prophetic 'wild' - colored horse, mediating the living and realm of the dead.",
         "points": 2,
         "img": "sivka.png"
@@ -24,6 +26,7 @@
         "name": "Bogatyr",
         "type": "action",
         "category": "attack",
+        "info": "Hero-warrior possessing great power, protector.",
         "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
         "points": 4,
         "img": "bogatyr.png"
@@ -34,6 +37,7 @@
         "name": "Apple",
         "type": "action",
         "category": "heal",
+        "info": "Heals its owner.",
         "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple - gets younger, and an ill - gets it health back.",
         "points": 3,
         "img": "apple.png"
@@ -44,6 +48,7 @@
         "name": "Keeper Bereginya",
         "type": "action",
         "category": "heal",
+        "info": "Heals 5 damage points.",
         "description": "Plenty of Keepers lives in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
         "points": 5,
         "img": "bereginya.png"
@@ -54,7 +59,8 @@
         "name": "Large Shield",
         "type": "item",
         "category": "shield",
-        "description": "The shield, forged by Svarog -  divinity-blacksmith. After recognition of  his owner, it can reflect the damage and ensure protection  from witchcraft.",
+        "info": "Protects its owner from damage until destroyed.",
+        "description": "The shield, forged by Svarog - divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
         "points": 5,
         "img": "shieldLarge.png"
     },
@@ -64,6 +70,7 @@
         "name": "Small Shield",
         "category": "shield",
         "type": "item",
+        "info": "Protects its owner from damage until destroyed.",
         "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battke dealing with the damage and also can ward off an attacks.",
         "points": 3,
         "img": "shieldSmall.png"
