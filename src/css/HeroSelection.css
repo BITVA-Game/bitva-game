@@ -178,10 +178,10 @@ section {
 	background-color: #97ABB8;
     border: 1px solid #fff;
 	border-radius: 3px;
-	bottom: 5px;
 	height: 40px;
 	left: 5px;
 	position: absolute;
+	top: 5px;
     width: 30px;
 }
 
@@ -226,21 +226,18 @@ section {
 
 .details-hero {
 	flex: 1 1 35%;
+	padding: 40px 20px;
 }
 
 .details-hero-avatar {
-	bottom: 8rem;
+	display: flex;
 	height: 35rem;
-	left: 5rem;
-	position: absolute;
-	right: 1rem;
-	width: 10rem;
+	justify-content: space-between;
+	width: 100%;
 }
 
-.details-hero-avatar img {
-	height: 100%;
-    object-fit: cover;
-    width: fit-content;
+.icon-char {
+	transform: scale(2);
 }
 
 /* details information block */
@@ -296,7 +293,7 @@ section {
 
 .details-card p {
 	color: #000;
-	flex-basis: 163px;
+	flex-basis: 110px;
 	font-size: 23px;
 	margin-top: 0.4rem;
 	text-align: center;
@@ -310,6 +307,21 @@ section {
 	height: 40px;
 	margin: 8px;
 	width: 40px;
+}
+
+.icon-deck {
+	align-items: center;
+	background-color: #97ABB8;
+    border: 1px solid #fff;
+	border-radius: 3px;
+	display: flex;
+	flex-basis: 30px;
+	font-size: 26px;
+	height: 40px;
+	justify-content: center;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	margin: 8px;
+    width: 30px;
 }
 
 .icon-attack {

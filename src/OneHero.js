@@ -7,6 +7,7 @@ import styles from './css/HeroSelection.module.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
+import heart from './images/icons/heart.png';
 
 import apple from './images/cards/apple.png';
 import bajun from './images/cards/bajun.png';
@@ -47,8 +48,13 @@ function prepairCards(cards) {
 
 const HeroImage = props => (
     <div className="details-hero">
-        <div className="details-hero-avatar">
-            <img src={images[props.heroid]} alt={props.heroid} />
+        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: '100% 100%' }}>
+            <div className="icon-deck icon-char">
+                {props.hero.cardsNumber}
+            </div>
+            <div className="icon icon-text icon-heal icon-char">
+                {props.hero.health}
+            </div>
         </div>
     </div>
 );
@@ -58,6 +64,9 @@ const CardPreview = props => (
         ? (
             <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
                 <div className="card-header">
+                    <div className="icon-deck">
+                        {props.card.count}
+                    </div>
                     <p>{props.card.name}</p>
                     <div className={`icon icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>{props.card.points}</div>
                 </div>
@@ -112,7 +121,7 @@ class CardsBlock extends Component {
 // Info about one hero.
 const OneHero = props => (
     <div className={styles.details}>
-        <HeroImage heroid={props.hero.id} />
+        <HeroImage heroid={props.hero.id} hero={props.hero} />
         <div className="details-info-block">
             <article className="details-description">
                 <span>
