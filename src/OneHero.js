@@ -48,11 +48,11 @@ function prepairCards(cards) {
 
 const HeroImage = props => (
     <div className="details-hero">
-        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: '100% 100%' }}>
-            <div className="icon-deck icon-char">
+        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }}>
+            <div className="icon-deck icon-text">
                 {props.hero.cardsNumber}
             </div>
-            <div className="icon icon-text icon-heal icon-char">
+            <div className="icon icon-text icon-heal">
                 {props.hero.health}
             </div>
         </div>
@@ -64,7 +64,7 @@ const CardPreview = props => (
         ? (
             <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
                 <div className="card-header">
-                    <div className="icon-deck">
+                    <div className="icon-deck icon-text">
                         {props.card.count}
                     </div>
                     <p>{props.card.name}</p>

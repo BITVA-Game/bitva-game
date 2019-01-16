@@ -124,7 +124,7 @@ section {
 .btn-back {
 	bottom: .1rem;
 	font-size: 6rem;
-	left: 5rem;
+	left: 4rem;
 }
 
 .btn-play {
@@ -188,6 +188,7 @@ section {
 .deck-text,
 .health-text {
 	font-size: 21px;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .health-container {
@@ -199,8 +200,8 @@ section {
 }
 
 .health {
-	-webkit-filter: drop-shadow(0 0 2px #fff);
-	filter: drop-shadow(0 0 2px #fff);
+	/*-webkit-filter: drop-shadow(0 0 2px #fff);
+	filter: drop-shadow(0 0 2px #fff);*/
 	height: 38px;
 	width: 38px;
 }
@@ -236,8 +237,13 @@ section {
 	width: 100%;
 }
 
-.icon-char {
-	transform: scale(2);
+.details-hero-avatar .icon-deck {
+	transform: scale(2) translate(8px, 10px);
+}
+
+.details-hero-avatar .icon-heal {
+	align-self: flex-end;
+	transform: scale(2) translate(-10px, -8px);
 }
 
 /* details information block */
@@ -316,10 +322,8 @@ section {
 	border-radius: 3px;
 	display: flex;
 	flex-basis: 30px;
-	font-size: 26px;
 	height: 40px;
 	justify-content: center;
-	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 	margin: 8px;
     width: 30px;
 }
