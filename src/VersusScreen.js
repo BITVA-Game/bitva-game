@@ -30,10 +30,16 @@ class VersusScreen extends Component {
         super(props);
 
         this.sendDealAllMessage = this.sendDealAllMessage.bind(this);
+        this.waitForIt = this.waitForIt.bind(this);
     }
 
     sendDealAllMessage() {
         this.props.sendMessage({ type: 'DEALALL' });
+    }
+
+    waitForIt() {
+        console.log('waiting');
+        setTimeout(this.sendDealAllMessage, 3000);
     }
 
     render() {
@@ -43,15 +49,13 @@ class VersusScreen extends Component {
                     <OneHero hero={this.props.app.game.players[0].hero} />
                     <div className="vs">
                         <p>
-                  VS
+                            VS
                         </p>
                     </div>
                     <OneHero hero={this.props.app.game.players[1].hero} />
                 </div>
-                <div className="play-button-container">
-                    <button className="play-button" type="button" onClick={this.sendDealAllMessage}>
-              PLAY
-                    </button>
+                <div className="versus-loading-container">
+                    <div className="versus-loading" onLoad={this.waitForIt.call(this)}></div>
                 </div>
                 <MainMenu sendMessage={this.props.sendMessage} />
             </div>

@@ -15,8 +15,9 @@
 .versus-heroes-container {
     display: flex;
     flex-wrap: nowrap;
+    height: 80vh;
     justify-content: center;
-    margin-top: 4.5em;
+    padding-top: 4.5em;
 }
 
 .versus-one-hero {
@@ -45,27 +46,17 @@
 
 /* play button */
 
-.play-button-container {
-    align-content: center;
-    background-color: rgb(33, 33, 33);
-    background-color: rgba(33, 33, 33, 0.55);
-    bottom: 0;
+.versus-loading-container {
+    align-items: center;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
-    height: 10vh;
+    height: 20vh;
     justify-content: center;
-    margin-top: 10em;
-	position: fixed;
     width: 100%;
-    /*width: 2em;*/
 }
 
-.play-button {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    font-family: Sedan SC;
-    font-size: 2.25em;
-    margin: auto;
+.versus-loading {
+    background-image: url("../images/versus-loading.png");
+    height: 56px;
+    width: 1016px;
 }
