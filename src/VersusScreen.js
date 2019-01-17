@@ -54,7 +54,7 @@ class VersusScreen extends Component {
                 </div>
                 <div className="versus-loading-container">
                     <div className="versus-loading" onLoad={this.waitForIt.call(this)}>
-                        <div className="loading"></div>
+                        <div className="loading" />
                     </div>
                 </div>
             </div>
