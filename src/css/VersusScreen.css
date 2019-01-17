@@ -60,3 +60,15 @@
     height: 56px;
     width: 1016px;
 }
+
+.loading {
+    animation: loading 5s linear infinite;
+    background: rgba(196, 196, 196, .7);
+    /*border-radius: 15px;*/
+    height: 56px;
+}
+
+@keyframes loading {
+    from {width: 100%;}
+    to {width: 0;}
+}
