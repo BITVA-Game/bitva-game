@@ -64,11 +64,12 @@
 .loading {
     animation: loading 5s linear infinite;
     background: rgba(196, 196, 196, .7);
-    /*border-radius: 15px;*/
+    border-radius: 0 15px 15px 0;
     height: 56px;
+    position: relative;
 }
 
 @keyframes loading {
-    from {width: 100%;}
-    to {width: 0;}
+    from {left: 0; width: 100%;}
+    to {left: 1016px; width: 0;}
 }
