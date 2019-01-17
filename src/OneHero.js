@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable import/no-duplicates */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
@@ -49,8 +50,13 @@ function prepairCards(cards) {
 
 const HeroImage = props => (
     <div className="details-hero">
-        <div className="details-hero-avatar">
-            <img src={images[props.heroid]} alt={props.heroid} />
+        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }}>
+            <div className="icon-deck icon-text">
+                {props.hero.cardsNumber}
+            </div>
+            <div className="icon icon-text icon-heal">
+                {props.hero.health}
+            </div>
         </div>
     </div>
 );
@@ -60,6 +66,9 @@ const CardPreview = props => (
         ? (
             <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
                 <div className="card-header">
+                    <div className="icon-deck icon-text">
+                        {props.card.count}
+                    </div>
                     <p>{props.card.name}</p>
                     <div className={`icon icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>{props.card.points}</div>
                 </div>
@@ -114,7 +123,7 @@ class CardsBlock extends Component {
 // Info about one hero.
 const OneHero = props => (
     <div className={styles.details}>
-        <HeroImage heroid={props.hero.id} />
+        <HeroImage heroid={props.hero.id} hero={props.hero} />
         <div className="details-info-block">
             <article className="details-description">
                 <span>
@@ -129,6 +138,7 @@ const OneHero = props => (
 
 HeroImage.propTypes = {
     heroid: PropTypes.string.isRequired,
+    hero: PropTypes.object.isRequired,
 };
 
 CardPreview.propTypes = {
