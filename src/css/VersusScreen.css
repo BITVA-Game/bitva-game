@@ -13,11 +13,11 @@
 /* heroes */
 
 .versus-heroes-container {
+    align-items: center;
     display: flex;
     flex-wrap: nowrap;
     height: 80vh;
     justify-content: center;
-    padding-top: 4.5em;
 }
 
 .versus-one-hero {
