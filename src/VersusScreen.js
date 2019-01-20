@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/VersusScreen.css';
-import MainMenu from './MainMenu';
-import './css/MainMenu.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -30,10 +28,16 @@ class VersusScreen extends Component {
         super(props);
 
         this.sendDealAllMessage = this.sendDealAllMessage.bind(this);
+        this.waitForIt = this.waitForIt.bind(this);
     }
 
     sendDealAllMessage() {
         this.props.sendMessage({ type: 'DEALALL' });
+    }
+
+    waitForIt() {
+        console.log('waiting');
+        setTimeout(this.sendDealAllMessage, 5000);
     }
 
     render() {
@@ -43,17 +47,16 @@ class VersusScreen extends Component {
                     <OneHero hero={this.props.app.game.players[0].hero} />
                     <div className="vs">
                         <p>
-                  VS
+                            VS
                         </p>
                     </div>
                     <OneHero hero={this.props.app.game.players[1].hero} />
                 </div>
-                <div className="play-button-container">
-                    <button className="play-button" type="button" onClick={this.sendDealAllMessage}>
-              PLAY
-                    </button>
+                <div className="versus-loading-container">
+                    <div className="versus-loading" onLoad={this.waitForIt.call(this)}>
+                        <div className="loading" />
+                    </div>
                 </div>
-                <MainMenu sendMessage={this.props.sendMessage} />
             </div>
         );
     }
