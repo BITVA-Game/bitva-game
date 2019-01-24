@@ -4,6 +4,28 @@ import Hero from './Hero';
 import './css/App.css';
 import './css/GameScreen.css';
 
+import apple from './images/cards/apple.png';
+import bajun from './images/cards/bajun.png';
+import sivka from './images/cards/sivka.png';
+import bereginya from './images/cards/bitva-cardbase.jpg';
+import bogatyr from './images/cards/bitva-cardbase.jpg';
+import shieldLarge from './images/cards/bitva-cardbase.jpg';
+import shieldSmall from './images/cards/bitva-cardbase.jpg';
+import wolf from './images/cards/bitva-cardbase.jpg';
+import cardPlace from './images/cards/cardPlace.png';
+
+const imagesCards = {
+    apple,
+    bajun,
+    sivka,
+    bereginya,
+    bogatyr,
+    shieldLarge,
+    shieldSmall,
+    wolf,
+    cardPlace,
+};
+
 const GameScreen = (props) => {
     props.app.game.players.sort((a, b) => {
         const x = a.active;
@@ -20,16 +42,20 @@ const GameScreen = (props) => {
 };
 
 const Card = props => (
-    <div
-        className="card card-like"
+    <div className="card card-like" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}
         data-key={props.cardKey}
         draggable={props.draggable}
         onDragStart={props.cardDragStarted}
         onDragEnd={props.cardDragEnded}
     >
-        <div className="card-name">
-            {props.card.name}
-            {props.cardKey}
+        <div className="card-header">
+            <div className="card-name">
+                {props.card.name}
+                {/* {props.cardKey} */}
+            </div>
+            <div className={`game-icon-text game-icon ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>
+                <p>{props.card.points}</p>
+            </div>
         </div>
     </div>
 );

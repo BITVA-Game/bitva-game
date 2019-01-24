@@ -101,6 +101,31 @@
     width: 100%;
 }
 
+.game-icon {    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    -webkit-filter: drop-shadow(0 0 2px #fff);
+    filter: drop-shadow(0 0 2px #fff);
+    height: 30px;
+    position: absolute;
+    right: -12px;
+    top: -10px;
+    width: 30px;  
+}
+.game-icon-text {
+    align-items: center;
+    display: flex;
+    font-size: 24px;
+    justify-content: center;
+    text-align: center;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.game-icon-text p {
+    line-height: 30px;
+    margin: 0;
+}
 /* deck */
 .deck {
     background-color: #97abb8;
