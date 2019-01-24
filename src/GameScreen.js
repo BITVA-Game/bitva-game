@@ -28,6 +28,8 @@ const imagesCards = {
 };
 
 const GameScreen = (props) => {
+    // var [player1, player2] = props.app.game.players;
+    // console.log(player1, player2);
     props.app.game.players.sort((a, b) => {
         const x = a.active;
         const y = b.active;
@@ -38,6 +40,8 @@ const GameScreen = (props) => {
             {props.app.game.players.map(player => (
                 <Player key={player.hero} player={player} sendMessage={props.sendMessage} />
             ))}
+            {/* <Player key={player1.hero} player={player1} sendMessage={props.sendMessage} /> */}
+            {/* <Player key={player2.hero} player={player2} sendMessage={props.sendMessage} /> */}
         </div>
     );
 };
