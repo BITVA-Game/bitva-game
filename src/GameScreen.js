@@ -1,3 +1,4 @@
+/* eslint-disable import/no-duplicates */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Hero from './Hero';
@@ -42,20 +43,20 @@ const GameScreen = (props) => {
 };
 
 const Card = props => (
-    <div className="card card-like" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}
+    <div
+        className="card card-like"
+        style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}
         data-key={props.cardKey}
         draggable={props.draggable}
         onDragStart={props.cardDragStarted}
         onDragEnd={props.cardDragEnded}
     >
-        <div className="card-header">
-            <div className="card-name">
-                {props.card.name}
-                {/* {props.cardKey} */}
-            </div>
-            <div className={`game-icon-text game-icon ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>
-                <p>{props.card.points}</p>
-            </div>
+        <div className="card-name">
+            {props.card.name}
+            {/* <p>{props.cardKey}</p> */}
+        </div>
+        <div className={`game-icon game-icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>
+            <p>{props.card.points}</p>
         </div>
     </div>
 );
