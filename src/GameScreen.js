@@ -1,8 +1,31 @@
+/* eslint-disable import/no-duplicates */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Hero from './Hero';
 import './css/App.css';
 import './css/GameScreen.css';
+
+import apple from './images/cards/apple.png';
+import bajun from './images/cards/bajun.png';
+import sivka from './images/cards/sivka.png';
+import bereginya from './images/cards/bitva-cardbase.jpg';
+import bogatyr from './images/cards/bitva-cardbase.jpg';
+import shieldLarge from './images/cards/bitva-cardbase.jpg';
+import shieldSmall from './images/cards/bitva-cardbase.jpg';
+import wolf from './images/cards/bitva-cardbase.jpg';
+import cardPlace from './images/cards/cardPlace.png';
+
+const imagesCards = {
+    apple,
+    bajun,
+    sivka,
+    bereginya,
+    bogatyr,
+    shieldLarge,
+    shieldSmall,
+    wolf,
+    cardPlace,
+};
 
 const GameScreen = (props) => {
     props.app.game.players.sort((a, b) => {
@@ -22,6 +45,7 @@ const GameScreen = (props) => {
 const Card = props => (
     <div
         className="card card-like"
+        style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}
         data-key={props.cardKey}
         draggable={props.draggable}
         onDragStart={props.cardDragStarted}
@@ -29,7 +53,10 @@ const Card = props => (
     >
         <div className="card-name">
             {props.card.name}
-            {props.cardKey}
+            {/* <p>{props.cardKey}</p> */}
+        </div>
+        <div className={`game-icon game-icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>
+            <p>{props.card.points}</p>
         </div>
     </div>
 );
