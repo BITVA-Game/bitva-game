@@ -28,20 +28,16 @@ const imagesCards = {
 };
 
 const GameScreen = (props) => {
-    // var [player1, player2] = props.app.game.players;
-    // console.log(player1, player2);
-    props.app.game.players.sort((a, b) => {
-        const x = a.active;
-        const y = b.active;
-        return x < y ? -1 : 1;
-    });
+    // props.app.game.players.sort((a, b) => {
+    //     const x = a.active;
+    //     const y = b.active;
+    //     return x < y ? -1 : 1;
+    // });
     return (
         <div className="game-table app-background">
             {props.app.game.players.map(player => (
-                <Player key={player.hero} player={player} sendMessage={props.sendMessage} />
+                <Player key={player.hero} position={player.position} player={player} sendMessage={props.sendMessage} />
             ))}
-            {/* <Player key={player1.hero} player={player1} sendMessage={props.sendMessage} /> */}
-            {/* <Player key={player2.hero} player={player2} sendMessage={props.sendMessage} /> */}
         </div>
     );
 };
@@ -150,8 +146,10 @@ class Player extends Component {
 
 
     render() {
+        const playerClass = this.props.player.active ? 'player player-active' : 'player player-inactive';
+        const playerPosition = this.props.player.position === 'bottom' ? 'player-bottom' : 'player-top';
         return (
-            <div className={this.props.player.active ? 'player player-active' : 'player player-inactive'}>
+            <div className={`${playerClass} ${playerPosition}`}>
                 <Hero player={this.props.player} />
                 <Item active={this.props.player.active} item={this.state.item} />
                 <Deck deck={this.props.player.deck} />
