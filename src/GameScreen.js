@@ -146,10 +146,10 @@ class Player extends Component {
 
 
     render() {
-        const playerClass = this.props.player.active ? 'player player-active' : 'player player-inactive';
-        const playerPosition = this.props.player.position === 'bottom' ? 'player-bottom' : 'player-top';
+        const playerClass = this.props.player.active ? '' : 'player-inactive';
+        const playerPosition = this.props.player.position === 'bottom' ? 'player player-bottom' : 'player player-top';
         return (
-            <div className={`${playerClass} ${playerPosition}`}>
+            <div className={`${playerPosition} ${playerClass}`}>
                 <Hero player={this.props.player} />
                 <Item active={this.props.player.active} item={this.state.item} />
                 <Deck deck={this.props.player.deck} />

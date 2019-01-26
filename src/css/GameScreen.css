@@ -11,7 +11,8 @@
     width: 100%;
 }
 
-.player-inactive {
+.player-top  {
+    margin-left: -70px;
     transform: rotate(180deg);
 }
 
@@ -26,6 +27,10 @@
 }
 
 .player-inactive .hero {
+    filter: brightness(45%);
+}
+
+.player-top .hero {
     transform: rotate(180deg);
 }
 
@@ -94,7 +99,7 @@
     width: 110px;
 }
 
-.player-inactive .card {
+.player-top .card {
     transform: rotate(180deg);
 }
 
@@ -106,7 +111,7 @@
     text-align: center;
 }
 
-.game-icon {    
+.game-icon {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 30px 30px;
@@ -116,7 +121,7 @@
     position: absolute;
     right: -12px;
     top: -10px;
-    width: 30px;  
+    width: 30px;
 }
 .game-icon-text {
     align-items: center;
@@ -142,7 +147,7 @@
     position: absolute;
 }
 
-.player-inactive .deck {
+.player-top .deck {
     display: none;
 }
 
@@ -167,7 +172,8 @@
     right: 35px;
 }
 
-.player-inactive .grave {
+.player-top .grave {
+    right: 105px;
     transform: rotate(180deg);
 }
 
