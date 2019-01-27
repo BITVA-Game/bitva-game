@@ -13,15 +13,15 @@
 
 .player-top  {
     margin-left: -70px;
-    transform: rotate(180deg);
     position: absolute;
-    top:0px;
+    top: 0;
+    transform: rotate(180deg);
 }
 
 .player-bottom  {
-    transform: rotate(0deg);
+    bottom: 0;
     position: absolute;
-    bottom:0px;
+    transform: rotate(0deg);
 }
 
 /* hero */

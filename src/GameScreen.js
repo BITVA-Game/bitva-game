@@ -27,20 +27,18 @@ const imagesCards = {
     cardPlace,
 };
 
-const GameScreen = (props) => {
-    // props.app.game.players.sort((a, b) => {
-    //     const x = a.active;
-    //     const y = b.active;
-    //     return x < y ? -1 : 1;
-    // });
-    return (
-        <div className="game-table app-background">
-            {props.app.game.players.map(player => (
-                <Player key={player.hero} position={player.position} player={player} sendMessage={props.sendMessage} />
-            ))}
-        </div>
-    );
-};
+const GameScreen = props => (
+    <div className="game-table app-background">
+        {props.app.game.players.map(player => (
+            <Player
+                key={player.hero}
+                position={player.position}
+                player={player}
+                sendMessage={props.sendMessage}
+            />
+        ))}
+    </div>
+);
 
 const Card = props => (
     <div
