@@ -16,15 +16,14 @@ class GameScreen extends Component {
 
     cardDragEnded(event) {
         this.setState({
-            dragging: null,
+            dragging: null
         });
     }
 
-    cardDragStarted(keyCard, type) {
+    cardDragStarted(key, card) {
         this.setState({
-            dragging: keyCard,
+            dragging: { key, card },
             item: null,
-            type: type,
         });
     }
 
@@ -35,7 +34,7 @@ class GameScreen extends Component {
                 item: card,
             });
         }
-        this.props.sendMessage({ type: 'ACTION', activeCard: this.state.dragging, target });
+        this.props.sendMessage({ type: 'ACTION', activeCard: this.state.dragging.key, target });
 
         this.setState({
             dragging: null,
