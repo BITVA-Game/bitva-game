@@ -91,15 +91,9 @@ const generatePlayers = function (heroName) {
     players[1].health.maximum = allCharacters[heroSecondName].health;
 
     console.log(`${players[0].hero} is active is ${players[0].active}`);
-    
     console.log(`${players[1].hero} is active is ${players[1].active}`);
     return { players };
 };
-
-// function randomKey(hashtable) {
-//     const keys = Object.keys(hashtable);
-//     return keys[Math.floor(keys.length * Math.random())];
-// }
 
 function giveCardsTo(player) {
     while (Object.keys(player.hand).length < 5) {
