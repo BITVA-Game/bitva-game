@@ -52,17 +52,17 @@ class HealthMeter extends Component {
 
     render() {
         return (
-      <>
-          <svg className="hero-health" width={(this.cx) * 2} height={(this.cy) * 2}>
-              <circle cx={this.cx} cy={this.cy} r={this.r} stroke="black" strokeWidth={this.sw + 1} fill="transparent" />
-              <path className="hero-health-points" d={this.d} strokeWidth={this.sw} strokeDasharray={this.sda} strokeLinecap="butt" fill="transparent" />
-          </svg>
-          <div className="heart app-heart">
-              <div className="heart-text app-heart-text">
-                  {this.props.health.current}
-              </div>
-          </div>
-      </>
+            <>
+                <svg className="hero-health" width={(this.cx) * 2} height={(this.cy) * 2}>
+                    <circle cx={this.cx} cy={this.cy} r={this.r} stroke="black" strokeWidth={this.sw + 1} fill="transparent" />
+                    <path className="hero-health-points" d={this.d} strokeWidth={this.sw} strokeDasharray={this.sda} strokeLinecap="butt" fill="transparent" />
+                </svg>
+                <div className="heart app-heart">
+                    <div className="heart-text app-heart-text">
+                        {this.props.health.current}
+                    </div>
+                </div>
+            </>
         );
     }
 }

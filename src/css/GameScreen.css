@@ -7,12 +7,21 @@
 /* player */
 
 .player {
-    height: 100vh;
+    height: 50%;
     width: 100%;
 }
 
-.player-inactive {
+.player-top  {
+    margin-left: -70px;
+    position: absolute;
+    top: 0;
     transform: rotate(180deg);
+}
+
+.player-bottom  {
+    bottom: 0;
+    position: absolute;
+    transform: rotate(0deg);
 }
 
 /* hero */
@@ -26,7 +35,15 @@
 }
 
 .player-inactive .hero {
+    filter: brightness(45%);
+}
+
+.player-top .hero {
     transform: rotate(180deg);
+}
+
+.player-bottom .hero {
+    transform: rotate(0deg);
 }
 
 .hero-image {
@@ -94,8 +111,12 @@
     width: 110px;
 }
 
-.player-inactive .card {
+.player-top .card {
     transform: rotate(180deg);
+}
+
+.player-bottom .card {
+    transform: rotate(0deg);
 }
 
 .card-name {
@@ -106,7 +127,7 @@
     text-align: center;
 }
 
-.game-icon {    
+.game-icon {
     background-position: center;
     background-repeat: no-repeat;
     background-size: 30px 30px;
@@ -116,7 +137,7 @@
     position: absolute;
     right: -12px;
     top: -10px;
-    width: 30px;  
+    width: 30px;
 }
 .game-icon-text {
     align-items: center;
@@ -167,8 +188,18 @@
     right: 35px;
 }
 
-.player-inactive .grave {
+.player-top .grave {
+    right: 105px;
     transform: rotate(180deg);
+}
+
+.player-top .deck {
+    transform: rotate(180deg);
+}
+
+.player-botttom .grave {
+    right: 105px;
+    transform: rotate(0deg);
 }
 
 .grave-name {
