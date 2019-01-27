@@ -59,8 +59,8 @@ const generatePlayers = function (heroName) {
     const players = [
         { active: rand },
         { active: !rand },
-
     ];
+
     // We create array from all characters objects.
     const allCharactersArray = Object.values(allCharacters);
     const heroSecondName = searchSecondHero(heroName, allCharactersArray);
@@ -94,6 +94,7 @@ const generatePlayers = function (heroName) {
     console.log(`${players[1].hero} is active is ${players[1].active}`);
     return { players };
 };
+
 
 function giveCardsTo(player) {
     while (Object.keys(player.hand).length < 5) {
