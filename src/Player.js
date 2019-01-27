@@ -37,15 +37,17 @@ class Player extends Component {
     }
 
     isTarget(target) {
+        // Move to a separate file later
+        // rules.isTarget(target, this.props.dragging, this.props.player.active, card);
         if (!this.props.dragging) {
-          return false;
+            return false;
         }
         const card = this.props.dragging.card;
         if (!this.props.player.active) {
-          return (
-            // Add condition for items later
-            (target === 'opponent' && card.category === 'attack')
-          );
+            return (
+                // Add condition for items later
+                (target === 'opponent' && card.category === 'attack')
+            );
         }
         return (
             (target === 'hero' && card.category === 'heal') ||
@@ -65,27 +67,24 @@ class Player extends Component {
         if (!this.isTarget(target)) {
             return;
         }
-        const card = this.props.dragging.card;
-        this.props.cardDropped(target, card);
+        this.props.cardDropped(target);
     }
 
 
     render() {
-        //console.log("Player", this.props.player);
         const playerClass = this.props.player.active ? 'player-active' : 'player-inactive';
         const playerPosition = this.props.player.position === 'bottom' ? 'player player-bottom' : 'player player-top';
         return (
             <div className={`${playerPosition} ${playerClass}`}>
                 <Hero
-                  player={this.props.player}
-                  cardDropped={this.cardDropped}
-                  cardOver={this.cardOver}
-                  isTarget={this.isTarget}
+                    player={this.props.player}
+                    cardDropped={this.cardDropped}
+                    cardOver={this.cardOver}
+                    isTarget={this.isTarget}
                 />
                 <Item
                     active={this.props.player.active}
                     item={Object.values(this.props.player.item)[0]}
-                    type={this.props.type}
                     isTarget={this.isTarget}
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
@@ -136,10 +135,11 @@ const Hand = props => (
 );
 
 const Grave = props => (
-    <div  className={`grave card-like ${props.isTarget('graveyard') ? 'target' : null}`}
-          id={props.active ? 'grave' : null}
-          onDrop={() => props.cardDropped('graveyard')}
-          onDragOver={e => props.cardOver(e, 'graveyard')}
+    <div
+        className={`grave card-like ${props.isTarget('graveyard') ? 'target' : null}`}
+        id={props.active ? 'grave' : null}
+        onDrop={() => props.cardDropped('graveyard')}
+        onDragOver={e => props.cardOver(e, 'graveyard')}
     >
         <div className="grave-name">
           grave
@@ -152,10 +152,10 @@ const Grave = props => (
 
 const Item = props => (
     <div
-      className={`item card-place card-like ${props.isTarget('item') ? 'target' : null}`}
-      id={props.active ? 'item' : null}
-      onDrop={() => props.cardDropped('item', props.item)}
-      onDragOver={e => props.cardOver(e, 'item')}
+        className={`item card-place card-like ${props.isTarget('item') ? 'target' : null}`}
+        id={props.active ? 'item' : null}
+        onDrop={() => props.cardDropped('item', props.item)}
+        onDragOver={e => props.cardOver(e, 'item')}
     >
         {props.item ? <Card card={props.item} /> : null}
     </div>
@@ -183,8 +183,13 @@ const Card = props => (
 Player.propTypes = {
     player: PropTypes.object.isRequired,
     cardDragStarted: PropTypes.func.isRequired,
-    sendMessage: PropTypes.func.isRequired,
+    cardDropped: PropTypes.func.isRequired,
+    dragging: PropTypes.object,
 };
+
+Player.defaultProps = {
+    dragging: null,
+}
 
 Hand.propTypes = {
     active: PropTypes.bool.isRequired,
@@ -195,28 +200,28 @@ Hand.propTypes = {
 
 Card.propTypes = {
     card: PropTypes.object.isRequired,
-    draggable: PropTypes.bool.isRequired,
-    cardKey: PropTypes.string.isRequired,
-    cardDragStarted: PropTypes.func.isRequired,
-    cardDragEnded: PropTypes.func.isRequired,
+    draggable: PropTypes.bool,
+    cardKey: PropTypes.string,
 };
+
+Card.defaultProps = {
+    draggable: null,
+    cardKey: null,
+}
 
 Grave.propTypes = {
     grave: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
-    target: PropTypes.bool.isRequired,
+    isTarget: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
     cardOver: PropTypes.func.isRequired,
 };
 
 Item.propTypes = {
-    item: PropTypes.string,
     active: PropTypes.bool.isRequired,
+    isTarget: PropTypes.func.isRequired,
 };
 
-Item.defaultProps = {
-    item: null,
-};
 
 
 export default Player;

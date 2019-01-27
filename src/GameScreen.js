@@ -8,32 +8,26 @@ import './css/GameScreen.css';
 class GameScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { item: null, dragging: null, type: null };
+        this.state = { dragging: null };
         this.cardDragStarted = this.cardDragStarted.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.cardDragEnded = this.cardDragEnded.bind(this);
     }
 
-    cardDragEnded(event) {
+    cardDragEnded() {
         this.setState({
-            dragging: null
+            dragging: null,
         });
     }
 
     cardDragStarted(key, card) {
         this.setState({
             dragging: { key, card },
-            item: null,
         });
     }
 
-    cardDropped(target, card) {
+    cardDropped(target) {
         console.log('Sending message');
-        if (target === 'item') {
-            this.setState({
-                item: card,
-            });
-        }
         this.props.sendMessage({ type: 'ACTION', activeCard: this.state.dragging.key, target });
 
         this.setState({
