@@ -193,6 +193,10 @@
     transform: rotate(180deg);
 }
 
+.player-top .deck {
+    transform: rotate(180deg);
+}
+
 .player-botttom .grave {
     right: 105px;
     transform: rotate(0deg);
