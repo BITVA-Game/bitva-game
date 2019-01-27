@@ -44,6 +44,16 @@ function createDeck(heroName) {
     return deck;
 }
 
+// we retrieve the name of the 2nd character not taken from the list previoulsy.
+function searchSecondHero(heroKey, CharacterArray) {
+    for (let i = 0; i < CharacterArray.length; i += 1) {
+        if (CharacterArray[i].id !== heroKey) {
+            return CharacterArray[i].id;
+        }
+    }
+    return true;
+}
+
 const generatePlayers = function (heroName) {
     const rand = getRandomBool();
     const players = [
@@ -53,45 +63,36 @@ const generatePlayers = function (heroName) {
     ];
     // We create array from all characters objects.
     const allCharactersArray = Object.values(allCharacters);
-
-    // we retrieve the name of the 2nd character not taken from the list previoulsy.
-    function searchSecondHero(heroKey, CharacterArray) {
-        for (let i = 0; i < CharacterArray.length; i += 1) {
-            if (CharacterArray[i].id !== heroKey) {
-                return CharacterArray[i].id;
-            }
-        }
-        return true;
-    }
     const heroSecondName = searchSecondHero(heroName, allCharactersArray);
 
+    // Assign the common data
     players.forEach((p) => {
-        if (p.active) {
-            p.hero = heroName;
-            p.deck = createDeck(heroName);
-            p.cards = assignCards(p.deck, allCharacters[heroName].cardsNumber);
-            p.hand = {};
-            p.item = {};
-            p.grave = {};
-            p.moveCounter = 0;
-            p.health = {};
-            p.health.current = allCharacters[heroName].health;
-            p.health.maximum = allCharacters[heroName].health;
-        }
-        if (p.active === false) {
-            p.hero = heroSecondName;
-            p.deck = createDeck(heroSecondName);
-            p.cards = assignCards(p.deck, allCharacters[heroSecondName].cardsNumber);
-            p.hand = {};
-            p.item = {};
-            p.grave = {};
-            p.moveCounter = 0;
-            p.health = {};
-            p.health.current = allCharacters[heroSecondName].health;
-            p.health.maximum = allCharacters[heroSecondName].health;
-        }
+        p.hand = {};
+        p.item = {};
+        p.grave = {};
+        p.moveCounter = 0;
+        p.health = {};
     });
 
+    // Assign individual data to player 0
+    players[0].position = 'bottom';
+    players[0].hero = heroName;
+    players[0].deck = createDeck(heroName);
+    players[0].cards = assignCards(players[0].deck, allCharacters[heroName].cardsNumber);
+    players[0].health.current = allCharacters[heroName].health;
+    players[0].health.maximum = allCharacters[heroName].health;
+
+    // Assign individual data to player 1
+    players[1].position = 'top';
+    players[1].hero = heroSecondName;
+    players[1].deck = createDeck(heroSecondName);
+    players[1].cards = assignCards(players[1].deck, allCharacters[heroSecondName].cardsNumber);
+    players[1].health.current = allCharacters[heroSecondName].health;
+    players[1].health.maximum = allCharacters[heroSecondName].health;
+
+    console.log(`${players[0].hero} is active is ${players[0].active}`);
+    
+    console.log(`${players[1].hero} is active is ${players[1].active}`);
     return { players };
 };
 
