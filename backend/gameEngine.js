@@ -180,10 +180,13 @@ function healPlayer(player, points) {
 
 // we move item card from active player's hand to his item holder
 function moveItem(player, key) {
-    // active player's item get the active card's key from his hand
-    player.item[key] = player.hand[key];
-    // we delete the card with active key from player's hand
-    delete player.hand[key];
+    // we check if there is no card in item holder of active player
+    if (Object.keys(player.item).length === 0) {
+        // then active player's item get the active card's key from his hand
+        player.item[key] = player.hand[key];
+        // and also we delete the card with active key from player's hand
+        delete player.hand[key];
+    }
 }
 
 function cardIncreaseHealth(players) {

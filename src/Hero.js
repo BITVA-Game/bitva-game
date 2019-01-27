@@ -14,7 +14,13 @@ const images = {
 };
 
 const Hero = props => (
-    <div className="hero" style={style} id={props.player.active ? 'hero' : 'enemy'}>
+    <div
+        className={`hero ${props.isTarget(props.player.active ? 'hero' : 'opponent') ? 'target' : null}`}
+        style={style}
+        id={props.player.active ? 'hero' : 'enemy'}
+        onDrop={() => props.cardDropped(props.player.active ? 'hero' : 'opponent')}
+        onDragOver={e => props.cardOver(e, props.player.active ? 'hero' : 'opponent')}
+    >
         <img
             className="hero-image"
             src={images[props.player.hero]}
@@ -69,6 +75,9 @@ class HealthMeter extends Component {
 
 Hero.propTypes = {
     player: PropTypes.object.isRequired,
+    cardDropped: PropTypes.func.isRequired,
+    cardOver: PropTypes.func.isRequired,
+    isTarget: PropTypes.func.isRequired,
 };
 
 HealthMeter.propTypes = {
