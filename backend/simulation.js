@@ -10,7 +10,6 @@ const sendReply = function(arg) {
 }
 
 function takeOneCardAtRand(hand) {
-  console.log('hand', hand);
   let rand = Math.floor(Math.random() * Math.floor(Object.keys(hand).length));
   console.log("takeOneCardAtRand ", Object.keys(hand).length, rand, Object.keys(hand)[rand]);
   return Object.keys(hand)[rand];
@@ -28,34 +27,45 @@ function isDead() {
 }
 
 function noCards() {
-    appObject.game.players.forEach(p => {
+    appObject.game.players.forEach((p) => {
         if (p.deck.length<=0) {
-          console.log(p.hero +" deck length is "+p.deck.length);
-          console.log(p.hero +" LOST");
-          return true;
+            console.log(p.hero +" deck length is "+p.deck.length);
+            console.log(p.hero +" LOST");
+            return true;
         }
     });
     return false;
 }
 
 function playOnePhase() {
-    let actions = 2;
-
+    console.log("START HEALTH");
+    appObject.game.players.forEach((p) => {
+        console.log(`${p.hero} ${p.health.current}`);
+    });
+    if (appObject.game.phase === 'OVER') {
+        return;
+    }
     let activePlayer = appObject.game.players[0];
     if (!activePlayer.active) {
         activePlayer = appObject.game.players[1];
     }
     console.log('-------------------------------------');
     console.log('Active player is ', activePlayer.hero);
+    console.log('Active player move counter ', activePlayer.moveCounter);
     let msg = {};
-
-    while (actions > 0) {
+    let action = 0;
+    while (activePlayer.moveCounter < 2 && action < 2) {
         msg = {};
-        console.log('playThrough N', actions);
+        console.log('playThrough N', action);
         const activeKey = takeOneCardAtRand(activePlayer.hand);
         console.log('Active Key ', activeKey);
+        if (!activePlayer.hand[activeKey]) {
+          console.log('ERROR');
+          console.log(appObject);
+          console.log(activePlayer.hand.length);
+        }
         const activeCard = activePlayer.hand[activeKey];
-        console.log('Selected card: ', activeCard.category);
+        console.log('Selected card: ', activeCard.id);
 
         // If it's an item
         if (activeCard.type === 'item') {
@@ -67,7 +77,7 @@ function playOnePhase() {
                     activeCard: activeKey,
                     target: 'item',
                 };
-                actions -= 1;
+                action++;
             }
         }
         // If it's health
@@ -79,7 +89,7 @@ function playOnePhase() {
                     activeCard: activeKey,
                     target: 'hero',
                 };
-                actions -= 1;
+                action++;
             }
         }
 
@@ -91,15 +101,22 @@ function playOnePhase() {
                 activeCard: activeKey,
                 target: 'opponent',
             };
-            actions -= 1;
+            action++;
         }
 
-        Object.keys(msg).length>0 ? application.msgReceived(msg, sendReply) : null;
-    };
+        if (Object.keys(msg).length>0) {
+            console.log("SENDING MESSAGE");
+            application.msgReceived(msg, sendReply);
+        }
+        console.log("END HEALTH");
+        appObject.game.players.forEach((p) => {
+            console.log(`${p.hero} ${p.health.current}`);
+        });
+    }
 }
 
 
-async function simulationSequence() {
+function simulationSequence() {
     //await sheets.getAllCards();
     console.log('Please select the hero to play');
     const heroes = ['morevna', 'yaga'];
@@ -116,12 +133,9 @@ async function simulationSequence() {
         console.log('unhandledRejection', error.message);
     });
     let count = 0;
-    while (isDead() === false || noCards() === false || count < 100) {
+    while (appObject.game.phase != 'OVER') {
         console.log('* * * * * * * * * * * * *');
         console.log('Loop N', count);
-        appObject.game.players.forEach((p) => {
-            console.log(`${p.hero} ${p.health.current}`);
-        });
         playOnePhase();
         count++;
     };
