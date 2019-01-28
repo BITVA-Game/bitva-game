@@ -8,23 +8,23 @@
         "cards": {
             "bajun": {
                 "id":  "bajun",
-			    "count": 2
+			    "count": 4
             },
 			"sivka": {
                 "id":  "sivka",
-				"count": 1
+				"count": 3
 			},
             "bogatyr": {
                 "id": "bogatyr",
-                "count": 3
+                "count": 2
             },
             "apple": {
                 "id": "apple",
-                "count": 4
+                "count": 2
              },
             "bereginya": {
                 "id": "bereginya",
-				"count": 4
+				"count": 1
             },
             "shieldLarge": {
                 "id": "shieldLarge",
@@ -50,31 +50,31 @@
         "cards": {
             "bajun": {
                 "id":  "bajun",
-                "count": 2
+			    "count": 4
             },
-            "sivka": {
+			"sivka": {
                 "id":  "sivka",
-                "count": 1
-            },
+				"count": 3
+			},
             "bogatyr": {
                 "id": "bogatyr",
-                "count": 3
+                "count": 2
             },
             "apple": {
                 "id": "apple",
-                "count": 4
+                "count": 2
              },
             "bereginya": {
                 "id": "bereginya",
-                "count": 4
+				"count": 1
             },
             "shieldLarge": {
                 "id": "shieldLarge",
-                "count": 2
+				"count": 2
             },
             "shieldSmall": {
                 "id": "shieldSmall",
-                "count": 3
+				"count": 3
             },
             "wolf": {
                 "id": "wolf",
