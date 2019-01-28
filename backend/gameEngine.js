@@ -367,7 +367,7 @@ function handle(appgame, message) {
     // All actions have the same action name as they all call the same function
     case 'ACTION': {
         console.log('ACTION');
-        helperToDebug(message, game);
+        // helperToDebug(message, game);
         return Object.assign(game, makeMove(game, message));
     }
     default: { return game; }

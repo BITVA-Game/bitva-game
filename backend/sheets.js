@@ -83,6 +83,5 @@ async function getAllCards() {
     console.log('CHARACTERS file has been saved.');
 }
 
-
-// exports.getAllCards = getAllCards;
-getAllCards();
+exports.getAllCards = getAllCards;
+//getAllCards();
