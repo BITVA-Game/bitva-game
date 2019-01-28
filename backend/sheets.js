@@ -1,3 +1,5 @@
+/* eslint-disable no-await-in-loop */
+
 const gsjson = require('google-spreadsheet-to-json');
 const fs = require('fs');
 
@@ -65,27 +67,22 @@ async function formatOriginalCharacters() {
     return characters;
 }
 
+function writeToFile(obj, path) {
+    fs.writeFileSync(path.join(__dirname, path), JSON.stringify(obj), 'utf8', (err) => {
+        if (err) { throw err; }
+    });
+}
 
 async function getAllCards() {
     const cards = await formatOriginalCards();
-    console.log('Getting all cards');
-    fs.writeFileSync(__dirname+'/data/cards.json', JSON.stringify(cards), 'utf8', function write(err) {
-        if(err){ throw err };
-    });
-    console.log("CARDS file has been saved.");
-
+    writeToFile(cards, 'data/cards.json');
+    console.log('CARDS file has been saved.');
     const characters = await formatOriginalCharacters();
-    console.log('Getting all characters');
-    fs.writeFileSync(__dirname+'/data/characters.json', JSON.stringify(characters), 'utf8', function write(err) {
-      if(err){ throw err };
-    });
+    writeToFile(characters, 'data/characters.json');
 
-    console.log("CHARACTERS file has been saved.");
+    console.log('CHARACTERS file has been saved.');
 }
 
 
-
-
+// exports.getAllCards = getAllCards;
 getAllCards();
-//exports.getAllCards = getAllCards;
-;
