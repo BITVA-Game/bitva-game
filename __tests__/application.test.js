@@ -1,5 +1,6 @@
 // import module for tests
 const application = require('../backend/application');
+const heroData = require('../backend/data/characters.json');
 
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
@@ -76,207 +77,16 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
     application.msgReceived(msg, sendReply);
 
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            heroSelect: {
-                morevna: {
-                    id: 'morevna',
-                    name: 'Мarya Мorevna',
-                    cardsNumber: 17,
-                    description: 'Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.',
-                    health: 13,
-                    cards: {
-                        bajun: {
-                            id: 'bajun',
-                            name: 'Cat-Bajun',
-                            type: 'action',
-                            category: 'attack',
-                            info: 'Magic were-cat attacks the enemy with his songs and spells.',
-                            description: 'Magic were-cat. Can attack the enemy with his songs and spells. Live at Yaga\'s hut.',
-                            points: 1,
-                            img: 'bajun.png',
-                            count: 2,
-                        },
-                        sivka: {
-                            id: 'sivka',
-                            name: 'Sivka-Burka',
-                            type: 'action',
-                            category: 'attack',
-                            info: 'Magic prophetic \'wild\' - colored horse, mediating the living and realm of the dead.',
-                            description: 'Magic prophetic \'wild\' - colored horse, mediating the living and realm of the dead.',
-                            points: 2,
-                            img: 'sivka.png',
-                            count: 1,
-                        },
-                        bogatyr: {
-                            id: 'bogatyr',
-                            name: 'Bogatyr',
-                            type: 'action',
-                            category: 'attack',
-                            info: 'Hero-warrior possessing great power, protector.',
-                            description: 'Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.',
-                            points: 4,
-                            img: 'bogatyr.png',
-                            count: 3,
-                        },
-                        apple: {
-                            id: 'apple',
-                            name: 'Apple',
-                            type: 'action',
-                            category: 'heal',
-                            info: 'Heals its owner.',
-                            description: 'In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple - gets younger, and an ill - gets it health back.',
-                            points: 3,
-                            img: 'apple.png',
-                            count: 4,
-                        },
-                        bereginya: {
-                            id: 'bereginya',
-                            name: 'Keeper Bereginya',
-                            type: 'action',
-                            category: 'heal',
-                            info: 'Heals 5 damage points.',
-                            description: 'Plenty of Keepers lives in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.',
-                            points: 5,
-                            img: 'bereginya.png',
-                            count: 4,
-                        },
-                        shieldLarge: {
-                            id: 'shieldLarge',
-                            name: 'Large Shield',
-                            type: 'item',
-                            category: 'shield',
-                            info: 'Protects its owner from damage until destroyed.',
-                            description: 'The shield, forged by Svarog - divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.',
-                            points: 5,
-                            img: 'shieldLarge.png',
-                            count: 2,
-                        },
-                        shieldSmall: {
-                            id: 'shieldSmall',
-                            name: 'Small Shield',
-                            type: 'item',
-                            category: 'shield',
-                            info: 'Protects its owner from damage until destroyed.',
-                            description: 'The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battke dealing with the damage and also can ward off an attacks.',
-                            points: 3,
-                            img: 'shieldSmall.png',
-                            count: 3,
-                        },
-                        wolf: {
-                            id: 'wolf',
-                            name: 'Grey Wolf',
-                            category: 'attack',
-                            type: 'action',
-                            info: 'Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.',
-                            description: 'Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.',
-                            points: 3,
-                            img: 'wolf.png',
-                            count: 2,
-                        },
-                    },
-                },
 
-                yaga: {
-                    id: 'yaga',
-                    name: 'Yaga',
-                    description: 'Yaga can lead a person between realm of the dead and the living. She is a Witch, Keeper of the Living and Dead water.',
-                    cardsNumber: 17,
-                    health: 15,
-                    cards: {
-                        bajun: {
-                            id: 'bajun',
-                            name: 'Cat-Bajun',
-                            type: 'action',
-                            category: 'attack',
-                            info: 'Magic were-cat attacks the enemy with his songs and spells.',
-                            description: 'Magic were-cat. Can attack the enemy with his songs and spells. Live at Yaga\'s hut.',
-                            points: 1,
-                            img: 'bajun.png',
-                            count: 2,
-                        },
-                        sivka: {
-                            id: 'sivka',
-                            name: 'Sivka-Burka',
-                            type: 'action',
-                            category: 'attack',
-                            info: 'Magic prophetic \'wild\' - colored horse, mediating the living and realm of the dead.',
-                            description: 'Magic prophetic \'wild\' - colored horse, mediating the living and realm of the dead.',
-                            points: 2,
-                            img: 'sivka.png',
-                            count: 1,
-                        },
-                        bogatyr: {
-                            id: 'bogatyr',
-                            name: 'Bogatyr',
-                            type: 'action',
-                            category: 'attack',
-                            info: 'Hero-warrior possessing great power, protector.',
-                            description: 'Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.',
-                            points: 4,
-                            img: 'bogatyr.png',
-                            count: 3,
-                        },
-                        apple: {
-                            id: 'apple',
-                            name: 'Apple',
-                            type: 'action',
-                            category: 'heal',
-                            info: 'Heals its owner.',
-                            description: 'In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple - gets younger, and an ill - gets it health back.',
-                            points: 3,
-                            img: 'apple.png',
-                            count: 4,
-                        },
-                        bereginya: {
-                            id: 'bereginya',
-                            name: 'Keeper Bereginya',
-                            type: 'action',
-                            category: 'heal',
-                            info: 'Heals 5 damage points.',
-                            description: 'Plenty of Keepers lives in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.',
-                            points: 5,
-                            img: 'bereginya.png',
-                            count: 4,
-                        },
-                        shieldLarge: {
-                            id: 'shieldLarge',
-                            name: 'Large Shield',
-                            type: 'item',
-                            category: 'shield',
-                            info: 'Protects its owner from damage until destroyed.',
-                            description: 'The shield, forged by Svarog - divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.',
-                            points: 5,
-                            img: 'shieldLarge.png',
-                            count: 2,
-                        },
-                        shieldSmall: {
-                            id: 'shieldSmall',
-                            name: 'Small Shield',
-                            type: 'item',
-                            category: 'shield',
-                            info: 'Protects its owner from damage until destroyed.',
-                            description: 'The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battke dealing with the damage and also can ward off an attacks.',
-                            points: 3,
-                            img: 'shieldSmall.png',
-                            count: 3,
-                        },
-                        wolf: {
-                            id: 'wolf',
-                            name: 'Grey Wolf',
-                            category: 'attack',
-                            type: 'action',
-                            info: 'Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.',
-                            description: 'Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.',
-                            points: 3,
-                            img: 'wolf.png',
-                            count: 2,
-                        },
-                    },
-                },
-            },
-        },
-    );
+    // Save the data into variable for checks
+    const heroSelect = sendReply.mock.calls[0][0].heroSelect;
+    expect(heroSelect.morevna.cardsNumber).toEqual(17);
+    expect(heroSelect.morevna.health).toEqual(13);
+    expect(Object.keys(heroSelect.morevna.cards).length).toEqual(8);
+
+    expect(heroSelect.yaga.cardsNumber).toEqual(17);
+    expect(heroSelect.yaga.health).toEqual(15);
+    expect(Object.keys(heroSelect.yaga.cards).length).toEqual(8);
 });
 
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
@@ -362,24 +172,20 @@ test('msg HEROSELECTED received: active player is set.', () => {
                     { active: true },
                 ],
             },
+            heroSelect: {},
         },
     );
     // We return random to initial value, so it is not always set to 1
     Math.random = oldRandom;
 });
 
-// Test that active player gets its character's deck. Game state VERSUS.
-test('msg HEROSELECTED received: active player has a character and 15 cards.', () => {
+// Test that active player gets all the data. Game state VERSUS.
+test('msg HEROSELECTED received: active player has all the data.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // we save normal random here before mock it
-    const oldRandom = Math.random;
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -388,25 +194,28 @@ test('msg HEROSELECTED received: active player has a character and 15 cards.', (
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // we expect that active player gets hero Morevna and gets 15 cards
-    expect(result.game.players[1].hero).toEqual('morevna');
-    expect(Object.keys(result.game.players[1].cards).length).toEqual(17);
-    // We return random to initial value, so it is not always set to 1
-    Math.random = oldRandom;
+    // Find active player
+    let activePlayer = result.game.players[0];
+    if (result.game.players[0].active === false) {
+        activePlayer = result.game.players[1];
+    }
+
+    // Expect player to have relevant data
+    expect(activePlayer.hero).toBeDefined();
+    expect(Object.keys(activePlayer.cards).length).toEqual(
+        heroData[activePlayer.hero].cardsNumber,
+    );
+    expect(activePlayer.health.maximum).toEqual(heroData[activePlayer.hero].health);
+    expect(activePlayer.hand).toEqual({});
 });
 
 // Test that inactive player gets its character and it's deck. Game state VERSUS.
-test('msg HEROSELECTED received: inactive player gets available character and 15 cards.', () => {
+test('msg HEROSELECTED received: inactive player gets relevant data.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
-    // we save normal random here before mock it
-    const oldRandom = Math.random;
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -415,71 +224,16 @@ test('msg HEROSELECTED received: inactive player gets available character and 15
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // we expect that inactive player gets hero Yaga and gets 15 cards
-    expect(result.game.players[0].hero).toEqual('yaga');
-    expect(Object.keys(result.game.players[0].cards).length).toEqual(17);
-    // We return random to initial value, so it is not always set to 1
-    Math.random = oldRandom;
-});
-
-// Test that players gets their characters health. Game state VERSUS.
-test('msg HEROSELECTED received: player gets character healths.', () => {
-    // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-    // we save normal random here before mock it
-    const oldRandom = Math.random;
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // we expect that inactive hero is Yaga and her health current == 15
-    expect(result.game.players[0].hero).toEqual('yaga');
-    expect(result.game.players[0].health.current).toEqual(15);
-
-    // we expect that active hero is Morevna and her health current == 13
-    expect(result.game.players[1].hero).toEqual('morevna');
-    expect(result.game.players[1].health.current).toEqual(13);
-    // We return random to initial value, so it is not always set to 1
-    Math.random = oldRandom;
-});
-
-// Test that each player has its hand empty. State Hero Selected.
-test('msg HEROSELECTED received: Players hand is empty. State Hero Selected.', () => {
-// We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-    // we save normal random here before mock it
-    const oldRandom = Math.random;
-    // Mock will rewrite all math.random and set it to 1
-    Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    expect(result.game.players[0].hero).toEqual('yaga');
-    expect(result.game.players[0].hand).toEqual({});
-
-    expect(result.game.players[1].hero).toEqual('morevna');
-    expect(result.game.players[1].hand).toEqual({});
-    // We return random to initial value, so it is not always set to 1
-    Math.random = oldRandom;
+    let inactivePlayer = result.game.players[0];
+    if (result.game.players[0].active === true) {
+        inactivePlayer = result.game.players[1];
+    }
+    expect(inactivePlayer.hero).toBeDefined();
+    expect(Object.keys(inactivePlayer.cards).length).toEqual(
+        heroData[inactivePlayer.hero].cardsNumber,
+    );
+    expect(inactivePlayer.health.maximum).toEqual(heroData[inactivePlayer.hero].health);
+    expect(inactivePlayer.hand).toEqual({});
 });
 
 // Test that both players get 5 cards from deck to their hands. Game state Deal All.
