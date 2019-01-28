@@ -19,6 +19,13 @@ function getRandomBool() {
     return rand === 0;
 }
 
+function helperToDebug(msg, game) {
+    let player = game.players[0];
+    if (!player.active) { player = game.players[1]; }
+    console.log('PLAYER TRIES TO ACT');
+    console.log('PLAYING CARD: ', player.hand[msg.activeCard].id);
+}
+
 function assignCards(deck, cardsNumber) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
@@ -359,6 +366,8 @@ function handle(appgame, message) {
     }
     // All actions have the same action name as they all call the same function
     case 'ACTION': {
+        console.log('ACTION');
+        helperToDebug(message, game);
         return Object.assign(game, makeMove(game, message));
     }
     default: { return game; }

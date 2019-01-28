@@ -68,17 +68,17 @@ async function formatOriginalCharacters() {
 }
 
 function writeToFile(obj, path) {
-    fs.writeFileSync(path.join(__dirname, path), JSON.stringify(obj), 'utf8', (err) => {
+    fs.writeFileSync(__dirname+path, JSON.stringify(obj), 'utf8', (err) => {
         if (err) { throw err; }
     });
 }
 
 async function getAllCards() {
     const cards = await formatOriginalCards();
-    writeToFile(cards, 'data/cards.json');
+    writeToFile(cards, '/data/cards.json');
     console.log('CARDS file has been saved.');
     const characters = await formatOriginalCharacters();
-    writeToFile(characters, 'data/characters.json');
+    writeToFile(characters, '/data/characters.json');
 
     console.log('CHARACTERS file has been saved.');
 }

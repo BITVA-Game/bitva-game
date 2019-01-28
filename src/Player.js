@@ -191,13 +191,15 @@ Card.propTypes = {
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool,
     cardKey: PropTypes.string,
-    cardDragStarted: PropTypes.func.isRequired,
-    cardDragEnded: PropTypes.func.isRequired,
+    cardDragStarted: PropTypes.func,
+    cardDragEnded: PropTypes.func,
 };
 
 Card.defaultProps = {
     draggable: null,
     cardKey: null,
+    cardDragStarted: null,
+    cardDragEnded: null,
 };
 
 Grave.propTypes = {

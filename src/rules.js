@@ -1,5 +1,4 @@
 export default function isTarget(target, dragging, active) {
-    console.log('IS TARGET CHECK ', target, dragging, active);
     if (!dragging) {
         return false;
     }
