@@ -4,7 +4,7 @@ const cards = require('./data/cards.json');
 function heroWithCards() {
     for (const hero in heroes) {
         const heroCards = Object.keys(heroes[hero].cards);
-        for (let i = 0; i < heroCards.length; i++) {
+        for (let i = 0; i < heroCards.length; i += 1) {
             const cardData = cards[heroCards[i]];
             const heroCard = heroes[hero].cards[heroCards[i]];
             heroes[hero].cards[heroCards[i]] = Object.assign({}, heroCard, cardData);

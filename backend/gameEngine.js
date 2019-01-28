@@ -92,7 +92,7 @@ const generatePlayers = function (heroName) {
 
     console.log(`${players[0].hero} is active is ${players[0].active}`);
     console.log(`${players[1].hero} is active is ${players[1].active}`);
-    return { players };
+    return players;
 };
 
 
@@ -111,12 +111,12 @@ function giveCardsTo(player) {
     return player;
 }
 
-function giveCardsToAll(playersArray) {
-    playersArray.forEach((p) => {
+function giveCardsToAll(players) {
+    players.forEach((p) => {
         giveCardsTo(p);
     });
 
-    return playersArray;
+    return players;
 }
 
 // This function taked the player and the key for his cards
@@ -343,25 +343,25 @@ function makeMove(game, msg) {
     return game;
 }
 
-function handle(app, message) {
+function handle(appgame, message) {
+    const game = Object.assign({}, appgame);
+
     switch (message.type) {
     case 'INITIAL': {
-        return app.game;
+        return game;
     }
     case 'HEROSELECTED': {
         const heroName = message.hero;
-        return Object.assign({}, app.game, generatePlayers(heroName));
+        return Object.assign(game, { players: generatePlayers(heroName) });
     }
     case 'DEALALL': {
-        const playersArray = app.game.players;
-
-        return Object.assign({}, app.game, giveCardsToAll(playersArray));
+        return Object.assign(game, { players: giveCardsToAll(game.players) });
     }
     // All actions have the same action name as they all call the same function
     case 'ACTION': {
-        return Object.assign({}, app.game, makeMove(app.game, message));
+        return Object.assign(game, makeMove(game, message));
     }
-    default: { return app.game; }
+    default: { return game; }
     }
 }
 

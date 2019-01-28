@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Hero from './Hero';
+import rules from './rules';
 import './css/App.css';
 import './css/GameScreen.css';
 
@@ -37,22 +38,10 @@ class Player extends Component {
     }
 
     isTarget(target) {
-        // Move to a separate file later
-        // rules.isTarget(target, this.props.dragging, this.props.player.active, card);
-        if (!this.props.dragging) {
-            return false;
-        }
-        const card = this.props.dragging.card;
-        if (!this.props.player.active) {
-            return (
-                // Add condition for items later
-                (target === 'opponent' && card.category === 'attack')
-            );
-        }
-        return (
-            (target === 'hero' && card.category === 'heal') ||
-            (target === 'item' && card.type === 'item') ||
-            (target === 'graveyard')
+        return rules(
+            target,
+            this.props.dragging,
+            this.props.player.active,
         );
     }
 
@@ -189,25 +178,27 @@ Player.propTypes = {
 
 Player.defaultProps = {
     dragging: null,
-}
+};
 
 Hand.propTypes = {
     active: PropTypes.bool.isRequired,
     hand: PropTypes.object.isRequired,
-    cardDragStarted: PropTypes.func.isRequired,
     cardDragEnded: PropTypes.func.isRequired,
+    cardDragStarted: PropTypes.func.isRequired,
 };
 
 Card.propTypes = {
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool,
     cardKey: PropTypes.string,
+    cardDragStarted: PropTypes.func.isRequired,
+    cardDragEnded: PropTypes.func.isRequired,
 };
 
 Card.defaultProps = {
     draggable: null,
     cardKey: null,
-}
+};
 
 Grave.propTypes = {
     grave: PropTypes.object.isRequired,
@@ -219,9 +210,15 @@ Grave.propTypes = {
 
 Item.propTypes = {
     active: PropTypes.bool.isRequired,
+    item: PropTypes.object,
     isTarget: PropTypes.func.isRequired,
+    cardOver: PropTypes.func.isRequired,
+    cardDropped: PropTypes.func.isRequired,
 };
 
+Item.defaultProps = {
+    item: null,
+};
 
 
 export default Player;

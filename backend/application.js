@@ -17,7 +17,7 @@ function msgReceived(message, sendReply) {
         profile: profileManager.handle(application, message),
         manager: screenManager.handle(application, message),
         heroSelect: heroManager.handle(application, message),
-        game: gameEngine.handle(application, message),
+        game: gameEngine.handle(application.game, message),
     };
     sendReply(newApp);
     application = newApp;
