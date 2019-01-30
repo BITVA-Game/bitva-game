@@ -1412,3 +1412,80 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
     // ожидаем, что карта-water обнулилась points == 0.
     expect(result.game.players[0].grave.key10.points).toEqual(0);
 });
+
+// Test, that active player once his moveCounter = 2 gets missing cards to his hand.
+// If cards in deck are not enough, then graveyard cards are shuffled
+// and taken to the deck and then to hand
+test('msg ACTION ANY received: active player moveCounter = 2 after his action, he gets missing cards to hand, if not enough cards are taken from graveyard.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'hero',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key16: {},
+                    },
+                    health: { current: 12, maximum: 13 },
+                    hero: 'yaga',
+                    hand: {
+                        key1: {
+                            type: 'action',
+                            points: 3,
+                            category: 'heal',
+                        },
+                    },
+                    moveCounter: 1,
+                    item: {},
+                    grave: {
+                        key10: {},
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key3: {},
+                        key15: {},
+                    },
+                },
+                {
+                    active: false,
+                    hero: 'morevna',
+                    item: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[0].moveCounter).toEqual(0);
+
+    // expect that active player got cards from graveyard and gave 5 to the hand
+    expect(Object.keys(result.game.players[0].cards).length).toEqual(12);
+
+    // expect that active player has empty graveyard
+    expect(Object.keys(result.game.players[0].grave).length).toEqual(0);
+
+    // expect that hand of active player got 5 cards before game passes to opponent
+    expect(Object.keys(result.game.players[0].hand).length).toEqual(5);
+});

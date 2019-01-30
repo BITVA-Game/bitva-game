@@ -23,7 +23,7 @@ function helperToDebug(msg, game) {
     let player = game.players[0];
     if (!player.active) { player = game.players[1]; }
     console.log('PLAYER TRIES TO ACT');
-    console.log('PLAYING CARD: ', player.hand[msg.activeCard].id);
+    // console.log('PLAYING CARD: ', player.hand[msg.activeCard].id);
 }
 
 function assignCards(deck, cardsNumber) {
@@ -102,6 +102,30 @@ const generatePlayers = function (heroName) {
     return players;
 };
 
+// function for active player to get all cards from graveyard shuffled and passed to cards
+function cardsFromGraveyard(player) {
+    // we take number of cards in graveyard
+    const graveyardCardsNumber = Object.keys(player.grave).length;
+    // we call assignCards function to shuffle cards and return them
+    assignCards(player.grave, graveyardCardsNumber);
+    // we get each card from graveyard until cards get them all
+    while (Object.keys(player.cards).length < graveyardCardsNumber) {
+        // if graveyard is not empty
+        if (Object.keys(player.grave).length > 0) {
+            // we get key of each card from graveyard
+            const cardKey = Object.keys(player.grave)[0];
+            // and pass by card key each card to cards
+            player.cards[cardKey] = player.grave[cardKey];
+            // then we delete the same key card in graveyard
+            delete player.grave[cardKey];
+        } else {
+            // of nothing to pass we stop
+            break;
+        }
+    }
+    // then we return active player
+    return player;
+}
 
 function giveCardsTo(player) {
     while (Object.keys(player.hand).length < 5) {
@@ -308,10 +332,17 @@ function playerActs(game, player, opponent, active, target) {
     }
     // after each move we increase active player's counter for 1
     player.moveCounter += 1;
-    // once active player's counter ==2 we call function to give cards to players up to 5
+    // if active player's counter ==2
     if (player.moveCounter === 2) {
-        // console.log(game);
+        // we call function to give cards to players up to 5
         giveCardsTo(player);
+        // if active player has no cards
+        if (Object.keys(player.cards).length === 0) {
+            // we call function that takes cards from gaveyard
+            cardsFromGraveyard(player);
+            // then we call function to give cards to players up to 5
+            giveCardsTo(player);
+        }
         // active player becomes inactive once active player's counter ==2
         player.active = false;
         // player's counter set to 0
