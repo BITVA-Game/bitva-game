@@ -102,49 +102,55 @@ const generatePlayers = function (heroName) {
     return players;
 };
 
-// function for active player to get all cards from graveyard shuffled and passed to cards
-function cardsFromGraveyard(player) {
-    // we take number of cards in graveyard
-    const graveyardCardsNumber = Object.keys(player.grave).length;
-    // we call assignCards function to shuffle cards and return them
-    assignCards(player.grave, graveyardCardsNumber);
-    // we get each card from graveyard until cards get them all
-    while (Object.keys(player.cards).length < graveyardCardsNumber) {
-        // if graveyard is not empty
-        if (Object.keys(player.grave).length > 0) {
-            // we get key of each card from graveyard
-            const cardKey = Object.keys(player.grave)[0];
-            // and pass by card key each card to cards
-            player.cards[cardKey] = player.grave[cardKey];
-            // then we delete the same key card in graveyard
-            delete player.grave[cardKey];
-        } else {
-            // of nothing to pass we stop
-            break;
+
+// function for active player to get cards to hand or to cards from graveyard if no cards left
+function giveCardsTo(player, cardsTo) {
+    // we run switch based on where we give cards to
+    switch (cardsTo) {
+    // case for active player to get cards to hand
+    case 'playerHand':
+        // we get each card from cards until hand has 5 cards
+        while (Object.keys(player.hand).length < 5) {
+            if (Object.keys(player.cards).length > 0) {
+                // we get number of cards that player has
+                const key = Object.keys(player.cards)[0];
+                player.hand[key] = player.cards[key];
+                delete player.cards[key];
+            } else {
+                break;
+            }
         }
+        break;
+    // case for active player to get all cards from graveyard shuffled and give them to player
+    case 'playerCards':
+        // we take number of cards in graveyard
+        const graveyardCardsNumber = Object.keys(player.grave).length;
+        // we call assignCards function to shuffle cards and return them
+        assignCards(player.grave, graveyardCardsNumber);
+        // we get each card from graveyard until cards get them all
+        while (Object.keys(player.cards).length < graveyardCardsNumber) {
+            // if graveyard is not empty
+            if (Object.keys(player.grave).length > 0) {
+                // we get key of each card from graveyard
+                const cardKey = Object.keys(player.grave)[0];
+                // and pass by card key each card to cards
+                player.cards[cardKey] = player.grave[cardKey];
+                // then we delete the same key card in graveyard
+                delete player.grave[cardKey];
+            } else {
+                // of nothing to pass we stop
+                break;
+            }
+        }
+        break;
     }
     // then we return active player
     return player;
 }
 
-function giveCardsTo(player) {
-    while (Object.keys(player.hand).length < 5) {
-        if (Object.keys(player.cards).length > 0) {
-            // const key = randomKey(player.cards);
-            const key = Object.keys(player.cards)[0];
-            player.hand[key] = player.cards[key];
-            delete player.cards[key];
-        } else {
-            break;
-        }
-    }
-
-    return player;
-}
-
 function giveCardsToAll(players) {
     players.forEach((p) => {
-        giveCardsTo(p);
+        giveCardsTo(p, 'playerHand');
     });
 
     return players;
@@ -334,14 +340,14 @@ function playerActs(game, player, opponent, active, target) {
     player.moveCounter += 1;
     // if active player's counter ==2
     if (player.moveCounter === 2) {
-        // we call function to give cards to players up to 5
-        giveCardsTo(player);
+        // we call function to give cards to players hands up to 5
+        giveCardsTo(player, 'playerHand');
         // if active player has no cards
         if (Object.keys(player.cards).length === 0) {
             // we call function that takes cards from gaveyard
-            cardsFromGraveyard(player);
+            giveCardsTo(player, 'playerCards');
             // then we call function to give cards to players up to 5
-            giveCardsTo(player);
+            giveCardsTo(player, 'playerHand');
         }
         // active player becomes inactive once active player's counter ==2
         player.active = false;
