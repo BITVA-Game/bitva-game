@@ -1480,7 +1480,9 @@ test('msg ACTION ANY received: active player moveCounter = 2 after his action, h
     // expect that his counter set to 0 after turn's change
     expect(result.game.players[0].moveCounter).toEqual(0);
 
-    // expect that active player got cards from graveyard and gave 5 to the hand
+    // expect that active player, having 3 cards in hand and 1 in deck,
+    // got 13 cards from graveyard to his deck, gave 2 cards to the hand
+    // (to make 5 in hand) and now has 12 cards in his deck
     expect(Object.keys(result.game.players[0].cards).length).toEqual(12);
 
     // expect that active player has empty graveyard
