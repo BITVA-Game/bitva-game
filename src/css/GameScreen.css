@@ -225,3 +225,25 @@
     box-shadow: 0 0 15px 7px #b74a45;
     transition: box-shadow 1s;
 }
+
+/* game over */
+
+.gameover {
+    align-items: center;
+    background: rgba(33,33,33,0.75);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+}
+
+.gameover-message {
+    color: #fff;
+    font-size: 48px;
+    text-shadow: 0 0 32px #B74A45;
+    text-transform: uppercase;
+}
