@@ -5,7 +5,7 @@ import Player from './Player';
 import './css/App.css';
 import './css/GameScreen.css';
 
-// there should be function here
+// there should be function here, or not
 // props.players[0].health.current > 0
 
 const GameOver = props => (
