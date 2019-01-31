@@ -5,6 +5,15 @@ import Player from './Player';
 import './css/App.css';
 import './css/GameScreen.css';
 
+// there should be function here
+// props.players[0].health.current > 0
+
+const GameOver = props => (
+    <div className="gameover">
+        <p className="gameover-message">{props.players[0].active ? 'you win' : 'you lose'}</p>
+    </div>
+)
+
 class GameScreen extends Component {
     constructor(props) {
         super(props);
@@ -49,8 +58,9 @@ class GameScreen extends Component {
                         cardDropped={this.cardDropped}
                         cardDragStarted={this.cardDragStarted}
                         cardDragEnded={this.cardDragEnded}
-                    />
+                    />    
                 ))}
+                {this.props.app.game.phase === 'OVER' ? <GameOver players={this.props.app.game.players} /> : null}
             </div>
         );
     }
