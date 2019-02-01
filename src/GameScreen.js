@@ -5,12 +5,10 @@ import Player from './Player';
 import './css/App.css';
 import './css/GameScreen.css';
 
-// there should be function here, or not
-// props.players[0].health.current > 0
-
 const GameOver = props => (
     <div className="gameover">
-        <p className="gameover-message">{props.players[0].active ? 'you win' : 'you lose'}</p>
+        {/* if player is active and alive, the message is 'you win' */}
+        <p className="gameover-message">{props.players[0].active && props.players[0].health.current > 0 ? 'you win' : 'you lose'}</p>
     </div>
 )
 
