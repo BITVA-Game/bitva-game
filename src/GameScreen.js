@@ -9,7 +9,6 @@ const GameOver = props => (
     <div className="gameover">
         {/* if player is active and alive, the message is 'you win' */}
         <p className="gameover-message">{props.player.active && props.player.health.current > 0 ? 'you lose' : 'you win'}</p>
-        {/* <p className="gameover-message">{props.player.active && props.player.health.current > 0 ? 'you win' : 'you lose'}</p> */}
     </div>
 );
 
@@ -62,13 +61,10 @@ class GameScreen extends Component {
                 {this.props.app.game.phase === 'OVER'
                     ? (
                         <GameOver
-                            players={this.props.app.game.players}
                             player={this.props.app.game.players.map(player => ({ player }))}
                         />
                     )
                     : null}
-
-                {/* {this.props.app.game.phase === 'OVER' ? <GameOver players={this.props.app.game.players} /> : null} */}
             </div>
         );
     }
