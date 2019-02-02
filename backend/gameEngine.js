@@ -19,6 +19,16 @@ function getRandomBool() {
     return rand === 0;
 }
 
+<<<<<<< HEAD
+=======
+function helperToDebug(msg, game) {
+    let player = game.players[0];
+    if (!player.active) { player = game.players[1]; }
+    console.log('PLAYER TRIES TO ACT');
+    // console.log('PLAYING CARD: ', player.hand[msg.activeCard].id);
+}
+
+>>>>>>> gameEnging amended and test added not to change turn after game is Over
 function assignCards(deck, cardsNumber) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
@@ -328,20 +338,26 @@ function playerActs(game, player, opponent, active, target) {
     if (player.moveCounter === 2) {
         // console.log(game);
         giveCardsTo(player);
-        // active player becomes inactive once active player's counter ==2
-        player.active = false;
-        // player's counter set to 0
+        // active player's counter set to 0
         player.moveCounter = 0;
-        // save cards in personal graveyards for both players
-        let playerGrave = player.grave;
-        let opponentGrave = opponent.grave;
-        opponentGrave = playerGrave;
-        // inactive player becomes active once active player's counter ==2
-        opponent.active = true;
-        playerGrave = opponentGrave;
         // we check if there is special water cards in item holder of players
         // and run function water if any
+<<<<<<< HEAD
         // waterCard(game.players);
+=======
+        waterCard(game.players);
+        if (game.phase !== 'OVER') {
+            // active player becomes inactive once active player's counter ==2
+            player.active = false;
+            // save cards in personal graveyards for both players
+            let playerGrave = player.grave;
+            let opponentGrave = opponent.grave;
+            opponentGrave = playerGrave;
+            // inactive player becomes active once active player's counter ==2
+            opponent.active = true;
+            playerGrave = opponentGrave;
+        }
+>>>>>>> gameEnging amended and test added not to change turn after game is Over
     }
     // we return the whole game to continue
     return game;
@@ -352,12 +368,10 @@ function makeMove(game, msg) {
     let pActive;
     let pInactive;
     game.players.forEach((p) => {
-        if (game.phase !== 'OVER') {
-            if (p.active) {
-                pActive = p;
-            } else {
-                pInactive = p;
-            }
+        if (p.active) {
+            pActive = p;
+        } else {
+            pInactive = p;
         }
     });
     // We expect the first card is always the selected card that acts
