@@ -8,9 +8,10 @@ import './css/GameScreen.css';
 const GameOver = props => (
     <div className="gameover">
         {/* if player is active and alive, the message is 'you win' */}
-        <p className="gameover-message">{props.players[0].active && props.players[0].health.current > 0 ? 'you win' : 'you lose'}</p>
+        <p className="gameover-message">{props.player.active && props.player.health.current > 0 ? 'you lose' : 'you win'}</p>
+        {/* <p className="gameover-message">{props.player.active && props.player.health.current > 0 ? 'you win' : 'you lose'}</p> */}
     </div>
-)
+);
 
 class GameScreen extends Component {
     constructor(props) {
@@ -56,9 +57,18 @@ class GameScreen extends Component {
                         cardDropped={this.cardDropped}
                         cardDragStarted={this.cardDragStarted}
                         cardDragEnded={this.cardDragEnded}
-                    />    
+                    />
                 ))}
-                {this.props.app.game.phase === 'OVER' ? <GameOver players={this.props.app.game.players} /> : null}
+                {this.props.app.game.phase === 'OVER'
+                    ? (
+                        <GameOver
+                            players={this.props.app.game.players}
+                            player={this.props.app.game.players.map(player => ({ player }))}
+                        />
+                    )
+                    : null}
+
+                {/* {this.props.app.game.phase === 'OVER' ? <GameOver players={this.props.app.game.players} /> : null} */}
             </div>
         );
     }
@@ -67,6 +77,10 @@ class GameScreen extends Component {
 GameScreen.propTypes = {
     app: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
+};
+
+GameOver.propTypes = {
+    player: PropTypes.array.isRequired,
 };
 
 export default GameScreen;
