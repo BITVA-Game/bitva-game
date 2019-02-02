@@ -10,7 +10,7 @@ function takeOneCardAtRand(hand) {
 
 function isDead(appObject) {
     appObject.game.players.forEach((p) => {
-        if (p.health.current<=0) {
+        if (p.health.current <= 0) {
             // console.log(p.hero +" health is "+p.health.current);
             // console.log(p.hero +" LOST");
             return true;
@@ -117,7 +117,7 @@ function simulationSequence(application) {
         appObject = arg;
     };
     const sendMessage = (msg) => {
-      application.msgReceived(msg, sendReply);
+        application.msgReceived(msg, sendReply);
     }
 
     const index = getRandomInt(1);
@@ -133,6 +133,7 @@ function simulationSequence(application) {
 
     let count = 0;
     const playThroughResult = {
+        first: '',
         players: [{}, {}],
         round: 0,
     };
@@ -151,6 +152,7 @@ function simulationSequence(application) {
         playThroughResult.players[j].hand = Object.keys(player.hand).length;
     }
     playThroughResult.round = count;
+    playThroughResult.first = heroes[index];
 
     return playThroughResult;
 }
