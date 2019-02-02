@@ -348,14 +348,6 @@ function playerActs(game, player, opponent, active, target) {
 }
 
 function makeMove(game, msg) {
-<<<<<<< HEAD
-    console.log('makeMove called');
-    let pActive = game.players[0];
-    let pInactive = game.players[1];
-    if (!pActive.active) {
-        pActive = game.players[1];
-        pInactive = game.players[0];
-=======
     // console.log('makeMove called');
     let pActive;
     let pInactive;
@@ -368,11 +360,9 @@ function makeMove(game, msg) {
             }
         }
     });
-
     // We expect the first card is always the selected card that acts
     if (pActive.moveCounter < 2) {
         game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
->>>>>>> amended function makeMove so turn does not change if game phase is OVER
     }
     // We expect the first card is always the selected card that acts
     game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
