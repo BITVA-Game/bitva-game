@@ -31,9 +31,9 @@ function formReport(arr, n) {
 
     // Wins at phase per character avg
     let morevnaPhaseAvg = getAvgPhase(morevnawins);
-    console.log("On average, Morevna wins at phase num " + morevnaPhaseAvg);
+    console.log("On average, Morevna wins at turn num " + morevnaPhaseAvg);
     let yagaPhaseAvg = getAvgPhase(yagawins);
-    console.log("On average, Yaga wins at phase num " + yagaPhaseAvg);
+    console.log("On average, Yaga wins at turn num " + yagaPhaseAvg);
 
 }
 
@@ -46,7 +46,7 @@ function runSim(n) {
         console.log(result);
         simResult.push(result);
     }
-    const report = formReport(simResult, n);
+    formReport(simResult, n);
     //writeToFile(report, '/result.txt');
 }
 

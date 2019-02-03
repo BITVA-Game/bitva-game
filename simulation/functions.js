@@ -1,10 +1,12 @@
+/* eslint-disable no-plusplus */
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
 function takeOneCardAtRand(hand) {
     const rand = Math.floor(Math.random() * Math.floor(Object.keys(hand).length));
-    // console.log('takeOneCardAtRand ', Object.keys(hand).length, rand, Object.keys(hand)[rand]);
+    console.log('takeOneCardAtRand ', Object.keys(hand).length, rand, Object.keys(hand)[rand]);
     return Object.keys(hand)[rand];
 }
 
@@ -42,25 +44,26 @@ function playOnePhase(appObject, sendMessage) {
     if (!activePlayer.active) {
         activePlayer = appObject.game.players[1];
     }
-    // console.log('-------------------------------------');
-    // console.log('Active player is ', activePlayer.hero);
+    console.log('-------------------------------------');
+    console.log('Active player is ', activePlayer.hero);
     // console.log('Active player move counter ', activePlayer.moveCounter);
     let msg = {};
     let action = 0;
+    let unblocker =  0;
     while (activePlayer.moveCounter < 2 && action < 2 && !isDead(appObject)) {
         msg = {};
-        // console.log('playThrough N', action);
+        console.log('playThrough N', action);
         const activeKey = takeOneCardAtRand(activePlayer.hand);
-        // console.log('Active Key ', activeKey);
+        console.log('Active Key ', activeKey);
         if (!activePlayer.hand[activeKey]) {
             console.log('ERROR');
-            console.log(activePlayer.hand.length);
-            console.log(activePlayer.graveyard.length);
-            console.log(activePlayer.deck.length);
+            console.log(Object.keys(activePlayer.hand).length);
+            console.log(Object.keys(activePlayer.graveyard).length);
+            console.log(Object.keys(activePlayer.deck).length);
             break;
         }
         const activeCard = activePlayer.hand[activeKey];
-        // console.log('Selected card: ', activeCard.id);
+        console.log('Selected card: ', activeCard.id);
 
         // If it's an item
         if (activeCard.type === 'item') {
@@ -106,6 +109,15 @@ function playOnePhase(appObject, sendMessage) {
         // appObject.game.players.forEach((p) => {
         //     console.log(`${p.hero} ${p.health.current}`);
         // });
+        unblocker ++;
+        if (unblocker > 3 ) {
+          msg = {
+            type: 'ACTION',
+            activeCard: activeKey,
+            target: 'graveyard',
+          }
+          action++;
+        }
     }
 }
 
