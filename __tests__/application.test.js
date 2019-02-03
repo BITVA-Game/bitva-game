@@ -266,6 +266,7 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
                         key4: {}, key11: {}, key10: {}, key16: {}, key5: {},
                     },
                     health: 15,
+                    grave: {},
                 },
                 {
                     active: true,
@@ -286,6 +287,7 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
                         key11: {}, key10: {}, key1: {}, key8: {}, key13: {},
                     },
                     health: 13,
+                    grave: {},
                 },
             ],
         },
