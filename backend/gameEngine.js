@@ -339,9 +339,6 @@ function playerActs(game, player, opponent, active, target) {
         player.moveCounter = 0;
         // we check if there is special water cards in item holder of players
         // and run function water if any
-<<<<<<< HEAD
-        // waterCard(game.players);
-=======
         waterCard(game.players);
         if (game.phase !== 'OVER') {
             // active player becomes inactive once active player's counter ==2
@@ -354,7 +351,6 @@ function playerActs(game, player, opponent, active, target) {
             opponent.active = true;
             playerGrave = opponentGrave;
         }
->>>>>>> gameEnging amended and test added not to change turn after game is Over
     }
     // we return the whole game to continue
     return game;
