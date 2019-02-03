@@ -1418,7 +1418,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
 
 // test - player attacks enemy with attack power < shieldLarge points
 // opponent shield points decreased only for activeCard, other shield cards points remain
-test.skip('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
+test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
