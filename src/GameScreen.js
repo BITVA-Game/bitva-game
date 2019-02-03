@@ -63,18 +63,18 @@ class GameScreen extends Component {
     }
 }
 
-const GameOver = props => {
+const GameOver = (props) => {
     let activePlayer = props.players[0];
     if (props.players[0].active === false) {
         activePlayer = props.players[1];
     }
     return (
-    <div className="gameover">
-        {/* if player is active and alive, the message is 'you win' */}
-        <p className="gameover-message">{activePlayer && activePlayer.health.current > 0 ? 'you win' : 'you lose'}</p>
-    </div>
-    )
-}
+        <div className="gameover">
+            {/* if player is active and alive, the message is 'you win' */}
+            <p className="gameover-message">{activePlayer && activePlayer.health.current > 0 ? 'you win' : 'you lose'}</p>
+        </div>
+    );
+};
 
 GameScreen.propTypes = {
     app: PropTypes.object.isRequired,
@@ -82,7 +82,7 @@ GameScreen.propTypes = {
 };
 
 GameOver.propTypes = {
-    player: PropTypes.array.isRequired,
+    players: PropTypes.array.isRequired,
 };
 
 export default GameScreen;
