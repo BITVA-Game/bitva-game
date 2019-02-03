@@ -1417,7 +1417,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
 });
 
 // test - player attacks enemy with attack power < shieldLarge points
-// opponent shield points decreased only for activeCard, other shield cards points remain
+// only opponent shield points decreased for activeCard points, other shield cards points remain
 test('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
     const msg = {
         type: 'ACTION',
@@ -1502,4 +1502,92 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
 
     // expect the Large shield card in active player item with key9 remains its health points
     expect(result.game.players[0].item.key9.points).toEqual(3);
+});
+
+// test - player attacks enemy with attack power = shield small points
+// only opponent shield points decreased for activeCard points, other shield cards points remain
+test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player attack card's key to key1
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, pointsInitial: 2,
+                        },
+                        key1: { type: 'action', category: 'attack', points: 2 },
+                    },
+                    moveCounter: 2,
+                    item: {
+                        key9: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1, pointsInitial: 2,
+                        },
+                    },
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 6, maximum: 15 },
+                    hand: {
+                        key12: {},
+                        key8: {},
+                        key15: {},
+                        key3: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, pointsInitial: 2,
+                        },
+                    },
+                    item: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1, pointsInitial: 2,
+                        },
+                    },
+                    grave: { },
+                },
+            ],
+        },
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // expect the small shield card key7 moved to gravyead and got its initial points back
+    expect(result.game.players[1].grave.key7.points).toEqual(2);
+
+    // expect the small shield card in opponent hand with key3 remains its health points
+    expect(result.game.players[1].hand.key3.points).toEqual(2);
+
+    // expect the small shield card in opponent hand with key3 remains its health points
+    expect(result.game.players[0].hand.key13.points).toEqual(2);
+
+    // expect the Large shield card in active player item with key9 remains its health points
+    expect(result.game.players[0].item.key9.points).toEqual(1);
 });

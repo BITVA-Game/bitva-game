@@ -97,7 +97,7 @@ const generatePlayers = function (heroName) {
 };
 
 function playerHasCards(pActive) {
-    console.log('playerHasCards', Object.keys(pActive.cards).length, Object.keys(pActive.hand).length);
+    // console.log('playerHasCards', Object.keys(pActive.cards).length, Object.keys(pActive.hand).length);
     if ((Object.keys(pActive.cards).length + Object.keys(pActive.hand).length) >= 5) {
         return true;
     }
@@ -168,11 +168,14 @@ function attackShield(player, itemKey, points) {
         // console.log('item > points');
         player.item[itemKey].points -= points;
     } else if (player.item[itemKey].points === points) {
-        // console.log('item == points');
+        console.log('item == points');
+        player.item[itemKey].points = player.item[itemKey].pointsInitial;
         moveCardGraveyard(player, itemKey, 'item');
+        console.log(player.grave[itemKey]);
     } else {
         // console.log('item < points');
         damagePlayer(player, points - player.item[itemKey].points);
+        player.item[itemKey].points = player.item[itemKey].pointsInitial;
         moveCardGraveyard(player, itemKey, 'item');
     }
 }
@@ -351,7 +354,6 @@ function playerActs(game, player, opponent, active, target) {
 
 function makeMove(game, msg) {
     // console.log('makeMove called');
-
     let pActive = game.players[0];
     let pInactive = game.players[1];
     if (!pActive.active) {

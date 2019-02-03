@@ -67,6 +67,7 @@
     "info": "Reflects minor damage until destroyed.",
     "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
     "points": 4,
+    "pointsInitial": 4,
     "img": "shieldLarge.png"
   },
   "shieldSmall": {
@@ -77,6 +78,7 @@
     "info": "Protects from damage until destroyed.",
     "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
     "points": 2,
+    "pointsInitial": 2,
     "img": "shieldSmall.png"
   },
   "mirror": {
