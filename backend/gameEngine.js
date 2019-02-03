@@ -110,9 +110,9 @@ function dealFromGraveyard(graveyard) {
 }
 
 function giveCardsTo(player) {
-    console.log(`PLAYER ${player.hero} HAS IN DECK `, Object.keys(player.cards).length);
-    console.log(`PLAYER ${player.hero} HAS IN GRAVEYARD `, Object.keys(player.grave).length);
-    console.log(`PLAYER ${player.hero} HAS IN HAND `, Object.keys(player.hand).length);
+    // console.log(`PLAYER ${player.hero} HAS IN DECK `, Object.keys(player.cards).length);
+    // console.log(`PLAYER ${player.hero} HAS IN GRAVEYARD `, Object.keys(player.grave).length);
+    // console.log(`PLAYER ${player.hero} HAS IN HAND `, Object.keys(player.hand).length);
     if (!playerHasCards(player)) {
         console.log('NO CARDS');
         // Player doesn't have cards to acts
@@ -265,7 +265,6 @@ function waterCard(players) {
 }
 
 function playerActs(game, player, opponent, active, target) {
-    // console.log('playerActs called');
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
     // We send the card that has key1 to graveyard
@@ -342,7 +341,7 @@ function playerActs(game, player, opponent, active, target) {
         playerGrave = opponentGrave;
         // we check if there is special water cards in item holder of players
         // and run function water if any
-        waterCard(game.players);
+        // waterCard(game.players);
     }
     // we return the whole game to continue
     return game;
@@ -350,20 +349,14 @@ function playerActs(game, player, opponent, active, target) {
 
 function makeMove(game, msg) {
     console.log('makeMove called');
-    let pActive;
-    let pInactive;
-    game.players.forEach((p) => {
-        if (p.active) {
-            pActive = p;
-        } else {
-            pInactive = p;
-        }
-    });
-
-    // We expect the first card is always the selected card that acts
-    if (pActive.moveCounter < 2) {
-        game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
+    let pActive = game.players[0];
+    let pInactive = game.players[1];
+    if (!pActive.active) {
+        pActive = game.players[1];
+        pInactive = game.players[0];
     }
+    // We expect the first card is always the selected card that acts
+    game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
     return game;
 }
 
