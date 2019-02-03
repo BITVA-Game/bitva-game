@@ -2,12 +2,13 @@
 
 const gsjson = require('google-spreadsheet-to-json');
 const fs = require('fs');
+const path = require('path');
 
 async function formatOriginalCards() {
     const cards = {};
     const cardsOrigin = await gsjson({
         spreadsheetId: '1o5JJRR8JY0TCUzoRR81ghhrhUhdDjTV81ANWCxTKgBA',
-        worksheet: 'Cards'
+        worksheet: 'Cards',
     });
 
     const cardsUpdated = {};
@@ -67,8 +68,8 @@ async function formatOriginalCharacters() {
     return characters;
 }
 
-function writeToFile(obj, path) {
-    fs.writeFileSync(__dirname+path, JSON.stringify(obj), 'utf8', (err) => {
+function writeToFile(obj, filepath) {
+    fs.writeFileSync(path.join(__dirname, filepath), JSON.stringify(obj), 'utf8', (err) => {
         if (err) { throw err; }
     });
 }
@@ -83,6 +84,5 @@ async function getAllCards() {
     console.log('CHARACTERS file has been saved.');
 }
 
-
-// exports.getAllCards = getAllCards;
-getAllCards();
+exports.getAllCards = getAllCards;
+// getAllCards();

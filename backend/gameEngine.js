@@ -19,13 +19,6 @@ function getRandomBool() {
     return rand === 0;
 }
 
-function helperToDebug(msg, game) {
-    let player = game.players[0];
-    if (!player.active) { player = game.players[1]; }
-    console.log('PLAYER TRIES TO ACT');
-    console.log('PLAYING CARD: ', player.hand[msg.activeCard].id);
-}
-
 function assignCards(deck, cardsNumber) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
@@ -79,6 +72,7 @@ const generatePlayers = function (heroName) {
         p.grave = {};
         p.moveCounter = 0;
         p.health = {};
+        p.deal = 0;
     });
 
     // Assign individual data to player 0
@@ -102,8 +96,31 @@ const generatePlayers = function (heroName) {
     return players;
 };
 
+function playerHasCards(pActive) {
+    console.log('playerHasCards', Object.keys(pActive.cards).length, Object.keys(pActive.hand).length);
+    if ((Object.keys(pActive.cards).length + Object.keys(pActive.hand).length) >= 5) {
+        return true;
+    }
+    return false;
+}
+
+function dealFromGraveyard(graveyard) {
+    // Shffle cards we had in graveryard;
+    return assignCards(graveyard, Object.keys(graveyard).length);
+}
 
 function giveCardsTo(player) {
+    // console.log(`PLAYER ${player.hero} HAS IN DECK `, Object.keys(player.cards).length);
+    // console.log(`PLAYER ${player.hero} HAS IN GRAVEYARD `, Object.keys(player.grave).length);
+    // console.log(`PLAYER ${player.hero} HAS IN HAND `, Object.keys(player.hand).length);
+    if (!playerHasCards(player)) {
+        console.log('NO CARDS');
+        // Player doesn't have cards to acts
+        // Move cards from graveyard. Set deal to 1;
+        player.deal += 1;
+        player.cards = dealFromGraveyard(player.grave);
+        player.grave = {};
+    }
     while (Object.keys(player.hand).length < 5) {
         if (Object.keys(player.cards).length > 0) {
             // const key = randomKey(player.cards);
@@ -248,7 +265,6 @@ function waterCard(players) {
 }
 
 function playerActs(game, player, opponent, active, target) {
-    // console.log('playerActs called');
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
     // We send the card that has key1 to graveyard
@@ -325,28 +341,22 @@ function playerActs(game, player, opponent, active, target) {
         playerGrave = opponentGrave;
         // we check if there is special water cards in item holder of players
         // and run function water if any
-        waterCard(game.players);
+        // waterCard(game.players);
     }
     // we return the whole game to continue
     return game;
 }
 
 function makeMove(game, msg) {
-    // console.log('makeMove called');
-    let pActive;
-    let pInactive;
-    game.players.forEach((p) => {
-        if (p.active) {
-            pActive = p;
-        } else {
-            pInactive = p;
-        }
-    });
-
-    // We expect the first card is always the selected card that acts
-    if (pActive.moveCounter < 2) {
-        game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
+    console.log('makeMove called');
+    let pActive = game.players[0];
+    let pInactive = game.players[1];
+    if (!pActive.active) {
+        pActive = game.players[1];
+        pInactive = game.players[0];
     }
+    // We expect the first card is always the selected card that acts
+    game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
     return game;
 }
 
@@ -367,7 +377,7 @@ function handle(appgame, message) {
     // All actions have the same action name as they all call the same function
     case 'ACTION': {
         console.log('ACTION');
-        helperToDebug(message, game);
+        // helperToDebug(message, game);
         return Object.assign(game, makeMove(game, message));
     }
     default: { return game; }
