@@ -19,13 +19,6 @@ function getRandomBool() {
     return rand === 0;
 }
 
-function helperToDebug(msg, game) {
-    let player = game.players[0];
-    if (!player.active) { player = game.players[1]; }
-    console.log('PLAYER TRIES TO ACT');
-    console.log('PLAYING CARD: ', player.hand[msg.activeCard].id);
-}
-
 function assignCards(deck, cardsNumber) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
@@ -79,6 +72,7 @@ const generatePlayers = function (heroName) {
         p.grave = {};
         p.moveCounter = 0;
         p.health = {};
+        p.deal = 0;
     });
 
     // Assign individual data to player 0
@@ -102,8 +96,31 @@ const generatePlayers = function (heroName) {
     return players;
 };
 
+function playerHasCards(pActive) {
+    console.log('playerHasCards', Object.keys(pActive.cards).length, Object.keys(pActive.hand).length);
+    if ((Object.keys(pActive.cards).length + Object.keys(pActive.hand).length) >= 5) {
+        return true;
+    }
+    return false;
+}
+
+function dealFromGraveyard(graveyard) {
+    // Shffle cards we had in graveryard;
+    return assignCards(graveyard, Object.keys(graveyard).length);
+}
 
 function giveCardsTo(player) {
+    console.log(`PLAYER ${player.hero} HAS IN DECK `, Object.keys(player.cards).length);
+    console.log(`PLAYER ${player.hero} HAS IN GRAVEYARD `, Object.keys(player.grave).length);
+    console.log(`PLAYER ${player.hero} HAS IN HAND `, Object.keys(player.hand).length);
+    if (!playerHasCards(player)) {
+        console.log('NO CARDS');
+        // Player doesn't have cards to acts
+        // Move cards from graveyard. Set deal to 1;
+        player.deal += 1;
+        player.cards = dealFromGraveyard(player.grave);
+        player.grave = {};
+    }
     while (Object.keys(player.hand).length < 5) {
         if (Object.keys(player.cards).length > 0) {
             // const key = randomKey(player.cards);
@@ -332,7 +349,7 @@ function playerActs(game, player, opponent, active, target) {
 }
 
 function makeMove(game, msg) {
-    // console.log('makeMove called');
+    console.log('makeMove called');
     let pActive;
     let pInactive;
     game.players.forEach((p) => {
