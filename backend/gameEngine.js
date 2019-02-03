@@ -343,7 +343,7 @@ function playerActs(game, player, opponent, active, target) {
         playerGrave = opponentGrave;
         // we check if there is special water cards in item holder of players
         // and run function water if any
-        // waterCard(game.players);
+        waterCard(game.players);
     }
     // we return the whole game to continue
     return game;
