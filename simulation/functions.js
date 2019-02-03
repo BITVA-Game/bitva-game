@@ -16,8 +16,6 @@ function takeOneCardAtRand(hand) {
 function isDead(appObject) {
     appObject.game.players.forEach((p) => {
         if (p.health.current <= 0) {
-            // console.log(p.hero +" health is "+p.health.current);
-            // console.log(p.hero +" LOST");
             return true;
         }
     });
@@ -33,10 +31,6 @@ function getActivePlayer(appObject) {
 }
 
 function playOnePhase(appObject, sendMessage) {
-    // console.log('START HEALTH');
-    // appObject.game.players.forEach((p) => {
-    //     console.log(`${p.hero} ${p.health.current}`);
-    // });
     if (appObject.game.phase === 'OVER') {
         return;
     }
@@ -117,10 +111,6 @@ function playOnePhase(appObject, sendMessage) {
             console.log('______________________');
             sendMessage(msg);
         }
-        // console.log('END HEALTH');
-        // appObject.game.players.forEach((p) => {
-        //     console.log(`${p.hero} ${p.health.current}`);
-        // });
     }
 }
 
