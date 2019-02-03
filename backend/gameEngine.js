@@ -19,8 +19,6 @@ function getRandomBool() {
     return rand === 0;
 }
 
-<<<<<<< HEAD
-=======
 function helperToDebug(msg, game) {
     let player = game.players[0];
     if (!player.active) { player = game.players[1]; }
@@ -28,7 +26,6 @@ function helperToDebug(msg, game) {
     // console.log('PLAYING CARD: ', player.hand[msg.activeCard].id);
 }
 
->>>>>>> gameEnging amended and test added not to change turn after game is Over
 function assignCards(deck, cardsNumber) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
