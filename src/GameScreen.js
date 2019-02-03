@@ -5,13 +5,6 @@ import Player from './Player';
 import './css/App.css';
 import './css/GameScreen.css';
 
-const GameOver = props => (
-    <div className="gameover">
-        {/* if player is active and alive, the message is 'you win' */}
-        <p className="gameover-message">{props.player.active && props.player.health.current > 0 ? 'you lose' : 'you win'}</p>
-    </div>
-);
-
 class GameScreen extends Component {
     constructor(props) {
         super(props);
@@ -61,13 +54,26 @@ class GameScreen extends Component {
                 {this.props.app.game.phase === 'OVER'
                     ? (
                         <GameOver
-                            player={this.props.app.game.players.map(player => ({ player }))}
+                            players={this.props.app.game.players}
                         />
                     )
                     : null}
             </div>
         );
     }
+}
+
+const GameOver = props => {
+    let activePlayer = props.players[0];
+    if (props.players[0].active === false) {
+        activePlayer = props.players[1];
+    }
+    return (
+    <div className="gameover">
+        {/* if player is active and alive, the message is 'you win' */}
+        <p className="gameover-message">{activePlayer && activePlayer.health.current > 0 ? 'you win' : 'you lose'}</p>
+    </div>
+    )
 }
 
 GameScreen.propTypes = {
