@@ -5,8 +5,11 @@ function getRandomInt(max) {
 }
 
 function takeOneCardAtRand(hand) {
+    console.log('takeOneCardAtRand');
+    console.log(Object.keys(hand));
     const rand = Math.floor(Math.random() * Math.floor(Object.keys(hand).length));
-    console.log('takeOneCardAtRand ', Object.keys(hand).length, rand, Object.keys(hand)[rand]);
+    console.log(rand);
+    // console.log('takeOneCardAtRand ', Object.keys(hand).length, rand, Object.keys(hand)[rand]);
     return Object.keys(hand)[rand];
 }
 
@@ -21,15 +24,12 @@ function isDead(appObject) {
     return false;
 }
 
-function noCards() {
-    appObject.game.players.forEach((p) => {
-        if (p.deck.length <= 0) {
-            // console.log(`${p.hero} deck length is ${p.deck.length}`);
-            // console.log(`${p.hero} LOST`);
-            return true;
-        }
-    });
-    return false;
+function getActivePlayer(appObject) {
+    let activePlayer = appObject.game.players[0];
+    if (!activePlayer.active) {
+        activePlayer = appObject.game.players[1];
+    }
+    return activePlayer;
 }
 
 function playOnePhase(appObject, sendMessage) {
@@ -40,19 +40,20 @@ function playOnePhase(appObject, sendMessage) {
     if (appObject.game.phase === 'OVER') {
         return;
     }
-    let activePlayer = appObject.game.players[0];
-    if (!activePlayer.active) {
-        activePlayer = appObject.game.players[1];
-    }
+    const hero = getActivePlayer(appObject).hero;
     console.log('-------------------------------------');
-    console.log('Active player is ', activePlayer.hero);
-    // console.log('Active player move counter ', activePlayer.moveCounter);
+    console.log('Active player is ', hero);
     let msg = {};
     let action = 0;
-    let unblocker =  0;
-    while (activePlayer.moveCounter < 2 && action < 2 && !isDead(appObject)) {
+    let unblocker = 0;
+    while (action < 2 && !isDead(appObject)) {
         msg = {};
-        console.log('playThrough N', action);
+        const activePlayer = getActivePlayer(appObject);
+        if (activePlayer.hero !== hero) {
+            break;
+        }
+        console.log('Active player move counter ', activePlayer.moveCounter);
+        console.log(`playThrough N ${action} for ${activePlayer.hero}`);
         const activeKey = takeOneCardAtRand(activePlayer.hand);
         console.log('Active Key ', activeKey);
         if (!activePlayer.hand[activeKey]) {
@@ -69,7 +70,7 @@ function playOnePhase(appObject, sendMessage) {
         if (activeCard.type === 'item') {
             // console.log(Object.values(activePlayer.item).length);
             if (Object.values(activePlayer.item).length === 0) {
-                // console.log('set up item');
+                console.log('set up item');
                 msg = {
                     type: 'ACTION',
                     activeCard: activeKey,
@@ -81,7 +82,7 @@ function playOnePhase(appObject, sendMessage) {
         // If it's health
         if (activeCard.category === 'heal') {
             if ((activePlayer.health.maximum - activePlayer.health.current) >= 3) {
-                // console.log('heal');
+                console.log('heal');
                 msg = {
                     type: 'ACTION',
                     activeCard: activeKey,
@@ -92,7 +93,7 @@ function playOnePhase(appObject, sendMessage) {
         }
         // If it's attack
         if (activeCard.category === 'attack') {
-            // console.log('attack');
+            console.log('attack');
             msg = {
                 type: 'ACTION',
                 activeCard: activeKey,
@@ -101,23 +102,25 @@ function playOnePhase(appObject, sendMessage) {
             action++;
         }
 
+        unblocker++;
+        if (unblocker > 3) {
+            msg = {
+                type: 'ACTION',
+                activeCard: activeKey,
+                target: 'graveyard',
+            };
+            action++;
+        }
+
         if (Object.keys(msg).length > 0) {
-            // console.log('SENDING MESSAGE');
+            console.log('SENDING MESSAGE');
+            console.log('______________________');
             sendMessage(msg);
         }
         // console.log('END HEALTH');
         // appObject.game.players.forEach((p) => {
         //     console.log(`${p.hero} ${p.health.current}`);
         // });
-        unblocker ++;
-        if (unblocker > 3 ) {
-          msg = {
-            type: 'ACTION',
-            activeCard: activeKey,
-            target: 'graveyard',
-          }
-          action++;
-        }
     }
 }
 
@@ -130,7 +133,7 @@ function simulationSequence(application) {
     };
     const sendMessage = (msg) => {
         application.msgReceived(msg, sendReply);
-    }
+    };
 
     const index = getRandomInt(1);
     const heroes = ['morevna', 'yaga'];

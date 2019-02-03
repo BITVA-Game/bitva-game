@@ -1,11 +1,12 @@
 /* eslint-disable no-plusplus */
-const fs = require('fs')
+const fs = require('fs');
+const path = require('path');
 const application = require('../backend/application');
 const appData = require('../backend/data/app.json');
 const { simulationSequence } = require('./functions');
 
-function writeToFile(obj, path) {
-    fs.writeFileSync(__dirname+path, JSON.stringify(obj), 'utf8', (err) => {
+function writeToFile(obj, filepath) {
+    fs.writeFileSync(path.join(__dirname, filepath), JSON.stringify(obj), 'utf8', (err) => {
         if (err) { throw err; }
     });
 }
@@ -13,28 +14,27 @@ function writeToFile(obj, path) {
 function getAvgPhase(arr) {
     let sum = 0;
     arr.forEach((a) => { sum += a.round; });
-    return parseInt(sum/arr.length);
+    return parseInt((sum / arr.length) / 2, 10);
 }
 
 function formReport(arr, n) {
     // Separate wins per character
-    const player = (players, name) => players.find(p => p.name == name);
+    const player = (players, name) => players.find(p => p.name === name);
     const morevnawins = arr.filter(
-      a => player(a.players, 'yaga').health <= 0,
+        a => player(a.players, 'yaga').health <= 0,
     );
-      const yagawins = arr.filter(
-      a => player(a.players, 'morevna').health <= 0,
+    const yagawins = arr.filter(
+        a => player(a.players, 'morevna').health <= 0,
     );
-    console.log("From "+n+" games, Yaga has "
-                + yagawins.length + " and Morevna has "
-                + morevnawins.length + " wins");
+    console.log(`From ${n} games, Yaga has ${
+        yagawins.length} and Morevna has ${
+        morevnawins.length} wins`);
 
     // Wins at phase per character avg
-    let morevnaPhaseAvg = getAvgPhase(morevnawins);
-    console.log("On average, Morevna wins at turn num " + morevnaPhaseAvg);
-    let yagaPhaseAvg = getAvgPhase(yagawins);
-    console.log("On average, Yaga wins at turn num " + yagaPhaseAvg);
-
+    const morevnaPhaseAvg = getAvgPhase(morevnawins);
+    console.log(`On average, Morevna wins at turn num ${morevnaPhaseAvg}`);
+    const yagaPhaseAvg = getAvgPhase(yagawins);
+    console.log(`On average, Yaga wins at turn num ${yagaPhaseAvg}`);
 }
 
 function runSim(n) {
@@ -43,11 +43,11 @@ function runSim(n) {
         console.log('simulationSequence ', i);
         application.setApp(appData);
         const result = simulationSequence(application);
-        console.log(result);
+        // console.log(result);
         simResult.push(result);
     }
     formReport(simResult, n);
-    //writeToFile(report, '/result.txt');
+    // writeToFile(report, '/result.txt');
 }
 
 
@@ -56,4 +56,4 @@ process.on('unhandledRejection', (error) => {
     console.log('unhandledRejection', error.message);
 });
 
-runSim(50);
+runSim(100);
