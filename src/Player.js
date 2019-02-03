@@ -78,7 +78,7 @@ class Player extends Component {
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
                 />
-                <Deck deck={this.props.player.deck} />
+                <Deck cards={this.props.player.cards} />
                 <Hand
                     active={this.props.player.active}
                     hand={this.props.player.hand}
@@ -102,7 +102,10 @@ class Player extends Component {
 const Deck = props => (
     <div className="deck card-like">
         <div className="deck-name" props={props}>
-            deck
+            cards
+        </div>
+        <div className="count">
+            {Object.keys(props.cards).length}
         </div>
     </div>
 );
@@ -168,6 +171,10 @@ const Card = props => (
         </div>
     </div>
 );
+
+Deck.propTypes = {
+    cards: PropTypes.object.isRequired,
+};
 
 Player.propTypes = {
     player: PropTypes.object.isRequired,
