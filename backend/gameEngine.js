@@ -168,14 +168,14 @@ function attackShield(player, itemKey, points) {
         // console.log('item > points');
         player.item[itemKey].points -= points;
     } else if (player.item[itemKey].points === points) {
-        console.log('item == points');
-        player.item[itemKey].points = player.item[itemKey].pointsInitial;
+        // console.log('item == points');
+        player.item[itemKey].points = player.item[itemKey].initialPoints;
         moveCardGraveyard(player, itemKey, 'item');
-        console.log(player.grave[itemKey]);
+        // console.log(player.grave[itemKey]);
     } else {
-        // console.log('item < points');
+        // console.log('item < points', player.item[itemKey].points, points);
         damagePlayer(player, points - player.item[itemKey].points);
-        player.item[itemKey].points = player.item[itemKey].pointsInitial;
+        player.item[itemKey].points = player.item[itemKey].initialPoints;
         moveCardGraveyard(player, itemKey, 'item');
     }
 }
@@ -192,6 +192,7 @@ function attackOpponent(player, points) {
         }
     } else if (Object.keys(player.item).length === 1 && itemCategory === 'shield') {
         // console.log('Were in attack shield');
+        console.log(itemKey);
         attackShield(player, itemKey, points);
     }
 }

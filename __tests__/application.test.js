@@ -1470,12 +1470,12 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key8: {},
                         key15: {},
                         key3: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialPoints: 4,
                         },
                     },
                     item: {
                         key7: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialPoints: 4,
                         },
                     },
                     grave: { },
@@ -1537,14 +1537,14 @@ test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has
                         key11: {},
                         key8: {},
                         key13: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, pointsInitial: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialPoints: 2,
                         },
                         key1: { type: 'action', category: 'attack', points: 2 },
                     },
                     moveCounter: 2,
                     item: {
                         key9: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1, pointsInitial: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1, initialPoints: 2,
                         },
                     },
                     grave: { key10: {} },
@@ -1558,12 +1558,12 @@ test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has
                         key8: {},
                         key15: {},
                         key3: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, pointsInitial: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialPoints: 2,
                         },
                     },
                     item: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1, pointsInitial: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialPoints: 2,
                         },
                     },
                     grave: { },
