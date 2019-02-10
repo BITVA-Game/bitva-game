@@ -169,13 +169,13 @@ function attackShield(player, itemKey, points) {
         player.item[itemKey].points -= points;
     } else if (player.item[itemKey].points === points) {
         // console.log('item == points');
-        player.item[itemKey].points = player.item[itemKey].initialPoints;
+        player.item[itemKey].points = player.item[itemKey].initialpoints;
         moveCardGraveyard(player, itemKey, 'item');
         // console.log(player.grave[itemKey]);
     } else {
         // console.log('item < points', player.item[itemKey].points, points);
         damagePlayer(player, points - player.item[itemKey].points);
-        player.item[itemKey].points = player.item[itemKey].initialPoints;
+        player.item[itemKey].points = player.item[itemKey].initialpoints;
         moveCardGraveyard(player, itemKey, 'item');
     }
 }

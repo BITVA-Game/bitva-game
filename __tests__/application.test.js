@@ -1418,7 +1418,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
 
 // test - player attacks enemy with attack power < shieldLarge points
 // only opponent shield points decreased for activeCard points, other shield cards points remain
-test('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
+test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1470,12 +1470,12 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key8: {},
                         key15: {},
                         key3: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialPoints: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4,
                         },
                     },
                     item: {
                         key7: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialPoints: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4,
                         },
                     },
                     grave: { },
@@ -1537,14 +1537,14 @@ test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has
                         key11: {},
                         key8: {},
                         key13: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialPoints: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialpoints: 2,
                         },
-                        key1: { type: 'action', category: 'attack', points: 2 },
+                        key1: { type: 'action', category: 'attack', points: 1 },
                     },
                     moveCounter: 2,
                     item: {
                         key9: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1, initialPoints: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1, initialpoints: 2,
                         },
                     },
                     grave: { key10: {} },
@@ -1558,12 +1558,12 @@ test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has
                         key8: {},
                         key15: {},
                         key3: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialPoints: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialpoints: 2,
                         },
                     },
                     item: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialPoints: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialpoints: 2,
                         },
                     },
                     grave: { },
@@ -1580,7 +1580,7 @@ test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has
     const result = sendReply.mock.calls[0][0];
 
     // expect the small shield card key7 moved to gravyead and got its initial points back
-    expect(result.game.players[1].grave.key7.points).toEqual(2);
+    expect(result.game.players[1].item.key7.points).toEqual(1);
 
     // expect the small shield card in opponent hand with key3 remains its health points
     expect(result.game.players[1].hand.key3.points).toEqual(2);
