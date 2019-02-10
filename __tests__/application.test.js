@@ -1456,7 +1456,7 @@ test('msg ACTION ANY received: active player moveCounter = 2 after his action, g
                             category: 'attack',
                         },
                     },
-                    moveCounter: 1,
+                    moveCounter: 0,
                     item: {},
                     grave: { key10: {} },
                 },
@@ -1476,8 +1476,8 @@ test('msg ACTION ANY received: active player moveCounter = 2 after his action, g
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that active player counter set to 0 after turn's change
-    expect(result.game.players[0].moveCounter).toEqual(0);
+    // expect that active player counter set to 1 as turn doesn't change
+    expect(result.game.players[0].moveCounter).toEqual(1);
 
     // expect that inactive player curent health is 0
     expect(result.game.players[1].health.current).toEqual(0);

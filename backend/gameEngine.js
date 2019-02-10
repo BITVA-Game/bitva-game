@@ -19,13 +19,6 @@ function getRandomBool() {
     return rand === 0;
 }
 
-function helperToDebug(msg, game) {
-    let player = game.players[0];
-    if (!player.active) { player = game.players[1]; }
-    console.log('PLAYER TRIES TO ACT');
-    // console.log('PLAYING CARD: ', player.hand[msg.activeCard].id);
-}
-
 function assignCards(deck, cardsNumber) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
@@ -331,26 +324,26 @@ function playerActs(game, player, opponent, active, target) {
     }
     // after each move we increase active player's counter for 1
     player.moveCounter += 1;
+
+
     // once active player's counter ==2 we call function to give cards to players up to 5
-    if (player.moveCounter === 2) {
+    if (player.moveCounter === 2 && game.phase === 'ACTIVE') {
         // console.log(game);
         giveCardsTo(player);
-        // active player's counter set to 0
+        // active player becomes inactive once active player's counter ==2
+        player.active = false;
+        // player's counter set to 0
         player.moveCounter = 0;
+        // save cards in personal graveyards for both players
+        let playerGrave = player.grave;
+        let opponentGrave = opponent.grave;
+        opponentGrave = playerGrave;
+        // inactive player becomes active once active player's counter ==2
+        opponent.active = true;
+        playerGrave = opponentGrave;
         // we check if there is special water cards in item holder of players
         // and run function water if any
-        waterCard(game.players);
-        if (game.phase !== 'OVER') {
-            // active player becomes inactive once active player's counter ==2
-            player.active = false;
-            // save cards in personal graveyards for both players
-            let playerGrave = player.grave;
-            let opponentGrave = opponent.grave;
-            opponentGrave = playerGrave;
-            // inactive player becomes active once active player's counter ==2
-            opponent.active = true;
-            playerGrave = opponentGrave;
-        }
+        // waterCard(game.players);
     }
     // we return the whole game to continue
     return game;
@@ -358,21 +351,16 @@ function playerActs(game, player, opponent, active, target) {
 
 function makeMove(game, msg) {
     // console.log('makeMove called');
-    let pActive;
-    let pInactive;
-    game.players.forEach((p) => {
-        if (p.active) {
-            pActive = p;
-        } else {
-            pInactive = p;
-        }
-    });
-    // We expect the first card is always the selected card that acts
-    if (pActive.moveCounter < 2) {
-        game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
+
+    let pActive = game.players[0];
+    let pInactive = game.players[1];
+    if (!pActive.active) {
+        pActive = game.players[1];
+        pInactive = game.players[0];
     }
     // We expect the first card is always the selected card that acts
     game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
+
     return game;
 }
 
