@@ -287,19 +287,32 @@ section {
 .details-card {
 	display: flex;
 	flex-direction: column;
-	height: 22rem;
+	height: 294px;
 	justify-content: space-between;
-	width: 15.7rem;
+	width: 210px;
 }
 
 .card-header {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	padding: 0 30px;
+	position: relative;
+}
+
+.card-header .icon {
+	position: absolute;
+	right: -25px;	
+	top: -25px;
+}
+
+.card-header .icon-deck {
+	left: 0;
+	position: absolute;
+	top: 0;
 }
 
 .details-card p {
 	color: #000;
-	flex-basis: 110px;
 	font-size: 23px;
 	margin-top: 0.4rem;
 	text-align: center;
@@ -345,6 +358,7 @@ section {
 	text-align: center;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
+
 
 .card-description {
 	background-color: #c4c4c4;
