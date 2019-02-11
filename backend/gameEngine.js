@@ -97,7 +97,8 @@ const generatePlayers = function (heroName) {
 };
 
 function playerHasCards(pActive) {
-    // console.log('playerHasCards', Object.keys(pActive.cards).length, Object.keys(pActive.hand).length);
+// eslint-disable-next-line max-len
+// console.log('playerHasCards', Object.keys(pActive.cards).length, Object.keys(pActive.hand).length);
     if ((Object.keys(pActive.cards).length + Object.keys(pActive.hand).length) >= 5) {
         return true;
     }
