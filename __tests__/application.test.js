@@ -81,11 +81,11 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
     // Save the data into variable for checks
     const heroSelect = sendReply.mock.calls[0][0].heroSelect;
     expect(heroSelect.morevna.cardsNumber).toEqual(17);
-    expect(heroSelect.morevna.health).toEqual(13);
+    expect(heroSelect.morevna.health).toEqual(15);
     expect(Object.keys(heroSelect.morevna.cards).length).toEqual(8);
 
     expect(heroSelect.yaga.cardsNumber).toEqual(17);
-    expect(heroSelect.yaga.health).toEqual(15);
+    expect(heroSelect.yaga.health).toEqual(17);
     expect(Object.keys(heroSelect.yaga.cards).length).toEqual(8);
 });
 
@@ -1418,7 +1418,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
 
 // test - player attacks enemy with attack power < shieldLarge points
 // only opponent shield points decreased for activeCard points, other shield cards points remain
-test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
+test('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1506,7 +1506,7 @@ test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has
 
 // test - player attacks enemy with attack power = shield small points
 // only opponent shield points decreased for activeCard points, other shield cards points remain
-test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
+test('msg ACTION CASE3 player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1590,4 +1590,198 @@ test.only('msg ACTION CASE3 player attacks with less points than shieldLarge has
 
     // expect the Large shield card in active player item with key9 remains its health points
     expect(result.game.players[0].item.key9.points).toEqual(1);
+});
+
+// test to check that attacking card takes only points of shield in opponent's item
+// and does not take points from other key shield in player's item
+test('msg ACTION for shields with the same key, shields in item', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 1,
+                    item: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+                        },
+                    },
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 6, maximum: 15 },
+                    hand: {
+                        key12: {}, key8: {}, key15: {}, key3: {},
+                    },
+                    item: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+                        },
+                    },
+                    grave: { },
+                },
+            ],
+        },
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[0].moveCounter).toEqual(0);
+
+    // expect that it was an action card as we performing the action
+    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    // expect it was the attack card
+    expect(result.game.players[0].grave.key1.category).toEqual('attack');
+
+    // expect shield for player 0 did not change
+    expect(result.game.players[0].item).toEqual({
+        key7: {
+            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+        },
+    });
+
+    // expect shield for player 1 lost health
+    expect(result.game.players[1].item).toEqual({
+        key7: {
+            id: 'shieldSmall', type: 'item', category: 'shield', points: 1,
+        },
+    });
+
+    // expect the acting card is now on the graveyard
+    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    // expect the acting card is now not in hand
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+});
+
+// test to check that attacking card takes only points of shield in opponent's item
+// and does not take points from other key shield in player's hand
+test('msg ACTION for shields with the same key, shield with the same key in hand', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player arrack card's key to key1
+    application.setApp({
+        game: {
+            players: [
+                {
+                    active: true,
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 5, maximum: 13 },
+                    hero: 'morevna',
+                    hand: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+                        },
+                        key8: {},
+                        key13: {},
+                        key1: { type: 'action', category: 'attack', points: 3 },
+                    },
+                    moveCounter: 0,
+                    item: {},
+                    grave: { key10: {} },
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 6, maximum: 15 },
+                    hand: {
+                        key12: {},
+                        key8: {},
+                        key15: {},
+                        key3: {},
+                    },
+                    item: {
+                        key7: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+                        },
+                    },
+                    grave: { },
+                },
+            ],
+        },
+    });
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // expect that his counter set to 0 after turn's change
+    expect(result.game.players[0].moveCounter).toEqual(1);
+
+    // expect that it was an action card as we performing the action
+    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    // expect it was the attack card
+    expect(result.game.players[0].grave.key1.category).toEqual('attack');
+
+    // expect shield for player 0 did not change
+    expect(result.game.players[0].hand).toEqual({
+        key7: {
+            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+        },
+        key8: {},
+        key13: {},
+    });
+
+    // expect shield for player 1 lost health
+    expect(result.game.players[1].item).toEqual({
+        key7: {
+            id: 'shieldSmall', type: 'item', category: 'shield', points: 1,
+        },
+    });
+
+    // expect the acting card is now on the graveyard
+    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    // expect the acting card is now not in hand
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
 });
