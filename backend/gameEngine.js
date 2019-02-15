@@ -324,8 +324,10 @@ function playerActs(game, player, opponent, active, target) {
     }
     // after each move we increase active player's counter for 1
     player.moveCounter += 1;
+
+
     // once active player's counter ==2 we call function to give cards to players up to 5
-    if (player.moveCounter === 2) {
+    if (player.moveCounter === 2 && game.phase === 'ACTIVE') {
         // console.log(game);
         giveCardsTo(player);
         // active player becomes inactive once active player's counter ==2
@@ -348,7 +350,8 @@ function playerActs(game, player, opponent, active, target) {
 }
 
 function makeMove(game, msg) {
-    console.log('makeMove called');
+    // console.log('makeMove called');
+
     let pActive = game.players[0];
     let pInactive = game.players[1];
     if (!pActive.active) {
@@ -357,6 +360,7 @@ function makeMove(game, msg) {
     }
     // We expect the first card is always the selected card that acts
     game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
+
     return game;
 }
 

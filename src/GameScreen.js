@@ -51,14 +51,38 @@ class GameScreen extends Component {
                         cardDragEnded={this.cardDragEnded}
                     />
                 ))}
+                {this.props.app.game.phase === 'OVER'
+                    ? (
+                        <GameOver
+                            players={this.props.app.game.players}
+                        />
+                    )
+                    : null}
             </div>
         );
     }
 }
 
+const GameOver = (props) => {
+    let activePlayer = props.players[0];
+    if (props.players[0].active === false) {
+        activePlayer = props.players[1];
+    }
+    return (
+        <div className="gameover">
+            {/* if player is active and alive, the message is 'you win' */}
+            <p className="gameover-message">{activePlayer && activePlayer.health.current > 0 ? 'you win' : 'you lose'}</p>
+        </div>
+    );
+};
+
 GameScreen.propTypes = {
     app: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
+};
+
+GameOver.propTypes = {
+    players: PropTypes.array.isRequired,
 };
 
 export default GameScreen;
