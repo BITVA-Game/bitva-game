@@ -1,4 +1,6 @@
 // JSON object with allication data
+const fs = require('fs');
+const path = require('path');
 let application = require('./data/app.json');
 
 // Additional files that have functions related to this part of application
@@ -6,6 +8,15 @@ const screenManager = require('./screenManager');
 const profileManager = require('./profileManager');
 const gameEngine = require('./gameEngine');
 const heroManager = require('./heroSelect');
+
+// This function will write your last game object into a file
+// To be used in debug functionality
+
+function writeGameObject(newApp) {
+    fs.writeFileSync(path.join(__dirname, '../backend/data/some.json'), JSON.stringify(newApp), 'utf8', (err) => {
+        if (err) { throw err; }
+    });
+}
 
 // This function is called from main.js
 // It redirects the message to all handlers
@@ -19,11 +30,13 @@ function msgReceived(message, sendReply) {
         heroSelect: heroManager.handle(application, message),
         game: gameEngine.handle(application.game, message),
     };
+    // writeGameObject(newApp);
     sendReply(newApp);
     application = newApp;
 }
 
 function setApp(newApp) {
+    console.log('Setting app into needed state');
     application = newApp;
 }
 
