@@ -36,6 +36,7 @@ class GameScreen extends Component {
     }
 
     render() {
+        console.log('I AM RENDERING!');
         return (
             <div className="game-table app-background">
                 {this.props.app.game.players.map(player => (

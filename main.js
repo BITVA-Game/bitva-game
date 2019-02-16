@@ -57,7 +57,7 @@ function createWindow() {
 
     win.webContents.on('context-menu', (s, e) => {
         s.preventDefault();
-        const temp = ctxMenu(app, win, e);
+        const temp = ctxMenu(app, win, e, sendMessage);
         const c = electron.Menu.buildFromTemplate(temp);
         c.popup(win);
     });

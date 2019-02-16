@@ -1,6 +1,8 @@
 const electron = require('electron');
 const os = require('os');
 const fs = require('fs');
+const { setApp } = require('../backend/application');
+const morevnaStart = require('../backend/data/morevnaStart.json');
 
 const dialog = electron.dialog;
 
@@ -18,13 +20,14 @@ const shortcuts = {
     buttons: ['ok'],
 };
 
+
 function showDialog(win, msg, e) {
     dialog.showMessageBox(win, msg, e.x, e.y, (m) => {
         console.log(m);
     });
 }
 
-module.exports = function menu(app, win, e) {
+module.exports = function menu(app, win, e, sendMessage) {
     return (
         [{
             label: 'devTools',
@@ -68,6 +71,17 @@ module.exports = function menu(app, win, e) {
                 about.message += `window:\t${win.getSize().join('x')}\n`;
                 about.message += `${process.platform}-${process.arch}:\t${os.release}`;
                 showDialog(win, about, e);
+            },
+        },
+        {
+            label: 'start game with Morevna',
+            click() {
+                console.log('Set app called');
+                // Set backend into correct state for the debug
+                const newState = JSON.parse(JSON.stringify(morevnaStart));
+                setApp(newState);
+                // Send the game object to frontend
+                sendMessage(newState);
             },
         },
         {
