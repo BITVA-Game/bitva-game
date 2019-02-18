@@ -82,7 +82,9 @@ class Player extends Component {
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
                 />
-                <Deck cards={this.props.player.cards} />
+                <Deck
+                    active={this.props.player.active}
+                    cards={this.props.player.cards} />
                 <Hand
                     active={this.props.player.active}
                     hand={this.props.player.hand}
@@ -109,7 +111,7 @@ const Deck = props => (
             cards
         </div>
         <div className="count">
-            {Object.keys(props.cards).length}
+            {props.active ? Object.keys(props.cards).length : Object.keys(props.cards).length}
         </div>
     </div>
 );

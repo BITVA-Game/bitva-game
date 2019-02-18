@@ -12,7 +12,6 @@
 }
 
 .player-top  {
-    margin-left: -70px;
     position: absolute;
     top: 0;
     transform: rotate(180deg);
@@ -30,12 +29,8 @@
     border-radius: 50%;
     bottom: 180px;
     display: inline-block;
-    left: 220px;
+    left: 200px;
     position: absolute;
-}
-
-.player-inactive .hero {
-    filter: brightness(45%);
 }
 
 .player-top .hero {
@@ -48,11 +43,16 @@
 
 .hero-image {
     border-radius: 50%;
+    filter: invert(.2) sepia(1);
 }
 
 .hero-health {
     left: 0;
     position: absolute;
+}
+
+.player-active .hero-health circle {
+    stroke: #fff;
 }
 
 .hero-health-points {
@@ -74,7 +74,6 @@
 /* item */
 
 .item {
-    bottom: 200px;
     left: 444px;
     position: absolute;
 }
@@ -94,7 +93,6 @@
 .card-place {
     background-color: rgb(211, 226, 243);
     background-color: rgba(211, 226, 243, 0.55);
-    border-radius: 9%;
     margin-right: 26px;
 }
 
@@ -103,12 +101,12 @@
 .card {
     background-color: #fff;
     transform: rotate(0);
-    width: 110px;
+    width: 120px;
 }
 
 .card-like {
-    height: 140px;
-    width: 110px;
+    height: 168px;
+    width: 120px;
 }
 
 .player-top .card {
@@ -130,19 +128,19 @@
 .game-icon {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 30px 30px;
+    background-size: 40px 40px;
     -webkit-filter: drop-shadow(0 0 2px #fff);
     filter: drop-shadow(0 0 2px #fff);
-    height: 30px;
+    height: 40px;
     position: absolute;
-    right: -12px;
-    top: -10px;
-    width: 30px;
+    right: -18px;
+    top: -14px;
+    width: 40px;
 }
 .game-icon-text {
     align-items: center;
     display: flex;
-    font-size: 24px;
+    font-size: 28px;
     justify-content: center;
     text-align: center;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -161,10 +159,6 @@
     display: inline-block;
     left: 35px;
     position: absolute;
-}
-
-.player-inactive .deck {
-    display: none;
 }
 
 .deck-name {
@@ -189,7 +183,6 @@
 }
 
 .player-top .grave {
-    right: 105px;
     transform: rotate(180deg);
 }
 
