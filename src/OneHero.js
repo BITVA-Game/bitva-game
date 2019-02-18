@@ -37,15 +37,14 @@ const imagesCards = {
     cardPlace,
 };
 
-
-// Show all cards by pairs (3 in row)
+// Show all cards by 1 in row
 function prepairCards(cards) {
     const cardsKeys = Object.keys(cards);
-    const cardsBy3 = [];
+    const cardsBy1 = [];
     for (let i = 0; i < cardsKeys.length; i += 1) {
-        cardsBy3.push(cardsKeys.slice(i, i + 1));
+        cardsBy1.push(cardsKeys.slice(i, i + 1));
     }
-    return cardsBy3;
+    return cardsBy1;
 }
 
 const HeroImage = props => (
@@ -89,14 +88,14 @@ const CardsRow = props => (
 class CardsBlock extends Component {
     constructor(props) {
         super(props);
-        this.cardsBy3 = prepairCards(props.cards);
+        this.cardsBy1 = prepairCards(props.cards);
         this.state = { row: 0 };
         this.changeRow = this.changeRow.bind(this);
     }
 
     changeRow() {
         console.log('changeRow ', this.state.row);
-        const maxRotation = this.cardsBy3.length - 1;
+        const maxRotation = this.cardsBy1.length - 1;
         const currentRow = this.state.row;
         if (currentRow === maxRotation) {
             this.setState({ row: 0 });
@@ -111,7 +110,7 @@ class CardsBlock extends Component {
                 <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
                     ◀
                 </div>
-                <CardsRow heroId={this.props.heroId} row={this.cardsBy3[this.state.row]} cards={this.props.cards} />
+                <CardsRow heroId={this.props.heroId} row={this.cardsBy1[this.state.row]} cards={this.props.cards} />
                 <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="6">
                     ▶
                 </div>
