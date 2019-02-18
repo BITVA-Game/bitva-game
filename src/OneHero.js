@@ -42,8 +42,8 @@ const imagesCards = {
 function prepairCards(cards) {
     const cardsKeys = Object.keys(cards);
     const cardsBy3 = [];
-    for (let i = 0; i < cardsKeys.length; i += 3) {
-        cardsBy3.push(cardsKeys.slice(i, i + 3));
+    for (let i = 0; i < cardsKeys.length; i += 1) {
+        cardsBy3.push(cardsKeys.slice(i, i + 1));
     }
     return cardsBy3;
 }
@@ -66,13 +66,9 @@ const CardPreview = props => (
         ? (
             <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
                 <div className="card-header">
-                    <div className="icon-deck icon-text">
-                        {props.card.count}
-                    </div>
                     <p>{props.card.name}</p>
                     <div className={`icon icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>{props.card.points}</div>
                 </div>
-                <div className="card-description">{props.card.info}</div>
             </div>
         )
         : <img className="details-card" style={{ opacity: '0.25' }} src={imagesCards.cardPlace} alt="card" />
@@ -81,8 +77,12 @@ const CardPreview = props => (
 const CardsRow = props => (
     <>
         <CardPreview card={props.cards[props.row[0]]} />
-        <CardPreview card={props.cards[props.row[1]]} />
-        <CardPreview card={props.cards[props.row[2]]} />
+        <div className="card-description">
+            {props.cards[props.row[0]].description}
+            <div className="icon-deck icon-text">
+                {props.cards[props.row[0]].count}
+            </div>
+        </div>
     </>
 );
 

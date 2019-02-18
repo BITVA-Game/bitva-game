@@ -305,12 +305,6 @@ section {
 	top: -25px;
 }
 
-.card-header .icon-deck {
-	left: 0;
-	position: absolute;
-	top: 0;
-}
-
 .details-card p {
 	color: #000;
 	font-size: 23px;
@@ -337,7 +331,7 @@ section {
 	flex-basis: 30px;
 	height: 40px;
 	justify-content: center;
-	margin: 8px;
+	margin: 8px 0;
     width: 30px;
 }
 
@@ -359,12 +353,12 @@ section {
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-
 .card-description {
-	background-color: #c4c4c4;
-	border-radius: 5px;
 	color: #000;
-	margin: 8px;
-	padding: 5px;
-	text-align: center;
+	font-size: 22px;
+	width: 450px;
+}
+
+.card-description .icon-text {
+    color: #fff;
 }
