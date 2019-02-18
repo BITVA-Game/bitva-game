@@ -50,12 +50,6 @@ function prepairCards(cards) {
 const HeroImage = props => (
     <div className="details-hero">
         <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }}>
-            <div className="icon-deck icon-text">
-                {props.hero.cardsNumber}
-            </div>
-            <div className="icon icon-text icon-heal">
-                {props.hero.health}
-            </div>
         </div>
     </div>
 );
@@ -129,6 +123,14 @@ const OneHero = props => (
                     {props.hero.description}
                     {console.log('PROPS HERO ', props.hero.cards)}
                 </span>
+                <div className="icons-container">
+                    <div className="icon-deck icon-text">
+                        {props.hero.cardsNumber}
+                    </div>
+                    <div className="icon icon-text icon-heal">
+                        {props.hero.health}
+                    </div>
+                </div>
             </article>
             <CardsBlock heroId={props.hero.id} cards={props.hero.cards} />
         </div>

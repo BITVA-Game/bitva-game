@@ -312,6 +312,14 @@ section {
 	text-align: center;
 }
 
+.icons-container {
+	display: flex;
+}
+
+.icons-container .icon-deck {
+	margin-right: 17px;
+}
+
 .icon {
 	background-position: center;
 	background-repeat: no-repeat;
@@ -348,6 +356,7 @@ section {
 }
 
 .icon-text {
+	color: #fff;
 	font-size: 26px;
 	text-align: center;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -357,8 +366,4 @@ section {
 	color: #000;
 	font-size: 22px;
 	width: 450px;
-}
-
-.card-description .icon-text {
-    color: #fff;
 }
