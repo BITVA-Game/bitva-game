@@ -2,6 +2,7 @@ const electron = require('electron');
 const os = require('os');
 const fs = require('fs');
 const { setApp } = require('../backend/application');
+const startScreen = require('../backend/data/app.json');
 const morevnaStart = require('../backend/data/morevnaStart.json');
 
 const dialog = electron.dialog;
@@ -71,6 +72,13 @@ module.exports = function menu(app, win, e, sendMessage) {
                 about.message += `window:\t${win.getSize().join('x')}\n`;
                 about.message += `${process.platform}-${process.arch}:\t${os.release}`;
                 showDialog(win, about, e);
+            },
+        },
+        {
+            label: 'to Start Screen',
+            click() {
+                setApp(startScreen);
+                sendMessage(startScreen);
             },
         },
         {
