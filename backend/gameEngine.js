@@ -91,8 +91,8 @@ const generatePlayers = function (heroName) {
     players[1].health.current = allCharacters[heroSecondName].health;
     players[1].health.maximum = allCharacters[heroSecondName].health;
 
-    console.log(`${players[0].hero} is active is ${players[0].active}`);
-    console.log(`${players[1].hero} is active is ${players[1].active}`);
+    // console.log(`${players[0].hero} is active is ${players[0].active}`);
+    // console.log(`${players[1].hero} is active is ${players[1].active}`);
     return players;
 };
 
@@ -115,7 +115,7 @@ function giveCardsTo(player) {
     // console.log(`PLAYER ${player.hero} HAS IN GRAVEYARD `, Object.keys(player.grave).length);
     // console.log(`PLAYER ${player.hero} HAS IN HAND `, Object.keys(player.hand).length);
     if (!playerHasCards(player)) {
-        console.log('NO CARDS');
+        // console.log('NO CARDS');
         // Player doesn't have cards to acts
         // Move cards from graveyard. Set deal to 1;
         player.deal += 1;
@@ -193,7 +193,7 @@ function attackOpponent(player, points) {
         }
     } else if (Object.keys(player.item).length === 1 && itemCategory === 'shield') {
         // console.log('Were in attack shield');
-        console.log(itemKey);
+        // console.log(itemKey);
         attackShield(player, itemKey, points);
     }
 }
@@ -220,7 +220,14 @@ function moveItem(player, key) {
 
 function cardIncreaseHealth(players) {
     for (let i = 0; i < players.length; i += 1) {
-        players[i].health.current += 1;
+        // if any player has current health == maximum health
+        // then player remains with current health
+        if (players[i].health.current === players[i].health.maximum) {
+            players[i].health.current = players[i].health.current;
+        // in other cases we increase each player's health with 1 point
+        } else {
+            players[i].health.current += 1;
+        }
     }
     return players;
 }
@@ -244,7 +251,7 @@ function waterCard(players) {
             switch (itemCard.id) {
             // if it is Living Water card then we run function
             // that increase players current health by 1 point
-            case 'livingWater':
+            case 'waterLiving':
                 //  console.log('We are in living water case!');
                 cardIncreaseHealth(players);
                 // we deduct 1 point from item card points
@@ -252,14 +259,17 @@ function waterCard(players) {
                 break;
             // if it is Dead Water card then we run function
             // that decrease players current health by 1 point
-            case 'deadWater':
+            case 'waterDead':
                 // console.log('We are in dead water case!');
                 cardDecreaseHealth(players);
                 // we deduct 1 point from item card points
                 itemCard.points -= 1;
                 break;
             }
+            // if water card has its points equal to 0
             if (itemCard.points === 0) {
+                // we reset water card's points to initial points
+                itemCard.points = itemCard.initialpoints;
                 // we move water item card to graveyard if its points == 0
                 // console.log('We are in item card has 0 ponts!', p, (Object.keys(p.item)[0]));
                 moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
