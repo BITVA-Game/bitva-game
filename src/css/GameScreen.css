@@ -4,6 +4,20 @@
     background-image: url(../images/game-background.png);
 }
 
+.player-active .card,
+.player-active .deck,
+.player-active .item,
+.player-active .grave {
+    border: 3px solid #fff;
+}
+
+.player-inactive .card,
+.player-inactive .deck,
+.player-inactive .item,
+.player-inactive .grave {
+    border: 3px solid #000;
+}
+
 /* player */
 
 .player {
@@ -29,8 +43,10 @@
     border-radius: 50%;
     bottom: 180px;
     display: inline-block;
+    height: 220px;
     left: 200px;
     position: absolute;
+    width: 220px;
 }
 
 .player-top .hero {
@@ -75,7 +91,16 @@
 
 .item {
     left: 444px;
+    opacity: .5;
     position: absolute;
+}
+
+.green {
+    background-color: #6D8374;
+}
+
+.red {
+    background-color: #A36264;
 }
 
 /* hand */
@@ -91,8 +116,8 @@
 /* card-place */
 
 .card-place {
-    background-color: rgb(211, 226, 243);
-    background-color: rgba(211, 226, 243, 0.55);
+    /*background-color: rgb(211, 226, 243);
+    background-color: rgba(211, 226, 243, 0.55);*/
     margin-right: 26px;
 }
 
@@ -161,21 +186,19 @@
     position: absolute;
 }
 
-.deck-name {
-    color: #000;
-    font-size: 24px;
-    position: absolute;
-    text-align: center;
-    text-transform: lowercase;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
+.deck-green {
+    background-image: url(../images/back-green.jpg);
+    background-size: cover;
+}
+
+.deck-red {
+    background-image: url(../images/back-red.jpg);
+    background-size: cover;
 }
 
 /* graveyard */
 
 .grave {
-    background-color: #566678;
     bottom: 27px;
     display: inline-block;
     position: absolute;
