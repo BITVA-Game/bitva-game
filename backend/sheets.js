@@ -64,6 +64,7 @@ async function formatOriginalCharacters() {
         characters[name].cardsNumber = c.cards;
         characters[name].img = c.image;
         characters[name].cards = await getCardsFor(name);
+        characters[name].background = c.background;
     }
     return characters;
 }
@@ -85,4 +86,4 @@ async function getAllCards() {
 }
 
 exports.getAllCards = getAllCards;
-// getAllCards();
+    // getAllCards();
