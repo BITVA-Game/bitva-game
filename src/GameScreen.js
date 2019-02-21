@@ -8,10 +8,11 @@ import './css/GameScreen.css';
 class GameScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { dragging: null, active: true };
+        this.state = { dragging: null, changeTurn: false };
         this.cardDragStarted = this.cardDragStarted.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.cardDragEnded = this.cardDragEnded.bind(this);
+        this.turnMessage = this.turnMessage.bind(this);
     }
 
     cardDragEnded() {
@@ -35,15 +36,15 @@ class GameScreen extends Component {
         });
     }
 
-    changePlayer() {
-        this.setState({
-            active: null,
+    turnMessage() {
+        // if player's status (active=true) changed, set changeTurn to true
+        this.setState({changeTurn: true}, () => {
+            console.log("State is up to date", this.state.changeTurn);
         });
     }
 
     render() {
         console.log('I AM RENDERING!');
-        console.log(this.props.changePlayer);
         return (
             <div className="game-table app-background">
                 {this.props.app.game.players.map(player => (
@@ -59,14 +60,14 @@ class GameScreen extends Component {
                         cardDragEnded={this.cardDragEnded}
                     />
                 ))}
-                {this.state.active === true
-                    ? (
+                {/* {this.state.changeTurn === true */}
+                {/*     ? ( */}
                         <ChangeTurn
-                            changePlayer={this.changePlayer}
                             players={this.props.app.game.players}
+                            turnMessage={this.turnMessage}
                         />
-                    )
-                    : null}
+                    {/* ) */}
+                    {/* : null} */}
                 {this.props.app.game.phase === 'OVER'
                     ? (
                         <GameOver
@@ -93,19 +94,13 @@ const GameOver = (props) => {
 };
 
 const ChangeTurn = (props) => {
-    /*let players = props.players;
-    for (const p of players) {
-        if (p.active === true) {
-           props.changePlayer();
-        }
-    }*/
     let activePlayer = props.players[0];
     if (props.players[0].active === false) {
         activePlayer = props.players[1];
     }
     return (
         <div className="changeturn">
-            <p className="changeturn-message">Your turn</p>
+            <p className="changeturn-message">{activePlayer.hero}'s turn</p>
         </div>
     );
 }
@@ -116,6 +111,10 @@ GameScreen.propTypes = {
 };
 
 GameOver.propTypes = {
+    players: PropTypes.array.isRequired,
+};
+
+ChangeTurn.propTypes = {
     players: PropTypes.array.isRequired,
 };
 
