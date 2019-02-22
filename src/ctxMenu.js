@@ -3,6 +3,7 @@ const os = require('os');
 const fs = require('fs');
 const { setApp } = require('../backend/application');
 const morevnaStart = require('../backend/data/morevnaStart.json');
+const selectCharacter = require('../backend/data/selectCharacter.json');
 
 const dialog = electron.dialog;
 
@@ -82,6 +83,14 @@ module.exports = function menu(app, win, e, sendMessage) {
                 setApp(newState);
                 // Send the game object to frontend
                 sendMessage(newState);
+            },
+        },
+        {
+            label: 'select character',
+            click() {
+                const data = JSON.parse(JSON.stringify(selectCharacter));
+                setApp(selectCharacter);
+                sendMessage(selectCharacter);
             },
         },
         {
