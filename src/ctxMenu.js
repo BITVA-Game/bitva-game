@@ -89,8 +89,8 @@ module.exports = function menu(app, win, e, sendMessage) {
             label: 'select character',
             click() {
                 const data = JSON.parse(JSON.stringify(selectCharacter));
-                setApp(selectCharacter);
-                sendMessage(selectCharacter);
+                setApp(data);
+                sendMessage(data);
             },
         },
         {
