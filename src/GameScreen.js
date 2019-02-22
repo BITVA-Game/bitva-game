@@ -12,7 +12,7 @@ class GameScreen extends Component {
         this.cardDragStarted = this.cardDragStarted.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.cardDragEnded = this.cardDragEnded.bind(this);
-        this.turnMessage = this.turnMessage.bind(this);
+        // this.turnMessage = this.turnMessage.bind(this);
     }
 
     cardDragEnded() {
@@ -36,12 +36,12 @@ class GameScreen extends Component {
         });
     }
 
-    turnMessage() {
-        // if player's status (active=true) changed, set changeTurn to true
-        this.setState({changeTurn: true}, () => {
-            console.log("State is up to date", this.state.changeTurn);
-        });
-    }
+    // turnMessage() {
+    //     // if player's status (active=true) changed, set changeTurn to true
+    //     this.setState({changeTurn: true}, () => {
+    //         console.log("State is up to date", this.state.changeTurn);
+    //     });
+    // }
 
     render() {
         console.log('I AM RENDERING!');
@@ -60,14 +60,22 @@ class GameScreen extends Component {
                         cardDragEnded={this.cardDragEnded}
                     />
                 ))}
-                {/* {this.state.changeTurn === true */}
-                {/*     ? ( */}
+                {(this.props.app.game.players[0].active === true)
+                    ? (
                         <ChangeTurn
                             players={this.props.app.game.players}
-                            turnMessage={this.turnMessage}
+                            // turnMessage={this.turnMessage}
                         />
-                    {/* ) */}
-                    {/* : null} */}
+                    )
+                    : null}
+                {(this.props.app.game.players[1].active === true)
+                    ? (
+                        <ChangeTurn
+                            players={this.props.app.game.players}
+                            // turnMessage={this.turnMessage}
+                        />
+                    )
+                    : null}
                 {this.props.app.game.phase === 'OVER'
                     ? (
                         <GameOver
