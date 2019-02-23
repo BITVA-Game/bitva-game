@@ -4,7 +4,7 @@
         "name": "Мarya Мorevna",
         "description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
         "health": 15,
-        "cardsNumber": 17,
+        "cardsNumber": 19,
         "img": "character_ex.png",
         "cards": {
             "bajun": {
@@ -38,6 +38,14 @@
             "shieldSmall": {
                 "id": "shieldSmall",
                 "count": 3
+            },
+            "waterLiving": {
+                "id": "waterLiving",
+                "count": 1
+            },
+            "waterDead": {
+                "id": "waterDead",
+                "count": 1
             }
         }
     },
@@ -46,7 +54,7 @@
         "name": "Yaga",
         "description": "Yaga can lead a person between realm of the dead and the living. She is a Witch, Keeper of the Living and Dead water.",
         "health": 17,
-        "cardsNumber": 17,
+        "cardsNumber": 19,
         "img": "character_ex.png",
         "cards": {
             "bajun": {
@@ -80,6 +88,14 @@
             "shieldSmall": {
                 "id": "shieldSmall",
                 "count": 3
+            },
+            "waterLiving": {
+                "id": "waterLiving",
+                "count": 1
+            },
+            "waterDead": {
+                "id": "waterDead",
+                "count": 1
             }
         }
     }
