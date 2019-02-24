@@ -15,6 +15,8 @@ import bogatyr from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/bitva-cardbase.jpg';
 import shieldSmall from './images/cards/bitva-cardbase.jpg';
 import wolf from './images/cards/bitva-cardbase.jpg';
+import waterDead from './images/cards/bitva-cardbase.jpg';
+import waterLiving from './images/cards/bitva-cardbase.jpg';
 import cardPlace from './images/cards/cardPlace.png';
 
 const imagesCards = {
@@ -26,6 +28,8 @@ const imagesCards = {
     shieldLarge,
     shieldSmall,
     wolf,
+    waterDead,
+    waterLiving,
     cardPlace,
 };
 
