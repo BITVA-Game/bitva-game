@@ -1,0 +1,232 @@
+{
+  "profile": {
+    "characters": [
+      "morevna"
+    ],
+    "deck": [
+      "apple"
+    ],
+    "silver": 5,
+    "gold": 0
+  },
+  "manager": {
+    "screen": "HEROSELECT"
+  },
+  "heroSelect": {
+    "morevna": {
+      "id": "morevna",
+      "name": "Мarya Мorevna",
+      "description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
+      "health": 15,
+      "cardsNumber": 17,
+      "img": "character_ex.png",
+      "cards": {
+        "bajun": {
+          "id": "bajun",
+          "count": 5,
+          "name": "Cat-Bajun",
+          "type": "action",
+          "category": "attack",
+          "info": "Magic were-cat attacks with his songs and spells.",
+          "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+          "points": 1,
+          "initialpoints": 1,
+          "img": "bajun.png"
+        },
+        "sivka": {
+          "id": "sivka",
+          "count": 4,
+          "name": "Sivka-Burka",
+          "type": "action",
+          "category": "attack",
+          "info": "Magic prophetic horse, mediating the realm of the dead.",
+          "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
+          "points": 2,
+          "initialpoints": 2,
+          "img": "sivka.png"
+        },
+        "wolf": {
+          "id": "wolf",
+          "count": 3,
+          "name": "Grey Wolf",
+          "type": "action",
+          "category": "attack",
+          "info": "Lives in a deep forest, aggresive and unpredictable.",
+          "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+          "points": 3,
+          "initialpoints": 3,
+          "img": "wolf.png"
+        },
+        "bogatyr": {
+          "id": "bogatyr",
+          "count": 2,
+          "name": "Bogatyr",
+          "type": "action",
+          "category": "attack",
+          "info": "Hero-warrior possessing great power, protector.",
+          "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+          "points": 4,
+          "initialpoints": 4,
+          "img": "bogatyr.png"
+        },
+        "apple": {
+          "id": "apple",
+          "count": 2,
+          "name": "Apple",
+          "type": "action",
+          "category": "heal",
+          "info": "Heals its owner for 3 damage points.",
+          "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+          "points": 2,
+          "initialpoints": 2,
+          "img": "apple.png"
+        },
+        "bereginya": {
+          "id": "bereginya",
+          "count": 1,
+          "name": "Keeper Bereginya",
+          "type": "action",
+          "category": "heal",
+          "info": "Heals its owner for 5 damage points.",
+          "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
+          "points": 4,
+          "initialpoints": 4,
+          "img": "bereginya.png"
+        },
+        "shieldLarge": {
+          "id": "shieldLarge",
+          "count": 2,
+          "name": "Large Shield",
+          "type": "item",
+          "category": "shield",
+          "info": "Reflects minor damage until destroyed.",
+          "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+          "points": 4,
+          "initialpoints": 4,
+          "img": "shieldLarge.png"
+        },
+        "shieldSmall": {
+          "id": "shieldSmall",
+          "count": 3,
+          "name": "Small Shield",
+          "type": "item",
+          "category": "shield",
+          "info": "Protects from damage until destroyed.",
+          "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+          "points": 2,
+          "initialpoints": 2,
+          "img": "shieldSmall.png"
+        }
+      }
+    },
+    "yaga": {
+      "id": "yaga",
+      "name": "Yaga",
+      "description": "Yaga can lead a person between realm of the dead and the living. She is a Witch, Keeper of the Living and Dead water.",
+      "health": 17,
+      "cardsNumber": 17,
+      "img": "character_ex.png",
+      "cards": {
+        "bajun": {
+          "id": "bajun",
+          "count": 5,
+          "name": "Cat-Bajun",
+          "type": "action",
+          "category": "attack",
+          "info": "Magic were-cat attacks with his songs and spells.",
+          "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+          "points": 1,
+          "initialpoints": 1,
+          "img": "bajun.png"
+        },
+        "sivka": {
+          "id": "sivka",
+          "count": 4,
+          "name": "Sivka-Burka",
+          "type": "action",
+          "category": "attack",
+          "info": "Magic prophetic horse, mediating the realm of the dead.",
+          "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
+          "points": 2,
+          "initialpoints": 2,
+          "img": "sivka.png"
+        },
+        "wolf": {
+          "id": "wolf",
+          "count": 3,
+          "name": "Grey Wolf",
+          "type": "action",
+          "category": "attack",
+          "info": "Lives in a deep forest, aggresive and unpredictable.",
+          "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+          "points": 3,
+          "initialpoints": 3,
+          "img": "wolf.png"
+        },
+        "bogatyr": {
+          "id": "bogatyr",
+          "count": 2,
+          "name": "Bogatyr",
+          "type": "action",
+          "category": "attack",
+          "info": "Hero-warrior possessing great power, protector.",
+          "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+          "points": 4,
+          "initialpoints": 4,
+          "img": "bogatyr.png"
+        },
+        "apple": {
+          "id": "apple",
+          "count": 2,
+          "name": "Apple",
+          "type": "action",
+          "category": "heal",
+          "info": "Heals its owner for 3 damage points.",
+          "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+          "points": 2,
+          "initialpoints": 2,
+          "img": "apple.png"
+        },
+        "bereginya": {
+          "id": "bereginya",
+          "count": 1,
+          "name": "Keeper Bereginya",
+          "type": "action",
+          "category": "heal",
+          "info": "Heals its owner for 5 damage points.",
+          "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
+          "points": 4,
+          "initialpoints": 4,
+          "img": "bereginya.png"
+        },
+        "shieldLarge": {
+          "id": "shieldLarge",
+          "count": 2,
+          "name": "Large Shield",
+          "type": "item",
+          "category": "shield",
+          "info": "Reflects minor damage until destroyed.",
+          "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+          "points": 4,
+          "initialpoints": 4,
+          "img": "shieldLarge.png"
+        },
+        "shieldSmall": {
+          "id": "shieldSmall",
+          "count": 3,
+          "name": "Small Shield",
+          "type": "item",
+          "category": "shield",
+          "info": "Protects from damage until destroyed.",
+          "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+          "points": 2,
+          "initialpoints": 2,
+          "img": "shieldSmall.png"
+        }
+      }
+    }
+  },
+  "game": {
+    "phase": "ACTIVE"
+  }
+}
