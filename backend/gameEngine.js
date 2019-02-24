@@ -77,6 +77,7 @@ const generatePlayers = function (heroName) {
 
     // Assign individual data to player 0
     players[0].position = 'bottom';
+    players[0].background = allCharacters[heroName].background;
     players[0].hero = heroName;
     players[0].deck = createDeck(heroName);
     players[0].cards = assignCards(players[0].deck, allCharacters[heroName].cardsNumber);
@@ -85,6 +86,7 @@ const generatePlayers = function (heroName) {
 
     // Assign individual data to player 1
     players[1].position = 'top';
+    players[1].background = allCharacters[heroSecondName].background;
     players[1].hero = heroSecondName;
     players[1].deck = createDeck(heroSecondName);
     players[1].cards = assignCards(players[1].deck, allCharacters[heroSecondName].cardsNumber);

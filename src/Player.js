@@ -81,8 +81,13 @@ class Player extends Component {
                     isTarget={this.isTarget}
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
+                    background={this.props.player.background}
                 />
-                <Deck cards={this.props.player.cards} />
+                <Deck
+                    active={this.props.player.active}
+                    cards={this.props.player.cards}
+                    background={this.props.player.background}
+                />
                 <Hand
                     active={this.props.player.active}
                     hand={this.props.player.hand}
@@ -97,6 +102,7 @@ class Player extends Component {
                     isTarget={this.isTarget}
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
+                    background={this.props.player.background}
                 />
             </div>
         );
@@ -104,12 +110,9 @@ class Player extends Component {
 }
 
 const Deck = props => (
-    <div className="deck card-like">
-        <div className="deck-name" props={props}>
-            cards
-        </div>
+    <div className={`deck card-like deck-${props.background}`}>
         <div className="count">
-            {Object.keys(props.cards).length}
+            {props.active ? Object.keys(props.cards).length : Object.keys(props.cards).length}
         </div>
     </div>
 );
@@ -132,7 +135,7 @@ const Hand = props => (
 
 const Grave = props => (
     <div
-        className={`grave card-like ${props.isTarget('graveyard') ? 'target' : null}`}
+        className={`grave card-like ${props.background} ${props.isTarget('graveyard') ? 'target' : null}`}
         id={props.active ? 'grave' : null}
         onDrop={() => props.cardDropped('graveyard')}
         onDragOver={e => props.cardOver(e, 'graveyard')}
@@ -148,7 +151,7 @@ const Grave = props => (
 
 const Item = props => (
     <div
-        className={`item card-place card-like ${props.isTarget('item') ? 'target' : null}`}
+        className={`item card-place card-like ${props.background} ${props.isTarget('item') ? 'target' : null}`}
         id={props.active ? 'item' : null}
         onDrop={() => props.cardDropped('item', props.item)}
         onDragOver={e => props.cardOver(e, 'item')}
@@ -178,6 +181,8 @@ const Card = props => (
 
 Deck.propTypes = {
     cards: PropTypes.object.isRequired,
+    background: PropTypes.string.isRequired,
+    active: PropTypes.bool.isRequired,
 };
 
 Player.propTypes = {
@@ -219,6 +224,7 @@ Grave.propTypes = {
     isTarget: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
     cardOver: PropTypes.func.isRequired,
+    background: PropTypes.string.isRequired,
 };
 
 Item.propTypes = {
@@ -227,6 +233,7 @@ Item.propTypes = {
     isTarget: PropTypes.func.isRequired,
     cardOver: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
+    background: PropTypes.string.isRequired,
 };
 
 Item.defaultProps = {

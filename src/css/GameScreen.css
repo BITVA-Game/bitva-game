@@ -4,6 +4,20 @@
     background-image: url(../images/game-background.png);
 }
 
+.player-active .card,
+.player-active .deck,
+.player-active .item,
+.player-active .grave {
+    border: 3px solid #fff;
+}
+
+.player-inactive .card,
+.player-inactive .deck,
+.player-inactive .item,
+.player-inactive .grave {
+    border: 3px solid #000;
+}
+
 /* player */
 
 .player {
@@ -12,7 +26,6 @@
 }
 
 .player-top  {
-    margin-left: -70px;
     position: absolute;
     top: 0;
     transform: rotate(180deg);
@@ -30,12 +43,10 @@
     border-radius: 50%;
     bottom: 180px;
     display: inline-block;
-    left: 220px;
+    height: 220px;
+    left: 200px;
     position: absolute;
-}
-
-.player-inactive .hero {
-    filter: brightness(45%);
+    width: 220px;
 }
 
 .player-top .hero {
@@ -48,11 +59,16 @@
 
 .hero-image {
     border-radius: 50%;
+    filter: invert(.2) sepia(1);
 }
 
 .hero-health {
     left: 0;
     position: absolute;
+}
+
+.player-active .hero-health circle {
+    stroke: #fff;
 }
 
 .hero-health-points {
@@ -74,9 +90,17 @@
 /* item */
 
 .item {
-    bottom: 200px;
     left: 444px;
+    opacity: .5;
     position: absolute;
+}
+
+.green {
+    background-color: #6D8374;
+}
+
+.red {
+    background-color: #A36264;
 }
 
 /* hand */
@@ -92,9 +116,8 @@
 /* card-place */
 
 .card-place {
-    background-color: rgb(211, 226, 243);
-    background-color: rgba(211, 226, 243, 0.55);
-    border-radius: 9%;
+    /*background-color: rgb(211, 226, 243);
+    background-color: rgba(211, 226, 243, 0.55);*/
     margin-right: 26px;
 }
 
@@ -103,12 +126,12 @@
 .card {
     background-color: #fff;
     transform: rotate(0);
-    width: 110px;
+    width: 120px;
 }
 
 .card-like {
-    height: 140px;
-    width: 110px;
+    height: 168px;
+    width: 120px;
 }
 
 .player-top .card {
@@ -130,19 +153,19 @@
 .game-icon {
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 30px 30px;
+    background-size: 40px 40px;
     -webkit-filter: drop-shadow(0 0 2px #fff);
     filter: drop-shadow(0 0 2px #fff);
-    height: 30px;
+    height: 40px;
     position: absolute;
-    right: -12px;
-    top: -10px;
-    width: 30px;
+    right: -18px;
+    top: -14px;
+    width: 40px;
 }
 .game-icon-text {
     align-items: center;
     display: flex;
-    font-size: 24px;
+    font-size: 28px;
     justify-content: center;
     text-align: center;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -163,25 +186,19 @@
     position: absolute;
 }
 
-.player-inactive .deck {
-    display: none;
+.deck-green {
+    background-image: url(../images/back-green.jpg);
+    background-size: cover;
 }
 
-.deck-name {
-    color: #000;
-    font-size: 24px;
-    position: absolute;
-    text-align: center;
-    text-transform: lowercase;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
+.deck-red {
+    background-image: url(../images/back-red.jpg);
+    background-size: cover;
 }
 
 /* graveyard */
 
 .grave {
-    background-color: #566678;
     bottom: 27px;
     display: inline-block;
     position: absolute;
@@ -189,7 +206,6 @@
 }
 
 .player-top .grave {
-    right: 105px;
     transform: rotate(180deg);
 }
 
