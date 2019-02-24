@@ -104,3 +104,30 @@
         -9px 20px 9px 3px orange, 9px 20px 9px 3px orange;
     }
 }
+
+/* spider */
+.spider img {max-width:100%;}
+.spider {
+  display: block;
+  height: 45px;
+  left: 5%;
+  margin-left: 390px;
+  position: absolute;
+  top: 24px;
+  width: 45px;
+}
+ @keyframes spider-move {
+    0% {height: 20px;}
+    100% {height: 400px;}
+  }
+
+  .spider::before {
+    animation: spider-move 4s ease-in-out infinite alternate;
+    background-color: black;
+    content: "";
+    display: block;
+    height: 50px;  
+    margin-bottom: -3px;    
+    margin-left: 24px;    
+    width: 1px;
+  }
