@@ -95,10 +95,12 @@
 }
 
 .green {
+    background-color: rgb(109, 131, 116);
     background-color: rgba(109, 131, 116, .5); /*#6D8374*/
 }
 
 .red {
+    background-color: rgb(163, 98, 100);
     background-color: rgba(163, 98, 100, .5); /*#A36264*/
 }
 
