@@ -41,26 +41,19 @@ const imagesCards = {
     cardPlace,
 };
 
-
-// Show all cards by pairs (3 in row)
+// Show all cards by 1 in row
 function prepairCards(cards) {
     const cardsKeys = Object.keys(cards);
-    const cardsBy3 = [];
-    for (let i = 0; i < cardsKeys.length; i += 3) {
-        cardsBy3.push(cardsKeys.slice(i, i + 3));
+    const cardsBy1 = [];
+    for (let i = 0; i < cardsKeys.length; i += 1) {
+        cardsBy1.push(cardsKeys.slice(i, i + 1));
     }
-    return cardsBy3;
+    return cardsBy1;
 }
 
 const HeroImage = props => (
     <div className="details-hero">
         <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }}>
-            <div className="icon-deck icon-text">
-                {props.hero.cardsNumber}
-            </div>
-            <div className="icon icon-text icon-heal">
-                {props.hero.health}
-            </div>
         </div>
     </div>
 );
@@ -70,13 +63,9 @@ const CardPreview = props => (
         ? (
             <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
                 <div className="card-header">
-                    <div className="icon-deck icon-text">
-                        {props.card.count}
-                    </div>
                     <p>{props.card.name}</p>
                     <div className={`icon icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>{props.card.points}</div>
                 </div>
-                <div className="card-description">{props.card.info}</div>
             </div>
         )
         : <img className="details-card" style={{ opacity: '0.25' }} src={imagesCards.cardPlace} alt="card" />
@@ -85,22 +74,26 @@ const CardPreview = props => (
 const CardsRow = props => (
     <>
         <CardPreview card={props.cards[props.row[0]]} />
-        <CardPreview card={props.cards[props.row[1]]} />
-        <CardPreview card={props.cards[props.row[2]]} />
+        <div className="card-description">
+            {props.cards[props.row[0]].description}
+            <div className="icon-deck icon-text">
+                {props.cards[props.row[0]].count}
+            </div>
+        </div>
     </>
 );
 
 class CardsBlock extends Component {
     constructor(props) {
         super(props);
-        this.cardsBy3 = prepairCards(props.cards);
+        this.cardsBy1 = prepairCards(props.cards);
         this.state = { row: 0 };
         this.changeRow = this.changeRow.bind(this);
     }
 
     changeRow() {
         console.log('changeRow ', this.state.row);
-        const maxRotation = this.cardsBy3.length - 1;
+        const maxRotation = this.cardsBy1.length - 1;
         const currentRow = this.state.row;
         if (currentRow === maxRotation) {
             this.setState({ row: 0 });
@@ -115,7 +108,7 @@ class CardsBlock extends Component {
                 <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
                     ◀
                 </div>
-                <CardsRow heroId={this.props.heroId} row={this.cardsBy3[this.state.row]} cards={this.props.cards} />
+                <CardsRow heroId={this.props.heroId} row={this.cardsBy1[this.state.row]} cards={this.props.cards} />
                 <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="6">
                     ▶
                 </div>
@@ -134,6 +127,14 @@ const OneHero = props => (
                     {props.hero.description}
                     {console.log('PROPS HERO ', props.hero.cards)}
                 </span>
+                <div className="icons-container">
+                    <div className="icon-deck icon-text">
+                        {props.hero.cardsNumber}
+                    </div>
+                    <div className="icon icon-text icon-heal">
+                        {props.hero.health}
+                    </div>
+                </div>
             </article>
             <CardsBlock heroId={props.hero.id} cards={props.hero.cards} />
         </div>
