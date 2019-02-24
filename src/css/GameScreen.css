@@ -7,7 +7,6 @@
 .player-active .card,
 .player-active .deck,
 .player-active .item,
-.player-active .no-item,
 .player-active .grave {
     border: 3px solid #fff;
 }
@@ -15,7 +14,6 @@
 .player-inactive .card,
 .player-inactive .deck,
 .player-inactive .item,
-.player-inactive .no-item,
 .player-inactive .grave {
     border: 3px solid #000;
 }
@@ -96,18 +94,12 @@
     position: absolute;
 }
 
-.no-item {
-    left: 444px;
-    opacity: .5;
-    position: absolute;
-}
-
 .green {
-    background-color: #6D8374;
+    background-color: rgba(109, 131, 116, .5); /*#6D8374*/
 }
 
 .red {
-    background-color: #A36264;
+    background-color: rgba(163, 98, 100, .5); /*#A36264*/
 }
 
 /*fix card-in-item's position for bottom player*/
@@ -213,6 +205,10 @@
     background-size: cover;
 }
 
+.player-top .deck {
+    transform: rotate(180deg);
+}
+
 /* graveyard */
 
 .grave {
@@ -222,11 +218,15 @@
     right: 35px;
 }
 
-.player-top .grave {
-    transform: rotate(180deg);
+.grave-green {
+    background-color: rgb(109, 131, 116); /*#6D8374*/
 }
 
-.player-top .deck {
+.grave-red {
+    background-color: rgb(163, 98, 100); /*#A36264*/
+}
+
+.player-top .grave {
     transform: rotate(180deg);
 }
 

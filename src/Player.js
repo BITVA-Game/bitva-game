@@ -135,7 +135,7 @@ const Hand = props => (
 
 const Grave = props => (
     <div
-        className={`grave card-like ${props.background} ${props.isTarget('graveyard') ? 'target' : null}`}
+        className={`grave card-like grave-${props.background} ${props.isTarget('graveyard') ? 'target' : null}`}
         id={props.active ? 'grave' : null}
         onDrop={() => props.cardDropped('graveyard')}
         onDragOver={e => props.cardOver(e, 'graveyard')}
@@ -151,7 +151,7 @@ const Grave = props => (
 
 const Item = props => (
     <div
-        className={`card-place card-like ${props.item === null ? 'no-item' : 'item'} ${props.background} ${props.isTarget('item') ? 'target' : null}`}
+        className={`item card-place card-like ${props.background} ${props.isTarget('item') ? 'target' : null}`}
         id={props.active ? 'item' : null}
         onDrop={() => props.cardDropped('item', props.item)}
         onDragOver={e => props.cardOver(e, 'item')}
