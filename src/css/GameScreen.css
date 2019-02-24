@@ -7,6 +7,7 @@
 .player-active .card,
 .player-active .deck,
 .player-active .item,
+.player-active .no-item,
 .player-active .grave {
     border: 3px solid #fff;
 }
@@ -14,6 +15,7 @@
 .player-inactive .card,
 .player-inactive .deck,
 .player-inactive .item,
+.player-inactive .no-item,
 .player-inactive .grave {
     border: 3px solid #000;
 }
@@ -91,6 +93,11 @@
 
 .item {
     left: 444px;
+    position: absolute;
+}
+
+.no-item {
+    left: 444px;
     opacity: .5;
     position: absolute;
 }
@@ -101,6 +108,16 @@
 
 .red {
     background-color: #A36264;
+}
+
+/*fix card-in-item's position for bottom player*/
+.player-bottom .item .card {
+    transform: rotate(0deg) translate(-3px, -3px);
+}
+
+/*fix card-in-item's position for top player*/
+.player-top .item .card {
+    transform: rotate(180deg) translate(3px, 3px);
 }
 
 /* hand */

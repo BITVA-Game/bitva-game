@@ -151,7 +151,7 @@ const Grave = props => (
 
 const Item = props => (
     <div
-        className={`item card-place card-like ${props.background} ${props.isTarget('item') ? 'target' : null}`}
+        className={`card-place card-like ${props.item === null ? 'no-item' : 'item'} ${props.background} ${props.isTarget('item') ? 'target' : null}`}
         id={props.active ? 'item' : null}
         onDrop={() => props.cardDropped('item', props.item)}
         onDragOver={e => props.cardOver(e, 'item')}
