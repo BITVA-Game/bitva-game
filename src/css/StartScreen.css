@@ -106,28 +106,54 @@
 }
 
 /* spider */
-.spider img {max-width:100%;}
 .spider {
   display: block;
-  height: 45px;
+  height: 15px;
   left: 5%;
-  margin-left: 390px;
+  margin-left: 376px;
   position: absolute;
-  top: 24px;
+  top: 13px;
   width: 45px;
 }
  @keyframes spider-move {
-    0% {height: 20px;}
+    0% {height: 0px;}
     100% {height: 400px;}
   }
 
   .spider::before {
-    animation: spider-move 4s ease-in-out infinite alternate;
-    background-color: black;
+    animation: spider-move 3s ease-in-out infinite alternate;
+    animation-delay: 3s;
+    background-color: grey;
     content: "";
     display: block;
-    height: 50px;  
-    margin-bottom: -3px;    
-    margin-left: 24px;    
+    height: 0px;  
+    margin-bottom: -13px;    
+    margin-left: 38px;    
     width: 1px;
   }
+
+  /* mushrooms */
+  /* .mushrooms {
+    display: block;
+    width: 20px;
+    height: 30px;
+    border-radius:  60% 60% 40% 40% / 50% 50% 50% 50%;
+    background-color: black;
+    animation: glow 3s infinite alternate;
+    
+    right: 11.5%;
+    margin-left: 376px;
+    position: absolute;
+    bottom: 285px;
+    z-index: -1;
+}
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 10px -10px black;
+    }
+    to {
+      box-shadow: 0 0 10px 10px rgb(104, 212, 89);
+    }
+    
+  } */
