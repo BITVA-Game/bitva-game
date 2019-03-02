@@ -1,4 +1,5 @@
 /* eslint-disable import/no-duplicates */
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Player from './Player';
@@ -71,8 +72,11 @@ const GameOver = (props) => {
     }
     return (
         <div className="gameover">
-            {/* if player is active and alive, the message is 'you win' */}
-            <p className="gameover-message">{activePlayer && activePlayer.health.current > 0 ? 'you win' : 'you lose'}</p>
+            {/* for pvp mode: if player is active and alive, the message is 'you win' */}
+            {/* <p className="gameover-message">{activePlayer && activePlayer.health.current > 0 ? 'you win' : 'you lose'}</p> */}
+            <p className="gameover-message">
+                {activePlayer && activePlayer.health.current > 0 ? `${activePlayer.hero} wins` : `${activePlayer.hero} loses`}
+            </p>
         </div>
     );
 };
