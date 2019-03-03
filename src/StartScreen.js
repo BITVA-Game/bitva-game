@@ -4,12 +4,16 @@ import MainMenu from './MainMenu';
 import './css/App.css';
 import './css/MainMenu.css';
 import './css/StartScreen.css';
+import spider from './images/animation/spider.png';
 
 
 const StartScreen = props => (
     <div className="start-screen">
         <div className="hollow" />
         <div className="window" />
+        <div className="spider">
+            <img src={spider} alt="spider icon" />
+        </div>
         <MainMenu sendMessage={props.sendMessage} opened />
         {/* <textarea value={JSON.stringify(props.app.profile)} /> */}
     </div>
