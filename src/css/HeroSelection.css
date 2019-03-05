@@ -175,7 +175,7 @@ section {
 }
 
 .deck-icon {
-	background-color: #97ABB8;
+	background-color: #898989;
     border: 1px solid #fff;
 	border-radius: 3px;
 	height: 40px;
@@ -301,8 +301,8 @@ section {
 
 .card-header .icon {
 	position: absolute;
-	right: -25px;	
-	top: -25px;
+	right: -38px;	
+	top: -30px;
 }
 
 .details-card p {
@@ -323,32 +323,36 @@ section {
 .icon {
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: 40px 40px;
-	flex-basis: 40px;
-	height: 40px;
+	background-size: 68px 68px;
+	flex-basis: 68px;
+	height: 68px;
 	margin: 8px;
-	width: 40px;
+	width: 68px;
 }
 
 .icon-deck {
 	align-items: center;
-	background-color: #97ABB8;
+	background-color: #898989;
     border: 1px solid #fff;
 	border-radius: 3px;
 	display: flex;
-	flex-basis: 30px;
-	height: 40px;
+	flex-basis: 51px;
+	height: 68px;
 	justify-content: center;
 	margin: 8px 0;
-    width: 30px;
+    width: 51px;
 }
 
 .icon-attack {
 	background-image: url("../images/icons/skull.png");
 }
 
+.icon-damage {
+	background-image: url("../images/icons/heart_black.png");
+}
+
 .icon-heal {
-	background-image: url("../images/icons/heart.png");
+	background-image: url("../images/icons/heart_red.png");
 }
 
 .icon-shield {
@@ -357,7 +361,7 @@ section {
 
 .icon-text {
 	color: #fff;
-	font-size: 26px;
+	font-size: 44px;
 	text-align: center;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }

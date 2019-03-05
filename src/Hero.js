@@ -63,10 +63,8 @@ class HealthMeter extends Component {
                     <circle cx={this.cx} cy={this.cy} r={this.r} stroke="black" strokeWidth={this.sw + 1} fill="transparent" />
                     <path className="hero-health-points" d={this.d} strokeWidth={this.sw} strokeDasharray={this.sda} strokeLinecap="butt" fill="transparent" />
                 </svg>
-                <div className="heart app-heart">
-                    <div className="heart-text app-heart-text">
-                        {this.props.health.current}
-                    </div>
+                <div className="hero-icon game-icon-text icon-heal">
+                    {this.props.health.current}
                 </div>
             </>
         );

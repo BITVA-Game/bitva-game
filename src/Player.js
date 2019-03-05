@@ -173,8 +173,13 @@ const Card = props => (
             {props.card.name}
             {/* <p>{props.cardKey}</p> */}
         </div>
-        <div className={`game-icon game-icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>
-            <p>{props.card.points}</p>
+        <div className={`game-icon game-icon-text 
+            ${props.card.category === 'attack' ? 'icon-attack' : null}
+            ${props.card.category === 'damage' ? 'icon-damage' : null}
+            ${props.card.category === 'heal' ? 'icon-heal' : null} 
+            ${props.card.category === 'shield' ? 'icon-shield' : null}`}
+        >
+            {props.card.points}
         </div>
     </div>
 );
