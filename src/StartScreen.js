@@ -14,6 +14,7 @@ const StartScreen = props => (
         <div className="spider">
             <img src={spider} alt="spider icon" />
         </div>
+        <div className="mushroom" />
         <MainMenu sendMessage={props.sendMessage} opened />
         {/* <textarea value={JSON.stringify(props.app.profile)} /> */}
     </div>
