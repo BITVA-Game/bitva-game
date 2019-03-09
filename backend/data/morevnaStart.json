@@ -1,919 +1,1061 @@
 {
-  "profile": {
-    "characters": [
-      "morevna"
-    ],
-    "deck": [
-      "apple"
-    ],
-    "silver": 5,
-    "gold": 0
-  },
-  "manager": {
-    "screen": "PLAYERACT"
-  },
-  "heroSelect": {},
-  "game": {
-    "phase": "ACTIVE",
-    "players": [
-      {
-        "active": true,
-        "hand": {
-          "key2": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key0": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key3": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key14": {
-            "id": "apple",
-            "name": "Apple",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 3 damage points.",
-            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "apple.png"
-          },
-          "key19": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          }
-        },
-        "item": {},
-        "grave": {},
-        "moveCounter": 0,
-        "health": {
-          "current": 15,
-          "maximum": 15
-        },
-        "deal": 0,
-        "position": "bottom",
-        "background": "green",
-        "hero": "morevna",
-        "deck": {
-          "key0": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key1": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key2": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key3": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key4": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key5": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key6": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key7": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key8": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key9": {
-            "id": "wolf",
-            "name": "Grey Wolf",
-            "type": "action",
-            "category": "attack",
-            "info": "Lives in a deep forest, aggresive and unpredictable.",
-            "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-            "points": 3,
-            "initialpoints": 3,
-            "img": "wolf.png"
-          },
-          "key10": {
-            "id": "wolf",
-            "name": "Grey Wolf",
-            "type": "action",
-            "category": "attack",
-            "info": "Lives in a deep forest, aggresive and unpredictable.",
-            "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-            "points": 3,
-            "initialpoints": 3,
-            "img": "wolf.png"
-          },
-          "key11": {
-            "id": "wolf",
-            "name": "Grey Wolf",
-            "type": "action",
-            "category": "attack",
-            "info": "Lives in a deep forest, aggresive and unpredictable.",
-            "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-            "points": 3,
-            "initialpoints": 3,
-            "img": "wolf.png"
-          },
-          "key12": {
-            "id": "bogatyr",
-            "name": "Bogatyr",
-            "type": "action",
-            "category": "attack",
-            "info": "Hero-warrior possessing great power, protector.",
-            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bogatyr.png"
-          },
-          "key13": {
-            "id": "bogatyr",
-            "name": "Bogatyr",
-            "type": "action",
-            "category": "attack",
-            "info": "Hero-warrior possessing great power, protector.",
-            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bogatyr.png"
-          },
-          "key14": {
-            "id": "apple",
-            "name": "Apple",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 3 damage points.",
-            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "apple.png"
-          },
-          "key15": {
-            "id": "apple",
-            "name": "Apple",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 3 damage points.",
-            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "apple.png"
-          },
-          "key16": {
-            "id": "bereginya",
-            "name": "Keeper Bereginya",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 5 damage points.",
-            "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bereginya.png"
-          },
-          "key17": {
-            "id": "shieldLarge",
-            "name": "Large Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Reflects minor damage until destroyed.",
-            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "shieldLarge.png"
-          },
-          "key18": {
-            "id": "shieldLarge",
-            "name": "Large Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Reflects minor damage until destroyed.",
-            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "shieldLarge.png"
-          },
-          "key19": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          },
-          "key20": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          },
-          "key21": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          }
-        },
-        "cards": {
-          "key12": {
-            "id": "bogatyr",
-            "name": "Bogatyr",
-            "type": "action",
-            "category": "attack",
-            "info": "Hero-warrior possessing great power, protector.",
-            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bogatyr.png"
-          },
-          "key1": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key7": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key8": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key21": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          },
-          "key15": {
-            "id": "apple",
-            "name": "Apple",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 3 damage points.",
-            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "apple.png"
-          },
-          "key11": {
-            "id": "wolf",
-            "name": "Grey Wolf",
-            "type": "action",
-            "category": "attack",
-            "info": "Lives in a deep forest, aggresive and unpredictable.",
-            "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-            "points": 3,
-            "initialpoints": 3,
-            "img": "wolf.png"
-          },
-          "key13": {
-            "id": "bogatyr",
-            "name": "Bogatyr",
-            "type": "action",
-            "category": "attack",
-            "info": "Hero-warrior possessing great power, protector.",
-            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bogatyr.png"
-          },
-          "key18": {
-            "id": "shieldLarge",
-            "name": "Large Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Reflects minor damage until destroyed.",
-            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "shieldLarge.png"
-          },
-          "key4": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key17": {
-            "id": "shieldLarge",
-            "name": "Large Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Reflects minor damage until destroyed.",
-            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "shieldLarge.png"
-          },
-          "key16": {
-            "id": "bereginya",
-            "name": "Keeper Bereginya",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 5 damage points.",
-            "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bereginya.png"
-          }
-        }
-      },
-      {
-        "active": false,
-        "hand": {
-          "key0": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key20": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          },
-          "key16": {
-            "id": "bereginya",
-            "name": "Keeper Bereginya",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 5 damage points.",
-            "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bereginya.png"
-          },
-          "key3": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key5": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          }
-        },
-        "item": {},
-        "grave": {},
-        "moveCounter": 0,
-        "health": {
-          "current": 17,
-          "maximum": 17
-        },
-        "deal": 0,
-        "position": "top",
-        "background": "red",
-        "hero": "yaga",
-        "deck": {
-          "key0": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key1": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key2": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key3": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key4": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key5": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key6": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key7": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key8": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key9": {
-            "id": "wolf",
-            "name": "Grey Wolf",
-            "type": "action",
-            "category": "attack",
-            "info": "Lives in a deep forest, aggresive and unpredictable.",
-            "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-            "points": 3,
-            "initialpoints": 3,
-            "img": "wolf.png"
-          },
-          "key10": {
-            "id": "wolf",
-            "name": "Grey Wolf",
-            "type": "action",
-            "category": "attack",
-            "info": "Lives in a deep forest, aggresive and unpredictable.",
-            "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-            "points": 3,
-            "initialpoints": 3,
-            "img": "wolf.png"
-          },
-          "key11": {
-            "id": "wolf",
-            "name": "Grey Wolf",
-            "type": "action",
-            "category": "attack",
-            "info": "Lives in a deep forest, aggresive and unpredictable.",
-            "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-            "points": 3,
-            "initialpoints": 3,
-            "img": "wolf.png"
-          },
-          "key12": {
-            "id": "bogatyr",
-            "name": "Bogatyr",
-            "type": "action",
-            "category": "attack",
-            "info": "Hero-warrior possessing great power, protector.",
-            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bogatyr.png"
-          },
-          "key13": {
-            "id": "bogatyr",
-            "name": "Bogatyr",
-            "type": "action",
-            "category": "attack",
-            "info": "Hero-warrior possessing great power, protector.",
-            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bogatyr.png"
-          },
-          "key14": {
-            "id": "apple",
-            "name": "Apple",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 3 damage points.",
-            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "apple.png"
-          },
-          "key15": {
-            "id": "apple",
-            "name": "Apple",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 3 damage points.",
-            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "apple.png"
-          },
-          "key16": {
-            "id": "bereginya",
-            "name": "Keeper Bereginya",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 5 damage points.",
-            "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bereginya.png"
-          },
-          "key17": {
-            "id": "shieldLarge",
-            "name": "Large Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Reflects minor damage until destroyed.",
-            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "shieldLarge.png"
-          },
-          "key18": {
-            "id": "shieldLarge",
-            "name": "Large Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Reflects minor damage until destroyed.",
-            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "shieldLarge.png"
-          },
-          "key19": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          },
-          "key20": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          },
-          "key21": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          }
-        },
-        "cards": {
-          "key15": {
-            "id": "apple",
-            "name": "Apple",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 3 damage points.",
-            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "apple.png"
-          },
-          "key8": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key13": {
-            "id": "bogatyr",
-            "name": "Bogatyr",
-            "type": "action",
-            "category": "attack",
-            "info": "Hero-warrior possessing great power, protector.",
-            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bogatyr.png"
-          },
-          "key14": {
-            "id": "apple",
-            "name": "Apple",
-            "type": "action",
-            "category": "heal",
-            "info": "Heals its owner for 3 damage points.",
-            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "apple.png"
-          },
-          "key12": {
-            "id": "bogatyr",
-            "name": "Bogatyr",
-            "type": "action",
-            "category": "attack",
-            "info": "Hero-warrior possessing great power, protector.",
-            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-            "points": 4,
-            "initialpoints": 4,
-            "img": "bogatyr.png"
-          },
-          "key21": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          },
-          "key4": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key2": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          },
-          "key7": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key6": {
-            "id": "sivka",
-            "name": "Sivka-Burka",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic prophetic horse, mediating the realm of the dead.",
-            "description": "Magic prophetic ''wild\"-colored horse, mediating the living and realm of the dead.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "sivka.png"
-          },
-          "key19": {
-            "id": "shieldSmall",
-            "name": "Small Shield",
-            "type": "item",
-            "category": "shield",
-            "info": "Protects from damage until destroyed.",
-            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-            "points": 2,
-            "initialpoints": 2,
-            "img": "shieldSmall.png"
-          },
-          "key1": {
-            "id": "bajun",
-            "name": "Cat-Bajun",
-            "type": "action",
-            "category": "attack",
-            "info": "Magic were-cat attacks with his songs and spells.",
-            "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-            "points": 1,
-            "initialpoints": 1,
-            "img": "bajun.png"
-          }
-        }
-      }
-    ]
-  }
+    "profile": {
+        "characters": [
+            "morevna"
+        ],
+        "deck": [
+            "apple"
+        ],
+        "silver": 5,
+        "gold": 0
+    },
+    "manager": {
+        "screen": "PLAYERACT"
+    },
+    "heroSelect": {},
+    "game": {
+        "phase": "ACTIVE",
+        "players": [
+            {
+                "active": true,
+                "hand": {
+                    "key22": {
+                        "id": "waterLiving",
+                        "name": "Living water",
+                        "type": "item",
+                        "category": "heal",
+                        "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "livingWater.png"
+                    },
+                    "key11": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key4": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key7": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key8": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    }
+                },
+                "item": {},
+                "grave": {},
+                "moveCounter": 0,
+                "health": {
+                    "current": 15,
+                    "maximum": 15
+                },
+                "deal": 0,
+                "position": "bottom",
+                "background": "green",
+                "hero": "morevna",
+                "deck": {
+                    "key0": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key1": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key2": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key3": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key4": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key5": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key6": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key7": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key8": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key9": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key10": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key11": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key12": {
+                        "id": "bogatyr",
+                        "name": "Bogatyr",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bogatyr.png"
+                    },
+                    "key13": {
+                        "id": "bogatyr",
+                        "name": "Bogatyr",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bogatyr.png"
+                    },
+                    "key14": {
+                        "id": "apple",
+                        "name": "Apple",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "apple.png"
+                    },
+                    "key15": {
+                        "id": "apple",
+                        "name": "Apple",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "apple.png"
+                    },
+                    "key16": {
+                        "id": "bereginya",
+                        "name": "Keeper Bereginya",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bereginya.png"
+                    },
+                    "key17": {
+                        "id": "shieldLarge",
+                        "name": "Large Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "shieldLarge.png"
+                    },
+                    "key18": {
+                        "id": "shieldLarge",
+                        "name": "Large Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "shieldLarge.png"
+                    },
+                    "key19": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key20": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key21": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key22": {
+                        "id": "waterLiving",
+                        "name": "Living water",
+                        "type": "item",
+                        "category": "heal",
+                        "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "livingWater.png"
+                    },
+                    "key23": {
+                        "id": "waterLiving",
+                        "name": "Living water",
+                        "type": "item",
+                        "category": "heal",
+                        "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "livingWater.png"
+                    },
+                    "key24": {
+                        "id": "waterDead",
+                        "name": "Dead water",
+                        "type": "item",
+                        "category": "damage",
+                        "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "deadWater.png"
+                    }
+                },
+                "cards": {
+                    "key18": {
+                        "id": "shieldLarge",
+                        "name": "Large Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "shieldLarge.png"
+                    },
+                    "key1": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key19": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key12": {
+                        "id": "bogatyr",
+                        "name": "Bogatyr",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bogatyr.png"
+                    },
+                    "key9": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key15": {
+                        "id": "apple",
+                        "name": "Apple",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "apple.png"
+                    },
+                    "key21": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key0": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key5": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key10": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key3": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key17": {
+                        "id": "shieldLarge",
+                        "name": "Large Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "shieldLarge.png"
+                    },
+                    "key20": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key24": {
+                        "id": "waterDead",
+                        "name": "Dead water",
+                        "type": "item",
+                        "category": "damage",
+                        "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "deadWater.png"
+                    },
+                    "key6": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key2": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key13": {
+                        "id": "bogatyr",
+                        "name": "Bogatyr",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bogatyr.png"
+                    },
+                    "key14": {
+                        "id": "apple",
+                        "name": "Apple",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "apple.png"
+                    },
+                    "key16": {
+                        "id": "bereginya",
+                        "name": "Keeper Bereginya",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bereginya.png"
+                    },
+                    "key23": {
+                        "id": "waterLiving",
+                        "name": "Living water",
+                        "type": "item",
+                        "category": "heal",
+                        "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "livingWater.png"
+                    }
+                }
+            },
+            {
+                "active": false,
+                "hand": {
+                    "key22": {
+                        "id": "waterLiving",
+                        "name": "Living water",
+                        "type": "item",
+                        "category": "heal",
+                        "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "livingWater.png"
+                    },
+                    "key12": {
+                        "id": "bogatyr",
+                        "name": "Bogatyr",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bogatyr.png"
+                    },
+                    "key5": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key21": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key7": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    }
+                },
+                "item": {},
+                "grave": {},
+                "moveCounter": 0,
+                "health": {
+                    "current": 17,
+                    "maximum": 17
+                },
+                "deal": 0,
+                "position": "top",
+                "background": "red",
+                "hero": "yaga",
+                "deck": {
+                    "key0": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key1": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key2": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key3": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key4": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key5": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key6": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key7": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key8": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key9": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key10": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key11": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key12": {
+                        "id": "bogatyr",
+                        "name": "Bogatyr",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bogatyr.png"
+                    },
+                    "key13": {
+                        "id": "bogatyr",
+                        "name": "Bogatyr",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bogatyr.png"
+                    },
+                    "key14": {
+                        "id": "apple",
+                        "name": "Apple",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "apple.png"
+                    },
+                    "key15": {
+                        "id": "apple",
+                        "name": "Apple",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "apple.png"
+                    },
+                    "key16": {
+                        "id": "bereginya",
+                        "name": "Keeper Bereginya",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bereginya.png"
+                    },
+                    "key17": {
+                        "id": "shieldLarge",
+                        "name": "Large Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "shieldLarge.png"
+                    },
+                    "key18": {
+                        "id": "shieldLarge",
+                        "name": "Large Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "shieldLarge.png"
+                    },
+                    "key19": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key20": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key21": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key22": {
+                        "id": "waterLiving",
+                        "name": "Living water",
+                        "type": "item",
+                        "category": "heal",
+                        "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "livingWater.png"
+                    },
+                    "key23": {
+                        "id": "waterDead",
+                        "name": "Dead water",
+                        "type": "item",
+                        "category": "damage",
+                        "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "deadWater.png"
+                    },
+                    "key24": {
+                        "id": "waterDead",
+                        "name": "Dead water",
+                        "type": "item",
+                        "category": "damage",
+                        "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "deadWater.png"
+                    }
+                },
+                "cards": {
+                    "key17": {
+                        "id": "shieldLarge",
+                        "name": "Large Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "shieldLarge.png"
+                    },
+                    "key19": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key6": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key1": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key8": {
+                        "id": "sivka",
+                        "name": "Sivka-Burka",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "sivka.png"
+                    },
+                    "key13": {
+                        "id": "bogatyr",
+                        "name": "Bogatyr",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bogatyr.png"
+                    },
+                    "key23": {
+                        "id": "waterDead",
+                        "name": "Dead water",
+                        "type": "item",
+                        "category": "damage",
+                        "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "deadWater.png"
+                    },
+                    "key18": {
+                        "id": "shieldLarge",
+                        "name": "Large Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "shieldLarge.png"
+                    },
+                    "key14": {
+                        "id": "apple",
+                        "name": "Apple",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "apple.png"
+                    },
+                    "key0": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key15": {
+                        "id": "apple",
+                        "name": "Apple",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "apple.png"
+                    },
+                    "key20": {
+                        "id": "shieldSmall",
+                        "name": "Small Shield",
+                        "type": "item",
+                        "category": "shield",
+                        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                        "points": 2,
+                        "initialpoints": 2,
+                        "img": "shieldSmall.png"
+                    },
+                    "key16": {
+                        "id": "bereginya",
+                        "name": "Keeper Bereginya",
+                        "type": "action",
+                        "category": "heal",
+                        "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
+                        "points": 4,
+                        "initialpoints": 4,
+                        "img": "bereginya.png"
+                    },
+                    "key11": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key10": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key9": {
+                        "id": "wolf",
+                        "name": "Grey Wolf",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "wolf.png"
+                    },
+                    "key4": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key3": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key2": {
+                        "id": "bajun",
+                        "name": "Cat-Bajun",
+                        "type": "action",
+                        "category": "attack",
+                        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+                        "points": 1,
+                        "initialpoints": 1,
+                        "img": "bajun.png"
+                    },
+                    "key24": {
+                        "id": "waterDead",
+                        "name": "Dead water",
+                        "type": "item",
+                        "category": "damage",
+                        "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+                        "points": 3,
+                        "initialpoints": 3,
+                        "img": "deadWater.png"
+                    }
+                }
+            }
+        ]
+    }
 }
