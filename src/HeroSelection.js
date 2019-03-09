@@ -118,14 +118,16 @@ class HeroSelection extends Component {
         const heroes = Object.keys(this.app.heroSelect);
         let index = heroes.indexOf(this.state.selected);
         index = index === heroes.length - 1 ? 0 : index + 1;
-        const heroID = this.state.selected;
-        const hero = this.app.heroSelect[heroID];
-        this.setState({ selected: heroes[index], hero: hero });    
+        const hero = this.app.heroSelect[heroes[index]];
+        this.setState({ selected: heroes[index], hero });
     }
 
     showLeftHero() {
-        this.selectLeftHero();
-        this.showHero();
+        const heroes = Object.keys(this.app.heroSelect);
+        let index = heroes.indexOf(this.state.selected);
+        index = index === 0 ? heroes.length - 1 : index - 1;
+        const hero = this.app.heroSelect[heroes[index]];
+        this.setState({ selected: heroes[index], hero });
     }
 
     selectHero() {
@@ -150,7 +152,7 @@ class HeroSelection extends Component {
                     {this.state.hero
                         ? (
                             <OneHero
-                                hero={this.state.hero}                                
+                                hero={this.state.hero}
                             />
                         ) : (
                             <ListOfHeroes
@@ -174,21 +176,24 @@ class HeroSelection extends Component {
 }
 
 Header.propTypes = {
-    selected: PropTypes.string.isRequired,
-    next: PropTypes.func.isRequired,
+    hero: PropTypes.object,
     prev: PropTypes.func.isRequired,
-
+    next: PropTypes.func.isRequired,
+    selected: PropTypes.string.isRequired,
     onShow: PropTypes.func.isRequired,
+    showNext: PropTypes.func.isRequired,
+    showPrev: PropTypes.func.isRequired,
+};
+
+Header.defaultProps = {
+    hero: null,
 };
 
 HeaderHeroButton.propTypes = {
     direction: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
     funct: PropTypes.func.isRequired,
-};
-
-Footer.propTypes = {
-    selectHero: PropTypes.func.isRequired,
+    tabIndex: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
 };
 
 HeroSelection.propTypes = {
@@ -196,29 +201,15 @@ HeroSelection.propTypes = {
     app: PropTypes.object.isRequired,
 };
 
-HeaderHeroButton.propTypes = {
-    funct: PropTypes.func.isRequired,
-    tabIndex: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    direction: PropTypes.string.isRequired,
-};
-
 CharacterDetailsButton.propTypes = {
     onShow: PropTypes.func.isRequired,
     tabIndex: PropTypes.string.isRequired,
 };
 
-Header.propTypes = {
-    hero: PropTypes.object,
-};
-
-Header.defaultProps = {
-    hero: null,
-};
-
 Footer.propTypes = {
-    onBack: PropTypes.func.isRequired,
     hero: PropTypes.object,
+    selectHero: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
 };
 
 Footer.defaultProps = {
