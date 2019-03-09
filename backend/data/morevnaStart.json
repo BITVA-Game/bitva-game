@@ -84,6 +84,7 @@
         },
         "deal": 0,
         "position": "bottom",
+        "background": "green",
         "hero": "morevna",
         "deck": {
           "key0": {
@@ -532,6 +533,7 @@
         },
         "deal": 0,
         "position": "top",
+        "background": "red",
         "hero": "yaga",
         "deck": {
           "key0": {
