@@ -1,4 +1,5 @@
 /* eslint-disable import/no-duplicates */
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Player from './Player';
@@ -8,12 +9,10 @@ import './css/GameScreen.css';
 class GameScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { dragging: null, changeTurn: true };
+        this.state = { dragging: null };
         this.cardDragStarted = this.cardDragStarted.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.cardDragEnded = this.cardDragEnded.bind(this);
-        this.toggleTurn = this.toggleTurn.bind(this);
-        this.toggleTurnState = this.toggleTurnState.bind(this);
     }
 
     cardDragEnded() {
@@ -37,19 +36,6 @@ class GameScreen extends Component {
         });
     }
 
-    toggleTurn() {
-        console.log('Toggling "state.changeTurn" in 3 sec');
-        setTimeout(this.toggleTurnState, 3000);
-    }
-
-    toggleTurnState() {
-        console.log('3 sec passed, state changed to false');
-        // we could use it to change state to true when the turn changes
-        this.setState(state => ({
-            changeTurn: !state.changeTurn
-        }));
-    }
-
     render() {
         console.log('I AM RENDERING!');
         return (
@@ -68,36 +54,15 @@ class GameScreen extends Component {
                     />
                 ))}
 
-                {/* this works only once since toggleTurn changes state to false and nothing changes it to true */}
-
-                {this.state.changeTurn === true
+                {((this.props.app.game.players[0].moveCounter === 0) && (this.props.app.game.players[0].active === true))
+                    || ((this.props.app.game.players[1].moveCounter === 0) && (this.props.app.game.players[1].active === true))
                     ? (
                         <ChangeTurn
                             players={this.props.app.game.players}
-                            toggleTurn={this.toggleTurn.call(this)}
-                            toggleTurnState={this.toggleTurnState}
                         />
                     )
                     : null}
 
-                {/* the block below works but looks ugly, to see it in action uncomment it and comment lines 73-81 */}
-
-                {/* {(this.props.app.game.players[0].active === true) */}
-                {/*     ? ( */}
-                {/*         <ChangeTurn */}
-                {/*             players={this.props.app.game.players} */}
-                {/*             // turnMessage={this.turnMessage} */}
-                {/*         /> */}
-                {/*     ) */}
-                {/*     : null} */}
-                {/* {(this.props.app.game.players[1].active === true) */}
-                {/*     ? ( */}
-                {/*         <ChangeTurn */}
-                {/*             players={this.props.app.game.players} */}
-                {/*             // turnMessage={this.turnMessage} */}
-                {/*         /> */}
-                {/*     ) */}
-                {/*     : null} */}
                 {this.props.app.game.phase === 'OVER'
                     ? (
                         <GameOver
@@ -130,10 +95,12 @@ const ChangeTurn = (props) => {
     }
     return (
         <div className="changeturn">
-            <p className="changeturn-message">{activePlayer.hero}'s turn</p>
+            <p className="changeturn-message">
+                {activePlayer.hero}'s turn
+            </p>
         </div>
     );
-}
+};
 
 GameScreen.propTypes = {
     app: PropTypes.object.isRequired,
