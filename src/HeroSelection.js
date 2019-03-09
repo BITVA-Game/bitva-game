@@ -30,11 +30,11 @@ const Header = props => (
             { props.hero ? 'Character details' : 'Select character' }
         </div>
         <div className="header-menu header-nav-menu">
-            <HeaderHeroButton direction="hero-btn-arrow-left" funct={props.prev} tabIndex="1" img="◀" />
+            <HeaderHeroButton direction="hero-btn-arrow-left" funct={props.hero ? props.showPrev : props.prev} tabIndex="1" img="◀" />
             <div className="header-menu hero-nav-menu-name">
                 {props.selected}
             </div>
-            <HeaderHeroButton direction="hero-btn-arrow-right" funct={props.next} tabIndex="2" img="▶" />
+            <HeaderHeroButton direction="hero-btn-arrow-right" funct={props.hero ? props.showNext : props.next} tabIndex="2" img="▶" />
         </div>
         { props.hero
             ? null : <CharacterDetailsButton onShow={props.onShow} tabIndex="4" />
@@ -81,6 +81,8 @@ class HeroSelection extends Component {
         this.selectRightHero = this.selectRightHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
         this.showHeroList = this.showHeroList.bind(this);
+        this.showRightHero = this.showRightHero.bind(this);
+        this.showLeftHero = this.showLeftHero.bind(this);
     }
 
     showHero() {
@@ -112,11 +114,26 @@ class HeroSelection extends Component {
         this.setState({ selected: heroes[index] });
     }
 
+    showRightHero() {
+        const heroes = Object.keys(this.app.heroSelect);
+        let index = heroes.indexOf(this.state.selected);
+        index = index === heroes.length - 1 ? 0 : index + 1;
+        const heroID = this.state.selected;
+        const hero = this.app.heroSelect[heroID];
+        this.setState({ selected: heroes[index], hero: hero });    
+    }
+
+    showLeftHero() {
+        this.selectLeftHero();
+        this.showHero();
+    }
+
     selectHero() {
         this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected });
     }
 
     render() {
+        console.log(this.state.selected, this.state.hero);
         return (
             <div className="heroselection-container">
                 <Header
@@ -125,12 +142,15 @@ class HeroSelection extends Component {
                     next={this.selectRightHero}
                     selected={this.state.selected}
                     onShow={this.showHero}
+                    // for char details
+                    showNext={this.showRightHero}
+                    showPrev={this.showLeftHero}
                 />
                 <div className={styles.main}>
                     {this.state.hero
                         ? (
                             <OneHero
-                                hero={this.state.hero}
+                                hero={this.state.hero}                                
                             />
                         ) : (
                             <ListOfHeroes
