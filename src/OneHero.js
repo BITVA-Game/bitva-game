@@ -125,7 +125,7 @@ const OneHero = props => (
             <article className="details-description">
                 <span>
                     {props.hero.description}
-                    {console.log('PROPS HERO ', props.hero.cards)}
+                    {/* {console.log('PROPS HERO ', props.hero)} */}
                 </span>
                 <div className="icons-container">
                     <div className="icon-deck icon-text">
