@@ -367,7 +367,7 @@ function playerActs(game, player, opponent, active, target) {
 }
 
 function makeMove(game, msg) {
-    // console.log('makeMove called');
+    //console.log('makeMove called');
     let pActive = game.players[0];
     let pInactive = game.players[1];
     if (!pActive.active) {

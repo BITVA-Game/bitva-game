@@ -283,3 +283,36 @@
     text-shadow: 0 0 32px #B74A45;
     text-transform: uppercase;
 }
+
+/* turn change */
+
+@keyframes turn {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.changeturn {
+    align-items: center;
+    animation-duration: 3s;
+    animation-name: turn;
+    animation-timing-function: ease-in;
+    display: flex;
+    height: 50px;
+    justify-content: center;
+    left: 50%;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%);
+    z-index: 100;
+}
+
+.changeturn-message {
+    background: rgb(33, 33, 33);
+    background: rgba(33, 33, 33, .75);
+    color: #fff;
+    font-size: 48px;
+    padding: 10px 20px;
+    text-shadow: 0 0 32px #B74A45;
+    text-transform: capitalize;
+}
