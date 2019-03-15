@@ -264,6 +264,7 @@ section {
 .details-cards {
 	bottom: 8rem;
 	display: flex;
+	height: 301px;
 	justify-content: space-between;
 	position: absolute;
 	right: 6.8rem;
@@ -285,30 +286,72 @@ section {
 }
 
 .details-card {
+	align-items: center;
+	border: 3px solid #fff;
 	display: flex;
 	flex-direction: column;
 	height: 294px;
-	justify-content: space-between;
+	/*justify-content: space-between;*/
 	width: 210px;
+}
+
+.green-item {
+	background-color: #6d8374;
+}
+
+.green-action {
+	background-color: #4a5a50;
+}
+
+.red-item {
+	background-color: #9e6265;
+}
+
+.red-action {
+	background-color: #7e383a;
 }
 
 .card-header {
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
-	padding: 0 30px;
+	/*padding: 0 30px;*/
 	position: relative;
+	width: 100%;
 }
 
 .card-header .icon {
 	position: absolute;
-	right: -38px;	
+	right: -43px;	
 	top: -30px;
 }
 
-.details-card p {
-	color: #000;
-	font-size: 23px;
-	margin-top: 0.4rem;
+.card-header p {
+	color: #fff;
+	font-family: "Ruslan Display";
+	font-size: 26px;
+	margin: 0;
+	text-align: center;
+}
+
+.card-img {
+	background-color: #fff;
+	height: 207px;
+	width: 182px;
+}
+
+.card-footer {
+	background-color: #cfbc9c;
+	height: 32px;
+	margin-top: 10px;
+	width: 182px;
+}
+
+.card-footer p {
+	color: #763e3f;
+	font-size: 26px;
+	line-height: 32px;
+	margin: 0;
 	text-align: center;
 }
 
