@@ -51,8 +51,7 @@ function prepairCards(cards) {
 
 const HeroImage = props => (
     <div className="details-hero">
-        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }}>
-        </div>
+        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }} />
     </div>
 );
 
@@ -65,7 +64,8 @@ const CardPreview = props => (
                 ${props.card.category === 'damage' ? 'icon-damage' : null}
                 ${props.card.category === 'heal' ? 'icon-heal' : null}
                 ${props.card.category === 'shield' ? 'icon-shield' : null}
-            `}>
+            `}
+            >
                 {props.card.points}
             </div>
         </div>
@@ -113,7 +113,7 @@ class CardsBlock extends Component {
                 <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
                     ◀
                 </div>
-                <CardsRow heroId={this.props.heroId} row={this.cardsBy1[this.state.row]} cards={this.props.cards} hero={this.props.hero}/>
+                <CardsRow heroId={this.props.heroId} row={this.cardsBy1[this.state.row]} cards={this.props.cards} hero={this.props.hero} />
                 <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="6">
                     ▶
                 </div>
@@ -141,18 +141,18 @@ const OneHero = props => (
                     </div>
                 </div>
             </article>
-            <CardsBlock heroId={props.hero.id} cards={props.hero.cards} hero={props.hero}/>
+            <CardsBlock heroId={props.hero.id} cards={props.hero.cards} hero={props.hero} />
         </div>
     </div>
 );
 
 HeroImage.propTypes = {
     heroid: PropTypes.string.isRequired,
-    hero: PropTypes.object.isRequired,
 };
 
 CardPreview.propTypes = {
     card: PropTypes.object,
+    hero: PropTypes.object.isRequired,
 };
 
 CardPreview.defaultProps = {
@@ -161,10 +161,12 @@ CardPreview.defaultProps = {
 
 CardsRow.propTypes = {
     card: PropTypes.object,
+    hero: PropTypes.object.isRequired,
 };
 
 CardsBlock.propTypes = {
     cards: PropTypes.object.isRequired,
+    hero: PropTypes.object.isRequired,
     heroId: PropTypes.string.isRequired,
 };
 
