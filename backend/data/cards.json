@@ -1,1 +1,132 @@
-{"bajun":{"id":"bajun","name":"Cat-Bajun","type":"action","category":"attack","description":"Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.","points":1,"initialpoints":1,"img":"bajun.png"},"sivka":{"id":"sivka","name":"Sivka-Burka","type":"action","category":"attack","description":"Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.","points":2,"initialpoints":2,"img":"sivka.png"},"wolf":{"id":"wolf","name":"Grey Wolf","type":"action","category":"attack","description":"Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.","points":3,"initialpoints":3,"img":"wolf.png"},"bogatyr":{"id":"bogatyr","name":"Bogatyr","type":"action","category":"attack","description":"Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.","points":4,"initialpoints":4,"img":"bogatyr.png"},"apple":{"id":"apple","name":"Apple","type":"action","category":"heal","description":"In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ","points":2,"initialpoints":2,"img":"apple.png"},"bereginya":{"id":"bereginya","name":"Keeper Bereginya","type":"action","category":"heal","description":"Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.","points":4,"initialpoints":4,"img":"bereginya.png"},"shieldLarge":{"id":"shieldLarge","name":"Large Shield","type":"item","category":"shield","description":"The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.","points":4,"initialpoints":4,"img":"shieldLarge.png"},"shieldSmall":{"id":"shieldSmall","name":"Small Shield","type":"item","category":"shield","description":"The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.","points":2,"initialpoints":2,"img":"shieldSmall.png"},"mirror":{"id":"mirror","name":"Mirror","type":"item","category":"reflect","description":"Magiс Mirror — item that can \"duplicate the reality\". The boundary between the earth and the other Subtle World.","points":2,"initialpoints":2,"img":"mirror.png"},"waterLiving":{"id":"waterLiving","name":"Living water","type":"item","category":"heal","description":"Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.","points":3,"initialpoints":3,"img":"livingWater.png"},"waterDead":{"id":"waterDead","name":"Dead water","type":"item","category":"damage","description":"Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.","points":3,"initialpoints":3,"img":"deadWater.png"},"firebird":{"id":"firebird","name":"Firebird","type":"item","category":"shuffling","description":"Magic fire bird. Her feathers have the ability to glow and can blind the human vision.  Firebird dies every year in autumn and returns to life in spring.","points":1,"initialpoints":1,"img":"firebird.png"},"kladenets":{"id":"kladenets","name":"Magic sword 'Kladenets'","type":"item","category":"attack","description":"Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.","points":2,"initialpoints":2,"img":"sword.png"}}
+{
+  "bajun": {
+    "id": "bajun",
+    "name": "Cat-Bajun",
+    "type": "action",
+    "category": "attack",
+    "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+    "points": 1,
+    "initialpoints": 1,
+    "img": "bajun.png"
+  },
+  "sivka": {
+    "id": "sivka",
+    "name": "Sivka-Burka",
+    "type": "action",
+    "category": "attack",
+    "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+    "points": 2,
+    "initialpoints": 2,
+    "img": "sivka.png"
+  },
+  "wolf": {
+    "id": "wolf",
+    "name": "Grey Wolf",
+    "type": "action",
+    "category": "attack",
+    "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+    "points": 3,
+    "initialpoints": 3,
+    "img": "wolf.png"
+  },
+  "bogatyr": {
+    "id": "bogatyr",
+    "name": "Bogatyr",
+    "type": "action",
+    "category": "attack",
+    "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+    "points": 4,
+    "initialpoints": 4,
+    "img": "bogatyr.png"
+  },
+  "apple": {
+    "id": "apple",
+    "name": "Apple",
+    "type": "action",
+    "category": "heal",
+    "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+    "points": 2,
+    "initialpoints": 2,
+    "img": "apple.png"
+  },
+  "bereginya": {
+    "id": "bereginya",
+    "name": "Bereginya",
+    "type": "action",
+    "category": "heal",
+    "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
+    "points": 4,
+    "initialpoints": 4,
+    "img": "bereginya.png"
+  },
+  "shieldLarge": {
+    "id": "shieldLarge",
+    "name": "Large Shield",
+    "type": "item",
+    "category": "shield",
+    "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+    "points": 4,
+    "initialpoints": 4,
+    "img": "shieldLarge.png"
+  },
+  "shieldSmall": {
+    "id": "shieldSmall",
+    "name": "Small Shield",
+    "type": "item",
+    "category": "shield",
+    "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+    "points": 2,
+    "initialpoints": 2,
+    "img": "shieldSmall.png"
+  },
+  "mirror": {
+    "id": "mirror",
+    "name": "Mirror",
+    "type": "item",
+    "category": "reflect",
+    "description": "Magiс Mirror — item that can \"duplicate the reality\". The boundary between the earth and the other Subtle World.",
+    "points": 2,
+    "initialpoints": 2,
+    "img": "mirror.png"
+  },
+  "waterLiving": {
+    "id": "waterLiving",
+    "name": "Living water",
+    "type": "item",
+    "category": "heal",
+    "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
+    "points": 3,
+    "initialpoints": 3,
+    "img": "livingWater.png"
+  },
+  "waterDead": {
+    "id": "waterDead",
+    "name": "Dead water",
+    "type": "item",
+    "category": "damage",
+    "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+    "points": 3,
+    "initialpoints": 3,
+    "img": "deadWater.png"
+  },
+  "firebird": {
+    "id": "firebird",
+    "name": "Firebird",
+    "type": "item",
+    "category": "shuffling",
+    "description": "Magic fire bird. Her feathers have the ability to glow and can blind the human vision.  Firebird dies every year in autumn and returns to life in spring.",
+    "points": 1,
+    "initialpoints": 1,
+    "img": "firebird.png"
+  },
+  "kladenets": {
+    "id": "kladenets",
+    "name": "Magic sword 'Kladenets'",
+    "type": "item",
+    "category": "attack",
+    "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.",
+    "points": 2,
+    "initialpoints": 2,
+    "img": "sword.png"
+  }
+}
