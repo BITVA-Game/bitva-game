@@ -74,12 +74,13 @@ class Player extends Component {
                     isTarget={this.isTarget}
                 />
                 <Item
-                    active={this.props.player.active}
                     item={Object.values(this.props.player.item)[0]}
                     isTarget={this.isTarget}
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
-                    background={this.props.player.background}
+                    player={this.props.player}
+                    cardDragStarted={this.props.cardDragStarted}
+                    cardDragEnded={this.props.cardDragEnded}
                 />
                 <Deck
                     active={this.props.player.active}
@@ -151,12 +152,22 @@ const Grave = props => (
 
 const Item = props => (
     <div
-        className={`item card-place card-like ${props.background} ${props.isTarget('item') ? 'target' : null}`}
-        id={props.active ? 'item' : null}
-        onDrop={() => props.cardDropped('item', props.item)}
+        className={`item card-place card-like ${props.player.background} ${props.isTarget('item') ? 'target' : null}`}
+        id={props.player.active ? 'item' : null}
+        onDrop={() => props.cardDropped('item', Object.keys(props.player.item))}
         onDragOver={e => props.cardOver(e, 'item')}
     >
-        {props.item ? <Card card={props.item} /> : null}
+        {props.item
+            ? (
+                <Card
+                    card={props.item}
+                    player={props.player}
+                    cardKey={Object.keys(props.player.item)[0]}
+                    draggable={props.player.active}
+                    cardDragStarted={props.cardDragStarted}
+                    cardDragEnded={props.cardDragEnded}
+                />
+            ) : null}
     </div>
 );
 
@@ -170,10 +181,10 @@ const Card = props => (
     >
         <div className="card-header">
             <p className="card-category">{props.card.category}</p>
-            <div className={`game-icon game-icon-text 
+            <div className={`game-icon game-icon-text
                 ${props.card.category === 'attack' ? 'icon-attack' : null}
                 ${props.card.category === 'damage' ? 'icon-damage' : null}
-                ${props.card.category === 'heal' ? 'icon-heal' : null} 
+                ${props.card.category === 'heal' ? 'icon-heal' : null}
                 ${props.card.category === 'shield' ? 'icon-shield' : null}`}
             >
                 {props.card.points}
@@ -238,16 +249,19 @@ Grave.propTypes = {
 };
 
 Item.propTypes = {
-    active: PropTypes.bool.isRequired,
+    player: PropTypes.object.isRequired,
     item: PropTypes.object,
     isTarget: PropTypes.func.isRequired,
+    cardDragStarted: PropTypes.func,
+    cardDragEnded: PropTypes.func,
     cardOver: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
-    background: PropTypes.string.isRequired,
 };
 
 Item.defaultProps = {
     item: null,
+    cardDragStarted: null,
+    cardDragEnded: null,
 };
 
 

@@ -22,6 +22,7 @@ class GameScreen extends Component {
     }
 
     cardDragStarted(key, card) {
+        console.log('cardDragStarted', key, card);
         this.setState({
             dragging: { key, card },
         });
@@ -37,7 +38,6 @@ class GameScreen extends Component {
     }
 
     render() {
-        console.log('I AM RENDERING!');
         return (
             <div className="game-table app-background">
                 {this.props.app.game.players.map(player => (
@@ -99,7 +99,8 @@ const ChangeTurn = (props) => {
     return (
         <div className="changeturn">
             <p className="changeturn-message">
-                {activePlayer.hero}'s turn
+                {activePlayer.hero}
+'s turn
             </p>
         </div>
     );
