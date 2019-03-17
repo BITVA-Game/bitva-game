@@ -5,7 +5,7 @@ import './css/HeroSelection.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
-import heart from './images/icons/heart.png';
+import heart from './images/icons/heart_red.png';
 
 const images = {
     yaga,

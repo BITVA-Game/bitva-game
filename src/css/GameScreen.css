@@ -75,16 +75,27 @@
     stroke: #b74a45;
 }
 
-.heart {
-    bottom: -12px;
-    height: 25px;
-    left: 50%;
+.hero-icon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    bottom: -24px;
+    -webkit-filter: drop-shadow(0 0 3px #000);
+    filter: drop-shadow(0 0 3px #000);
+    height: 50px;
     position: absolute;
-    width: 25px;
+    right: 76px;
+    width: 50px;
 }
 
-.heart-text {
-    font-size: 24px;
+.player-active .hero-icon {
+    -webkit-filter: drop-shadow(0 0 3px #fff);
+    filter: drop-shadow(0 0 3px #fff);
+}
+
+.hero .game-icon-text {
+    font-size: 30px;
+    padding-left: 1px;
 }
 
 /* item */
@@ -135,7 +146,9 @@
 /* card */
 
 .card {
-    background-color: #fff;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     transform: rotate(0);
     width: 120px;
 }
@@ -153,12 +166,28 @@
     transform: rotate(0deg);
 }
 
-.card-name {
-    color: #000;
+.card-header .card-category {
     font-size: 14px;
-    line-height: 14px;
-    padding-top: 6px;
+}
+
+.card-name {
+    background-color: #cfbc9c;
+    height: 18px;
+    margin-top: 6px;
+    width: 104px;
+}
+
+.card-name p {
+    color: #763e3f;
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0;
     text-align: center;
+}
+
+.card-image {
+    height: 118px;
+    width: 104px;
 }
 
 .game-icon {
@@ -176,15 +205,10 @@
 .game-icon-text {
     align-items: center;
     display: flex;
-    font-size: 28px;
+    font-size: 26px;
     justify-content: center;
-    text-align: center;
+    padding-bottom: 5px;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-}
-
-.game-icon-text p {
-    line-height: 30px;
-    margin: 0;
 }
 
 /* deck */

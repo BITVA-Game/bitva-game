@@ -175,7 +175,7 @@ section {
 }
 
 .deck-icon {
-	background-color: #97ABB8;
+	background-color: #898989;
     border: 1px solid #fff;
 	border-radius: 3px;
 	height: 40px;
@@ -264,6 +264,7 @@ section {
 .details-cards {
 	bottom: 8rem;
 	display: flex;
+	height: 301px;
 	justify-content: space-between;
 	position: absolute;
 	right: 6.8rem;
@@ -285,30 +286,69 @@ section {
 }
 
 .details-card {
+	align-items: center;
+	border: 3px solid #fff;
 	display: flex;
 	flex-direction: column;
 	height: 294px;
-	justify-content: space-between;
 	width: 210px;
+}
+
+.green-item {
+	background-color: #6d8374;
+}
+
+.green-action {
+	background-color: #4a5a50;
+}
+
+.red-item {
+	background-color: #9e6265;
+}
+
+.red-action {
+	background-color: #7e383a;
 }
 
 .card-header {
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
-	padding: 0 30px;
 	position: relative;
+	width: 100%;
 }
 
 .card-header .icon {
 	position: absolute;
-	right: -25px;	
-	top: -25px;
+	right: -43px;	
+	top: -30px;
 }
 
-.details-card p {
-	color: #000;
-	font-size: 23px;
-	margin-top: 0.4rem;
+.card-header p {
+	color: #fff;
+	font-family: "Ruslan Display";
+	font-size: 26px;
+	margin: 0;
+	text-align: center;
+}
+
+.card-img {
+	height: 207px;
+	width: 182px;
+}
+
+.card-footer {
+	background-color: #cfbc9c;
+	height: 32px;
+	margin-top: 10px;
+	width: 182px;
+}
+
+.card-footer p {
+	color: #763e3f;
+	font-size: 26px;
+	line-height: 32px;
+	margin: 0;
 	text-align: center;
 }
 
@@ -323,32 +363,36 @@ section {
 .icon {
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: 40px 40px;
-	flex-basis: 40px;
-	height: 40px;
+	background-size: 68px 68px;
+	flex-basis: 68px;
+	height: 68px;
 	margin: 8px;
-	width: 40px;
+	width: 68px;
 }
 
 .icon-deck {
 	align-items: center;
-	background-color: #97ABB8;
+	background-color: #898989;
     border: 1px solid #fff;
 	border-radius: 3px;
 	display: flex;
-	flex-basis: 30px;
-	height: 40px;
+	flex-basis: 51px;
+	height: 68px;
 	justify-content: center;
 	margin: 8px 0;
-    width: 30px;
+    width: 51px;
 }
 
 .icon-attack {
 	background-image: url("../images/icons/skull.png");
 }
 
+.icon-damage {
+	background-image: url("../images/icons/heart_black.png");
+}
+
 .icon-heal {
-	background-image: url("../images/icons/heart.png");
+	background-image: url("../images/icons/heart_red.png");
 }
 
 .icon-shield {
@@ -357,7 +401,7 @@ section {
 
 .icon-text {
 	color: #fff;
-	font-size: 26px;
+	font-size: 44px;
 	text-align: center;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }

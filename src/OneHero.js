@@ -9,17 +9,16 @@ import styles from './css/HeroSelection.module.css';
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
 
-import apple from './images/cards/apple.png';
-import bajun from './images/cards/bajun.png';
+import apple from './images/cards/apple.jpg';
+import bajun from './images/cards/catbajun.jpg';
 import sivka from './images/cards/sivka.png';
 import bereginya from './images/cards/bitva-cardbase.jpg';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/bitva-cardbase.jpg';
-import shieldSmall from './images/cards/bitva-cardbase.jpg';
+import shieldSmall from './images/cards/smallshield.jpg';
 import wolf from './images/cards/bitva-cardbase.jpg';
 import waterDead from './images/cards/bitva-cardbase.jpg';
 import waterLiving from './images/cards/bitva-cardbase.jpg';
-import cardPlace from './images/cards/cardPlace.png';
 
 
 const images = {
@@ -38,7 +37,6 @@ const imagesCards = {
     wolf,
     waterDead,
     waterLiving,
-    cardPlace,
 };
 
 // Show all cards by 1 in row
@@ -53,27 +51,34 @@ function prepairCards(cards) {
 
 const HeroImage = props => (
     <div className="details-hero">
-        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }}>
-        </div>
+        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }} />
     </div>
 );
 
 const CardPreview = props => (
-    props.card
-        ? (
-            <div className="details-card" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}>
-                <div className="card-header">
-                    <p>{props.card.name}</p>
-                    <div className={`icon icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>{props.card.points}</div>
-                </div>
+    <div className={`details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
+        <div className="card-header">
+            <p>{props.card.category}</p>
+            <div className={`icon icon-text       
+                ${props.card.category === 'attack' ? 'icon-attack' : null}
+                ${props.card.category === 'damage' ? 'icon-damage' : null}
+                ${props.card.category === 'heal' ? 'icon-heal' : null}
+                ${props.card.category === 'shield' ? 'icon-shield' : null}
+            `}
+            >
+                {props.card.points}
             </div>
-        )
-        : <img className="details-card" style={{ opacity: '0.25' }} src={imagesCards.cardPlace} alt="card" />
+        </div>
+        <div className="card-img" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
+        <div className="card-footer">
+            <p>{props.card.name}</p>
+        </div>
+    </div>
 );
 
 const CardsRow = props => (
     <>
-        <CardPreview card={props.cards[props.row[0]]} />
+        <CardPreview card={props.cards[props.row[0]]} hero={props.hero} />
         <div className="card-description">
             {props.cards[props.row[0]].description}
             <div className="icon-deck icon-text">
@@ -108,7 +113,7 @@ class CardsBlock extends Component {
                 <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
                     ◀
                 </div>
-                <CardsRow heroId={this.props.heroId} row={this.cardsBy1[this.state.row]} cards={this.props.cards} />
+                <CardsRow heroId={this.props.heroId} row={this.cardsBy1[this.state.row]} cards={this.props.cards} hero={this.props.hero} />
                 <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="6">
                     ▶
                 </div>
@@ -136,18 +141,18 @@ const OneHero = props => (
                     </div>
                 </div>
             </article>
-            <CardsBlock heroId={props.hero.id} cards={props.hero.cards} />
+            <CardsBlock heroId={props.hero.id} cards={props.hero.cards} hero={props.hero} />
         </div>
     </div>
 );
 
 HeroImage.propTypes = {
     heroid: PropTypes.string.isRequired,
-    hero: PropTypes.object.isRequired,
 };
 
 CardPreview.propTypes = {
     card: PropTypes.object,
+    hero: PropTypes.object.isRequired,
 };
 
 CardPreview.defaultProps = {
@@ -156,10 +161,12 @@ CardPreview.defaultProps = {
 
 CardsRow.propTypes = {
     card: PropTypes.object,
+    hero: PropTypes.object.isRequired,
 };
 
 CardsBlock.propTypes = {
     cards: PropTypes.object.isRequired,
+    hero: PropTypes.object.isRequired,
     heroId: PropTypes.string.isRequired,
 };
 

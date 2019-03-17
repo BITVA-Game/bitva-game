@@ -11,18 +11,6 @@ button {
     outline: none;
 }
 
-/*unused styles, might be useful in future*/
-
-/*
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-} */
-
 .app-background {
     background: transparent center no-repeat fixed;
     background-size: cover;
@@ -33,52 +21,18 @@ button {
     top: 0;
 }
 
-/* heart */
-.app-heart {
-    background-color: #ff0101;
-    height: 20px;
-    position: absolute;
-    transform: translate(-50%) rotate(45deg);
-    width: 20px;
-}
-
-.app-heart::after {
-    background-color: inherit;
-    border-radius: 50%;
-    content: '';
-    height: 100%;
-    left: -50%;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -1;
-}
-
-.app-heart::before {
-    background-color: inherit;
-    border-radius: 50%;
-    content: '';
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: -50%;
-    width: 100%;
-    z-index: -1;
-}
-
-.app-heart-text {
-    font-size: 20px;
-    height: 125%;
-    left: -25%;
-    line-height: 125%;
-    position: absolute;
-    text-align: center;
-    top: -25%;
-    transform: rotate(-45deg);
-    width: 125%;
-}
+/*unused styles, might be useful in future*/
 
 /*
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
 .App-header {
     background-color: #222;
     color: white;

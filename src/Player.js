@@ -7,17 +7,16 @@ import rules from './rules';
 import './css/App.css';
 import './css/GameScreen.css';
 
-import apple from './images/cards/apple.png';
-import bajun from './images/cards/bajun.png';
+import apple from './images/cards/apple.jpg';
+import bajun from './images/cards/catbajun.jpg';
 import sivka from './images/cards/sivka.png';
 import bereginya from './images/cards/bitva-cardbase.jpg';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/bitva-cardbase.jpg';
-import shieldSmall from './images/cards/bitva-cardbase.jpg';
+import shieldSmall from './images/cards/smallshield.jpg';
 import wolf from './images/cards/bitva-cardbase.jpg';
 import waterDead from './images/cards/bitva-cardbase.jpg';
 import waterLiving from './images/cards/bitva-cardbase.jpg';
-import cardPlace from './images/cards/cardPlace.png';
 
 const imagesCards = {
     apple,
@@ -30,7 +29,6 @@ const imagesCards = {
     wolf,
     waterDead,
     waterLiving,
-    cardPlace,
 };
 
 class Player extends Component {
@@ -94,6 +92,7 @@ class Player extends Component {
                     cardDragStarted={this.props.cardDragStarted}
                     cardDragEnded={this.props.cardDragEnded}
                     isTarget={this.isTarget}
+                    player={this.props.player}
                 />
                 <Grave
                     player={this.props.player}
@@ -127,6 +126,7 @@ const Hand = props => (
                     draggable={props.active}
                     cardDragStarted={props.cardDragStarted}
                     cardDragEnded={props.cardDragEnded}
+                    player={props.player}
                 />
             </div>
         ))}
@@ -162,19 +162,26 @@ const Item = props => (
 
 const Card = props => (
     <div
-        className="card card-like"
-        style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }}
+        className={`card card-like ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
         data-key={props.cardKey}
         draggable={props.draggable}
         onDragStart={() => props.cardDragStarted(props.cardKey, props.card)}
         onDragEnd={props.cardDragEnded}
     >
-        <div className="card-name">
-            {props.card.name}
-            {/* <p>{props.cardKey}</p> */}
+        <div className="card-header">
+            <p className="card-category">{props.card.category}</p>
+            <div className={`game-icon game-icon-text 
+                ${props.card.category === 'attack' ? 'icon-attack' : null}
+                ${props.card.category === 'damage' ? 'icon-damage' : null}
+                ${props.card.category === 'heal' ? 'icon-heal' : null} 
+                ${props.card.category === 'shield' ? 'icon-shield' : null}`}
+            >
+                {props.card.points}
+            </div>
         </div>
-        <div className={`game-icon game-icon-text ${props.card.category === 'heal' ? 'icon-heal' : null} ${props.card.category === 'attack' ? 'icon-attack' : null} ${props.card.category === 'shield' ? 'icon-shield' : null}`}>
-            <p>{props.card.points}</p>
+        <div className="card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
+        <div className="card-name">
+            <p>{props.card.name}</p>
         </div>
     </div>
 );
@@ -188,6 +195,7 @@ Deck.propTypes = {
 Player.propTypes = {
     player: PropTypes.object.isRequired,
     cardDragStarted: PropTypes.func.isRequired,
+    cardDragEnded: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
     dragging: PropTypes.object,
 };
@@ -201,6 +209,7 @@ Hand.propTypes = {
     hand: PropTypes.object.isRequired,
     cardDragEnded: PropTypes.func.isRequired,
     cardDragStarted: PropTypes.func.isRequired,
+    player: PropTypes.object.isRequired,
 };
 
 Card.propTypes = {
@@ -209,6 +218,7 @@ Card.propTypes = {
     cardKey: PropTypes.string,
     cardDragStarted: PropTypes.func,
     cardDragEnded: PropTypes.func,
+    player: PropTypes.object.isRequired,
 };
 
 Card.defaultProps = {
