@@ -3,6 +3,7 @@ import './css/App.css';
 import WebFont from 'webfontloader';
 
 import StartScreen from './StartScreen';
+import Profile from './Profile';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
@@ -39,6 +40,8 @@ class App extends Component {
             return 'LOADING';
         case 'STARTSCREEN':
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
+        case 'PROFILE':
+            return <Profile sendMessage={sendMessage} app={this.state.app} />;
         case 'HEROSELECT':
             return <HeroSelection sendMessage={sendMessage} app={this.state.app} />;
         case 'VERSUS':
