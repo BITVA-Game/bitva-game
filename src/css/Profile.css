@@ -1,0 +1,10 @@
+.profile {
+	background-image: url(../images/game-background.png);
+	padding: 60px;
+}
+
+.info {
+	background-color: rgba(0, 0, 0, .7);
+	font-size: 36px;
+	padding: 20px 60px;
+}
