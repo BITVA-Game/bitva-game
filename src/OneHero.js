@@ -11,14 +11,14 @@ import morevna from './images/heroes/morevna.jpg';
 
 import apple from './images/cards/apple.jpg';
 import bajun from './images/cards/catbajun.jpg';
-import sivka from './images/cards/sivka.png';
+import sivka from './images/cards/warhorse.jpg';
 import bereginya from './images/cards/bitva-cardbase.jpg';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
-import shieldLarge from './images/cards/bitva-cardbase.jpg';
+import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
 import wolf from './images/cards/bitva-cardbase.jpg';
-import waterDead from './images/cards/bitva-cardbase.jpg';
-import waterLiving from './images/cards/bitva-cardbase.jpg';
+import waterDead from './images/cards/deadwater.jpg';
+import waterLiving from './images/cards/livingwater.jpg';
 
 
 const images = {
