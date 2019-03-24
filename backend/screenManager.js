@@ -16,8 +16,8 @@ function handle(app, message) {
         return Object.assign({}, app.manager, { screen: 'GAMESCREEN' });
     case 'ENDGAME':
         return Object.assign({}, app.manager, { screen: 'VICTORY' });
-
-
+    case 'NETWORKPLAY':
+        return Object.assign({}, app.manager, { screen: 'NETWORKPLAY' });
     default: return app.manager;
     }
 }

@@ -1899,3 +1899,15 @@ test('msg PROFILE switches screen state to PROFILE', () => {
     // ожидаем, что карта dead water в item holder неактивного игрока
     expect(result.manager.screen).toEqual('PROFILE');
 });
+
+test.only('msg NETWORKPLAY switches screen state to SELECTROLE', () => {
+    const msg = { type: 'NETWORKPLAY' };
+
+    const sendReply = jest.fn();
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    const result = sendReply.mock.calls[0][0];
+
+    expect(result.manager.screen).toEqual('NETWORKPLAY');
+});

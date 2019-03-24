@@ -51,7 +51,7 @@ class MainMenu extends Component {
                 <LogoBlock opened={this.state.opened} />
                 <div className="menu-buttons-container">
                     <ul className="menu-buttons-group">
-                        <MenuButton name="Single Play" type="PLAY" sendMessage={this.props.sendMessage} />
+                        <MenuButton name="Network Play" type="NETWORKPLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Player vs Player" type="PLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Tournament" type="PLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Daily Challenge" type="PLAY" sendMessage={this.props.sendMessage} />
