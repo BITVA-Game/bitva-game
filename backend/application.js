@@ -8,6 +8,7 @@ const screenManager = require('./screenManager');
 const profileManager = require('./profileManager');
 const gameEngine = require('./gameEngine');
 const heroManager = require('./heroSelect');
+const socketClient = require('./socketClient');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -31,8 +32,17 @@ function msgReceived(message, sendReply) {
         game: gameEngine.handle(application.game, message),
     };
     // writeGameObject(newApp);
-    sendReply(newApp);
-    application = newApp;
+    if (message.network) {
+        newApp.network = true;
+        console.log('OMG NETWORK PLAY IS: ', newApp.network);
+
+        socketClient.emitMessage(message);
+        sendReply(newApp);
+        application = newApp;
+    } else {
+        sendReply(newApp);
+        application = newApp;
+    }
 }
 
 function setApp(newApp) {

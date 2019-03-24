@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import MainMenu from './MainMenu';
 import './css/Profile.css';
 
+const WaitingForHost = props => (
+    <form onSubmit={props.gameConnect}>
+        <label htmlFor="text">ENETER IP</label>
+        <input type="text" name="address" />
+        <input type="submit" value="Submit" />
+    </form>
+);
+
 
 const SelectRole = props => (
     <div>
@@ -30,6 +38,7 @@ class NetworkPlay extends Component {
         this.assignRole = this.assignRole.bind(this);
         this.estConnection = this.estConnection.bind(this);
         this.clearSelection = this.clearSelection.bind(this);
+        this.gameConnect = this.gameConnect.bind(this);
     }
 
     assignRole(event) {
@@ -38,10 +47,18 @@ class NetworkPlay extends Component {
         });
     }
 
+    gameConnect(event) {
+        event.preventDefault();
+        const ip = event.target.elements.address.value;
+        this.props.sendMessage({
+            type: 'PLAY', role: this.state.role, network: true, ip,
+        });
+    }
+
     estConnection(event) {
         event.preventDefault();
         this.setState({
-            screen: this.state.role == 'host' ? 'waiting' : 'selection',
+            screen: this.state.role === 'host' ? 'waiting' : 'selection',
         });
     }
 
@@ -56,7 +73,7 @@ class NetworkPlay extends Component {
         return (
             <div>
                 <h1>I AM POPUP</h1>
-                { this.state.screen === 'waiting' ? <h1>Waiting</h1> : <h1>Selection</h1>}
+                { this.state.screen === 'waiting' ? <h1>Waiting</h1> : <WaitingForHost gameConnect={this.gameConnect} />}
                 <button type="button" onClick={this.clearSelection}>Back</button>
             </div>
         );

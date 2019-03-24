@@ -59,7 +59,7 @@ class App extends Component {
     }
 
     render() {
-        console.log('SCREEN ', this.state.app.manager.screen);
+        console.log('APP ', this.state.app);
         WebFont.load({
             custom: {
                 families: ['Ruslan Display', 'Sedan SC'],
