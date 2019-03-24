@@ -387,6 +387,9 @@ function handle(appgame, message) {
     case 'INITIAL': {
         return game;
     }
+    case 'PROFILE': {
+        return game;
+    }
     case 'HEROSELECTED': {
         const heroName = message.hero;
         return Object.assign(game, { players: generatePlayers(heroName) });

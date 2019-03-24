@@ -2,6 +2,8 @@ function handle(app, message) {
     switch (message.type) {
     case 'INITIAL':
         return app.manager;
+    case 'PROFILE':
+        return Object.assign({}, app.manager, { screen: 'PROFILE' });
     case 'PLAY':
         return Object.assign({}, app.manager, { screen: 'HEROSELECT' });
     case 'HEROSELECTED':
