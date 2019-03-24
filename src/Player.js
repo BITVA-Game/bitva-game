@@ -31,12 +31,35 @@ const imagesCards = {
     waterLiving,
 };
 
+const Animation = props => (
+    <h1>Animation</h1>
+);
+
 class Player extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            animation: null,
+        };
         this.cardOver = this.cardOver.bind(this);
         this.isTarget = this.isTarget.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
+        this.playAnimation = this.playAnimation.bind(this);
+    }
+
+    componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+        if (this.props.player.deal !== prevProps.player.deal) {
+            this.playAnimation();
+        }
+    }
+
+    playAnimation() {
+        this.setState({ animation: 'cards' });
+        setTimeout(
+            () => this.setState({ animation: null }),
+            2000,
+        );
     }
 
     isTarget(target) {
@@ -66,45 +89,49 @@ class Player extends Component {
         const playerClass = this.props.player.active ? 'player-active' : 'player-inactive';
         const playerPosition = this.props.player.position === 'bottom' ? 'player player-bottom' : 'player player-top';
         return (
-            <div className={`${playerPosition} ${playerClass}`}>
-                <Hero
-                    player={this.props.player}
-                    cardDropped={this.cardDropped}
-                    cardOver={this.cardOver}
-                    isTarget={this.isTarget}
-                />
-                <Item
-                    item={Object.values(this.props.player.item)[0]}
-                    isTarget={this.isTarget}
-                    cardDropped={this.cardDropped}
-                    cardOver={this.cardOver}
-                    player={this.props.player}
-                    cardDragStarted={this.props.cardDragStarted}
-                    cardDragEnded={this.props.cardDragEnded}
-                />
-                <Deck
-                    active={this.props.player.active}
-                    cards={this.props.player.cards}
-                    background={this.props.player.background}
-                />
-                <Hand
-                    active={this.props.player.active}
-                    hand={this.props.player.hand}
-                    cardDragStarted={this.props.cardDragStarted}
-                    cardDragEnded={this.props.cardDragEnded}
-                    isTarget={this.isTarget}
-                    player={this.props.player}
-                />
-                <Grave
-                    player={this.props.player}
-                    active={this.props.player.active}
-                    grave={this.props.player.grave}
-                    isTarget={this.isTarget}
-                    cardDropped={this.cardDropped}
-                    cardOver={this.cardOver}
-                    background={this.props.player.background}
-                />
-            </div>
+            this.state.animation
+                ? <Animation />
+                : (
+                    <div className={`${playerPosition} ${playerClass}`}>
+                        <Hero
+                            player={this.props.player}
+                            cardDropped={this.cardDropped}
+                            cardOver={this.cardOver}
+                            isTarget={this.isTarget}
+                        />
+                        <Item
+                            item={Object.values(this.props.player.item)[0]}
+                            isTarget={this.isTarget}
+                            cardDropped={this.cardDropped}
+                            cardOver={this.cardOver}
+                            player={this.props.player}
+                            cardDragStarted={this.props.cardDragStarted}
+                            cardDragEnded={this.props.cardDragEnded}
+                        />
+                        <Deck
+                            active={this.props.player.active}
+                            cards={this.props.player.cards}
+                            background={this.props.player.background}
+                        />
+                        <Hand
+                            active={this.props.player.active}
+                            hand={this.props.player.hand}
+                            cardDragStarted={this.props.cardDragStarted}
+                            cardDragEnded={this.props.cardDragEnded}
+                            isTarget={this.isTarget}
+                            player={this.props.player}
+                        />
+                        <Grave
+                            player={this.props.player}
+                            active={this.props.player.active}
+                            grave={this.props.player.grave}
+                            isTarget={this.isTarget}
+                            cardDropped={this.cardDropped}
+                            cardOver={this.cardOver}
+                            background={this.props.player.background}
+                        />
+                    </div>
+                )
         );
     }
 }

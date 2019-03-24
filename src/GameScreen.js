@@ -9,7 +9,9 @@ import './css/GameScreen.css';
 class GameScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { dragging: null };
+        this.state = {
+            dragging: null,
+        };
         this.cardDragStarted = this.cardDragStarted.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.cardDragEnded = this.cardDragEnded.bind(this);
@@ -99,8 +101,7 @@ const ChangeTurn = (props) => {
     return (
         <div className="changeturn">
             <p className="changeturn-message">
-                {activePlayer.hero}
-'s turn
+                {`${activePlayer.hero}'s turn`}
             </p>
         </div>
     );
