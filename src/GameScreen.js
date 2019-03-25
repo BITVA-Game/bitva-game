@@ -72,6 +72,17 @@ class GameScreen extends Component {
                         />
                     )
                     : null}
+                <div className="animation-game-screen">
+                    <div className="bird-container bird-container-one">
+                        <div className="bird bird-one" />
+                    </div>
+                    <div className="bird-container bird-container-two">
+                        <div className="bird bird-two" />
+                    </div>
+                    <div className="bird-container bird-container-three">
+                        <div className="bird bird-three" />
+                    </div>
+                </div>
             </div>
         );
     }
