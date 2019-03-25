@@ -10,11 +10,25 @@ class GameScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dragging: null,
+            dragging: null, animation: null,
         };
         this.cardDragStarted = this.cardDragStarted.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.cardDragEnded = this.cardDragEnded.bind(this);
+        this.startBirds = this.startBirds.bind(this);
+    }
+
+    componentDidMount() {
+        this.startBirds();
+    }
+
+    componentDidUpdate() {
+        if (this.state.animation === 'birds') {
+            setTimeout(
+                () => this.setState({ animation: null }),
+                9000,
+            );
+        }   
     }
 
     cardDragEnded() {
@@ -37,6 +51,13 @@ class GameScreen extends Component {
         this.setState({
             dragging: null,
         });
+    }
+
+    startBirds() {
+        setInterval(
+            () => this.setState({ animation: 'birds' }),
+            9000 + 5000,
+        );
     }
 
     render() {
@@ -72,21 +93,27 @@ class GameScreen extends Component {
                         />
                     )
                     : null}
-                <div className="animation-game-screen">
-                    <div className="bird-container bird-container-one">
-                        <div className="bird bird-one" />
-                    </div>
-                    <div className="bird-container bird-container-two">
-                        <div className="bird bird-two" />
-                    </div>
-                    <div className="bird-container bird-container-three">
-                        <div className="bird bird-three" />
-                    </div>
-                </div>
+                {this.state.animation === 'birds'
+                    ? <BirdsAnimation />
+                    : null}
             </div>
         );
     }
 }
+
+const BirdsAnimation = () => (
+    <div className="animation-game-screen">
+        <div className="bird-container bird-container-one">
+            <div className="bird bird-one" />
+        </div>
+        <div className="bird-container bird-container-two">
+            <div className="bird bird-two" />
+        </div>
+        <div className="bird-container bird-container-three">
+            <div className="bird bird-three" />
+        </div>
+    </div>
+);
 
 const GameOver = (props) => {
     let activePlayer = props.players[0];
