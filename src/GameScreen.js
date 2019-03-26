@@ -6,6 +6,9 @@ import Player from './Player';
 import './css/App.css';
 import './css/GameScreen.css';
 
+// animation duration time
+const animationDuration = 9000;
+
 class GameScreen extends Component {
     constructor(props) {
         super(props);
@@ -26,7 +29,9 @@ class GameScreen extends Component {
         if (this.state.animation === 'birds') {
             setTimeout(() => {
                 this.setState({ animation: null });
-            }, 9000);
+            }, animationDuration);
+            clearInterval(this.birdsInterval);
+            this.startBirds();
         }
     }
 
@@ -57,9 +62,16 @@ class GameScreen extends Component {
     }
 
     startBirds() {
+        // min time delay to start animation
+        const minStart = 60000;
+        // max time delay to start animation
+        const maxStart = 180000;
+        // random time delay to start animation between mmin and max values
+        const animationStart = Math.floor(Math.random() * (maxStart - minStart + 1)) + minStart;
+        console.log('birds animation starts in', animationStart / 60000);
         this.birdsInterval = setInterval(() => {
             this.setState({ animation: 'birds' });
-        }, 9000 + 5000);
+        }, animationDuration + animationStart);
     }
 
     render() {
