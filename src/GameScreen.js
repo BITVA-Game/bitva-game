@@ -24,11 +24,14 @@ class GameScreen extends Component {
 
     componentDidUpdate() {
         if (this.state.animation === 'birds') {
-            setTimeout(
-                () => this.setState({ animation: null }),
-                9000,
-            );
-        }   
+            setTimeout(() => {
+                this.setState({ animation: null });
+            }, 9000);
+        }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.birdsInterval);
     }
 
     cardDragEnded() {
@@ -54,10 +57,9 @@ class GameScreen extends Component {
     }
 
     startBirds() {
-        setInterval(
-            () => this.setState({ animation: 'birds' }),
-            9000 + 5000,
-        );
+        this.birdsInterval = setInterval(() => {
+            this.setState({ animation: 'birds' });
+        }, 9000 + 5000);
     }
 
     render() {
