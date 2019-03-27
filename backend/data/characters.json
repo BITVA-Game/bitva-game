@@ -3,7 +3,7 @@
     "id": "morevna",
     "name": "Мarya Мorevna",
     "description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
-    "health": 15,
+    "health": 16,
     "cardsNumber": 25,
     "img": "character_ex.png",
     "cards": {
@@ -52,8 +52,8 @@
   },
   "yaga": {
     "id": "yaga",
-    "name": "Yaga",
-    "description": "Yaga can lead a person between realm of the dead and the living. She is a Witch, Keeper of the Living and Dead water.",
+    "name": "Baba Yaga",
+    "description": "Baba Yaga flies around in a mortar, wields a pestle, and dwells deep in the forest in a hut  on chicken legs. Baba Yaga may help or hinder those that encounter or seek her out.",
     "health": 17,
     "cardsNumber": 25,
     "img": "character_ex.png",
@@ -97,6 +97,107 @@
       "waterDead": {
         "id": "waterDead",
         "count": 2
+      }
+    },
+    "background": "red"
+  },
+  "hozyaika": {
+    "id": "hozyaika",
+    "name": "The Malachite Maid",
+    "description": "The Malachite Maid is the mountain spirit from the legends of the Ural miners and the Mistress of the Ural Mountains",
+    "health": 16,
+    "cardsNumber": 25,
+    "img": "character_ex.png",
+    "cards": {
+      "bajun": {
+        "id": "bajun",
+        "count": 5
+      },
+      "sivka": {
+        "id": "sivka",
+        "count": 4
+      },
+      "wolf": {
+        "id": "wolf",
+        "count": 3
+      },
+      "bogatyr": {
+        "id": "bogatyr",
+        "count": 2
+      },
+      "apple": {
+        "id": "apple",
+        "count": 2
+      },
+      "bereginya": {
+        "id": "bereginya",
+        "count": 1
+      },
+      "shieldLarge": {
+        "id": "shieldLarge",
+        "count": 2
+      },
+      "shieldSmall": {
+        "id": "shieldSmall",
+        "count": 3
+      },
+      "waterLiving": {
+        "id": "waterLiving",
+        "count": 2
+      },
+      "waterDead": {
+        "id": "waterDead",
+        "count": 1
+      }
+    },
+    "background": "green"
+  },
+  "premudraya": {
+    "id": "premudraya",
+    "name": "Vasilisa the Wise",
+    "description": "A young girl abused by her step-mother is on her joyrney to find a mystical fire and unexpected helpers",
+    "health": 15,
+    "cardsNumber": 25,
+    "cards": {
+      "bajun": {
+        "id": "bajun",
+        "count": 5
+      },
+      "sivka": {
+        "id": "sivka",
+        "count": 4
+      },
+      "wolf": {
+        "id": "wolf",
+        "count": 3
+      },
+      "bogatyr": {
+        "id": "bogatyr",
+        "count": 2
+      },
+      "apple": {
+        "id": "apple",
+        "count": 2
+      },
+      "bereginya": {
+        "id": "bereginya",
+        "count": 1
+      },
+      "shieldLarge": {
+        "id": "shieldLarge",
+        "count": 2
+      },
+      "shieldSmall": {
+        "id": "shieldSmall",
+        "count": 3
+      },
+      "waterLiving": {
+        "id": "waterLiving",
+        "count": 2
+      },
+      "waterDead": {
+        "id": "waterDead",
+        "count": 1
       }
     },
     "background": "red"

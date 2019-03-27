@@ -119,7 +119,7 @@
     "initialpoints": 1,
     "img": "firebird.png"
   },
-  "kladenets": {
+  "kadenets": {
     "id": "kladenets",
     "name": "Magic sword 'Kladenets'",
     "type": "item",
