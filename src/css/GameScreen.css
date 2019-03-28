@@ -281,8 +281,19 @@
 }
 
 .target {
-    box-shadow: 0 0 15px 7px #b74a45;
-    transition: box-shadow 1s;
+    animation: target 1s ease-out infinite;
+}
+
+@keyframes target {
+    0% {
+        box-shadow: 0 0 0 0 #b74a45;
+    }
+    30% {
+        box-shadow: 0 0 15px 7px #b74a45;
+    }
+    100% {
+        box-shadow: 0 0 30px 14px #b74a45;
+    }
 }
 
 /* game over */
