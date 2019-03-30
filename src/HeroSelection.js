@@ -67,11 +67,10 @@ const BackButton = props => (
 );
 
 function sortedHeroesList(app) {
+    // Sort characters' names based on profile and alphabet
     return Object.keys(app.heroSelect).sort((h1, h2) => {
         const id1 = app.profile.characters.indexOf(h1);
-        console.log('id1', id1);
         const id2 = app.profile.characters.indexOf(h2);
-        console.log('id2', id2);
         if (id1 === id2) {
             return h1 > h2 ? 1 : -1;
         }
@@ -85,9 +84,8 @@ class HeroSelection extends Component {
     constructor(props) {
         super(props);
         this.app = props.app;
-        // this.heroesList = sortedHeroesList(this.app);
-        this.defaultHeroID = sortedHeroesList(this.app)[0];
-        // this.defaultHeroID = this.app.heroSelect[Object.keys(this.app.heroSelect)[0]].id;
+        this.heroesList = sortedHeroesList(this.app);
+        this.defaultHeroID = this.heroesList[0];
         this.state = {
             hero: null,
             selected: this.defaultHeroID,
@@ -118,21 +116,21 @@ class HeroSelection extends Component {
     }
 
     selectRightHero() {
-        const heroes = Object.keys(this.app.heroSelect);
+        const heroes = this.heroesList;
         let index = heroes.indexOf(this.state.selected);
         index = index === heroes.length - 1 ? 0 : index + 1;
         this.setState({ selected: heroes[index] });
     }
 
     selectLeftHero() {
-        const heroes = Object.keys(this.app.heroSelect);
+        const heroes = this.heroesList;
         let index = heroes.indexOf(this.state.selected);
         index = index === 0 ? heroes.length - 1 : index - 1;
         this.setState({ selected: heroes[index] });
     }
 
     showRightHero() {
-        const heroes = Object.keys(this.app.heroSelect);
+        const heroes = this.heroesList;
         let index = heroes.indexOf(this.state.selected);
         index = index === heroes.length - 1 ? 0 : index + 1;
         const hero = this.app.heroSelect[heroes[index]];
@@ -140,7 +138,7 @@ class HeroSelection extends Component {
     }
 
     showLeftHero() {
-        const heroes = Object.keys(this.app.heroSelect);
+        const heroes = this.heroesList;
         let index = heroes.indexOf(this.state.selected);
         index = index === 0 ? heroes.length - 1 : index - 1;
         const hero = this.app.heroSelect[heroes[index]];
@@ -152,8 +150,8 @@ class HeroSelection extends Component {
     }
 
     render() {
-        console.log(sortedHeroesList(this.app), this.state.heroesList);
-        console.log(this.state.selected, this.state.hero);
+        // console.log(sortedHeroesList(this.app));
+        // console.log(this.state.selected, this.state.hero);
         return (
             <div className="heroselection-container">
                 <Header

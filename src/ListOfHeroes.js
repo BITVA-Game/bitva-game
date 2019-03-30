@@ -24,9 +24,7 @@ function sortedHeroes(app) {
     // Sort characters based on profile and alphabet
     return Object.values(app.heroSelect).sort((h1, h2) => {
         const id1 = app.profile.characters.indexOf(h1.id);
-        console.log('id1', id1);
         const id2 = app.profile.characters.indexOf(h2.id);
-        console.log('id2', id2);
         if (id1 === id2) {
             return h1 > h2 ? 1 : -1;
         }
@@ -58,7 +56,7 @@ const HeroBlock = props => (
 
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
-const ListOfHeroes = props => console.log(sortedHeroes(props.app)) || (
+const ListOfHeroes = props => (
     <div className="heroes-list">
         {sortedHeroes(props.app).map(hero => (
             <HeroBlock
