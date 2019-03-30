@@ -66,11 +66,28 @@ const BackButton = props => (
     </div>
 );
 
+function sortedHeroesList(app) {
+    return Object.keys(app.heroSelect).sort((h1, h2) => {
+        const id1 = app.profile.characters.indexOf(h1);
+        console.log('id1', id1);
+        const id2 = app.profile.characters.indexOf(h2);
+        console.log('id2', id2);
+        if (id1 === id2) {
+            return h1 > h2 ? 1 : -1;
+        }
+        else {
+            return id1 > id2 ? -1 : 1;
+        }        
+    });
+}
+
 class HeroSelection extends Component {
     constructor(props) {
         super(props);
         this.app = props.app;
-        this.defaultHeroID = this.app.heroSelect[Object.keys(this.app.heroSelect)[0]].id;
+        // this.heroesList = sortedHeroesList(this.app);
+        this.defaultHeroID = sortedHeroesList(this.app)[0];
+        // this.defaultHeroID = this.app.heroSelect[Object.keys(this.app.heroSelect)[0]].id;
         this.state = {
             hero: null,
             selected: this.defaultHeroID,
@@ -135,6 +152,7 @@ class HeroSelection extends Component {
     }
 
     render() {
+        console.log(sortedHeroesList(this.app), this.state.heroesList);
         console.log(this.state.selected, this.state.hero);
         return (
             <div className="heroselection-container">

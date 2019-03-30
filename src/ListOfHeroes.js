@@ -20,15 +20,21 @@ function isAvailable(app, hero) {
     return app.profile.characters.find(character => character === hero.id);
 }
 
-// function sortedHeroes(app) {
-//     // Sort characters based on provile and alphabet
-//     return Object.values(app.heroSelect).sort((h1, h2) => {
-//         const id1 = app.profile.characters.indexOf(h1.id) + h1.id;
-//         const id2 = app.profile.characters.indexOf(h2.id) + h2.id;
-// 
-//         return id1 > id2 ? -1 : 1;
-//     });
-// }
+function sortedHeroes(app) {
+    // Sort characters based on profile and alphabet
+    return Object.values(app.heroSelect).sort((h1, h2) => {
+        const id1 = app.profile.characters.indexOf(h1.id);
+        console.log('id1', id1);
+        const id2 = app.profile.characters.indexOf(h2.id);
+        console.log('id2', id2);
+        if (id1 === id2) {
+            return h1 > h2 ? 1 : -1;
+        }
+        else {
+            return id1 > id2 ? -1 : 1;
+        } 
+    });
+}
 
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
@@ -52,9 +58,9 @@ const HeroBlock = props => (
 
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
-const ListOfHeroes = props => (
+const ListOfHeroes = props => console.log(sortedHeroes(props.app)) || (
     <div className="heroes-list">
-        {Object.values(props.app.heroSelect).map(hero => (
+        {sortedHeroes(props.app).map(hero => (
             <HeroBlock
                 key={hero.id}
                 onShow={props.onShow}
