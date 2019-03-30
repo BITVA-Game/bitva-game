@@ -8,6 +8,8 @@ import styles from './css/HeroSelection.module.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
+import hozyaika from './images/heroes/hozyaika.jpg';
+import premudraya from './images/heroes/premudraya.jpg';
 
 import apple from './images/cards/apple.jpg';
 import bajun from './images/cards/catbajun.jpg';
@@ -24,6 +26,8 @@ import waterLiving from './images/cards/livingwater.jpg';
 const images = {
     yaga,
     morevna,
+    hozyaika,
+    premudraya,
 };
 
 const imagesCards = {
