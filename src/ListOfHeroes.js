@@ -28,9 +28,7 @@ function sortedHeroes(app) {
         if (id1 === id2) {
             return h1 > h2 ? 1 : -1;
         }
-        else {
-            return id1 > id2 ? -1 : 1;
-        } 
+        return id1 > id2 ? -1 : 1;
     });
 }
 
