@@ -2,7 +2,6 @@ const ioClient = require('socket.io-client');
 const http = require('http').Server();
 const ioHost = require('socket.io');
 
-
 let socket;
 let httpServer;
 let httpServerAddr;
@@ -44,4 +43,8 @@ afterEach((done) => {
         socket.disconnect();
     }
     done();
+});
+
+test('Initial test to always pass', () => {
+    expect(true).toBeTruthy();
 });

@@ -1,8 +1,5 @@
 /* eslint-disable no-plusplus */
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
 
 function takeOneCardAtRand(hand) {
     console.log('takeOneCardAtRand');
@@ -115,7 +112,7 @@ function playOnePhase(appObject, sendMessage) {
 }
 
 
-function simulationSequence(application) {
+function simulationSequence(application, hero, opponent) {
     console.log('STARTING SIM');
     let appObject = null;
     const sendReply = (arg) => {
@@ -125,12 +122,9 @@ function simulationSequence(application) {
         application.msgReceived(msg, sendReply);
     };
 
-    const index = getRandomInt(1);
-    const heroes = ['morevna', 'yaga'];
+    console.log(`Playing ${hero} against ${opponent}`);
 
-    console.log(`First hero is ${heroes[index]}`);
-
-    const msg1 = { type: 'HEROSELECTED', hero: heroes[index] };
+    const msg1 = { type: 'HEROSELECTED', hero, opponent };
     sendMessage(msg1);
 
     const msg2 = { type: 'DEALALL' };
@@ -157,7 +151,7 @@ function simulationSequence(application) {
         playThroughResult.players[j].hand = Object.keys(player.hand).length;
     }
     playThroughResult.round = count;
-    playThroughResult.first = heroes[index];
+    playThroughResult.first = hero;
 
     return playThroughResult;
 }

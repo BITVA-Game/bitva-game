@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 // const fs = require('fs');
 // const path = require('path');
+const readlineSync = require('readline-sync');
 const application = require('../backend/application');
 const appData = require('../backend/data/app.json');
 const { simulationSequence } = require('./functions');
@@ -19,26 +20,30 @@ function getAvgPhase(arr) {
 
 function formReport(arr, n) {
     // Separate wins per character
+    const player1name = arr[0].players[0].name;
+    const player2name = arr[0].players[1].name;
+    console.log('PLAYERS: ', player1name, player2name);
     const player = (players, name) => players.find(p => p.name === name);
-    const morevnawins = arr.filter(a => player(a.players, 'yaga').health <= 0);
-    const yagawins = arr.filter(a => player(a.players, 'morevna').health <= 0);
-    console.log(`From ${n} games, Yaga has ${
-        yagawins.length} and Morevna has ${
-        morevnawins.length} wins`);
+    const player2wins = arr.filter(a => player(a.players, player1name).health <= 0);
+    const player1wins = arr.filter(a => player(a.players, player2name).health <= 0);
+    console.log(`From ${n} games, ${player2name} has ${
+        player2wins.length} and ${player1name} has ${
+        player1wins.length} wins`);
 
     // Wins at phase per character avg
-    const morevnaPhaseAvg = getAvgPhase(morevnawins);
-    console.log(`On average, Morevna wins at turn num ${morevnaPhaseAvg}`);
-    const yagaPhaseAvg = getAvgPhase(yagawins);
-    console.log(`On average, Yaga wins at turn num ${yagaPhaseAvg}`);
+    console.log(`On average, ${player1name} wins at turn num ${getAvgPhase(player1wins)}`);
+    console.log(`On average, ${player2name} wins at turn num ${getAvgPhase(player2wins)}`);
 }
 
 function runSim(n) {
     const simResult = [];
+    const heroes = ['morevna', 'yaga', 'premudraya', 'hozyaika'];
+    const hero = readlineSync.keyInSelect(heroes, 'Select hero:');
+    const opponent = readlineSync.keyInSelect(heroes, 'Select opponent:');
     for (let i = 0; i < n; i++) {
         console.log('simulationSequence ', i);
         application.setApp(appData);
-        const result = simulationSequence(application);
+        const result = simulationSequence(application, heroes[hero], heroes[opponent]);
         // console.log(result);
         simResult.push(result);
     }
@@ -52,4 +57,4 @@ process.on('unhandledRejection', (error) => {
     console.log('unhandledRejection', error.message);
 });
 
-runSim(100);
+runSim(300);

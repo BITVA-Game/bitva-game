@@ -131,7 +131,8 @@ class HeroSelection extends Component {
     }
 
     selectHero() {
-        this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected });
+        // PLEASE NOTE THIS IS TEMPORARY AS WE ASSIGN YAGA BY DEFAULT
+        this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected, opponent: 'yaga' });
     }
 
     render() {

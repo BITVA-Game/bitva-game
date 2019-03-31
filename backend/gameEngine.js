@@ -5,7 +5,6 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
-
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
@@ -44,17 +43,7 @@ function createDeck(heroName) {
     return deck;
 }
 
-// we retrieve the name of the 2nd character not taken from the list previoulsy.
-function searchSecondHero(heroKey, CharacterArray) {
-    for (let i = 0; i < CharacterArray.length; i += 1) {
-        if (CharacterArray[i].id !== heroKey) {
-            return CharacterArray[i].id;
-        }
-    }
-    return true;
-}
-
-const generatePlayers = function (heroName) {
+const generatePlayers = function (heroName, opponentName) {
     const rand = getRandomBool();
     const players = [
         { active: rand },
@@ -62,8 +51,7 @@ const generatePlayers = function (heroName) {
     ];
 
     // We create array from all characters objects.
-    const allCharactersArray = Object.values(allCharacters);
-    const heroSecondName = searchSecondHero(heroName, allCharactersArray);
+    const heroSecondName = opponentName;
 
     // Assign the common data
     players.forEach((p) => {
@@ -392,7 +380,10 @@ function handle(appgame, message) {
     }
     case 'HEROSELECTED': {
         const heroName = message.hero;
-        return Object.assign(game, { players: generatePlayers(heroName) });
+        const opponentName = message.opponent
+            ? message.opponent
+            : allCharacters[getRandomUpTo(allCharacters.length)].name;
+        return Object.assign(game, { players: generatePlayers(heroName, opponentName) });
     }
     case 'DEALALL': {
         return Object.assign(game, { players: giveCardsToAll(game.players) });

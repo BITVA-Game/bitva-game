@@ -13,7 +13,8 @@
     "react-scripts": "2.0.3",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "readline-sync": "^1.4.9"
   },
   "scripts": {
     "start-react": "cross-env PORT=5000 BROWSER=none react-scripts start",
