@@ -340,3 +340,82 @@
     text-shadow: 0 0 32px #B74A45;
     text-transform: capitalize;
 }
+
+/* bird animation */
+
+.animation-game-screen {
+    margin-top: 200px;
+    min-height: 125px;
+    position: relative;
+    z-index: -1;
+}
+
+.bird-container {
+    left: -10%;
+    position: absolute;
+    top: 20%;
+    transform: scale(0) translateX(-10vw) translateY(50vh);
+    will-change: transform;
+}
+
+.bird-container-one {
+    animation: flying 9s linear 0s;
+}
+
+.bird-container-two {
+    animation: flying 8s linear 1s;
+}
+
+.bird-container-three {
+    animation: flying 7s linear 2s;
+}
+
+@keyframes flying {
+    0% {
+        transform: translateY(50vh) translateX(-10vw) scale(0.3);
+    }
+    15% {
+        transform: translateY(30vh) translateX(10vw) scale(0.4);
+    }
+    30% {
+        transform: translateY(30vh) translateX(30vw) scale(0.6);
+    }
+    45% {
+        transform: translateY(20vh) translateX(50vw) scale(0.6);
+    }
+    60% {
+        transform: translateY(14vh) translateX(70vw) scale(0.6);
+    }
+    75% {
+        transform: translateY(7vh) translateX(90vw) scale(0.6);
+    }
+    100% {
+        transform: translateY(0vh) translateX(110vw) scale(0.6);
+    }
+}
+
+.bird {
+    background-image: url(../images/animation/bird.svg);
+    background-size: auto 100%;
+    height: 63px;
+    width: 44px;
+    will-change: background-position;
+}
+
+.bird-one {
+    animation: fly-cycle 1.25s steps(10) -0.25s infinite;
+}
+
+.bird-two {
+    animation: fly-cycle 1s steps(10) -0.5s infinite;
+}
+
+.bird-three {
+    animation: fly-cycle 1.1s steps(10) -0.75s infinite;
+}
+
+@keyframes fly-cycle {
+    100% {
+        background-position: -450px 0;
+    }
+}
