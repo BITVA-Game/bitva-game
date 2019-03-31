@@ -1896,10 +1896,11 @@ test('msg PROFILE switches screen state to PROFILE', () => {
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // ожидаем, что карта dead water в item holder неактивного игрока
+    // ожидаем, что экран станет 'PROFILE'
     expect(result.manager.screen).toEqual('PROFILE');
 });
 
+// screen swtich to NETWORKPLAY when NETWORKPLAY message received
 test('msg NETWORKPLAY switches screen state to SELECTROLE', () => {
     const msg = { type: 'NETWORKPLAY' };
 
@@ -1910,4 +1911,166 @@ test('msg NETWORKPLAY switches screen state to SELECTROLE', () => {
     const result = sendReply.mock.calls[0][0];
 
     expect(result.manager.screen).toEqual('NETWORKPLAY');
+});
+
+// Test, that when a player attackes with  russianOven card, then opponent
+// cannot use two random cards from his hand in next turn
+test.only('msg ACTION received: active player attacks with russianOven, it disables 2 cards in hand of opponent for 1 turn.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key1
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key2: {},
+                        key1: {
+                            id: 'russianOven', type: 'action', category: 'holdCard', points: 2, initialpoints: 2, disabled: false,
+                        },
+
+                    },
+                    grave: { },
+                    item: {
+                        key10: {
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                },
+                {
+                    active: false,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 13, maximum: 13 },
+                    hand: {
+                        key11: { disabled: false },
+                        key8: { disabled: false },
+                        key13: { disabled: false },
+                        key1: { disabled: false },
+                        key3: { disabled: false },
+                    },
+                    moveCounter: 1,
+                    item: { },
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта russianOven на кладбище активного игрока
+    expect(result.game.players[0].grave.key1.id).toEqual('russianOven');
+    // ожидаем, что карта russianOven активного игрока имеет category holdCard
+    expect(result.game.players[0].grave.key1.category).toEqual('holdCard');
+    // ожидаем, что 2 карты  неактивного игрока имеют тип
+    expect(Object.values(result.game.players[1].hand)).toContainEqual({ disabled: true }, { disabled: true }, { disabled: false }, { disabled: false }, { disabled: false });
+});
+
+// Test, that when a player attacked with  russianOven card, then opponent
+// cannot use two random cards from his hand  in action
+test.only('msg ACTION received: inactive player attacked with russianOven, 2 cards in hand of active player are disabled for 1 turn.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key3',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key2: {},
+                        key4: {},
+
+                    },
+                    grave: {
+                        key1: {
+                            id: 'russianOven', type: 'action', category: 'holdCard', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    item: {},
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key17: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 13, maximum: 13 },
+                    hand: {
+                        key11: { disabled: true },
+                        key8: { disabled: true },
+                        key13: { disabled: false },
+                        key1: { disabled: false },
+                        key3: {
+                            id: 'bajun', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    item: {},
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у активного игрокы (Моревна) 2 карты в руке с типом 'disabled'
+    expect(Object.values(result.game.players[1].hand)).toContainEqual(
+        { disabled: true }, { disabled: true }, { disabled: false }, { disabled: false },
+    );
+    // ожидаем, что у активного игрокы (Моревна) счетчик хода равен 1
+    expect(result.game.players[1].moveCounter).toEqual(1);
 });
