@@ -1998,9 +1998,10 @@ test.only('msg ACTION received: active player attacks with  skullLantern, it mov
 
     // ожидаем, что карты с типом item из руки и item holder активного игрока уйдут на кладбище
     expect(Object.keys(result.game.players[1].grave)).toContain('key3', 'key8');
+    expect(Object.keys(result.game.players[1].hand)).not.toContain('item');
     expect(Object.keys(result.game.players[1].item).length).toEqual(0);
-    
     // ожидаем, что то карты с типом item из руки и item holder неактивного игрока уйдут на кладбище
     expect(Object.keys(result.game.players[0].grave)).toContain('key7', 'key10');
     expect(Object.keys(result.game.players[0].item).length).toEqual(0);
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('item');
 });

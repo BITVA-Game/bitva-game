@@ -273,7 +273,6 @@ function waterCard(players) {
 // it accept players and checks all item category cards from both players item holders and hands
 // and move such cards to players grave yards
 function attackItems(players) {
-    console.log('We are in attack items');
     players.forEach((p) => {
         if (Object.keys(p.item).length !== 0) {
             const itemCard = Object.values(p.item)[0];
@@ -282,16 +281,15 @@ function attackItems(players) {
             // we move any item card to graveyard
             moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
         }
+        // we check whether each player hand is not empty
         if (Object.keys(p.hand).length !== 0) {
-            for (const cardIndex in Object.keys(p.hand)) {
-                console.log(p.hero, Object.values(p.hand)[cardIndex], Object.keys(p.hand)[cardIndex]);
-                const handCard = Object.values(p.hand)[cardIndex];
-                if (handCard.type === 'item') {
+            // and for each card in hand with type item
+            for (const cardIndex in p.hand) {
+                if (p.hand[cardIndex].type === 'item') {
                     // we reset item card's points to initial points
-                    handCard.points = handCard.initialpoints;
+                    p.hand[cardIndex].points = p.hand[cardIndex].initialpoints;
                     // we move any item card to graveyard
-                    moveCardGraveyard(p, Object.keys(p.hand)[cardIndex]);
-                    console.log(p.grave);
+                    moveCardGraveyard(p, cardIndex);
                 }
             }
         }
@@ -347,8 +345,8 @@ function playerActs(game, player, opponent, active, target) {
                     game.phase = 'OVER';
                 }
                 break;
+            // if player attacks with card category attackItems we call attack items function
             case 'attackItems':
-                console.log('attackItems');
                 attackItems(game.players);
                 moveCardGraveyard(player, active);
                 if (opponent.health.current <= 0) {
