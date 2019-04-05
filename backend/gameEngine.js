@@ -382,7 +382,7 @@ function handle(appgame, message) {
         const heroName = message.hero;
         const opponentName = message.opponent
             ? message.opponent
-            : allCharacters[getRandomUpTo(allCharacters.length)].name;
+            : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length)].id;
         return Object.assign(game, { players: generatePlayers(heroName, opponentName) });
     }
     case 'DEALALL': {
