@@ -430,3 +430,159 @@
         background-position: -450px 0;
     }
 }
+
+/*cards shuffle animation*/
+
+.stack {
+    bottom: 60px;
+    display: inline-block;
+    position: relative;
+    right: 80px;
+}
+
+.player-top .stack {
+    right: -100px;
+    top: 170px;
+    transform: rotate(180deg);
+}
+
+.card-grave {
+    animation: onTop 4s ease infinite;
+    transform: translateY(0);
+	
+}
+
+.one {
+    animation-name: onTop;
+    left: 0;
+	top: 0;
+	z-index: 2;	
+}
+
+.two {
+    animation-name: onMiddle;
+	left: 20px;
+	top: 20px;
+	z-index: 1;
+}
+.three {
+    animation-name: onBottom;
+	left: 40px;
+	top: 40px;
+	z-index: 0;
+}
+
+@keyframes onTop {
+    5% {
+      transform: translateY(-50px);
+      z-index: 1;
+      left: 20px;
+      top: 20px;
+    }
+    10% {
+      transform: translateY(0);
+      z-index: 0;
+      left: 40px;
+      top: 40px;
+    }
+    40% {
+      transform: translateY(0);
+      z-index: 0;
+      left: 40px;
+      top: 40px;
+    }
+    50% {
+      transform: translateY(0);
+      z-index: 1;
+      left: 20px;
+      top: 20px;
+    }
+    70% {
+      transform: translateY(0);
+      z-index: 1;
+      left: 20px;
+      top: 20px;
+    }
+    80% {
+      transform: translateY(0);
+      z-index: 2;
+      left: 0;
+      top: 0;
+    }
+  }
+  @keyframes onMiddle {
+    10% {
+      transform: translateY(0);
+      z-index: 2;
+      left: 0;
+      top: 0;
+    }
+    40% {
+      transform: translateY(0);
+      z-index: 2;
+      left: 0;
+      top: 0;
+    }
+    45% {
+      transform: translateY(-50px);
+      z-index: 1;
+      left: 20px;
+      top: 20px;
+    }
+    50% {
+      transform: translateY(0);
+      z-index: 0;
+      left: 40px;
+      top: 40px;
+    }
+    70% {
+      transform: translateY(0);
+      z-index: 0;
+      left: 40px;
+      top: 40px;
+    }
+    80% {
+      transform: translateY(0);
+      z-index: 1;
+      left: 20px;
+      top: 20px;
+    }
+  }
+  @keyframes onBottom {
+    10% {
+      transform: translateY(0);
+      z-index: 0;
+      left: 20px;
+      top: 20px;
+    }
+    40% {
+      transform: translateY(0);
+      z-index: 1;
+      left: 20px;
+      top: 20px;
+    }
+    50% {
+      transform: translateY(0);
+      z-index: 2;
+      left: 0;
+      top: 0;
+    }
+    70% {
+      transform: translateY(0);
+      z-index: 2;
+      left: 0;
+      top: 0;
+    }
+    75% {
+      transform: translateY(-50px);
+      z-index: 1;
+      left: 20px;
+      top: 20px;
+    }
+    80% {
+      transform: translateY(0);
+      z-index: 0;
+      left: 40px;
+      top: 40px;
+    }
+  }

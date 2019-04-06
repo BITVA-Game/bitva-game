@@ -174,6 +174,17 @@ const Grave = props => (
         <div className="count">
             {props.active ? Object.keys(props.grave).length : Object.keys(props.grave).length}
         </div>
+        <figure className="stack">
+            <div className={`deck card-grave card-like deck-${props.background} one`}>
+                <span>Top</span>
+            </div>
+            <div className={`deck card-grave card-like deck-${props.background} two`}>
+                <span>Middle</span>
+            </div>
+            <div className={`deck card-grave card-like deck-${props.background} three`}>
+                <span>Bottom</span>
+            </div>
+        </figure>
     </div>
 );
 
