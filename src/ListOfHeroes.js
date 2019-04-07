@@ -21,11 +21,13 @@ function isAvailable(app, hero) {
 }
 
 function sortedHeroes(app) {
-    // Sort characters based on provile and alphabet
+    // Sort characters based on profile and alphabet
     return Object.values(app.heroSelect).sort((h1, h2) => {
-        const id1 = app.profile.characters.indexOf(h1.id) + h1.id;
-        const id2 = app.profile.characters.indexOf(h2.id) + h2.id;
-
+        const id1 = app.profile.characters.indexOf(h1.id);
+        const id2 = app.profile.characters.indexOf(h2.id);
+        if (id1 === id2) {
+            return h1 > h2 ? 1 : -1;
+        }
         return id1 > id2 ? -1 : 1;
     });
 }
@@ -33,7 +35,7 @@ function sortedHeroes(app) {
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <div className="btn-hero btn-hero-selected" role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex="-1">
+        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex="-1">
             <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
             <div className="deck-icon">
                 <div className="deck-text">
