@@ -1914,7 +1914,7 @@ test('msg NETWORKPLAY switches screen state to SELECTROLE', () => {
 
 // Test, that when active player attackes opponent with skullLantern card then
 // all cards with item type are thrown to graveyard from the game table
-test.only('msg ACTION received: active player attacks with  skullLantern, it moves all players cards with item type to graveyards', () => {
+test('msg ACTION received: active player attacks with  skullLantern, it moves all players cards with item type to graveyards', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
