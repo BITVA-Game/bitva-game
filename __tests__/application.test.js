@@ -78,19 +78,19 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
 
     // Save the data into variable for checks
     const heroSelect = sendReply.mock.calls[0][0].heroSelect;
-    expect(heroSelect.morevna.cardsNumber).toEqual(25);
-    expect(heroSelect.morevna.health).toEqual(15);
-    expect(Object.keys(heroSelect.morevna.cards).length).toEqual(10);
+    expect(heroSelect.morevna.cardsNumber).toEqual(15);
+    expect(heroSelect.morevna.health).toEqual(16);
+    expect(Object.keys(heroSelect.morevna.cards).length).toEqual(8);
 
-    expect(heroSelect.yaga.cardsNumber).toEqual(25);
-    expect(heroSelect.yaga.health).toEqual(17);
-    expect(Object.keys(heroSelect.yaga.cards).length).toEqual(10);
+    expect(heroSelect.yaga.cardsNumber).toEqual(15);
+    expect(heroSelect.yaga.health).toEqual(15);
+    expect(Object.keys(heroSelect.yaga.cards).length).toEqual(8);
 });
 
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
 test('msg HEROSELECTED received. List with charactes cleared. State Hero Selected.', () => {
 // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -117,7 +117,7 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
 // screen swtich to state VERSUS after hero is selected
 test('msg HEROSELECTED switches screen state to VERSUS', () => {
     // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -147,7 +147,7 @@ test('msg HEROSELECTED switches screen state to VERSUS', () => {
 // Test that one player has become active. Game state VERSUS.
 test('msg HEROSELECTED received: active player is set.', () => {
 // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -178,7 +178,7 @@ test('msg HEROSELECTED received: active player is set.', () => {
 // Test that active player gets all the data. Game state VERSUS.
 test('msg HEROSELECTED received: active player has all the data.', () => {
 // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -1796,7 +1796,7 @@ test('msg ACTION for shields with the same key, shield with the same key in hand
 
 // Test, that when living water card is in any player item holder then
 // active player with current health == maximum heals does not get +1 to current health
-test.only('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
+test('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1900,7 +1900,7 @@ test('msg PROFILE switches screen state to PROFILE', () => {
     expect(result.manager.screen).toEqual('PROFILE');
 });
 
-test.only('msg NETWORKPLAY switches screen state to SELECTROLE', () => {
+test('msg NETWORKPLAY switches screen state to SELECTROLE', () => {
     const msg = { type: 'NETWORKPLAY' };
 
     const sendReply = jest.fn();
