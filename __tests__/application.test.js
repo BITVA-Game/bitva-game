@@ -362,7 +362,11 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
                     hero: 'morevna',
                     // We expect the card 10 will be moved to graveyard
                     hand: {
-                        key11: {}, key1: {}, key8: {}, key13: {}, key10: { points: 3 },
+                        key11: {},
+                        key1: {},
+                        key8: {},
+                        key13: {},
+                        key10: { points: 3, disabled: false },
                     },
                     moveCounter: 0,
                     item: {},
@@ -442,6 +446,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                             type: 'action',
                             points: 3,
                             category: 'heal',
+                            disabled: false,
                         },
                     },
                     moveCounter: 1,
@@ -508,6 +513,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
                             type: 'action',
                             points: 3,
                             category: 'heal',
+                            disabled: false,
                         },
                     },
                     moveCounter: 1,
@@ -571,7 +577,12 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: { type: 'action', category: 'attack', points: 2 }, key1: {},
+                        key11: {},
+                        key8: {},
+                        key13: {
+                            type: 'action', category: 'attack', points: 2, disabled: false,
+                        },
+                        key1: {},
                     },
                     moveCounter: 0,
                     item: {},
@@ -643,7 +654,12 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 1,
                     item: {},
@@ -724,7 +740,12 @@ test('msg ACTION CASE3 player attacks with more points than shield has, shield &
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 1,
                     item: {},
@@ -807,7 +828,12 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 1,
                     item: {},
@@ -891,7 +917,7 @@ test('msg ACTION CASE4 received: active player choose item, if his item holder i
                         key8: {},
                         key13: {},
                         key1: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 3,
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 3, disabled: false,
                         },
                     },
                     moveCounter: 1,
@@ -960,6 +986,7 @@ test('msg ACTION ANY received: active player moveCounter = 2 after his action, h
                             type: 'action',
                             points: 3,
                             category: 'heal',
+                            disabled: false,
                         },
                     },
                     moveCounter: 1,
@@ -1026,7 +1053,7 @@ test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
                         key8: {},
                         key13: {},
                         key1: {
-                            id: 'bogatyr', type: 'action', category: 'attack', points: 3,
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 3, disabled: false,
                         },
                     },
                     moveCounter: 1,
@@ -1096,7 +1123,7 @@ test('msg ACTION CASE 5, player wants to move his card from item holder to grave
                         key11: {}, key1: {}, key8: {}, key13: {},
                     },
                     // We expect the card 10 will be moved to graveyard
-                    item: { key10: { points: 3 } },
+                    item: { key10: { points: 3, disabled: false } },
                     moveCounter: 0,
                     // graveyard is empty
                     grave: {},
@@ -1167,7 +1194,7 @@ test('msg ACTION received: active player put Living Water in item, it increases 
                         key8: {},
                         key13: {},
                         key1: {
-                            id: 'waterLiving', type: 'item', category: 'heal', points: 3, initialpoints: 3,
+                            id: 'waterLiving', type: 'item', category: 'heal', disabled: false, points: 3, initialpoints: 3,
                         },
                     },
                     moveCounter: 1,
@@ -1236,7 +1263,9 @@ test('msg ACTION received: active player has dead water in item, it decreased pl
                         key11: {},
                         key8: {},
                         key13: {},
-                        key1: { type: 'action', category: 'attack', points: 3 },
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 1,
                     item: {
@@ -1298,7 +1327,7 @@ test('msg ACTION received: inactive player has living water in item, it increase
                     health: { current: 8, maximum: 15 },
                     item: {
                         key10: {
-                            id: 'waterLiving', type: 'item', category: 'heal', points: 2, initialpoints: 3,
+                            id: 'waterLiving', type: 'item', category: 'heal', points: 2, initialpoints: 3, disabled: false,
                         },
                     },
                 },
@@ -1322,10 +1351,12 @@ test('msg ACTION received: inactive player has living water in item, it increase
                         key11: {},
                         key8: {},
                         key13: {},
-                        key1: { type: 'action', category: 'attack', points: 3 },
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 1,
-                    item: { },
+                    item: {},
                     grave: {},
                 },
             ],
@@ -1456,9 +1487,11 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key11: {},
                         key8: {},
                         key13: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, disabled: false,
                         },
-                        key1: { type: 'action', category: 'attack', points: 3 },
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 2,
                     item: {
@@ -1477,12 +1510,12 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key8: {},
                         key15: {},
                         key3: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4, disabled: false,
                         },
                     },
                     item: {
                         key7: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4, disabled: false,
                         },
                     },
                     grave: { },
@@ -1546,7 +1579,9 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key13: {
                             id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialpoints: 2,
                         },
-                        key1: { type: 'action', category: 'attack', points: 1 },
+                        key1: {
+                            type: 'action', category: 'attack', points: 1, disabled: false,
+                        },
                     },
                     moveCounter: 2,
                     item: {
@@ -1631,7 +1666,12 @@ test('msg ACTION for shields with the same key, shields in item', () => {
                     health: { current: 5, maximum: 13 },
                     hero: 'morevna',
                     hand: {
-                        key11: {}, key8: {}, key13: {}, key1: { type: 'action', category: 'attack', points: 3 },
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 1,
                     item: {
@@ -1726,11 +1766,13 @@ test('msg ACTION for shields with the same key, shield with the same key in hand
                     hero: 'morevna',
                     hand: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4, disabled: false,
                         },
                         key8: {},
                         key13: {},
-                        key1: { type: 'action', category: 'attack', points: 3 },
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 0,
                     item: {},
@@ -1775,7 +1817,7 @@ test('msg ACTION for shields with the same key, shield with the same key in hand
     // expect shield for player 0 did not change
     expect(result.game.players[0].hand).toEqual({
         key7: {
-            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+            id: 'shieldSmall', type: 'item', category: 'shield', points: 4, disabled: false,
         },
         key8: {},
         key13: {},
@@ -1796,7 +1838,7 @@ test('msg ACTION for shields with the same key, shield with the same key in hand
 
 // Test, that when living water card is in any player item holder then
 // active player with current health == maximum heals does not get +1 to current health
-test('msg ACTION received: inactive player has living water in item, it increases players health current for 1pnt next 3 moves.', () => {
+test('msg ACTION received: inactive player has living water in item, it increases players health only if current != maximum', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1815,7 +1857,7 @@ test('msg ACTION received: inactive player has living water in item, it increase
                     health: { current: 8, maximum: 15 },
                     item: {
                         key10: {
-                            id: 'waterLiving', type: 'item', category: 'heal', points: 2, initialpoints: 3,
+                            id: 'waterLiving', type: 'item', category: 'heal', points: 2, initialpoints: 3, disabled: false,
                         },
                     },
                 },
@@ -1839,7 +1881,9 @@ test('msg ACTION received: inactive player has living water in item, it increase
                         key11: {},
                         key8: {},
                         key13: {},
-                        key1: { type: 'action', category: 'attack', points: 3 },
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
                     },
                     moveCounter: 1,
                     item: { },
@@ -1914,8 +1958,8 @@ test('msg NETWORKPLAY switches screen state to SELECTROLE', () => {
 });
 
 // Test, that when a player attackes with  russianOven card, then opponent
-// cannot use two random cards from his hand in next turn
-test.only('msg ACTION received: active player attacks with russianOven, it disables 2 cards in hand of opponent for 1 turn.', () => {
+// cannot use two random cards from his hand in next turn (move counter 1+1)
+test('msg ACTION received: active player attacks with russianOven, it disables 2 cards in hand of opponent for 1 turn.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -1972,7 +2016,7 @@ test.only('msg ACTION received: active player attacks with russianOven, it disab
                         key1: { disabled: false },
                         key3: { disabled: false },
                     },
-                    moveCounter: 1,
+                    moveCounter: 0,
                     item: { },
                     grave: {},
                 },
@@ -1991,12 +2035,18 @@ test.only('msg ACTION received: active player attacks with russianOven, it disab
     // ожидаем, что карта russianOven активного игрока имеет category holdCard
     expect(result.game.players[0].grave.key1.category).toEqual('holdCard');
     // ожидаем, что 2 карты  неактивного игрока имеют тип
-    expect(Object.values(result.game.players[1].hand)).toContainEqual({ disabled: true }, { disabled: true }, { disabled: false }, { disabled: false }, { disabled: false });
+    expect(Object.values(result.game.players[1].hand)).toContainEqual(
+        { disabled: true },
+        { disabled: true },
+        { disabled: false },
+        { disabled: false },
+        { disabled: false },
+    );
 });
 
-// Test, that when a player attacked with  russianOven card, then opponent
-// cannot use two random cards from his hand  in action
-test.only('msg ACTION received: inactive player attacked with russianOven, 2 cards in hand of active player are disabled for 1 turn.', () => {
+// Test, that when a player is attacked with  russianOven card by opponent, then this player
+// cannot use two random cards from his hand  during his turn ( move counter 1+1)
+test('msg ACTION received: inactive player attacked with russianOven, 2 cards in hand of active player are disabled for full turn.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key3',
@@ -2053,7 +2103,7 @@ test.only('msg ACTION received: inactive player attacked with russianOven, 2 car
                             id: 'bajun', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
                         },
                     },
-                    moveCounter: 0,
+                    moveCounter: 1,
                     item: {},
                     grave: {},
                 },
@@ -2071,6 +2121,7 @@ test.only('msg ACTION received: inactive player attacked with russianOven, 2 car
     expect(Object.values(result.game.players[1].hand)).toContainEqual(
         { disabled: true }, { disabled: true }, { disabled: false }, { disabled: false },
     );
-    // ожидаем, что у активного игрокы (Моревна) счетчик хода равен 1
-    expect(result.game.players[1].moveCounter).toEqual(1);
+    // ожидаем, что у активного игрокы (Моревна) счетчик хода равен 0 так как после полного хода-
+    // - 2 действия, он снчала равен 2, но тут же при переходе хода он обнуляется
+    expect(result.game.players[1].moveCounter).toEqual(0);
 });

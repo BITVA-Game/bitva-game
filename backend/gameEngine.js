@@ -269,6 +269,7 @@ function waterCard(players) {
     return { players };
 }
 
+// function to set disabled property to true to random 2 cards in player's hand
 function disableCards(opponent) {
     const opponentCards = Object.values(opponent.hand);
     const index1 = getRandomUpTo(opponentCards.length);
@@ -280,6 +281,7 @@ function disableCards(opponent) {
     opponentCards[index2].disabled = true;
 }
 
+// function to return disabled cards property to false if any have true
 function removeDisable(player) {
     const playerCards = Object.values(player.hand);
     for (const c in playerCards) {
@@ -293,76 +295,75 @@ function removeDisable(player) {
 function playerActs(game, player, opponent, active, target) {
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
-    // We send the card that has key1 to graveyard
-    if (activeCard.type !== 'disabled') {
-        if (target === 'graveyard') {
-            // if active card is in item holder
-            if (Object.keys(player.item)[0] === active) {
-                // We move active card from item holder to graveyard
-                moveCardGraveyard(player, active, 'item');
-            } else {
-                // In other cases we move active card from hand to Graveyard
-                moveCardGraveyard(player, active);
-            }
-        }
-        // if target is active player's hero, player can only heal his hero
-        // then his active card moves to graveyard. Other scenarios are not allowed
-        if (target === 'hero') {
-            if (activeCard.type === 'action') {
-                // eslint-disable-next-line default-case
-                switch (activeCard.category) {
-                case 'heal':
-                    healPlayer(player, activeCard.points);
-                    moveCardGraveyard(player, active);
-                    break;
-                case 'attack':
-                    break;
-                // if any mistake occurs during game process, player gets error message by default
-                default:
-                    return new Error('You are under spell. Wait for redemption!');
-                }
-            }
-        }
-        // if target is inactive player's hero - opponent, player can only attack opponent
-        // then his active card moves to graveyard. Other scenarios are not allowed
-        if (target === 'opponent') {
-            if (activeCard.type === 'action') {
-                // eslint-disable-next-line default-case
-                switch (activeCard.category) {
-                case 'heal':
-                    break;
-                case 'attack':
-                    // console.log('attacking opponent');
-                    attackOpponent(opponent, activeCard.points);
-                    moveCardGraveyard(player, active);
-                    if (opponent.health.current <= 0) {
-                        game.phase = 'OVER';
-                    }
-                    break;
-                case 'holdCard':
-                    disableCards(opponent);
-                    moveCardGraveyard(player, active);
-                    break;
-                // if any mistake occurs during game process, player gets error message by default
-                default:
-                    return new Error('You are under spell. Wait for redemption!');
-                }
-            }
-        }
-
-        if (target === 'item' && activeCard.type === 'item') {
-            // console.log('We are in move item case');
-            moveItem(player, active);
+    // We send the card that has active key to graveyard
+    if (target === 'graveyard') {
+        // if active card is in item holder
+        if (Object.keys(player.item)[0] === active) {
+            // We move active card from item holder to graveyard
+            moveCardGraveyard(player, active, 'item');
+        } else if (activeCard.disabled === false) {
+            // In other cases we move active card from hand to Graveyard
+            moveCardGraveyard(player, active);
         }
     }
+    // if target is active player's hero, player can only heal his hero
+    // then his active card moves to graveyard. Other scenarios are not allowed
+    if (target === 'hero' && activeCard.disabled === false) {
+        if (activeCard.type === 'action') {
+            // eslint-disable-next-line default-case
+            switch (activeCard.category) {
+            case 'heal':
+                healPlayer(player, activeCard.points);
+                moveCardGraveyard(player, active);
+                break;
+            case 'attack':
+                break;
+                // if any mistake occurs during game process, player gets error message by default
+            default:
+                return new Error('You are under spell. Wait for redemption!');
+            }
+        }
+    }
+    // if target is inactive player's hero - opponent, player can only attack opponent
+    // then his active card moves to graveyard. Other scenarios are not allowed
+    if (target === 'opponent' && activeCard.disabled === false) {
+        if (activeCard.type === 'action') {
+            // eslint-disable-next-line default-case
+            switch (activeCard.category) {
+            case 'heal':
+                break;
+            case 'attack':
+                console.log('attacking opponent');
+                attackOpponent(opponent, activeCard.points);
+                moveCardGraveyard(player, active);
+                if (opponent.health.current <= 0) {
+                    game.phase = 'OVER';
+                }
+                break;
+            case 'holdCard':
+                disableCards(opponent);
+                moveCardGraveyard(player, active);
+                break;
+                // if any mistake occurs during game process, player gets error message by default
+            default:
+                return new Error('You are under spell. Wait for redemption!');
+            }
+        }
+    }
+
+    if (target === 'item' && activeCard.type === 'item') {
+        // console.log('We are in move item case');
+        moveItem(player, active);
+    }
+
     // after each move we increase active player's counter for 1
     player.moveCounter += 1;
-    if (player.moveCounter === 1) {
-        removeDisable(player);
-    }
-    // once active player's counter ==2 we call function to give cards to players up to 5
+    // once active player's counter ==2
     if (player.moveCounter === 2 && game.phase === 'ACTIVE') {
         // console.log(game);
+        // we call function to return disabled cards property to false if any have true
+        removeDisable(player);
+        // we call function to give cards to players up to 5
         giveCardsTo(player);
         // active player becomes inactive once active player's counter ==2
         player.active = false;
