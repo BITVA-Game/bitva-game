@@ -35,7 +35,10 @@
     "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=src/icons/png/1024x1024.png --prune=true --out=releases"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^9.0.0",
+    "babel-jest": "^24.7.1",
     "cross-env": "^5.2.0",
     "csslint": "^1.0.5",
     "electron-packager": "^12.1.0",
@@ -45,8 +48,9 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
     "foreman": "^3.0.1",
-    "jest": "^23.4.1",
+    "jest": "^24.7.1",
     "jsdoc": "^3.5.5",
+    "react-testing-library": "^6.1.2",
     "url-parse": "^1.4.3",
     "wait-on": "^2.1.0"
   },
