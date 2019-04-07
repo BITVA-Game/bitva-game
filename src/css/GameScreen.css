@@ -447,7 +447,8 @@
 }
 
 .card-grave {
-    animation: onTop 4s ease infinite;
+    animation: onTop 4s ease 3;
+    /* animation: fly-in 10s 12s infinite;  */
     transform: translateY(0);
 	
 }
@@ -461,16 +462,21 @@
 
 .two {
     animation-name: onMiddle;
-	left: 20px;
+    left: 20px;
 	top: 20px;
 	z-index: 1;
 }
 .three {
     animation-name: onBottom;
-	left: 40px;
+    left: 40px;
 	top: 40px;
 	z-index: 0;
 }
+
+/* .player-top .card-grave {
+    transform: rotate(180deg);
+    animation-direction: reverse;
+} */
 
 @keyframes onTop {
     5% {
@@ -587,7 +593,7 @@
     }
   }
 
-  /* @keyframes fly-in {
+  @keyframes fly-in {
     0% {
       transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(80px) translateY(0);
     }
@@ -603,4 +609,4 @@
     100% {
       transform: rotateY(0) rotateX(0) translateZ(0) translateX(0) translateY(0);
     }
-  } */
+  }
