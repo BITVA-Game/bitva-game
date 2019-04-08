@@ -8,7 +8,7 @@ import spider from './images/animation/spider.png';
 
 
 const StartScreen = props => (
-    <div className="start-screen">
+    <div className="start-screen" data-testid="start-screen">
         <div className="hollow" />
         <div className="window" />
         <div className="spider">
