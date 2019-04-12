@@ -446,11 +446,6 @@
     transform: rotate(180deg);
 }
 
-.card-grave {
-    /* animation: fly-in 3s 4s 1;  */
-    transform: translateY(0);	
-}
-
 .one {
     animation: onTop 2s ease-out 1 forwards;
     left: 0;
