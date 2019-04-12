@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 // import module for tests
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
@@ -2017,7 +2018,7 @@ test('msg ACTION received: active player attacks with russianOven, it disables 2
                         key3: { disabled: false },
                     },
                     moveCounter: 0,
-                    item: { },
+                    item: {},
                     grave: {},
                 },
             ],
@@ -2046,7 +2047,7 @@ test('msg ACTION received: active player attacks with russianOven, it disables 2
 
 // Test, that when a player is attacked with  russianOven card by opponent, then this player
 // cannot use two random cards from his hand  during his turn ( move counter 1+1)
-test('msg ACTION received: inactive player attacked with russianOven, 2 cards in hand of active player are disabled for full turn.', () => {
+test('msg ACTION received: inactive player attacked with russianOven, 2 cards in hand of active player got disabled: true for full turn.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key3',
@@ -2103,7 +2104,7 @@ test('msg ACTION received: inactive player attacked with russianOven, 2 cards in
                             id: 'bajun', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
                         },
                     },
-                    moveCounter: 1,
+                    moveCounter: 0,
                     item: {},
                     grave: {},
                 },
@@ -2121,7 +2122,130 @@ test('msg ACTION received: inactive player attacked with russianOven, 2 cards in
     expect(Object.values(result.game.players[1].hand)).toContainEqual(
         { disabled: true }, { disabled: true }, { disabled: false }, { disabled: false },
     );
-    // ожидаем, что у активного игрокы (Моревна) счетчик хода равен 0 так как после полного хода-
-    // - 2 действия, он снчала равен 2, но тут же при переходе хода он обнуляется
+    // ожидаем, что у активного игрока счетчик хода равен 1
+    expect(result.game.players[1].moveCounter).toEqual(1);
+});
+
+// Test, that when a player has been attacked with  russianOven card by opponent, then this player
+// get back disabled: false to all cards in hand after his full turn ( move counter 1+1)
+test('msg ACTION received: inactive player attacked with russianOven, all cards in hand of active player got disabled: false after full turn.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key2',
+        target: 'hero',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 8, maximum: 15 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key13: {},
+                        key2: {},
+                        key4: {},
+
+                    },
+                    grave: {
+                        key1: {
+                            id: 'russianOven', type: 'action', category: 'holdCard', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    item: {},
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: { disabled: false },
+                        key1: { disabled: false },
+                        key17: { disabled: false },
+                        key5: { disabled: false },
+                        key7: { disabled: false },
+                        key4: { disabled: false },
+                        key6: { disabled: false },
+                        key14: { disabled: false },
+                        key12: { disabled: false },
+                        key9: { disabled: false },
+                    },
+                    health: { current: 13, maximum: 13 },
+                    hand: {
+                        key11: { disabled: true },
+                        key8: { disabled: true },
+                        key13: { disabled: false },
+                        key2: {
+                            id: 'apple', type: 'action', category: 'heal', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    item: {},
+                    grave: {
+                        key3: {
+                            id: 'bajun', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у активного игрокы (Моревна) 2 карты в руке с типом 'disabled'
+    expect(Object.values(result.game.players[1].hand)).toContainEqual(
+        { disabled: false }, { disabled: false }, { disabled: false },
+    );
+    // we check every card dealt to active player
+    for (let i = 0; i < Object.keys(result.game.players[1].hand).length; i++) {
+        // and we expect active player to have disabled: false property in each card
+        expect(Object.values(result.game.players[1].hand)[i]).toHaveProperty('disabled', false);
+    }
+    // ожидаем, что у активного игрокf (Моревна) счетчик хода равен 0 так как после полного хода-
+    // - 2 действия, он снfчала равен 2, но тут же при переходе хода он обнуляется
     expect(result.game.players[1].moveCounter).toEqual(0);
+});
+
+// Test that players cards get property disabled: fasle once they are dealt to players.
+test('msg HEROSELECTED received: both players cards get property disabled: fasle.', () => {
+    // We only need type for this test.
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // Find active andinactive players
+    let activePlayer = result.game.players[0];
+    let inactivePlayer = result.game.players[1];
+    if (result.game.players[0].active === false) {
+        activePlayer = result.game.players[1];
+        inactivePlayer = result.game.players[0];
+    }
+    // we check every card dealt to active player
+    for (let i = 0; i < Object.keys(activePlayer.cards).length; i++) {
+        // and we expect active player to have disabled: false property in each card
+        expect(Object.values(activePlayer.cards)[i]).toHaveProperty('disabled', false);
+    }
+    // we check every card dealt to inactive player
+    for (let c = 0; c < Object.keys(inactivePlayer.cards).length; c++) {
+        // and we expect inactive player to have disabled: false property in each card
+        expect(Object.values(inactivePlayer.cards)[c]).toHaveProperty('disabled', false);
+    }
 });

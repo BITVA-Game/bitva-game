@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable default-case */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-param-reassign */
@@ -23,6 +24,7 @@ function assignCards(deck, cardsNumber) {
     const cards = {};
     d.forEach((key) => {
         cards[key] = deck[key];
+        cards[key].disabled = false;
     });
     return cards;
 }
@@ -284,9 +286,9 @@ function disableCards(opponent) {
 // function to return disabled cards property to false if any have true
 function removeDisable(player) {
     const playerCards = Object.values(player.hand);
-    for (const c in playerCards) {
-        if (c.disbled === true) {
-            c.disbled === false;
+    for (let i = 0; i < Object.keys(player.hand).length; i++) {
+        if (playerCards[i].disabled === true) {
+            playerCards[i].disabled = false;
         }
     }
     return playerCards;
