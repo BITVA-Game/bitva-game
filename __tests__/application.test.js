@@ -2366,7 +2366,7 @@ test('msg ACTION received: inactive player has Magic Mirror in item, it reflects
                     health: { current: 10, maximum: 14 },
                     item: {
                         key10: {
-                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2,
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2,  disabled: false, 
                         },
                     },
                 },
@@ -2392,7 +2392,9 @@ test('msg ACTION received: inactive player has Magic Mirror in item, it reflects
                         key8: {},
                         key3: {},
                         key6: {},
-                        key1: { type: 'action', category: 'attack', points: 3 },
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false, 
+                        },
                     },
                     moveCounter: 1,
                     item: {},
@@ -2443,7 +2445,7 @@ test('msg ACTION received: inactive player has Magic Mirror in item, after attac
                     health: { current: 8, maximum: 14 },
                     item: {
                         key10: {
-                            id: 'magicMirror', type: 'item', category: 'reflect', points: 1, initialpoints: 2,
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 1, initialpoints: 2, disabled: false,
                         },
                     },
                     grave: {},
@@ -2470,7 +2472,9 @@ test('msg ACTION received: inactive player has Magic Mirror in item, after attac
                         key8: {},
                         key3: {},
                         key6: {},
-                        key1: { type: 'action', category: 'attack', points: 2 },
+                        key1: {
+                            type: 'action', category: 'attack', points: 2, disabled: false,
+                        },
                     },
                     moveCounter: 1,
                     item: {},
@@ -2513,7 +2517,7 @@ test('msg ACTION received: active player can put Magic Mirror in item holder.', 
                     health: { current: 10, maximum: 14 },
                     hand: {
                         key10: {
-                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2,
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
                         },
                     },
                     item: {},
