@@ -10,5 +10,24 @@ afterEach(cleanup);
 
 test.only('renders without crashing', () => {
     const { getByTestId, queryByTestId, queryAllByTestId } = render(<App />);
-    expect(getByTestId('start-screen')).toBeTruthy();
+    expect(getByTestId('app-screen')).toBeTruthy();
+    const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
+
+    const state = {
+        profile: {
+            characters: ['morevna'],
+            deck: ['apple'],
+            gold: 0,
+        },
+        manager: {
+            screen: 'STARTSCREEN',
+        },
+        game: {
+
+        },
+    };
+
+    stateSaver('eventIDontKnowWhatItIs', state);
+    const app = getByTestId('app-screen');
+    expect(dom.getByTestId(app, 'start-screen')).toBeTruthy();
 });
