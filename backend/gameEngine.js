@@ -308,9 +308,9 @@ function attackItems(players) {
         }
         // we check whether each player hand is not empty
         if (Object.keys(p.hand).length !== 0) {
-            // and for each card in hand with type item
-            for (const cardIndex in p.hand) {
-                if (p.hand[cardIndex].type === 'item') {
+            for (const cardIndex in Object.keys(p.hand)) {
+                const handCard = Object.values(p.hand)[cardIndex];
+                if (handCard.type === 'item') {
                     // we reset item card's points to initial points
                     p.hand[cardIndex].points = p.hand[cardIndex].initialpoints;
                     // we move any item card to graveyard
