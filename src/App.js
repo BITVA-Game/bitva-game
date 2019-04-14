@@ -10,6 +10,7 @@ import GameScreen from './GameScreen';
 import NetworkPlay from './NetworkPlay';
 
 // Import electron and establis connection to use app.js as Renderer
+console.log(window.require);
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
