@@ -431,7 +431,6 @@ function playerActs(game, player, opponent, active, target) {
             mirrorCard(opponent, activeCard.points);
         }
     }
-
     // after each move we increase active player's counter for 1
     player.moveCounter += 1;
     // once active player's counter ==2

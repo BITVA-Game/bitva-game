@@ -2425,7 +2425,7 @@ test('msg ACTION received: inactive player has Magic Mirror in item, it reflects
 });
 
 // Test, that when Magic Mirror card is at inactive player's item holder then after attack
-// card points <= 0, Mirror card goes to graveyard and gets its initial points back
+// card points <= 0, mirror card goes to graveyard and gets its initial points back
 test('msg ACTION received: inactive player has Magic Mirror in item, after attack its points <=0 and card goes to graveyard.', () => {
     const msg = {
         type: 'ACTION',
