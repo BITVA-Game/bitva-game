@@ -2393,7 +2393,7 @@ test('msg ACTION received: inactive player has Magic Mirror in item, it reflects
                         key3: {},
                         key6: {},
                         key1: {
-                            type: 'action', category: 'attack', points: 3, disabled: false, 
+                            type: 'action', category: 'attack', points: 3, disabled: false,
                         },
                     },
                     moveCounter: 1,
