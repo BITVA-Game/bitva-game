@@ -2366,7 +2366,7 @@ test('msg ACTION received: inactive player has Magic Mirror in item, it reflects
                     health: { current: 10, maximum: 14 },
                     item: {
                         key10: {
-                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2,  disabled: false, 
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
                         },
                     },
                 },
