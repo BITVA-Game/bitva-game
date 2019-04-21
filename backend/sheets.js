@@ -8,7 +8,7 @@ async function formatOriginalCards() {
     const cards = {};
     const cardsOrigin = await gsjson({
         spreadsheetId: '1o5JJRR8JY0TCUzoRR81ghhrhUhdDjTV81ANWCxTKgBA',
-        worksheet: 'Cards',
+        worksheet: 'Cards_new',
     });
 
     const cardsUpdated = {};
@@ -19,8 +19,10 @@ async function formatOriginalCards() {
         cardsUpdated[name].id = c.id;
         cardsUpdated[name].name = c.nameEn;
         cardsUpdated[name].type = c.typeEn;
+        cardsUpdated[name].icon = c.icon;
         cardsUpdated[name].category = c.category;
         cardsUpdated[name].description = c.descriptionEn;
+        cardsUpdated[name].health = c.health;
         cardsUpdated[name].points = c.points;
         cardsUpdated[name].initialpoints = c.initialpoints;
         cardsUpdated[name].img = c.image;

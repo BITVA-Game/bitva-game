@@ -7,16 +7,16 @@
     "cardsNumber": 15,
     "img": "character_ex.png",
     "cards": {
-      "bajun": {
-        "id": "bajun",
+      "bulat": {
+        "id": "bulat",
         "count": 5
-      },
-      "sivka": {
-        "id": "sivka",
-        "count": 4
       },
       "wolf": {
         "id": "wolf",
+        "count": 4
+      },
+      "warhorse": {
+        "id": "warhorse",
         "count": 3
       },
       "bogatyr": {
@@ -38,14 +38,18 @@
       "shieldSmall": {
         "id": "shieldSmall",
         "count": 3
+      },
+      "waterLiving": {
+        "id": "waterLiving",
+        "count": 2
       }
     },
     "background": "green"
   },
   "yaga": {
     "id": "yaga",
-    "name": "Baba Yaga",
-    "description": "Baba Yaga flies around in a mortar, wields a pestle, and dwells deep in the forest in a hut  on chicken legs. Baba Yaga may help or hinder those that encounter or seek her out.",
+    "name": " Yaga",
+    "description": "Yaga flies around in a mortar, wields a pestle, and dwells deep in the forest in a hut  on chicken legs. Baba Yaga may help or hinder those that encounter or seek her out.",
     "health": 15,
     "cardsNumber": 15,
     "img": "character_ex.png",
@@ -54,24 +58,24 @@
         "id": "bajun",
         "count": 5
       },
-      "sivka": {
-        "id": "sivka",
+      "gusiLebedi": {
+        "id": "gusiLebedi",
         "count": 5
       },
-      "wolf": {
-        "id": "wolf",
+      "kikkmora": {
+        "id": "kikkmora",
         "count": 3
       },
       "bogatyr": {
         "id": "bogatyr",
         "count": 3
       },
-      "apple": {
-        "id": "apple",
+      "mortar": {
+        "id": "mortar",
         "count": 2
       },
-      "bereginya": {
-        "id": "bereginya",
+      "chickenLegsHut": {
+        "id": "chickenLegsHut",
         "count": 1
       },
       "shieldLarge": {
@@ -81,6 +85,10 @@
       "shieldSmall": {
         "id": "shieldSmall",
         "count": 3
+      },
+      "russianOven": {
+        "id": "russianOven",
+        "count": 2
       }
     },
     "background": "red"
@@ -93,16 +101,16 @@
     "cardsNumber": 19,
     "img": "character_ex.png",
     "cards": {
-      "bajun": {
-        "id": "bajun",
+      "bat": {
+        "id": "bat",
         "count": 4
       },
-      "sivka": {
-        "id": "sivka",
+      "lizard": {
+        "id": "lizard",
         "count": 4
       },
-      "wolf": {
-        "id": "wolf",
+      "earthquake": {
+        "id": "earthquake",
         "count": 4
       },
       "bogatyr": {
@@ -113,8 +121,8 @@
         "id": "apple",
         "count": 3
       },
-      "bereginya": {
-        "id": "bereginya",
+      "crown": {
+        "id": "crown",
         "count": 1
       },
       "shieldLarge": {
@@ -124,6 +132,10 @@
       "shieldSmall": {
         "id": "shieldSmall",
         "count": 3
+      },
+      "waterDead": {
+        "id": "waterDead",
+        "count": 2
       }
     },
     "background": "green"
@@ -136,28 +148,28 @@
     "cardsNumber": 19,
     "img": "character_ex.png",
     "cards": {
-      "bajun": {
-        "id": "bajun",
+      "horsemanWhite": {
+        "id": "horsemanWhite",
         "count": 5
       },
-      "sivka": {
-        "id": "sivka",
+      "horsemanBlack": {
+        "id": "horsemanBlack",
         "count": 5
       },
-      "wolf": {
-        "id": "wolf",
+      "horsemanRed": {
+        "id": "horsemanRed",
         "count": 5
       },
       "bogatyr": {
         "id": "bogatyr",
         "count": 2
       },
-      "apple": {
-        "id": "apple",
+      "dolly": {
+        "id": "dolly",
         "count": 2
       },
-      "bereginya": {
-        "id": "bereginya",
+      "chemise": {
+        "id": "chemise",
         "count": 2
       },
       "shieldLarge": {
@@ -167,6 +179,10 @@
       "shieldSmall": {
         "id": "shieldSmall",
         "count": 3
+      },
+      "skullLantern": {
+        "id": "skullLantern",
+        "count": 2
       }
     },
     "background": "red"

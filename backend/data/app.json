@@ -1,6 +1,6 @@
 {
 	"profile": {
-		"characters": ["morevna"],
+		"characters": ["morevna", "yaga", "premudraya", "hozyaika"],
 		"deck": ["apple"],
 		"gold": 0
 	},
@@ -8,7 +8,7 @@
 		"screen": "STARTSCREEN"
 	},
 	"game": {
-		"phase": "ACTIVE"		
+		"phase": "ACTIVE"
 	}
 
 }
