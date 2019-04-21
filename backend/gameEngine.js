@@ -173,13 +173,42 @@ function attackShield(player, itemKey, points) {
     }
 }
 
+// function to reflect half of the damage (or round down to integer)
+function reflect(opponent, points) {
+    const damage = Math.floor(points / 2);
+    opponent.health.current -= damage;
+}
+
+// function to move mirror card to graveyard after its points <= 0
+// and restore its initial points for future use
+function mirrorCard(opponent, points) {
+    const cardItem = Object.values(opponent.item)[0];
+    cardItem.points -= points;
+    if (cardItem.points <= 0) {
+        cardItem.points = cardItem.initialpoints;
+        moveCardGraveyard(opponent, (Object.keys(opponent.item)[0]), 'item');
+    }
+}
+
+// function to handle attack points deduction from opponent player health
+// depending on item card if any present
 function attackOpponent(player, points) {
     // console.log('attackOpponent ', player, points);
     let itemCategory;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemCategory = player.item[itemKey].category : null;
+    // we check if item holder is not empty and item card does not have shield category
     if (Object.keys(player.item).length === 0 || itemCategory !== 'shield') {
-        player.health.current -= points;
+        // and if item card does not have 'reflect' category
+        // we deduct attack card points from item card points
+        if (itemCategory !== 'reflect') {
+            player.health.current -= points;
+        }
+        // we check for special mirror card at opponent item holder with category 'reflect'
+        // and run reflect function if it is present there
+        if (itemCategory === 'reflect') {
+            reflect(player, points);
+        }
         if (player.health.current <= 0) {
             player.health.current = 0;
         }
@@ -397,7 +426,11 @@ function playerActs(game, player, opponent, active, target) {
         // console.log('We are in move item case');
         moveItem(player, active);
     }
-
+    if (target === 'itemOpponent' && activeCard.type === 'action') {
+        if (Object.values(opponent.item)[0].id === 'magicMirror') {
+            mirrorCard(opponent, activeCard.points);
+        }
+    }
     // after each move we increase active player's counter for 1
     player.moveCounter += 1;
     // once active player's counter ==2

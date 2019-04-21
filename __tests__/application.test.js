@@ -1915,7 +1915,7 @@ test('msg ACTION received: inactive player has living water in item, it increase
     expect(result.game.players[0].item.key10.points).not.toEqual(0);
 });
 
-// screen swtich to PROFILE when Profile message received
+// Test that screen swtichs to PROFILE when Profile message received
 test('msg PROFILE switches screen state to PROFILE', () => {
     // We only need type for this test.
     const msg = { type: 'PROFILE' };
@@ -2343,4 +2343,200 @@ test('msg ACTION received: active player attacks with  skullLantern, it moves al
     expect(Object.keys(result.game.players[0].grave)).toContain('key7', 'key10');
     expect(Object.keys(result.game.players[0].item).length).toEqual(0);
     expect(Object.keys(result.game.players[0].hand)).not.toContain('item');
+});
+
+// Test, that when Magic Mirror card is at any player's item holder then
+// it reflects half of damage got from the opponent (or round down damage points to integer)
+test('msg ACTION received: inactive player has Magic Mirror in item, it reflects half of active player attack for next 2 turns.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key1
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    health: { current: 10, maximum: 14 },
+                    item: {
+                        key10: {
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    health: { current: 13, maximum: 16 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key3: {},
+                        key6: {},
+                        key1: {
+                            type: 'action', category: 'attack', points: 3, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    item: {},
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта magic mirror в item holder неактивного игрока
+    expect(result.game.players[0].item.key10.id).toEqual('magicMirror');
+    // ожидаем, что карта magic mirror неактивного игрока имеет категорию - reflect
+    expect(result.game.players[0].item.key10.category).toEqual('reflect');
+    // ожидаем, что после атаки текущее здоровье неактивного игрока (Василисы)
+    // уменьшается только на половину очков атаки или др цело число , округленное в меньшую сторону
+    // (3/2 =1.5 - округляем в меньшую сторону = 1 point)
+    expect(result.game.players[0].health.current).toEqual(9);
+    // ожидаем, что карта mirror находится в item пока у нее есть очки.
+    expect(result.game.players[0].item.key10.points).not.toEqual(0);
+    // ожидаем, что очки карты mirror, остануться неизменными
+    expect(result.game.players[0].item.key10.points).toEqual(2);
+});
+
+// Test, that when Magic Mirror card is at inactive player's item holder then after attack
+// card points <= 0, mirror card goes to graveyard and gets its initial points back
+test('msg ACTION received: inactive player has Magic Mirror in item, after attack its points <=0 and card goes to graveyard.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'itemOpponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key1
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    health: { current: 8, maximum: 14 },
+                    item: {
+                        key10: {
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 1, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    grave: {},
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    health: { current: 10, maximum: 16 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key3: {},
+                        key6: {},
+                        key1: {
+                            type: 'action', category: 'attack', points: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    item: {},
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта magic mirror на кладбище неактивного игрока
+    expect(result.game.players[0].grave.key10.id).toEqual('magicMirror');
+    // ожидаем, что карта mirror после второга хода игрока обнулится и уйдет на кладбище
+    // и ее points получат назад первоначальное значение
+    expect(result.game.players[0].grave.key10.points).toEqual(2);
+});
+
+// Test, that active player can put Magic Mirror card in item holder
+test('msg ACTION received: active player can put Magic Mirror in item holder.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key10',
+        target: 'item',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'premudraya',
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key10: {
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    item: {},
+                },
+                {
+                    active: false,
+                    hero: 'morevna',
+                    health: { current: 13, maximum: 16 },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта magic mirror в item holder активного игрока
+    expect(result.game.players[0].item.key10.id).toEqual('magicMirror');
 });
