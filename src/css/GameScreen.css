@@ -430,3 +430,335 @@
         background-position: -450px 0;
     }
 }
+
+/*cards shuffle animation*/
+
+.stack {
+    bottom: 60px;
+    display: inline-block;
+    position: relative;
+    right: 40px;
+}
+
+.player-top .stack {
+    right: -135px;
+    top: 167px;
+    transform: rotate(180deg);
+}
+
+.one {
+    animation: onTop 2s ease-out 1 forwards;
+    left: 0;
+	top: 0;
+	z-index: 2;	
+}
+
+.two {
+    animation: onMiddle 2s ease-out 1 forwards;
+    left: 20px;
+	top: 20px;
+	z-index: 1;
+}
+.three {            
+    animation: onBottom 2s ease-out 1 forwards;
+    left: 40px;
+	top: 40px;
+	z-index: 0;
+}
+
+.player-top .one {
+    animation: topOnTop 2s ease-out 1 forwards;
+}
+
+.player-top .two {
+    animation: topOnMiddle 2s ease-out 1 forwards;
+}
+.player-top .three {
+    animation: topOnBottom 2s ease-out 1 forwards;
+}
+
+/* grave cards animation for bottom player */
+
+@keyframes onTop {
+    3% {
+      left: 20px;
+      top: 20px;
+      transform: translateY(-30px);
+      z-index: 1;      
+    }
+    5% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    10% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;      
+    }
+    20% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    30% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    40% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    45% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateX(-1150px);
+    }
+}
+
+@keyframes onMiddle {
+    5% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;      
+    }
+    10% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    15% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(-30px);
+        z-index: 1;      
+    }
+    20% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    30% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    40% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    55% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    100% {
+        transform: translateX(-1170px);
+    }
+}
+
+@keyframes onBottom {
+    5% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    10% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    20% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    30% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    35% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(-30px);
+        z-index: 1;
+    }
+    40% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    65% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    100% {
+        transform: translateX(-1190px);
+    }
+}
+
+/* grave cards animation for top player */
+
+@keyframes topOnTop {
+    3% {
+        left: 20px;
+        top: 20px;
+        transform: rotate(180deg) translateY(-30px);
+        z-index: 1;
+    }
+    5% {
+        left: 40px;
+        top: 40px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 0;
+    }
+    10% {
+        left: 40px;
+        top: 40px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 0;
+    }
+    20% {
+        left: 20px;
+        top: 20px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 1;
+    }
+    30% {
+        left: 20px;
+        top: 20px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 1;
+    }
+    40% {
+        left: 0;
+        top: 0;
+        transform: rotate(180deg) translateY(0);
+        z-index: 2;
+    }
+    45% {
+        transform: rotate(180deg) translateY(0);
+    }
+    100% {
+        transform: rotate(180deg) translateX(1150px);
+    }
+}
+
+@keyframes topOnMiddle {
+    5% {
+        left: 0;
+        top: 0;
+        transform: rotate(180deg) translateY(0);
+        z-index: 2;
+    }
+    10% {
+        left: 0;
+        top: 0;
+        transform: rotate(180deg) translateY(0);
+        z-index: 2;     
+    }
+    15% {
+        left: 20px;
+        top: 20px;
+        transform: rotate(180deg) translateY(-30px);
+        z-index: 1;
+    }
+    20% {
+        left: 40px;
+        top: 40px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 0;
+    }
+    30% {
+        left: 40px;
+        top: 40px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 0;
+    }
+    40% {
+        left: 20px;
+        top: 20px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 1;
+    }
+    55% {
+        left: 0;
+        top: 0;
+        transform: rotate(180deg) translateY(0);
+        z-index: 1;
+    }
+    100% {
+        transform: rotate(180deg) translateX(1170px);
+    }
+}
+
+@keyframes topOnBottom {
+    5% {
+        left: 20px;
+        top: 20px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 0;
+    }
+    10% {
+        left: 20px;
+        top: 20px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 1;
+    }
+    20% {
+        left: 0;
+        top: 0;
+        transform: rotate(180deg) translateY(0);
+        z-index: 2;
+    }
+    30% {
+        left: 0;
+        top: 0;
+        transform: rotate(180deg) translateY(0);
+        z-index: 2;
+    }
+    35% {
+        left: 20px;
+        top: 20px;
+        transform: rotate(180deg) translateY(-30px);
+        z-index: 1;
+    }
+    40% {
+        left: 40px;
+        top: 40px;
+        transform: rotate(180deg) translateY(0);
+        z-index: 0;
+    }
+    65% {
+        left: 0;
+        top: 0;
+        transform: rotate(180deg) translateY(0);
+        z-index: 0;
+    }
+    100% {
+        transform: rotate(180deg) translateX(1190px);
+    }
+}
