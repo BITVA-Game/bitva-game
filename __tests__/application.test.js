@@ -2216,7 +2216,7 @@ test('msg ACTION received: inactive player attacked with russianOven, all cards 
     expect(result.game.players[1].moveCounter).toEqual(0);
 });
 
-// Test that players cards get property disabled: fasle once they are dealt to players.
+// Test that players cards get property disabled: false once they are dealt to players.
 test('msg HEROSELECTED received: both players cards get property disabled: fasle.', () => {
     // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
@@ -2248,4 +2248,99 @@ test('msg HEROSELECTED received: both players cards get property disabled: fasle
         // and we expect inactive player to have disabled: false property in each card
         expect(Object.values(inactivePlayer.cards)[c]).toHaveProperty('disabled', false);
     }
+});
+
+
+// Test, that when active player attackes opponent with skullLantern card then
+// all cards with item type are thrown to graveyard from the game table
+test('msg ACTION received: active player attacks with  skullLantern, it moves all players cards with item type to graveyards', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    item: {
+                        key10: {
+                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4, disabled: false,
+                        },
+                    },
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', points: 2, initialpoints: 2, disabled: false,
+                        },
+                        key9: { type: 'action', disabled: false },
+                        key2: { type: 'action', disabled: false },
+                        key4: { type: 'action', disabled: false },
+                    },
+                    grave: {},
+                },
+                {
+                    active: true,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 14, maximum: 14 },
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key8: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', points: 2, initialpoints: 2, disabled: false,
+                        },
+                        key13: { type: 'action', disabled: false },
+                        key10: { type: 'action', disabled: false },
+                        key1: {
+                            id: 'skullLantern', type: 'action', category: 'attackItems', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', points: 1, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта skullLantern окажется после атаки на кладбище активного игрока
+    expect(result.game.players[1].grave.key1.id).toEqual('skullLantern');
+    // ожидаем, что карта skullLantern активного игрока имеет категорию attackItems
+    expect(result.game.players[1].grave.key1.category).toEqual('attackItems');
+
+    // ожидаем, что карты с типом item из руки и item holder активного игрока уйдут на кладбище
+    expect(Object.keys(result.game.players[1].grave)).toContain('key3', 'key8');
+    expect(Object.keys(result.game.players[1].hand)).not.toContain('item');
+    expect(Object.keys(result.game.players[1].item).length).toEqual(0);
+    // ожидаем, что то карты с типом item из руки и item holder неактивного игрока уйдут на кладбище
+    expect(Object.keys(result.game.players[0].grave)).toContain('key7', 'key10');
+    expect(Object.keys(result.game.players[0].item).length).toEqual(0);
+    expect(Object.keys(result.game.players[0].hand)).not.toContain('item');
 });

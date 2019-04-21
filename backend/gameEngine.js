@@ -136,8 +136,8 @@ function giveCardsToAll(players) {
     return players;
 }
 
-// This function taked the player and the key for his cards
-// And moves it so graveyard via deleting the key from array
+// This function takes the player and the key for his card
+// and destination = from, then moves card to graveyard via deleting the key from array
 function moveCardGraveyard(player, key, from) {
     if (from === 'item') {
         // console.log('moveCardGraveyard called for item ', player, key);
@@ -294,6 +294,34 @@ function removeDisable(player) {
     return playerCards;
 }
 
+// this function runs when player attacks with the card which category is attackItems
+// it accept players and checks all item category cards from both players item holders and hands
+// and move such cards to players grave yards
+function attackItems(players) {
+    players.forEach((p) => {
+        if (Object.keys(p.item).length !== 0) {
+            const itemCard = Object.values(p.item)[0];
+            // we reset item card's points to initial points
+            itemCard.points = itemCard.initialpoints;
+            // we move any item card to graveyard
+            moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
+        }
+        // we check whether each player hand is not empty
+        if (Object.keys(p.hand).length !== 0) {
+            // and for each card in hand with type item
+            for (const cardIndex in p.hand) {
+                if (p.hand[cardIndex].type === 'item') {
+                    // we reset item card's points to initial points
+                    p.hand[cardIndex].points = p.hand[cardIndex].initialpoints;
+                    // we move any item card to graveyard
+                    moveCardGraveyard(p, cardIndex);
+                }
+            }
+        }
+    });
+    return { players };
+}
+
 function playerActs(game, player, opponent, active, target) {
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
@@ -335,17 +363,29 @@ function playerActs(game, player, opponent, active, target) {
             case 'heal':
                 break;
             case 'attack':
-                console.log('attacking opponent');
+                // console.log('attacking opponent');
                 attackOpponent(opponent, activeCard.points);
                 moveCardGraveyard(player, active);
                 if (opponent.health.current <= 0) {
                     game.phase = 'OVER';
                 }
                 break;
+            // if player attacks with card category holdCard we call disableCards function
+            // then move this attack card to gravyeard
             case 'holdCard':
                 disableCards(opponent);
                 moveCardGraveyard(player, active);
                 break;
+            // if player attacks with card category == attackItems, we call attack items function
+            // then move this attack card to gravyeard
+            case 'attackItems':
+                attackItems(game.players);
+                moveCardGraveyard(player, active);
+                if (opponent.health.current <= 0) {
+                    game.phase = 'OVER';
+                }
+                break;
+
                 // if any mistake occurs during game process, player gets error message by default
             default:
                 return new Error('You are under spell. Wait for redemption!');
