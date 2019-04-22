@@ -71,6 +71,7 @@ const ListOfHeroes = props => (
 
 HeroBlock.propTypes = {
     app: PropTypes.object.isRequired,
+    changeSelected: PropTypes.func.isRequired,
     hero: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
