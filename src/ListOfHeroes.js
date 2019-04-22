@@ -35,7 +35,7 @@ function sortedHeroes(app) {
 // Individual hero block, repeates to display every character
 const HeroBlock = props => (
     <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onClick={props.onShow} onKeyPress={props.onShow} tabIndex="-1">
+        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onMouseEnter={() => props.changeSelected(props.hero.id)} onClick={props.onShow} onKeyPress={props.onShow} tabIndex="-1">
             <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
             <div className="deck-icon">
                 <div className="deck-text">
