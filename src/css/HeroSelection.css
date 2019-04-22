@@ -294,12 +294,28 @@ section {
 	width: 210px;
 }
 
+.blue-item {
+	background-color: #b3c0c8;
+}
+
+.blue-action {
+	background-color: #829baf;
+}
+
 .green-item {
 	background-color: #6d8374;
 }
 
 .green-action {
 	background-color: #4a5a50;
+}
+
+.ochre-item {
+	background-color: #c18c6d;
+}
+
+.ochre-action {
+	background-color: #c1762a;
 }
 
 .red-item {
