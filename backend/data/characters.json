@@ -44,7 +44,7 @@
         "count": 2
       }
     },
-    "background": "green"
+    "background": "ochre"
   },
   "yaga": {
     "id": "yaga",
@@ -185,6 +185,6 @@
         "count": 2
       }
     },
-    "background": "red"
+    "background": "blue"
   }
 }
