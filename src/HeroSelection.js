@@ -110,7 +110,6 @@ class HeroSelection extends Component {
 
     changeSelected(selected) {
         this.setState({ selected });
-        console.log(selected);
     }
 
     selectRightHero() {
