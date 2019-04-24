@@ -34,19 +34,6 @@ section {
 	top: 0;
 }
 
-/* common */
-
-.btn {
-	color: #fff;
-	outline: none;
-}
-
-.btn:focus,
-.btn:hover,
-.btn:active {
-	color: #B74A45;
-}
-
 /* header */
 
 .heroselection-header {
@@ -152,8 +139,12 @@ section {
 	width: 235px;
 }
 
-.btn-hero:hover,
+/*.btn-hero:hover,
 .btn-hero:focus {
+	border-color: #B74A45;
+}*/
+
+.btn-hero:hover {
 	border-color: #B74A45;
 }
 
