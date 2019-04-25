@@ -139,11 +139,6 @@ section {
 	width: 235px;
 }
 
-/*.btn-hero:hover,
-.btn-hero:focus {
-	border-color: #B74A45;
-}*/
-
 .btn-hero:hover {
 	border-color: #B74A45;
 }
