@@ -5,10 +5,14 @@ import './css/VersusScreen.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
+import hozyaika from './images/heroes/hozyaika.jpg';
+import premudraya from './images/heroes/premudraya.jpg';
 
 const images = {
     yaga,
     morevna,
+    hozyaika,
+    premudraya,
 };
 
 /* const renderHeroes = function (players) {
