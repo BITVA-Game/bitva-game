@@ -105,9 +105,19 @@
     position: absolute;
 }
 
+.blue {
+    background-color: rgb(179, 192, 200);
+    background-color: rgba(179, 192, 200, .5); /*#B3C0C8*/
+}
+
 .green {
     background-color: rgb(109, 131, 116);
     background-color: rgba(109, 131, 116, .5); /*#6D8374*/
+}
+
+.ochre {
+    background-color: rgb(193, 140, 109);
+    background-color: rgba(193, 140, 109, .5); /*#C18C6D*/
 }
 
 .red {
@@ -221,8 +231,18 @@
     position: absolute;
 }
 
+.deck-blue {
+    background-image: url(../images/back-blue.jpg);
+    background-size: cover;
+}
+
 .deck-green {
     background-image: url(../images/back-green.jpg);
+    background-size: cover;
+}
+
+.deck-ochre {
+    background-image: url(../images/back-ochre.jpg);
     background-size: cover;
 }
 
@@ -244,8 +264,16 @@
     right: 35px;
 }
 
+.grave-blue {
+    background-color: rgb(179, 192, 200); /*#B3C0C8*/
+}
+
 .grave-green {
     background-color: rgb(109, 131, 116); /*#6D8374*/
+}
+
+.grave-ochre {
+    background-color: rgb(193, 140, 109); /*#C18C6D*/
 }
 
 .grave-red {

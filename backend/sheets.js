@@ -88,4 +88,4 @@ async function getAllCards() {
 }
 
 exports.getAllCards = getAllCards;
-getAllCards();
+// getAllCards();
