@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 // import module for tests
 const application = require('../backend/application');
@@ -20,7 +21,7 @@ test('Game loaded. Send the app in its initial state', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['morevna'],
+                characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
                 deck: ['apple'],
                 gold: 0,
             },
@@ -49,7 +50,7 @@ test('First game state Play. The Player can select any of the characters he has'
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['morevna'],
+                characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
                 deck: ['apple'],
                 gold: 0,
             },
@@ -79,13 +80,13 @@ test('PLAY msg received. List with all characters added - HERO SELECT state.', (
 
     // Save the data into variable for checks
     const heroSelect = sendReply.mock.calls[0][0].heroSelect;
-    expect(heroSelect.morevna.cardsNumber).toEqual(15);
-    expect(heroSelect.morevna.health).toEqual(16);
-    expect(Object.keys(heroSelect.morevna.cards).length).toEqual(8);
+    expect(heroSelect.morevna.cardsNumber).toEqual(heroData.morevna.cardsNumber);
+    expect(heroSelect.morevna.health).toEqual(heroData.morevna.health);
+    expect(Object.keys(heroSelect.morevna.cards).length).toEqual(Object.keys(heroData.morevna.cards).length);
 
-    expect(heroSelect.yaga.cardsNumber).toEqual(15);
-    expect(heroSelect.yaga.health).toEqual(15);
-    expect(Object.keys(heroSelect.yaga.cards).length).toEqual(8);
+    expect(heroSelect.yaga.cardsNumber).toEqual(heroData.yaga.cardsNumber);
+    expect(heroSelect.yaga.health).toEqual(heroData.yaga.health);
+    expect(Object.keys(heroSelect.yaga.cards).length).toEqual(Object.keys(heroData.yaga.cards).length);
 });
 
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
@@ -102,7 +103,7 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['morevna'],
+                characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
                 deck: ['apple'],
                 gold: 0,
             },
@@ -129,7 +130,7 @@ test('msg HEROSELECTED switches screen state to VERSUS', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
             profile: {
-                characters: ['morevna'],
+                characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
                 deck: ['apple'],
                 gold: 0,
             },
