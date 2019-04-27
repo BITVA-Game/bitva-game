@@ -3,17 +3,6 @@ body {
     user-select: none;
 }
 
-/* common */
-
-.btn {
-    outline: none;
-}
-
-.btn:focus,
-.btn:hover {
-    color: #b74a45;
-}
-
 /* main menu */
 
 .main-menu {
