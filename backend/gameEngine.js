@@ -283,6 +283,7 @@ function waterCard(players) {
     return { players };
 }
 
+
 // function to set disabled property to true to random 2 cards in player's hand
 function disableCards(opponent) {
     const opponentCards = Object.values(opponent.hand);
@@ -361,6 +362,43 @@ function magicTree(player, opponent) {
 }
 
 // basic function for the game that represents each act of active player
+// helper function to get random index for player's cards in hand
+function getRandomIndexes(cardsLength) {
+    const index1 = getRandomUpTo(cardsLength);
+    let index2 = getRandomUpTo(cardsLength);
+    if (index2 === index1) {
+        index2 = getRandomUpTo(cardsLength);
+    }
+    return [index1, index2];
+}
+
+// function to check if opponent has item card with id== bowArrow
+// and to randomly ( 60% chance) to decrease pnts of 2 cards in hand by 1 pnt
+function bowArrow(player, opponent) {
+    console.log('We are in borrow and Arrow case!');
+    // const itemCard = Object.values(opponent.item)[0];
+    let itemId;
+    const itemKey = Object.keys(player.item)[0];
+    itemKey ? itemId = player.item[itemKey].id : null;
+    console.log(itemId);
+    if (itemId === 'bowArrow') {
+        const chance = getRandomUpTo(10);
+        console.log(chance);
+        if (chance <= 5) {
+            const cards = Object.values(opponent.hand);
+            cards.splice(cards.findIndex(e => e.points <= 1), 1);
+            console.log(cards);
+
+            const indexes = getRandomIndexes(cards.length);
+            // const index1 = indexes[0];
+            // const index2 = indexes[1];
+            cards[indexes[0]].points -= 1;
+            cards[indexes[1]].points -= 1;
+            console.log(cards[indexes[0]], cards[indexes[1]]);
+        }
+    }
+}
+
 function playerActs(game, player, opponent, active, target) {
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
@@ -462,6 +500,9 @@ function playerActs(game, player, opponent, active, target) {
         giveCardsTo(player);
         // run changeTurn function
         changeTurn(player, opponent);
+        // we run bowArrow function to check if opponent has bow & arrow card in item
+        // and to supress attack points if any
+        bowArrow(player, opponent);
         // and run function water if any
         waterCard(game.players);
     }
