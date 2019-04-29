@@ -14,8 +14,30 @@ test.only('renders without crashing', () => {
     const { getByTestId, queryByTestId, queryAllByTestId } = render(<App />);
     expect(getByTestId('app-screen')).toBeTruthy();
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
+    stateSaver('eventStartSceen', startscreenState);
 
-    stateSaver('eventIDontKnowWhatItIs', startscreenState);
     const app = getByTestId('app-screen');
     expect(dom.getByTestId(app, 'start-screen')).toBeTruthy();
+    const startScreen = getByTestId('start-screen');
+    expect(dom.getByTestId(startScreen, 'hollow-animation')).toBeTruthy();
+    expect(dom.getByTestId(startScreen, 'window-animation')).toBeTruthy();
+    expect(dom.getByTestId(startScreen, 'spider-animation')).toBeTruthy();
+    // expect(startScreen.contains(getByTestId('mushroom-animation'))).toBeTruthy();
+    // same as line below
+    expect(dom.getByTestId(startScreen, 'mushroom-animation')).toBeTruthy();
+    const menu = getByTestId('main-menu');
+    expect(startScreen.contains(menu)).toBeTruthy();
+});
+
+test('main menu works as expected', () => {
+    const { getByTestId, queryByTestId, queryAllByTestId } = render(<App />);
+    const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
+    stateSaver('eventStartSceen', startscreenState);
+    
+    const startScreen = getByTestId('start-screen');
+    const menu = getByTestId('main-menu');
+    const toggleBtn = getByTestId("toggle-btn");
+    expect(startScreen.contains(menu)).toBeTruthy();
+    expect(menu.contains(toggleBtn)).toBeTruthy();
+    fireEvent.click(toggleBtn);
 });
