@@ -47,7 +47,7 @@ class MainMenu extends Component {
 
     render() {
         return (
-            <div className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
+            <div data-testid="main-menu" className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
                 <LogoBlock opened={this.state.opened} />
                 <div className="menu-buttons-container">
                     <ul className="menu-buttons-group">
@@ -64,7 +64,7 @@ class MainMenu extends Component {
                         <MenuButton name="Quit" type="QUIT" sendMessage={this.props.sendMessage} />
                     </ul>
                 </div>
-                <div className="main-menu-overlay" role="button" onClick={this.toggle} onKeyPress={this.toggle} tabIndex="-1" />
+                <div data-testid="toggle-btn" className="main-menu-overlay" role="button" onClick={this.toggle} onKeyPress={this.toggle} tabIndex="-1" />
             </div>
         );
     }
