@@ -5,39 +5,53 @@ import * as dom from 'dom-testing-library';
 
 import electron from './electron-test';
 import App from './App';
+import StartScreen from './StartScreen';
+import MainMenu from './MainMenu';
 
 import { startscreenState } from '../__mocks__/stateMock';
 
 afterEach(cleanup);
 
-test.only('renders without crashing', () => {
-    const { getByTestId, queryByTestId, queryAllByTestId } = render(<App />);
+test('renders without crashing', () => {
+    const { getByTestId } = render(<App />);
     expect(getByTestId('app-screen')).toBeTruthy();
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
     stateSaver('eventStartSceen', startscreenState);
 
     const app = getByTestId('app-screen');
-    expect(dom.getByTestId(app, 'start-screen')).toBeTruthy();
+    expect(app).toContainElement(getByTestId('start-screen'));
     const startScreen = getByTestId('start-screen');
-    expect(dom.getByTestId(startScreen, 'hollow-animation')).toBeTruthy();
-    expect(dom.getByTestId(startScreen, 'window-animation')).toBeTruthy();
-    expect(dom.getByTestId(startScreen, 'spider-animation')).toBeTruthy();
-    // expect(startScreen.contains(getByTestId('mushroom-animation'))).toBeTruthy();
-    // same as line below
-    expect(dom.getByTestId(startScreen, 'mushroom-animation')).toBeTruthy();
+    expect(startScreen).toContainElement(getByTestId('hollow-animation'));
+    expect(startScreen).toContainElement(getByTestId('window-animation'));
+    expect(startScreen).toContainElement(getByTestId('spider-animation'));
+    expect(startScreen).toContainElement(getByTestId('mushroom-animation'));
     const menu = getByTestId('main-menu');
-    expect(startScreen.contains(menu)).toBeTruthy();
+    expect(startScreen).toContainElement(menu);
 });
 
-test('main menu works as expected', () => {
-    const { getByTestId, queryByTestId, queryAllByTestId } = render(<App />);
+test('<MainMenu> looks as expected', () => {
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
     stateSaver('eventStartSceen', startscreenState);
+    const { getByTestId, getAllByTestId } = render(<MainMenu />);
     
-    const startScreen = getByTestId('start-screen');
-    const menu = getByTestId('main-menu');
-    const toggleBtn = getByTestId("toggle-btn");
-    expect(startScreen.contains(menu)).toBeTruthy();
-    expect(menu.contains(toggleBtn)).toBeTruthy();
-    fireEvent.click(toggleBtn);
+    const mainMenu = getByTestId('main-menu');
+    expect(mainMenu).toContainElement(getByTestId('logo-container'));
+    expect(mainMenu).toContainElement(getByTestId('menu-buttons-container'));
+    const toggleBtn = getByTestId('toggle-btn');
+    expect(mainMenu).toContainElement(toggleBtn);
+
+    expect(getByTestId('menu-buttons-container')).toContainElement(getByTestId('toggle-button'));
+    const menuButtonsGroups = getAllByTestId('menu-buttons-group');
+    expect(menuButtonsGroups).toHaveLength(2);
+
+    const menuButtons = getAllByTestId('menu-button');
+    expect(menuButtons).toHaveLength(8);
+    expect(getByTestId('menu-buttons-group')).toContainElement(getByTestId('menu-button'));
+    
+    let opened = true;
+
+    const toggle = jest.fn(() => opened = false);
+    fireEvent.click(getByTestId('toggle-button'), toggle());
+    expect(toggle).toHaveBeenCalledTimes(1);
+    expect(opened).toEqual(false);
 });
