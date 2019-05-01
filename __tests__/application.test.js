@@ -2,9 +2,15 @@
 /* eslint-disable no-plusplus */
 import { startscreenState, heroselectState, heroselectedState, versusState, profileState } from '../__mocks__/stateMock';
 // import module for tests
+import { chance, indexes } from '../backend/gameEngine';
+
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
 
+// jest.mock('../backend/gameEngine', () => () => ({
+//     chance: jest.fn(),
+//     indexes: jest.fn(),
+// }));
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
 test('Game loaded. Send the app in its initial state', () => {
@@ -2766,7 +2772,7 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
     });
 
     // we save normal random here before mock it
-    const oldRandom = Math.random;
+    // const oldRandom = Math.random;
     // Mock will rewrite all math.random and set it to 1 to 1st call
     // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
     Math.random = jest.fn();
@@ -2785,7 +2791,7 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
     expect(result.game.players[0].hand.key9.points).toEqual(4);
 
     // We return random to initial value, so it is not always set to 1
-    Math.random = oldRandom;
+    // Math.random = oldRandom;
 });
 
 // Test that once Bow and Arrows card is at opponent item holder, 2 player's

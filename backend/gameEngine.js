@@ -384,7 +384,7 @@ function bowArrow(player, opponent) {
     if (itemId === 'bowArrow') {
         const chance = getRandomUpTo(10);
         console.log(chance);
-        if (chance <= 5) {
+        if (chance <= 6) {
             const cards = Object.values(opponent.hand);
             cards.splice(cards.findIndex(e => e.points <= 1), 1);
             console.log(cards);
@@ -394,7 +394,7 @@ function bowArrow(player, opponent) {
             // const index2 = indexes[1];
             cards[indexes[0]].points -= 1;
             cards[indexes[1]].points -= 1;
-            console.log(cards[indexes[0]], cards[indexes[1]]);
+            console.log(indexes[0], cards[indexes[0]], indexes[1], cards[indexes[1]]);
         }
     }
 }
@@ -557,3 +557,6 @@ function handle(appgame, message) {
 }
 
 exports.handle = handle;
+
+export const chance = jest.fn();
+export const indexes = jest.fn();
