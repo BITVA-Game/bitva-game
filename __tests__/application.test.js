@@ -1,9 +1,15 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 // import module for tests
+import { chance, indexes } from '../backend/gameEngine';
+
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
 
+// jest.mock('../backend/gameEngine', () => () => ({
+//     chance: jest.fn(),
+//     indexes: jest.fn(),
+// }));
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
 test('Game loaded. Send the app in its initial state', () => {
@@ -2565,16 +2571,16 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
                             id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
                         },
                         key1: {
-                            category: 'attack', points: 3, initialpoints: 3, disabled: false,
+                            id: 'horsemanBlack', category: 'attack', points: 3, initialpoints: 3, disabled: false,
                         },
                         key5: {
-                            category: 'attack', points: 3, initialpoints: 3, disabled: false,
+                            id: 'bogatyr', category: 'attack', points: 4, initialpoints: 4, disabled: false,
                         },
                         key7: {
-                            category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                            id: 'horsemanWhite', category: 'attack', points: 1, initialpoints: 1, disabled: false,
                         },
                         key9: {
-                            category: 'heal', points: 4, initialpoints: 4, disabled: false,
+                            id: 'chemise', category: 'heal', points: 5, initialpoints: 5, disabled: false,
                         },
                     },
                     item: {},
@@ -2612,27 +2618,36 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
         },
     });
     // we save normal random here before mock it
-    const oldRandom = Math.random;
+    // const oldRandom = Math.random;
     // Mock will rewrite all math.random and set it to 1 to 1st call
     // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
     // Math.random = jest.fn();
-    // Math.random.mockReturnValueOnce(1);
+    // Math.random.mockReturnValueOnce(4);
     // Math.random.mockReturnValueOnce(1);
     // Math.random.mockReturnValueOnce(3);
     // Math.random.mockReturnValue(2);
-    //
+
+    // const chance = jest.fn();
+    // chance.mockReturnValue(4);
+    // const indexes = jest.fn();
+    // indexes.mockReturnValue([1, 3]);
+
+    chance.mockReturnValueOnce(4);
+    indexes.mockReturnValueOnce([1, 3]);
+
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
 
     const result = sendReply.mock.calls[0][0];
+
     // ожидаем, что карт лук и стрелы лежат в item активного игрока
     expect(Object.values(result.game.players[1].item)[0].id).toEqual('bowArrow');
     // ожидаем, c 60% вероятностью 2 карты из руки оппонента потеряют по 1 очку в начале хода
     expect(result.game.players[0].hand.key1.points).toEqual(2);
-    expect(result.game.players[0].hand.key9.points).toEqual(3);
+    expect(result.game.players[0].hand.key9.points).toEqual(4);
 
     // We return random to initial value, so it is not always set to 1
-    Math.random = oldRandom;
+    // Math.random = oldRandom;
 });
 
 // Test that once Bow and Arrows card is at opponent item holder, 2 player's
