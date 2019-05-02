@@ -547,6 +547,3 @@ function handle(appgame, message) {
 }
 
 exports.handle = handle;
-
-export const chance = jest.fn();
-export const indexes = jest.fn();

@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 // import module for tests
-import { chance, indexes } from '../backend/gameEngine';
-
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
 
@@ -2617,23 +2615,24 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
             ],
         },
     });
+
     // we save normal random here before mock it
-    // const oldRandom = Math.random;
+    const oldRandom = Math.random;
     // Mock will rewrite all math.random and set it to 1 to 1st call
     // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
-    // Math.random = jest.fn();
-    // Math.random.mockReturnValueOnce(4);
-    // Math.random.mockReturnValueOnce(1);
-    // Math.random.mockReturnValueOnce(3);
+    Math.random = jest.fn();
+    Math.random.mockReturnValueOnce(4).mockReturnValueOnce(1).mockReturnValueOnce(3);
     // Math.random.mockReturnValue(2);
 
-    // const chance = jest.fn();
-    // chance.mockReturnValue(4);
-    // const indexes = jest.fn();
+    // const chance = jest.fn(() => 4);
+    // chance();
+    // // chance.mockReturnValue(4);
+    // const indexes = jest.fn(() => [1, 3]);
+    // indexes();
     // indexes.mockReturnValue([1, 3]);
 
-    chance.mockReturnValueOnce(4);
-    indexes.mockReturnValueOnce([1, 3]);
+    // chance.mockReturnValueOnce(4);
+    // indexes.mockReturnValueOnce([1, 3]);
 
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
@@ -2647,12 +2646,12 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
     expect(result.game.players[0].hand.key9.points).toEqual(4);
 
     // We return random to initial value, so it is not always set to 1
-    // Math.random = oldRandom;
+    Math.random = oldRandom;
 });
 
 // Test that once Bow and Arrows card is at opponent item holder, 2 player's
 // cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
-test('msg ACTION received: if Bow&Arrow card is at opponent item, then цшер 60% 2 cards in player hand can loose 1 point at next acttion.', () => {
+test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 2 cards in player hand can loose 1 point at next acttion.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key10',
