@@ -4,8 +4,6 @@ import {
     startscreenState, heroselectState, heroselectedState, versusState,
 } from '../__mocks__/stateMock';
 // import module for tests
-import { chance, indexes } from '../backend/gameEngine';
-
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
 
