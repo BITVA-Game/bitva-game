@@ -453,3 +453,228 @@ test('msg HEROSELECTED received: both players cards get property categoryName.',
         expect(Object.values(inactivePlayer.cards)[c]).toHaveProperty('categoryName');
     }
 });
+
+// Test, that when inactive player has  magicTree item in  item holder,
+// then active player can make only one action in 1 turn (turn changes once moveCounter == 1 not 2 as usual)
+test('msg ACTION received: active can make only 1 action in 1 turn if inactive player has magicTree in item holder', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    item: {
+                        key10: {
+                            id: 'magicTree', type: 'item', category: 'holdTurn', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: { type: 'action', disabled: false },
+                        key4: { type: 'action', disabled: false },
+                    },
+                    grave: {},
+                },
+                {
+                    active: true,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key8: { type: 'item', disabled: false },
+                        key13: { type: 'action', disabled: false },
+                        key10: { type: 'action', disabled: false },
+                        key1: {
+                            id: 'horsemanRed', type: 'action', category: 'attack', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что ход сменился и Yaga стала активным игроком
+    expect(result.game.players[0].active).toEqual(true);
+    // а Premudraya стала неактивным игроком и ее счетчик хода снова обнулился
+    expect(result.game.players[1].active).toEqual(false);
+    expect(result.game.players[1].moveCounter).toEqual(0);
+
+    // ожидаем, что карта magicTree лежит в item holder активного игрока Yaga
+    expect(result.game.players[0].item.key10.id).toEqual('magicTree');
+    // ожидаем, что карта magicTree активного игрока имеет категорию holdTurn
+    expect(result.game.players[0].item.key10.category).toEqual('holdTurn');
+});
+
+// Test that player can put  Bow and Arrows card in item holder, and opponent's
+// cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
+test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 2 cards can loose 1 point at next turn.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key4',
+        target: 'item',
+    };
+    const sendReply = jest.fn();
+    // we set app game in needed state for testing
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key10: {
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
+                        },
+                        key1: {
+                            id: 'horsemanBlack', category: 'attack', points: 3, initialpoints: 3, disabled: false,
+                        },
+                        key5: {
+                            id: 'bogatyr', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                        },
+                        key7: {
+                            id: 'horsemanWhite', category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                        },
+                        key9: {
+                            id: 'chemise', category: 'heal', points: 5, initialpoints: 5, disabled: false,
+                        },
+                    },
+                    item: {},
+                    moveCounter: 0,
+                },
+                {
+                    active: true,
+                    hero: 'morevna',
+                    health: { current: 13, maximum: 16 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key3: {},
+                        key4: {
+                            id: 'bowArrow', type: 'item', category: 'supress', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    item: {},
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key6: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    moveCounter: 1,
+                },
+            ],
+        },
+    });
+
+    // we save normal random here before mock it
+    const oldRandom = Math.random;
+    // Mock will rewrite all math.random and set it to 1 to 1st call
+    // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
+    // Math.random = jest.fn();
+    // Math.random.mockReturnValueOnce(4).mockReturnValueOnce(1).mockReturnValueOnce(3);
+    // Math.random.mockReturnValue(2);
+
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карт лук и стрелы лежат в item активного игрока
+    expect(Object.values(result.game.players[1].item)[0].id).toEqual('bowArrow');
+    // ожидаем, c 60% вероятностью 2 карты из руки оппонента потеряют по 1 очку в начале хода
+    expect(result.game.players[0].hand.key1.points).toEqual(2);
+    expect(result.game.players[0].hand.key9.points).toEqual(4);
+
+    // We return random to initial value, so it is not always set to 1
+    Math.random = oldRandom;
+});
+
+// Test that once Bow and Arrows card is at opponent item holder, 2 player's
+// cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
+test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 2 cards in player hand can loose 1 point at next acttion.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key10',
+        target: 'opponent',
+    };
+    const sendReply = jest.fn();
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'premudraya',
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key10: {
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    item: {},
+                },
+                {
+                    active: false,
+                    hero: 'morevna',
+                    health: { current: 13, maximum: 16 },
+                    item: {
+                        key4: {
+                            id: 'bowArrow', type: 'item', category: 'supress', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    const result = sendReply.mock.calls[0][0];
+    // ожидаем, что карт лук и стрелы лежат в item неактивного игрока
+    expect(result.game.players[1].item[0].id).toEqual('bowArrow');
+});
