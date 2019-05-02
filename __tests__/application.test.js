@@ -2624,13 +2624,7 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
     Math.random.mockReturnValueOnce(4).mockReturnValueOnce(1).mockReturnValueOnce(3);
     // Math.random.mockReturnValue(2);
 
-    // const chance = jest.fn(() => 4);
-    // chance();
-    // // chance.mockReturnValue(4);
-    // const indexes = jest.fn(() => [1, 3]);
-    // indexes();
-    // indexes.mockReturnValue([1, 3]);
-
+    
     // chance.mockReturnValueOnce(4);
     // indexes.mockReturnValueOnce([1, 3]);
 
