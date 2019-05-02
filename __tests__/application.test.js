@@ -2773,8 +2773,8 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
     const oldRandom = Math.random;
     // Mock will rewrite all math.random and set it to 1 to 1st call
     // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
-    Math.random = jest.fn();
-    Math.random.mockReturnValueOnce(4).mockReturnValueOnce(1).mockReturnValueOnce(3);
+    // Math.random = jest.fn();
+    // Math.random.mockReturnValueOnce(4).mockReturnValueOnce(1).mockReturnValueOnce(3);
     // Math.random.mockReturnValue(2);
 
     application.msgReceived(msg, sendReply);
