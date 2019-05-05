@@ -106,8 +106,8 @@
 }
 
 .blue {
-    background-color: rgb(179, 192, 200);
-    background-color: rgba(179, 192, 200, .5); /*#B3C0C8*/
+    background-color: rgb(130, 155, 175);
+    background-color: rgb(130, 155, 175, .5); /*#829baf*/
 }
 
 .green {
@@ -265,7 +265,7 @@
 }
 
 .grave-blue {
-    background-color: rgb(179, 192, 200); /*#B3C0C8*/
+    background-color: rgb(130, 155, 175); /*#829baf*/
 }
 
 .grave-green {
