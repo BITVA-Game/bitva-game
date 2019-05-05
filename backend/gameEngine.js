@@ -25,6 +25,8 @@ function assignCards(deck, cardsNumber) {
     d.forEach((key) => {
         cards[key] = deck[key];
         cards[key].disabled = false;
+        cards[key].points = cards[key].initialpoints;
+        cards[key].healthCurrent = cards[key].health;
     });
     return cards;
 }

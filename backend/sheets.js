@@ -23,7 +23,6 @@ async function formatOriginalCards() {
         cardsUpdated[name].category = c.category;
         cardsUpdated[name].description = c.descriptionEn;
         cardsUpdated[name].health = c.health;
-        cardsUpdated[name].points = c.points;
         cardsUpdated[name].initialpoints = c.initialpoints;
         cardsUpdated[name].img = c.image;
         cards[name] = cardsUpdated[name];
