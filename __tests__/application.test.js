@@ -2545,7 +2545,7 @@ test('msg ACTION received: active player can put Magic Mirror in item holder.', 
 // Test that players cards get points and health current points once they are dealt to players.
 test('msg HEROSELECTED received: both players cards get property points and healthCurrent.', () => {
     // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'hozyaika' };
 
     // Mock sendReply function
     const sendReply = jest.fn();

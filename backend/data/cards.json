@@ -61,8 +61,7 @@
         "icon": "heartBlack",
         "category": "supress",
         "description": "Magic Bow possesses the precious characteristic - his owner can see and aim to the invisible creatures. And an arrow shot with this bow destroyes the illusion. ",
-        "health": 2,
-        "initialpoints": 2
+        "health": 2
     },
     "bajun": {
         "id": "bajun",
@@ -116,8 +115,7 @@
         "icon": "arrows",
         "category": "panic",
         "description": "Forest Mushroom cooked by Yaga are dangerous. Yaga's guest shoudn't treat oneself with them, if wishes to retain the clear consciousness.",
-        "health": 2,
-        "initialpoints": 2
+        "health": 2
     },
     "russianOven": {
         "id": "russianOven",
@@ -135,8 +133,7 @@
         "icon": "ballChain",
         "category": "holdTurn",
         "description": "Yaga resuscitated the age-old oak with her magic. It guards the forest and detains trespassers.",
-        "health": 2,
-        "initialpoints": 2
+        "health": 2
     },
     "horsemanBlack": {
         "id": "horsemanBlack",
@@ -181,8 +178,7 @@
         "icon": "hand",
         "category": "reflect",
         "description": "Magiс Mirror — item that can \"duplicate the reality\". The boundary between the earth and the other Subtle World.",
-        "health": 2,
-        "initialpoints": 2
+        "health": 2
     },
     "clairvoyance": {
         "id": "clairvoyance",
@@ -245,8 +241,7 @@
         "icon": "deckMove",
         "category": "generator",
         "description": "Maid's gift. But it has a hidden agenda and brings miseries to the person who opens box without permission.",
-        "health": 2,
-        "initialpoints": 2
+        "health": 2
     },
     "turningPotion": {
         "id": "turningPotion",
@@ -273,8 +268,7 @@
         "icon": "shield",
         "category": "shield",
         "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-        "health": 2,
-        "initialpoints": 2
+        "health": 2
     },
     "waterDead": {
         "id": "waterDead",
@@ -293,8 +287,7 @@
         "icon": "shield",
         "category": "shield",
         "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-        "health": 4,
-        "initialpoints": 4
+        "health": 4
     },
     "bogatyr": {
         "id": "bogatyr",
@@ -321,8 +314,7 @@
         "icon": "deckMove",
         "category": "shuffling",
         "description": "Magic fire bird. Her feathers have the ability to glow and can blind the human vision.  Firebird dies every year in autumn and returns to life in spring.",
-        "health": 1,
-        "initialpoints": 1
+        "health": 1
     },
     "kladenets": {
         "id": "kladenets",
@@ -331,7 +323,6 @@
         "icon": "skull",
         "category": "attack",
         "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.",
-        "health": 2,
-        "initialpoints": 2
+        "health": 2
     }
 }
