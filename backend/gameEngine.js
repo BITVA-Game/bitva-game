@@ -181,14 +181,14 @@ function reflect(opponent, points) {
 
 // function to move mirror card to graveyard after its points <= 0
 // and restore its initial points for future use
-function mirrorCard(opponent, points) {
-    const cardItem = Object.values(opponent.item)[0];
-    cardItem.points -= points;
-    if (cardItem.points <= 0) {
-        cardItem.points = cardItem.initialpoints;
-        moveCardGraveyard(opponent, (Object.keys(opponent.item)[0]), 'item');
-    }
-}
+// function mirrorCard(opponent, points) {
+//     const cardItem = Object.values(opponent.item)[0];
+//     cardItem.points -= points;
+//     if (cardItem.points <= 0) {
+//         cardItem.points = cardItem.initialpoints;
+//         moveCardGraveyard(opponent, (Object.keys(opponent.item)[0]), 'item');
+//     }
+// }
 
 // function to handle attack points deduction from opponent player health
 // depending on item card if any present
@@ -275,25 +275,13 @@ function waterCard(players) {
             case 'waterLiving':
                 //  console.log('We are in living water case!');
                 cardIncreaseHealth(players);
-                // we deduct 1 point from item card points
-                itemCard.points -= 1;
                 break;
             // if it is Dead Water card then we run function
             // that decrease players current health by 1 point
             case 'waterDead':
                 // console.log('We are in dead water case!');
                 cardDecreaseHealth(players);
-                // we deduct 1 point from item card points
-                itemCard.points -= 1;
                 break;
-            }
-            // if water card has its points equal to 0
-            if (itemCard.points === 0) {
-                // we reset water card's points to initial points
-                itemCard.points = itemCard.initialpoints;
-                // we move water item card to graveyard if its points == 0
-                // console.log('We are in item card has 0 ponts!', p, (Object.keys(p.item)[0]));
-                moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
             }
         }
     });
@@ -426,9 +414,17 @@ function playerActs(game, player, opponent, active, target) {
         // console.log('We are in move item case');
         moveItem(player, active);
     }
+    // if player attacks opponent item with card type action, then
+    // if item is not empty we deduct points of attack from item card points
+    // if item card points <= 0 cards get its initial points and goes to graveyard
     if (target === 'itemOpponent' && activeCard.type === 'action') {
-        if (Object.values(opponent.item)[0].id === 'magicMirror') {
-            mirrorCard(opponent, activeCard.points);
+        if (Object.keys(opponent.item)[0].length !== 0) {
+            const itemCard = Object.values(opponent.item)[0];
+            itemCard.points -= activeCard.points;
+            if (itemCard.points <= 0) {
+                itemCard.points = itemCard.initialpoints;
+                moveCardGraveyard(opponent, Object.keys(opponent.item)[0], 'item');
+            }
         }
     }
     // after each move we increase active player's counter for 1
