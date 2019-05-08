@@ -43,16 +43,6 @@ const imagesCards = {
     waterLiving,
 };
 
-// Show all cards by 1 in row
-function prepairCards(cards) {
-    const cardsKeys = Object.keys(cards);
-    const cardsBy1 = [];
-    for (let i = 0; i < cardsKeys.length; i += 1) {
-        cardsBy1.push(cardsKeys.slice(i, i + 1));
-    }
-    return cardsBy1;
-}
-
 const HeroImage = props => (
     <div className="details-hero">
         <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }} />
@@ -82,11 +72,11 @@ const CardPreview = props => (
 
 const CardsRow = props => (
     <>
-        <CardPreview card={props.cards[props.row[0]]} hero={props.hero} />
+        <CardPreview card={props.cards[props.cardIndex]} hero={props.hero} />
         <div className="card-description">
-            {props.cards[props.row[0]].description}
+            {props.cards[props.cardIndex].description}
             <div className="icon-deck icon-text">
-                {props.cards[props.row[0]].count}
+                {props.cards[props.cardIndex].count}
             </div>
         </div>
     </>
@@ -95,30 +85,44 @@ const CardsRow = props => (
 class CardsBlock extends Component {
     constructor(props) {
         super(props);
-        this.cardsBy1 = prepairCards(props.cards);
-        this.state = { row: 0 };
-        this.changeRow = this.changeRow.bind(this);
+        this.state = { cardIndex: 0 };
+        this.changeRowNext = this.changeRowNext.bind(this);
+        this.changeRowPrev = this.changeRowPrev.bind(this);
     }
 
-    changeRow() {
-        console.log('changeRow ', this.state.row);
-        const maxRotation = this.cardsBy1.length - 1;
-        const currentRow = this.state.row;
+    changeRowNext() {
+        // console.log('changeRow ', this.state.cardIndex);
+        const maxRotation = this.deck.length - 1;
+        const currentRow = this.state.cardIndex;
         if (currentRow === maxRotation) {
-            this.setState({ row: 0 });
+            this.setState({ cardIndex: 0 });
         } else {
-            this.setState({ row: currentRow + 1 });
+            this.setState({ cardIndex: currentRow + 1 });
+        }
+    }
+
+    changeRowPrev() {
+        // console.log('changeRow ', this.state.cardIndex);
+        const minRotation = 0;
+        const currentRow = this.state.cardIndex;
+        if (currentRow === minRotation) {
+            this.setState({ cardIndex: this.deck.length - 1 });
+        } else {
+            this.setState({ cardIndex: currentRow - 1 });
         }
     }
 
     render() {
+        // get the array of all cards of current character
+        this.deck = Object.keys(this.props.cards);
+        // console.log(this.props.cards, this.deck);
         return (
             <section className="details-cards">
-                <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="5">
+                <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRowPrev} onKeyPress={this.changeRow} tabIndex="5">
                     ◀
                 </div>
-                <CardsRow heroId={this.props.heroId} row={this.cardsBy1[this.state.row]} cards={this.props.cards} hero={this.props.hero} />
-                <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRow} onKeyPress={this.changeRow} tabIndex="6">
+                <CardsRow heroId={this.props.heroId} cardIndex={this.deck[this.state.cardIndex]} cards={this.props.cards} hero={this.props.hero} />
+                <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRowNext} onKeyPress={this.changeRow} tabIndex="6">
                     ▶
                 </div>
             </section>
@@ -154,6 +158,12 @@ HeroImage.propTypes = {
     heroid: PropTypes.string.isRequired,
 };
 
+CardsBlock.propTypes = {
+    cards: PropTypes.object.isRequired,
+    hero: PropTypes.object.isRequired,
+    heroId: PropTypes.string.isRequired,
+};
+
 CardPreview.propTypes = {
     card: PropTypes.object,
     hero: PropTypes.object.isRequired,
@@ -164,14 +174,9 @@ CardPreview.defaultProps = {
 };
 
 CardsRow.propTypes = {
-    card: PropTypes.object,
-    hero: PropTypes.object.isRequired,
-};
-
-CardsBlock.propTypes = {
     cards: PropTypes.object.isRequired,
+    cardIndex: PropTypes.number.isRequired,
     hero: PropTypes.object.isRequired,
-    heroId: PropTypes.string.isRequired,
 };
 
 OneHero.propTypes = {
