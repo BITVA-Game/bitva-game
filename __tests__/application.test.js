@@ -2621,3 +2621,43 @@ test('msg ACTION received: active player can put Magic Mirror in item holder.', 
     // ожидаем, что карта magic mirror в item holder активного игрока
     expect(result.game.players[0].item.key10.id).toEqual('magicMirror');
 });
+
+// Test that players cards get points and health current points once they are dealt to players.
+test('msg HEROSELECTED received: both players cards get property points and healthCurrent.', () => {
+    // We only need type for this test.
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'hozyaika' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // Find active andinactive players
+    let activePlayer = result.game.players[0];
+    let inactivePlayer = result.game.players[1];
+    if (result.game.players[0].active === false) {
+        activePlayer = result.game.players[1];
+        inactivePlayer = result.game.players[0];
+    }
+    // we check every card dealt to active player
+    for (let i = 0; i < Object.keys(activePlayer.cards).length; i++) {
+        // and we expect active player to have points property in each card = initialpoints
+        // and property healthCurrent = health
+        const card = Object.values(activePlayer.cards)[i];
+        expect(card).toHaveProperty('points', card.initialpoints);
+        expect(card).toHaveProperty('healthCurrent', card.health);
+    }
+    // we check every card dealt to inactive player
+    for (let c = 0; c < Object.keys(inactivePlayer.cards).length; c++) {
+        // and we expect inactive player to have points property in each card = initialpoints
+        // and property healthCurrent = health
+        const card = Object.values(activePlayer.cards)[c];
+        expect(card).toHaveProperty('points', card.initialpoints);
+        expect(card).toHaveProperty('healthCurrent', card.health);
+    }
+});

@@ -1,190 +1,190 @@
 {
-  "morevna": {
-    "id": "morevna",
-    "name": "Мarya Мorevna",
-    "description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
-    "health": 16,
-    "cardsNumber": 15,
-    "img": "character_ex.png",
-    "cards": {
-      "bulat": {
-        "id": "bulat",
-        "count": 5
-      },
-      "wolf": {
-        "id": "wolf",
-        "count": 4
-      },
-      "warhorse": {
-        "id": "warhorse",
-        "count": 3
-      },
-      "bogatyr": {
-        "id": "bogatyr",
-        "count": 2
-      },
-      "apple": {
-        "id": "apple",
-        "count": 2
-      },
-      "bereginya": {
-        "id": "bereginya",
-        "count": 1
-      },
-      "shieldLarge": {
-        "id": "shieldLarge",
-        "count": 2
-      },
-      "shieldSmall": {
-        "id": "shieldSmall",
-        "count": 3
-      },
-      "waterLiving": {
-        "id": "waterLiving",
-        "count": 2
-      }
+    "morevna": {
+        "id": "morevna",
+        "name": "Мarya Мorevna",
+        "description": "Lady bogatyr of steppe, crown queen possesing great sorcerous powers, who enchained Koschei the Deathless.",
+        "health": 16,
+        "cardsNumber": 15,
+        "img": "character_ex.png",
+        "cards": {
+            "bulat": {
+                "id": "bulat",
+                "count": 5
+            },
+            "wolf": {
+                "id": "wolf",
+                "count": 4
+            },
+            "warhorse": {
+                "id": "warhorse",
+                "count": 3
+            },
+            "bogatyr": {
+                "id": "bogatyr",
+                "count": 2
+            },
+            "apple": {
+                "id": "apple",
+                "count": 2
+            },
+            "bereginya": {
+                "id": "bereginya",
+                "count": 1
+            },
+            "shieldLarge": {
+                "id": "shieldLarge",
+                "count": 2
+            },
+            "shieldSmall": {
+                "id": "shieldSmall",
+                "count": 3
+            },
+            "waterLiving": {
+                "id": "waterLiving",
+                "count": 2
+            }
+        },
+        "background": "ochre"
     },
-    "background": "ochre"
-  },
-  "yaga": {
-    "id": "yaga",
-    "name": " Yaga",
-    "description": "Yaga flies around in a mortar, wields a pestle, and dwells deep in the forest in a hut  on chicken legs. Baba Yaga may help or hinder those that encounter or seek her out.",
-    "health": 15,
-    "cardsNumber": 15,
-    "img": "character_ex.png",
-    "cards": {
-      "bajun": {
-        "id": "bajun",
-        "count": 5
-      },
-      "gusiLebedi": {
-        "id": "gusiLebedi",
-        "count": 5
-      },
-      "kikkmora": {
-        "id": "kikkmora",
-        "count": 3
-      },
-      "bogatyr": {
-        "id": "bogatyr",
-        "count": 3
-      },
-      "mortar": {
-        "id": "mortar",
-        "count": 2
-      },
-      "chickenLegsHut": {
-        "id": "chickenLegsHut",
-        "count": 1
-      },
-      "shieldLarge": {
-        "id": "shieldLarge",
-        "count": 2
-      },
-      "shieldSmall": {
-        "id": "shieldSmall",
-        "count": 3
-      },
-      "russianOven": {
-        "id": "russianOven",
-        "count": 2
-      }
+    "yaga": {
+        "id": "yaga",
+        "name": " Yaga",
+        "description": "Yaga flies around in a mortar, wields a pestle, and dwells deep in the forest in a hut  on chicken legs. Baba Yaga may help or hinder those that encounter or seek her out.",
+        "health": 15,
+        "cardsNumber": 15,
+        "img": "character_ex.png",
+        "cards": {
+            "bajun": {
+                "id": "bajun",
+                "count": 5
+            },
+            "gusiLebedi": {
+                "id": "gusiLebedi",
+                "count": 5
+            },
+            "kikkmora": {
+                "id": "kikkmora",
+                "count": 3
+            },
+            "bogatyr": {
+                "id": "bogatyr",
+                "count": 3
+            },
+            "mortar": {
+                "id": "mortar",
+                "count": 2
+            },
+            "chickenLegsHut": {
+                "id": "chickenLegsHut",
+                "count": 1
+            },
+            "shieldLarge": {
+                "id": "shieldLarge",
+                "count": 2
+            },
+            "shieldSmall": {
+                "id": "shieldSmall",
+                "count": 3
+            },
+            "russianOven": {
+                "id": "russianOven",
+                "count": 2
+            }
+        },
+        "background": "red"
     },
-    "background": "red"
-  },
-  "hozyaika": {
-    "id": "hozyaika",
-    "name": "The Malachite Maid",
-    "description": "The Malachite Maid is the mountain spirit from the legends of the Ural miners and the Mistress of the Ural Mountains",
-    "health": 13,
-    "cardsNumber": 19,
-    "img": "character_ex.png",
-    "cards": {
-      "bat": {
-        "id": "bat",
-        "count": 4
-      },
-      "lizard": {
-        "id": "lizard",
-        "count": 4
-      },
-      "earthquake": {
-        "id": "earthquake",
-        "count": 4
-      },
-      "bogatyr": {
-        "id": "bogatyr",
-        "count": 3
-      },
-      "apple": {
-        "id": "apple",
-        "count": 3
-      },
-      "crown": {
-        "id": "crown",
-        "count": 1
-      },
-      "shieldLarge": {
-        "id": "shieldLarge",
-        "count": 2
-      },
-      "shieldSmall": {
-        "id": "shieldSmall",
-        "count": 3
-      },
-      "waterDead": {
-        "id": "waterDead",
-        "count": 2
-      }
+    "hozyaika": {
+        "id": "hozyaika",
+        "name": "The Malachite Maid",
+        "description": "The Malachite Maid is the mountain spirit from the legends of the Ural miners and the Mistress of the Ural Mountains",
+        "health": 13,
+        "cardsNumber": 19,
+        "img": "character_ex.png",
+        "cards": {
+            "bat": {
+                "id": "bat",
+                "count": 4
+            },
+            "lizard": {
+                "id": "lizard",
+                "count": 4
+            },
+            "earthquake": {
+                "id": "earthquake",
+                "count": 4
+            },
+            "bogatyr": {
+                "id": "bogatyr",
+                "count": 3
+            },
+            "apple": {
+                "id": "apple",
+                "count": 3
+            },
+            "crown": {
+                "id": "crown",
+                "count": 1
+            },
+            "shieldLarge": {
+                "id": "shieldLarge",
+                "count": 2
+            },
+            "shieldSmall": {
+                "id": "shieldSmall",
+                "count": 3
+            },
+            "waterDead": {
+                "id": "waterDead",
+                "count": 2
+            }
+        },
+        "background": "green"
     },
-    "background": "green"
-  },
-  "premudraya": {
-    "id": "premudraya",
-    "name": "Vasilisa the Wise",
-    "description": "A young girl abused by her step-mother is on her joyrney to find a mystical fire and unexpected helpers",
-    "health": 14,
-    "cardsNumber": 19,
-    "img": "character_ex.png",
-    "cards": {
-      "horsemanWhite": {
-        "id": "horsemanWhite",
-        "count": 5
-      },
-      "horsemanBlack": {
-        "id": "horsemanBlack",
-        "count": 5
-      },
-      "horsemanRed": {
-        "id": "horsemanRed",
-        "count": 5
-      },
-      "bogatyr": {
-        "id": "bogatyr",
-        "count": 2
-      },
-      "dolly": {
-        "id": "dolly",
-        "count": 2
-      },
-      "chemise": {
-        "id": "chemise",
-        "count": 2
-      },
-      "shieldLarge": {
-        "id": "shieldLarge",
-        "count": 2
-      },
-      "shieldSmall": {
-        "id": "shieldSmall",
-        "count": 3
-      },
-      "skullLantern": {
-        "id": "skullLantern",
-        "count": 2
-      }
-    },
-    "background": "blue"
-  }
+    "premudraya": {
+        "id": "premudraya",
+        "name": "Vasilisa the Wise",
+        "description": "A young girl abused by her step-mother is on her joyrney to find a mystical fire and unexpected helpers",
+        "health": 14,
+        "cardsNumber": 19,
+        "img": "character_ex.png",
+        "cards": {
+            "horsemanWhite": {
+                "id": "horsemanWhite",
+                "count": 5
+            },
+            "horsemanBlack": {
+                "id": "horsemanBlack",
+                "count": 5
+            },
+            "horsemanRed": {
+                "id": "horsemanRed",
+                "count": 5
+            },
+            "bogatyr": {
+                "id": "bogatyr",
+                "count": 2
+            },
+            "dolly": {
+                "id": "dolly",
+                "count": 2
+            },
+            "chemise": {
+                "id": "chemise",
+                "count": 2
+            },
+            "shieldLarge": {
+                "id": "shieldLarge",
+                "count": 2
+            },
+            "shieldSmall": {
+                "id": "shieldSmall",
+                "count": 3
+            },
+            "skullLantern": {
+                "id": "skullLantern",
+                "count": 2
+            }
+        },
+        "background": "blue"
+    }
 }

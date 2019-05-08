@@ -1,364 +1,328 @@
 {
-  "warhorse": {
-    "id": "warhorse",
-    "name": "War Horse",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Loyal friend, warning his owner of the danger. Horse helps his Lady bogatyr both to slip her pursuers and joins the battle - hoofs the enemy warriors.",
-    "points": 3,
-    "initialpoints": 3
-  },
-  "bulat": {
-    "id": "bulat",
-    "name": "Bulat sword",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Damask steel dagger - sword with sorcery charmed blade. Its steel is quenched not by the water but the wind, possesses wind's power and force.",
-    "points": 1,
-    "initialpoints": 2
-  },
-  "wolf": {
-    "id": "wolf",
-    "name": "Grey Wolf",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "apple": {
-    "id": "apple",
-    "name": "Apple",
-    "type": "action",
-    "icon": "dropRed",
-    "category": "heal",
-    "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "bereginya": {
-    "id": "bereginya",
-    "name": "Bereginya",
-    "type": "action",
-    "icon": "dropRed",
-    "category": "heal",
-    "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
-    "points": 4,
-    "initialpoints": 4
-  },
-  "waterLiving": {
-    "id": "waterLiving",
-    "name": "Living water",
-    "type": "item",
-    "icon": "heartRed",
-    "category": "heal",
-    "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
-    "health": 2,
-    "points": 3,
-    "initialpoints": 3
-  },
-  "bowArrow": {
-    "id": "bowArrow",
-    "name": "Bow and Arrows",
-    "type": "item",
-    "icon": "heartBlack",
-    "category": "supress",
-    "description": "Magic Bow possesses the precious characteristic - his owner can see and aim to the invisible creatures. And an arrow shot with this bow destroyes the illusion. ",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "bajun": {
-    "id": "bajun",
-    "name": "Cat-Bajun",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-    "points": 1,
-    "initialpoints": 2
-  },
-  "gusiLebedi": {
-    "id": "gusiLebedi",
-    "name": "The Magic Swan Geese",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "The Magic Swan Geese are Yaga's winged warriors. They help to capture and take an enemy to the other world.",
-    "points": 2,
-    "initialpoints": 1
-  },
-  "kikkmora": {
-    "id": "kikkmora",
-    "name": "Kikimora",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Kikimora -- a female swamp spirit who may inhabit a house too. She likes to harm or misdirect people. Kikimora is capable to put on human or animal shape.",
-    "points": 3,
-    "initialpoints": 1
-  },
-  "chickenLegsHut": {
-    "id": "chickenLegsHut",
-    "name": "Hut on chicken legs",
-    "type": "action",
-    "icon": "dropRed",
-    "category": "heal",
-    "description": "Yaga's place of living. Once hut turns its front to a viator, back to the forest and then vice versa, the hut opens entrance to the living and then to the Nether world.",
-    "points": 4,
-    "initialpoints": 5
-  },
-  "mortar": {
-    "id": "mortar",
-    "name": "Flying Mortar",
-    "type": "action",
-    "icon": "dropRed",
-    "category": "heal",
-    "description": "Mortar possess magic powers and can, not only fly, but also grind the desease, pound an ill person into healthy.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "forestMushrom": {
-    "id": "forestMushrom",
-    "name": "Forest Mushroom",
-    "type": "item",
-    "icon": "arrows",
-    "category": "panic",
-    "description": "Forest Mushroom cooked by Yaga are dangerous. Yaga's guest shoudn't treat oneself with them, if wishes to retain the clear consciousness.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "russianOven": {
-    "id": "russianOven",
-    "name": "Russian Oven",
-    "type": "action",
-    "icon": "ballChain",
-    "category": "holdCard",
-    "description": "Being the fire keeper, Russian Oven possesses the fire power and can stop the enemies, helping Yaga in witchcraft.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "magicTree": {
-    "id": "magicTree",
-    "name": "Magic tree",
-    "type": "item",
-    "icon": "ballChain",
-    "category": "holdTurn",
-    "description": "Yaga resuscitated the age-old oak with her magic. It guards the forest and detains trespassers.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "horsemanBlack": {
-    "id": "horsemanBlack",
-    "name": "Black horseman",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
-    "points": 3,
-    "initialpoints": 3
-  },
-  "horsemanWhite": {
-    "id": "horsemanWhite",
-    "name": "White horseman",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
-    "points": 1,
-    "initialpoints": 1
-  },
-  "horsemanRed": {
-    "id": "horsemanRed",
-    "name": "Red horseman",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "skullLantern": {
-    "id": "skullLantern",
-    "name": "Skull Lantern",
-    "type": "action",
-    "icon": "heartBlack",
-    "category": "attackItems",
-    "description": "Spellfull illuminant, capable to enlight the invisible and to burn to ashes the enchanted characterstics of magic items.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "magicMirror": {
-    "id": "magicMirror",
-    "name": "Magiс Mirror",
-    "type": "item",
-    "icon": "hand",
-    "category": "reflect",
-    "description": "Magiс Mirror — item that can \"duplicate the reality\". The boundary between the earth and the other Subtle World.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "clairvoyance": {
-    "id": "clairvoyance",
-    "name": "Clairvoyance",
-    "type": "action",
-    "icon": "eye",
-    "category": "showCards",
-    "description": "«Second vision». This gift offers great possibilities. It helps to see the lie, to see damage ahead and to avoid it. ",
-    "points": 1,
-    "initialpoints": 1
-  },
-  "dolly": {
-    "id": "dolly",
-    "name": "Magic dolly",
-    "type": "action",
-    "icon": "dropRed",
-    "category": "heal",
-    "description": "The mother's gift given before her death with blessing. This is not just a dolly - if to feed her, she always helps in troubles.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "chemise": {
-    "id": "chemise",
-    "name": "Сhemise ",
-    "type": "action",
-    "icon": "dropRed",
-    "category": "heal",
-    "description": "The chemise sewed from the magic sindon, spun and woven by Vasilisa the Wise.",
-    "points": 5,
-    "initialpoints": 5
-  },
-  "bat": {
-    "id": "bat",
-    "name": "Cave Bat",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
-    "points": 1,
-    "initialpoints": 1
-  },
-  "lizard": {
-    "id": "lizard",
-    "name": "Lizard",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "earthquake": {
-    "id": "earthquake",
-    "name": "Earthquake",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
-    "points": 3,
-    "initialpoints": 5
-  },
-  "malachiteBox": {
-    "id": "malachiteBox",
-    "name": "The Malachite Box",
-    "type": "item",
-    "icon": "deckMove",
-    "category": "generator",
-    "description": "Maid's gift. But it has a hidden agenda and brings miseries to the person who opens box without permission.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "turningPotion": {
-    "id": "turningPotion",
-    "name": "The Turning Potion",
-    "type": "action",
-    "icon": "arrows",
-    "category": "turning",
-    "description": "Deep underground the luminous moss grows. The Potion made of it allows to intoxicate the enemy's consciousness and to enjoy an advantage",
-    "points": 1,
-    "initialpoints": 1
-  },
-  "crown": {
-    "id": "crown",
-    "name": "Copper Crown",
-    "type": "action",
-    "icon": "dropRed",
-    "category": "heal",
-    "description": "Copper Crown possesses great healing power. For a reason the Malachite Maid always wears it. ",
-    "points": 4,
-    "initialpoints": 4
-  },
-  "shieldSmall": {
-    "id": "shieldSmall",
-    "name": "Small Shield",
-    "type": "item",
-    "icon": "shield",
-    "category": "shield",
-    "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "sivka": {
-    "id": "sivka",
-    "name": "Sivka-Burka",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
-    "points": 2,
-    "initialpoints": 2
-  },
-  "bogatyr": {
-    "id": "bogatyr",
-    "name": "Bogatyr",
-    "type": "action",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-    "points": 4,
-    "initialpoints": 4
-  },
-  "shieldLarge": {
-    "id": "shieldLarge",
-    "name": "Large Shield",
-    "type": "item",
-    "icon": "shield",
-    "category": "shield",
-    "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-    "points": 4,
-    "initialpoints": 4
-  },
-  "waterDead": {
-    "id": "waterDead",
-    "name": "Dead water",
-    "type": "item",
-    "icon": "heartBlack",
-    "category": "damage",
-    "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
-    "health": 2,
-    "points": 3,
-    "initialpoints": 3
-  },
-  "firebird": {
-    "id": "firebird",
-    "name": "Firebird",
-    "type": "item",
-    "icon": "deckMove",
-    "category": "shuffling",
-    "description": "Magic fire bird. Her feathers have the ability to glow and can blind the human vision.  Firebird dies every year in autumn and returns to life in spring.",
-    "points": 1,
-    "initialpoints": 1
-  },
-  "kladenets": {
-    "id": "kladenets",
-    "name": "Magic sword 'Kladenets'",
-    "type": "item",
-    "icon": "skull",
-    "category": "attack",
-    "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.",
-    "points": 2,
-    "initialpoints": 2
-  }
+    "warhorse": {
+        "id": "warhorse",
+        "name": "War Horse",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Loyal friend, warning his owner of the danger. Horse helps his Lady bogatyr both to slip her pursuers and joins the battle - hoofs the enemy warriors.",
+        "initialpoints": 3
+    },
+    "bulat": {
+        "id": "bulat",
+        "name": "Bulat sword",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Damask steel dagger - sword with sorcery charmed blade. Its steel is quenched not by the water but the wind, possesses wind's power and force.",
+        "initialpoints": 2
+    },
+    "wolf": {
+        "id": "wolf",
+        "name": "Grey Wolf",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
+        "initialpoints": 2
+    },
+    "apple": {
+        "id": "apple",
+        "name": "Apple",
+        "type": "action",
+        "icon": "dropRed",
+        "category": "heal",
+        "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+        "initialpoints": 2
+    },
+    "bereginya": {
+        "id": "bereginya",
+        "name": "Bereginya",
+        "type": "action",
+        "icon": "dropRed",
+        "category": "heal",
+        "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
+        "initialpoints": 4
+    },
+    "waterLiving": {
+        "id": "waterLiving",
+        "name": "Living water",
+        "type": "item",
+        "icon": "heartRed",
+        "category": "heal",
+        "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
+        "health": 3,
+        "initialpoints": 1
+    },
+    "bowArrow": {
+        "id": "bowArrow",
+        "name": "Bow and Arrows",
+        "type": "item",
+        "icon": "heartBlack",
+        "category": "supress",
+        "description": "Magic Bow possesses the precious characteristic - his owner can see and aim to the invisible creatures. And an arrow shot with this bow destroyes the illusion. ",
+        "health": 2
+    },
+    "bajun": {
+        "id": "bajun",
+        "name": "Cat-Bajun",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
+        "initialpoints": 2
+    },
+    "gusiLebedi": {
+        "id": "gusiLebedi",
+        "name": "The Magic Swan Geese",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "The Magic Swan Geese are Yaga's winged warriors. They help to capture and take an enemy to the other world.",
+        "initialpoints": 1
+    },
+    "kikkmora": {
+        "id": "kikkmora",
+        "name": "Kikimora",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Kikimora -- a female swamp spirit who may inhabit a house too. She likes to harm or misdirect people. Kikimora is capable to put on human or animal shape.",
+        "initialpoints": 1
+    },
+    "chickenLegsHut": {
+        "id": "chickenLegsHut",
+        "name": "Hut on chicken legs",
+        "type": "action",
+        "icon": "dropRed",
+        "category": "heal",
+        "description": "Yaga's place of living. Once hut turns its front to a viator, back to the forest and then vice versa, the hut opens entrance to the living and then to the Nether world.",
+        "initialpoints": 5
+    },
+    "mortar": {
+        "id": "mortar",
+        "name": "Flying Mortar",
+        "type": "action",
+        "icon": "dropRed",
+        "category": "heal",
+        "description": "Mortar possess magic powers and can, not only fly, but also grind the desease, pound an ill person into healthy.",
+        "initialpoints": 2
+    },
+    "forestMushrom": {
+        "id": "forestMushrom",
+        "name": "Forest Mushroom",
+        "type": "item",
+        "icon": "arrows",
+        "category": "panic",
+        "description": "Forest Mushroom cooked by Yaga are dangerous. Yaga's guest shoudn't treat oneself with them, if wishes to retain the clear consciousness.",
+        "health": 2
+    },
+    "russianOven": {
+        "id": "russianOven",
+        "name": "Russian Oven",
+        "type": "action",
+        "icon": "ballChain",
+        "category": "holdCard",
+        "description": "Being the fire keeper, Russian Oven possesses the fire power and can stop the enemies, helping Yaga in witchcraft.",
+        "initialpoints": 2
+    },
+    "magicTree": {
+        "id": "magicTree",
+        "name": "Magic tree",
+        "type": "item",
+        "icon": "ballChain",
+        "category": "holdTurn",
+        "description": "Yaga resuscitated the age-old oak with her magic. It guards the forest and detains trespassers.",
+        "health": 2
+    },
+    "horsemanBlack": {
+        "id": "horsemanBlack",
+        "name": "Black horseman",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+        "initialpoints": 3
+    },
+    "horsemanWhite": {
+        "id": "horsemanWhite",
+        "name": "White horseman",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+        "initialpoints": 1
+    },
+    "horsemanRed": {
+        "id": "horsemanRed",
+        "name": "Red horseman",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+        "initialpoints": 2
+    },
+    "skullLantern": {
+        "id": "skullLantern",
+        "name": "Skull Lantern",
+        "type": "action",
+        "icon": "heartBlack",
+        "category": "attackItems",
+        "description": "Spellfull illuminant, capable to enlight the invisible and to burn to ashes the enchanted characterstics of magic items.",
+        "initialpoints": 2
+    },
+    "magicMirror": {
+        "id": "magicMirror",
+        "name": "Magiс Mirror",
+        "type": "item",
+        "icon": "hand",
+        "category": "reflect",
+        "description": "Magiс Mirror — item that can \"duplicate the reality\". The boundary between the earth and the other Subtle World.",
+        "health": 2
+    },
+    "clairvoyance": {
+        "id": "clairvoyance",
+        "name": "Clairvoyance",
+        "type": "action",
+        "icon": "eye",
+        "category": "showCards",
+        "description": "«Second vision». This gift offers great possibilities. It helps to see the lie, to see damage ahead and to avoid it. ",
+        "initialpoints": 1
+    },
+    "dolly": {
+        "id": "dolly",
+        "name": "Magic dolly",
+        "type": "action",
+        "icon": "dropRed",
+        "category": "heal",
+        "description": "The mother's gift given before her death with blessing. This is not just a dolly - if to feed her, she always helps in troubles.",
+        "initialpoints": 2
+    },
+    "chemise": {
+        "id": "chemise",
+        "name": "Сhemise ",
+        "type": "action",
+        "icon": "dropRed",
+        "category": "heal",
+        "description": "The chemise sewed from the magic sindon, spun and woven by Vasilisa the Wise.",
+        "initialpoints": 5
+    },
+    "bat": {
+        "id": "bat",
+        "name": "Cave Bat",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+        "initialpoints": 1
+    },
+    "lizard": {
+        "id": "lizard",
+        "name": "Lizard",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+        "initialpoints": 2
+    },
+    "earthquake": {
+        "id": "earthquake",
+        "name": "Earthquake",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
+        "initialpoints": 5
+    },
+    "malachiteBox": {
+        "id": "malachiteBox",
+        "name": "The Malachite Box",
+        "type": "item",
+        "icon": "deckMove",
+        "category": "generator",
+        "description": "Maid's gift. But it has a hidden agenda and brings miseries to the person who opens box without permission.",
+        "health": 2
+    },
+    "turningPotion": {
+        "id": "turningPotion",
+        "name": "The Turning Potion",
+        "type": "action",
+        "icon": "arrows",
+        "category": "turning",
+        "description": "Deep underground the luminous moss grows. The Potion made of it allows to intoxicate the enemy's consciousness and to enjoy an advantage",
+        "initialpoints": 1
+    },
+    "crown": {
+        "id": "crown",
+        "name": "Copper Crown",
+        "type": "action",
+        "icon": "dropRed",
+        "category": "heal",
+        "description": "Copper Crown possesses great healing power. For a reason the Malachite Maid always wears it. ",
+        "initialpoints": 4
+    },
+    "shieldSmall": {
+        "id": "shieldSmall",
+        "name": "Small Shield",
+        "type": "item",
+        "icon": "shield",
+        "category": "shield",
+        "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+        "health": 2
+    },
+    "waterDead": {
+        "id": "waterDead",
+        "name": "Dead water",
+        "type": "item",
+        "icon": "heartBlack",
+        "category": "damage",
+        "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+        "health": 3,
+        "initialpoints": 1
+    },
+    "shieldLarge": {
+        "id": "shieldLarge",
+        "name": "Large Shield",
+        "type": "item",
+        "icon": "shield",
+        "category": "shield",
+        "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+        "health": 4
+    },
+    "bogatyr": {
+        "id": "bogatyr",
+        "name": "Bogatyr",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+        "initialpoints": 4
+    },
+    "sivka": {
+        "id": "sivka",
+        "name": "Sivka-Burka",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
+        "initialpoints": 2
+    },
+    "firebird": {
+        "id": "firebird",
+        "name": "Firebird",
+        "type": "item",
+        "icon": "deckMove",
+        "category": "shuffling",
+        "description": "Magic fire bird. Her feathers have the ability to glow and can blind the human vision.  Firebird dies every year in autumn and returns to life in spring.",
+        "health": 1
+    },
+    "kladenets": {
+        "id": "kladenets",
+        "name": "Magic sword 'Kladenets'",
+        "type": "item",
+        "icon": "skull",
+        "category": "attack",
+        "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.",
+        "health": 2
+    }
 }
