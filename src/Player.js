@@ -6,6 +6,7 @@ import Hero from './Hero';
 import rules from './rules';
 import './css/App.css';
 import './css/GameScreen.css';
+import './css/Cards.css';
 
 import apple from './images/cards/apple.jpg';
 import bajun from './images/cards/catbajun.jpg';
@@ -203,25 +204,32 @@ const Item = props => (
 
 const Card = props => (
     <div
-        className={`card card-like ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
+        className={`card game-card card-like ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
         data-key={props.cardKey}
         draggable={props.draggable}
         onDragStart={() => props.cardDragStarted(props.cardKey, props.card)}
         onDragEnd={props.cardDragEnded}
     >
         <div className="card-header">
-            <p className="card-category">{props.card.category}</p>
-            <div className={`game-icon game-icon-text
-                ${props.card.category === 'attack' ? 'icon-attack' : null}
-                ${props.card.category === 'damage' ? 'icon-damage' : null}
-                ${props.card.category === 'heal' ? 'icon-heal' : null}
-                ${props.card.category === 'shield' ? 'icon-shield' : null}`}
-            >
-                {props.card.points}
+            <div className={`card-icon-container game-card-icon-container ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
+                <div className={`card-icon game-card-icon
+                    ${props.card.category === 'attack' ? 'icon-attack' : null}
+                    ${props.card.category === 'damage' || props.card.category === 'attackItems' ? 'icon-damage' : null}
+                    ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
+                    ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
+                    ${props.card.category === 'shield' ? 'icon-shield' : null}`}
+                />
             </div>
+            <p className="card-category game-card-category">{props.card.category}</p>
+            {props.card.initialpoints ?
+                <div className={`points game-points ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
+                    {props.card.initialpoints}
+                </div>
+                : null
+            }           
         </div>
-        <div className="card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
-        <div className="card-name">
+        <div className="game-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
+        <div className="card-footer game-card-footer">
             <p>{props.card.name}</p>
         </div>
     </div>

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/HeroSelection.css';
 import styles from './css/HeroSelection.module.css';
+import './css/Cards.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -50,21 +51,28 @@ const HeroImage = props => (
 );
 
 const CardPreview = props => (
-    <div className={`details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
+    <div className={`card details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
         <div className="card-header">
-            <p>{props.card.category}</p>
-            <div className={`icon icon-text       
-                ${props.card.category === 'attack' ? 'icon-attack' : null}
-                ${props.card.category === 'damage' ? 'icon-damage' : null}
-                ${props.card.category === 'heal' ? 'icon-heal' : null}
-                ${props.card.category === 'shield' ? 'icon-shield' : null}
-            `}
-            >
-                {props.card.points}
+            <div className={`card-icon-container details-card-icon-container ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
+                <div className={`card-icon details-card-icon
+                    ${props.card.category === 'attack' ? 'icon-attack' : null}
+                    ${props.card.category === 'damage' ? 'icon-damage' : null}
+                    ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
+                    ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
+                    ${props.card.category === 'shield' ? 'icon-shield' : null}
+                `}
+                />
             </div>
+            <p className="card-category details-card-category">{props.card.category}</p>
+            {props.card.initialpoints ?
+                <div className={`points details-points ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
+                    {props.card.initialpoints}
+                </div>
+                : null
+            }
         </div>
-        <div className="card-img" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
-        <div className="card-footer">
+        <div className="card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
+        <div className="card-footer details-card-footer">
             <p>{props.card.name}</p>
         </div>
     </div>
@@ -144,7 +152,7 @@ const OneHero = props => (
                     <div className="icon-deck icon-text">
                         {props.hero.cardsNumber}
                     </div>
-                    <div className="icon icon-text icon-heal">
+                    <div className="icon-text icon-heart icon-heart-description">
                         {props.hero.health}
                     </div>
                 </div>
