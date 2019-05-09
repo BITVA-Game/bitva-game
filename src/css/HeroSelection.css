@@ -271,88 +271,7 @@ section {
 	right: -3rem;
 }
 
-.details-card {
-	align-items: center;
-	border: 3px solid #fff;
-	display: flex;
-	flex-direction: column;
-	height: 294px;
-	width: 210px;
-}
-
-.blue-item {
-	background-color: #829baf;
-}
-
-.blue-action {
-	background-color: #5b7ea1;
-}
-
-.green-item {
-	background-color: #6d8374;
-}
-
-.green-action {
-	background-color: #4a5a50;
-}
-
-.ochre-item {
-	background-color: #c18c6d;
-}
-
-.ochre-action {
-	background-color: #c1762a;
-}
-
-.red-item {
-	background-color: #9e6265;
-}
-
-.red-action {
-	background-color: #7e383a;
-}
-
-.card-header {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	position: relative;
-	width: 100%;
-}
-
-.card-header .icon {
-	position: absolute;
-	right: -43px;	
-	top: -30px;
-}
-
-.card-header p {
-	color: #fff;
-	font-family: "Ruslan Display";
-	font-size: 26px;
-	margin: 0;
-	text-align: center;
-}
-
-.card-img {
-	height: 207px;
-	width: 182px;
-}
-
-.card-footer {
-	background-color: #cfbc9c;
-	height: 32px;
-	margin-top: 10px;
-	width: 182px;
-}
-
-.card-footer p {
-	color: #763e3f;
-	font-size: 26px;
-	line-height: 32px;
-	margin: 0;
-	text-align: center;
-}
+/* description icons */
 
 .icons-container {
 	display: flex;
@@ -362,9 +281,7 @@ section {
 	margin-right: 17px;
 }
 
-.icon {
-	background-position: center;
-	background-repeat: no-repeat;
+.icon-heart-description {
 	background-size: 68px 68px;
 	flex-basis: 68px;
 	height: 68px;
@@ -383,22 +300,6 @@ section {
 	justify-content: center;
 	margin: 8px 0;
     width: 51px;
-}
-
-.icon-attack {
-	background-image: url("../images/icons/skull.png");
-}
-
-.icon-damage {
-	background-image: url("../images/icons/heart_black.png");
-}
-
-.icon-heal {
-	background-image: url("../images/icons/heart_red.png");
-}
-
-.icon-shield {
-	background-image: url("../images/icons/shield.png");
 }
 
 .icon-text {

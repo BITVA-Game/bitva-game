@@ -1,0 +1,213 @@
+/* common */
+
+.icon-attack {
+	background-image: url("../images/icons/skull.png");
+}
+
+.icon-damage {
+	background-image: url("../images/icons/heart_black.png");
+}
+
+.icon-heal {
+	background-image: url("../images/icons/drop_r.png");
+}
+
+.icon-heart {
+	background-image: url("../images/icons/heart_red.png");
+}
+
+.icon-shield {
+	background-image: url("../images/icons/shield.png");
+}
+
+.blue-item {
+	background-color: #829baf;
+}
+
+.blue-action {
+	background-color: #5b7ea1;
+}
+
+.green-item {
+	background-color: #6d8374;
+}
+
+.green-action {
+	background-color: #4a5a50;
+}
+
+.ochre-item {
+	background-color: #c18c6d;
+}
+
+.ochre-action {
+	background-color: #c1762a;
+}
+
+.red-item {
+	background-color: #9e6265;
+}
+
+.red-action {
+	background-color: #7e383a;
+}
+
+.card {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.card-header {
+	color: #fff;
+	display: flex;
+	flex-direction: row;
+	font-family: "Ruslan Display";
+	justify-content: center;
+	position: relative;
+	width: 100%;
+}
+
+.card-icon-container {
+	border-bottom-right-radius: 100%;
+	left: 1px;
+	position: absolute;
+	top: 1px;
+}
+
+.card-icon {
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.card-category {
+    margin: 0;
+	text-align: center;
+}
+
+.points {
+    border-bottom-left-radius: 100%;
+    line-height: 1;
+    padding-right: 3px;
+    position: absolute;
+    right: 1px;
+    text-align: right;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    top: 1px;
+}
+
+.card-footer {
+	background-color: #cfbc9c;
+}
+
+.card-footer p {
+	color: #763e3f;
+	margin: 0;
+	text-align: center;
+}
+
+/* OneHero (HeroSelection) */
+
+.details-card {
+	border: 3px solid #fff;
+	height: 294px;
+	width: 210px;
+}
+
+.details-card-icon-container {
+	height: 52px;
+	width: 52px;
+}
+
+.details-card-icon {
+	background-size: 28px 28px;
+	height: 28px;
+	margin-left: 5px;
+	margin-top: 5px;
+	width: 28px;
+}
+
+.details-card-category {
+	font-size: 26px;
+}
+
+.details-points {
+    font-size: 52px;
+    height: 52px;
+    width: 52px;
+}
+
+.card-image {
+	height: 207px;
+	width: 182px;
+}
+
+.details-card-footer {
+	height: 32px;
+	margin-top: 10px;
+	width: 182px;
+}
+
+.details-card-footer p {
+	font-size: 26px;
+	line-height: 32px;
+}
+
+/* Player (GameScreen) */
+
+.game-card {
+    transform: rotate(0);
+    width: 120px;
+}
+
+.game-card-icon-container {
+	height: 30px;
+	width: 30px;
+}
+
+.game-card-icon {
+	background-size: 16px 16px;
+	height: 16px;
+	margin-left: 3px;
+	margin-top: 3px;
+	width: 16px;
+}
+
+.game-card-category {
+    font-size: 14px;
+}
+
+.game-points {
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+}
+
+.player-top .card {
+    transform: rotate(180deg);
+}
+
+.player-bottom .card {
+    transform: rotate(0deg);
+}
+
+.card-like {
+    height: 168px;
+    width: 120px;
+}
+
+.game-card-image {
+    height: 118px;
+    width: 104px;
+}
+
+.game-card-footer {
+	height: 18px;
+    margin-top: 6px;
+    width: 104px;
+}
+
+.game-card-footer p {
+    font-size: 14px;
+    line-height: 18px;
+}
