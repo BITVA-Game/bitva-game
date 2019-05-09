@@ -163,18 +163,18 @@ function damagePlayer(player, points) {
 
 function attackShield(player, itemKey, points) {
     // console.log('attackShield');
-    if (player.item[itemKey].points > points) {
+    if (player.item[itemKey].healthCurrent > points) {
         // console.log('item > points');
-        player.item[itemKey].points -= points;
-    } else if (player.item[itemKey].points === points) {
+        player.item[itemKey].healthCurrent -= points;
+    } else if (player.item[itemKey].healthCurrent === points) {
         // console.log('item == points');
-        player.item[itemKey].points = player.item[itemKey].initialpoints;
+        player.item[itemKey].healthCurrent = player.item[itemKey].health;
         moveCardGraveyard(player, itemKey, 'item');
         // console.log(player.grave[itemKey]);
     } else {
         // console.log('item < points', player.item[itemKey].points, points);
-        damagePlayer(player, points - player.item[itemKey].points);
-        player.item[itemKey].points = player.item[itemKey].initialpoints;
+        damagePlayer(player, points - player.item[itemKey].healthCurrent);
+        player.item[itemKey].healthCurrent = player.item[itemKey].health;
         moveCardGraveyard(player, itemKey, 'item');
     }
 }
@@ -317,15 +317,15 @@ function removeDisable(player) {
     return playerCards;
 }
 
-// this function runs when player attacks with the card which category is attackItems
+// this function runs when player attacks with the card Skull Lantern which category is attackItems
 // it accept players and checks all item category cards from both players item holders and hands
 // and move such cards to players grave yards
 function attackItems(players) {
     players.forEach((p) => {
         if (Object.keys(p.item).length !== 0) {
             const itemCard = Object.values(p.item)[0];
-            // we reset item card's points to initial points
-            itemCard.points = itemCard.initialpoints;
+            // we reset item card's health points to initial points
+            itemCard.healthCurrent = itemCard.health;
             // we move any item card to graveyard
             moveCardGraveyard(p, (Object.keys(p.item)[0]), 'item');
         }
@@ -335,7 +335,7 @@ function attackItems(players) {
             for (const cardIndex in p.hand) {
                 if (p.hand[cardIndex].type === 'item') {
                     // we reset item card's points to initial points
-                    p.hand[cardIndex].points = p.hand[cardIndex].initialpoints;
+                    p.hand[cardIndex].healthCurrent = p.hand[cardIndex].health;
                     // we move any item card to graveyard
                     moveCardGraveyard(p, cardIndex);
                 }
@@ -426,9 +426,9 @@ function playerActs(game, player, opponent, active, target) {
     if (target === 'itemOpponent' && activeCard.type === 'action') {
         if (Object.keys(opponent.item)[0].length !== 0) {
             const itemCard = Object.values(opponent.item)[0];
-            itemCard.points -= activeCard.points;
-            if (itemCard.points <= 0) {
-                itemCard.points = itemCard.initialpoints;
+            itemCard.healthCurrent -= activeCard.points;
+            if (itemCard.healthCurrent <= 0) {
+                itemCard.healthCurrent = itemCard.health;
                 moveCardGraveyard(opponent, Object.keys(opponent.item)[0], 'item');
             }
         }
