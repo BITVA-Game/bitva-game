@@ -124,8 +124,8 @@
 
 .card-health {
 	border-top-right-radius: 100%;
-	line-height: 1;
 	left: 1px;
+	line-height: 1;
 	position: absolute;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
