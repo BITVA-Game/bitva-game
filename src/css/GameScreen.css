@@ -98,7 +98,7 @@
     display: flex;
     font-size: 30px;
     justify-content: center;
-    padding-bottom: 5px;
+    padding-bottom: 12px;
     padding-left: 1px;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
