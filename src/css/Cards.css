@@ -1,4 +1,8 @@
-/* common */
+/* icons */
+
+.icon-arrows {
+	background-image: url("../images/icons/cycle_arrows.png");
+}
 
 .icon-attack {
 	background-image: url("../images/icons/skull.png");
@@ -16,9 +20,27 @@
 	background-image: url("../images/icons/heart_red.png");
 }
 
+.icon-hold {
+	background-image: url("../images/icons/ball_chain.png");
+}
+
+.icon-move {
+	background-image: url("../images/icons/deck.png");
+}
+
+.icon-reflect {
+	background-image: url("../images/icons/hand.png");
+}
+
 .icon-shield {
 	background-image: url("../images/icons/shield.png");
 }
+
+.icon-show {
+	background-image: url("../images/icons/eye.png");
+}
+
+/* backgrounds */
 
 .blue-item {
 	background-color: #829baf;
@@ -52,6 +74,8 @@
 	background-color: #7e383a;
 }
 
+/* common */
+
 .card {
 	align-items: center;
 	display: flex;
@@ -59,6 +83,7 @@
 }
 
 .card-header {
+	align-items: center;
 	color: #fff;
 	display: flex;
 	flex-direction: row;
@@ -83,9 +108,10 @@
 .card-category {
     margin: 0;
 	text-align: center;
+	z-index: 500;
 }
 
-.points {
+.card-points {
     border-bottom-left-radius: 100%;
     line-height: 1;
     padding-right: 3px;
@@ -96,8 +122,19 @@
     top: 1px;
 }
 
+.card-health {
+	border-top-right-radius: 100%;
+	line-height: 1;
+	left: 1px;
+	position: absolute;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
 .card-footer {
+	align-items: center;
 	background-color: #cfbc9c;
+	display: flex;
+	justify-content: center;
 }
 
 .card-footer p {
@@ -120,37 +157,47 @@
 }
 
 .details-card-icon {
-	background-size: 28px 28px;
-	height: 28px;
+	background-size: 30px 30px;
+	height: 30px;
 	margin-left: 5px;
 	margin-top: 5px;
-	width: 28px;
+	width: 30px;
 }
 
 .details-card-category {
 	font-size: 26px;
 }
 
-.details-points {
+.details-card-points {
     font-size: 52px;
     height: 52px;
     width: 52px;
 }
 
-.card-image {
-	height: 207px;
+.details-card-image {
+	height: 179px;
 	width: 182px;
 }
 
+.details-card-health {
+	font-size: 52px;
+    height: 52px;
+    padding-left: 10px;
+    padding-top: 14px;
+    top: 155px;
+    width: 52px;
+}
+
 .details-card-footer {
-	height: 32px;
+	height: 60px;
 	margin-top: 10px;
 	width: 182px;
 }
 
 .details-card-footer p {
 	font-size: 26px;
-	line-height: 32px;
+	line-height: 26px;
+	padding: 0 7px;
 }
 
 /* Player (GameScreen) */
@@ -177,7 +224,7 @@
     font-size: 14px;
 }
 
-.game-points {
+.game-card-points {
     font-size: 30px;
     height: 30px;
     width: 30px;
@@ -197,17 +244,27 @@
 }
 
 .game-card-image {
-    height: 118px;
+    height: 100px;
     width: 104px;
 }
 
+.game-card-health {
+	font-size: 30px;
+    height: 30px;
+    padding-left: 5px;
+    padding-top: 8px;
+    top: 86px;
+    width: 30px;
+}
+
 .game-card-footer {
-	height: 18px;
+	height: 36px;
     margin-top: 6px;
     width: 104px;
 }
 
 .game-card-footer p {
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 15px;
+    line-height: 15px;
+    padding: 0 4px;
 }

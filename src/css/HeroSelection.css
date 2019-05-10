@@ -193,7 +193,7 @@ section {
 }
 
 .health-text {
-	bottom: 8px;
+	bottom: 10px;
 	height: 28px;
     position: absolute;
 }
@@ -285,7 +285,7 @@ section {
 	background-size: 68px 68px;
 	flex-basis: 68px;
 	height: 68px;
-	margin: 8px;
+	margin: 14px 8px 2px 8px;
 	width: 68px;
 }
 
@@ -305,6 +305,7 @@ section {
 .icon-text {
 	color: #fff;
 	font-size: 44px;
+	line-height: 52px;
 	text-align: center;
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }

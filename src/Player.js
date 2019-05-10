@@ -10,26 +10,60 @@ import './css/Cards.css';
 
 import apple from './images/cards/apple.jpg';
 import bajun from './images/cards/catbajun.jpg';
-import sivka from './images/cards/warhorse.jpg';
+import bat from './images/cards/bitva-cardbase.jpg';
 import bereginya from './images/cards/bitva-cardbase.jpg';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
+import bulat from './images/cards/bitva-cardbase.jpg';
+import chemise from './images/cards/bitva-cardbase.jpg';
+import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
+import crown from './images/cards/bitva-cardbase.jpg';
+import dolly from './images/cards/bitva-cardbase.jpg';
+import earthquake from './images/cards/bitva-cardbase.jpg';
+import gusiLebedi from './images/cards/bitva-cardbase.jpg';
+import horsemanBlack from './images/cards/bitva-cardbase.jpg';
+import horsemanRed from './images/cards/bitva-cardbase.jpg';
+import horsemanWhite from './images/cards/bitva-cardbase.jpg';
+import kikkmora from './images/cards/bitva-cardbase.jpg';
+import lizard from './images/cards/bitva-cardbase.jpg';
+import mortar from './images/cards/bitva-cardbase.jpg';
+import russianOven from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
-import wolf from './images/cards/bitva-cardbase.jpg';
+import sivka from './images/cards/warhorse.jpg';
+import skullLantern from './images/cards/bitva-cardbase.jpg';
+import warhorse from './images/cards/warhorse.jpg';
 import waterDead from './images/cards/deadwater.jpg';
 import waterLiving from './images/cards/livingwater.jpg';
+import wolf from './images/cards/bitva-cardbase.jpg';
 
 const imagesCards = {
     apple,
     bajun,
-    sivka,
+    bat,
     bereginya,
     bogatyr,
+    bulat,
+    chemise,
+    chickenLegsHut,
+    crown,
+    dolly,
+    earthquake,
+    gusiLebedi,
+    horsemanBlack,
+    horsemanRed,
+    horsemanWhite,
+    kikkmora,
+    lizard,
+    mortar,
+    russianOven,
     shieldLarge,
     shieldSmall,
-    wolf,
+    sivka,
+    skullLantern,
+    warhorse,
     waterDead,
     waterLiving,
+    wolf,    
 };
 
 const Animation = props => (
@@ -214,19 +248,35 @@ const Card = props => (
             <div className={`card-icon-container game-card-icon-container ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
                 <div className={`card-icon game-card-icon
                     ${props.card.category === 'attack' ? 'icon-attack' : null}
-                    ${props.card.category === 'damage' || props.card.category === 'attackItems' ? 'icon-damage' : null}
+                    ${props.card.category === 'attackItems' ? 'icon-damage' : null}
+                    ${props.card.category === 'damage' ? 'icon-damage' : null}
+                    ${props.card.category === 'generator' ? 'icon-move' : null}               
                     ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
                     ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
-                    ${props.card.category === 'shield' ? 'icon-shield' : null}`}
+                    ${props.card.category === 'holdCard' ? 'icon-hold' : null}
+                    ${props.card.category === 'holdTurn' ? 'icon-hold' : null}
+                    ${props.card.category === 'panic' ? 'icon-arrows' : null}
+                    ${props.card.category === 'reflect' ? 'icon-reflect' : null}
+                    ${props.card.category === 'shield' ? 'icon-shield' : null}
+                    ${props.card.category === 'showCards' ? 'icon-show' : null}
+                    ${props.card.category === 'shuffling' ? 'icon-move' : null}
+                    ${props.card.category === 'supress' ? 'icon-damage' : null}
+                    ${props.card.category === 'turning' ? 'icon-arrows' : null}`}
                 />
             </div>
             <p className="card-category game-card-category">{props.card.category}</p>
             {props.card.initialpoints ?
-                <div className={`points game-points ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
+                <div className={`card-points game-card-points ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
                     {props.card.initialpoints}
                 </div>
                 : null
-            }           
+            }
+            {props.card.health ?
+                <div className={`card-health game-card-health ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
+                    {props.card.health}
+                </div>
+                : null
+            }          
         </div>
         <div className="game-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
         <div className="card-footer game-card-footer">
