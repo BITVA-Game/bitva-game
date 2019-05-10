@@ -63,7 +63,7 @@ const imagesCards = {
     warhorse,
     waterDead,
     waterLiving,
-    wolf,    
+    wolf,
 };
 
 const Animation = props => (
@@ -265,18 +265,24 @@ const Card = props => (
                 />
             </div>
             <p className="card-category game-card-category">{props.card.category}</p>
-            {props.card.initialpoints ?
-                <div className={`card-points game-card-points ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
-                    {props.card.initialpoints}
-                </div>
-                : null
+            {props.card.initialpoints
+                ? (
+                    <div className={`card-points game-card-points
+                        ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
+                    >
+                        {props.card.initialpoints}
+                    </div>
+                ) : null
             }
-            {props.card.health ?
-                <div className={`card-health game-card-health ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
-                    {props.card.health}
-                </div>
-                : null
-            }          
+            {props.card.health
+                ? (
+                    <div className={`card-health game-card-health
+                        ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
+                    >
+                        {props.card.health}
+                    </div>
+                ) : null
+            }
         </div>
         <div className="game-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
         <div className="card-footer game-card-footer">
