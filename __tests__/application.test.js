@@ -2669,3 +2669,90 @@ test('msg HEROSELECTED received: both players cards get property points and heal
         }
     }
 });
+
+// Test, that when inactive player has  magicTree item in  item holder,
+// then active player can make only one action in 1 turn (turn changes once moveCounter == 1 not 2 as usual)
+test.only('msg ACTION received: active player attacks with  skullLantern, it moves all players cards with item type to graveyards', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    item: {
+                        key10: {
+                            id: 'magicTree', type: 'item', category: 'holdTurn', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: { type: 'action', disabled: false },
+                        key4: { type: 'action', disabled: false },
+                    },
+                    grave: {},
+                },
+                {
+                    active: true,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key8: { type: 'item', disabled: false },
+                        key13: { type: 'action', disabled: false },
+                        key10: { type: 'action', disabled: false },
+                        key1: {
+                            id: 'horsemanRed', type: 'action', category: 'attack', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что ход сменился и Yaga стала активным игроком
+    expect(result.game.players[0].active).toEqual(true);
+    // а Premudraya стала неактивным игроком и ее счетчик хода снова обнулился
+    expect(result.game.players[1].active).toEqual(false);
+    expect(result.game.players[1].moveCounter).toEqual(0);
+
+    // ожидаем, что карта magicTree лжеит в item holder активного игрока Yaga
+    expect(result.game.players[0].item.key10.id).toEqual('magicTree');
+    // ожидаем, что карта skullLantern активного игрока имеет категорию holdTurn
+    expect(result.game.players[1].item.key10.category).toEqual('holdTurn');
+});
