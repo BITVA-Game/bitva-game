@@ -2623,7 +2623,7 @@ test('msg ACTION received: active player can put Magic Mirror in item holder.', 
 });
 
 // Test that players cards get points and health current points once they are dealt to players.
-test('msg HEROSELECTED received: both players cards get property points and healthCurrent.', () => {
+test('msg HEROSELECTED received: both players cards get property initialpoints and health.', () => {
     // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'hozyaika' };
 
@@ -2650,10 +2650,10 @@ test('msg HEROSELECTED received: both players cards get property points and heal
         // and property healthCurrent = health
         const card = Object.values(activePlayer.cards)[i];
         if (card.initialpoints !== undefined) {
-            expect(card).toHaveProperty('points', card.initialpoints);
+            expect(card).toHaveProperty('initialpoints', card.initialpoints);
         }
         if (card.type === 'item') {
-            expect(card).toHaveProperty('healthCurrent', card.health);
+            expect(card).toHaveProperty('health', card.health);
         }
     }
     // we check every card dealt to inactive player
@@ -2662,10 +2662,10 @@ test('msg HEROSELECTED received: both players cards get property points and heal
         // and property healthCurrent = health for each item card
         const card = Object.values(inactivePlayer.cards)[c];
         if (card.initialpoints !== undefined) {
-            expect(card).toHaveProperty('points', card.initialpoints);
+            expect(card).toHaveProperty('initialpoints', card.initialpoints);
         }
         if (card.type === 'item') {
-            expect(card).toHaveProperty('healthCurrent', card.health);
+            expect(card).toHaveProperty('health', card.health);
         }
     }
 });
