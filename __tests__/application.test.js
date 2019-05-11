@@ -2650,10 +2650,10 @@ test('msg HEROSELECTED received: both players cards get property initialpoints a
         // and property healthCurrent = health
         const card = Object.values(activePlayer.cards)[i];
         if (card.initialpoints !== undefined) {
-            expect(card).toHaveProperty('initialpoints', card.initialpoints);
+            expect(card).toHaveProperty('points', card.initialpoints);
         }
         if (card.type === 'item') {
-            expect(card).toHaveProperty('health', card.health);
+            expect(card).toHaveProperty('healthCurrent', card.health);
         }
     }
     // we check every card dealt to inactive player
@@ -2662,10 +2662,10 @@ test('msg HEROSELECTED received: both players cards get property initialpoints a
         // and property healthCurrent = health for each item card
         const card = Object.values(inactivePlayer.cards)[c];
         if (card.initialpoints !== undefined) {
-            expect(card).toHaveProperty('initialpoints', card.initialpoints);
+            expect(card).toHaveProperty('points', card.initialpoints);
         }
         if (card.type === 'item') {
-            expect(card).toHaveProperty('health', card.health);
+            expect(card).toHaveProperty('healthCurrent', card.health);
         }
     }
 });
