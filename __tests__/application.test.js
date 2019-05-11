@@ -1134,6 +1134,7 @@ test('msg ACTION CASE 5, player wants to move his card from item holder to grave
                     active: false,
                     hero: 'yaga',
                     health: { current: 8 },
+                    item: {},
                 },
             ],
 
@@ -2607,6 +2608,7 @@ test('msg ACTION received: active player can put Magic Mirror in item holder.', 
                     active: false,
                     hero: 'morevna',
                     health: { current: 13, maximum: 16 },
+                    item: {},
                 },
             ],
         },
@@ -2672,7 +2674,7 @@ test('msg HEROSELECTED received: both players cards get property points and heal
 
 // Test, that when inactive player has  magicTree item in  item holder,
 // then active player can make only one action in 1 turn (turn changes once moveCounter == 1 not 2 as usual)
-test.only('msg ACTION received: active player attacks with  skullLantern, it moves all players cards with item type to graveyards', () => {
+test('msg ACTION received: active can make only 1 action in 1 turn if inactive player has magicTree in item holder', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
@@ -2751,8 +2753,8 @@ test.only('msg ACTION received: active player attacks with  skullLantern, it mov
     expect(result.game.players[1].active).toEqual(false);
     expect(result.game.players[1].moveCounter).toEqual(0);
 
-    // ожидаем, что карта magicTree лжеит в item holder активного игрока Yaga
+    // ожидаем, что карта magicTree лежит в item holder активного игрока Yaga
     expect(result.game.players[0].item.key10.id).toEqual('magicTree');
-    // ожидаем, что карта skullLantern активного игрока имеет категорию holdTurn
-    expect(result.game.players[1].item.key10.category).toEqual('holdTurn');
+    // ожидаем, что карта magicTree активного игрока имеет категорию holdTurn
+    expect(result.game.players[0].item.key10.category).toEqual('holdTurn');
 });
