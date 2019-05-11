@@ -762,7 +762,7 @@ test('msg ACTION CASE3 player attacks with more points than shield has, shield &
                     },
                     item: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1,
+                            id: 'shieldSmall', type: 'item', category: 'shield', healthCurrent: 1,
                         },
                     },
                     grave: { },
@@ -850,7 +850,7 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
                     },
                     item: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 5,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4,
                         },
                     },
                     grave: { },
@@ -875,7 +875,7 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
     expect(result.game.players[0].grave.key1.category).toEqual('attack');
 
     // expect the shield helath to lessen
-    expect(result.game.players[1].item.key7.points).toEqual(2);
+    expect(result.game.players[1].item.key7.healthCurrent).toEqual(1);
 
     // expect the acting card is now on the graveyard
     expect(Object.keys(result.game.players[0].grave)).toContain('key1');
@@ -1421,7 +1421,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
                     moveCounter: 1,
                     item: {
                         key10: {
-                            id: 'waterLiving', type: 'item', category: 'attack', initialpoints: 3, points: 1, disabled: false,
+                            id: 'waterLiving', type: 'item', category: 'attack', health: 3, healthCurrent: 1, disabled: false,
                         },
                     },
                     grave: {},
@@ -1456,7 +1456,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
     expect(result.game.players[0].health.current).toEqual(10);
     expect(result.game.players[1].health.current).toEqual(8);
     // ожидаем, что очки карта-water восстановились до 3 initial points.
-    expect(result.game.players[0].grave.key10.points).toEqual(3);
+    expect(result.game.players[0].grave.key10.healthCurrent).toEqual(3);
 });
 
 // Test, that when active player attacks dead water, then
@@ -1510,7 +1510,7 @@ test('msg ACTION received: dead water card in opponent item is attacked, it goes
                     health: { current: 8, maximum: 15 },
                     item: {
                         key10: {
-                            id: 'waterDead', type: 'item', category: 'damage', points: 2, initialpoints: 3, disabled: false,
+                            id: 'waterDead', type: 'item', category: 'damage', healthCurrent: 2, health: 3, disabled: false,
                         },
                     },
                     grave: {},
@@ -1528,7 +1528,7 @@ test('msg ACTION received: dead water card in opponent item is attacked, it goes
     // ожидаем, что карта dead water ушла на кладбище неактивного игрока
     expect(result.game.players[1].grave.key10.id).toEqual('waterDead');
     // ожидаем, что карта-water получила назад свои начальные очки для будущего использования.
-    expect(result.game.players[1].grave.key10.points).toEqual(3);
+    expect(result.game.players[1].grave.key10.healthCurrent).toEqual(3);
 
     // ожидаем, что текущее здоровье игроков не изменится
     expect(result.game.players[0].health.current).toEqual(10);
@@ -1569,7 +1569,7 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key11: {},
                         key8: {},
                         key13: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, disabled: false,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4, disabled: false,
                         },
                         key1: {
                             type: 'action', category: 'attack', points: 3, disabled: false,
@@ -1578,7 +1578,7 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                     moveCounter: 2,
                     item: {
                         key9: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 3,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 3,
                         },
                     },
                     grave: { key10: {} },
@@ -1592,12 +1592,12 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key8: {},
                         key15: {},
                         key3: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4, disabled: false,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4, health: 4, disabled: false,
                         },
                     },
                     item: {
                         key7: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 4, initialpoints: 4, disabled: false,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4, health: 4, disabled: false,
                         },
                     },
                     grave: { },
@@ -1614,16 +1614,16 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
     const result = sendReply.mock.calls[0][0];
 
     // expect the Large shield card key7 health to lessen
-    expect(result.game.players[1].item.key7.points).toEqual(1);
+    expect(result.game.players[1].item.key7.healthCurrent).toEqual(1);
 
     // expect the Large shield card in opponent hand with key3 remains its health points
-    expect(result.game.players[1].hand.key3.points).toEqual(4);
+    expect(result.game.players[1].hand.key3.healthCurrent).toEqual(4);
 
     // expect the Large shield card in opponent hand with key3 remains its health points
-    expect(result.game.players[0].hand.key13.points).toEqual(4);
+    expect(result.game.players[0].hand.key13.healthCurrent).toEqual(4);
 
     // expect the Large shield card in active player item with key9 remains its health points
-    expect(result.game.players[0].item.key9.points).toEqual(3);
+    expect(result.game.players[0].item.key9.healthCurrent).toEqual(3);
 });
 
 // test - player attacks enemy with attack power = shield small points
@@ -1659,7 +1659,7 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key11: {},
                         key8: {},
                         key13: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialpoints: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2,
                         },
                         key1: {
                             type: 'action', category: 'attack', points: 1, disabled: false,
@@ -1668,7 +1668,7 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                     moveCounter: 2,
                     item: {
                         key9: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 1, initialpoints: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2,
                         },
                     },
                     grave: { key10: {} },
@@ -1682,12 +1682,12 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
                         key8: {},
                         key15: {},
                         key3: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialpoints: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2,
                         },
                     },
                     item: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 2, initialpoints: 2,
+                            id: 'shieldSmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2,
                         },
                     },
                     grave: { },
@@ -1704,16 +1704,16 @@ test('msg ACTION CASE3 player attacks with less points than shieldLarge has, onl
     const result = sendReply.mock.calls[0][0];
 
     // expect the small shield card key7 moved to gravyead and got its initial points back
-    expect(result.game.players[1].item.key7.points).toEqual(1);
+    expect(result.game.players[1].item.key7.healthCurrent).toEqual(1);
 
     // expect the small shield card in opponent hand with key3 remains its health points
-    expect(result.game.players[1].hand.key3.points).toEqual(2);
+    expect(result.game.players[1].hand.key3.healthCurrent).toEqual(2);
 
     // expect the small shield card in opponent hand with key3 remains its health points
-    expect(result.game.players[0].hand.key13.points).toEqual(2);
+    expect(result.game.players[0].hand.key13.healthCurrent).toEqual(2);
 
     // expect the Large shield card in active player item with key9 remains its health points
-    expect(result.game.players[0].item.key9.points).toEqual(1);
+    expect(result.game.players[0].item.key9.healthCurrent).toEqual(1);
 });
 
 // test to check that attacking card takes only points of shield in opponent's item
@@ -1758,7 +1758,7 @@ test('msg ACTION for shields with the same key, shields in item', () => {
                     moveCounter: 1,
                     item: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4,
                         },
                     },
                     grave: { key10: {} },
@@ -1772,7 +1772,7 @@ test('msg ACTION for shields with the same key, shields in item', () => {
                     },
                     item: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4,
                         },
                     },
                     grave: { },
@@ -1799,14 +1799,14 @@ test('msg ACTION for shields with the same key, shields in item', () => {
     // expect shield for player 0 did not change
     expect(result.game.players[0].item).toEqual({
         key7: {
-            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4,
         },
     });
 
     // expect shield for player 1 lost health
     expect(result.game.players[1].item).toEqual({
         key7: {
-            id: 'shieldSmall', type: 'item', category: 'shield', points: 1,
+            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 1,
         },
     });
 
@@ -1848,7 +1848,7 @@ test('msg ACTION for shields with the same key, shield with the same key in hand
                     hero: 'morevna',
                     hand: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4, disabled: false,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4, disabled: false,
                         },
                         key8: {},
                         key13: {},
@@ -1872,7 +1872,7 @@ test('msg ACTION for shields with the same key, shield with the same key in hand
                     },
                     item: {
                         key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 4,
+                            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4,
                         },
                     },
                     grave: { },
@@ -1899,7 +1899,7 @@ test('msg ACTION for shields with the same key, shield with the same key in hand
     // expect shield for player 0 did not change
     expect(result.game.players[0].hand).toEqual({
         key7: {
-            id: 'shieldSmall', type: 'item', category: 'shield', points: 4, disabled: false,
+            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 4, disabled: false,
         },
         key8: {},
         key13: {},
@@ -1908,7 +1908,7 @@ test('msg ACTION for shields with the same key, shield with the same key in hand
     // expect shield for player 1 lost health
     expect(result.game.players[1].item).toEqual({
         key7: {
-            id: 'shieldSmall', type: 'item', category: 'shield', points: 1,
+            id: 'shieldLarge', type: 'item', category: 'shield', healthCurrent: 1,
         },
     });
 
@@ -2526,7 +2526,7 @@ test('msg ACTION received: inactive player has Magic Mirror in item, after attac
                     health: { current: 8, maximum: 14 },
                     item: {
                         key10: {
-                            id: 'magicMirror', type: 'item', category: 'reflect', points: 1, initialpoints: 2, disabled: false,
+                            id: 'magicMirror', type: 'item', category: 'reflect', healthCurrent: 1, health: 2, disabled: false,
                         },
                     },
                     grave: {},
@@ -2575,7 +2575,7 @@ test('msg ACTION received: inactive player has Magic Mirror in item, after attac
     expect(result.game.players[0].grave.key10.id).toEqual('magicMirror');
     // ожидаем, что карта mirror после второга хода игрока обнулится и уйдет на кладбище
     // и ее points получат назад первоначальное значение
-    expect(result.game.players[0].grave.key10.points).toEqual(2);
+    expect(result.game.players[0].grave.key10.healthCurrent).toEqual(2);
 });
 
 // Test, that active player can put Magic Mirror card in item holder
@@ -2649,15 +2649,23 @@ test('msg HEROSELECTED received: both players cards get property points and heal
         // and we expect active player to have points property in each card = initialpoints
         // and property healthCurrent = health
         const card = Object.values(activePlayer.cards)[i];
-        expect(card).toHaveProperty('points', card.initialpoints);
-        expect(card).toHaveProperty('healthCurrent', card.health);
+        if (card.initialpoints !== undefined) {
+            expect(card).toHaveProperty('points', card.initialpoints);
+        }
+        if (card.type === 'item') {
+            expect(card).toHaveProperty('healthCurrent', card.health);
+        }
     }
     // we check every card dealt to inactive player
     for (let c = 0; c < Object.keys(inactivePlayer.cards).length; c++) {
         // and we expect inactive player to have points property in each card = initialpoints
-        // and property healthCurrent = health
-        const card = Object.values(activePlayer.cards)[c];
-        expect(card).toHaveProperty('points', card.initialpoints);
-        expect(card).toHaveProperty('healthCurrent', card.health);
+        // and property healthCurrent = health for each item card
+        const card = Object.values(inactivePlayer.cards)[c];
+        if (card.initialpoints !== undefined) {
+            expect(card).toHaveProperty('points', card.initialpoints);
+        }
+        if (card.type === 'item') {
+            expect(card).toHaveProperty('healthCurrent', card.health);
+        }
     }
 });
