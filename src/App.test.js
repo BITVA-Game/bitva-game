@@ -33,7 +33,7 @@ test('<MainMenu> looks as expected', () => {
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
     stateSaver('eventStartSceen', startscreenState);
     const { getByTestId, getAllByTestId } = render(<MainMenu />);
-    
+
     const mainMenu = getByTestId('main-menu');
     expect(mainMenu).toContainElement(getByTestId('logo-container'));
     expect(mainMenu).toContainElement(getByTestId('menu-buttons-container'));
@@ -47,7 +47,7 @@ test('<MainMenu> looks as expected', () => {
     const menuButtons = getAllByTestId('menu-button');
     expect(menuButtons).toHaveLength(8);
     expect(getByTestId('menu-buttons-group')).toContainElement(getByTestId('menu-button'));
-    
+
     let opened = true;
 
     const toggle = jest.fn(() => opened = false);
