@@ -270,7 +270,7 @@ const Card = props => (
                     <div className={`card-points game-card-points
                         ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
                     >
-                        {props.card.initialpoints}
+                        {props.card.points}
                     </div>
                 ) : null
             }
@@ -279,7 +279,7 @@ const Card = props => (
                     <div className={`card-health game-card-health
                         ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
                     >
-                        {props.card.health}
+                        {props.card.healthCurrent}
                     </div>
                 ) : null
             }
