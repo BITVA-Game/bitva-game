@@ -2863,7 +2863,6 @@ test('msg ACTION received: active can make only 1 action in 1 turn if inactive p
     expect(result.game.players[0].item.key10.category).toEqual('holdTurn');
 });
 
-<<<<<<< HEAD
 // test to show 3 next cards in opponent cards once active player attacks opponent with clairvoyance card
 test('msg ACTION received: player attack opponent with clairvoyance card and can see next 3 opponent cards', () => {
     const msg = {
@@ -3096,12 +3095,6 @@ test('msg ACTION received: no card in opponent item, player trying to attack, bu
 test.only('msg HEROSELECTED received: players  have individual keyHero each.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'morevna' };
-=======
-// Test that players cards get property categoryName once they are dealt to players.
-test('msg HEROSELECTED received: both players cards get property categoryName.', () => {
-    // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
->>>>>>> test, data  and function are added for categoryName property to each card dealt to players
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -3113,25 +3106,43 @@ test('msg HEROSELECTED received: both players cards get property categoryName.',
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-<<<<<<< HEAD
     // Find active and inactive players
-=======
-    // Find active andinactive players
->>>>>>> test, data  and function are added for categoryName property to each card dealt to players
     let activePlayer = result.game.players[0];
     let inactivePlayer = result.game.players[1];
     if (result.game.players[0].active === false) {
         activePlayer = result.game.players[1];
         inactivePlayer = result.game.players[0];
     }
-<<<<<<< HEAD
 
     // Expect players to have keyHero
     expect(activePlayer.keyHero).toBeDefined();
     expect(inactivePlayer.keyHero).toBeDefined();
     // Expect each player's keyHero differs
     expect(activePlayer.keyHero).not.toEqual(inactivePlayer.keyHero);
-=======
+});
+
+// Test that players cards get property categoryName once they are dealt to players.
+test('msg HEROSELECTED received: both players cards get property categoryName.', () => {
+    // We only need type for this test.
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'yaga' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // Find active andinactive players
+    let activePlayer = result.game.players[0];
+    let inactivePlayer = result.game.players[1];
+    if (result.game.players[0].active === false) {
+        activePlayer = result.game.players[1];
+        inactivePlayer = result.game.players[0];
+    }
     // we check every card dealt to active player
     for (let i = 0; i < Object.keys(activePlayer.cards).length; i++) {
         // and we expect active player to have disabled: false property in each card
@@ -3142,5 +3153,4 @@ test('msg HEROSELECTED received: both players cards get property categoryName.',
         // and we expect inactive player to have disabled: false property in each card
         expect(Object.values(inactivePlayer.cards)[c]).toHaveProperty('categoryName');
     }
->>>>>>> test, data  and function are added for categoryName property to each card dealt to players
 });
