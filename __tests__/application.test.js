@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
+import { startscreenState, heroselectState, heroselectedState, versusState, profileState } from '../__mocks__/stateMock';
 // import module for tests
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
@@ -18,21 +19,7 @@ test('Game loaded. Send the app in its initial state', () => {
     application.msgReceived(msg, sendReply);
 
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            profile: {
-                characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
-                deck: ['apple'],
-                gold: 0,
-            },
-            manager: {
-                screen: 'STARTSCREEN',
-            },
-            game: {
-
-            },
-        },
-    );
+    expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenState);
 });
 
 // Test the first game state Play, returns the available characters
@@ -47,21 +34,7 @@ test('First game state Play. The Player can select any of the characters he has'
     application.msgReceived(msg, sendReply);
 
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            profile: {
-                characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
-                deck: ['apple'],
-                gold: 0,
-            },
-            manager: {
-                screen: 'HEROSELECT',
-            },
-            game: {
-
-            },
-        },
-    );
+    expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectState);
 });
 
 
@@ -100,20 +73,7 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            profile: {
-                characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
-                deck: ['apple'],
-                gold: 0,
-            },
-            heroSelect: {
-            },
-            game: {
-
-            },
-        },
-    );
+    expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectedState);
 });
 
 // screen swtich to state VERSUS after hero is selected
@@ -127,23 +87,7 @@ test('msg HEROSELECTED switches screen state to VERSUS', () => {
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            profile: {
-                characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
-                deck: ['apple'],
-                gold: 0,
-            },
-            heroSelect: {
-            },
-            manager: {
-                screen: 'VERSUS',
-            },
-            game: {
-
-            },
-        },
-    );
+    expect(sendReply.mock.calls[0][0]).toMatchObject(versusState);
 });
 
 // Test that one player has become active. Game state VERSUS.
@@ -2004,15 +1948,7 @@ test('msg PROFILE switches screen state to PROFILE', () => {
     // Mock sendReply function
     const sendReply = jest.fn();
     application.setApp({
-        profile: {
-            characters: ['morevna'],
-            deck: ['apple'],
-            gold: 0,
-        },
-        manager: {
-            screen: 'PROFILE',
-        },
-        game: { phase: 'ACTIVE' },
+        profileState
     });
 
     // Call the message function from application with this message and mocked function.

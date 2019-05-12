@@ -6,14 +6,14 @@ import logo from './images/dark_logo.png';
 
 const MenuButton = props => (
     <li>
-        <button className="menu-button" type="button" onClick={() => props.sendMessage({ type: props.type })}>
+        <button data-testid="menu-button" className="menu-button" type="button" onClick={() => props.sendMessage({ type: props.type })}>
             {props.name}
         </button>
     </li>
 );
 
 const LogoBlock = props => (
-    <div className="logo-container">
+    <div data-testid="logo-container" className="logo-container">
         {props.opened
             ? <img className="logo" src={logo} alt={logo} />
             : null
@@ -23,6 +23,7 @@ const LogoBlock = props => (
 
 const ToggleButton = props => (
     <div
+    data-testid="toggle-button"
         className="btn btn-sidebar-toggle"
         role="button"
         onClick={props.toggle}
@@ -47,24 +48,24 @@ class MainMenu extends Component {
 
     render() {
         return (
-            <div className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
+            <div data-testid="main-menu" className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}>
                 <LogoBlock opened={this.state.opened} />
-                <div className="menu-buttons-container">
-                    <ul className="menu-buttons-group">
+                <div data-testid="menu-buttons-container" className="menu-buttons-container">
+                    <ul data-testid="menu-buttons-group" className="menu-buttons-group">
                         <MenuButton name="Network Play" type="NETWORKPLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Player vs Player" type="PLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Tournament" type="PLAY" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Daily Challenge" type="PLAY" sendMessage={this.props.sendMessage} />
                     </ul>
                     <ToggleButton toggle={this.toggle} />
-                    <ul className="menu-buttons-group">
+                    <ul data-testid="menu-buttons-group" className="menu-buttons-group">
                         <MenuButton name="Store" type="" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Profile" type="PROFILE" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Settings" type="SETTINGS" sendMessage={this.props.sendMessage} />
                         <MenuButton name="Quit" type="QUIT" sendMessage={this.props.sendMessage} />
                     </ul>
                 </div>
-                <div className="main-menu-overlay" role="button" onClick={this.toggle} onKeyPress={this.toggle} tabIndex="-1" />
+                <div data-testid="toggle-btn" className="main-menu-overlay" role="button" onClick={this.toggle} onKeyPress={this.toggle} tabIndex="-1" />
             </div>
         );
     }

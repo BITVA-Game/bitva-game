@@ -8,13 +8,13 @@ import spider from './images/animation/spider.png';
 
 
 const StartScreen = props => (
-    <div className="start-screen">
-        <div className="hollow" />
-        <div className="window" />
-        <div className="spider">
+    <div data-testid="start-screen" className="start-screen">
+        <div data-testid="hollow-animation" className="hollow" />
+        <div data-testid="window-animation" className="window" />
+        <div data-testid="spider-animation" className="spider">
             <img src={spider} alt="spider icon" />
         </div>
-        <div className="mushroom" />
+        <div data-testid="mushroom-animation" className="mushroom" />
         <MainMenu sendMessage={props.sendMessage} opened />
         {/* <textarea value={JSON.stringify(props.app.profile)} /> */}
     </div>

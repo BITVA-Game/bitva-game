@@ -52,6 +52,12 @@
     "url-parse": "^1.4.3",
     "wait-on": "^2.1.0"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
+      "\\.(png|jpg|gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
+    }
+  },
   "browserslist": [
     ">0.2%",
     "not dead",

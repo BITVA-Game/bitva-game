@@ -67,7 +67,7 @@ class App extends Component {
             },
         });
         return (
-            <div className="App">
+            <div className="App" data-testid="app-screen">
                 {this.showApplication()}
             </div>
         );
