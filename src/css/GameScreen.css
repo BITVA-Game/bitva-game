@@ -93,9 +93,14 @@
     filter: drop-shadow(0 0 3px #fff);
 }
 
-.hero .game-icon-text {
+.hero .game-icon-text {    
+    align-items: center;
+    display: flex;
     font-size: 30px;
+    justify-content: center;
+    padding-bottom: 12px;
     padding-left: 1px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 /* item */
@@ -151,74 +156,6 @@
     /*background-color: rgb(211, 226, 243);
     background-color: rgba(211, 226, 243, 0.55);*/
     margin-right: 26px;
-}
-
-/* card */
-
-.card {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    transform: rotate(0);
-    width: 120px;
-}
-
-.card-like {
-    height: 168px;
-    width: 120px;
-}
-
-.player-top .card {
-    transform: rotate(180deg);
-}
-
-.player-bottom .card {
-    transform: rotate(0deg);
-}
-
-.card-header .card-category {
-    font-size: 14px;
-}
-
-.card-name {
-    background-color: #cfbc9c;
-    height: 18px;
-    margin-top: 6px;
-    width: 104px;
-}
-
-.card-name p {
-    color: #763e3f;
-    font-size: 14px;
-    line-height: 18px;
-    margin: 0;
-    text-align: center;
-}
-
-.card-image {
-    height: 118px;
-    width: 104px;
-}
-
-.game-icon {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 40px 40px;
-    -webkit-filter: drop-shadow(0 0 2px #fff);
-    filter: drop-shadow(0 0 2px #fff);
-    height: 40px;
-    position: absolute;
-    right: -18px;
-    top: -14px;
-    width: 40px;
-}
-.game-icon-text {
-    align-items: center;
-    display: flex;
-    font-size: 26px;
-    justify-content: center;
-    padding-bottom: 5px;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 /* deck */

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/HeroSelection.css';
 import styles from './css/HeroSelection.module.css';
+import './css/Cards.css';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -13,15 +14,31 @@ import premudraya from './images/heroes/premudraya.jpg';
 
 import apple from './images/cards/apple.jpg';
 import bajun from './images/cards/catbajun.jpg';
-import sivka from './images/cards/warhorse.jpg';
+import bat from './images/cards/bitva-cardbase.jpg';
 import bereginya from './images/cards/bitva-cardbase.jpg';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
+import bulat from './images/cards/bitva-cardbase.jpg';
+import chemise from './images/cards/bitva-cardbase.jpg';
+import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
+import crown from './images/cards/bitva-cardbase.jpg';
+import dolly from './images/cards/bitva-cardbase.jpg';
+import earthquake from './images/cards/bitva-cardbase.jpg';
+import gusiLebedi from './images/cards/bitva-cardbase.jpg';
+import horsemanBlack from './images/cards/bitva-cardbase.jpg';
+import horsemanRed from './images/cards/bitva-cardbase.jpg';
+import horsemanWhite from './images/cards/bitva-cardbase.jpg';
+import kikkmora from './images/cards/bitva-cardbase.jpg';
+import lizard from './images/cards/bitva-cardbase.jpg';
+import mortar from './images/cards/bitva-cardbase.jpg';
+import russianOven from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
-import wolf from './images/cards/bitva-cardbase.jpg';
+import sivka from './images/cards/warhorse.jpg';
+import skullLantern from './images/cards/bitva-cardbase.jpg';
+import warhorse from './images/cards/warhorse.jpg';
 import waterDead from './images/cards/deadwater.jpg';
 import waterLiving from './images/cards/livingwater.jpg';
-
+import wolf from './images/cards/bitva-cardbase.jpg';
 
 const images = {
     yaga,
@@ -33,14 +50,31 @@ const images = {
 const imagesCards = {
     apple,
     bajun,
-    sivka,
+    bat,
     bereginya,
     bogatyr,
+    bulat,
+    chemise,
+    chickenLegsHut,
+    crown,
+    dolly,
+    earthquake,
+    gusiLebedi,
+    horsemanBlack,
+    horsemanRed,
+    horsemanWhite,
+    kikkmora,
+    lizard,
+    mortar,
+    russianOven,
     shieldLarge,
     shieldSmall,
-    wolf,
+    sivka,
+    skullLantern,
+    warhorse,
     waterDead,
     waterLiving,
+    wolf,
 };
 
 const HeroImage = props => (
@@ -50,21 +84,49 @@ const HeroImage = props => (
 );
 
 const CardPreview = props => (
-    <div className={`details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
+    <div className={`card details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
         <div className="card-header">
-            <p>{props.card.category}</p>
-            <div className={`icon icon-text       
-                ${props.card.category === 'attack' ? 'icon-attack' : null}
-                ${props.card.category === 'damage' ? 'icon-damage' : null}
-                ${props.card.category === 'heal' ? 'icon-heal' : null}
-                ${props.card.category === 'shield' ? 'icon-shield' : null}
-            `}
-            >
-                {props.card.points}
+            <div className={`card-icon-container details-card-icon-container ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
+                <div className={`card-icon details-card-icon
+                    ${props.card.category === 'attack' ? 'icon-attack' : null}
+                    ${props.card.category === 'attackItems' ? 'icon-damage' : null}
+                    ${props.card.category === 'damage' ? 'icon-damage' : null}
+                    ${props.card.category === 'generator' ? 'icon-move' : null}               
+                    ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
+                    ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
+                    ${props.card.category === 'holdCard' ? 'icon-hold' : null}
+                    ${props.card.category === 'holdTurn' ? 'icon-hold' : null}
+                    ${props.card.category === 'panic' ? 'icon-arrows' : null}
+                    ${props.card.category === 'reflect' ? 'icon-reflect' : null}
+                    ${props.card.category === 'shield' ? 'icon-shield' : null}
+                    ${props.card.category === 'showCards' ? 'icon-show' : null}
+                    ${props.card.category === 'shuffling' ? 'icon-move' : null}
+                    ${props.card.category === 'supress' ? 'icon-damage' : null}
+                    ${props.card.category === 'turning' ? 'icon-arrows' : null}`}
+                />
             </div>
+            <p className="card-category details-card-category">{props.card.category}</p>
+            {props.card.initialpoints
+                ? (
+                    <div className={`card-points details-card-points 
+                        ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
+                    >
+                        {props.card.initialpoints}
+                    </div>
+                ) : null
+            }
+            {props.card.health
+                ? (
+                    <div className={`card-health details-card-health
+                        ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
+                    >
+                        {props.card.health}
+                    </div>
+                ) : null
+            }
         </div>
-        <div className="card-img" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
-        <div className="card-footer">
+        <div className="details-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
+        <div className="card-footer details-card-footer">
             <p>{props.card.name}</p>
         </div>
     </div>
@@ -144,7 +206,7 @@ const OneHero = props => (
                     <div className="icon-deck icon-text">
                         {props.hero.cardsNumber}
                     </div>
-                    <div className="icon icon-text icon-heal">
+                    <div className="icon-text icon-heart icon-heart-description">
                         {props.hero.health}
                     </div>
                 </div>
