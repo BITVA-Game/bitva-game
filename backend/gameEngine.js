@@ -306,6 +306,20 @@ function removeDisable(player) {
     return playerCards;
 }
 
+// function to show 3 cards from opponent cards
+// when active player attackes with claivoyance card
+function showCards(opponent) {
+    const cardsKeys = Object.keys(opponent.cards).reverse().splice(-3);
+    opponent.cardsShown = {};
+    cardsKeys.forEach((key) => {
+        opponent.cardsShown[key] = opponent.cards[key];
+    });
+    return opponent.cardsShown;
+}
+
+// function to delete cardsShown property from player object
+const deleteCardsShown = (opponent) => { delete opponent.cardsShown; };
+
 // this function runs when player attacks with the card Skull Lantern which category is attackItems
 // it accept players and checks all item category cards from both players item holders and hands
 // and move such cards to players grave yards
@@ -424,6 +438,12 @@ function playerActs(game, player, opponent, active, target) {
                     game.phase = 'OVER';
                 }
                 break;
+            // if player attackes with clairvoyance card, we call showCards function
+            // then move this attack card to gravyeard
+            case 'showCards':
+                showCards(opponent);
+                moveCardGraveyard(player, active);
+                break;
 
                 // if any mistake occurs during game process, player gets error message by default
             default:
@@ -458,6 +478,10 @@ function playerActs(game, player, opponent, active, target) {
         // console.log(game);
         // we call function to return disabled cards property to false if any have true
         removeDisable(player);
+        // we check then if any cardsShown property in opponent cards
+        // and remove by calling deleteCardsShown function
+        deleteCardsShown(opponent);
+        console.log(player);
         // we call function to give cards to players up to 5
         giveCardsTo(player);
         // run changeTurn function
