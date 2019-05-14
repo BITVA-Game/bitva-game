@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 import {
- startscreenState, heroselectState, heroselectedState, versusState, profileState 
+    startscreenState, heroselectState, heroselectedState, versusState, profileState,
 } from '../__mocks__/stateMock';
 // import module for tests
 const application = require('../backend/application');
