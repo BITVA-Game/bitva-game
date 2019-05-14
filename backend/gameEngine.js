@@ -179,22 +179,11 @@ function attackShield(player, itemKey, points) {
     }
 }
 
-// function to reflect half of the damage (or round down to integer)
+// function to reflect half of the damage (or round down to integer) for magicMirror card
 function reflect(opponent, points) {
     const damage = Math.floor(points / 2);
     opponent.health.current -= damage;
 }
-
-// function to move mirror card to graveyard after its points <= 0
-// and restore its initial points for future use
-// function mirrorCard(opponent, points) {
-//     const cardItem = Object.values(opponent.item)[0];
-//     cardItem.points -= points;
-//     if (cardItem.points <= 0) {
-//         cardItem.points = cardItem.initialpoints;
-//         moveCardGraveyard(opponent, (Object.keys(opponent.item)[0]), 'item');
-//     }
-// }
 
 // function to handle attack points deduction from opponent player health
 // depending on item card if any present
@@ -205,7 +194,7 @@ function attackOpponent(player, points) {
     itemKey ? itemCategory = player.item[itemKey].category : null;
     // we check if item holder is not empty and item card does not have shield category
     if (Object.keys(player.item).length === 0 || itemCategory !== 'shield') {
-        // and if item card does not have 'reflect' category
+        // and if item card does not have 'reflect' category (e.g. magicMirror card)
         // we deduct attack card points from item card points
         if (itemCategory !== 'reflect') {
             player.health.current -= points;
@@ -345,6 +334,33 @@ function attackItems(players) {
     return { players };
 }
 
+
+// function that change turn in the game
+function changeTurn(player, opponent) {
+    // active player becomes inactive
+    player.active = false;
+    // player's counter set to 0
+    player.moveCounter = 0;
+    // save cards in personal graveyards for both players
+    let playerGrave = player.grave;
+    let opponentGrave = opponent.grave;
+    opponentGrave = playerGrave;
+    // inactive player becomes active
+    opponent.active = true;
+    playerGrave = opponentGrave;
+}
+
+// function checks whether opponent item is not empty
+// and whether opponent has magicTree card in item
+// if so - function change turn runs - active layer becomes inactive etc.
+function magicTree(player, opponent) {
+    let itemId;
+    const itemKey = Object.keys(opponent.item)[0];
+    itemKey ? itemId = opponent.item[itemKey].id : null;
+    player.moveCounter === 1 && itemId === 'magicTree' ? changeTurn(player, opponent) : null;
+}
+
+// basic function for the game that represents each act of active player
 function playerActs(game, player, opponent, active, target) {
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
@@ -435,6 +451,8 @@ function playerActs(game, player, opponent, active, target) {
     }
     // after each move we increase active player's counter for 1
     player.moveCounter += 1;
+    // after each move of active player we check whether opponent has magicTree card in item
+    magicTree(player, opponent);
     // once active player's counter ==2
     if (player.moveCounter === 2 && game.phase === 'ACTIVE') {
         // console.log(game);
@@ -442,18 +460,8 @@ function playerActs(game, player, opponent, active, target) {
         removeDisable(player);
         // we call function to give cards to players up to 5
         giveCardsTo(player);
-        // active player becomes inactive once active player's counter ==2
-        player.active = false;
-        // player's counter set to 0
-        player.moveCounter = 0;
-        // save cards in personal graveyards for both players
-        let playerGrave = player.grave;
-        let opponentGrave = opponent.grave;
-        opponentGrave = playerGrave;
-        // inactive player becomes active once active player's counter ==2
-        opponent.active = true;
-        playerGrave = opponentGrave;
-        // we check if there is special water cards in item holder of players
+        // run changeTurn function
+        changeTurn(player, opponent);
         // and run function water if any
         waterCard(game.players);
     }
