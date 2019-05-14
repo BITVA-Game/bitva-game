@@ -180,14 +180,24 @@ function attackShield(player, itemKey, points) {
 }
 
 // function to reflect half of the damage (or round down to integer) for magicMirror card
-function reflect(opponent, points) {
+function reflect(opponent, player, points) {
+    // console.log('We are in reflect function!', player);
     const damage = Math.floor(points / 2);
     opponent.health.current -= damage;
+    if (Object.keys(player.item).length === 0 || Object.values(player.item)[0].category !== 'shield') {
+        player.health.current -= damage;
+    }
+    if (Object.keys(player.item).length === 1 && Object.values(player.item)[0].category === 'shield') {
+        attackShield(player, Object.keys(player.item)[0], damage);
+    }
+    if (player.health.current < 0) {
+        player.health.current = 0;
+    }
 }
 
 // function to handle attack points deduction from opponent player health
 // depending on item card if any present
-function attackOpponent(player, points) {
+function attackOpponent(player, opponent, points) {
     // console.log('attackOpponent ', player, points);
     let itemCategory;
     const itemKey = Object.keys(player.item)[0];
@@ -202,7 +212,7 @@ function attackOpponent(player, points) {
         // we check for special mirror card at opponent item holder with category 'reflect'
         // and run reflect function if it is present there
         if (itemCategory === 'reflect') {
-            reflect(player, points);
+            reflect(player, opponent, points);
         }
         if (player.health.current <= 0) {
             player.health.current = 0;
@@ -403,7 +413,7 @@ function playerActs(game, player, opponent, active, target) {
                 break;
             case 'attack':
                 // console.log('attacking opponent');
-                attackOpponent(opponent, activeCard.points);
+                attackOpponent(opponent, player, activeCard.points);
                 moveCardGraveyard(player, active);
                 if (opponent.health.current <= 0) {
                     game.phase = 'OVER';
