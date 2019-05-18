@@ -2929,7 +2929,7 @@ test('msg ACTION received: player attack opponent with clairvoyance card and can
     expect(Object.keys(result.game.players[1].cards)).toContain('key0', 'key2', 'key13');
 });
 
-// test to remove cardsShown from opponent object once player attacked with clairvoyance card becomes active ( change of turn)
+
 test('msg ACTION received: after turn changes cardsShown is removed from player who has been attacked with clairvoyance card', () => {
     const msg = {
         type: 'ACTION',
