@@ -361,7 +361,6 @@ function magicTree(player, opponent) {
     player.moveCounter === 1 && itemId === 'magicTree' ? changeTurn(player, opponent) : null;
 }
 
-// basic function for the game that represents each act of active player
 // helper function to get random index for player's cards in hand
 function getRandomIndexes(cardsLength) {
     const index1 = getRandomUpTo(cardsLength);
@@ -376,11 +375,9 @@ function getRandomIndexes(cardsLength) {
 // and to randomly ( 60% chance) to decrease pnts of 2 cards in hand by 1 pnt
 function bowArrow(player, opponent) {
     console.log('We are in borrow and Arrow case!');
-    // const itemCard = Object.values(opponent.item)[0];
     let itemId;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemId = player.item[itemKey].id : null;
-    console.log(itemId);
     if (itemId === 'bowArrow') {
         const chance = getRandomUpTo(10);
         console.log(chance);
@@ -390,8 +387,6 @@ function bowArrow(player, opponent) {
             console.log(cards);
 
             const indexes = getRandomIndexes(cards.length);
-            // const index1 = indexes[0];
-            // const index2 = indexes[1];
             cards[indexes[0]].points -= 1;
             cards[indexes[1]].points -= 1;
             console.log(indexes[0], cards[indexes[0]], indexes[1], cards[indexes[1]]);

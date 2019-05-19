@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
-import { startscreenState, heroselectState, heroselectedState, versusState, profileState } from '../__mocks__/stateMock';
+import {
+    startscreenState, heroselectState, heroselectedState, versusState, profileState,
+} from '../__mocks__/stateMock';
 
 // import module for tests
 const application = require('../backend/application');
@@ -1954,7 +1956,7 @@ test('msg PROFILE switches screen state to PROFILE', () => {
     // Mock sendReply function
     const sendReply = jest.fn();
     application.setApp({
-        profileState
+        profileState,
     });
 
     // Call the message function from application with this message and mocked function.
@@ -2774,23 +2776,22 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
     const oldRandom = Math.random;
     // Mock will rewrite all math.random and set it to 1 to 1st call
     // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
-    // Math.random = jest.fn();
-    // Math.random.mockReturnValueOnce(4).mockReturnValueOnce(1).mockReturnValueOnce(3);
-    // Math.random.mockReturnValue(2);
+    Math.random = jest.fn();
+    Math.random.mockReturnValueOnce(0.4).mockReturnValueOnce(0.3).mockReturnValueOnce(0.9);
 
     application.msgReceived(msg, sendReply);
+    // We return random to initial value, so it is not always set to 1
+    Math.random = oldRandom;
     expect(sendReply.mock.calls.length).toBe(1);
 
     const result = sendReply.mock.calls[0][0];
 
     // ожидаем, что карт лук и стрелы лежат в item активного игрока
     expect(Object.values(result.game.players[1].item)[0].id).toEqual('bowArrow');
+
     // ожидаем, c 60% вероятностью 2 карты из руки оппонента потеряют по 1 очку в начале хода
     expect(result.game.players[0].hand.key1.points).toEqual(2);
     expect(result.game.players[0].hand.key9.points).toEqual(4);
-
-    // We return random to initial value, so it is not always set to 1
-    Math.random = oldRandom;
 });
 
 // Test that once Bow and Arrows card is at opponent item holder, 2 player's
