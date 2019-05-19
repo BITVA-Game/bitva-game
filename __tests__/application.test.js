@@ -544,7 +544,7 @@ test('msg ACTION received: active can make only 1 action in 1 turn if inactive p
 
 // Test that player can put  Bow and Arrows card in item holder, and opponent's
 // cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
-test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 2 cards can loose 1 point at next turn.', () => {
+test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 2 cards can loose 1 point at next turn.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key4',
@@ -655,6 +655,18 @@ test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 
                         key10: {
                             id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
                         },
+                        key1: {
+                            id: 'horsemanBlack', category: 'attack', points: 2, initialpoints: 3, disabled: false,
+                        },
+                        key5: {
+                            id: 'bogatyr', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                        },
+                        key7: {
+                            id: 'horsemanWhite', category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                        },
+                        key9: {
+                            id: 'chemise', category: 'heal', points: 4, initialpoints: 5, disabled: false,
+                        },
                     },
                     item: {},
                 },
@@ -676,5 +688,8 @@ test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 
 
     const result = sendReply.mock.calls[0][0];
     // ожидаем, что карт лук и стрелы лежат в item неактивного игрока
-    expect(result.game.players[1].item[0].id).toEqual('bowArrow');
+    expect(Object.values(result.game.players[1].item)[0].id).toEqual('bowArrow');
+    // ожидаем 2 карты в руке оппонента, которые приа активации карты bowArrow все также с уменьшенными на 1 очками
+    expect(result.game.players[0].hand.key1.points).toEqual(2);
+    expect(result.game.players[0].hand.key9.points).toEqual(4);
 });
