@@ -6,13 +6,15 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
+const { getRandomUpTo } = require('./randomFunc');
+
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
-
-function getRandomUpTo(n) {
-    return Math.floor(Math.random() * Math.floor(n));
-}
+// transferred to separate file randomFunc
+// function getRandomUpTo(n) {
+//     return Math.floor(Math.random() * Math.floor(n));
+// }
 
 function getRandomBool() {
     const rand = getRandomUpTo(2);
