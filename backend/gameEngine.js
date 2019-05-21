@@ -6,6 +6,7 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
+<<<<<<< HEAD
 const keygen = require('keygenerator');
 const { getRandomUpTo } = require('./randomFunc');
 
@@ -13,6 +14,17 @@ const { getRandomUpTo } = require('./randomFunc');
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
+=======
+const { getRandomUpTo } = require('./randomFunc');
+
+const allCharacters = require('./data/characters.json');
+const allCards = require('./data/cards.json');
+
+// transferred to separate file randomFunc
+// function getRandomUpTo(n) {
+//     return Math.floor(Math.random() * Math.floor(n));
+// }
+>>>>>>> randomUpTo function is in another file + mock func created trying to use
 
 function getRandomBool() {
     const rand = getRandomUpTo(2, 'indexPlayer');

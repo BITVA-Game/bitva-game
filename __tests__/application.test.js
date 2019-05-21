@@ -5,6 +5,8 @@ import {
 } from '../__mocks__/stateMock';
 
 // import module for tests
+const { getRandomUpTo } = require('../backend/__mocks__/randomFunc');
+
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
 
@@ -544,7 +546,7 @@ test('msg ACTION received: active can make only 1 action in 1 turn if inactive p
 
 // Test that player can put  Bow and Arrows card in item holder, and opponent's
 // cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
-test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 2 cards can loose 1 point at next turn.', () => {
+test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 2 cards can loose 1 point at next turn.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key4',
@@ -613,15 +615,17 @@ test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 
     });
 
     // we save normal random here before mock it
-    const oldRandom = Math.random;
-    // Mock will rewrite all math.random and set it to 1 to 1st call
-    // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
-    Math.random = jest.fn();
-    Math.random.mockReturnValueOnce(0.4).mockReturnValueOnce(0.3).mockReturnValueOnce(0.9);
+    // const oldRandom = Math.random;
+    // // Mock will rewrite all math.random and set it to 1 to 1st call
+    // // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
+    // Math.random = jest.fn();
+    // Math.random.mockReturnValueOnce(0.4).mockReturnValueOnce(0.3).mockReturnValueOnce(0.9);
+
+    getRandomUpTo('bowArrow');
 
     application.msgReceived(msg, sendReply);
     // We return random to initial value, so it is not always set to 1
-    Math.random = oldRandom;
+    // Math.random = oldRandom;
     expect(sendReply.mock.calls.length).toBe(1);
 
     const result = sendReply.mock.calls[0][0];
