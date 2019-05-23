@@ -237,7 +237,7 @@ CardPreview.defaultProps = {
 
 CardsRow.propTypes = {
     cards: PropTypes.object.isRequired,
-    cardIndex: PropTypes.number.isRequired,
+    cardIndex: PropTypes.string.isRequired,
     hero: PropTypes.object.isRequired,
 };
 
