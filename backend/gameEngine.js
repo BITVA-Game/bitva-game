@@ -471,14 +471,13 @@ function playerActs(game, player, opponent, active, target) {
     // if item card points <= 0 cards get its initial points and goes to graveyard
     if (target === 'itemOpponent' && activeCard.category === 'attack') {
         if (Object.keys(opponent.item)[0].length !== 0) {
+        // if (Object.keys(opponent.item)[0] !== undefined) {
             const itemCard = Object.values(opponent.item)[0];
             itemCard.healthCurrent -= activeCard.points;
             if (itemCard.healthCurrent <= 0) {
                 itemCard.healthCurrent = itemCard.health;
                 moveCardGraveyard(opponent, Object.keys(opponent.item)[0], 'item');
             }
-        console.log(active);
-        console.log(player);
         moveCardGraveyard(player, active);
         }
     }
