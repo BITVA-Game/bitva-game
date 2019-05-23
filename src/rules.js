@@ -5,6 +5,7 @@ export default function isTarget(target, dragging, active) {
     if (!active) {
         return (
             (target === 'opponent' && dragging.card.category === 'attack')
+            || (target === 'itemOpponent' && dragging.card.category === 'attack')
         );
     }
     return (

@@ -1386,6 +1386,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
                         },
                     },
                     item: {},
+                    grave: {},
                 },
             ],
         },
