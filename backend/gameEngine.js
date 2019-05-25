@@ -72,7 +72,7 @@ const generatePlayers = function (heroName, opponentName) {
         p.deal = 0;
     });
 
-     // Assign individual data to player 0
+    // Assign individual data to player 0
     players[0].position = 'bottom';
     players[0].background = allCharacters[heroName].background;
     players[0].hero = heroName;
