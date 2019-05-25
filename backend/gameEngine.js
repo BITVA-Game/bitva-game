@@ -469,23 +469,22 @@ function playerActs(game, player, opponent, active, target) {
     // if player attacks opponent item with card type action, then
     // if item is not empty we deduct points of attack from item card points
     // if item card points <= 0 cards get its initial points and goes to graveyard
-    if (target === 'itemOpponent' && activeCard.category === 'attack') {
-        // if (Object.keys(opponent.item)[0].length !== 0) {
-        if (Object.keys(opponent.item)[0] !== undefined) {
-            const itemCard = Object.values(opponent.item)[0];
-            itemCard.healthCurrent -= activeCard.points;
-            if (itemCard.healthCurrent <= 0) {
-                itemCard.healthCurrent = itemCard.health;
-                moveCardGraveyard(opponent, Object.keys(opponent.item)[0], 'item');
-            }
-            moveCardGraveyard(player, active);
+    if (target === 'itemOpponent' && activeCard.category === 'attack' && Object.keys(opponent.item).length !== 0) {
+        const itemCard = Object.values(opponent.item)[0];
+        itemCard.healthCurrent -= activeCard.points;
+        if (itemCard.healthCurrent <= 0) {
+            itemCard.healthCurrent = itemCard.health;
+            moveCardGraveyard(opponent, Object.keys(opponent.item)[0], 'item');
         }
+        moveCardGraveyard(player, active);
     }
-    // after each move we increase active player's counter for 1
-    player.moveCounter += 1;
+
+    // after each move we increase active player's counter for 1 if activeCard acted
+    // if activeCard remains in player's hand we do not increase move Counter
+    player.hand[active] ? null : player.moveCounter += 1;
     // after each move of active player we check whether opponent has magicTree card in item
     magicTree(player, opponent);
-    // once active player's counter ==2
+    // once active player's move counter == 2
     if (player.moveCounter === 2 && game.phase === 'ACTIVE') {
         // console.log(game);
         // we call function to return disabled cards property to false if any have true

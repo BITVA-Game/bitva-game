@@ -220,18 +220,21 @@ const Item = props => (
         className={`item card-place card-like
             ${props.player.background}
             ${props.isTarget('item') ? 'target' : null}
-            ${props.isTarget('itemOpponent') ? 'target' : null}
+            ${props.isTarget('itemOpponent') && props.item ? 'target' : null}
         `}
         id={props.player.active ? 'item' : null}
+
         onDrop={
+            // eslint-disable-next-line no-nested-ternary
             props.player.active
-            ? () => props.cardDropped('item', Object.keys(props.player.item))
-            : () => props.cardDropped('itemOpponent')
+                ? () => props.cardDropped('item', Object.keys(props.player.item))
+                : props.item ? () => props.cardDropped('itemOpponent') : null
         }
         onDragOver={
+            // eslint-disable-next-line no-nested-ternary
             props.player.active
-            ? e => props.cardOver(e, 'item')
-            : e => props.cardOver(e, 'itemOpponent')
+                ? e => props.cardOver(e, 'item')
+                : props.item ? e => props.cardOver(e, 'itemOpponent') : null
         }
     >
         {props.item
