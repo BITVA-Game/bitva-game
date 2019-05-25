@@ -10,10 +10,7 @@ const { getRandomUpTo } = require('../backend/__mocks__/randomFunc');
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
 
-// jest.mock('../backend/gameEngine', () => () => ({
-//     chance: jest.fn(),
-//     indexes: jest.fn(),
-// }));
+jest.mock('../backend/randomFunc');
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
 test('Game loaded. Send the app in its initial state', () => {
@@ -2781,8 +2778,9 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
     // Math.random = jest.fn();
     // Math.random.mockReturnValueOnce(0.4).mockReturnValueOnce(0.3).mockReturnValueOnce(0.9);
 
-    getRandomUpTo('bowArrow');
+    // getRandomUpTo('bowArrow');
 
+    
     application.msgReceived(msg, sendReply);
     // We return random to initial value, so it is not always set to 1
     // Math.random = oldRandom;
