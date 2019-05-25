@@ -5,8 +5,6 @@ import {
 } from '../__mocks__/stateMock';
 
 // import module for tests
-const { getRandomUpTo } = require('../backend/__mocks__/randomFunc');
-
 const application = require('../backend/application');
 const heroData = require('../backend/data/characters.json');
 
@@ -2778,9 +2776,6 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
     // Math.random = jest.fn();
     // Math.random.mockReturnValueOnce(0.4).mockReturnValueOnce(0.3).mockReturnValueOnce(0.9);
 
-    // getRandomUpTo('bowArrow');
-
-    
     application.msgReceived(msg, sendReply);
     // We return random to initial value, so it is not always set to 1
     // Math.random = oldRandom;
