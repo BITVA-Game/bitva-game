@@ -470,15 +470,15 @@ function playerActs(game, player, opponent, active, target) {
     // if item is not empty we deduct points of attack from item card points
     // if item card points <= 0 cards get its initial points and goes to graveyard
     if (target === 'itemOpponent' && activeCard.category === 'attack') {
-        if (Object.keys(opponent.item)[0].length !== 0) {
-        // if (Object.keys(opponent.item)[0] !== undefined) {
+        // if (Object.keys(opponent.item)[0].length !== 0) {
+        if (Object.keys(opponent.item)[0] !== undefined) {
             const itemCard = Object.values(opponent.item)[0];
             itemCard.healthCurrent -= activeCard.points;
             if (itemCard.healthCurrent <= 0) {
                 itemCard.healthCurrent = itemCard.health;
                 moveCardGraveyard(opponent, Object.keys(opponent.item)[0], 'item');
             }
-        moveCardGraveyard(player, active);
+            moveCardGraveyard(player, active);
         }
     }
     // after each move we increase active player's counter for 1
