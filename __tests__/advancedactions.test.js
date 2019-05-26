@@ -1422,9 +1422,8 @@ test('msg ACTION received: after turn changes cardsShown is removed from player 
     expect(Object.values(result.game.players[1])).not.toContain('cardsShown');
 });
 
-// Test that player can put  Bow and Arrows card in item holder, and opponent's
-// cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
-test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 2 cards can loose 1 point at next turn.', () => {
+// Test that player can put  Bow and Arrows card in item holder
+test('msg ACTION received: player can put Bow&Arrow card in item.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key4',
@@ -1440,24 +1439,9 @@ test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 
                     active: false,
                     hero: 'premudraya',
                     health: { current: 10, maximum: 14 },
-                    hand: {
-                        key10: {
-                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
-                        },
-                        key1: {
-                            id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: false,
-                        },
-                        key5: {
-                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
-                        },
-                        key7: {
-                            id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
-                        },
-                        key9: {
-                            id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false,
-                        },
-                    },
+                    hand: {},
                     item: {},
+                    grave: {},
                     moveCounter: 0,
                 },
                 {
@@ -1487,6 +1471,7 @@ test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 
                         key15: {},
                     },
                     moveCounter: 1,
+                    grave: {},
                 },
             ],
         },
@@ -1501,10 +1486,6 @@ test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 
 
     // ожидаем, что карт лук и стрелы лежат в item активного игрока
     expect(Object.values(result.game.players[1].item)[0].id).toEqual('bowArrow');
-
-    // ожидаем, c 60% вероятностью 2 карты из руки оппонента потеряют по 1 очку в начале хода
-    expect(result.game.players[0].hand.key1.points).toEqual(2);
-    expect(result.game.players[0].hand.key9.points).toEqual(4);
 });
 
 // Test that once Bow and Arrows card is at opponent item holder, 2 player's
@@ -1524,29 +1505,64 @@ test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 
                     active: true,
                     hero: 'premudraya',
                     health: { current: 10, maximum: 14 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key6: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
                     hand: {
                         key10: {
                             id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
                         },
                         key1: {
-                            id: 'horsemanBlack', category: 'attack', points: 2, initialpoints: 3, disabled: false,
+                            id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: false,
                         },
                         key5: {
-                            id: 'bogatyr', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
                         },
                         key7: {
-                            id: 'horsemanWhite', category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                            id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
                         },
                         key9: {
-                            id: 'chemise', category: 'heal', points: 4, initialpoints: 5, disabled: false,
+                            id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false,
+                        },
+                        key6: {
+                            id: 'blabla', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                        },
+                        key2: {
+                            id: 'testtest', type: 'item', category: 'attack', points: 5, initialpoints: 5, disabled: false,
                         },
                     },
                     item: {},
+                    grave: {},
+                    moveCounter: 0,
                 },
                 {
                     active: false,
                     hero: 'morevna',
                     health: { current: 13, maximum: 16 },
+                    grave: {},
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key6: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
                     item: {
                         key4: {
                             id: 'bowArrow', type: 'item', category: 'supress', points: 2, initialpoints: 2, disabled: false,
@@ -1558,11 +1574,11 @@ test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 
     });
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
-    
+
     const result = sendReply.mock.calls[0][0];
     // ожидаем, что карт лук и стрелы лежат в item неактивного игрока
     expect(Object.values(result.game.players[1].item)[0].id).toEqual('bowArrow');
     // ожидаем 2 карты в руке оппонента, которые приа активации карты bowArrow все также с уменьшенными на 1 очками
-    expect(result.game.players[0].hand.key1.points).toEqual(2);
+    expect(result.game.players[0].grave.key1.points).toEqual(2);
     expect(result.game.players[0].hand.key9.points).toEqual(4);
 });

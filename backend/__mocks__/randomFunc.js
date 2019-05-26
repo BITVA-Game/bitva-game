@@ -14,9 +14,9 @@ function getRandomUpTo(n, caseName) {
     } if (caseName === 'chanceBowArrow') {
         return 4;
     } if (caseName === 'index1Bow') {
-        return 3;
+        return 0;
     } if (caseName === 'index2Bow') {
-        return 1;
+        return 2;
     }
 }
 
