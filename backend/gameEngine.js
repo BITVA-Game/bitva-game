@@ -98,7 +98,7 @@ const generatePlayers = function (heroName, opponentName) {
         p.keyHero = keygen.number();
         keyHero[p.keyHero] = p;
     });
-    console.log(players);
+    // console.log(players);
     // console.log(`${players[0].hero} is active is ${players[0].active}`);
     // console.log(`${players[1].hero} is active is ${players[1].active}`);
     return players;
