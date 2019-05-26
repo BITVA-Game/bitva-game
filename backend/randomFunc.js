@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 /* eslint-disable no-unused-vars */
+// mock random function created for each case, tests and gameEngine are  corrected accordingly
+
 
 function getRandomUpTo(n, caseName) {
     // console.log('We are in real getrandom!');
-=======
-function getRandomUpTo(n) {
-    console.log('We are in real getrandom!');
->>>>>>> randomUpTo function is in another file + mock func created trying to use
     return Math.floor(Math.random() * Math.floor(n));
 }
 

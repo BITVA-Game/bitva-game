@@ -6,25 +6,12 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
-<<<<<<< HEAD
 const keygen = require('keygenerator');
 const { getRandomUpTo } = require('./randomFunc');
 
 
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
-
-=======
-const { getRandomUpTo } = require('./randomFunc');
-
-const allCharacters = require('./data/characters.json');
-const allCards = require('./data/cards.json');
-
-// transferred to separate file randomFunc
-// function getRandomUpTo(n) {
-//     return Math.floor(Math.random() * Math.floor(n));
-// }
->>>>>>> randomUpTo function is in another file + mock func created trying to use
 
 function getRandomBool() {
     const rand = getRandomUpTo(2, 'indexPlayer');
@@ -315,7 +302,8 @@ function waterCard(players) {
 }
 
 
-// function to set disabled property to true to random 2 cards in player's hand fo Oven card
+
+// function to set disabled property to true to random 2 cards in player's hand for russianOven card
 function disableCards(opponent) {
     const opponentCards = Object.values(opponent.hand);
     const index1 = getRandomUpTo(opponentCards.length, 'index1Oven');
@@ -419,7 +407,7 @@ function getRandomIndexes(cardsLength) {
 // function to check if opponent has item card with id== bowArrow
 // and to randomly ( 60% chance) to decrease pnts of 2 cards in hand by 1 pnt
 function bowArrow(player, opponent) {
-    console.log('We are in borrow and Arrow case!');
+    // console.log('We are in borrow and Arrow case!');
     let itemId;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemId = player.item[itemKey].id : null;
@@ -434,7 +422,6 @@ function bowArrow(player, opponent) {
             const indexes = getRandomIndexes(cards.length);
             cards[indexes[0]].points -= 1;
             cards[indexes[1]].points -= 1;
-            console.log(indexes[0], cards[indexes[0]], indexes[1], cards[indexes[1]]);
         }
     }
 }

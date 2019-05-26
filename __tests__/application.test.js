@@ -612,13 +612,6 @@ test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 
         },
     });
 
-    // we save normal random here before mock it
-    // const oldRandom = Math.random;
-    // // Mock will rewrite all math.random and set it to 1 to 1st call
-    // // then set it to 1 at 2nd call, to 3 at 3rd call and to 2 by default
-    // Math.random = jest.fn();
-    // Math.random.mockReturnValueOnce(0.4).mockReturnValueOnce(0.3).mockReturnValueOnce(0.9);
-
     application.msgReceived(msg, sendReply);
     // We return random to initial value, so it is not always set to 1
     // Math.random = oldRandom;
@@ -636,7 +629,7 @@ test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 
 
 // Test that once Bow and Arrows card is at opponent item holder, 2 player's
 // cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
-test.only('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 2 cards in player hand can loose 1 point at next acttion.', () => {
+test.only('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 2 cards in player hand can loose 1 point at next action.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key10',
