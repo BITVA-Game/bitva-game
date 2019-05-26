@@ -21,6 +21,7 @@ async function formatOriginalCards() {
         cardsUpdated[name].type = c.typeEn;
         cardsUpdated[name].icon = c.icon;
         cardsUpdated[name].category = c.category;
+        cardsUpdated[name].categoryName = c.categorynameEn;
         cardsUpdated[name].description = c.descriptionEn;
         cardsUpdated[name].health = c.health;
         cardsUpdated[name].initialpoints = c.initialpoints;
