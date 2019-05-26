@@ -217,10 +217,25 @@ const Grave = props => (
 
 const Item = props => (
     <div
-        className={`item card-place card-like ${props.player.background} ${props.isTarget('item') ? 'target' : null}`}
+        className={`item card-place card-like
+            ${props.player.background}
+            ${props.isTarget('item') ? 'target' : null}
+            ${props.isTarget('itemOpponent') && props.item ? 'target' : null}
+        `}
         id={props.player.active ? 'item' : null}
-        onDrop={() => props.cardDropped('item', Object.keys(props.player.item))}
-        onDragOver={e => props.cardOver(e, 'item')}
+
+        onDrop={
+            // eslint-disable-next-line no-nested-ternary
+            props.player.active
+                ? () => props.cardDropped('item', Object.keys(props.player.item))
+                : props.item ? () => props.cardDropped('itemOpponent') : null
+        }
+        onDragOver={
+            // eslint-disable-next-line no-nested-ternary
+            props.player.active
+                ? e => props.cardOver(e, 'item')
+                : props.item ? e => props.cardOver(e, 'itemOpponent') : null
+        }
     >
         {props.item
             ? (
