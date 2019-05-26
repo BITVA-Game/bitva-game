@@ -2701,7 +2701,7 @@ test('msg ACTION received: active can make only 1 action in 1 turn if inactive p
 
 // Test that player can put  Bow and Arrows card in item holder, and opponent's
 // cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
-test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 2 cards can loose 1 point at next turn.', () => {
+test('msg ACTION received: player put Bow&Arrow card in item, 60% that opponent 2 cards can loose 1 point at next turn.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key4',
@@ -2793,7 +2793,7 @@ test.only('msg ACTION received: player put Bow&Arrow card in item, 60% that oppo
 
 // Test that once Bow and Arrows card is at opponent item holder, 2 player's
 // cards with > 1 point have 60%  chance to loose 1 point at the beggining of every turn ( move counter +1)
-test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 2 cards in player hand can loose 1 point at next acttion.', () => {
+test.only('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 2 cards in player hand can loose 1 point at next acttion.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key10',
@@ -2842,7 +2842,7 @@ test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 
     });
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
-
+    
     const result = sendReply.mock.calls[0][0];
     // ожидаем, что карт лук и стрелы лежат в item неактивного игрока
     expect(Object.values(result.game.players[1].item)[0].id).toEqual('bowArrow');
