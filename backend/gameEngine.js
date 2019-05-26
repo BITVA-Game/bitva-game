@@ -7,16 +7,15 @@
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
 const keygen = require('keygenerator');
+const { getRandomUpTo } = require('./randomFunc');
+
 
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
-function getRandomUpTo(n) {
-    return Math.floor(Math.random() * Math.floor(n));
-}
 
 function getRandomBool() {
-    const rand = getRandomUpTo(2);
+    const rand = getRandomUpTo(2, 'indexPlayer');
     return rand === 0;
 }
 
@@ -303,11 +302,12 @@ function waterCard(players) {
     return { players };
 }
 
-// function to set disabled property to true to random 2 cards in player's hand
+
+// function to set disabled property to true to random 2 cards in player's hand fo Oven card
 function disableCards(opponent) {
     const opponentCards = Object.values(opponent.hand);
-    const index1 = getRandomUpTo(opponentCards.length);
-    let index2 = getRandomUpTo(opponentCards.length);
+    const index1 = getRandomUpTo(opponentCards.length, 'index1Oven');
+    let index2 = getRandomUpTo(opponentCards.length, 'index2Oven');
     if (index2 === index1) {
         index2 = getRandomUpTo(opponentCards.length);
     }
@@ -395,6 +395,41 @@ function magicTree(player, opponent) {
 }
 
 // basic function for the game that represents each act of active player
+// helper function to get random index for player's cards in hand
+function getRandomIndexes(cardsLength) {
+    const index1 = getRandomUpTo(cardsLength, 'index1Bow');
+    let index2 = getRandomUpTo(cardsLength, 'index2Bow');
+    if (index2 === index1) {
+        index2 = getRandomUpTo(cardsLength);
+    }
+    return [index1, index2];
+}
+
+// function to check if opponent has item card with id== bowArrow
+// and to randomly ( 60% chance) to decrease pnts of 2 cards in hand by 1 pnt
+function bowArrow(player, opponent) {
+    console.log('We are in borrow and Arrow case!');
+    // const itemCard = Object.values(opponent.item)[0];
+    let itemId;
+    const itemKey = Object.keys(player.item)[0];
+    itemKey ? itemId = player.item[itemKey].id : null;
+    console.log(itemId);
+    if (itemId === 'bowArrow') {
+        const chance = getRandomUpTo(10, 'chanceBowArrow');
+        console.log(chance);
+        if (chance <= 5) {
+            const cards = Object.values(opponent.hand);
+            cards.splice(cards.findIndex(e => e.initialpoints <= 1 && e.type !== 'action'), 1);
+            console.log(cards);
+
+            const indexes = getRandomIndexes(cards.length);
+            cards[indexes[0]].points -= 1;
+            cards[indexes[1]].points -= 1;
+            console.log(cards[indexes[0]], cards[indexes[1]]);
+        }
+    }
+}
+
 function playerActs(game, player, opponent, active, target) {
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
@@ -507,6 +542,9 @@ function playerActs(game, player, opponent, active, target) {
         giveCardsTo(player);
         // run changeTurn function
         changeTurn(player, opponent);
+        // we run bowArrow function to check if opponent has bow & arrow card in item
+        // and to supress attack points if any
+        bowArrow(player, opponent);
         // and run function water if any
         waterCard(game.players);
     }
@@ -542,7 +580,7 @@ function handle(appgame, message) {
         const heroName = message.hero;
         const opponentName = message.opponent
             ? message.opponent
-            : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length)].id;
+            : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length, 'indexOpponent')].id;
         return Object.assign(game, { players: generatePlayers(heroName, opponentName) });
     }
     case 'DEALALL': {
