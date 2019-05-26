@@ -381,8 +381,7 @@ function getRandomIndexes(cardsLength) {
 // function to check if opponent has item card with id== bowArrow
 // and to randomly ( 60% chance) to decrease pnts of 2 cards in hand by 1 pnt
 function bowArrow(player, opponent) {
-    console.log('We are in borrow and Arrow case!');
-    console.log(player);
+    // console.log('We are in borrow and Arrow case!');
     let itemId;
     const itemKey = Object.keys(opponent.item)[0];
     itemKey ? itemId = opponent.item[itemKey].id : null;
