@@ -11,13 +11,8 @@ const { getRandomUpTo } = require('./randomFunc');
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
-// transferred to separate file randomFunc
-// function getRandomUpTo(n) {
-//     return Math.floor(Math.random() * Math.floor(n));
-// }
-
 function getRandomBool() {
-    const rand = getRandomUpTo(2);
+    const rand = getRandomUpTo(2, 'indexPlayer');
     return rand === 0;
 }
 
@@ -286,11 +281,11 @@ function waterCard(players) {
 }
 
 
-// function to set disabled property to true to random 2 cards in player's hand
+// function to set disabled property to true to random 2 cards in player's hand for russianOven card
 function disableCards(opponent) {
     const opponentCards = Object.values(opponent.hand);
-    const index1 = getRandomUpTo(opponentCards.length);
-    let index2 = getRandomUpTo(opponentCards.length);
+    const index1 = getRandomUpTo(opponentCards.length, 'index1Oven');
+    let index2 = getRandomUpTo(opponentCards.length, 'index2Oven');
     if (index2 === index1) {
         index2 = getRandomUpTo(opponentCards.length);
     }
@@ -365,8 +360,8 @@ function magicTree(player, opponent) {
 
 // helper function to get random index for player's cards in hand
 function getRandomIndexes(cardsLength) {
-    const index1 = getRandomUpTo(cardsLength);
-    let index2 = getRandomUpTo(cardsLength);
+    const index1 = getRandomUpTo(cardsLength, 'index1Bow');
+    let index2 = getRandomUpTo(cardsLength, 'index2Bow');
     if (index2 === index1) {
         index2 = getRandomUpTo(cardsLength);
     }
@@ -376,22 +371,18 @@ function getRandomIndexes(cardsLength) {
 // function to check if opponent has item card with id== bowArrow
 // and to randomly ( 60% chance) to decrease pnts of 2 cards in hand by 1 pnt
 function bowArrow(player, opponent) {
-    console.log('We are in borrow and Arrow case!');
+    // console.log('We are in borrow and Arrow case!');
     let itemId;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemId = player.item[itemKey].id : null;
     if (itemId === 'bowArrow') {
-        const chance = getRandomUpTo(10);
-        console.log(chance);
+        const chance = getRandomUpTo(10, 'chanceBowArrow');
         if (chance <= 6) {
             const cards = Object.values(opponent.hand);
             cards.splice(cards.findIndex(e => e.points <= 1), 1);
-            console.log(cards);
-
             const indexes = getRandomIndexes(cards.length);
             cards[indexes[0]].points -= 1;
             cards[indexes[1]].points -= 1;
-            console.log(indexes[0], cards[indexes[0]], indexes[1], cards[indexes[1]]);
         }
     }
 }
@@ -535,7 +526,7 @@ function handle(appgame, message) {
         const heroName = message.hero;
         const opponentName = message.opponent
             ? message.opponent
-            : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length)].id;
+            : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length, 'indexOpponent')].id;
         return Object.assign(game, { players: generatePlayers(heroName, opponentName) });
     }
     case 'DEALALL': {
