@@ -134,11 +134,11 @@ const CardPreview = props => (
 
 const CardsRow = props => (
     <>
-        <CardPreview card={props.cards[props.cardIndex]} hero={props.hero} />
+        <CardPreview card={props.cards[props.currentCard]} hero={props.hero} />
         <div className="card-description">
-            {props.cards[props.cardIndex].description}
+            {props.cards[props.currentCard].description}
             <div className="icon-deck icon-text">
-                {props.cards[props.cardIndex].count}
+                {props.cards[props.currentCard].count}
             </div>
         </div>
     </>
@@ -183,7 +183,7 @@ class CardsBlock extends Component {
                 <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRowPrev} onKeyPress={this.changeRow} tabIndex="5">
                     ◀
                 </div>
-                <CardsRow heroId={this.props.heroId} cardIndex={this.deck[this.state.cardIndex]} cards={this.props.cards} hero={this.props.hero} />
+                <CardsRow heroId={this.props.heroId} currentCard={this.deck[this.state.cardIndex]} cards={this.props.cards} hero={this.props.hero} />
                 <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRowNext} onKeyPress={this.changeRow} tabIndex="6">
                     ▶
                 </div>
@@ -237,7 +237,7 @@ CardPreview.defaultProps = {
 
 CardsRow.propTypes = {
     cards: PropTypes.object.isRequired,
-    cardIndex: PropTypes.number.isRequired,
+    currentCard: PropTypes.string.isRequired,
     hero: PropTypes.object.isRequired,
 };
 
