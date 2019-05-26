@@ -3090,3 +3090,33 @@ test('msg ACTION received: no card in opponent item, player trying to attack, bu
     expect(result.game.players[0].health.current).toEqual(10);
     expect(result.game.players[1].health.current).toEqual(8);
 });
+
+// Test that both  players gets individual keyHero each. Game state VERSUS.
+test.only('msg HEROSELECTED received: players  have individual keyHero each.', () => {
+// We only need type for this test.
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', opponent: 'morevna' };
+
+    // Mock sendReply function
+    const sendReply = jest.fn();
+
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // Find active and inactive players
+    let activePlayer = result.game.players[0];
+    let inactivePlayer = result.game.players[1];
+    if (result.game.players[0].active === false) {
+        activePlayer = result.game.players[1];
+        inactivePlayer = result.game.players[0];
+    }
+
+    // Expect players to have keyHero
+    expect(activePlayer.keyHero).toBeDefined();
+    expect(inactivePlayer.keyHero).toBeDefined();
+    // Expect each player's keyHero differs
+    expect(activePlayer.keyHero).not.toEqual(inactivePlayer.keyHero);
+});

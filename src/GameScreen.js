@@ -80,7 +80,7 @@ class GameScreen extends Component {
                 {this.props.app.game.players.map(player => (
                     <Player
                         item={player.item}
-                        key={player.hero}
+                        key={player.keyHero}
                         position={player.position}
                         player={player}
                         sendMessage={this.props.sendMessage}

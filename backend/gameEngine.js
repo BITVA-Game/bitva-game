@@ -6,9 +6,10 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
+const keygen = require('keygenerator');
+
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
-
 
 function getRandomUpTo(n) {
     return Math.floor(Math.random() * Math.floor(n));
@@ -75,6 +76,7 @@ const generatePlayers = function (heroName, opponentName) {
     players[0].position = 'bottom';
     players[0].background = allCharacters[heroName].background;
     players[0].hero = heroName;
+    // players[0].key = keyPlayerOne;
     players[0].deck = createDeck(heroName);
     players[0].cards = assignCards(players[0].deck, allCharacters[heroName].cardsNumber);
     players[0].health.current = allCharacters[heroName].health;
@@ -84,11 +86,19 @@ const generatePlayers = function (heroName, opponentName) {
     players[1].position = 'top';
     players[1].background = allCharacters[heroSecondName].background;
     players[1].hero = heroSecondName;
+    // players[1].key = keyPlayerTwo;
     players[1].deck = createDeck(heroSecondName);
     players[1].cards = assignCards(players[1].deck, allCharacters[heroSecondName].cardsNumber);
     players[1].health.current = allCharacters[heroSecondName].health;
     players[1].health.maximum = allCharacters[heroSecondName].health;
 
+    // we assign individual key to each hero
+    const keyHero = Object.create(null);
+    players.forEach((p) => {
+        p.keyHero = keygen.number();
+        keyHero[p.keyHero] = p;
+    });
+    console.log(players);
     // console.log(`${players[0].hero} is active is ${players[0].active}`);
     // console.log(`${players[1].hero} is active is ${players[1].active}`);
     return players;
