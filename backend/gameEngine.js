@@ -544,6 +544,9 @@ function playerActs(game, player, opponent, active, target) {
 
         // run changeTurn function
         changeTurn(player, opponent);
+        // we run bowArrow function to check if opponent has bow & arrow card in item
+        // and to supress attack points if any
+        bowArrow(player, opponent);
         // and run function water if any
         waterCard(game.players);
     }
