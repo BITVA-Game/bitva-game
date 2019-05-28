@@ -1284,7 +1284,7 @@ test('msg ACTION received: no card in opponent item, player trying to attack, bu
 });
 
 // Test, that active player cannot attacks shield directly at item holder of opponent
-test.only('msg ACTION received: opponent has shield in item, player trying to attack, but cannot do it.', () => {
+test('msg ACTION received: opponent has shield in item, player trying to attack, but cannot do it.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key1',
