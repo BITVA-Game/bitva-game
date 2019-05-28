@@ -106,6 +106,7 @@ class Player extends Component {
             target,
             this.props.dragging,
             this.props.player.active,
+            this.props.player,
         );
     }
 
