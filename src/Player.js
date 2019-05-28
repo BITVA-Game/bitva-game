@@ -279,7 +279,7 @@ const Card = props => (
                     ${props.card.category === 'turning' ? 'icon-arrows' : null}`}
                 />
             </div>
-            <p className="card-category game-card-category">{props.card.category}</p>
+            <p className="card-category game-card-category">{props.card.categoryName}</p>
             {props.card.initialpoints
                 ? (
                     <div className={`card-points game-card-points
