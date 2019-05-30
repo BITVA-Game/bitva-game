@@ -25,7 +25,7 @@ import horsemanRed from './images/cards/bitva-cardbase.jpg';
 import horsemanWhite from './images/cards/bitva-cardbase.jpg';
 import kikkmora from './images/cards/bitva-cardbase.jpg';
 import lizard from './images/cards/lizard.jpg';
-import malachiteBox from './images/cards/malachitebox.jpg'
+import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
 import mushrooms from './images/cards/mushrooms.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
