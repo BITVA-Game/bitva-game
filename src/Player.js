@@ -262,7 +262,7 @@ const Card = props => (
     <div
         className={`card game-card card-like ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
         data-key={props.cardKey}
-        draggable={props.draggable}
+        draggable={props.card.disabled === true ? null : props.draggable}
         onDragStart={() => props.cardDragStarted(props.cardKey, props.card)}
         onDragEnd={props.cardDragEnded}
     >
