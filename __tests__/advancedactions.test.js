@@ -4,8 +4,6 @@
 // import module for tests
 const application = require('../backend/application');
 
-jest.mock('../backend/randomFunc');
-
 // Test, that  when living water is in item holder, then
 // players get +1 to their health current each until card has its points > 0
 test('msg ACTION received: active player put Living Water in item, it increases players health current for 1pnt.', () => {
@@ -1420,6 +1418,174 @@ test('msg ACTION received: after turn changes cardsShown is removed from player 
 
     // ожидаем, что у противника исчезнет cardsShown после перехода к нему хода
     expect(Object.values(result.game.players[1])).not.toContain('cardsShown');
+});
+
+// test that once player acts with any card, while having malachiteBox card in item holder,
+// then opponent also is attacked by bat card
+test('msg ACTION received: player has malachiteBox in item, when player acts then opponent is attacked by bat card', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key10',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'hozyaika',
+                    health: { current: 10, maximum: 14 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    hand: {
+                        key10: {
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                        },
+                    },
+                    item: {
+                        key1: {
+                            id: 'malachiteBox', type: 'item', category: 'generator', health: 2, healthCurrent: 2, disabled: false,
+                        },
+                    },
+                    grave: {},
+                    moveCounter: 0,
+                },
+                {
+                    active: false,
+                    hero: 'morevna',
+                    health: { current: 14, maximum: 16 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    item: {},
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у активного игрока в item holder лежит карта с id == malachiteBox
+    expect(Object.values(result.game.players[0].item)[0].id).toEqual('malachiteBox');
+    // ожидаем, что у активного игрока в item holder лежит карта с id == malachiteBox
+    expect(result.game.players[0].moveCounter).toEqual(1);
+
+    // ожидаем, что у неактивного игрока, health current == 9
+    expect(result.game.players[1].health.current).toEqual(9);
+});
+
+// test that active player can put malachiteBox card in item holder,
+// the opponent health current does not increased (only on next act of player)
+test('msg ACTION received: player can put malachiteBox in item, opponent health is not increased', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key1',
+        target: 'item',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'hozyaika',
+                    health: { current: 10, maximum: 14 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    hand: {
+                        key10: {
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                        },
+                        key1: {
+                            id: 'malachiteBox', type: 'item', category: 'generator', health: 2, healthCurrent: 2, disabled: false,
+                        },
+                    },
+                    item: {},
+
+                    grave: {},
+                    moveCounter: 0,
+                },
+                {
+                    active: false,
+                    hero: 'morevna',
+                    health: { current: 14, maximum: 16 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    item: {},
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у активного игрока в item holder лежит карта с id == malachiteBox
+    expect(Object.values(result.game.players[0].item)[0].id).toEqual('malachiteBox');
+    // ожидаем, что у активного игрока в item holder лежит карта с id == malachiteBox
+    expect(result.game.players[0].moveCounter).toEqual(1);
+
+    // ожидаем, что у неактивного игрока не изменится, health current == 14
+    expect(result.game.players[1].health.current).toEqual(14);
 });
 
 // Test that player can put  Bow and Arrows card in item holder
