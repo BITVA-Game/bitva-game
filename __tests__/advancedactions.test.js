@@ -4,6 +4,7 @@
 // import module for tests
 const application = require('../backend/application');
 
+jest.mock('../backend/randomFunc');
 // Test, that  when living water is in item holder, then
 // players get +1 to their health current each until card has its points > 0
 test('msg ACTION received: active player put Living Water in item, it increases players health current for 1pnt.', () => {
