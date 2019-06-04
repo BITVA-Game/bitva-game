@@ -7,16 +7,14 @@
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
 const keygen = require('keygenerator');
+const { getRandomUpTo } = require('./randomFunc');
+
 
 const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
-function getRandomUpTo(n) {
-    return Math.floor(Math.random() * Math.floor(n));
-}
-
 function getRandomBool() {
-    const rand = getRandomUpTo(2);
+    const rand = getRandomUpTo(2, 'indexPlayer');
     return rand === 0;
 }
 
@@ -303,11 +301,12 @@ function waterCard(players) {
     return { players };
 }
 
-// function to set disabled property to true to random 2 cards in player's hand
+
+// function to set disabled property to true to random 2 cards in player's hand for russianOven card
 function disableCards(opponent) {
     const opponentCards = Object.values(opponent.hand);
-    const index1 = getRandomUpTo(opponentCards.length);
-    let index2 = getRandomUpTo(opponentCards.length);
+    const index1 = getRandomUpTo(opponentCards.length, 'index1Oven');
+    let index2 = getRandomUpTo(opponentCards.length, 'index2Oven');
     if (index2 === index1) {
         index2 = getRandomUpTo(opponentCards.length);
     }
@@ -369,6 +368,41 @@ function attackItems(players) {
 }
 
 
+// helper function to get random index for player's cards in hand
+function getRandomIndexes(cardsLength) {
+    const index1 = getRandomUpTo(cardsLength, 'index1Bow');
+    let index2 = getRandomUpTo(cardsLength, 'index2Bow');
+    if (index2 === index1) {
+        index2 = getRandomUpTo(cardsLength);
+    }
+    return [index1, index2];
+}
+
+// function to check if opponent has item card with id== bowArrow
+// and to randomly ( 60% chance) to decrease pnts of 2 cards in hand by 1 pnt
+function bowArrow(player, opponent) {
+    // console.log('We are in borrow and Arrow case!');
+    let itemId;
+    const itemKey = Object.keys(opponent.item)[0];
+    itemKey ? itemId = opponent.item[itemKey].id : null;
+    if (itemId === 'bowArrow') {
+        const chance = getRandomUpTo(10, 'chanceBowArrow');
+        if (chance <= 6) {
+            const cards = Object.values(player.hand);
+            const cardsNew = [];
+            for (let i = 0; i < Object.keys(player.hand).length; i++) {
+                if (cards[i].initialpoints > 1 && cards[i].type === 'action') {
+                    cardsNew.push(cards[i]);
+                }
+            }
+
+            const indexes = getRandomIndexes(cardsNew.length);
+            cardsNew[indexes[0]].points -= 1;
+            cardsNew[indexes[1]].points -= 1;
+        }
+    }
+}
+
 // function that change turn in the game
 function changeTurn(player, opponent) {
     // active player becomes inactive
@@ -394,8 +428,11 @@ function magicTree(player, opponent) {
     player.moveCounter === 1 && itemId === 'magicTree' ? changeTurn(player, opponent) : null;
 }
 
-// basic function for the game that represents each act of active player
 function playerActs(game, player, opponent, active, target) {
+    // at the beggining of each player action
+    // we run bowArrow function to check if opponent has bow & arrow card in item
+    // and to supress attack points if any
+    bowArrow(player, opponent);
     const activeCard = player.hand[active];
     // If the key for the second card is graveyard
     // We send the card that has active key to graveyard
@@ -502,11 +539,14 @@ function playerActs(game, player, opponent, active, target) {
         // we check then if any cardsShown property in opponent cards
         // and remove by calling deleteCardsShown function
         deleteCardsShown(opponent);
-        console.log(player);
         // we call function to give cards to players up to 5
         giveCardsTo(player);
+
         // run changeTurn function
         changeTurn(player, opponent);
+        // we run bowArrow function to check if opponent has bow & arrow card in item
+        // and to supress attack points if any
+        bowArrow(player, opponent);
         // and run function water if any
         waterCard(game.players);
     }
@@ -542,7 +582,7 @@ function handle(appgame, message) {
         const heroName = message.hero;
         const opponentName = message.opponent
             ? message.opponent
-            : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length)].id;
+            : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length, 'indexOpponent')].id;
         return Object.assign(game, { players: generatePlayers(heroName, opponentName) });
     }
     case 'DEALALL': {

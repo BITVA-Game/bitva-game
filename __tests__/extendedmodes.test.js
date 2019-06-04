@@ -5,6 +5,8 @@ import {
     profileState,
 } from '../__mocks__/stateMock';
 
+jest.mock('../backend/randomFunc');
+
 // import module for tests
 const application = require('../backend/application');
 
