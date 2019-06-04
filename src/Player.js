@@ -10,10 +10,10 @@ import './css/Cards.css';
 
 import apple from './images/cards/apple.jpg';
 import bajun from './images/cards/catbajun.jpg';
-import bat from './images/cards/bitva-cardbase.jpg';
+import bat from './images/cards/bat.jpg';
 import bereginya from './images/cards/bitva-cardbase.jpg';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
-import bulat from './images/cards/bitva-cardbase.jpg';
+import bulat from './images/cards/sword.jpg';
 import chemise from './images/cards/bitva-cardbase.jpg';
 import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
 import crown from './images/cards/bitva-cardbase.jpg';
@@ -24,13 +24,16 @@ import horsemanBlack from './images/cards/bitva-cardbase.jpg';
 import horsemanRed from './images/cards/bitva-cardbase.jpg';
 import horsemanWhite from './images/cards/bitva-cardbase.jpg';
 import kikkmora from './images/cards/bitva-cardbase.jpg';
-import lizard from './images/cards/bitva-cardbase.jpg';
+import lizard from './images/cards/lizard.jpg';
+import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
+import mushrooms from './images/cards/mushrooms.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
 import sivka from './images/cards/warhorse.jpg';
 import skullLantern from './images/cards/bitva-cardbase.jpg';
+import turningPotion from './images/cards/potion.jpg';
 import warhorse from './images/cards/warhorse.jpg';
 import waterDead from './images/cards/deadwater.jpg';
 import waterLiving from './images/cards/livingwater.jpg';
@@ -54,12 +57,15 @@ const imagesCards = {
     horsemanWhite,
     kikkmora,
     lizard,
+    malachiteBox,
     mortar,
+    mushrooms,
     russianOven,
     shieldLarge,
     shieldSmall,
     sivka,
     skullLantern,
+    turningPotion,
     warhorse,
     waterDead,
     waterLiving,
