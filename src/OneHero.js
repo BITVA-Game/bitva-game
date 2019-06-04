@@ -27,7 +27,7 @@ import gusiLebedi from './images/cards/bitva-cardbase.jpg';
 import horsemanBlack from './images/cards/bitva-cardbase.jpg';
 import horsemanRed from './images/cards/bitva-cardbase.jpg';
 import horsemanWhite from './images/cards/bitva-cardbase.jpg';
-import kikkmora from './images/cards/bitva-cardbase.jpg';
+import kikimora from './images/cards/bitva-cardbase.jpg';
 import lizard from './images/cards/lizard.jpg';
 import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
@@ -66,7 +66,7 @@ const imagesCards = {
     horsemanBlack,
     horsemanRed,
     horsemanWhite,
-    kikkmora,
+    kikimora,
     lizard,
     malachiteBox,
     mortar,

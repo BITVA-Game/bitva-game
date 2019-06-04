@@ -90,8 +90,8 @@
         "description": "The Magic Swan Geese are Yaga's winged warriors. They help to capture and take an enemy to the other world.",
         "initialpoints": 1
     },
-    "kikkmora": {
-        "id": "kikkmora",
+    "kikimora": {
+        "id": "kikimora",
         "name": "Kikimora",
         "type": "action",
         "icon": "skull",
