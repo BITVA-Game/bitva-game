@@ -197,7 +197,7 @@ function attackShield(player, itemKey, points, opponent) {
 
 // function to reflect half of the damage (or round down to integer) for magicMirror card
 function reflect(opponent, player, points) {
-    console.log('We are in reflect function!', player);
+    // console.log('We are in reflect function!', player);
     const damage = Math.floor(points / 2);
     opponent.health.current -= damage;
     if (Object.keys(player.item).length === 0 || Object.values(player.item)[0].category !== 'shield') {
