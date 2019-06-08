@@ -197,7 +197,7 @@ function attackShield(player, itemKey, points, opponent) {
 
 // function to reflect half of the damage (or round down to integer) for magicMirror card
 function reflect(opponent, player, points) {
-    // console.log('We are in reflect function!', player);
+    console.log('We are in reflect function!', player);
     const damage = Math.floor(points / 2);
     opponent.health.current -= damage;
     if (Object.keys(player.item).length === 0 || Object.values(player.item)[0].category !== 'shield') {
@@ -218,11 +218,12 @@ function attackOpponent(player, opponent, points) {
     let itemCategory;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemCategory = player.item[itemKey].category : null;
+
     // we check if item holder is not empty and item card does not have shield category
     const itemLength = Object.keys(player.item).length;
     if (itemLength === 0 || itemCategory !== 'shield') {
         // and if item card does not have 'reflect' category (e.g. magicMirror card)
-        // we deduct attack card points from item card points
+        // we descrease hero health for attack card points
         if (itemCategory !== 'reflect') {
             opponent.turningHand === true
                 ? opponent.health.current -= points : player.health.current -= points;
@@ -576,13 +577,14 @@ function playerActs(game, player, opponent, active, target) {
         const itemCard = Object.values(opponent.item)[0];
         itemCard.healthCurrent -= activeCard.points;
         if (itemCard.healthCurrent <= 0) {
+            // console.log('itemCard.healthCurrent <= 0');
             itemCard.healthCurrent = itemCard.health;
+            // console.log(opponent.hero, Object.keys(opponent.item)[0]);
             moveCardGraveyard(opponent, Object.keys(opponent.item)[0], 'item');
         }
         player.turningHand === true
             ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
     }
-
     // after each act we delete turningHand property for both players
     // if active player acted after turning potion card
     // we also turn active card's key to null as players's cards keys duplicate
