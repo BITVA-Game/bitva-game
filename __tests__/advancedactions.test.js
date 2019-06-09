@@ -1748,3 +1748,783 @@ test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 
     expect(result.game.players[0].grave.key1.points).toEqual(2);
     expect(result.game.players[0].hand.key9.points).toEqual(4);
 });
+
+// Test, that when active player attacks opponent with turningPotion card
+// then active player get turningHand property so next act player can chose any one card from opponent hand to act
+// and his move counter to be increased by 1 only for act by both these cards
+test('msg ACTION received: active player attacks with turningPotion and at next act can choose any 1 card from opponent hand to act for 1 move', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key4',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    item: {},
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: { type: 'action', disabled: false },
+                        key4: {
+                            id: 'turningPotion', type: 'action', category: 'turning', disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    grave: {},
+                },
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: {
+                            id: 'skullLantern', type: 'action', category: 'attackItems ', disabled: false,
+                        },
+                        key8: { id: 'shieldsmall', type: 'item', disabled: false },
+                        key13: { id: 'horsemanWhite', type: 'action', disabled: false },
+                        key10: { id: 'bogatyr', type: 'action', disabled: false },
+                        key1: {
+                            id: 'horsemanRed', type: 'action', category: 'attack', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {},
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что Yaga сходила картой turningPotion, и та после ходя ушла на кладбище
+    expect(result.game.players[0].grave.key4.id).toEqual('turningPotion');
+    // ожидаем, что ход не сменится и Yaga продолжает быть активным игроком
+    expect(result.game.players[0].active).toEqual(true);
+    // и ее счетчик хода не увеличился и равен 1
+    expect(result.game.players[0].moveCounter).toEqual(1);
+    // ожидаем, что у Yaga появится свойство turningHand: true,
+    // которое позволит ей выбрать карту из руки противника
+    // и у Премудрой также появилось это свойство (для frontend)
+    expect(result.game.players[0].turningHand).toEqual(true);
+    expect(result.game.players[1].turningHand).toEqual(true);
+});
+
+// Test, that when active player has already attacked opponent with turningPotion card
+// and active player has gotten turningHand property,
+// and now player choses one card from opponent's hand to move it to opponent's grave
+// and only now his move counter to be increased by 1 (after 2nd act)
+test('msg ACTION received: active player attacked with turningPotion and now put 1 card from opponent hand to opponent graveyard', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key2',
+        target: 'graveyard',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    item: {},
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: {
+                            id: 'bajun', type: 'action', category: 'attack', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    turningHand: true,
+                    grave: {
+                        key4: {
+                            id: 'turningPotion', type: 'action', category: 'turning', disabled: false,
+                        },
+                    },
+                },
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key15: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: {
+                            id: 'skullLantern', type: 'action', category: 'attackItems ', disabled: false,
+                        },
+                        key8: { id: 'shieldsmall', type: 'item', disabled: false },
+                        key13: { id: 'horsemanWhite', type: 'action', disabled: false },
+                        key10: { id: 'bogatyr', type: 'action', disabled: false },
+                        key2: {
+                            id: 'horsemanRed', type: 'action', category: 'attack', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    turningHand: true,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {
+                        key1: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у Yaga и у Премудрой пропало свойство turningHand: true
+    expect(result.game.players[0].turningHand).not.toEqual(true);
+    expect(result.game.players[1].turningHand).not.toEqual(true);
+    // ожидаем, что ход сменится и Yaga неактивный игрок
+    expect(result.game.players[0].active).toEqual(false);
+    // и ее счетчик хода сначала увеличился до 2х, а потом обнулился при переходе хода
+    expect(result.game.players[0].moveCounter).toEqual(0);
+    // ожидаем, что выбранная Ягой карта из руки Премудрой ушла на кладбище
+    expect(result.game.players[1].grave.key2.id).toEqual('horsemanRed');
+});
+
+// Test, that when active player has already attacked opponent with turningPotion card
+// and active player has gotten turningHand property,
+// that now player choses one card from opponent's hand to heal herself /  himself
+// and only now his move counter to be increased by 1 (after 2nd act)
+test('msg ACTION received: active player attacked with turningPotion and now put 1 card from opponent hand to opponent graveyard', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key2',
+        target: 'hero',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'yaga',
+                    health: { current: 10, maximum: 15 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    item: {},
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: {
+                            id: 'bajun', type: 'action', category: 'attack', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    turningHand: true,
+                    grave: {
+                        key4: {
+                            id: 'turningPotion', type: 'action', category: 'turning', disabled: false,
+                        },
+                    },
+                },
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key15: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: {
+                            id: 'skullLantern', type: 'action', category: 'attackItems ', disabled: false,
+                        },
+                        key8: { id: 'shieldsmall', type: 'item', disabled: false },
+                        key13: { id: 'horsemanWhite', type: 'action', disabled: false },
+                        key10: { id: 'bogatyr', type: 'action', disabled: false },
+                        key2: {
+                            id: 'dolly', type: 'action', category: 'heal', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    turningHand: true,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {
+                        key1: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у Yaga и у Премудрой пропало свойство turningHand: true
+    expect(result.game.players[0].turningHand).not.toEqual(true);
+    expect(result.game.players[1].turningHand).not.toEqual(true);
+    // ожидаем, что ход сменится и Yaga неактивный игрок
+    expect(result.game.players[0].active).toEqual(false);
+    // и ее счетчик хода сначала увеличился до 2х, а потом обнулился при переходе хода
+    expect(result.game.players[0].moveCounter).toEqual(0);
+    // ожидаем, что здоровье Яги увеличится на 2 очка
+    expect(result.game.players[0].health.current).toEqual(12);
+    // ожидаем, что выбранная Ягой карта из руки Премудрой ушла на кладбище
+    expect(result.game.players[1].grave.key2.id).toEqual('dolly');
+});
+
+// Test, that when active player has attacked with turningPotion card and got turningHand property,
+// then now player choses one card from opponent's hand to attack opponent
+// opponent shield in item holder took some damage and goes to graveyard as well as active card
+// opponent's health to be decrease by difference (if any active card points left)
+// player's move counter to be increased by 1 (after 2nd act)
+test('msg ACTION received: active player attacked with turningPotion and now attacks opponent with 1 card from opponent hand', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key2',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    item: {},
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: {
+                            id: 'bajun', type: 'action', category: 'attack', points: 1, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    turningHand: true,
+                    grave: {
+                        key4: {
+                            id: 'turningPotion', type: 'action', category: 'turning', disabled: false,
+                        },
+                    },
+                },
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key15: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: {
+                            id: 'skullLantern', type: 'action', category: 'attackItems ', disabled: false,
+                        },
+                        key8: { id: 'shieldsmall', type: 'item', disabled: false },
+                        key13: { id: 'horsemanWhite', type: 'action', disabled: false },
+                        key10: { id: 'bogatyr', type: 'action', disabled: false },
+                        key2: {
+                            id: 'horsemanRed', type: 'action', category: 'attack', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    turningHand: true,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {
+                        key1: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у Yaga и у Премудрой пропало свойство turningHand: true
+    expect(result.game.players[0].turningHand).not.toEqual(true);
+    expect(result.game.players[1].turningHand).not.toEqual(true);
+    // ожидаем, что ход сменится и Yaga неактивный игрок
+    expect(result.game.players[0].active).toEqual(false);
+    // и ее счетчик хода сначала увеличился до 2х, а потом обнулился при переходе хода
+    expect(result.game.players[0].moveCounter).toEqual(0);
+    // ожидаем, что выбранная Ягой карта из руки Премудрой ушла на кладбище
+    expect(result.game.players[1].grave.key2.id).toEqual('horsemanRed');
+    // ожидаем, что щит из item holder Премудрой ушёл на кладбище
+    expect(Object.keys(result.game.players[1].grave)).toContain('key3');
+    // ожидаем, что текущее здоровье Премудрой уменьшилось на 1
+    expect(result.game.players[1].health.current).toEqual(9);
+    // ожидаем, что текущее здоровье Yaga не изменилось
+    expect(result.game.players[0].health.current).toEqual(15);
+});
+
+// Test, that when active player has attacked with turningPotion card and got turningHand property,
+// then now player choses one card from opponent's hand to put it to her/his own item holder
+// such card in player's item holder got fromOpponent: true property, so we may return it back to opponent cards
+// after furutre attack when this card health to be == 0 and card would go to opponent graveyard
+// player's move counter to be increased by 1 (after 2nd act)
+test('msg ACTION received: active player attacked with turningPotion and now put in his/her item holder 1 card from opponent hand', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key2',
+        target: 'item',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    item: {},
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: {
+                            id: 'bajun', type: 'action', category: 'attack', points: 1, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    turningHand: true,
+                    grave: {
+                        key4: {
+                            id: 'turningPotion', type: 'action', category: 'turning', disabled: false,
+                        },
+                    },
+                },
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key15: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: {
+                            id: 'skullLantern', type: 'action', category: 'attackItems ', disabled: false,
+                        },
+                        key8: { id: 'shieldsmall', type: 'item', disabled: false },
+                        key13: { id: 'horsemanWhite', type: 'action', disabled: false },
+                        key10: { id: 'bogatyr', type: 'action', disabled: false },
+                        key2: {
+                            id: 'shieldLarge', type: 'item', category: 'shield', health: 4, healthCurrent: 4, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    turningHand: true,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {
+                        key1: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у Yaga и у Премудрой пропало свойство turningHand: true
+    expect(result.game.players[0].turningHand).not.toEqual(true);
+    expect(result.game.players[1].turningHand).not.toEqual(true);
+    // ожидаем, что ход сменится и Yaga неактивный игрок
+    expect(result.game.players[0].active).toEqual(false);
+    // и ее счетчик хода сначала увеличился до 2х, а потом обнулился при переходе хода
+    expect(result.game.players[0].moveCounter).toEqual(0);
+    // ожидаем, что карта из руки Премудрой ушла Яге в item holder
+    expect(result.game.players[0].item.key2.id).toEqual('shieldLarge');
+    // ожидаем, что карта в item holder Яги приобрела свойство fromOpponent: true
+    expect(result.game.players[0].item.key2.fromOpponent).toEqual(true);
+    // ожидаем, что текущее здоровье Премудрой не изменилось
+    expect(result.game.players[1].health.current).toEqual(10);
+    // ожидаем, что текущее здоровье Yaga не изменилось
+    expect(result.game.players[0].health.current).toEqual(15);
+});
+
+// Test, that when inactive player previoulsy put shield card from opponent's hand to her/his own item holder
+// with the help of turningPotion card
+// opponent now attacks inactive player and shield card goes back to opponent's grave ( so cards remain same as when dealt)
+// fromOpponent: true property has been removed now from this shield card in inactive player's item holder
+test('msg ACTION received: inactive player put in own item holder shield card from opponent hand, after attack against player it returns to opponent graveyard', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key10',
+        target: 'opponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key10
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    item: {
+                        key2: {
+                            id: 'shieldLarge', type: 'item', category: 'shield', health: 4, healthCurrent: 2, disabled: false, fromOpponent: true,
+                        },
+                    },
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: {
+                            id: 'bajun', type: 'action', category: 'attack', points: 2, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    grave: {
+                        key4: {
+                            id: 'turningPotion', type: 'action', category: 'turning', disabled: false,
+                        },
+                    },
+                },
+                {
+                    active: true,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key15: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: {
+                            id: 'skullLantern', type: 'action', category: 'attackItems ', disabled: false,
+                        },
+                        key8: { id: 'shieldsmall', type: 'item', disabled: false },
+                        key13: { id: 'horsemanWhite', type: 'action', disabled: false },
+                        key10: {
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    item: {
+                        key3: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 1, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {
+                        key1: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у Yaga и у Премудрой пропало свойство turningHand: true
+    expect(result.game.players[0].turningHand).not.toEqual(true);
+    expect(result.game.players[1].turningHand).not.toEqual(true);
+    // ожидаем, что карта почле атаки ушло Премудрой на кладбище из item holder Яги
+    expect(result.game.players[1].grave.key2.id).toEqual('shieldLarge');
+    // ожидаем, что карта потеряла свойство fromOpponent: true, уйдя из item holder Яги
+    expect(result.game.players[1].grave.key2).not.toContain('fromOpponent');
+    // ожидаем, что текущее здоровье Премудрой не изменилось
+    expect(result.game.players[1].health.current).toEqual(10);
+    // ожидаем, что текущее здоровье Yaga уменьшилось на 2
+    expect(result.game.players[0].health.current).toEqual(13);
+});
+
+// Test, that when active player has attacked with turningPotion card and got turningHand property,
+// then now player choses one card from opponent's hand to put attack item card in opponent item holder
+// such card in opponent item holder  and the active card both go to opponent graveyard
+// player's move counter to be increased by 1 (after this 2nd act)
+test('msg ACTION received: active player attacked with turningPotion and now attacks opponent item with the card from opponent hand', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key2',
+        target: 'itemOpponent',
+    };
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    // Mock will rewrite all math.random and set active player card's key to key2
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'yaga',
+                    health: { current: 15, maximum: 15 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    item: {},
+                    hand: {
+                        key11: { type: 'action', disabled: false },
+                        key7: { type: 'item', disabled: false },
+                        key9: { type: 'action', disabled: false },
+                        key2: {
+                            id: 'bajun', type: 'action', category: 'attack', points: 1, initialpoints: 2, disabled: false,
+                        },
+                    },
+                    moveCounter: 1,
+                    turningHand: true,
+                    grave: {
+                        key4: {
+                            id: 'turningPotion', type: 'action', category: 'turning', disabled: false,
+                        },
+                    },
+                },
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    cards: {
+                        key0: {},
+                        key15: {},
+                        key5: {},
+                        key7: {},
+                        key4: {},
+                        key6: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                    },
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key11: {
+                            id: 'skullLantern', type: 'action', category: 'attackItems ', disabled: false,
+                        },
+                        key8: { id: 'shieldsmall', type: 'item', disabled: false },
+                        key13: { id: 'horsemanWhite', type: 'action', disabled: false },
+                        key2: {
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                        },
+                        key10: {
+                            id: 'shieldLarge', type: 'item', category: 'shield', health: 4, healthCurrent: 4, disabled: false,
+                        },
+                    },
+                    moveCounter: 0,
+                    turningHand: true,
+                    item: {
+                        key3: {
+                            id: 'magicMirror', type: 'item', category: 'reflect', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                    grave: {
+                        key1: {
+                            id: 'shieldsmall', type: 'item', category: 'shield', healthCurrent: 2, health: 2, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    // Call the message function from application with this message and mocked function.
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    // to use it more easy let's save the received app into result
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что у Yaga и у Премудрой пропало свойство turningHand: true
+    expect(result.game.players[0].turningHand).not.toEqual(true);
+    expect(result.game.players[1].turningHand).not.toEqual(true);
+    // ожидаем, что ход сменится и Yaga неактивный игрок
+    expect(result.game.players[0].active).toEqual(false);
+    // ожидаем, что активная карта из руки Премудрой ушла на её кладбище
+    expect(result.game.players[1].grave.key2.id).toEqual('bogatyr');
+    // ожидаем, что карта из item holder Премудрой ушла на её кладбище
+    expect(result.game.players[1].grave.key3.id).toEqual('magicMirror');    
+    // ожидаем, что текущее здоровье Премудрой не изменилось
+    expect(result.game.players[1].health.current).toEqual(10);
+    // ожидаем, что текущее здоровье Yaga не изменилось
+    expect(result.game.players[0].health.current).toEqual(15);
+});
