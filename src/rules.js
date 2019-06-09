@@ -4,14 +4,14 @@ export default function isTarget(target, dragging, active, player) {
     }
     if (!active) {
         // console.log(player.item);
-        let itemCategory;
         const itemKey = Object.keys(player.item)[0];
         // eslint-disable-next-line no-unused-expressions
-        itemKey ? itemCategory = player.item[itemKey].category : null;
+        itemKey ? player.item[itemKey].category : null;
         // console.log(itemCategory);
         return (
             (target === 'opponent' && dragging.card.category === 'attack')
             || (target === 'itemOpponent' && dragging.card.category === 'attack')
+            || (target === 'opponent' && dragging.card.category === 'holdCard')
             || (target === 'opponent' && dragging.card.category === 'attackItems')
         );
     }
