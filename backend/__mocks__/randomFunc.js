@@ -17,6 +17,10 @@ function getRandomUpTo(n, caseName) {
         return 0;
     } if (caseName === 'index2Bow') {
         return 2;
+    } if (caseName === 'chanceforestMushroom') {
+        return 5;
+    } if (caseName === 'indexMushroom') {
+        return 3;
     }
 }
 

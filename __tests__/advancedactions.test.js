@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 
@@ -3167,4 +3168,200 @@ test('msg ACTION received: active player attacked with turningPotion and now att
     expect(result.game.players[1].health.current).toEqual(10);
     // ожидаем, что текущее здоровье Yaga не изменилось
     expect(result.game.players[0].health.current).toEqual(15);
+});
+
+// Test that once active player has forestMushroom card in item holder, inactive player has gotten 60 % chance,
+// and inactive player cards in hand are getting disabled: true property except one random card,
+// so opponent at the beggining of his next action can act only with this one random card from his/her hand ( move counter +1)
+test('msg ACTION received: if forestMushroom card is at player item holder, then with 60% opponent can aget only 1 random card available from hand.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key4',
+        target: 'item',
+    };
+    const sendReply = jest.fn();
+    // we set app game in needed state for testing
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: false,
+                    hero: 'premudraya',
+                    health: { current: 10, maximum: 14 },
+                    hand: {
+                        key10: {
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
+                        },
+                        key1: {
+                            id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: false,
+                        },
+                        key5: {
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                        },
+                        key7: {
+                            id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                        },
+                        key9: {
+                            id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false,
+                        },
+                    },
+                    item: {},
+                    grave: {},
+                    moveCounter: 0,
+                },
+                {
+                    active: true,
+                    hero: 'yaga',
+                    health: { current: 13, maximum: 15 },
+                    hand: {
+                        key11: {},
+                        key8: {},
+                        key3: {},
+                        key4: {
+                            id: 'forestMushroom', type: 'item', category: 'panic', health: 2, healthCurrent: 2, disabled: false,
+                        },
+                    },
+                    item: {},
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key6: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    moveCounter: 1,
+                    grave: {},
+                },
+            ],
+        },
+    });
+
+    application.msgReceived(msg, sendReply);
+    // We return random to initial value, so it is not always set to 1
+    // Math.random = oldRandom;
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    const result = sendReply.mock.calls[0][0];
+
+    // ожидаем, что карта "лесные грибы" лежит в item holder у Яги
+    expect(Object.values(result.game.players[1].item)[0].id).toEqual('forestMushroom');
+    // ожидаем, что свойство disabled у 4 случайных карт из 5 в руке Василисы стало == true
+    // то есть, Василиса, в начале хода сможет выбрать только одну карту,
+    // у которой свойство disabled: false
+    expect(Object.values(result.game.players[0].hand)).toContainEqual(
+        { id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: true },
+        { id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: true },
+        { id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: true },
+        { id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false },
+        { id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: true },
+    );
+    // ожидаем, что рэндомная карта с ключом 7 из руки Василисы осталась со свойством disabled: false
+    expect(result.game.players[0].hand.key7.disabled).toEqual(false);
+});
+
+// Test that opponent got forestMushroom card in item holder,and with 60 % chance,
+// active player cards in hand got disabled property  except one random card,
+// and player acted with this one random card, then again with 60% chance he may get
+// possibility to act only with 1 random card as far as forestMushroom card in opponent item holder
+test.only('msg ACTION received: if forestMushroom card is at opponent item, then with 60% player can act only by 1 random card from hand at next action.', () => {
+    const msg = {
+        type: 'ACTION',
+        activeCard: 'key7',
+        target: 'itemOpponent',
+    };
+    const sendReply = jest.fn();
+    application.setApp({
+        game: {
+            phase: 'ACTIVE',
+            players: [
+                {
+                    active: true,
+                    hero: 'premudraya',
+                    health: { current: 10, maximum: 14 },
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key6: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    hand: {
+                        key10: {
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: true,
+                        },
+                        key1: {
+                            id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: true,
+                        },
+                        key5: {
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: true,
+                        },
+                        key7: {
+                            id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
+                        },
+                        key9: {
+                            id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: true,
+                        },
+                    },
+                    item: {},
+                    grave: {},
+                    moveCounter: 0,
+                },
+                {
+                    active: false,
+                    hero: 'yaga',
+                    health: { current: 13, maximum: 15 },
+                    grave: {},
+                    cards: {
+                        key0: {},
+                        key2: {},
+                        key13: {},
+                        key5: {},
+                        key7: {},
+                        key6: {},
+                        key10: {},
+                        key14: {},
+                        key12: {},
+                        key9: {},
+                        key15: {},
+                    },
+                    item: {
+                        key4: {
+                            id: 'forestMushroom', type: 'item', category: 'panic', health: 2, healthCurrent: 2, disabled: false,
+                        },
+                    },
+                },
+            ],
+        },
+    });
+    application.msgReceived(msg, sendReply);
+    expect(sendReply.mock.calls.length).toBe(1);
+
+    const result = sendReply.mock.calls[0][0];
+    // ожидаем, что карта forestMushroom лежит в item holder неактивного игрока
+    expect(Object.values(result.game.players[1].item)[0].id).toEqual('forestMushroom');
+    // ожидаем, здоровье карты forestMushroom после атаки активного игрока уменьшилось
+    expect(Object.values(result.game.players[1].item)[0].healthCurrent).toEqual(1);
+    // ожидаем, что при 60% шанса все карты (кроме 1ой рэндомной) в руке игрока,
+    // имеют свойство disabled === true
+    expect(Object.values(result.game.players[0].hand)).toContainEqual(
+        { id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: true },
+        { id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: true },
+        { id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: true },
+        { id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false },
+    );
+    // ожидаем, что рэндомная карта с ключом 7 из руки Василисы осталась со свойством disabled: false
+    expect(result.game.players[0].hand.key9.disabled).toEqual(false);
 });
