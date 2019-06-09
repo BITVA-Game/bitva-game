@@ -420,12 +420,19 @@ function changeTurn(player, opponent) {
 
 // function checks whether opponent item is not empty
 // and whether opponent has magicTree card in item
-// if so - function change turn runs - active layer becomes inactive etc.
+// if so - function change turn runs after moveCounter === 1, active layer becomes inactive etc.
 function magicTree(player, opponent) {
     let itemId;
     const itemKey = Object.keys(opponent.item)[0];
     itemKey ? itemId = opponent.item[itemKey].id : null;
     player.moveCounter === 1 && itemId === 'magicTree' ? changeTurn(player, opponent) : null;
+}
+
+function malachiteBox(player, opponent, target) {
+    let itemId;
+    const itemKey = Object.keys(player.item)[0];
+    itemKey ? itemId = player.item[itemKey].id : null;
+    itemId === 'malachiteBox' && (target === 'opponent' || target === 'grave' || target === 'hero') ? opponent.health.current -= 1 : null;
 }
 
 function playerActs(game, player, opponent, active, target) {
@@ -532,6 +539,8 @@ function playerActs(game, player, opponent, active, target) {
     player.hand[active] ? null : player.moveCounter += 1;
     // after each move of active player we check whether opponent has magicTree card in item
     magicTree(player, opponent);
+    // after each move of active player we run function malachiteBox if applicable
+    malachiteBox(player, opponent, target);
     // once active player's move counter == 2
     if (player.moveCounter === 2 && game.phase === 'ACTIVE') {
         // console.log(game);
