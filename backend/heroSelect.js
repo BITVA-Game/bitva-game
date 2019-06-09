@@ -20,6 +20,8 @@ function handle(app, message) {
     case 'PLAY':
         return Object.assign({}, app.heroSelect, heroWithCards());
     case 'HEROSELECTED':
+        return Object.assign({}, app.heroSelect, heroWithCards());
+    case 'HEROSSELECTED':
         return Object.assign({});
     default: return app.heroSelect;
     }
