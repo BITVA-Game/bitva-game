@@ -7,6 +7,8 @@ function handle(app, message) {
     case 'PLAY':
         return Object.assign({}, app.manager, { screen: 'HEROSELECT' });
     case 'HEROSELECTED':
+        return Object.assign({}, app.manager, { screen: 'HEROSSELECT' });
+    case 'HEROSSELECTED':
         return Object.assign({}, app.manager, { screen: 'VERSUS' });
     case 'DEALALL':
         return Object.assign({}, app.manager, { screen: 'PLAYERACT' });

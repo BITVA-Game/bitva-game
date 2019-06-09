@@ -50,56 +50,36 @@ function createDeck(heroName) {
     return deck;
 }
 
-const generatePlayers = function (heroName, opponentName) {
+const assignPlayers = function (players) {
     const rand = getRandomBool();
-    const players = [
-        { active: rand },
-        { active: !rand },
-    ];
+    players[0].active = rand;
+    players[1].active = !rand;
 
-    // We create array from all characters objects.
-    const heroSecondName = opponentName;
-
-    // Assign the common data
-    players.forEach((p) => {
-        p.hand = {};
-        p.item = {};
-        p.grave = {};
-        p.moveCounter = 0;
-        p.health = {};
-        p.deal = 0;
-    });
-
-    // Assign individual data to player 0
     players[0].position = 'bottom';
-    players[0].background = allCharacters[heroName].background;
-    players[0].hero = heroName;
-    // players[0].key = keyPlayerOne;
-    players[0].deck = createDeck(heroName);
-    players[0].cards = assignCards(players[0].deck, allCharacters[heroName].cardsNumber);
-    players[0].health.current = allCharacters[heroName].health;
-    players[0].health.maximum = allCharacters[heroName].health;
-
-    // Assign individual data to player 1
     players[1].position = 'top';
-    players[1].background = allCharacters[heroSecondName].background;
-    players[1].hero = heroSecondName;
-    // players[1].key = keyPlayerTwo;
-    players[1].deck = createDeck(heroSecondName);
-    players[1].cards = assignCards(players[1].deck, allCharacters[heroSecondName].cardsNumber);
-    players[1].health.current = allCharacters[heroSecondName].health;
-    players[1].health.maximum = allCharacters[heroSecondName].health;
-
-    // we assign individual key to each hero
-    const keyHero = Object.create(null);
-    players.forEach((p) => {
-        p.keyHero = keygen.number();
-        keyHero[p.keyHero] = p;
-    });
-    // console.log(players);
-    // console.log(`${players[0].hero} is active is ${players[0].active}`);
-    // console.log(`${players[1].hero} is active is ${players[1].active}`);
     return players;
+};
+
+const generatePlayer = function (heroName) {
+    const player = {};
+    player.hand = {};
+    player.item = {};
+    player.grave = {};
+    player.moveCounter = 0;
+    player.health = {};
+    player.deal = 0;
+    player.background = allCharacters[heroName].background;
+    player.hero = heroName;
+    player.deck = createDeck(heroName);
+    player.cards = assignCards(player.deck, allCharacters[heroName].cardsNumber);
+    player.health.current = allCharacters[heroName].health;
+    player.health.maximum = allCharacters[heroName].health;
+
+
+    const keyHero = Object.create(null);
+    player.keyHero = keygen.number();
+    keyHero[player.keyHero] = player;
+    return player;
 };
 
 function playerHasCards(pActive) {
@@ -646,10 +626,15 @@ function handle(appgame, message) {
     }
     case 'HEROSELECTED': {
         const heroName = message.hero;
+        return Object.assign(game, { players: [generatePlayer(heroName)] });
+    }
+    case 'HEROSSELECTED': {
         const opponentName = message.opponent
             ? message.opponent
             : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length, 'indexOpponent')].id;
-        return Object.assign(game, { players: generatePlayers(heroName, opponentName) });
+        console.log(game.players);
+        const players = [game.players[0], generatePlayer(opponentName)];
+        return Object.assign(game, { players: assignPlayers(players) });
     }
     case 'DEALALL': {
         return Object.assign(game, { players: giveCardsToAll(game.players) });
