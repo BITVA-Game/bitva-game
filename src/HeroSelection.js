@@ -143,7 +143,12 @@ class HeroSelection extends Component {
     }
 
     selectHero() {
-        this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected });
+        if (this.props.first) {
+            this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected });
+            this.showHeroList();
+        } else {
+            this.props.sendMessage({ type: 'HEROSSELECTED', opponent: this.state.selected });
+        }
     }
 
     render() {
@@ -173,6 +178,7 @@ class HeroSelection extends Component {
                                 onShow={this.showHero}
                                 changeSelected={this.changeSelected}
                                 selected={this.state.selected}
+                                opponent={!this.props.first}
                             />
                         )
                     }
@@ -212,7 +218,9 @@ HeaderHeroButton.propTypes = {
 HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
+    first: PropTypes.bool.isRequired,
 };
+
 
 CharacterDetailsButton.propTypes = {
     onShow: PropTypes.func.isRequired,

@@ -33,24 +33,37 @@ function sortedHeroes(app) {
 }
 
 // Individual hero block, repeates to display every character
-const HeroBlock = props => (
-    <div className={isAvailable(props.app, props.hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
-        <div className={props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive'} role="button" onMouseEnter={() => props.changeSelected(props.hero.id)} onClick={props.onShow} onKeyPress={props.onShow} tabIndex="-1">
-            <img className="heroselection-hero-image" src={images[props.hero.id]} alt={props.hero.id} />
-            <div className="deck-icon">
-                <div className="deck-text">
-                    {props.hero.cardsNumber}
+class HeroBlock extends React.Component {
+    highlighted() {
+        const highlight = this.props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive';
+        const additional = this.props.opponent ? 'btn-hero btn-hero-ooponent ' : highlight;
+        return additional;
+    }
+
+    render() {
+        const {
+            app, hero, changeSelected, onShow,
+        } = this.props;
+        return (
+            <div className={isAvailable(app, hero) ? 'hero-block' : 'hero-block hero-inaccessable'}>
+                <div className={this.highlighted()} role="button" onMouseEnter={() => changeSelected(hero.id)} onClick={onShow} onKeyPress={onShow} tabIndex="-1">
+                    <img className="heroselection-hero-image" src={images[hero.id]} alt={hero.id} />
+                    <div className="deck-icon">
+                        <div className="deck-text">
+                            {hero.cardsNumber}
+                        </div>
+                    </div>
+                    <div className="health-container">
+                        <img className="health" src={heart} alt="" />
+                        <div className="health-text">
+                            {hero.health}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="health-container">
-                <img className="health" src={heart} alt="" />
-                <div className="health-text">
-                    {props.hero.health}
-                </div>
-            </div>
-        </div>
-    </div>
-);
+        );
+    }
+}
 
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
@@ -63,6 +76,7 @@ const ListOfHeroes = props => (
                 hero={hero}
                 app={props.app}
                 selected={hero.id === props.selected}
+                opponent={props.opponent && hero.id === props.app.game.players[0].hero}
                 changeSelected={props.changeSelected}
             />
         ))}
@@ -75,6 +89,7 @@ HeroBlock.propTypes = {
     hero: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
+    opponent: PropTypes.bool.isRequired,
 };
 
 ListOfHeroes.propTypes = {
@@ -82,6 +97,7 @@ ListOfHeroes.propTypes = {
     changeSelected: PropTypes.func.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
+    opponent: PropTypes.bool.isRequired,
 };
 
 export default ListOfHeroes;
