@@ -1829,10 +1829,6 @@ test('msg ACTION received: if Bow&Arrow card is at opponent item, then with 60% 
 // then active player get turningHand property so next act player can chose any one card from opponent hand to act
 // and his move counter to be increased by 1 only for act by both these cards
 test('msg ACTION received: active player attacks with turningPotion and at next act can choose any 1 card from opponent hand to act for 1 move', () => {
-// Test, that when active player attacks opponent with turningPotion card
-// then active player get turningHand property so next act player can chose any one card from opponent hand to act
-// and his move counter to be increased by 1 only for act by both these cards
-test('msg ACTION received: active player attacks with turningPotion and can choose any 1 card from opponent hand to act for 1 move', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key4',
