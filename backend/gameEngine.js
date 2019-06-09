@@ -152,10 +152,14 @@ function giveCardsToAll(players) {
 
 // This function takes the player and the key for his card
 // and destination = from, then moves card to graveyard via deleting the key from array
-function moveCardGraveyard(player, key, from) {
+function moveCardGraveyard(player, key, from, opponent) {
     if (from === 'item') {
-        // console.log('moveCardGraveyard called for item ', player, key);
+        // console.log('moveCardGraveyard called for item ', player.hero, key);
         player.grave[key] = player.item[key];
+        delete player.item[key];
+    } else if (from === 'itemInactive') {
+        // console.log('moveCardGraveyard called for itemOpponent ', opponent.hero, opponent.grave);
+        opponent.grave[key] = player.item[key];
         delete player.item[key];
     } else {
         // console.log('moveCardGraveyard called ', player, key);
@@ -164,12 +168,13 @@ function moveCardGraveyard(player, key, from) {
     }
 }
 
+
 function damagePlayer(player, points) {
     // console.log('damagePlayer');
     player.health.current -= points;
 }
 
-function attackShield(player, itemKey, points) {
+function attackShield(player, itemKey, points, opponent) {
     // console.log('attackShield');
     if (player.item[itemKey].healthCurrent > points) {
         // console.log('item > points');
@@ -177,19 +182,22 @@ function attackShield(player, itemKey, points) {
     } else if (player.item[itemKey].healthCurrent === points) {
         // console.log('item == points');
         player.item[itemKey].healthCurrent = player.item[itemKey].health;
-        moveCardGraveyard(player, itemKey, 'item');
+        // moveCardGraveyard(player, itemKey, 'item');
+        player.item[itemKey].fromOpponent === true
+            ? moveCardGraveyard(player, itemKey, 'itemInactive', opponent) : moveCardGraveyard(player, itemKey, 'item');
         // console.log(player.grave[itemKey]);
     } else {
-        // console.log('item < points', player.item[itemKey].points, points);
+        // console.log('item < points', player.item[itemKey].healthCurrent, points);
         damagePlayer(player, points - player.item[itemKey].healthCurrent);
         player.item[itemKey].healthCurrent = player.item[itemKey].health;
-        moveCardGraveyard(player, itemKey, 'item');
+        player.item[itemKey].fromOpponent === true
+            ? moveCardGraveyard(player, itemKey, 'itemInactive', opponent) : moveCardGraveyard(player, itemKey, 'item');
     }
 }
 
 // function to reflect half of the damage (or round down to integer) for magicMirror card
 function reflect(opponent, player, points) {
-    // console.log('We are in reflect function!', player);
+    console.log('We are in reflect function!', player);
     const damage = Math.floor(points / 2);
     opponent.health.current -= damage;
     if (Object.keys(player.item).length === 0 || Object.values(player.item)[0].category !== 'shield') {
@@ -210,25 +218,29 @@ function attackOpponent(player, opponent, points) {
     let itemCategory;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemCategory = player.item[itemKey].category : null;
+
     // we check if item holder is not empty and item card does not have shield category
-    if (Object.keys(player.item).length === 0 || itemCategory !== 'shield') {
+    const itemLength = Object.keys(player.item).length;
+    if (itemLength === 0 || itemCategory !== 'shield') {
         // and if item card does not have 'reflect' category (e.g. magicMirror card)
-        // we deduct attack card points from item card points
+        // we descrease hero health for attack card points
         if (itemCategory !== 'reflect') {
-            player.health.current -= points;
+            opponent.turningHand === true
+                ? opponent.health.current -= points : player.health.current -= points;
         }
         // we check for special mirror card at opponent item holder with category 'reflect'
         // and run reflect function if it is present there
         if (itemCategory === 'reflect') {
-            reflect(player, opponent, points);
+            opponent.turningHand === true
+                ? reflect(opponent, player, points) : reflect(player, opponent, points);
         }
         if (player.health.current <= 0) {
             player.health.current = 0;
         }
-    } else if (Object.keys(player.item).length === 1 && itemCategory === 'shield') {
+    } else if (itemLength === 1 && itemCategory === 'shield') {
         // console.log('Were in attack shield');
         // console.log(itemKey);
-        attackShield(player, itemKey, points);
+        attackShield(player, itemKey, points, opponent);
     }
 }
 
@@ -242,13 +254,25 @@ function healPlayer(player, points) {
 }
 
 // we move item card from active player's hand to his item holder
-function moveItem(player, key) {
+function moveItem(player, key, opponent) {
     // we check if there is no card in item holder of active player
     if (Object.keys(player.item).length === 0) {
-        // then active player's item get the active card's key from his hand
-        player.item[key] = player.hand[key];
-        // and also we delete the card with active key from player's hand
-        delete player.hand[key];
+        if (player.turningHand !== true) {
+            // then active player's item get the active card's key from his hand
+            player.item[key] = player.hand[key];
+            // and also we delete the card with active key from player's hand
+            delete player.hand[key];
+        // if player attacked with turningPotion and got turningHand property
+        // then she / he can put to item holder an item card from opponent hand
+        } if (player.turningHand === true) {
+            // then active player's item get the active card's key from opponent's hand
+            player.item[key] = opponent.hand[key];
+            // and such card got new property fromOpponent: true
+            // so we may return it later on back to opponent cards via opponent's graveyard
+            player.item[key].fromOpponent = true;
+            // and also we delete the card with active key from opponent's hand
+            delete opponent.hand[key];
+        }
     }
 }
 
@@ -435,12 +459,23 @@ function malachiteBox(player, opponent, target) {
     itemId === 'malachiteBox' && (target === 'opponent' || target === 'grave' || target === 'hero') ? opponent.health.current -= 1 : null;
 }
 
+// function set turningHand property to both players
+// and allows active player to act with opponent hand card
+// the same phase - moveCoutner increases only after act with opponent hand card
+function turningHand(player, opponent) {
+    player.turningHand = true;
+    opponent.turningHand = true;
+}
+
+// basic function for the game that represents each act of active player
 function playerActs(game, player, opponent, active, target) {
     // at the beggining of each player action
     // we run bowArrow function to check if opponent has bow & arrow card in item
     // and to supress attack points if any
     bowArrow(player, opponent);
-    const activeCard = player.hand[active];
+    let activeCard;
+    player.turningHand !== true
+        ? activeCard = player.hand[active] : activeCard = opponent.hand[active];
     // If the key for the second card is graveyard
     // We send the card that has active key to graveyard
     if (target === 'graveyard') {
@@ -448,6 +483,10 @@ function playerActs(game, player, opponent, active, target) {
         if (Object.keys(player.item)[0] === active) {
             // We move active card from item holder to graveyard
             moveCardGraveyard(player, active, 'item');
+        // if active player can chose opponent's card after act with turningPotion
+        // then we move card from opponent hand to his grave
+        } else if (player.turningHand === true) {
+            moveCardGraveyard(opponent, active);
         } else if (activeCard.disabled === false) {
             // In other cases we move active card from hand to Graveyard
             moveCardGraveyard(player, active);
@@ -461,7 +500,8 @@ function playerActs(game, player, opponent, active, target) {
             switch (activeCard.category) {
             case 'heal':
                 healPlayer(player, activeCard.points);
-                moveCardGraveyard(player, active);
+                player.turningHand === true
+                    ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
                 break;
             case 'attack':
                 break;
@@ -480,9 +520,9 @@ function playerActs(game, player, opponent, active, target) {
             case 'heal':
                 break;
             case 'attack':
-                // console.log('attacking opponent');
                 attackOpponent(opponent, player, activeCard.points);
-                moveCardGraveyard(player, active);
+                player.turningHand === true
+                    ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
                 if (opponent.health.current <= 0) {
                     game.phase = 'OVER';
                 }
@@ -491,13 +531,15 @@ function playerActs(game, player, opponent, active, target) {
             // then move this attack card to gravyeard
             case 'holdCard':
                 disableCards(opponent);
-                moveCardGraveyard(player, active);
+                player.turningHand === true
+                    ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
                 break;
             // if player attacks with card category == attackItems, we call attack items function
             // then move this attack card to gravyeard
             case 'attackItems':
                 attackItems(game.players);
-                moveCardGraveyard(player, active);
+                player.turningHand === true
+                    ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
                 if (opponent.health.current <= 0) {
                     game.phase = 'OVER';
                 }
@@ -506,6 +548,13 @@ function playerActs(game, player, opponent, active, target) {
             // then move this attack card to gravyeard
             case 'showCards':
                 showCards(opponent);
+                player.turningHand === true
+                    ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
+                break;
+            // if player attackes with turningPotion card, we call turningHand function
+            // then move this attack card to gravyeard
+            case 'turning':
+                turningHand(player, opponent);
                 moveCardGraveyard(player, active);
                 break;
 
@@ -518,7 +567,7 @@ function playerActs(game, player, opponent, active, target) {
 
     if (target === 'item' && activeCard.type === 'item') {
         // console.log('We are in move item case');
-        moveItem(player, active);
+        moveItem(player, active, opponent);
     }
     // if player attacks opponent item with card type action, then
     // if item is not empty we deduct points of attack from item card points
@@ -528,15 +577,22 @@ function playerActs(game, player, opponent, active, target) {
         const itemCard = Object.values(opponent.item)[0];
         itemCard.healthCurrent -= activeCard.points;
         if (itemCard.healthCurrent <= 0) {
+            // console.log('itemCard.healthCurrent <= 0');
             itemCard.healthCurrent = itemCard.health;
+            // console.log(opponent.hero, Object.keys(opponent.item)[0]);
             moveCardGraveyard(opponent, Object.keys(opponent.item)[0], 'item');
         }
-        moveCardGraveyard(player, active);
+        player.turningHand === true
+            ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
     }
-
+    // after each act we delete turningHand property for both players
+    // if active player acted after turning potion card
+    // we also turn active card's key to null as players's cards keys duplicate
+    player.turningHand === true && (active in opponent.grave || active in player.item)
+        ? (delete opponent.turningHand) && (delete player.turningHand) && (active = null) : null;
     // after each move we increase active player's counter for 1 if activeCard acted
     // if activeCard remains in player's hand we do not increase move Counter
-    player.hand[active] ? null : player.moveCounter += 1;
+    player.hand[active] || player.turningHand === true ? null : player.moveCounter += 1;
     // after each move of active player we check whether opponent has magicTree card in item
     magicTree(player, opponent);
     // after each move of active player we run function malachiteBox if applicable
