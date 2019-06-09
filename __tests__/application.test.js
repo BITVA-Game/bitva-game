@@ -285,20 +285,25 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     );
 });
 
+
 // Test that both  players gets individual keyHero each. Game state VERSUS.
-test.only('msg HEROSSELECTED received: players  have individual keyHero each.', () => {
+test('msg HEROSELECT THEN HEROSSELECTED received: players  have individual keyHero each.', () => {
 // We only need type for this test.
-    const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'morevna' };
+
+    const msg1 = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
 
     // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
+    application.msgReceived(msg1, sendReply);
+    const msg2 = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'morevna' };
 
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
+    application.msgReceived(msg2, sendReply);
+    expect(sendReply.mock.calls.length).toBe(2);
+    const result = sendReply.mock.calls[1][0];
+    console.log('SECOND CALL', result.game.players);
+
 
     // Find active and inactive players
     let activePlayer = result.game.players[0];
@@ -318,17 +323,19 @@ test.only('msg HEROSSELECTED received: players  have individual keyHero each.', 
 // Test that players cards get property disabled: false once they are dealt to players.
 test('msg HEROSSELECTED received: both players cards get property disabled: fasle.', () => {
     // We only need type for this test.
-    const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'yaga' };
+    const msg1 = { type: 'HEROSELECTED', hero: 'morevna' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
 
     // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
+    application.msgReceived(msg1, sendReply);
+    const msg2 = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'yaga' };
 
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
+    application.msgReceived(msg2, sendReply);
+    expect(sendReply.mock.calls.length).toBe(2);
+    const result = sendReply.mock.calls[1][0];
+    console.log('SECOND CALL', result.game.players);
 
     // Find active andinactive players
     let activePlayer = result.game.players[0];
