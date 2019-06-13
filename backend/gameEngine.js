@@ -144,6 +144,7 @@ function moveCardGraveyard(player, key, from, opponent) {
     } else {
         // console.log('moveCardGraveyard called ', player, key);
         player.grave[key] = player.hand[key];
+        delete player.grave[key].panic;
         delete player.hand[key];
     }
 }
@@ -233,22 +234,17 @@ function healPlayer(player, points) {
     }
 }
 
-// function forestMushroom accept opponent ( inactive player)
+// function forestMushroom accepts opponent
 // and if opponent get 60% chance, then his/ her cards in hand
 // get disabled: true property except one random card
 // so at the begginig of opponent action he can play only this card
 function forestMushroom(opponent) {
-    // console.log('We ate forest mushrooms!!', opponent.hero);
+    console.log('We ate forest mushrooms!!', opponent.hero);
     const chance = getRandomUpTo(10, 'chanceforestMushroom');
     const opponentCards = Object.values(opponent.hand);
     if (chance <= 6) {
-        for (let i = 0; i < Object.keys(opponent.hand).length; i++) {
-            if (opponentCards[i].disabled === false) {
-                opponentCards[i].disabled = true;
-            }
-        }
         const index = getRandomUpTo(opponentCards.length, 'indexMushroom');
-        opponentCards[index].disabled = false;
+        opponentCards[index].panic = true;
     }
     return opponentCards;
 }
@@ -343,7 +339,7 @@ function disableCards(opponent) {
 }
 
 // function to return disabled cards property to false if any have true
-function removeDisable(player, opponent, cardSpecial) {
+function removeDisable(player) {
     const playerCards = Object.values(player.hand);
     for (let i = 0; i < Object.keys(player.hand).length; i++) {
         if (playerCards[i].disabled === true) {
@@ -589,9 +585,9 @@ function playerActs(game, player, opponent, active, target) {
         player.turningHand === true
             ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
     }
-    // after each move we return disabled to false if any have true
-    // for cards in player hand in case of special card == forest mushroom
-    removeDisable(player, opponent, 'forestMushroom');
+    //  after each act we check whether opponent has in item holder card with category panic,
+    // then we call function forestMushroom
+    Object.keys(opponent.item).length !== 0 && Object.values(opponent.item)[0].category === 'panic' ? forestMushroom(player) : null;
     // after each act we delete turningHand property for both players
     // if active player acted after turning potion card
     // we also turn active card's key to null as players's cards keys duplicate
@@ -608,7 +604,7 @@ function playerActs(game, player, opponent, active, target) {
     if (player.moveCounter === 2 && game.phase === 'ACTIVE') {
         // console.log(game);
         // we call function to return disabled cards property to false if any have true
-        removeDisable(player, opponent);
+        removeDisable(player);
         // we check then if any cardsShown property in opponent cards
         // and remove by calling deleteCardsShown function
         deleteCardsShown(opponent);
@@ -659,7 +655,7 @@ function handle(appgame, message) {
         const opponentName = message.opponent
             ? message.opponent
             : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length, 'indexOpponent')].id;
-        console.log(game.players);
+        // console.log(game.players);
         const players = [game.players[0], generatePlayer(opponentName)];
         return Object.assign(game, { players: assignPlayers(players) });
     }
