@@ -527,7 +527,8 @@ function playerActs(game, player, opponent, active, target) {
                     game.phase = 'OVER';
                 }
                 break;
-            // if player attacks with card russianOven with category holdCard we call disableCards function
+            // if player attacks with card russianOven
+            // with category holdCard we call disableCards function
             // then move this attack card to gravyeard
             case 'holdCard':
                 disableCards(opponent);
