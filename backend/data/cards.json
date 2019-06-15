@@ -120,8 +120,8 @@
         "description": "Mortar possess magic powers and can, not only fly, but also grind the desease, pound an ill person into healthy.",
         "initialpoints": 2
     },
-    "forestMushrom": {
-        "id": "forestMushrom",
+    "forestMushroom": {
+        "id": "forestMushroom",
         "name": "Forest Mushroom",
         "type": "item",
         "icon": "arrows",
@@ -277,8 +277,7 @@
         "icon": "arrows",
         "category": "turning",
         "categoryName": "turning",
-        "description": "Deep underground the luminous moss grows. The Potion made of it allows to intoxicate the enemy's consciousness and to enjoy an advantage",
-        "initialpoints": 1
+        "description": "Deep underground the luminous moss grows. The Potion made of it allows to intoxicate the enemy's consciousness and to enjoy an advantage"
     },
     "crown": {
         "id": "crown",
@@ -360,5 +359,9 @@
         "categoryName": "attack",
         "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.",
         "health": 2
-    }
+    },
+    "LEGEND:": {
+        "id": "LEGEND:"
+    },
+    "undefined": {}
 }
