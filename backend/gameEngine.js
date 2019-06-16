@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 /* eslint-disable no-plusplus */
 /* eslint-disable default-case */
 /* eslint-disable no-unused-expressions */
@@ -130,6 +131,13 @@ function giveCardsToAll(players) {
     return players;
 }
 
+// function to remove panic true (for forestMushroom card)
+// from player's hand cards
+function removePanic(player) {
+    const playerCards = Object.values(player.hand);
+    playerCards.forEach(card => (card.panic === true ? delete card.panic : null));
+    return playerCards;
+}
 // This function takes the player and the key for his card
 // and destination = from, then moves card to graveyard via deleting the key from array
 function moveCardGraveyard(player, key, from, opponent) {
@@ -144,7 +152,13 @@ function moveCardGraveyard(player, key, from, opponent) {
     } else {
         // console.log('moveCardGraveyard called ', player, key);
         player.grave[key] = player.hand[key];
-        delete player.grave[key].panic;
+        // we check if card has panic  == false property (forest Mushroom card)
+        // and delete it then we call function removePanic
+        if (player.grave[key].panic === false) {
+            console.log('We delete panic!');
+            delete player.grave[key].panic;
+            removePanic(player);
+        }
         delete player.hand[key];
     }
 }
@@ -236,15 +250,18 @@ function healPlayer(player, points) {
 
 // function forestMushroom accepts opponent
 // and if opponent get 60% chance, then his/ her cards in hand
-// get disabled: true property except one random card
+// get panic: true property except one random card
 // so at the begginig of opponent action he can play only this card
 function forestMushroom(opponent) {
     console.log('We ate forest mushrooms!!', opponent.hero);
     const chance = getRandomUpTo(10, 'chanceforestMushroom');
     const opponentCards = Object.values(opponent.hand);
     if (chance <= 6) {
+        for (let i = 0; i < Object.keys(opponent.hand).length; i++) {
+            opponentCards[i].panic = true;
+        }
         const index = getRandomUpTo(opponentCards.length, 'indexMushroom');
-        opponentCards[index].panic = true;
+        opponentCards[index].panic = false;
     }
     return opponentCards;
 }
@@ -259,9 +276,6 @@ function moveItem(player, key, opponent) {
             player.item[key] = player.hand[key];
             // and also we delete the card with active key from player's hand
             delete player.hand[key];
-            // if active player put in item holder card with category panic,
-            // then we call function forestMushroom
-            player.item[key].category === 'panic' ? forestMushroom(opponent) : null;
         // if player attacked with turningPotion and got turningHand property
         // then she / he can put to item holder an item card from opponent hand
         } if (player.turningHand === true) {
@@ -469,6 +483,10 @@ function turningHand(player, opponent) {
 
 // basic function for the game that represents each act of active player
 function playerActs(game, player, opponent, active, target) {
+    //  at the beggining of each player action we check
+    // whether opponent has in item holder card with category panic,
+    // then we call function forestMushroom
+    Object.keys(opponent.item).length !== 0 && Object.values(opponent.item)[0].category === 'panic' ? forestMushroom(player) : null;
     // at the beggining of each player action
     // we run bowArrow function to check if opponent has bow & arrow card in item
     // and to supress attack points if any
@@ -586,9 +604,6 @@ function playerActs(game, player, opponent, active, target) {
         player.turningHand === true
             ? moveCardGraveyard(opponent, active) : moveCardGraveyard(player, active);
     }
-    //  after each act we check whether opponent has in item holder card with category panic,
-    // then we call function forestMushroom
-    Object.keys(opponent.item).length !== 0 && Object.values(opponent.item)[0].category === 'panic' ? forestMushroom(player) : null;
     // after each act we delete turningHand property for both players
     // if active player acted after turning potion card
     // we also turn active card's key to null as players's cards keys duplicate

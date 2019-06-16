@@ -19,6 +19,7 @@ import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
 import crown from './images/cards/bitva-cardbase.jpg';
 import dolly from './images/cards/bitva-cardbase.jpg';
 import earthquake from './images/cards/bitva-cardbase.jpg';
+import forestMushroom from './images/cards/mushrooms.jpg';
 import gusiLebedi from './images/cards/bitva-cardbase.jpg';
 import horsemanBlack from './images/cards/bitva-cardbase.jpg';
 import horsemanRed from './images/cards/bitva-cardbase.jpg';
@@ -27,7 +28,6 @@ import kikimora from './images/cards/bitva-cardbase.jpg';
 import lizard from './images/cards/lizard.jpg';
 import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
-import mushrooms from './images/cards/mushrooms.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
@@ -51,6 +51,7 @@ const imagesCards = {
     crown,
     dolly,
     earthquake,
+    forestMushroom,
     gusiLebedi,
     horsemanBlack,
     horsemanRed,
@@ -59,7 +60,6 @@ const imagesCards = {
     lizard,
     malachiteBox,
     mortar,
-    mushrooms,
     russianOven,
     shieldLarge,
     shieldSmall,
@@ -262,11 +262,12 @@ const Card = props => (
     <div
         className={`card game-card card-like ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
         data-key={props.cardKey}
-        draggable={props.card.disabled === true ? null : props.draggable}
+        draggable={props.card.disabled === true || props.card.panic === true
+            ? null : props.draggable}
         onDragStart={() => props.cardDragStarted(props.cardKey, props.card)}
         onDragEnd={props.cardDragEnded}
     >
-        {props.card.disabled === true ? <div className="card-chained" /> : null}
+        {props.card.disabled === true || props.card.panic === true ? <div className="card-chained" /> : null}
         <div className="card-header">
             <div className={`card-icon-container game-card-icon-container ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
                 <div className={`card-icon game-card-icon

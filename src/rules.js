@@ -13,7 +13,6 @@ export default function isTarget(target, dragging, active, player) {
             || (target === 'itemOpponent' && dragging.card.category === 'attack')
             || (target === 'opponent' && dragging.card.category === 'holdCard')
             || (target === 'opponent' && dragging.card.category === 'attackItems')
-            || (player.item[0].id === 'forestMushroom' && dragging.card.panic === 'true' ? dragging.card.panic === 'true' : null)
         );
     }
     return (

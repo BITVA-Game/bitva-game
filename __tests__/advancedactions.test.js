@@ -3169,8 +3169,8 @@ test('msg ACTION received: active player attacked with turningPotion and now att
     expect(result.game.players[0].health.current).toEqual(15);
 });
 
-// Test that once active player has forestMushroom card in item holder, inactive player has gotten 60 % chance,
-// and inactive player cards in hand are getting disabled: true property except one random card,
+// Test that once active player can put  forestMushroom card in item holder,
+// then at next action opponent can get 60 % chance,
 // so opponent at the beggining of his next action can act only with this one random card from his/her hand ( move counter +1)
 test('msg ACTION received: if forestMushroom card is at player item holder, then with 60% opponent can aget only 1 random card available from hand.', () => {
     const msg = {
@@ -3252,16 +3252,13 @@ test('msg ACTION received: if forestMushroom card is at player item holder, then
 
     // ожидаем, что карта "лесные грибы" лежит в item holder у Яги
     expect(Object.values(result.game.players[1].item)[0].id).toEqual('forestMushroom');
-    // ожидаем, что рэндомная карта с ключом 7 из руки Василисы приобрела свойство panic: true
-    expect(result.game.players[0].hand.key7.panic).toEqual(true);
 });
 
 // Test that if opponent has forestMushroom card in item holder, then with 60 % chance,
-// active player's one random card in hand got panic: true property ,
-// and then player acted with this one random card, it went to graveyard and panic property dissapeared
-// then again with 60% chance active player may get possibility to act only with
-// 1 random card as far as forestMushroom card in opponent item holder
-test('msg ACTION received: if forestMushroom card is at opponent item, then with 60% player can act only by 1 random card from hand at next action.', () => {
+// active player's one random card in hand got panic: true property, at the beggining of action
+// and then player acted with this one random card, it went to graveyard and panic: false property dissapeared
+// and also panic: true property deleted from cards in actie player's hand
+test('msg ACTION received: if forestMushroom card is at opponent item, then with 60% player can act only by 1 random card from hand at this action.', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key7',
@@ -3291,19 +3288,19 @@ test('msg ACTION received: if forestMushroom card is at opponent item, then with
                     },
                     hand: {
                         key10: {
-                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false, panic: true,
                         },
                         key1: {
-                            id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: false,
+                            id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: false, panic: true,
                         },
                         key7: {
-                            id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false, panic: true,
+                            id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false, panic: false,
                         },
                         key9: {
-                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false, panic: true,
                         },
                         key5: {
-                            id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false,
+                            id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false, panic: true,
                         },
                     },
                     item: {},
@@ -3348,7 +3345,6 @@ test('msg ACTION received: if forestMushroom card is at opponent item, then with
     expect(Object.values(result.game.players[1].item)[0].healthCurrent).toEqual(1);
     // ожидаем, что рэндомная карта с ключом 9 из руки Василисы приобрела свойство panic: true
     // а остальные карты в руке остались неизменны
-    expect(result.game.players[0].hand.key9.panic).toEqual(true);
     expect(result.game.players[0].hand).toEqual(
         {
             key10: {
@@ -3361,7 +3357,7 @@ test('msg ACTION received: if forestMushroom card is at opponent item, then with
                 id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false,
             },
             key9: {
-                id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false, panic: true,
+                id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
             },
         },
     );
@@ -3378,7 +3374,7 @@ test('msg ACTION received: if forestMushroom card is at opponent item, then with
 });
 
 // Test that if opponent has forestMushroom card in item holder, and with 60 % chance,
-// active player's one random card in hand got before panic: true property ,
+// active player's one random card in hand got at the beggining of action panic: false property ,
 // and now player acted with this one random card, it went to graveyard and panic property dissapeared
 // 'forestMushroom' card has lost its healthCurrent points and went to graveyard
 // no cards in hand of player got any panic property now
@@ -3412,19 +3408,19 @@ test('msg ACTION received: if forestMushroom card is at opponent item, then at 2
                     },
                     hand: {
                         key10: {
-                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false,
+                            id: 'magicMirror', type: 'item', category: 'reflect', points: 2, initialpoints: 2, disabled: false, panic: true,
                         },
                         key1: {
-                            id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: false,
+                            id: 'horsemanBlack', type: 'action', category: 'attack', points: 3, initialpoints: 3, disabled: false, panic: true,
                         },
-                        key5: {
-                            id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false,
+                        key9: {
+                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false, panic: false,
                         },
                         key7: {
                             id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false, panic: true,
                         },
-                        key9: {
-                            id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
+                        key5: {
+                            id: 'chemise', type: 'action', category: 'heal', points: 5, initialpoints: 5, disabled: false, panic: true,
                         },
                     },
                     item: {},
@@ -3479,6 +3475,7 @@ test('msg ACTION received: if forestMushroom card is at opponent item, then at 2
     );
     // ожидаем, что ни одна из карт в руке Василисы не содержат свойства panic: true
     expect(Object.values(result.game.players[0].hand)).not.toContainEqual({ panic: true });
+    expect(Object.values(result.game.players[0].hand)).not.toContainEqual({ panic: false });
     // ожидаем, что Василиса походила, moveCounter + 1 = 2 а потом обнулился при переходе хода
     // и Василиса стала неактивной
     expect(result.game.players[0].moveCounter).toEqual(0);
@@ -3488,7 +3485,7 @@ test('msg ACTION received: if forestMushroom card is at opponent item, then at 2
 // Test that if active player has forestMushroom card in item holder from previous turn, then with 60 % chance,
 // opponent's one random card in hand got at previous act panic: true property ,
 // then if active player acts now - none of the cards get panic property
-test.only('msg ACTION received: if forestMushroom card is at opponent item, player got 60% chance and acted with 1 random card from hand, turn change, no panic .', () => {
+test('msg ACTION received: if forestMushroom card is at opponent item, player got 60% chance and acted with 1 random card from hand, turn change, no panic .', () => {
     const msg = {
         type: 'ACTION',
         activeCard: 'key10',
