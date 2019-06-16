@@ -11,7 +11,7 @@ const heroData = require('../backend/data/characters.json');
 jest.mock('../backend/randomFunc');
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
-test('Game loaded. Send the app in its initial state', () => {
+test.only('Game loaded. Send the app in its initial state', () => {
     // Create a messade that has type and may have additional data later.
     // We only need type for this test.
     const msg = { type: 'INITIAL' };
@@ -27,7 +27,7 @@ test('Game loaded. Send the app in its initial state', () => {
 });
 
 // Test the first game state Play, returns the available characters
-test('First game state Play. The Player can select any of the characters he has', () => {
+test.only('First game state Play. The Player can select any of the characters he has', () => {
     // Again we only need type
     const msg = { type: 'PLAY' };
 

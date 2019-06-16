@@ -691,8 +691,8 @@ function makeMove(game, msg) {
     return game;
 }
 
-function handle(appgame, message) {
-    const game = Object.assign({}, appgame);
+function handle(app, message) {
+    const game = Object.assign({}, app.game);
 
     switch (message.type) {
     case 'INITIAL': {
@@ -700,6 +700,9 @@ function handle(appgame, message) {
     }
     case 'PROFILE': {
         return game;
+    }
+    case 'PLAY': {
+        return Object.assign(game, { activePlayer: app.profiles[0].id });
     }
     case 'HEROSELECTED': {
         const heroName = message.hero;

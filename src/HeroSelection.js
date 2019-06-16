@@ -8,6 +8,7 @@ import './css/MainMenu.css';
 import './css/App.css';
 import './css/HeroSelection.css';
 import styles from './css/HeroSelection.module.css';
+import { sortedHeroesList } from './rules';
 
 // button in the header to choose previous or next character in the list
 const HeaderHeroButton = props => (
@@ -66,23 +67,12 @@ const BackButton = props => (
     </div>
 );
 
-function sortedHeroesList(app) {
-    // Sort characters' names based on profile and alphabet
-    return Object.keys(app.heroSelect).sort((h1, h2) => {
-        const id1 = app.profile.characters.indexOf(h1);
-        const id2 = app.profile.characters.indexOf(h2);
-        if (id1 === id2) {
-            return h1 > h2 ? 1 : -1;
-        }
-        return id1 > id2 ? -1 : 1;
-    });
-}
 
 class HeroSelection extends Component {
     constructor(props) {
         super(props);
         this.app = props.app;
-        this.heroesList = sortedHeroesList(this.app);
+        this.heroesList = sortedHeroesList(this.app).map(h => h.id);
         this.defaultHeroID = this.heroesList[0];
         this.state = {
             hero: null,

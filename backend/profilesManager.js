@@ -1,8 +1,8 @@
 function handle(app, message) {
     switch (message.type) {
     case 'INITIAL':
-        return app.profile;
-    default: return app.profile;
+        return app.profiles;
+    default: return app.profiles;
     }
 }
 

@@ -21,3 +21,21 @@ export default function isTarget(target, dragging, active, player) {
             || (target === 'graveyard')
     );
 }
+
+
+export function activeProfile(app) {
+    return app.profiles.find(p => p.id === app.game.activePlayer);
+}
+
+export function sortedHeroesList(app) {
+    // Sort characters' names based on profile and alphabet
+    const characters = activeProfile(app).characters;
+    return Object.values(app.heroSelect).sort((h1, h2) => {
+        const id1 = characters.indexOf(h1.id);
+        const id2 = characters.indexOf(h2.id);
+        if (id1 === id2) {
+            return h1.id > h2.id ? 1 : -1;
+        }
+        return id1 > id2 ? -1 : 1;
+    });
+}

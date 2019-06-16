@@ -1,15 +1,18 @@
 {
-	"profile": {
-		"characters": ["morevna", "yaga", "premudraya", "hozyaika"],
-		"deck": ["apple"],
-		"gold": 0
-	},
-	"players": [{ "id": "player1" }, { "id": "player2" }],
+	"profiles": [
+		{
+			"id": "player1",
+			"characters": ["morevna", "yaga", "premudraya"]
+		},
+		{
+			"id": "player2",
+			"characters": ["morevna", "yaga"]
+		}
+	],
 	"manager": {
 		"screen": "STARTSCREEN"
 	},
 	"game": {
 		"phase": "ACTIVE"
 	}
-
 }

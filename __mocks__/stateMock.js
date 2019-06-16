@@ -1,10 +1,14 @@
 export const startscreenState = {
-    profile: {
-        characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
-        deck: ['apple'],
-        gold: 0,
-    },
-    players: [{ id: 'player1' }, { id: 'player2' }],
+    profiles: [
+        {
+            id: 'player1',
+            characters: ['morevna', 'yaga', 'premudraya'],
+        },
+        {
+            id: 'player2',
+            characters: ['morevna', 'yaga'],
+        },
+    ],
     manager: {
         screen: 'STARTSCREEN',
     },
@@ -14,27 +18,37 @@ export const startscreenState = {
 };
 
 export const heroselectState = {
-    profile: {
-        characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
-        deck: ['apple'],
-        gold: 0,
+    profiles: [
+        {
+            id: 'player1',
+            characters: ['morevna', 'yaga', 'premudraya'],
+        },
+        {
+            id: 'player2',
+            characters: ['morevna', 'yaga'],
+        },
+    ],
+    heroSelect: {
+        morevna: {},
+        yaga: {},
+        premudraya: {},
+        hozyaika: {},
     },
     manager: {
         screen: 'HEROSELECT',
     },
     game: {
-
+        activePlayer: 'player1',
     },
 };
 
 export const heroselectedState = {
-    profile: {
+    profiles: {
         characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
         deck: ['apple'],
         gold: 0,
     },
-    heroSelect: {
-    },
+    heroSelect: {},
     game: {
 
     },

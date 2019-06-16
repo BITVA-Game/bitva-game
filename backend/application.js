@@ -5,8 +5,7 @@ let application = require('./data/app.json');
 
 // Additional files that have functions related to this part of application
 const screenManager = require('./screenManager');
-const profileManager = require('./profileManager');
-const playersManager = require('./playersManager');
+const profilesManager = require('./profilesManager');
 const gameEngine = require('./gameEngine');
 const heroManager = require('./heroSelect');
 const socketClient = require('./socketClient');
@@ -29,12 +28,10 @@ const socketClient = require('./socketClient');
 // so we can se what we're sending back.
 function msgReceived(message, sendReply) {
     const newApp = {
-        players: playersManager.handle(application, message),
-        // TODO move profiles into players
-        profile: profileManager.handle(application, message),
+        profiles: profilesManager.handle(application, message),
         manager: screenManager.handle(application, message),
         heroSelect: heroManager.handle(application, message),
-        game: gameEngine.handle(application.game, message),
+        game: gameEngine.handle(application, message),
     };
     // writeGameObject(newApp);
     if (message.network) {
