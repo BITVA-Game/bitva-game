@@ -709,7 +709,6 @@ function handle(appgame, message) {
         const opponentName = message.opponent
             ? message.opponent
             : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length, 'indexOpponent')].id;
-        // console.log(game.players);
         const players = [game.players[0], generatePlayer(opponentName)];
         return Object.assign(game, { players: assignPlayers(players) });
     }

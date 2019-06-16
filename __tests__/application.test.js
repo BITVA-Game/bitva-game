@@ -11,7 +11,7 @@ const heroData = require('../backend/data/characters.json');
 jest.mock('../backend/randomFunc');
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
-test.only('Game loaded. Send the app in its initial state', () => {
+test('Game loaded. Send the app in its initial state', () => {
     // Create a messade that has type and may have additional data later.
     // We only need type for this test.
     const msg = { type: 'INITIAL' };
@@ -302,8 +302,6 @@ test('msg HEROSELECT THEN HEROSSELECTED received: players  have individual keyHe
     application.msgReceived(msg2, sendReply);
     expect(sendReply.mock.calls.length).toBe(2);
     const result = sendReply.mock.calls[1][0];
-    console.log('SECOND CALL', result.game.players);
-
 
     // Find active and inactive players
     let activePlayer = result.game.players[0];
@@ -335,7 +333,6 @@ test('msg HEROSSELECTED received: both players cards get property disabled: fasl
     application.msgReceived(msg2, sendReply);
     expect(sendReply.mock.calls.length).toBe(2);
     const result = sendReply.mock.calls[1][0];
-    console.log('SECOND CALL', result.game.players);
 
     // Find active andinactive players
     let activePlayer = result.game.players[0];
