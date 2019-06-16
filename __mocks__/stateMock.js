@@ -4,6 +4,7 @@ export const startscreenState = {
         deck: ['apple'],
         gold: 0,
     },
+    players: [{ id: 'player1' }, { id: 'player2' }],
     manager: {
         screen: 'STARTSCREEN',
     },
