@@ -136,6 +136,9 @@ function giveCardsToAll(players) {
 function removePanic(player) {
     const playerCards = Object.values(player.hand);
     playerCards.forEach(card => (card.panic === true ? delete card.panic : null));
+    if (Object.keys(player.item).length !== 0) {
+        delete Object.values(player.item)[0].panic;
+    }
     return playerCards;
 }
 // This function takes the player and the key for his card
@@ -155,7 +158,7 @@ function moveCardGraveyard(player, key, from, opponent) {
         // we check if card has panic  == false property (forest Mushroom card)
         // and delete it then we call function removePanic
         if (player.grave[key].panic === false) {
-            console.log('We delete panic!');
+            // console.log('We delete panic!');
             delete player.grave[key].panic;
             removePanic(player);
         }
@@ -253,15 +256,21 @@ function healPlayer(player, points) {
 // get panic: true property except one random card
 // so at the begginig of opponent action he can play only this card
 function forestMushroom(opponent) {
-    console.log('We ate forest mushrooms!!', opponent.hero);
+    // console.log('We ate forest mushrooms!!', opponent.hero);
     const chance = getRandomUpTo(10, 'chanceforestMushroom');
     const opponentCards = Object.values(opponent.hand);
     if (chance <= 6) {
         for (let i = 0; i < Object.keys(opponent.hand).length; i++) {
             opponentCards[i].panic = true;
         }
+        Object.keys(opponent.item).length !== 0
+            ? Object.values(opponent.item)[0].panic = true : null;
         const index = getRandomUpTo(opponentCards.length, 'indexMushroom');
         opponentCards[index].panic = false;
+        if (opponentCards[index].disabled === true) {
+            opponentCards[index].panic = false;
+            opponentCards[index].disabled = false;
+        }
     }
     return opponentCards;
 }
@@ -274,6 +283,13 @@ function moveItem(player, key, opponent) {
         if (player.turningHand !== true) {
             // then active player's item get the active card's key from his hand
             player.item[key] = player.hand[key];
+            // we check if card has panic  == false property (forest Mushroom card)
+            // and delete it, then we call function removePanic
+            if (player.item[key].panic === false) {
+                console.log('We delete panic!');
+                delete player.item[key].panic;
+                player.turningHand === true ? removePanic(opponent) : removePanic(player);
+            }
             // and also we delete the card with active key from player's hand
             delete player.hand[key];
         // if player attacked with turningPotion and got turningHand property
@@ -350,6 +366,8 @@ function disableCards(opponent) {
     }
     opponentCards[index1].disabled = true;
     opponentCards[index2].disabled = true;
+    opponentCards[index1].panic === false ? opponentCards[index1].disabled = false : null;
+    opponentCards[index2].panic === false ? opponentCards[index2].disabled = false : null;
 }
 
 // function to return disabled cards property to false if any have true
@@ -483,10 +501,6 @@ function turningHand(player, opponent) {
 
 // basic function for the game that represents each act of active player
 function playerActs(game, player, opponent, active, target) {
-    //  at the beggining of each player action we check
-    // whether opponent has in item holder card with category panic,
-    // then we call function forestMushroom
-    Object.keys(opponent.item).length !== 0 && Object.values(opponent.item)[0].category === 'panic' ? forestMushroom(player) : null;
     // at the beggining of each player action
     // we run bowArrow function to check if opponent has bow & arrow card in item
     // and to supress attack points if any
@@ -612,6 +626,9 @@ function playerActs(game, player, opponent, active, target) {
     // after each move we increase active player's counter for 1 if activeCard acted
     // if activeCard remains in player's hand we do not increase move Counter
     player.hand[active] || player.turningHand === true ? null : player.moveCounter += 1;
+    // after each move of active player we check for forestMushroom in opponent's item
+    Object.keys(opponent.item).length !== 0 && Object.values(opponent.item)[0].category === 'panic' && player.moveCounter === 1
+        ? forestMushroom(player) : null;
     // after each move of active player we check whether opponent has magicTree card in item
     magicTree(player, opponent);
     // after each move of active player we run function malachiteBox if applicable
@@ -629,6 +646,10 @@ function playerActs(game, player, opponent, active, target) {
 
         // run changeTurn function
         changeTurn(player, opponent);
+        //  after change of turn,  we check
+        // whether inactive player has in item holder card forest Mushroom with category panic,
+        // then we call function forestMushroom
+        Object.keys(player.item).length !== 0 && Object.values(player.item)[0].category === 'panic' ? forestMushroom(opponent, 'afterTurn') : null;
         // we run bowArrow function to check if opponent has bow & arrow card in item
         // and to supress attack points if any
         bowArrow(player, opponent);
