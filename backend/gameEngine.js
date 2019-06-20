@@ -481,7 +481,10 @@ function magicTree(player, opponent) {
     let itemId;
     const itemKey = Object.keys(opponent.item)[0];
     itemKey ? itemId = opponent.item[itemKey].id : null;
-    player.moveCounter === 1 && itemId === 'magicTree' ? changeTurn(player, opponent) : null;
+    if (player.moveCounter === 1 && itemId === 'magicTree') {
+        giveCardsTo(player);
+        changeTurn(player, opponent);
+    }
 }
 
 function malachiteBox(player, opponent, target) {

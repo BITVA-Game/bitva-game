@@ -26,6 +26,7 @@ import horsemanRed from './images/cards/bitva-cardbase.jpg';
 import horsemanWhite from './images/cards/bitva-cardbase.jpg';
 import kikimora from './images/cards/bitva-cardbase.jpg';
 import lizard from './images/cards/lizard.jpg';
+import magicTree from './images/cards/tree.jpg';
 import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
@@ -58,6 +59,7 @@ const imagesCards = {
     horsemanWhite,
     kikimora,
     lizard,
+    magicTree,
     malachiteBox,
     mortar,
     russianOven,
