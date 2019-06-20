@@ -186,7 +186,11 @@
             },
             "skullLantern": {
                 "id": "skullLantern",
-                "count": 2
+                "count": 1
+            },
+            "magicMirror": {
+                "id": "magicMirror",
+                "count": 1
             }
         },
         "background": "blue"
