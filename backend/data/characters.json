@@ -88,7 +88,11 @@
             },
             "russianOven": {
                 "id": "russianOven",
-                "count": 2
+                "count": 1
+            },
+            "forestMushroom": {
+                "id": "forestMushroom",
+                "count": 1
             }
         },
         "background": "red"
