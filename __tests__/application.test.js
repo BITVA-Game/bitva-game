@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 import {
-    startscreenState, heroselectState, versusState,
+    startscreenState, heroselectStateP1, heroselectStateP2, versusState,
 } from '../__mocks__/stateMock';
 
 // import module for tests
@@ -27,7 +27,7 @@ test.only('Game loaded. Send the app in its initial state', () => {
 });
 
 // Test the first game state Play, returns the available characters
-test.only('First game state Play. The Player can select any of the characters he has', () => {
+test.only('First game state Play. Player1 can select any of the characters he has', () => {
     // Again we only need type
     const msg = { type: 'PLAY' };
 
@@ -38,38 +38,17 @@ test.only('First game state Play. The Player can select any of the characters he
     application.msgReceived(msg, sendReply);
 
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectState);
+    expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectStateP1);
 });
 
 
 // Test msg PLAY returns list with all available characters.game state  Hero Select.
-test('PLAY msg received. List with all characters added - HERO SELECT state.', () => {
-    // We only need type for this test.
-    const msg = { type: 'PLAY' };
 
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // Save the data into variable for checks
-    const heroSelect = sendReply.mock.calls[0][0].heroSelect;
-    expect(heroSelect.morevna.cardsNumber).toEqual(heroData.morevna.cardsNumber);
-    expect(heroSelect.morevna.health).toEqual(heroData.morevna.health);
-    expect(Object.keys(heroSelect.morevna.cards).length).toEqual(Object.keys(heroData.morevna.cards).length);
-
-    expect(heroSelect.yaga.cardsNumber).toEqual(heroData.yaga.cardsNumber);
-    expect(heroSelect.yaga.health).toEqual(heroData.yaga.health);
-    expect(Object.keys(heroSelect.yaga.cards).length).toEqual(Object.keys(heroData.yaga.cards).length);
-});
 
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
-test('msg HEROSELECTED received. List with charactes cleared. State Hero Selected.', () => {
+test.only('msg HEROSELECTED received from P1, P2 is active', () => {
     // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
+    const msg = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -77,13 +56,11 @@ test('msg HEROSELECTED received. List with charactes cleared. State Hero Selecte
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
-    const newGame = sendReply.mock.calls[0][0];
-    expect(newGame.game.players.length).toEqual(1);
-    expect(newGame.game.players[0].hero).toEqual('morevna');
+    expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectStateP2);
 });
 
 // screen swtich to state VERSUS after hero is selected
-test('msg HEROSSELECTED switches screen state to VERSUS', () => {
+test('msg HEROSELECTED for 2 players switches screen state to VERSUS', () => {
     // We only need type for this test.
     const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'yaga' };
 

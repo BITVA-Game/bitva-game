@@ -1,12 +1,21 @@
 {
-	"profiles": [
-		{
+	"accounts": [{
 			"id": "player1",
-			"characters": ["morevna", "yaga", "premudraya"]
+			"heroes": ["morevna", "yaga", "premudraya"]
 		},
 		{
 			"id": "player2",
-			"characters": ["morevna", "yaga"]
+			"heroes": ["morevna", "yaga"]
+		}
+	],
+	"terminals": [{
+		"players": ["player1", "player2"]
+	}],
+	"profiles": [{
+			"id": "player1"
+		},
+		{
+			"id": "player2"
 		}
 	],
 	"manager": {

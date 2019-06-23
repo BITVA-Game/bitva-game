@@ -1,3 +1,10 @@
+function heroSelected(app) {
+    if (app.heroSelect.players.length === 2) {
+        return { screen: 'VERSUS' };
+    }
+    return { screen: 'HEROSELECT' };
+}
+
 function handle(app, message) {
     switch (message.type) {
     case 'INITIAL':
@@ -7,9 +14,7 @@ function handle(app, message) {
     case 'PLAY':
         return Object.assign({}, app.manager, { screen: 'HEROSELECT' });
     case 'HEROSELECTED':
-        return Object.assign({}, app.manager, { screen: 'HEROSSELECT' });
-    case 'HEROSSELECTED':
-        return Object.assign({}, app.manager, { screen: 'VERSUS' });
+        return Object.assign({}, app.manager, heroSelected(app));
     case 'DEALALL':
         return Object.assign({}, app.manager, { screen: 'PLAYERACT' });
     case 'STARTSCREEN':

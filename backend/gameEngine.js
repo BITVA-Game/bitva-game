@@ -52,6 +52,7 @@ function createDeck(heroName) {
 }
 
 const assignPlayers = function (players) {
+    if (players.length < 2) { return players; }
     const rand = getRandomBool();
     players[0].active = rand;
     players[1].active = !rand;
@@ -61,8 +62,9 @@ const assignPlayers = function (players) {
     return players;
 };
 
-const generatePlayer = function (heroName) {
+const generatePlayer = function (heroName, id) {
     const player = {};
+    player.id = id;
     player.hand = {};
     player.item = {};
     player.grave = {};
@@ -695,24 +697,11 @@ function handle(app, message) {
     const game = Object.assign({}, app.game);
 
     switch (message.type) {
-    case 'INITIAL': {
-        return game;
-    }
-    case 'PROFILE': {
-        return game;
-    }
     case 'PLAY': {
-        return Object.assign(game, { activePlayer: app.profiles[0].id });
+        return Object.assign(game, { players: [] });
     }
     case 'HEROSELECTED': {
-        const heroName = message.hero;
-        return Object.assign(game, { players: [generatePlayer(heroName)] });
-    }
-    case 'HEROSSELECTED': {
-        const opponentName = message.opponent
-            ? message.opponent
-            : Object.values(allCharacters)[getRandomUpTo(Object.keys(allCharacters).length, 'indexOpponent')].id;
-        const players = [game.players[0], generatePlayer(opponentName)];
+        const players = game.players.concat(generatePlayer(message.hero, message.player));
         return Object.assign(game, { players: assignPlayers(players) });
     }
     case 'DEALALL': {
@@ -726,7 +715,7 @@ function handle(app, message) {
     }
     case 'NETWORKPLAY': { return game; }
 
-    default: { return game; }
+    default: { return null; }
     }
 }
 

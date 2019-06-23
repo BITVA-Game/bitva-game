@@ -2,11 +2,9 @@ export const startscreenState = {
     profiles: [
         {
             id: 'player1',
-            characters: ['morevna', 'yaga', 'premudraya'],
         },
         {
             id: 'player2',
-            characters: ['morevna', 'yaga'],
         },
     ],
     manager: {
@@ -17,15 +15,13 @@ export const startscreenState = {
     },
 };
 
-export const heroselectState = {
+export const heroselectStateP1 = {
     profiles: [
         {
             id: 'player1',
-            characters: ['morevna', 'yaga', 'premudraya'],
         },
         {
             id: 'player2',
-            characters: ['morevna', 'yaga'],
         },
     ],
     heroSelect: {
@@ -33,40 +29,63 @@ export const heroselectState = {
         yaga: {},
         premudraya: {},
         hozyaika: {},
+        heroes: ['morevna', 'yaga', 'premudraya'],
+        activePlayer: 'player1',
+        players: [],
     },
     manager: {
         screen: 'HEROSELECT',
     },
     game: {
-        activePlayer: 'player1',
+        players: [],
     },
 };
 
-export const heroselectedState = {
-    profiles: {
-        characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
-        deck: ['apple'],
-        gold: 0,
+export const heroselectStateP2 = {
+    profiles: [
+        {
+            id: 'player1',
+        },
+        {
+            id: 'player2',
+        },
+    ],
+    heroSelect: {
+        morevna: {},
+        yaga: {},
+        premudraya: {},
+        hozyaika: {},
+        heroes: ['morevna', 'yaga'],
+        activePlayer: 'player2',
+        players: [{ hero: 'morevna', id: 'player1' }],
     },
-    heroSelect: {},
+    manager: {
+        screen: 'HEROSELECT',
+    },
     game: {
-
+        players: [{ hero: 'morevna', id: 'player1' }],
     },
 };
 
 export const versusState = {
-    profile: {
-        characters: ['morevna', 'yaga', 'premudraya', 'hozyaika'],
-        deck: ['apple'],
-        gold: 0,
-    },
+    profiles: [
+        {
+            id: 'player1',
+        },
+        {
+            id: 'player2',
+        },
+    ],
     heroSelect: {
     },
     manager: {
         screen: 'VERSUS',
     },
     game: {
-
+        players: [
+            { hero: 'morevna', id: 'player1' },
+            { hero: 'yaga', id: 'player2' },
+        ],
     },
 };
 

@@ -28,11 +28,14 @@ const socketClient = require('./socketClient');
 // so we can se what we're sending back.
 function msgReceived(message, sendReply) {
     const newApp = {
+        accounts: application.accounts,
+        terminals: application.terminals,
         profiles: profilesManager.handle(application, message),
-        manager: screenManager.handle(application, message),
         heroSelect: heroManager.handle(application, message),
         game: gameEngine.handle(application, message),
     };
+    newApp.manager = screenManager.handle(application, message);
+
     // writeGameObject(newApp);
     if (message.network) {
         newApp.network = true;
