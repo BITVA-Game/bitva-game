@@ -30,6 +30,7 @@ import magicTree from './images/cards/tree.jpg';
 import magicMirror from './images/cards/bitva-cardbase.jpg';
 import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
+import plateMail from './images/cards/bitva-cardbase.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
@@ -64,6 +65,7 @@ const imagesCards = {
     magicMirror,
     malachiteBox,
     mortar,
+    plateMail,
     russianOven,
     shieldLarge,
     shieldSmall,

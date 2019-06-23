@@ -34,6 +34,7 @@ import magicMirror from './images/cards/bitva-cardbase.jpg';
 import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
 import mushrooms from './images/cards/mushrooms.jpg';
+import plateMail from './images/cards/bitva-cardbase.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
@@ -75,6 +76,7 @@ const imagesCards = {
     malachiteBox,
     mortar,
     mushrooms,
+    plateMail,
     russianOven,
     shieldLarge,
     shieldSmall,

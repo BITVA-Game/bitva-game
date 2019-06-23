@@ -41,7 +41,11 @@
             },
             "waterLiving": {
                 "id": "waterLiving",
-                "count": 2
+                "count": 1
+            },
+            "plateMail": {
+                "id": "plateMail",
+                "count": 1
             }
         },
         "background": "ochre"
@@ -88,6 +92,10 @@
             },
             "russianOven": {
                 "id": "russianOven",
+                "count": 1
+            },
+            "forestMushroom": {
+                "id": "forestMushroom",
                 "count": 1
             },
             "magicTree": {

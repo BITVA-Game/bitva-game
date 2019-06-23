@@ -122,7 +122,7 @@
     },
     "forestMushroom": {
         "id": "forestMushroom",
-        "name": "Forest Mushroom",
+        "name": "Forest Mushrooms",
         "type": "item",
         "icon": "arrows",
         "category": "panic",
@@ -330,6 +330,16 @@
         "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
         "initialpoints": 4
     },
+    "plateMail": {
+        "id": "plateMail",
+        "name": "Plate Mail",
+        "type": "item",
+        "icon": "hand",
+        "category": "reflect",
+        "categoryName": "reflect",
+        "description": "Plate mail is a  bogatyr's armor. Bewitched plate mail is saving warrior's life, reflecting enemy's attack turning stroke back.",
+        "health": 3
+    },
     "sivka": {
         "id": "sivka",
         "name": "Sivka-Burka",
@@ -359,6 +369,26 @@
         "categoryName": "attack",
         "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.",
         "health": 2
+    },
+    "ring": {
+        "id": "ring",
+        "type": "item"
+    },
+    "helmet": {
+        "id": "helmet",
+        "type": "item"
+    },
+    "bracer": {
+        "id": "bracer",
+        "type": "item"
+    },
+    "chainMail": {
+        "id": "chainMail",
+        "type": "item"
+    },
+    "lapti": {
+        "id": "lapti",
+        "type": "item"
     },
     "LEGEND:": {
         "id": "LEGEND:"
