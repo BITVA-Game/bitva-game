@@ -194,26 +194,27 @@ function attackShield(player, itemKey, points, opponent) {
 }
 
 // function to reflect half of the damage (or round down to integer) for magicMirror card
-// or reflect 1 point back in case of plateMail
+// if active card has 1 attack points then each player gets 1 pnt damage
+// or in case of plateMail func reflect 1 point back to player
+// if active card has 1 attack points then no damage to both players
 function reflect(opponent, player, points) {
-    console.log('We are in reflect function!', player);
+    // console.log('We are in reflect function!', player);
     const itemCard = Object.values(opponent.item)[0].id;
     let damage;
-    switch (itemCard) {
-    case 'magicMirror':
+    if (itemCard === 'magicMirror') {
         points === 1 ? damage = 1 : damage = Math.floor(points / 2);
         opponent.health.current -= damage;
-        if (Object.keys(player.item).length === 0 || Object.values(player.item)[0].category !== 'shield') {
-            player.health.current -= damage;
-        }
-        if (Object.keys(player.item).length === 1 && Object.values(player.item)[0].category === 'shield') {
-            attackShield(player, Object.keys(player.item)[0], damage);
-        }
-        break;
-    case 'plateMail':
-        
     }
-
+    if (itemCard === 'plateMail') {
+        points === 1 ? damage = 0 : damage = 1;
+        damage === 0 ? opponent.health.current : opponent.health.current -= (points - damage);
+    }
+    if (Object.keys(player.item).length === 0 || Object.values(player.item)[0].category !== 'shield') {
+        player.health.current -= damage;
+    }
+    if (Object.keys(player.item).length === 1 && Object.values(player.item)[0].category === 'shield') {
+        attackShield(player, Object.keys(player.item)[0], damage);
+    }
     if (player.health.current < 0) {
         player.health.current = 0;
     }
