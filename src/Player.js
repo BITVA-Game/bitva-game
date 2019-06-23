@@ -231,7 +231,7 @@ const Item = props => (
         className={`item card-place card-like
             ${props.player.background}
             ${props.isTarget('item') ? 'target' : null}
-            ${props.isTarget('itemOpponent') && props.item ? 'target' : null}
+            ${props.isTarget('itemOpponent') && props.item && props.item.category !== 'shield' ? 'target' : null}
         `}
         id={props.player.active ? 'item' : null}
 
