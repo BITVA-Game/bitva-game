@@ -10,12 +10,21 @@ export const startscreenState = {
     manager: {
         screen: 'STARTSCREEN',
     },
-    game: {
-
-    },
 };
 
 export const heroselectStateP1 = {
+    accounts: [{
+        id: 'player1',
+        heroes: ['morevna', 'yaga', 'premudraya'],
+    },
+    {
+        id: 'player2',
+        heroes: ['morevna', 'yaga'],
+    },
+    ],
+    terminals: [{
+        players: ['player1', 'player2'],
+    }],
     profiles: [
         {
             id: 'player1',
@@ -42,6 +51,18 @@ export const heroselectStateP1 = {
 };
 
 export const heroselectStateP2 = {
+    accounts: [{
+        id: 'player1',
+        heroes: ['morevna', 'yaga', 'premudraya'],
+    },
+    {
+        id: 'player2',
+        heroes: ['morevna', 'yaga'],
+    },
+    ],
+    terminals: [{
+        players: ['player1', 'player2'],
+    }],
     profiles: [
         {
             id: 'player1',
@@ -76,12 +97,11 @@ export const versusState = {
             id: 'player2',
         },
     ],
-    heroSelect: {
-    },
     manager: {
         screen: 'VERSUS',
     },
     game: {
+        active: 'player1',
         players: [
             { hero: 'morevna', id: 'player1' },
             { hero: 'yaga', id: 'player2' },

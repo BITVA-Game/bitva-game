@@ -30,11 +30,12 @@ function msgReceived(message, sendReply) {
     const newApp = {
         accounts: application.accounts,
         terminals: application.terminals,
+        manager: application.manager,
         profiles: profilesManager.handle(application, message),
         heroSelect: heroManager.handle(application, message),
         game: gameEngine.handle(application, message),
     };
-    newApp.manager = screenManager.handle(application, message);
+    newApp.manager = screenManager.handle(newApp, message);
 
     // writeGameObject(newApp);
     if (message.network) {

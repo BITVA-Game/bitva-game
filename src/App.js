@@ -14,7 +14,7 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 function sendMessage(msg) {
-    console.log('MESSAGE', msg);
+    // console.log('MESSAGE', msg);
     ipcRenderer.send('APP', msg);
 }
 
@@ -61,7 +61,7 @@ class App extends Component {
     }
 
     render() {
-        console.log('APP ', this.state.app);
+        // console.log('APP ', this.state.app);
         WebFont.load({
             custom: {
                 families: ['Ruslan Display', 'Sedan SC'],

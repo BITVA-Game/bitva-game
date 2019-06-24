@@ -15,7 +15,7 @@ const allCharacters = require('./data/characters.json');
 const allCards = require('./data/cards.json');
 
 function getRandomBool() {
-    const rand = getRandomUpTo(2, 'indexPlayer');
+    const rand = getRandomUpTo(2, 'firstPlayerActive');
     return rand === 0;
 }
 
@@ -51,11 +51,17 @@ function createDeck(heroName) {
     return deck;
 }
 
-const assignPlayers = function (players) {
-    if (players.length < 2) { return players; }
+const selectActive = function (players) {
+    if (players.length < 2) { return null; }
     const rand = getRandomBool();
-    players[0].active = rand;
-    players[1].active = !rand;
+    if (rand) {
+        return players[0].id;
+    }
+    return players[1].id;
+};
+
+const assignPlayersPositions = function (players) {
+    if (players.length < 2) { return players; }
 
     players[0].position = 'bottom';
     players[1].position = 'top';
@@ -701,8 +707,10 @@ function handle(app, message) {
         return Object.assign(game, { players: [] });
     }
     case 'HEROSELECTED': {
-        const players = game.players.concat(generatePlayer(message.hero, message.player));
-        return Object.assign(game, { players: assignPlayers(players) });
+        const playersInitital = game.players.concat(generatePlayer(message.hero, message.player));
+        const active = selectActive(playersInitital);
+        const players = assignPlayersPositions(playersInitital);
+        return Object.assign(game, { active, players });
     }
     case 'DEALALL': {
         return Object.assign(game, { players: giveCardsToAll(game.players) });

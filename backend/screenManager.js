@@ -1,5 +1,5 @@
 function heroSelected(app) {
-    if (app.heroSelect.players.length === 2) {
+    if (app.game.players.length === 2) {
         return { screen: 'VERSUS' };
     }
     return { screen: 'HEROSELECT' };
@@ -7,7 +7,7 @@ function heroSelected(app) {
 
 function handle(app, message) {
     switch (message.type) {
-    case 'INITIAL':
+    case 'INIT':
         return app.manager;
     case 'PROFILE':
         return Object.assign({}, app.manager, { screen: 'PROFILE' });

@@ -41,10 +41,6 @@ test.only('First game state Play. Player1 can select any of the characters he ha
     expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectStateP1);
 });
 
-
-// Test msg PLAY returns list with all available characters.game state  Hero Select.
-
-
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
 test.only('msg HEROSELECTED received from P1, P2 is active', () => {
     // We only need type for this test.
@@ -60,21 +56,25 @@ test.only('msg HEROSELECTED received from P1, P2 is active', () => {
 });
 
 // screen swtich to state VERSUS after hero is selected
-test('msg HEROSELECTED for 2 players switches screen state to VERSUS', () => {
+test.only('msg HEROSELECTED for 2 players switches screen state to VERSUS', () => {
     // We only need type for this test.
-    const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'yaga' };
+    const msg1 = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
+    const msg2 = { type: 'HEROSELECTED', hero: 'yaga', player: 'player2' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
-
+    // Set the application into the previous state
+    application.setApp(heroselectStateP1);
     // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-    const newGame = sendReply.mock.calls[0][0];
+
+    application.msgReceived(msg1, sendReply);
+    application.msgReceived(msg2, sendReply);
+    expect(sendReply.mock.calls.length).toBe(2);
+    const newGame = sendReply.mock.calls[1][0];
     expect(newGame.game.players.length).toEqual(2);
-    expect(newGame.game.players[0].hero).toEqual('morevna');
-    expect(newGame.game.players[1].hero).toEqual('yaga');
     expect(newGame).toMatchObject(versusState);
+
+    // We return random to initial value, so it is not always set to 1
 });
 
 // Test that one player has become active. Game state VERSUS.
@@ -88,7 +88,7 @@ test('msg HEROSSELECTED received: active player is set.', () => {
     const oldRandom = Math.random;
     // Mock will rewrite all math.random and set it to 1
     Math.random = jest.fn();
-    Math.random.mockReturnValue(1);
+    Math.random.mockReturnValue(0);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);

@@ -3,8 +3,8 @@
 
 function getRandomUpTo(n, caseName) {
     // console.log('We are in mock getrandom!');
-    if (caseName === 'indexPlayer') {
-        return 1;
+    if (caseName === 'firstPlayerActive') {
+        return 0;
     } if (caseName === 'indexOpponent') {
         return 0;
     } if (caseName === 'index1Oven') {
