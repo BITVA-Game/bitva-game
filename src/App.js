@@ -14,7 +14,7 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 function sendMessage(msg) {
-    // console.log('MESSAGE', msg);
+    console.log('MESSAGE', msg);
     ipcRenderer.send('APP', msg);
 }
 
@@ -30,6 +30,7 @@ class App extends Component {
     // When the page loads, get GSO from backend, save it to state.
     componentDidMount() {
         ipcRenderer.on('APP', (event, arg) => {
+            console.log({ app: arg });
             this.setState({ app: arg });
         });
         sendMessage('Init');
@@ -45,9 +46,8 @@ class App extends Component {
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
         case 'HEROSELECT':
             return <HeroSelection sendMessage={sendMessage} app={this.state.app} first />;
-        case 'HEROSSELECT':
-            return <HeroSelection sendMessage={sendMessage} app={this.state.app} first={false} />;
-        case 'VERSUS':
+            /*
+      case 'VERSUS':
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PLAYERACT':
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
@@ -55,6 +55,7 @@ class App extends Component {
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'NETWORKPLAY':
             return <NetworkPlay sendMessage={sendMessage} app={this.state.app} />;
+            */
         default:
             return `UNKNOWN SCREEN NAME ${this.state.app.manager.screen}`;
         }

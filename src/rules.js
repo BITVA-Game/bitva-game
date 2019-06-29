@@ -24,12 +24,14 @@ export default function isTarget(target, dragging, active, player) {
 
 
 export function activeProfile(app) {
+    console.log('Heres select!');
     return app.profiles.find(p => p.id === app.game.activePlayer);
 }
 
 export function sortedHeroesList(app) {
+    console.log(app);
     // Sort characters' names based on profile and alphabet
-    const characters = activeProfile(app).characters;
+    const characters = app.heroSelect.heroes;
     return Object.values(app.heroSelect).sort((h1, h2) => {
         const id1 = characters.indexOf(h1.id);
         const id2 = characters.indexOf(h2.id);

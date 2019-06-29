@@ -21,12 +21,7 @@ const socketClient = require('./socketClient');
 //     });
 // }
 
-// This function is called from main.js
-// It redirects the message to all handlers
-// Only those that have relevatn state will be updated
-// It also sends the reply back. The reply is mocked by tests
-// so we can se what we're sending back.
-function msgReceived(message, sendReply) {
+function processMessage(message) {
     const newApp = {
         accounts: application.accounts,
         terminals: application.terminals,
@@ -36,6 +31,17 @@ function msgReceived(message, sendReply) {
         game: gameEngine.handle(application, message),
     };
     newApp.manager = screenManager.handle(newApp, message);
+
+    return newApp;
+}
+
+// This function is called from main.js
+// It redirects the message to all handlers
+// Only those that have relevatn state will be updated
+// It also sends the reply back. The reply is mocked by tests
+// so we can se what we're sending back.
+function msgReceived(message, sendReply) {
+    const newApp = message === 'Init' ? application : processMessage(message);
 
     // writeGameObject(newApp);
     if (message.network) {
