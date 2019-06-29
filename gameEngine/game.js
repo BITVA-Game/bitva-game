@@ -497,7 +497,7 @@ function bowArrow(player, opponent) {
             const cards = Object.values(player.hand);
             const cardsNew = [];
             for (let i = 0; i < Object.keys(player.hand).length; i++) {
-                if (cards[i].initialpoints > 1 && cards[i].type === 'action') {
+                if (cards[i].points > 1 && cards[i].type === 'action') {
                     cardsNew.push(cards[i]);
                 }
             }
