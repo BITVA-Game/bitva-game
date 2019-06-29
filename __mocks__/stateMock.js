@@ -34,10 +34,12 @@ export const heroselectStateP1 = {
         },
     ],
     heroSelect: {
-        morevna: {},
-        yaga: {},
-        premudraya: {},
-        hozyaika: {},
+        allHeroes: {
+            morevna: {},
+            yaga: {},
+            premudraya: {},
+            hozyaika: {},
+        },
         heroes: ['morevna', 'yaga', 'premudraya'],
         activePlayer: 'player1',
         players: [],
@@ -72,10 +74,12 @@ export const heroselectStateP2 = {
         },
     ],
     heroSelect: {
-        morevna: {},
-        yaga: {},
-        premudraya: {},
-        hozyaika: {},
+        allHeroes: {
+            morevna: {},
+            yaga: {},
+            premudraya: {},
+            hozyaika: {},
+        },
         heroes: ['morevna', 'yaga'],
         activePlayer: 'player2',
         players: [{ hero: 'morevna', id: 'player1' }],

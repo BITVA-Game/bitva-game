@@ -16,7 +16,7 @@ function heroWithCards() {
             heroes[hero].cards[heroCards[i]] = Object.assign({}, heroCard, cardData);
         }
     }
-    return heroes;
+    return { allHeroes: heroes };
 }
 
 function playerData(app, players = []) {
