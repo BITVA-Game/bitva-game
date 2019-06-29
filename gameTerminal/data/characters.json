@@ -46,6 +46,10 @@
             "plateMail": {
                 "id": "plateMail",
                 "count": 1
+            },
+            "bowArrow": {
+                "id": "bowArrow",
+                "count": 1
             }
         },
         "background": "ochre"

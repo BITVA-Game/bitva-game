@@ -17,6 +17,7 @@ import bajun from './images/cards/catbajun.jpg';
 import bat from './images/cards/bat.jpg';
 import bereginya from './images/cards/bitva-cardbase.jpg';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
+import bowArrow from './images/cards/bitva-cardbase.jpg';
 import bulat from './images/cards/sword.jpg';
 import chemise from './images/cards/bitva-cardbase.jpg';
 import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
@@ -59,6 +60,7 @@ const imagesCards = {
     bat,
     bereginya,
     bogatyr,
+    bowArrow,
     bulat,
     chemise,
     chickenLegsHut,
@@ -113,7 +115,7 @@ const CardPreview = props => (
                     ${props.card.category === 'shield' ? 'icon-shield' : null}
                     ${props.card.category === 'showCards' ? 'icon-show' : null}
                     ${props.card.category === 'shuffling' ? 'icon-move' : null}
-                    ${props.card.category === 'supress' ? 'icon-damage' : null}
+                    ${props.card.category === 'suppress' ? 'icon-damage' : null}
                     ${props.card.category === 'turning' ? 'icon-arrows' : null}`}
                 />
             </div>
