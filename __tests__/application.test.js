@@ -11,7 +11,7 @@ const heroData = require('../backend/data/characters.json');
 jest.mock('../backend/randomFunc');
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
-test.only('Game loaded. Send the app in its initial state', () => {
+test('Game loaded. Send the app in its initial state', () => {
     // Create a messade that has type and may have additional data later.
     // We only need type for this test.
     const msg = { type: 'INITIAL' };
@@ -27,7 +27,7 @@ test.only('Game loaded. Send the app in its initial state', () => {
 });
 
 // Test the first game state Play, returns the available characters
-test.only('First game state Play. Player1 can select any of the characters he has', () => {
+test('First game state Play. Player1 can select any of the characters he has', () => {
     // Again we only need type
     const msg = { type: 'PLAY' };
 
@@ -42,7 +42,7 @@ test.only('First game state Play. Player1 can select any of the characters he ha
 });
 
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
-test.only('msg HEROSELECTED received from P1, P2 is active', () => {
+test('msg HEROSELECTED received from P1, P2 is active', () => {
     // We only need type for this test.
     const msg = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
 
@@ -56,7 +56,7 @@ test.only('msg HEROSELECTED received from P1, P2 is active', () => {
 });
 
 // screen swtich to state VERSUS after hero is selected
-test.only('msg HEROSELECTED for 2 players switches screen state to VERSUS, Active players is set', () => {
+test('msg HEROSELECTED for 2 players switches screen state to VERSUS, Active players is set', () => {
     // We only need type for this test.
     const msg1 = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
     const msg2 = { type: 'HEROSELECTED', hero: 'yaga', player: 'player2' };
@@ -76,25 +76,25 @@ test.only('msg HEROSELECTED for 2 players switches screen state to VERSUS, Activ
 });
 
 // Test that active player gets all the data. Game state VERSUS.
-test('msg HEROSSELECTED received: active player has all the data.', () => {
+test('msg HEROSSELECTED received: both players have relevant data.', () => {
     // We only need type for this test.
-    const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'yaga' };
+    const msg1 = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
+    const msg2 = { type: 'HEROSELECTED', hero: 'yaga', player: 'player2' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
+    // Set the application into the previous state
+    application.setApp(heroselectStateP1);
 
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
+    application.msgReceived(msg1, sendReply);
+    application.msgReceived(msg2, sendReply);
+    expect(sendReply.mock.calls.length).toBe(2);
+    const newGame = sendReply.mock.calls[1][0];
+    console.log(newGame);
 
     // Find active player
-    let activePlayer = result.game.players[0];
-    if (result.game.players[0].active === false) {
-        activePlayer = result.game.players[1];
-    }
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
 
     // Expect player to have relevant data
     expect(activePlayer.hero).toBeDefined();
@@ -103,27 +103,7 @@ test('msg HEROSSELECTED received: active player has all the data.', () => {
     );
     expect(activePlayer.health.maximum).toEqual(heroData[activePlayer.hero].health);
     expect(activePlayer.hand).toEqual({});
-});
 
-// Test that inactive player gets its character and it's deck. Game state VERSUS.
-test('msg HEROSSELECTED received: inactive player gets relevant data.', () => {
-    // We only need type for this test.
-    const msg = { type: 'HEROSELECTED', hero: 'morevna' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    let inactivePlayer = result.game.players[0];
-    if (result.game.players[0].active === true) {
-        inactivePlayer = result.game.players[1];
-    }
     expect(inactivePlayer.hero).toBeDefined();
     expect(Object.keys(inactivePlayer.cards).length).toEqual(
         heroData[inactivePlayer.hero].cardsNumber,
@@ -133,7 +113,7 @@ test('msg HEROSSELECTED received: inactive player gets relevant data.', () => {
 });
 
 // Test that both players get 5 cards from deck to their hands. Game state Deal All.
-test('msg DEALALL received: Players hands have 5 cards each. Players cards have 5 cards less. State Deal All.', () => {
+test.skip('msg DEALALL received: Players hands have 5 cards each. Players cards have 5 cards less. State Deal All.', () => {
     const msg = { type: 'DEALALL' };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -209,7 +189,7 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
 });
 
 // screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
+test.skip('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     // We only need type for this test.
     const msg = { type: 'STARTSCREEN' };
 
@@ -231,7 +211,7 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 
 
 // Test that both  players gets individual keyHero each. Game state VERSUS.
-test('msg HEROSELECT THEN HEROSSELECTED received: players  have individual keyHero each.', () => {
+test.skip('msg HEROSELECT THEN HEROSSELECTED received: players  have individual keyHero each.', () => {
 // We only need type for this test.
 
     const msg1 = { type: 'HEROSELECTED', hero: 'morevna' };
@@ -263,7 +243,7 @@ test('msg HEROSELECT THEN HEROSSELECTED received: players  have individual keyHe
 });
 
 // Test that players cards get property disabled: false once they are dealt to players.
-test('msg HEROSSELECTED received: both players cards get property disabled: fasle.', () => {
+test.skip('msg HEROSSELECTED received: both players cards get property disabled: fasle.', () => {
     // We only need type for this test.
     const msg1 = { type: 'HEROSELECTED', hero: 'morevna' };
 
@@ -298,7 +278,7 @@ test('msg HEROSSELECTED received: both players cards get property disabled: fasl
 });
 
 // Test that players cards get points and health current points once they are dealt to players.
-test('msg HEROSSELECTED received: both players cards get property initialpoints and health.', () => {
+test.skip('msg HEROSSELECTED received: both players cards get property initialpoints and health.', () => {
     // We only need type for this test.
     const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'hozyaika' };
 
@@ -346,7 +326,7 @@ test('msg HEROSSELECTED received: both players cards get property initialpoints 
 });
 
 // Test that both  players gets individual keyHero each. Game state VERSUS.
-test('msg HEROSSELECTED received: players  have individual keyHero each.', () => {
+test.skip('msg HEROSSELECTED received: players  have individual keyHero each.', () => {
 // We only need type for this test.
     const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'morevna' };
 
@@ -376,7 +356,7 @@ test('msg HEROSSELECTED received: players  have individual keyHero each.', () =>
 });
 
 // Test that players cards get property categoryName once they are dealt to players.
-test('msg HEROSSELECTED received: both players cards get property categoryName.', () => {
+test.skip('msg HEROSSELECTED received: both players cards get property categoryName.', () => {
     // We only need type for this test.
     const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'yaga' };
 
