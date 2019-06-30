@@ -164,7 +164,6 @@ class HeroSelection extends Component {
                                 onShow={this.showHero}
                                 changeSelected={this.changeSelected}
                                 selected={this.state.selected}
-                                opponent={!this.props.first}
                             />
                         )
                     }
@@ -204,7 +203,6 @@ HeaderHeroButton.propTypes = {
 HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
-    first: PropTypes.bool.isRequired,
 };
 
 

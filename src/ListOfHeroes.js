@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/HeroSelection.css';
-import { activeProfile, sortedHeroesList } from './rules';
+import { sortedHeroesList } from './rules';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
@@ -21,8 +21,7 @@ const images = {
 class HeroBlock extends React.Component {
     highlighted() {
         const highlight = this.props.selected ? 'btn-hero btn-hero-selected' : 'btn-hero icons-inactive';
-        const additional = this.props.opponent ? 'btn-hero btn-hero-ooponent ' : highlight;
-        return additional;
+        return highlight;
     }
 
     render() {
@@ -52,6 +51,7 @@ class HeroBlock extends React.Component {
 
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
+// opponent={props.opponent && hero.id === props.app.game.players[0].hero}
 const ListOfHeroes = (props) => {
     const heroes = sortedHeroesList(props.app);
     const characterIDs = props.app.heroSelect.heroes;
@@ -66,7 +66,6 @@ const ListOfHeroes = (props) => {
                     app={props.app}
                     isAvailable={characterIDs.includes(hero.id)}
                     selected={hero.id === props.selected}
-                    opponent={props.opponent && hero.id === props.app.game.players[0].hero}
                     changeSelected={props.changeSelected}
                 />
             ))}
@@ -79,7 +78,6 @@ HeroBlock.propTypes = {
     hero: PropTypes.object.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.bool.isRequired,
-    opponent: PropTypes.bool.isRequired,
     isAvailable: PropTypes.bool.isRequired,
 };
 
@@ -88,7 +86,6 @@ ListOfHeroes.propTypes = {
     changeSelected: PropTypes.func.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
-    opponent: PropTypes.bool.isRequired,
 };
 
 export default ListOfHeroes;
