@@ -54,7 +54,7 @@ class HeroBlock extends React.Component {
 // Click will take the player into character info screen
 const ListOfHeroes = (props) => {
     const heroes = sortedHeroesList(props.app);
-    const characterIDs = activeProfile(props.app).characters;
+    const characterIDs = props.app.heroSelect.heroes;
 
     return (
         <div className="heroes-list">

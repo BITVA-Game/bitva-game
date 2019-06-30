@@ -133,12 +133,8 @@ class HeroSelection extends Component {
     }
 
     selectHero() {
-        if (this.props.first) {
-            this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected });
-            this.showHeroList();
-        } else {
-            this.props.sendMessage({ type: 'HEROSSELECTED', opponent: this.state.selected });
-        }
+        this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected, player: this.app.heroSelect.activePlayer });
+        this.showHeroList();
     }
 
     render() {
