@@ -495,16 +495,20 @@ function bowArrow(player, opponent) {
         const chance = getRandomUpTo(10, 'chanceBowArrow');
         if (chance <= 6) {
             const cards = Object.values(player.hand);
+            const cardsKeys = Object.keys(player.hand);
             const cardsNew = [];
-            for (let i = 0; i < Object.keys(player.hand).length; i++) {
+            for (let i = 0; i < cardsKeys.length; i++) {
                 if (cards[i].points > 1 && cards[i].type === 'action') {
-                    cardsNew.push(cards[i]);
+                    cardsNew.push(cardsKeys[i]);
                 }
             }
-
             const indexes = getRandomIndexes(cardsNew.length);
-            cardsNew[indexes[0]].points -= 1;
-            cardsNew[indexes[1]].points -= 1;
+            for (let i = 0; i < cardsKeys.length; i++) {
+                if (cardsKeys[i] === cardsNew[indexes[0]]
+                    || cardsKeys[i] === cardsNew[indexes[1]]) {
+                    cards[i].points -= 1;
+                }
+            }
         }
     }
 }
