@@ -35,6 +35,29 @@ function assignCards(deck, cardsNumber) {
     return cards;
 }
 
+// function to set disabled property to true to random 2 cards in player's hand for russianOven card
+function disableCards(opponent) {
+    const opponentCards = Object.values(opponent.hand);
+    const index1 = getRandomUpTo(opponentCards.length, 'index1Oven');
+    let index2 = getRandomUpTo(opponentCards.length, 'index2Oven');
+    if (index2 === index1) {
+        index2 = getRandomUpTo(opponentCards.length);
+    }
+    opponentCards[index1].disabled = true;
+    opponentCards[index2].disabled = true;
+}
+
+// function to return disabled cards property to false if any have true
+function removeDisable(player) {
+    const playerCards = Object.values(player.hand);
+    for (let i = 0; i < Object.keys(player.hand).length; i++) {
+        if (playerCards[i].disabled === true) {
+            playerCards[i].disabled = false;
+        }
+    }
+    return playerCards;
+}
+
 function createDeck(heroName) {
     const cards = allCharacters[heroName].cards;
     const deck = {};
@@ -134,8 +157,8 @@ function giveCardsTo(player) {
 function giveCardsToAll(players) {
     players.forEach((p) => {
         giveCardsTo(p);
+        removeDisable(p);
     });
-
     return players;
 }
 

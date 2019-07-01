@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 import {
-    startscreenState, heroselectStateP1, heroselectStateP2, versusState,
+    startscreenState, heroselectStateP1, heroselectStateP2, versusState, dealAllstate,
 } from '../__mocks__/stateMock';
 
 // import module for tests
@@ -113,62 +113,14 @@ test('msg HEROSSELECTED received: both players have relevant data.', () => {
 });
 
 // Test that both players get 5 cards from deck to their hands. Game state Deal All.
-test.skip('msg DEALALL received: Players hands have 5 cards each. Players cards have 5 cards less. State Deal All.', () => {
+test('msg DEALALL received: Players hands have 5 cards each. Players cards have 5 cards less. State Deal All.', () => {
     const msg = { type: 'DEALALL' };
     // Mock sendReply function
     const sendReply = jest.fn();
 
 
     // Mock will rewrite all game state and set it to DealAll case
-    application.setApp({
-        game: {
-            players: [
-                {
-                    active: false,
-                    hero: 'yaga',
-                    cards: {
-                        key1: {},
-                        key15: {},
-                        key18: {},
-                        key3: {},
-                        key7: {},
-                        key9: {},
-                        key2: {},
-                        key6: {},
-                        key14: {},
-                        key0: {},
-                    },
-                    hand: {
-                        key4: {}, key11: {}, key10: {}, key16: {}, key5: {},
-                    },
-                    health: 15,
-                    grave: {},
-                },
-                {
-                    active: true,
-                    hero: 'morevna',
-                    cards: {
-                        key0: {},
-                        key2: {},
-                        key17: {},
-                        key5: {},
-                        key7: {},
-                        key4: {},
-                        key6: {},
-                        key14: {},
-                        key12: {},
-                        key9: {},
-                    },
-                    hand: {
-                        key11: {}, key10: {}, key1: {}, key8: {}, key13: {},
-                    },
-                    health: 13,
-                    grave: {},
-                },
-            ],
-        },
-    });
-
+    application.setApp(dealAllstate);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -177,19 +129,56 @@ test.skip('msg DEALALL received: Players hands have 5 cards each. Players cards 
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    expect(result.game.players[0].hero).toEqual('yaga');
-    expect(Object.keys(result.game.players[0].hand).length).toEqual(5);
-    expect(Object.keys(result.game.players[0].cards).length).toEqual(10);
-
-    expect(result.game.players[1].hero).toEqual('morevna');
+    const activePlayer = result.game.players.find(player => player.id === result.game.active);
+    const inactivePlayer = result.game.players.find(player => player.id !== result.game.active);
+    expect(result.game.players[1].hero).toEqual('yaga');
     expect(Object.keys(result.game.players[1].hand).length).toEqual(5);
     expect(Object.keys(result.game.players[1].cards).length).toEqual(10);
 
+    expect(result.game.players[0].hero).toEqual('morevna');
+    expect(Object.keys(result.game.players[0].hand).length).toEqual(5);
+    expect(Object.keys(result.game.players[0].cards).length).toEqual(10);
+
     expect(result.manager.screen).toEqual('PLAYERACT');
+
+    // Expect players to have keyHero
+    expect(activePlayer.keyHero).toBeDefined();
+    expect(inactivePlayer.keyHero).toBeDefined();
+    // Expect each player's keyHero differs
+    expect(activePlayer.keyHero).not.toEqual(inactivePlayer.keyHero);
+
+    // both players cards get property disabled: fasle
+    console.log(result.game.players);
+    // we check every card dealt to active player
+    for (let i = 0; i < Object.keys(activePlayer.cards).length; i++) {
+        // and we expect active player to have disabled: false property in each card
+        expect(Object.values(activePlayer.cards)[i]).toHaveProperty('disabled', false);
+        expect(Object.values(activePlayer.cards)[i]).toHaveProperty('categoryName');
+        const card = Object.values(activePlayer.cards)[i];
+        if (card.initialpoints !== undefined) {
+            expect(card).toHaveProperty('points', card.initialpoints);
+        }
+        if (card.type === 'item') {
+            expect(card).toHaveProperty('healthCurrent', card.health);
+        }
+    }
+    // we check every card dealt to inactive player
+    for (let c = 0; c < Object.keys(inactivePlayer.cards).length; c++) {
+        // and we expect inactive player to have disabled: false property in each card
+        expect(Object.values(inactivePlayer.cards)[c]).toHaveProperty('disabled', false);
+        expect(Object.values(inactivePlayer.cards)[c]).toHaveProperty('categoryName');
+        const card = Object.values(inactivePlayer.cards)[c];
+        if (card.initialpoints !== undefined) {
+            expect(card).toHaveProperty('points', card.initialpoints);
+        }
+        if (card.type === 'item') {
+            expect(card).toHaveProperty('healthCurrent', card.health);
+        }
+    }
 });
 
 // screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test.skip('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
+test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     // We only need type for this test.
     const msg = { type: 'STARTSCREEN' };
 
@@ -207,184 +196,4 @@ test.skip('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 
         },
     );
-});
-
-
-// Test that both  players gets individual keyHero each. Game state VERSUS.
-test.skip('msg HEROSELECT THEN HEROSSELECTED received: players  have individual keyHero each.', () => {
-// We only need type for this test.
-
-    const msg1 = { type: 'HEROSELECTED', hero: 'morevna' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg1, sendReply);
-    const msg2 = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'morevna' };
-
-    application.msgReceived(msg2, sendReply);
-    expect(sendReply.mock.calls.length).toBe(2);
-    const result = sendReply.mock.calls[1][0];
-
-    // Find active and inactive players
-    let activePlayer = result.game.players[0];
-    let inactivePlayer = result.game.players[1];
-    if (result.game.players[0].active === false) {
-        activePlayer = result.game.players[1];
-        inactivePlayer = result.game.players[0];
-    }
-
-    // Expect players to have keyHero
-    expect(activePlayer.keyHero).toBeDefined();
-    expect(inactivePlayer.keyHero).toBeDefined();
-    // Expect each player's keyHero differs
-    expect(activePlayer.keyHero).not.toEqual(inactivePlayer.keyHero);
-});
-
-// Test that players cards get property disabled: false once they are dealt to players.
-test.skip('msg HEROSSELECTED received: both players cards get property disabled: fasle.', () => {
-    // We only need type for this test.
-    const msg1 = { type: 'HEROSELECTED', hero: 'morevna' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg1, sendReply);
-    const msg2 = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'yaga' };
-
-    application.msgReceived(msg2, sendReply);
-    expect(sendReply.mock.calls.length).toBe(2);
-    const result = sendReply.mock.calls[1][0];
-
-    // Find active andinactive players
-    let activePlayer = result.game.players[0];
-    let inactivePlayer = result.game.players[1];
-    if (result.game.players[0].active === false) {
-        activePlayer = result.game.players[1];
-        inactivePlayer = result.game.players[0];
-    }
-    // we check every card dealt to active player
-    for (let i = 0; i < Object.keys(activePlayer.cards).length; i++) {
-        // and we expect active player to have disabled: false property in each card
-        expect(Object.values(activePlayer.cards)[i]).toHaveProperty('disabled', false);
-    }
-    // we check every card dealt to inactive player
-    for (let c = 0; c < Object.keys(inactivePlayer.cards).length; c++) {
-        // and we expect inactive player to have disabled: false property in each card
-        expect(Object.values(inactivePlayer.cards)[c]).toHaveProperty('disabled', false);
-    }
-});
-
-// Test that players cards get points and health current points once they are dealt to players.
-test.skip('msg HEROSSELECTED received: both players cards get property initialpoints and health.', () => {
-    // We only need type for this test.
-    const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'hozyaika' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // Find active andinactive players
-    let activePlayer = result.game.players[0];
-    let inactivePlayer = result.game.players[1];
-    if (result.game.players[0].active === false) {
-        activePlayer = result.game.players[1];
-        inactivePlayer = result.game.players[0];
-    }
-    // we check every card dealt to active player
-    for (let i = 0; i < Object.keys(activePlayer.cards).length; i++) {
-        // and we expect active player to have points property in each card = initialpoints
-        // and property healthCurrent = health
-        const card = Object.values(activePlayer.cards)[i];
-        if (card.initialpoints !== undefined) {
-            expect(card).toHaveProperty('points', card.initialpoints);
-        }
-        if (card.type === 'item') {
-            expect(card).toHaveProperty('healthCurrent', card.health);
-        }
-    }
-    // we check every card dealt to inactive player
-    for (let c = 0; c < Object.keys(inactivePlayer.cards).length; c++) {
-        // and we expect inactive player to have points property in each card = initialpoints
-        // and property healthCurrent = health for each item card
-        const card = Object.values(inactivePlayer.cards)[c];
-        if (card.initialpoints !== undefined) {
-            expect(card).toHaveProperty('points', card.initialpoints);
-        }
-        if (card.type === 'item') {
-            expect(card).toHaveProperty('healthCurrent', card.health);
-        }
-    }
-});
-
-// Test that both  players gets individual keyHero each. Game state VERSUS.
-test.skip('msg HEROSSELECTED received: players  have individual keyHero each.', () => {
-// We only need type for this test.
-    const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'morevna' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // Find active and inactive players
-    let activePlayer = result.game.players[0];
-    let inactivePlayer = result.game.players[1];
-    if (result.game.players[0].active === false) {
-        activePlayer = result.game.players[1];
-        inactivePlayer = result.game.players[0];
-    }
-
-    // Expect players to have keyHero
-    expect(activePlayer.keyHero).toBeDefined();
-    expect(inactivePlayer.keyHero).toBeDefined();
-    // Expect each player's keyHero differs
-    expect(activePlayer.keyHero).not.toEqual(inactivePlayer.keyHero);
-});
-
-// Test that players cards get property categoryName once they are dealt to players.
-test.skip('msg HEROSSELECTED received: both players cards get property categoryName.', () => {
-    // We only need type for this test.
-    const msg = { type: 'HEROSSELECTED', hero: 'morevna', opponent: 'yaga' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // Find active andinactive players
-    let activePlayer = result.game.players[0];
-    let inactivePlayer = result.game.players[1];
-    if (result.game.players[0].active === false) {
-        activePlayer = result.game.players[1];
-        inactivePlayer = result.game.players[0];
-    }
-    // we check every card dealt to active player
-    for (let i = 0; i < Object.keys(activePlayer.cards).length; i++) {
-        // and we expect active player to have disabled: false property in each card
-        expect(Object.values(activePlayer.cards)[i]).toHaveProperty('categoryName');
-    }
-    // we check every card dealt to inactive player
-    for (let c = 0; c < Object.keys(inactivePlayer.cards).length; c++) {
-        // and we expect inactive player to have disabled: false property in each card
-        expect(Object.values(inactivePlayer.cards)[c]).toHaveProperty('categoryName');
-    }
 });
