@@ -2,61 +2,26 @@
 /* eslint-disable no-plusplus */
 
 // import module for tests
+import {
+    gameStartState,
+} from '../__mocks__/stateMock';
+
 const application = require('../backend/application');
 
-test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
+test.only('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     // active Card is always a card
     // target can be a place (item place, graveyard, deck, herom etc) or a card
+    const cardToTest = 'key23';
     const msg = {
         type: 'ACTION',
-        activeCard: 'key10',
+        activeCard: cardToTest,
         target: 'graveyard',
     };
     // Mock sendReply function
     const sendReply = jest.fn();
-    application.setApp({
-        game: {
 
-            players: [
-                {
-                    active: true,
-                    cards: {
-                        key0: {},
-                        key2: {},
-                        key17: {},
-                        key5: {},
-                        key7: {},
-                        key4: {},
-                        key6: {},
-                        key14: {},
-                        key12: {},
-                        key9: {},
-                    },
-                    health: 13,
-                    hero: 'morevna',
-                    // We expect the card 10 will be moved to graveyard
-                    hand: {
-                        key11: {},
-                        key1: {},
-                        key8: {},
-                        key13: {},
-                        key10: { points: 3, disabled: false },
-                    },
-                    moveCounter: 0,
-                    item: {},
-                    // graveyard is empty
-                    grave: {},
-                },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    item: {},
-                },
-            ],
-
-        },
-
-    });
+    // Mock will rewrite all game state and set it to DealAll case
+    application.setApp(gameStartState);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -66,13 +31,14 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     const result = sendReply.mock.calls[0][0];
 
     // expect that player[0] is active
-    expect(result.game.players[0].active).toBeTruthy();
+    expect(result.game.active).toBeDefined();
+    expect(result.game.players[0].active).not.toBeDefined();
     // expect that his cunter was increased
     expect(result.game.players[0].moveCounter).toEqual(1);
     // оexpect the card to move to graveryard
-    expect(Object.keys(result.game.players[0].grave)).toContain('key10');
+    expect(Object.keys(result.game.players[0].grave)).toContain(cardToTest);
     // expect the card to move out of the hand
-    expect(Object.keys(result.game.players[0].hand)).not.toContain('key10');
+    expect(Object.keys(result.game.players[0].hand)).not.toContain(cardToTest);
 });
 
 // player heals for less than max

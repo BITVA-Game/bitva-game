@@ -58,7 +58,6 @@ function msgReceived(message, sendReply) {
 }
 
 function setApp(newApp) {
-    console.log('Setting app into needed state');
     application = newApp;
 }
 

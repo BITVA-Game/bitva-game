@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 import {
-    startscreenState, heroselectStateP1, heroselectStateP2, versusState, dealAllstate,
+    startscreenState, heroselectStateP1, heroselectStateP2, versusState, dealAllState,
 } from '../__mocks__/stateMock';
 
 // import module for tests
@@ -90,7 +90,6 @@ test('msg HEROSSELECTED received: both players have relevant data.', () => {
     application.msgReceived(msg2, sendReply);
     expect(sendReply.mock.calls.length).toBe(2);
     const newGame = sendReply.mock.calls[1][0];
-    console.log(newGame);
 
     // Find active player
     const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
@@ -103,6 +102,7 @@ test('msg HEROSSELECTED received: both players have relevant data.', () => {
     );
     expect(activePlayer.health.maximum).toEqual(heroData[activePlayer.hero].health);
     expect(activePlayer.hand).toEqual({});
+    expect(activePlayer.turningHand).not.toBeTruthy();
 
     expect(inactivePlayer.hero).toBeDefined();
     expect(Object.keys(inactivePlayer.cards).length).toEqual(
@@ -110,6 +110,7 @@ test('msg HEROSSELECTED received: both players have relevant data.', () => {
     );
     expect(inactivePlayer.health.maximum).toEqual(heroData[inactivePlayer.hero].health);
     expect(inactivePlayer.hand).toEqual({});
+    expect(inactivePlayer.turningHand).not.toBeTruthy();
 });
 
 // Test that both players get 5 cards from deck to their hands. Game state Deal All.
@@ -120,7 +121,7 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
 
 
     // Mock will rewrite all game state and set it to DealAll case
-    application.setApp(dealAllstate);
+    application.setApp(dealAllState);
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -131,6 +132,7 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
 
     const activePlayer = result.game.players.find(player => player.id === result.game.active);
     const inactivePlayer = result.game.players.find(player => player.id !== result.game.active);
+
     expect(result.game.players[1].hero).toEqual('yaga');
     expect(Object.keys(result.game.players[1].hand).length).toEqual(5);
     expect(Object.keys(result.game.players[1].cards).length).toEqual(10);
@@ -144,12 +146,14 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
     // Expect players to have keyHero
     expect(activePlayer.keyHero).toBeDefined();
     expect(inactivePlayer.keyHero).toBeDefined();
+
+    // No turning cards
+    expect(activePlayer.turningHand).not.toBeTruthy();
+    expect(inactivePlayer.turningHand).not.toBeTruthy();
+
     // Expect each player's keyHero differs
     expect(activePlayer.keyHero).not.toEqual(inactivePlayer.keyHero);
 
-    // both players cards get property disabled: fasle
-    console.log(result.game.players);
-    // we check every card dealt to active player
     for (let i = 0; i < Object.keys(activePlayer.cards).length; i++) {
         // and we expect active player to have disabled: false property in each card
         expect(Object.values(activePlayer.cards)[i]).toHaveProperty('disabled', false);

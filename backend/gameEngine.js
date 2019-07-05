@@ -19,6 +19,14 @@ function getRandomBool() {
     return rand === 0;
 }
 
+function getActivePlayer(game) {
+    return game.players.find(p => p.id === game.active);
+}
+
+function getInActivePlayer(game) {
+    return game.players.find(p => p.id !== game.active);
+}
+
 function assignCards(deck, cardsNumber) {
     const d = Object.keys(deck).sort(() => Math.random() - 0.5).slice(0, cardsNumber);
     const cards = {};
@@ -97,6 +105,7 @@ const generatePlayer = function (heroName, id) {
     player.hand = {};
     player.item = {};
     player.grave = {};
+    player.turningHand = false;
     player.moveCounter = 0;
     player.health = {};
     player.deal = 0;
@@ -710,12 +719,8 @@ function playerActs(game, player, opponent, active, target) {
 
 function makeMove(game, msg) {
     // console.log('makeMove called');
-    let pActive = game.players[0];
-    let pInactive = game.players[1];
-    if (!pActive.active) {
-        pActive = game.players[1];
-        pInactive = game.players[0];
-    }
+    const pActive = getActivePlayer(game);
+    const pInactive = getInActivePlayer(game);
     // We expect the first card is always the selected card that acts
     game = playerActs(game, pActive, pInactive, msg.activeCard, msg.target);
 
@@ -740,7 +745,6 @@ function handle(app, message) {
     }
     // All actions have the same action name as they all call the same function
     case 'ACTION': {
-        console.log('ACTION');
         // helperToDebug(message, game);
         return Object.assign(game, makeMove(game, message));
     }
