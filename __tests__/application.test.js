@@ -43,7 +43,7 @@ test('First game state Play. Player1 can select any of the characters he has', (
 
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
 test('msg HEROSELECTED received from P1, P2 is active', () => {
-    // We only need type for this test.
+    // Player 1 selected morevna
     const msg = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
 
     // Mock sendReply function
@@ -57,7 +57,7 @@ test('msg HEROSELECTED received from P1, P2 is active', () => {
 
 // screen swtich to state VERSUS after hero is selected
 test('msg HEROSELECTED for 2 players switches screen state to VERSUS, Active players is set', () => {
-    // We only need type for this test.
+    // Both players selected their characters
     const msg1 = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
     const msg2 = { type: 'HEROSELECTED', hero: 'yaga', player: 'player2' };
 
@@ -71,13 +71,14 @@ test('msg HEROSELECTED for 2 players switches screen state to VERSUS, Active pla
     application.msgReceived(msg2, sendReply);
     expect(sendReply.mock.calls.length).toBe(2);
     const newGame = sendReply.mock.calls[1][0];
+    // Players created
     expect(newGame.game.players.length).toEqual(2);
     expect(newGame).toMatchObject(versusState);
 });
 
 // Test that active player gets all the data. Game state VERSUS.
 test('msg HEROSSELECTED received: both players have relevant data.', () => {
-    // We only need type for this test.
+    // Both players selected their characters
     const msg1 = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
     const msg2 = { type: 'HEROSELECTED', hero: 'yaga', player: 'player2' };
 
@@ -118,7 +119,6 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
     const msg = { type: 'DEALALL' };
     // Mock sendReply function
     const sendReply = jest.fn();
-
 
     // Mock will rewrite all game state and set it to DealAll case
     application.setApp(dealAllState);
