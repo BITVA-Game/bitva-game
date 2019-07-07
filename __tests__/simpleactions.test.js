@@ -3,7 +3,7 @@
 
 // import module for tests
 import {
-    gameStartState, gameP1DamagedState,
+    gameStartState, gameP1DamagedState, gameP2HasShieldState,
 } from '../__mocks__/stateMock';
 
 const application = require('../backend/application');
@@ -178,64 +178,21 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
 });
 
 // player attacks enemy with attack power == shield points
-test.skip('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
+test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
+    const cardToTest = 'key7';
+    const cardTypeToTest = 'action';
+    const cardCategoryToTest = 'attack';
+    const shieldCard = 'key23';
     const msg = {
         type: 'ACTION',
-        activeCard: 'key1',
-        target: 'opponent',
+        activeCard: cardToTest,
+        target: 'player2',
     };
+
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set active player arrack card's key to key1
-    application.setApp({
-        game: {
-            phase: 'ACTIVE',
-            players: [
-                {
-                    active: true,
-                    cards: {
-                        key0: {},
-                        key2: {},
-                        key17: {},
-                        key5: {},
-                        key7: {},
-                        key4: {},
-                        key6: {},
-                        key14: {},
-                        key12: {},
-                        key9: {},
-                    },
-                    health: { current: 5, maximum: 13 },
-                    hero: 'morevna',
-                    hand: {
-                        key11: {},
-                        key8: {},
-                        key13: {},
-                        key1: {
-                            type: 'action', category: 'attack', points: 3, disabled: false,
-                        },
-                    },
-                    moveCounter: 1,
-                    item: {},
-                    grave: { key10: {} },
-                },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    health: { current: 6, maximum: 15 },
-                    hand: {
-                        key12: {}, key8: {}, key15: {}, key3: {},
-                    },
-                    item: {
-                        key7: {
-                            id: 'shieldSmall', type: 'item', category: 'shield', points: 3,
-                        },
-                    },
-                    grave: { },
-                },
-            ],
-        },
-    });
+    // Mock sendReply function
+    application.setApp(clone(gameP2HasShieldState));
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -244,23 +201,27 @@ test.skip('msg ACTION CASE3 player attacks, shield & card go to graveyard', () =
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that his counter set to 0 after turn's change
-    expect(result.game.players[0].moveCounter).toEqual(0);
+    // expect that we have active player in game
+    expect(result.game.active).toBeDefined();
+    const activePlayer = getActivePlayer(result);
+    const inActivePlayer = getInActivePlayer(result);
+
+    expect(activePlayer.moveCounter).toEqual(1);
 
     // expect that it was an action card as we performing the action
-    expect(result.game.players[0].grave.key1.type).toEqual('action');
+    expect(activePlayer.grave[cardToTest].type).toEqual(cardTypeToTest);
     // expect it was the attack card
-    expect(result.game.players[0].grave.key1.category).toEqual('attack');
+    expect(activePlayer.grave[cardToTest].category).toEqual(cardCategoryToTest);
 
     // expect there's no item anymore
-    expect(result.game.players[1].item).toEqual({});
+    expect(inActivePlayer.item).toEqual({});
     // expect the itme is now on graveyard
-    expect(Object.keys(result.game.players[1].grave)).toContain('key7');
+    expect(Object.keys(inActivePlayer.grave)).toContain(shieldCard);
 
     // expect the acting card is now on the graveyard
-    expect(Object.keys(result.game.players[0].grave)).toContain('key1');
+    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     // expect the acting card is now not in hand
-    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
 // player attacks enemy with attack power > shield points
