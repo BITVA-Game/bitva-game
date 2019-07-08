@@ -3,7 +3,8 @@
 
 // import module for tests
 import {
-    gameStartState, gameP1DamagedState, gameP2HasShieldState, gameP2HasSmallShieldState, gameP1Action2,
+    gameStartState, gameP1DamagedState, gameP2HasShieldState,
+    gameP2HasSmallShieldState, gameP1Action2, gameP2Dying,
 } from '../__mocks__/stateMock';
 
 const application = require('../backend/application');
@@ -399,60 +400,17 @@ test('msg ACTION ANY received: active player moveCounter = 2 after his action, h
 });
 
 // If Player does not have any life points left game.phase = 'OVER'
-test.skip('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
+test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
+    const cardToTest = 'key7';
     const msg = {
         type: 'ACTION',
-        activeCard: 'key1',
-        target: 'opponent',
+        activeCard: cardToTest,
+        target: 'player2',
     };
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set active player arrack card's key to key1
-    application.setApp({
-        game: {
-            phase: 'ACTIVE',
-            players: [
-                {
-                    active: true,
-                    cards: {
-                        key0: {},
-                        key2: {},
-                        key17: {},
-                        key5: {},
-                        key7: {},
-                        key4: {},
-                        key6: {},
-                        key14: {},
-                        key12: {},
-                        key9: {},
-                    },
-                    health: { current: 5, maximum: 13 },
-                    hero: 'morevna',
-                    hand: {
-                        key11: {},
-                        key8: {},
-                        key13: {},
-                        key1: {
-                            id: 'bogatyr', type: 'action', category: 'attack', points: 3, disabled: false,
-                        },
-                    },
-                    moveCounter: 1,
-                    item: {},
-                    grave: { key10: {} },
-                },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    health: { current: 2, maximum: 15 },
-                    hand: {
-                        key12: {}, key8: {}, key15: {}, key3: {},
-                    },
-                    item: { },
-                    grave: { },
-                },
-            ],
-        },
-    });
+    // Set application for the correct state BEFORE the test
+    application.setApp(clone(gameP2Dying));
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -461,8 +419,16 @@ test.skip('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () =
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+    // expect that we have active player in game
+    expect(result.game.active).toBeDefined();
+    const activePlayer = getActivePlayer(result);
+    const inActivePlayer = getInActivePlayer(result);
+    // Confirm we removed active player from game. Can be deleted after refactoring
+    expect(activePlayer.active).not.toBeDefined();
+    expect(inActivePlayer.active).not.toBeDefined();
+
     // expect the inactive player health ===0
-    expect(result.game.players[1].health.current).toBeLessThanOrEqual(0);
+    expect(inActivePlayer.health.current).toBeLessThanOrEqual(0);
 
     // expect manager, screen is now Victory
     expect(result.game.phase).toEqual('OVER');
