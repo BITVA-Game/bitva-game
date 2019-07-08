@@ -319,54 +319,19 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
 
 // Test, that when massage with item card  received, then
 // if item holder is empty, active player moves item there
-test.skip('msg ACTION CASE4 received: active player choose item, if his item holder is empty player moves item there.', () => {
+test('msg ACTION CASE4 received: active player choose item, if his item holder is empty player moves item there.', () => {
+    const cardToTest = 'key23';
+    const cardTypeToTest = 'item';
     const msg = {
         type: 'ACTION',
-        activeCard: 'key1',
+        activeCard: cardToTest,
         target: 'item',
     };
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set active player card's key to key10
-    application.setApp({
-        game: {
-            players: [
-                {
-                    active: true,
-                    cards: {
-                        key0: {},
-                        key2: {},
-                        key17: {},
-                        key5: {},
-                        key7: {},
-                        key4: {},
-                        key6: {},
-                        key14: {},
-                        key12: {},
-                        key9: {},
-                    },
-                    health: { current: 5, maximum: 13 },
-                    hero: 'morevna',
-                    hand: {
-                        key11: {},
-                        key8: {},
-                        key13: {},
-                        key1: {
-                            id: 'shieldLarge', type: 'item', category: 'shield', points: 3, disabled: false,
-                        },
-                    },
-                    moveCounter: 1,
-                    item: {},
-                    grave: { key10: {} },
-                },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    item: {},
-                },
-            ],
-        },
-    });
+    // Set application for the correct state BEFORE the test
+    application.setApp(clone(gameP2HasSmallShieldState));
+
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
@@ -374,12 +339,18 @@ test.skip('msg ACTION CASE4 received: active player choose item, if his item hol
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
+    // expect that we have active player in game
+    expect(result.game.active).toBeDefined();
+    const activePlayer = getActivePlayer(result);
+
+    expect(activePlayer.moveCounter).toEqual(1);
+
     // ожидаем, что item holder активного игрока пустой
-    expect(Object.values(result.game.players[0].item).length).toEqual(1);
+    expect(Object.values(activePlayer.item).length).toEqual(1);
     // ожидаем, что карта предмет окажется в item holder активного игрока
-    expect(result.game.players[0].item.key1.type).toEqual('item');
+    expect(activePlayer.item[cardToTest].type).toEqual(cardTypeToTest);
     // ожидаем, что карта-item убралась из руки.
-    expect(Object.keys(result.game.players[0].hand)).not.toContain('key1');
+    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
 // Test, that active player after his moveCounter = 2 gets missing cards to his hand.
