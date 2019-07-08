@@ -3,7 +3,7 @@
 
 // import module for tests
 import {
-    gameStartState, gameP1DamagedState, gameP2HasShieldState, gameP2HasSmallShieldState,
+    gameStartState, gameP1DamagedState, gameP2HasShieldState, gameP2HasSmallShieldState, gameP1Action2,
 } from '../__mocks__/stateMock';
 
 const application = require('../backend/application');
@@ -300,6 +300,9 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
     expect(result.game.active).toBeDefined();
     const activePlayer = getActivePlayer(result);
     const inActivePlayer = getInActivePlayer(result);
+    // Confirm we removed active player from game. Can be deleted after refactoring
+    expect(activePlayer.active).not.toBeDefined();
+    expect(inActivePlayer.active).not.toBeDefined();
 
     expect(activePlayer.moveCounter).toEqual(1);
 
@@ -355,58 +358,20 @@ test('msg ACTION CASE4 received: active player choose item, if his item holder i
 
 // Test, that active player after his moveCounter = 2 gets missing cards to his hand.
 // Inactive Player becomes active. Turn change.
-test.skip('msg ACTION ANY received: active player moveCounter = 2 after his action, he gets missing cards to hand, inactive player becomes active.', () => {
+test('msg ACTION ANY received: active player moveCounter = 2 after his action, he gets missing cards to hand, inactive player becomes active.', () => {
+    const cardToTest = 'key1';
+    const player = 'player1';
+    const opponent = 'player2';
     const msg = {
         type: 'ACTION',
-        activeCard: 'key1',
-        target: 'hero',
+        activeCard: cardToTest,
+        target: opponent,
     };
     // Mock sendReply function
     const sendReply = jest.fn();
-    // Mock will rewrite all math.random and set active player card's key to key10
-    application.setApp({
-        game: {
-            phase: 'ACTIVE',
-            players: [
-                {
-                    active: true,
-                    cards: {
-                        key0: {},
-                        key2: {},
-                        key17: {},
-                        key5: {},
-                        key7: {},
-                        key4: {},
-                        key6: {},
-                        key14: {},
-                        key12: {},
-                        key9: {},
-                    },
-                    health: { current: 12, maximum: 13 },
-                    hero: 'morevna',
-                    hand: {
-                        key11: {},
-                        key8: {},
-                        key13: {},
-                        key1: {
-                            type: 'action',
-                            points: 3,
-                            category: 'heal',
-                            disabled: false,
-                        },
-                    },
-                    moveCounter: 1,
-                    item: {},
-                    grave: { key10: {} },
-                },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    item: {},
-                },
-            ],
-        },
-    });
+    // Set application for the correct state BEFORE the test
+    application.setApp(clone(gameP1Action2));
+
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
@@ -414,14 +379,23 @@ test.skip('msg ACTION ANY received: active player moveCounter = 2 after his acti
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that his counter set to 0 after turn's change
-    expect(result.game.players[0].moveCounter).toEqual(0);
+    // expect that we have active player in game
+    expect(result.game.active).toBeDefined();
+    const activePlayer = getActivePlayer(result);
+    const inActivePlayer = getInActivePlayer(result);
+    // Confirm we removed active player from game. Can be deleted after refactoring
+    expect(activePlayer.active).not.toBeDefined();
+    expect(inActivePlayer.active).not.toBeDefined();
+
+    expect(inActivePlayer.id).toEqual(player);
+
+    expect(inActivePlayer.moveCounter).toEqual(0);
 
     // expect that active player hand has 4  cards before game passes to opponent
-    expect(Object.keys(result.game.players[0].hand).length).toEqual(5);
+    expect(Object.keys(inActivePlayer.hand).length).toEqual(5);
 
     // expect that inactive player becomes active
-    expect(result.game.players[1].active).toEqual(true);
+    expect(activePlayer.id).toEqual(opponent);
 });
 
 // If Player does not have any life points left game.phase = 'OVER'
