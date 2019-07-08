@@ -4594,17 +4594,18 @@ export const gameP2HasSmallShieldState = {
                             points: 2,
                             disabled: false,
                         },
-                      key20:
+                      key1:
                         {
-                            id: 'shieldSmall',
-                            name: 'Small Shield',
-                            type: 'item',
-                            icon: 'shield',
-                            category: 'shield',
-                            categoryName: 'shield',
-                            description: 'The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.',
-                            health: 2,
-                            healthCurrent: 2,
+                            id: 'bulat',
+                            name: 'Bulat Sword',
+                            type: 'action',
+                            icon: 'skull',
+                            category: 'attack',
+                            categoryName: 'attack',
+                            description:
+                           "Damask steel dagger - sword with sorcery charmed blade. Its steel is quenched not by the water but the wind, possesses wind's power and force.",
+                            initialpoints: 1,
+                            points: 1,
                             disabled: false,
                         },
                       key9:
