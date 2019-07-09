@@ -182,7 +182,7 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
 });
 
 // screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
+test.only('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     // We only need type for this test.
     const msg = { type: 'STARTSCREEN' };
 

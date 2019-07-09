@@ -435,56 +435,17 @@ test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
 });
 
 // player moves a card to graveyard
-test.skip('msg ACTION CASE 5, player wants to move his card from item holder to graveyard', () => {
-    // active Card is always a card
-    // target can be a place (item place, graveyard, deck, hero etc) or a card
+test('msg ACTION CASE 5, player wants to move his card from item holder to graveyard', () => {
+    const cardToTest = 'key19';
     const msg = {
         type: 'ACTION',
-        activeCard: 'key10',
+        activeCard: cardToTest,
         target: 'graveyard',
     };
     // Mock sendReply function
     const sendReply = jest.fn();
-    application.setApp({
-        game: {
-
-            players: [
-                {
-                    active: true,
-                    cards: {
-                        key0: {},
-                        key2: {},
-                        key17: {},
-                        key5: {},
-                        key7: {},
-                        key4: {},
-                        key6: {},
-                        key14: {},
-                        key12: {},
-                        key9: {},
-                    },
-                    health: 13,
-                    hero: 'morevna',
-                    hand: {
-                        key11: {}, key1: {}, key8: {}, key13: {},
-                    },
-                    // We expect the card 10 will be moved to graveyard
-                    item: { key10: { points: 3, disabled: false } },
-                    moveCounter: 0,
-                    // graveyard is empty
-                    grave: {},
-                },
-                {
-                    active: false,
-                    hero: 'yaga',
-                    health: { current: 8 },
-                    item: {},
-                },
-            ],
-
-        },
-
-    });
+    // Set application for the correct state BEFORE the test
+    application.setApp(clone(gameP2Dying));
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
@@ -493,16 +454,22 @@ test.skip('msg ACTION CASE 5, player wants to move his card from item holder to 
     // to use it more easy let's save the received app into result
     const result = sendReply.mock.calls[0][0];
 
-    // expect that player[0] is active
-    expect(result.game.players[0].active).toBeTruthy();
+    // expect that we have active player in game
+    expect(result.game.active).toBeDefined();
+    const activePlayer = getActivePlayer(result);
+    const inActivePlayer = getInActivePlayer(result);
+    // Confirm we removed active player from game. Can be deleted after refactoring
+    expect(activePlayer.active).not.toBeDefined();
+    expect(inActivePlayer.active).not.toBeDefined();
+
     // expect that his cunter was increased
-    expect(result.game.players[0].moveCounter).toEqual(1);
+    expect(activePlayer.moveCounter).toEqual(1);
     // оexpect the card to move to graveryard
-    expect(Object.keys(result.game.players[0].grave)).toContain('key10');
+    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     // expect the card to move out of the item
-    expect(Object.keys(result.game.players[0].item)).not.toContain('key10');
+    expect(Object.keys(activePlayer.item)).not.toContain(cardToTest);
     // expect the opponent health !== 0
-    expect(result.game.players[1].health.current).toBeGreaterThan(0);
+    expect(inActivePlayer.health.current).toBeGreaterThan(0);
 });
 
 // test - player attacks enemy with attack power < shieldLarge points

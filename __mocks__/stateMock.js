@@ -5666,7 +5666,8 @@ export const gameP1Action2 = {
             {
                 id: 'player1',
                 turningHand: false,
-                item: {},
+                item: {
+                },
                 grave: {},
                 moveCounter: 1,
                 health: { current: 10, maximum: 16 },
@@ -6775,9 +6776,24 @@ export const gameP2Dying = {
             {
                 id: 'player1',
                 turningHand: false,
-                item: {},
+                item: {
+                    key19:
+                                        {
+                                            id: 'shieldSmall',
+                                            name: 'Small Shield',
+                                            type: 'item',
+                                            icon: 'shield',
+                                            category: 'shield',
+                                            categoryName: 'shield',
+                                            description:
+                                           'The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.',
+                                            health: 2,
+                                            healthCurrent: 2,
+                                            disabled: false,
+                                        },
+                },
                 grave: {},
-                moveCounter: 1,
+                moveCounter: 0,
                 health: { current: 10, maximum: 16 },
                 deal: 0,
                 background: 'ochre',

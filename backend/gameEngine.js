@@ -532,7 +532,6 @@ function bowArrow(player, opponent) {
 
 // function that change turn in the game
 function changeTurn(game) {
-    console.log(game.active);
     // active player becomes inactive
     const pActive = getActivePlayer(game);
     const pInactive = getInActivePlayer(game);
