@@ -5,9 +5,7 @@ let application = require('./data/app.json');
 
 // Additional files that have functions related to this part of application
 const screenManager = require('./screenManager');
-const profilesManager = require('./profilesManager');
-const gameEngine = require('./gameEngine');
-const heroManager = require('./heroSelect');
+const gameEngineManager = require('./gameEngineManager');
 const socketClient = require('./socketClient');
 
 // This function will write your last game object into a file
@@ -26,9 +24,12 @@ function processMessage(message) {
         accounts: application.accounts,
         terminals: application.terminals,
         manager: application.manager,
-        profiles: profilesManager.handle(application, message),
-        heroSelect: heroManager.handle(application, message),
-        game: gameEngine.handle(application, message),
+        engine: gameEngineManager.handle(application, message),
+        // {
+        //     // screen: "...",
+        //     // heroSelect: heroManager.handle(application, message),
+        //     // game: gameEngine.handle(application, message),
+        // },
     };
     newApp.manager = screenManager.handle(newApp, message);
 

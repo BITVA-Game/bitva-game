@@ -29,5 +29,17 @@ function handle(app, message) {
     }
 }
 
+function handleNew(app, message) {
+    switch (message.type) {
+    case 'PROFILE':
+        return 'PROFILE';
+    case 'PLAY':
+        return 'PLAY';
+    case 'NETWORKPLAY':
+        return 'NETWORKPLAY';
+    default: return app.manager;
+    }
+}
+
 
 exports.handle = handle;

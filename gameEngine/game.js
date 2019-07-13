@@ -746,9 +746,6 @@ function handle(app, message) {
     const game = Object.assign({}, app.game);
 
     switch (message.type) {
-    case 'PLAY': {
-        return Object.assign(game, { players: [] });
-    }
     case 'HEROSELECTED': {
         const playersInitital = game.players.concat(generatePlayer(message.hero, message.player));
         const active = selectActive(playersInitital);
