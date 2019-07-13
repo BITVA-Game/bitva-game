@@ -45,7 +45,7 @@ class App extends Component {
         case 'PROFILE':
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
         case 'HEROSELECT':
-            return <HeroSelection sendMessage={sendMessage} app={this.state.app} />;
+            return <HeroSelection sendMessage={sendMessage} app={this.state.app} key={this.state.app.heroSelect.activePlayer} />;
         case 'VERSUS':
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PLAYERACT':
