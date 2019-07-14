@@ -147,6 +147,7 @@ class Player extends Component {
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
                     isTarget={this.isTarget}
+                    active={this.props.active}
                 />
                 <Item
                     item={Object.values(this.props.player.item)[0]}
@@ -156,6 +157,7 @@ class Player extends Component {
                     player={this.props.player}
                     cardDragStarted={this.props.cardDragStarted}
                     cardDragEnded={this.props.cardDragEnded}
+                    active={this.props.active}
                 />
                 <Deck
                     active={this.props.active}
@@ -386,6 +388,7 @@ Item.propTypes = {
     cardDragEnded: PropTypes.func,
     cardOver: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
+    active: PropTypes.bool.isRequired,
 };
 
 Item.defaultProps = {

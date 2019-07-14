@@ -165,7 +165,7 @@ GameScreen.propTypes = {
 };
 
 GameOver.propTypes = {
-    players: PropTypes.array.isRequired,
+    app: PropTypes.object.isRequired,
 };
 
 ChangeTurn.propTypes = {

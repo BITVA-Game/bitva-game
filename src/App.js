@@ -7,7 +7,7 @@ import Profile from './Profile';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
-// import NetworkPlay from './NetworkPlay';
+import NetworkPlay from './NetworkPlay';
 
 // Import electron and establis connection to use app.js as Renderer
 const electron = window.require('electron');
@@ -50,12 +50,10 @@ class App extends Component {
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PLAYERACT':
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
-            /*
         case 'GAMESCREEN':
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'NETWORKPLAY':
             return <NetworkPlay sendMessage={sendMessage} app={this.state.app} />;
-            */
         default:
             return `UNKNOWN SCREEN NAME ${this.state.app.manager.screen}`;
         }
