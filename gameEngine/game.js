@@ -705,7 +705,7 @@ function playerActs(game, cardId, target) {
     pActive = changeMoveCounter(pActive, cardId);
 
     // after each move of active player we check for forestMushroom in opponent's item
-    Object.keys(opponent.item).length !== 0 && Object.values(opponent.item)[0].category === 'panic' && player.moveCounter === 1
+    Object.keys(pInactive.item).length !== 0 && Object.values(pInactive.item)[0].category === 'panic' && pActive.moveCounter === 1
         ? forestMushroom(player) : null;
     // after each move of active player we check whether opponent has magicTree card in item
     magicTree(game);
@@ -728,7 +728,7 @@ function playerActs(game, cardId, target) {
         //  after change of turn,  we check
         // whether inactive player has in item holder card forest Mushroom with category panic,
         // then we call function forestMushroom
-        Object.keys(player.item).length !== 0 && Object.values(player.item)[0].category === 'panic' ? forestMushroom(opponent, 'afterTurn') : null;
+        Object.keys(pActive.item).length !== 0 && Object.values(pActive.item)[0].category === 'panic' ? forestMushroom(opponent, 'afterTurn') : null;
         // we run bowArrow function to check if opponent has bow & arrow card in item
         // and to supress attack points if any
         bowArrow(pActive, pInactive);
