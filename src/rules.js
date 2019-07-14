@@ -43,3 +43,7 @@ export function sortedHeroesList(app) {
 export function getActivePlayer(app) {
     return app.game.players.find(p => p.id === app.game.active);
 }
+
+export function getInActivePlayer(app) {
+    return app.game.players.find(p => p.id !== app.game.active);
+}
