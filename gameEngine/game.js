@@ -55,7 +55,10 @@ function disableCards(opponent) {
     }
     opponentCards[index1].disabled = true;
     opponentCards[index2].disabled = true;
+    opponentCards[index1].panic === false ? opponentCards[index1].disabled = false : null;
+    opponentCards[index2].panic === false ? opponentCards[index2].disabled = false : null;
 }
+
 
 // function to return disabled cards property to false if any have true
 function removeDisable(player) {
@@ -428,32 +431,6 @@ function waterCard(players) {
     return { players };
 }
 
-
-// function to set disabled property to true to random 2 cards in player's hand for russianOven card
-function disableCards(opponent) {
-    const opponentCards = Object.values(opponent.hand);
-    const index1 = getRandomUpTo(opponentCards.length, 'index1Oven');
-    let index2 = getRandomUpTo(opponentCards.length, 'index2Oven');
-    if (index2 === index1) {
-        index2 = getRandomUpTo(opponentCards.length);
-    }
-    opponentCards[index1].disabled = true;
-    opponentCards[index2].disabled = true;
-    opponentCards[index1].panic === false ? opponentCards[index1].disabled = false : null;
-    opponentCards[index2].panic === false ? opponentCards[index2].disabled = false : null;
-}
-
-// function to return disabled cards property to false if any have true
-function removeDisable(player) {
-    const playerCards = Object.values(player.hand);
-    for (let i = 0; i < Object.keys(player.hand).length; i++) {
-        if (playerCards[i].disabled === true) {
-            playerCards[i].disabled = false;
-        }
-    }
-    return playerCards;
-}
-
 // function to show 3 cards from opponent cards
 // when active player attackes with claivoyance card
 function showCards(opponent) {
@@ -552,7 +529,7 @@ function magicTree(game) {
     const pInactive = getInActivePlayer(game);
     const itemKey = Object.keys(pInactive.item)[0];
     itemKey ? itemId = pInactive.item[itemKey].id : null;
-    if (pActive.moveCounter === 1 && itemId === 'magicTree'){
+    if (pActive.moveCounter === 1 && itemId === 'magicTree') {
         giveCardsTo(pActive);
         changeTurn(game);
     }
