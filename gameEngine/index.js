@@ -1,4 +1,3 @@
-const profiles = require('./profiles');
 const game = require('./game');
 const heroSelect = require('./heroSelect');
 const screen = require('./screen');
@@ -13,7 +12,6 @@ class GameEngine {
         const newState = {
             accounts: this.state.accounts,
             terminals: this.state.terminals,
-            profiles: profiles.handle(this.state, message),
             heroSelect: heroSelect.handle(this.state, message),
             game: game.handle(this.state, message),
         };

@@ -13,6 +13,7 @@ function handle(app, message) {
     case 'DEALALL':
     case 'ACTION':
     // call game engine to calculate new game state
+        if (!engine) engine = new GameEngine();
         engine.handle(message);
         break;
     // not a game-related message

@@ -36,13 +36,12 @@ test('First game state Play. Player1 can select any of the characters he has', (
 
     // Call the message function from application with this message and mocked function.
     application.msgReceived(msg, sendReply);
-
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectStateP1);
 });
 
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
-test('msg HEROSELECTED received from P1, P2 is active', () => {
+test.only('msg HEROSELECTED received from P1, P2 is active', () => {
     // Player 1 selected morevna
     const msg = { type: 'HEROSELECTED', hero: 'morevna', player: 'player1' };
 
@@ -182,7 +181,7 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
 });
 
 // screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test.only('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
+test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     // We only need type for this test.
     const msg = { type: 'STARTSCREEN' };
 

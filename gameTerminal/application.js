@@ -7,6 +7,7 @@ let application = require('./data/app.json');
 const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
 const socketClient = require('./socketClient');
+// const profiles = require('./profiles');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -29,13 +30,13 @@ function parseApplication(app) {
     const parsedApp = Object.assign(
         {}, app, app.engine, { manager: { screen } },
     );
+    delete parsedApp.engine;
     return parsedApp;
 }
 
 function processMessage(message) {
     const newApp = {
-        accounts: application.accounts,
-        terminals: application.terminals,
+        profiles: application.profiles,
         manager: screenManager.handle(application, message),
         engine: gameEngineManager.handle(application, message),
     };
@@ -66,6 +67,11 @@ function setApp(newApp) {
     application = newApp;
 }
 
+function getApp() {
+    return application;
+}
+
 /** *********** Exports ************** */
 exports.msgReceived = msgReceived;
 exports.setApp = setApp;
+exports.getApp = getApp;
