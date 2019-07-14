@@ -9,7 +9,7 @@ const ctxMenu = require('./src/ctxMenu');
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 
-const application = require('./backend/application');
+const application = require('./gameTerminal/application');
 
 function sendMessage(received) {
     win.webContents.send('APP', received);

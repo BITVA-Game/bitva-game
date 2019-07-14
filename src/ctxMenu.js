@@ -1,10 +1,10 @@
 const electron = require('electron');
 const os = require('os');
 const fs = require('fs');
-const { setApp } = require('../backend/application');
-const startScreen = require('../backend/data/app.json');
-const morevnaStart = require('../backend/data/morevnaStart.json');
-const selectCharacter = require('../backend/data/selectCharacter.json');
+const { setApp } = require('../gameTerminal/application');
+const startScreen = require('../gameTerminal/data/app.json');
+const morevnaStart = require('../gameTerminal/data/morevnaStart.json');
+const selectCharacter = require('../gameTerminal/data/selectCharacter.json');
 
 const dialog = electron.dialog;
 

@@ -1,5 +1,5 @@
-const heroes = require('./data/characters.json');
-const cards = require('./data/cards.json');
+const heroes = require('../gameTerminal/data/characters.json');
+const cards = require('../gameTerminal/data/cards.json');
 
 const initialState = {
     players: [],

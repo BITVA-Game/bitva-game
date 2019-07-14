@@ -5,10 +5,10 @@ import {
 } from '../__mocks__/stateMock';
 
 // import module for tests
-const application = require('../backend/application');
-const heroData = require('../backend/data/characters.json');
+const application = require('../gameTerminal/application');
+const heroData = require('../gameTerminal/data/characters.json');
 
-jest.mock('../backend/randomFunc');
+jest.mock('../gameTerminal/randomFunc');
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
 test('Game loaded. Send the app in its initial state', () => {

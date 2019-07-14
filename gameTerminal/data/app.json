@@ -1,0 +1,11 @@
+{
+	"profiles": [{
+			"id": "player1"
+		},
+		{
+			"id": "player2"
+		}
+	],
+	"manager": "STARTSCREEN"
+
+}

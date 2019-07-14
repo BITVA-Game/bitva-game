@@ -2,8 +2,8 @@
 // const fs = require('fs');
 // const path = require('path');
 const readlineSync = require('readline-sync');
-const application = require('../backend/application');
-const appData = require('../backend/data/app.json');
+const application = require('../gameTerminal/application');
+const appData = require('../gameTerminal/data/app.json');
 const { simulationSequence } = require('./functions');
 
 // function writeToFile(obj, filepath) {

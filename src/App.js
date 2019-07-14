@@ -7,7 +7,7 @@ import Profile from './Profile';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
-import NetworkPlay from './NetworkPlay';
+// import NetworkPlay from './NetworkPlay';
 
 // Import electron and establis connection to use app.js as Renderer
 const electron = window.require('electron');

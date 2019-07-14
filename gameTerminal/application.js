@@ -13,26 +13,32 @@ const socketClient = require('./socketClient');
 
 // function writeGameObject(newApp) {
 //     fs.writeFileSync(
-//        path.join(__dirname, '../backend/data/some.json'),
+//        path.join(__dirname, '../gameTerminal/data/some.json'),
 //        JSON.stringify(newApp), 'utf8', (err) => {
 //         if (err) { throw err; }
 //     });
 // }
 
+// TODO This is a temporary solution, getting read of it requires rewriting frontend to read from engine
+function parseApplication(app) {
+    let screen = app.manager;
+    if (screen === 'PLAY') {
+        // we're inside game screen playing the game
+        screen = app.engine.screen;
+    }
+    const parsedApp = Object.assign(
+        {}, app, app.engine, { manager: { screen } },
+    );
+    return parsedApp;
+}
+
 function processMessage(message) {
     const newApp = {
         accounts: application.accounts,
         terminals: application.terminals,
-        manager: application.manager,
+        manager: screenManager.handle(application, message),
         engine: gameEngineManager.handle(application, message),
-        // {
-        //     // screen: "...",
-        //     // heroSelect: heroManager.handle(application, message),
-        //     // game: gameEngine.handle(application, message),
-        // },
     };
-    newApp.manager = screenManager.handle(newApp, message);
-
     return newApp;
 }
 
@@ -50,12 +56,10 @@ function msgReceived(message, sendReply) {
         console.log('OMG NETWORK PLAY IS: ', newApp.network);
 
         socketClient.emitMessage(message);
-        sendReply(newApp);
-        application = newApp;
-    } else {
-        sendReply(newApp);
-        application = newApp;
     }
+
+    application = newApp;
+    sendReply(parseApplication(newApp));
 }
 
 function setApp(newApp) {

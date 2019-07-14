@@ -7,7 +7,7 @@ import {
     gameP2HasSmallShieldState, gameP1Action2, gameP2Dying,
 } from '../__mocks__/stateMock';
 
-const application = require('../backend/application');
+const application = require('../gameTerminal/application');
 
 function clone(obj) {
     return JSON.parse(JSON.stringify(obj));

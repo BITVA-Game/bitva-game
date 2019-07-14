@@ -8,11 +8,11 @@
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
 const keygen = require('keygenerator');
-const { getRandomUpTo } = require('./randomFunc');
+const { getRandomUpTo } = require('../gameTerminal/randomFunc');
 
 
-const allCharacters = require('./data/characters.json');
-const allCards = require('./data/cards.json');
+const allCharacters = require('../gameTerminal/data/characters.json');
+const allCards = require('../gameTerminal/data/cards.json');
 
 function getRandomBool() {
     const rand = getRandomUpTo(2, 'firstPlayerActive');
@@ -762,7 +762,7 @@ function handle(app, message) {
     }
     case 'NETWORKPLAY': { return game; }
 
-    default: { return null; }
+    default: return game;
     }
 }
 

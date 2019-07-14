@@ -5,10 +5,10 @@ import {
     profileState,
 } from '../__mocks__/stateMock';
 
-jest.mock('../backend/randomFunc');
+jest.mock('../gameTerminal/randomFunc');
 
 // import module for tests
-const application = require('../backend/application');
+const application = require('../gameTerminal/application');
 
 // Test that screen swtichs to PROFILE when Profile message received
 test('msg PROFILE switches screen state to PROFILE', () => {

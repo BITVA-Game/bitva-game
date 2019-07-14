@@ -7,6 +7,7 @@ function handle(app, message) {
     case 'PLAY':
         // initialize game engine
         engine = new GameEngine();
+        engine.handle(message);
         break;
     case 'HEROSELECTED':
     case 'DEALALL':
@@ -19,7 +20,7 @@ function handle(app, message) {
     }
 
     // if we had a game-related message - return new game state
-    return Object.assign({}, app, { engine: engine.state() });
+    return engine.getState();
 }
 
 exports.handle = handle;

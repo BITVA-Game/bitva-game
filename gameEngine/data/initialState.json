@@ -11,17 +11,8 @@
 	"terminals": [{
 		"players": ["player1", "player2"]
 	}],
-	"profiles": [{
-			"id": "player1"
-		},
-		{
-			"id": "player2"
-		}
-	],
-	"manager": {
-		"screen": "STARTSCREEN"
-	},
 	"game": {
-		"phase": "ACTIVE"
-	}
+		"players": []
+	},
+  "screen": "HEROSELECT"
 }
