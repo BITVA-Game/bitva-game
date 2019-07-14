@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import MainMenu from './MainMenu';
 import './css/Profile.css';
 
-import { activeProfile } from './rules';
+import { getActiveProfile } from './rules';
 
 const Profile = (props) => {
-    const profile = activeProfile(props.app);
+    const profile = getActiveProfile(props.app);
     const characters = profile.characters.map(character => (
         <span key={character}>{character}</span>
     ));

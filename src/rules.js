@@ -23,13 +23,11 @@ export default function isTarget(target, dragging, active, player) {
 }
 
 
-export function activeProfile(app) {
-    console.log('Heres select!');
-    return app.profiles.find(p => p.id === app.game.activePlayer);
+export function getActiveProfile(app) {
+    return app.profiles.find(p => p.id === app.game.active);
 }
 
 export function sortedHeroesList(app) {
-    console.log(app);
     // Sort characters' names based on profile and alphabet
     const heroes = app.heroSelect.heroes;
     return Object.values(app.heroSelect.allHeroes).sort((h1, h2) => {
@@ -40,4 +38,8 @@ export function sortedHeroesList(app) {
         }
         return id1 > id2 ? -1 : 1;
     });
+}
+
+export function getActivePlayer(app) {
+    return app.game.players.find(p => p.id === app.game.active);
 }

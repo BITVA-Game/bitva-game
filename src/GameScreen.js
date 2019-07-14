@@ -6,6 +6,8 @@ import Player from './Player';
 import './css/App.css';
 import './css/GameScreen.css';
 
+import { getActivePlayer } from './rules';
+
 // animation duration time
 const animationDuration = 9000;
 
@@ -75,6 +77,7 @@ class GameScreen extends Component {
     }
 
     render() {
+        const activePlayer = getActivePlayer(this.props.app);
         return (
             <div className="game-table app-background">
                 {this.props.app.game.players.map(player => (
@@ -83,6 +86,7 @@ class GameScreen extends Component {
                         key={player.keyHero}
                         position={player.position}
                         player={player}
+                        active={player === activePlayer}
                         sendMessage={this.props.sendMessage}
                         dragging={this.state.dragging}
                         cardDropped={this.cardDropped}
@@ -91,8 +95,7 @@ class GameScreen extends Component {
                     />
                 ))}
 
-                {((this.props.app.game.players[0].moveCounter === 0) && (this.props.app.game.players[0].active === true))
-                    || ((this.props.app.game.players[1].moveCounter === 0) && (this.props.app.game.players[1].active === true))
+                {activePlayer.moveCounter === 0
                     ? (
                         <ChangeTurn
                             players={this.props.app.game.players}
@@ -130,10 +133,7 @@ const BirdsAnimation = () => (
 );
 
 const GameOver = (props) => {
-    let activePlayer = props.players[0];
-    if (props.players[0].active === false) {
-        activePlayer = props.players[1];
-    }
+    const activePlayer = getActivePlayer(props.app);
     return (
         <div className="gameover">
             {/* for pvp mode: if player is active and alive, the message is 'you win' */}

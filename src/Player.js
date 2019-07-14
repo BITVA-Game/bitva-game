@@ -117,7 +117,7 @@ class Player extends Component {
         return rules(
             target,
             this.props.dragging,
-            this.props.player.active,
+            this.props.active,
             this.props.player,
         );
     }
@@ -138,7 +138,7 @@ class Player extends Component {
 
 
     render() {
-        const playerClass = this.props.player.active ? 'player-active' : 'player-inactive';
+        const playerClass = this.props.active ? 'player-active' : 'player-inactive';
         const playerPosition = this.props.player.position === 'bottom' ? 'player player-bottom' : 'player player-top';
         return (
             <div className={`${playerPosition} ${playerClass}`}>
@@ -158,12 +158,12 @@ class Player extends Component {
                     cardDragEnded={this.props.cardDragEnded}
                 />
                 <Deck
-                    active={this.props.player.active}
+                    active={this.props.active}
                     cards={this.props.player.cards}
                     background={this.props.player.background}
                 />
                 <Hand
-                    active={this.props.player.active}
+                    active={this.props.active}
                     hand={this.props.player.hand}
                     cardDragStarted={this.props.cardDragStarted}
                     cardDragEnded={this.props.cardDragEnded}
@@ -172,7 +172,7 @@ class Player extends Component {
                 />
                 <Grave
                     player={this.props.player}
-                    active={this.props.player.active}
+                    active={this.props.active}
                     grave={this.props.player.grave}
                     isTarget={this.isTarget}
                     cardDropped={this.cardDropped}
@@ -235,17 +235,17 @@ const Item = props => (
             ${props.isTarget('item') ? 'target' : null}
             ${props.isTarget('itemOpponent') && props.item && props.item.category !== 'shield' ? 'target' : null}
         `}
-        id={props.player.active ? 'item' : null}
+        id={props.active ? 'item' : null}
 
         onDrop={
             // eslint-disable-next-line no-nested-ternary
-            props.player.active
+            props.active
                 ? () => props.cardDropped('item', Object.keys(props.player.item))
                 : props.item ? () => props.cardDropped('itemOpponent') : null
         }
         onDragOver={
             // eslint-disable-next-line no-nested-ternary
-            props.player.active
+            props.active
                 ? e => props.cardOver(e, 'item')
                 : props.item ? e => props.cardOver(e, 'itemOpponent') : null
         }
@@ -256,7 +256,7 @@ const Item = props => (
                     card={props.item}
                     player={props.player}
                     cardKey={Object.keys(props.player.item)[0]}
-                    draggable={props.player.active}
+                    draggable={props.active}
                     cardDragStarted={props.cardDragStarted}
                     cardDragEnded={props.cardDragEnded}
                 />
@@ -280,7 +280,7 @@ const Card = props => (
                     ${props.card.category === 'attack' ? 'icon-attack' : null}
                     ${props.card.category === 'attackItems' ? 'icon-damage' : null}
                     ${props.card.category === 'damage' ? 'icon-damage' : null}
-                    ${props.card.category === 'generator' ? 'icon-move' : null}               
+                    ${props.card.category === 'generator' ? 'icon-move' : null}
                     ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
                     ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
                     ${props.card.category === 'holdCard' ? 'icon-hold' : null}
@@ -333,6 +333,7 @@ Player.propTypes = {
     cardDragEnded: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
     dragging: PropTypes.object,
+    active: PropTypes.bool.isRequired,
 };
 
 Player.defaultProps = {
