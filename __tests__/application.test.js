@@ -179,24 +179,3 @@ test('msg DEALALL received: Players hands have 5 cards each. Players cards have 
         }
     }
 });
-
-// screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
-    // We only need type for this test.
-    const msg = { type: 'STARTSCREEN' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            manager: {
-                screen: 'STARTSCREEN',
-            },
-
-        },
-    );
-});
