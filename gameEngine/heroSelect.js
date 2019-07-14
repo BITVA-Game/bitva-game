@@ -1,5 +1,8 @@
 const heroes = require('../gameTerminal/data/characters.json');
 const cards = require('../gameTerminal/data/cards.json');
+const {
+    PLAY, HEROSELECTED,
+} = require('../constants');
 
 const initialState = {
     players: [],
@@ -37,9 +40,9 @@ function newPlayers(app, message) {
 
 function handle(app, message) {
     switch (message.type) {
-    case 'PLAY':
+    case PLAY:
         return Object.assign({}, initialState, heroWithCards(), playerData(app));
-    case 'HEROSELECTED':
+    case HEROSELECTED:
         return Object.assign({}, initialState, heroWithCards(),
             playerData(app, newPlayers(app, message)));
     default: return null;

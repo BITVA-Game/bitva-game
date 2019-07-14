@@ -23,7 +23,7 @@ class App extends Component {
     // Bind the function to send messages
     constructor(props) {
         super(props);
-        this.state = { app: { manager: { screen: 'loading' } } };
+        this.state = { app: { manager: { screen: 'LOADING' } } };
     }
 
 
@@ -33,23 +33,27 @@ class App extends Component {
             console.log({ app: arg });
             this.setState({ app: arg });
         });
-        sendMessage('Init');
+        sendMessage('INIT');
     }
 
     showApplication() {
         switch (this.state.app.manager.screen) {
-        case 'loading':
+        case 'LOADING':
             return 'LOADING';
         case 'STARTSCREEN':
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PROFILE':
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
         case 'HEROSELECT':
-            return <HeroSelection sendMessage={sendMessage} app={this.state.app} key={this.state.app.heroSelect.activePlayer} />;
+            return (
+                <HeroSelection
+                    sendMessage={sendMessage}
+                    app={this.state.app}
+                    key={this.state.app.heroSelect.activePlayer}
+                />
+            );
         case 'VERSUS':
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
-        case 'PLAYERACT':
-            return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'GAMESCREEN':
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'NETWORKPLAY':

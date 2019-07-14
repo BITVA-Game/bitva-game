@@ -9,7 +9,9 @@
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
 const keygen = require('keygenerator');
 const { getRandomUpTo } = require('../gameTerminal/randomFunc');
-
+const {
+    HEROSELECTED, DEALALL, ACTION, NETWORKPLAY,
+} = require('../constants');
 
 const allCharacters = require('../gameTerminal/data/characters.json');
 const allCards = require('../gameTerminal/data/cards.json');
@@ -746,21 +748,21 @@ function handle(app, message) {
     const game = Object.assign({}, app.game);
 
     switch (message.type) {
-    case 'HEROSELECTED': {
+    case HEROSELECTED: {
         const playersInitital = game.players.concat(generatePlayer(message.hero, message.player));
         const active = selectActive(playersInitital);
         const players = assignPlayersPositions(playersInitital);
         return Object.assign(game, { active, players });
     }
-    case 'DEALALL': {
+    case DEALALL: {
         return Object.assign(game, { players: giveCardsToAll(game.players) });
     }
     // All actions have the same action name as they all call the same function
-    case 'ACTION': {
+    case ACTION: {
         // helperToDebug(message, game);
         return Object.assign(game, makeMove(game, message));
     }
-    case 'NETWORKPLAY': { return game; }
+    case NETWORKPLAY: { return game; }
 
     default: return game;
     }

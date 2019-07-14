@@ -2,7 +2,7 @@
 // const fs = require('fs');
 // const path = require('path');
 let application = require('./data/app.json');
-
+const { PLAY, INIT } = require('../constants');
 // Additional files that have functions related to this part of application
 const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
@@ -20,10 +20,10 @@ const socketClient = require('./socketClient');
 //     });
 // }
 
-// TODO This is a temporary solution, getting read of it requires rewriting frontend to read from engine
+// TODO This is a temporary solution, requires rewriting frontend to read from engine
 function parseApplication(app) {
     let screen = app.manager;
-    if (screen === 'PLAY') {
+    if (screen === PLAY) {
         // we're inside game screen playing the game
         screen = app.engine.screen;
     }
@@ -49,7 +49,7 @@ function processMessage(message) {
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
 function msgReceived(message, sendReply) {
-    const newApp = message === 'Init' ? application : processMessage(message);
+    const newApp = message === INIT ? application : processMessage(message);
 
     // writeGameObject(newApp);
     if (message.network) {

@@ -1,17 +1,19 @@
 let engine = null;
-
+const {
+    PLAY, HEROSELECTED, DEALALL, ACTION,
+} = require('../constants');
 const GameEngine = require('../gameEngine');
 
 function handle(app, message) {
     switch (message.type) {
-    case 'PLAY':
+    case PLAY:
         // initialize game engine
         engine = new GameEngine();
         engine.handle(message);
         break;
-    case 'HEROSELECTED':
-    case 'DEALALL':
-    case 'ACTION':
+    case HEROSELECTED:
+    case DEALALL:
+    case ACTION:
     // call game engine to calculate new game state
         if (!engine) engine = new GameEngine();
         engine.handle(message);

@@ -52,7 +52,7 @@ function createWindow() {
         win.show();
 
         // Send the message to show the first screen
-        application.msgReceived({ type: 'INITIAL' }, sendMessage);
+        application.msgReceived({ type: 'INIT' }, sendMessage);
     });
 
     win.webContents.on('context-menu', (s, e) => {

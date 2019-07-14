@@ -14,7 +14,7 @@ jest.mock('../gameTerminal/randomFunc');
 test('Game loaded. Send the app in its initial state', () => {
     // Create a messade that has type and may have additional data later.
     // We only need type for this test.
-    const msg = { type: 'INITIAL' };
+    const msg = { type: 'INIT' };
 
     // Mock sendReply function
     const sendReply = jest.fn();
