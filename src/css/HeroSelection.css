@@ -319,3 +319,22 @@ section {
 	font-size: 22px;
 	width: 450px;
 }
+
+.hero-selection-screen-animation {
+	animation: moveScreen 1s linear 1 forwards;
+	background-image: url("../images/backgrounds/animation1.png");
+	background-repeat: no-repeat;
+	height: 768px;
+}
+
+@keyframes moveScreen {
+	0% {
+		background-position: 0 100%;
+	}
+	45% {
+		background-position: 0 50%;
+	}
+	85% {
+		background-position: 0 0;
+	}
+}

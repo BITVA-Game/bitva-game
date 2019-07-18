@@ -24,6 +24,11 @@ class GameScreen extends Component {
     }
 
     componentDidMount() {
+        this.setState({ animation: 'background' });
+        setTimeout(() => {
+            this.setState({ animation: null });
+        }, 1000);
+
         this.startBirds();
     }
 
@@ -79,44 +84,51 @@ class GameScreen extends Component {
     render() {
         const activePlayer = getActivePlayer(this.props.app);
         return (
-            <div className="game-table app-background">
-                {this.props.app.game.players.map(player => (
-                    <Player
-                        item={player.item}
-                        key={player.keyHero}
-                        position={player.position}
-                        player={player}
-                        active={player === activePlayer}
-                        sendMessage={this.props.sendMessage}
-                        dragging={this.state.dragging}
-                        cardDropped={this.cardDropped}
-                        cardDragStarted={this.cardDragStarted}
-                        cardDragEnded={this.cardDragEnded}
-                    />
-                ))}
+            this.state.animation === 'background' ? <BackgroundAnimation />
+                : (
+                    <div className="game-table app-background">
+                        {this.props.app.game.players.map(player => (
+                            <Player
+                                item={player.item}
+                                key={player.keyHero}
+                                position={player.position}
+                                player={player}
+                                sendMessage={this.props.sendMessage}
+                                dragging={this.state.dragging}
+                                cardDropped={this.cardDropped}
+                                cardDragStarted={this.cardDragStarted}
+                                cardDragEnded={this.cardDragEnded}
+                            />
+                        ))}
 
-                {activePlayer.moveCounter === 0
-                    ? (
-                        <ChangeTurn
-                            players={this.props.app.game.players}
-                        />
-                    )
-                    : null}
+                        {((this.props.app.game.players[0].moveCounter === 0) && (this.props.app.game.players[0].active === true))
+                    || ((this.props.app.game.players[1].moveCounter === 0) && (this.props.app.game.players[1].active === true))
+                            ? (
+                                <ChangeTurn
+                                    players={this.props.app.game.players}
+                                />
+                            )
+                            : null}
 
-                {this.props.app.game.phase === 'OVER'
-                    ? (
-                        <GameOver
-                            players={this.props.app.game.players}
-                        />
-                    )
-                    : null}
-                {this.state.animation === 'birds'
-                    ? <BirdsAnimation />
-                    : null}
-            </div>
+                        {this.props.app.game.phase === 'OVER'
+                            ? (
+                                <GameOver
+                                    players={this.props.app.game.players}
+                                />
+                            )
+                            : null}
+                        {this.state.animation === 'birds'
+                            ? <BirdsAnimation />
+                            : null}
+                    </div>
+                )
         );
     }
 }
+
+const BackgroundAnimation = () => (
+    <div className="game-screen-animation" />
+);
 
 const BirdsAnimation = () => (
     <div className="animation-game-screen">

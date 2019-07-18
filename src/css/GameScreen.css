@@ -727,3 +727,10 @@
         transform: rotate(180deg) translateX(1190px);
     }
 }
+
+.game-screen-animation {
+    animation: moveScreen 1s linear 1 forwards;
+    background-image: url("../images/backgrounds/animation2.png");
+    background-repeat: no-repeat;
+	height: 768px;
+}
