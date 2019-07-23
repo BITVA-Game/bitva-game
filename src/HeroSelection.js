@@ -68,6 +68,10 @@ const BackButton = props => (
 );
 
 
+const BackgroundAnimation = () => (
+    <div className="hero-selection-screen-animation" />
+);
+
 class HeroSelection extends Component {
     constructor(props) {
         super(props);
@@ -77,6 +81,7 @@ class HeroSelection extends Component {
         this.state = {
             hero: null,
             selected: this.defaultHeroID,
+            animation: null,
         };
         this.showHero = this.showHero.bind(this);
         this.changeSelected = this.changeSelected.bind(this);
@@ -86,6 +91,13 @@ class HeroSelection extends Component {
         this.showHeroList = this.showHeroList.bind(this);
         this.showRightHero = this.showRightHero.bind(this);
         this.showLeftHero = this.showLeftHero.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ animation: 'background' });
+        setTimeout(() => {
+            this.setState({ animation: null });
+        }, 1000);
     }
 
     showHero() {
@@ -141,40 +153,44 @@ class HeroSelection extends Component {
         // console.log(sortedHeroesList(this.app));
         // console.log(this.state.selected, this.state.hero);
         return (
-            <div className="heroselection-container">
-                <Header
-                    hero={this.state.hero}
-                    prev={this.selectLeftHero}
-                    next={this.selectRightHero}
-                    selected={this.state.selected}
-                    onShow={this.showHero}
-                    // for char details
-                    showNext={this.showRightHero}
-                    showPrev={this.showLeftHero}
-                />
-                <div className={styles.main}>
-                    {this.state.hero
-                        ? (
-                            <OneHero
-                                hero={this.state.hero}
-                            />
-                        ) : (
-                            <ListOfHeroes
-                                app={this.props.app}
-                                onShow={this.showHero}
-                                changeSelected={this.changeSelected}
-                                selected={this.state.selected}
-                            />
-                        )
-                    }
-                </div>
-                <MainMenu sendMessage={this.props.sendMessage} />
-                <Footer
-                    hero={this.state.hero}
-                    selectHero={this.selectHero}
-                    onBack={this.showHeroList}
-                />
-            </div>
+            this.state.animation === 'background' ? <BackgroundAnimation />
+                : (
+                    <div className="heroselection-container">
+                        <Header
+                            hero={this.state.hero}
+                            prev={this.selectLeftHero}
+                            next={this.selectRightHero}
+                            selected={this.state.selected}
+                            onShow={this.showHero}
+                            // for char details
+                            showNext={this.showRightHero}
+                            showPrev={this.showLeftHero}
+                        />
+                        <div className={styles.main}>
+                            {this.state.hero
+                                ? (
+                                    <OneHero
+                                        hero={this.state.hero}
+                                    />
+                                ) : (
+                                    <ListOfHeroes
+                                        app={this.props.app}
+                                        onShow={this.showHero}
+                                        changeSelected={this.changeSelected}
+                                        selected={this.state.selected}
+                                        opponent={!this.props.first}
+                                    />
+                                )
+                            }
+                        </div>
+                        <MainMenu sendMessage={this.props.sendMessage} />
+                        <Footer
+                            hero={this.state.hero}
+                            selectHero={this.selectHero}
+                            onBack={this.showHeroList}
+                        />
+                    </div>
+                )
         );
     }
 }
