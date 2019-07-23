@@ -60,23 +60,25 @@ test('msg PLAY checks that PLAY creates engine and handles the message', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(playState);
 });
 
-// Test that engineManager on HEROSELECTED msg with player 1 creates engine - UNDER PROCESS
-test('msg HEROSELECTED msg with player 1 checks that HEROSELECTED creates engine and handles the message', () => {
-    const msg = { type: HEROSELECTED };
-    // Mock sendReply function
-    const sendReply = jest.fn();
+// // Test that engineManager on HEROSELECTED msg with player 1 creates engine - UNDER PROCESS
+// test.only('msg HEROSELECTED msg with player 1 checks that HEROSELECTED creates engine and handles the message', () => {
+//     const msg = { type: HEROSELECTED };
+//     // Mock sendReply function
+//     const sendReply = jest.fn();
+//     application.setApp(playState);
 
-    // Call the message function from application with this message and mocked function.
-    // application.msgReceived(msg, sendReply);
-    // expect(sendReply.mock.calls.length).toBe(1);
-    // expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectStateP1);
-});
+//     // Call the message function from application with this message and mocked function.
+//     application.msgReceived(msg, sendReply);
+//     expect(sendReply.mock.calls.length).toBe(1);
+//     expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectStateP1);
+// });
 
-// Test that engineManager on HEROSELECTED msg with player 2 creates engine - UNDER PROCESS
-// test('msg HEROSELECTED msg with player 2 checks that HEROSELECTED creates engine and handles the message', () => {
+// // Test that engineManager on HEROSELECTED msg with player 2 creates engine - UNDER PROCESS
+// test.only('msg HEROSELECTED msg with player 2 checks that HEROSELECTED creates engine and handles the message', () => {
 //     const msg = { type: HEROSELECTED, hero: 'yaga', player: 'player2' };
 //     // Mock sendReply function
 //     const sendReply = jest.fn();
+//     application.setApp(heroselectStateP1);
 
 //     // Call the message function from application with this message and mocked function.
 //     application.msgReceived(msg, sendReply);
