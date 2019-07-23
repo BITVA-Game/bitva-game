@@ -235,6 +235,10 @@
     font-size: 14px;
 }
 
+.suppress {
+	padding-left: 1em;
+}
+
 .game-card-points {
     font-size: 30px;
     height: 30px;

@@ -485,7 +485,7 @@ function getRandomIndexes(cardsLength) {
 }
 
 // function to check if opponent has item card with id== bowArrow
-// and to randomly ( 60% chance) to decrease pnts of 2 cards in hand by 1 pnt
+// and to randomly (60% chance) to decrease pnts of 2 cards in hand by 1 pnt
 function bowArrow(player, opponent) {
     // console.log('We are in borrow and Arrow case!');
     let itemId;
@@ -495,16 +495,20 @@ function bowArrow(player, opponent) {
         const chance = getRandomUpTo(10, 'chanceBowArrow');
         if (chance <= 6) {
             const cards = Object.values(player.hand);
+            const cardsKeys = Object.keys(player.hand);
             const cardsNew = [];
-            for (let i = 0; i < Object.keys(player.hand).length; i++) {
-                if (cards[i].initialpoints > 1 && cards[i].type === 'action') {
-                    cardsNew.push(cards[i]);
+            for (let i = 0; i < cardsKeys.length; i++) {
+                if (cards[i].points > 1 && cards[i].type === 'action') {
+                    cardsNew.push(cardsKeys[i]);
                 }
             }
-
             const indexes = getRandomIndexes(cardsNew.length);
-            cardsNew[indexes[0]].points -= 1;
-            cardsNew[indexes[1]].points -= 1;
+            for (let i = 0; i < cardsKeys.length; i++) {
+                if (cardsKeys[i] === cardsNew[indexes[0]]
+                    || cardsKeys[i] === cardsNew[indexes[1]]) {
+                    cards[i].points -= 1;
+                }
+            }
         }
     }
 }
