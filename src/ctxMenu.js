@@ -1,7 +1,7 @@
 const electron = require('electron');
 const os = require('os');
 const fs = require('fs');
-const { setApp } = require('../gameTerminal/application');
+const { setApp, getApp } = require('../gameTerminal/application');
 const startScreen = require('../gameTerminal/data/app.json');
 const morevnaStart = require('../gameTerminal/data/morevnaStart.json');
 const selectCharacter = require('../gameTerminal/data/selectCharacter.json');
@@ -79,7 +79,7 @@ module.exports = function menu(app, win, e, sendMessage) {
             label: 'to Start Screen',
             click() {
                 setApp(startScreen);
-                sendMessage(startScreen);
+                sendMessage(getApp());
             },
         },
         {
