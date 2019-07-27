@@ -89,6 +89,7 @@ class GameScreen extends Component {
                     <div className="game-table app-background">
                         {this.props.app.game.players.map(player => (
                             <Player
+                                active={player.id === activePlayer.id}
                                 item={player.item}
                                 key={player.keyHero}
                                 position={player.position}
