@@ -10,20 +10,6 @@ const heroData = require('../gameTerminal/data/characters.json');
 
 jest.mock('../gameTerminal/randomFunc');
 
-// Test the first game state Play, returns the available characters
-test('First game state Play. Player1 can select any of the characters he has', () => {
-    // Again we only need type
-    const msg = { type: 'PLAY' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(heroselectStateP1);
-});
-
 // Test that msg HEROSELECTED clears the characters list and turn state into HERO SELECTED
 test.only('msg HEROSELECTED received from P1, P2 is active', () => {
     // Player 1 selected morevna

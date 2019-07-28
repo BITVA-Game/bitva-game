@@ -15,6 +15,7 @@ jest.mock('../gameTerminal/randomFunc');
 beforeEach(() => {
     application.reset();
 });
+
 // If it's the first INITIAL message from frontend, return the app in it's initial state
 test('msg INIT Game loaded. Send the app in its initial state', () => {
     // Create a messade that has type and may have additional data later.

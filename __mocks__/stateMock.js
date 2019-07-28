@@ -25,14 +25,6 @@ export const playState = {
     terminals: [{
         players: ['player1', 'player2'],
     }],
-    profiles: [
-        {
-            id: 'player1',
-        },
-        {
-            id: 'player2',
-        },
-    ],
     heroSelect: {
         allHeroes: {
             morevna: {},
@@ -44,9 +36,7 @@ export const playState = {
         activePlayer: 'player1',
         players: [],
     },
-    manager: {
-        screen: 'HEROSELECT',
-    },
+    screen: 'HEROSELECT',
     game: {
         players: [],
     },
