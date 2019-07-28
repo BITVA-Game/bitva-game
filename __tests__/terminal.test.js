@@ -3,7 +3,7 @@ import {
 } from '../__mocks__/stateMock';
 
 import {
-    INIT, STARTSCREEN, PLAY, HEROSELECTED,
+    INIT, STARTSCREEN, PLAY, HEROSELECT,
 } from '../constants';
 
 // import module for tests
@@ -49,15 +49,41 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 });
 
 // Test that engineManager on PLAY creates engine
-test('msg PLAY checks that PLAY creates engine and handles the message', () => {
+const Engine = require('../gameEngine');
+
+jest.mock('../gameEngine');
+test.only('msg PLAY creates engine and handles the message', () => {
     const msg = { type: PLAY };
     // Mock sendReply function
     const sendReply = jest.fn();
+    const handleFunc = jest.fn();
+    const engineState = {
+        screen: HEROSELECT,
+        innerState: { a: 1 },
+    };
 
-    // Call the message function from application with this message and mocked function.
+    const mockEngine = jest.fn().mockImplementation(() => ({
+        handle: handleFunc,
+        getState() { return engineState; },
+    }));
+    Engine.mockImplementation(mockEngine);
+
     application.msgReceived(msg, sendReply);
+
+    // mockEngine must be called once to instantiate the engine
+    expect(mockEngine.mock.calls.length).toBe(1);
+
+    // handleFunc must have been called once with msg argument
+    expect(handleFunc.mock.calls.length).toBe(1);
+    expect(handleFunc.mock.calls[0]).toEqual([msg]);
+
+    const expectedState = Object.assign(
+        {},
+        { manager: { screen: HEROSELECT } },
+        { innerState: engineState.innerState },
+    );
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(playState);
+    expect(sendReply.mock.calls[0][0]).toMatchObject(expectedState);
 });
 
 // // Test that engineManager on HEROSELECTED msg with player 1 creates engine - UNDER PROCESS
