@@ -8,7 +8,7 @@ import App from './App';
 import StartScreen from './StartScreen';
 import MainMenu from './MainMenu';
 
-import { startscreenState } from '../__mocks__/stateMock';
+import { startscreenState } from '../gameTerminal/__data__/states';
 
 afterEach(cleanup);
 

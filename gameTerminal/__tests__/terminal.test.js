@@ -1,16 +1,13 @@
 import {
     startscreenState,
-} from '../__mocks__/stateMock';
+} from '../__data__/states';
 
 import {
     INIT, STARTSCREEN, PLAY, HEROSELECT, HEROSELECTED,
-} from '../constants';
+} from '../../constants';
 
 // import module for tests
-const application = require('../gameTerminal/application');
-
-jest.mock('../gameTerminal/randomFunc');
-
+const application = require('../application');
 
 beforeEach(() => {
     application.reset();
@@ -54,9 +51,9 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 });
 
 // Test that engineManager on PLAY creates engine
-const Engine = require('../gameEngine');
+const Engine = require('../../gameEngine');
 
-jest.mock('../gameEngine');
+jest.mock('../../gameEngine');
 test('msg PLAY creates engine and handles the message', () => {
     const msg = { type: PLAY };
     // Mock sendReply function

@@ -1,18 +1,4 @@
-export const startscreenState = {
-    profiles: [
-        {
-            id: 'player1',
-        },
-        {
-            id: 'player2',
-        },
-    ],
-    manager: {
-        screen: 'STARTSCREEN',
-    },
-};
-
-export const playState = {
+export const heroselectStateP1 = {
     accounts: [{
         id: 'player1',
         heroes: ['morevna', 'yaga', 'premudraya'],
@@ -25,6 +11,14 @@ export const playState = {
     terminals: [{
         players: ['player1', 'player2'],
     }],
+    profiles: [
+        {
+            id: 'player1',
+        },
+        {
+            id: 'player2',
+        },
+    ],
     heroSelect: {
         allHeroes: {
             morevna: {},
@@ -34,53 +28,13 @@ export const playState = {
         },
         heroes: ['morevna', 'yaga', 'premudraya'],
         activePlayer: 'player1',
-        players: [],
+        players: [{ hero: 'yaga', id: 'player1' }],
     },
-    screen: 'HEROSELECT',
+    manager: {
+        screen: 'HEROSELECT',
+    },
     game: {
-        players: [],
-    },
-};
-
-export const heroselectStateP1 = {
-    app: {
-        accounts: [{
-            id: 'player1',
-            heroes: ['morevna', 'yaga', 'premudraya'],
-        },
-        {
-            id: 'player2',
-            heroes: ['morevna', 'yaga'],
-        },
-        ],
-        terminals: [{
-            players: ['player1', 'player2'],
-        }],
-        profiles: [
-            {
-                id: 'player1',
-            },
-            {
-                id: 'player2',
-            },
-        ],
-        heroSelect: {
-            allHeroes: {
-                morevna: {},
-                yaga: {},
-                premudraya: {},
-                hozyaika: {},
-            },
-            heroes: ['morevna', 'yaga', 'premudraya'],
-            activePlayer: 'player1',
-            players: [{ hero: 'yaga', id: 'player1' }],
-        },
-        manager: {
-            screen: 'HEROSELECT',
-        },
-        game: {
-            players: [{ hero: 'yaga', id: 'player1' }],
-        },
+        players: [{ hero: 'yaga', id: 'player1' }],
     },
 };
 
