@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 import {
-    startscreenState, heroselectStateP1, heroselectStateP2, versusState, dealAllState,
+    heroselectStateP1, heroselectStateP2, versusState, dealAllState,
 } from '../__mocks__/stateMock';
 
 // import module for tests
@@ -9,22 +9,6 @@ const application = require('../gameTerminal/application');
 const heroData = require('../gameTerminal/data/characters.json');
 
 jest.mock('../gameTerminal/randomFunc');
-
-// If it's the first INITIAL message from frontend, return the app in it's initial state
-test('Game loaded. Send the app in its initial state', () => {
-    // Create a messade that has type and may have additional data later.
-    // We only need type for this test.
-    const msg = { type: 'INIT' };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-
-    expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenState);
-});
 
 // Test the first game state Play, returns the available characters
 test('First game state Play. Player1 can select any of the characters he has', () => {

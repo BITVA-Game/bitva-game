@@ -71,7 +71,12 @@ function getApp() {
     return application;
 }
 
+function reset() {
+    gameEngineManager.reset();
+}
+
 /** *********** Exports ************** */
 exports.msgReceived = msgReceived;
 exports.setApp = setApp;
 exports.getApp = getApp;
+exports.reset = reset;

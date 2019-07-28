@@ -11,6 +11,10 @@ const application = require('../gameTerminal/application');
 
 jest.mock('../gameTerminal/randomFunc');
 
+
+beforeEach(() => {
+    application.reset();
+});
 // If it's the first INITIAL message from frontend, return the app in it's initial state
 test('msg INIT Game loaded. Send the app in its initial state', () => {
     // Create a messade that has type and may have additional data later.
@@ -86,7 +90,7 @@ test('msg PLAY creates engine and handles the message', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(expectedState);
 });
 
-test.only('msg sent twice, we have one instance of engine', () => {
+test('msg sent twice, we have one instance of engine', () => {
     const msg = { type: HEROSELECTED };
     // Mock sendReply function
     const sendReply = jest.fn();

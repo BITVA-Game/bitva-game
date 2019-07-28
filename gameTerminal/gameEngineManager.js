@@ -26,4 +26,9 @@ function handle(app, message) {
     return engine.getState();
 }
 
+function reset() {
+    engine = null;
+}
+
 exports.handle = handle;
+exports.reset = reset;
