@@ -1,5 +1,5 @@
 import {
-    startscreenState, playState, heroselectStateP1, heroselectStateP2,
+    startscreenState,
 } from '../__mocks__/stateMock';
 
 import {
