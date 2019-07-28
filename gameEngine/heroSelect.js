@@ -35,6 +35,7 @@ function playerData(app, players = []) {
 
 function newPlayers(app, message) {
     const player = { id: message.player, hero: message.hero };
+    console.log(app);
     return app.heroSelect.players.concat(player);
 }
 

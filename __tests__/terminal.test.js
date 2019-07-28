@@ -3,7 +3,7 @@ import {
 } from '../__mocks__/stateMock';
 
 import {
-    INIT, STARTSCREEN, PLAY, HEROSELECTED,
+    INIT, STARTSCREEN, PLAY, HEROSELECT, HEROSELECTED,
 } from '../constants';
 
 // import module for tests
@@ -49,13 +49,74 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
 });
 
 // Test that engineManager on PLAY creates engine
-test('msg PLAY checks that PLAY creates engine and handles the message', () => {
+const Engine = require('../gameEngine');
+
+jest.mock('../gameEngine');
+test('msg PLAY creates engine and handles the message', () => {
     const msg = { type: PLAY };
-    //
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    const handleFunc = jest.fn();
+    const engineState = {
+        screen: HEROSELECT,
+        innerState: { a: 1 },
+    };
+
+    const mockEngine = jest.fn().mockImplementation(() => ({
+        handle: handleFunc,
+        getState() { return engineState; },
+    }));
+    Engine.mockImplementation(mockEngine);
+
+    application.msgReceived(msg, sendReply);
+
+    // mockEngine must be called once to instantiate the engine
+    expect(mockEngine.mock.calls.length).toBe(1);
+
+    // handleFunc must have been called once with msg argument
+    expect(handleFunc.mock.calls.length).toBe(1);
+    expect(handleFunc.mock.calls[0]).toEqual([msg]);
+
+    const expectedState = Object.assign(
+        {},
+        { manager: { screen: HEROSELECT } },
+        { innerState: engineState.innerState },
+    );
+    expect(sendReply.mock.calls.length).toBe(1);
+    expect(sendReply.mock.calls[0][0]).toMatchObject(expectedState);
 });
 
-// Test that engineManager on PLAY creates engine
-test('msg HEROSELECTED checks that HEROSELECTED creates engine and handles the message', () => {
+test.only('msg sent twice, we have one instance of engine', () => {
     const msg = { type: HEROSELECTED };
-    //
+    // Mock sendReply function
+    const sendReply = jest.fn();
+    const handleFunc = jest.fn();
+    const engineState = {
+        screen: STARTSCREEN,
+        innerState: { a: 1 },
+    };
+
+    const mockEngine = jest.fn().mockImplementation(() => ({
+        handle: handleFunc,
+        getState() { return engineState; },
+    }));
+    Engine.mockImplementation(mockEngine);
+
+    application.msgReceived(msg, sendReply);
+    application.msgReceived(msg, sendReply);
+
+    // mockEngine must be called once to instantiate the engine
+    expect(mockEngine.mock.calls.length).toBe(1);
+
+    // handleFunc must have been called once with msg argument
+    expect(handleFunc.mock.calls.length).toBe(2);
+    expect(handleFunc.mock.calls[0]).toEqual([msg]);
+
+    const expectedState = Object.assign(
+        {},
+        { manager: { screen: STARTSCREEN } },
+        { innerState: engineState.innerState },
+    );
+    expect(sendReply.mock.calls.length).toBe(2);
+    expect(sendReply.mock.calls[1][0]).toMatchObject(expectedState);
 });

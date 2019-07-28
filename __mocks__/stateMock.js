@@ -12,7 +12,7 @@ export const startscreenState = {
     },
 };
 
-export const heroselectStateP1 = {
+export const playState = {
     accounts: [{
         id: 'player1',
         heroes: ['morevna', 'yaga', 'premudraya'],
@@ -52,6 +52,48 @@ export const heroselectStateP1 = {
     },
 };
 
+export const heroselectStateP1 = {
+    app: {
+        accounts: [{
+            id: 'player1',
+            heroes: ['morevna', 'yaga', 'premudraya'],
+        },
+        {
+            id: 'player2',
+            heroes: ['morevna', 'yaga'],
+        },
+        ],
+        terminals: [{
+            players: ['player1', 'player2'],
+        }],
+        profiles: [
+            {
+                id: 'player1',
+            },
+            {
+                id: 'player2',
+            },
+        ],
+        heroSelect: {
+            allHeroes: {
+                morevna: {},
+                yaga: {},
+                premudraya: {},
+                hozyaika: {},
+            },
+            heroes: ['morevna', 'yaga', 'premudraya'],
+            activePlayer: 'player1',
+            players: [{ hero: 'yaga', id: 'player1' }],
+        },
+        manager: {
+            screen: 'HEROSELECT',
+        },
+        game: {
+            players: [{ hero: 'yaga', id: 'player1' }],
+        },
+    },
+};
+
 export const heroselectStateP2 = {
     accounts: [{
         id: 'player1',
@@ -82,13 +124,13 @@ export const heroselectStateP2 = {
         },
         heroes: ['morevna', 'yaga'],
         activePlayer: 'player2',
-        players: [{ hero: 'morevna', id: 'player1' }],
+        players: [{ hero: 'morevna', id: 'player2' }],
     },
     manager: {
         screen: 'HEROSELECT',
     },
     game: {
-        players: [{ hero: 'morevna', id: 'player1' }],
+        players: [{ hero: 'morevna', id: 'player2' }],
     },
 };
 
