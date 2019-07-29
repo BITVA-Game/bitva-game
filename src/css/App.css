@@ -17,6 +17,50 @@ html {
     top: 0;
 }
 
+.background-hut {
+  width: 1366px;
+  position: absolute;
+  overflow: hidden;
+  bottom: 0;
+  margin: 0 auto;
+}
+
+.background-greyTreeL {
+  width: 300px;
+  position: absolute;
+  overflow: hidden;
+  bottom: 130px;
+  left:120px;
+  margin: 0 auto;
+}
+
+.background-greyTreeR {
+  width: 300px;
+  position: absolute;
+  overflow: hidden;
+  bottom: 100px;
+  right:200px;
+  margin: 0 auto;
+}
+
+.background-blackTreeL {
+  width: 600px;
+  position: absolute;
+  overflow: hidden;
+  bottom: 30px;
+  left:0;
+  margin: 0 auto;
+}
+
+.background-blackTreeR {
+  width: 600px;
+  position: absolute;
+  overflow: hidden;
+  bottom: 0;
+  right:0;
+  margin: 0 auto;
+}
+
 button,
 .btn {
     color: #fff;

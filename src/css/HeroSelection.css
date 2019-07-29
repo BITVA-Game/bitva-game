@@ -25,7 +25,6 @@ section {
 /* container */
 
 .heroselection-container {
-	background: transparent url("../images/background.png") center no-repeat;
 	background-size: cover;
 	bottom: 0;
 	left: 0;

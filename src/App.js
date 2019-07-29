@@ -9,6 +9,12 @@ import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
 import NetworkPlay from './NetworkPlay';
 
+import hutImage from './images/backgrounds/Background_hut.png';
+import greyTreeL from './images/backgrounds/GreyTree_2.png';
+import greyTreeR from './images/backgrounds/GreyTree_1.png';
+import blackTreeL from './images/backgrounds/BlackTree_2.png';
+import blackTreeR from './images/backgrounds/BlackTree_1.png';
+
 // Import electron and establis connection to use app.js as Renderer
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
@@ -73,6 +79,13 @@ class App extends Component {
         });
         return (
             <div className="App" data-testid="app-screen">
+                <div id="background" className="start-screen">
+                    <img alt="hut" src={hutImage} className="background-hut" />
+                    <img alt="grey tree 1" src={greyTreeL} className="background-greyTreeL" />
+                    <img alt="grey tree 2" src={greyTreeR} className="background-greyTreeR" />
+                    <img alt="black tree 1" src={blackTreeL} className="background-blackTreeL" />
+                    <img alt="black tree 2" src={blackTreeR} className="background-blackTreeR" />
+                </div>
                 {this.showApplication()}
             </div>
         );

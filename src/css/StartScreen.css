@@ -1,5 +1,5 @@
 .start-screen {
-    background: #000 url("../images/start_screen.jpg") no-repeat;
+    background-color: #ecebeb;
     background-position: right 0 top 0;
     bottom: 0;
     left: 0;
@@ -133,7 +133,7 @@
     background-color: rgba(0, 0, 0, .5);
     content: "";
     display: block;
-    margin-bottom: -13px;    
+    margin-bottom: -13px;
     margin-left: 38px;
     width: 1px;
 }
@@ -147,7 +147,7 @@
     height: 115px;
     position: absolute;
     right: 105px;
-    width: 80px;    
+    width: 80px;
 }
 
 @keyframes glow {
