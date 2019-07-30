@@ -59,7 +59,7 @@ export const heroselectStateP1 = {
             premudraya: {},
             hozyaika: {},
         },
-        heroes: ['morevna', 'yaga', 'premudraya'],
+        heroes: ['morevna', 'yaga'],
         activePlayer: 'player1',
         players: [{ hero: 'premudraya', id: 'player1' }],
     },
