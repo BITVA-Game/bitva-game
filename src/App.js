@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import './css/App.css';
 import WebFont from 'webfontloader';
 
@@ -29,7 +30,7 @@ class App extends Component {
     // Bind the function to send messages
     constructor(props) {
         super(props);
-        this.state = { app: { manager: { screen: 'LOADING' } } };
+        this.state = { animation: false, app: { manager: { screen: 'LOADING' } } };
     }
 
 
@@ -40,6 +41,7 @@ class App extends Component {
             this.setState({ app: arg });
         });
         sendMessage('INIT');
+        setTimeout(() => this.setState({ animation: true }), 1000);
     }
 
     showApplication() {
@@ -84,7 +86,15 @@ class App extends Component {
                     <img alt="grey tree 1" src={greyTreeL} className="background-greyTreeL" />
                     <img alt="grey tree 2" src={greyTreeR} className="background-greyTreeR" />
                     <img alt="black tree 1" src={blackTreeL} className="background-blackTreeL" />
-                    <img alt="black tree 2" src={blackTreeR} className="background-blackTreeR" />
+                    <CSSTransition
+                        classNames="example"
+                        in={this.state.animation}
+                        timeout={5500}
+                    >
+                        <div>
+                            <img alt="black tree 2" src={blackTreeR} className="background-blackTreeR" />
+                        </div>
+                    </CSSTransition>
                 </div>
                 {this.showApplication()}
             </div>

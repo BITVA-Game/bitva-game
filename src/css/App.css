@@ -70,3 +70,21 @@ button,
 .btn:hover {
     color: #b74a45;
 }
+
+.example-enter {
+  opacity: 0;
+}
+
+.example-enter-active {
+  opacity: 1;
+  transition: opacity 1500ms ease-in;
+}
+
+.example-exit {
+  opacity: 1;
+}
+
+.example-exit-active {
+  opacity: 0.01;
+  transition: opacity 1300ms ease-in;
+}
