@@ -12,7 +12,8 @@
 		"players": ["player1", "player2"]
 	}],
 	"game": {
-		"players": []
+		"players": [],
+		"phase": "ACTIVE"
 	},
-  "screen": "HEROSELECT"
+  	"screen": "HEROSELECT"
 }
