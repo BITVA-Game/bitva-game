@@ -114,7 +114,7 @@ class GameScreen extends Component {
                         {this.props.app.game.phase === 'OVER'
                             ? (
                                 <GameOver
-                                    players={this.props.app.game.players}
+                                    app={this.props.app}
                                 />
                             )
                             : null}
