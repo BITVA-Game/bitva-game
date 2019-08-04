@@ -102,7 +102,7 @@ class HeroSelection extends Component {
 
     showHero() {
         const heroID = this.state.selected;
-        const hero = this.app.heroSelect[heroID];
+        const hero = this.app.heroSelect.allHeroes[heroID];
         this.setState({ hero });
     }
 
