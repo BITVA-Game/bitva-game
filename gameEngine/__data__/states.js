@@ -44,14 +44,6 @@ export const heroselectStateP1 = {
     terminals: [{
         players: ['player1', 'player2'],
     }],
-    profiles: [
-        {
-            id: 'player1',
-        },
-        {
-            id: 'player2',
-        },
-    ],
     heroSelect: {
         allHeroes: {
             morevna: {},
@@ -60,11 +52,8 @@ export const heroselectStateP1 = {
             hozyaika: {},
         },
         heroes: ['morevna', 'yaga'],
-        activePlayer: 'player1',
+        activePlayer: 'player2',
         players: [{ hero: 'premudraya', id: 'player1' }],
-    },
-    manager: {
-        screen: 'HEROSELECT',
     },
     game: {
         players: [{ hero: 'premudraya', id: 'player1' }],

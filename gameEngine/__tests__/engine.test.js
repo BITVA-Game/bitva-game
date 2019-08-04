@@ -23,10 +23,9 @@ test.only('Second game state heroselectStateP1. Player 1 selected one of his cha
     // we created message sent once Player 1 selected character
     const msg = { type: HEROSELECTED, hero: 'premudraya', player: 'player1' };
     // we referencing to GameEngine to work out our message
-    const engine = new GameEngine();
-    engine.state = playState;
+    const engine = new GameEngine(playState);
     engine.handle(msg);
-    console.log(engine);
+
     // we expect that engine after receiving above msg will match object
     expect(engine.getState()).toMatchObject(heroselectStateP1);
 });

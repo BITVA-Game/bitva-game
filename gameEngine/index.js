@@ -4,8 +4,8 @@ const screen = require('./screen');
 const initialState = require('./data/initialState.json');
 
 class GameEngine {
-    constructor() {
-        this.state = JSON.parse(JSON.stringify(initialState));
+    constructor(state = initialState) {
+        this.state = JSON.parse(JSON.stringify(state));
     }
 
     handle(message) {
