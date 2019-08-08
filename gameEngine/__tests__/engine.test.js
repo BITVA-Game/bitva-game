@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 import {
-    playState, heroselectStateP1, versus,
+    playState, heroselectStateP1, versus, versusWithCards, game,
 } from '../__data__/states';
 
 import {
-    PLAY, HEROSELECTED,
+    PLAY, HEROSELECTED, DEALALL,
 } from '../../constants';
 
 const GameEngine = require('../index');
@@ -35,14 +35,24 @@ test('Second game state heroselectStateP1. Player 1 selected one of his characte
 
 test('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, Active players is set', () => {
     // we created message sent once Player 1 selected character
-    // const msg1 = { type: HEROSELECTED, hero: 'premudraya', player: 'player1' };
-    const msg2 = { type: HEROSELECTED, hero: 'yaga', player: 'player2' };
+    const msg = { type: HEROSELECTED, hero: 'yaga', player: 'player2' };
     // we put GameEngine into previous statee
     const engine = new GameEngine(heroselectStateP1);
     // we referencing to GameEngine to work out our message
-    // engine.handle(msg1);
-    engine.handle(msg2);
+    engine.handle(msg);
 
     // we expect that engine after receiving above msg will match object
     expect(engine.getState()).toMatchObject(versus);
+});
+
+test('msg DEALALL switch to gameEngine state GAME', () => {
+    // we created message that sent from Versus
+    const msg = { type: DEALALL };
+    // we put GameEngine into previous statee
+    const engine = new GameEngine(versusWithCards);
+    // we referencing to GameEngine to work out our message
+    engine.handle(msg);
+
+    // we expect that engine after receiving above msg will match object
+    expect(engine.getState()).toMatchObject(game);
 });
