@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
 import {
-    playState, heroselectStateP1, versusState,
+    playState, heroselectStateP1, versusState, dealAllState,
 } from '../__data__/states';
 
 import {
-    PLAY, HEROSELECTED, DEALALL,
+    PLAY, HEROSELECTED, DEALALL, ACTION,
 } from '../../constants';
 
 const heroData = require('../../gameTerminal/data/characters.json');
@@ -15,7 +15,7 @@ const CARDSINHAND = 5;
 
 jest.mock('../../gameTerminal/randomFunc');
 
-test.only('First game state Play. Player1 can select any of the characters he has', () => {
+test('First game state Play. Player1 can select any of the characters he has', () => {
     // Again we only need type
     const msg = { type: PLAY };
 
@@ -25,7 +25,7 @@ test.only('First game state Play. Player1 can select any of the characters he ha
     expect(engine.getState()).toMatchObject(playState);
 });
 
-test.only('Second game state heroselectStateP1. Player 1 selected one of his characters. Player 2 is active.', () => {
+test('Second game state heroselectStateP1. Player 1 selected one of his characters. Player 2 is active.', () => {
     // we created message sent once Player 1 selected character
     const msg = { type: HEROSELECTED, hero: 'morevna', player: 'player1' };
     // we put GameEngine into previous state
@@ -41,7 +41,7 @@ test.only('Second game state heroselectStateP1. Player 1 selected one of his cha
     expect(engine.getState()).toMatchObject(heroselectStateP1);
 });
 
-test.only('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, Active players is set', () => {
+test('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, Active players is set', () => {
     // we created message sent once Player 1 selected character
     const msg = { type: HEROSELECTED, hero: 'yaga', player: 'player2' };
     // we put GameEngine into previous statee
@@ -60,7 +60,7 @@ test.only('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, A
 });
 
 // Test that active player gets all the data. Game state VERSUS.
-test.only('msg DEALALL switch to gameEngine state GAME', () => {
+test('msg DEALALL switch to gameEngine state GAME', () => {
     const msg = { type: DEALALL };
 
     const engine = new GameEngine(versusState);
@@ -87,4 +87,44 @@ test.only('msg DEALALL switch to gameEngine state GAME', () => {
     expect(inactivePlayer.health.maximum).toEqual(heroData[inactivePlayer.hero].health);
     expect(Object.keys(inactivePlayer.hand).length).toEqual(CARDSINHAND);
     expect(inactivePlayer.turningHand).not.toBeTruthy();
+});
+
+test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
+    const cardToTest = 'key20';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: 'graveyard',
+    };
+    // Making a copy of dealAllState object as we need to give our player correct card
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = {
+        id: 'shieldSmall',
+        name: 'Small Shield',
+        type: 'item',
+        icon: 'shield',
+        category: 'shield',
+        categoryName: 'shield',
+        description: 'The shield',
+        health: 2,
+        healthCurrent: 2,
+        disabled: false,
+    };
+    console.log(gameForTest.game.players[0].hand);
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+
+    // expect that we have active player in game
+    expect(newGame.game.active).toBeDefined();
+
+    // expect that counter increased
+    expect(activePlayer.moveCounter).toEqual(1);
+    // оexpect the card to move to graveryard
+    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
+    // expect the card to move out of the hand
+    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });

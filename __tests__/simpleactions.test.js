@@ -21,42 +21,6 @@ function getInActivePlayer(newGame) {
     return newGame.game.players.find(player => player.id !== newGame.game.active);
 }
 
-test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
-    const cardToTest = 'key23';
-    const msg = {
-        type: 'ACTION',
-        activeCard: cardToTest,
-        target: 'graveyard',
-    };
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Set application for the correct state BEFORE the test
-    application.setApp(clone(gameStartState));
-
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // expect that we have active player in game
-    expect(result.game.active).toBeDefined();
-    const activePlayer = getActivePlayer(result);
-    const inactivePlayer = getInActivePlayer(result);
-
-    // Confirm we removed active player from game. Can be deleted after refactoring
-    expect(activePlayer.active).not.toBeDefined();
-    expect(inactivePlayer.active).not.toBeDefined();
-
-    // expect that counter increased
-    expect(activePlayer.moveCounter).toEqual(1);
-    // оexpect the card to move to graveryard
-    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
-    // expect the card to move out of the hand
-    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
-});
-
 // player heals for less than max
 test('msg ACTION CASE2 player wants to heal himself. He is damaged and the healing is less than his max', () => {
     const cardToTest = 'key15';
