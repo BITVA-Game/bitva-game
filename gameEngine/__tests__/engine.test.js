@@ -12,6 +12,8 @@ const heroData = require('../../gameTerminal/data/characters.json');
 const GameEngine = require('../index');
 
 const CARDSINHAND = 5;
+const HERO = 'hero';
+const GRAVE = 'graveyard';
 
 jest.mock('../../gameTerminal/randomFunc');
 
@@ -33,10 +35,6 @@ test('Second game state heroselectStateP1. Player 1 selected one of his characte
     // we referencing to GameEngine to work out our message
     engine.handle(msg);
 
-    // const eng = engine.getState();
-    // eng.game.players[0].cards = {};
-    // eng.game.players[0].deck = {};
-    // eng.game.players[0].allHeroes = {};
     // we expect that engine after receiving above msg will match object
     expect(engine.getState()).toMatchObject(heroselectStateP1);
 });
@@ -94,10 +92,12 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     const msg = {
         type: ACTION,
         activeCard: cardToTest,
-        target: 'graveyard',
+        target: GRAVE,
     };
     // Making a copy of dealAllState object as we need to give our player correct card
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+
+    // Adding a test card for active player so we can test it
     gameForTest.game.players[0].hand.key20 = {
         id: 'shieldSmall',
         name: 'Small Shield',
@@ -110,7 +110,7 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
         healthCurrent: 2,
         disabled: false,
     };
-    console.log(gameForTest.game.players[0].hand);
+
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
     const newGame = engine.getState();
@@ -126,5 +126,52 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     // оexpect the card to move to graveryard
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     // expect the card to move out of the hand
+    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+});
+
+// player heals for less than max
+test('msg ACTION CASE2 player wants to heal himself. He is damaged and the healing is less than his max', () => {
+    const cardToTest = 'key20';
+    const cardTypeToTest = 'action';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: HERO,
+    };
+
+    // Making a copy of dealAllState object as we need to give our player correct card
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+
+    gameForTest.game.players[0].hand.key20 = {
+        id: 'apple',
+        name: 'Apple',
+        type: 'action',
+        icon: 'dropRed',
+        category: 'heal',
+        categoryName: 'heal',
+        description: 'Magic youth-giving apples',
+        initialpoints: 2,
+        points: 2,
+        disabled: false,
+    };
+    gameForTest.game.players[0].health.current = 10;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    // expect that we have active player in game
+    expect(newGame.game.active).toBeDefined();
+    // expect that his counter set to 1 after player makes an action
+    expect(activePlayer.moveCounter).toEqual(1);
+    // expect that the card was an action card
+    expect(activePlayer.grave[cardToTest].type).toEqual(cardTypeToTest);
+    // expect that hero's health was increased
+    expect(activePlayer.health.current).toEqual(12);
+    // expect that the card was moved to graveyard
+    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
+    // expect the card not to be in hand
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
