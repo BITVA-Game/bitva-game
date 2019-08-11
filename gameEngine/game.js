@@ -647,12 +647,12 @@ function playerActs(game, cardId, target) {
     target === 'graveyard' ? graveyardCheck(game, cardId, activeCard) : null;
 
     // For all the cases when the player acts against himself
-    if (target === game.active && activeCard.disabled === false && activeCard.type === 'action') {
+    if (target === 'hero' && activeCard.disabled === false && activeCard.type === 'action') {
         pActiveIsTarget(game, activeCard, cardId);
     }
     // if target is inactive player's hero - opponent, player can only attack opponent
     // then his active card moves to graveyard. Other scenarios are not allowed
-    if (target === pInactive.id && activeCard.disabled === false && activeCard.type === 'action') {
+    if (target === 'opponent' && activeCard.disabled === false && activeCard.type === 'action') {
         pInactiveIsTarget(game, activeCard, cardId);
     }
 
