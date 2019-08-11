@@ -68,7 +68,7 @@ function setApp(newApp) {
 }
 
 function getApp() {
-    return application;
+    return parseApplication(application);
 }
 
 function reset() {
