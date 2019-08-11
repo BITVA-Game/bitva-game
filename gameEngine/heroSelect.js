@@ -22,15 +22,15 @@ function heroWithCards() {
     return { allHeroes: heroes };
 }
 
-function playerData(app, players = []) {
+function playerData(player, players = []) {
+    return { heroes: player.heroes, activePlayer: player.id, players };
+}
+
+function pendingPlayer(app, players) {
     const accounts = app.accounts;
     const completed = players.map(p => p.id);
     const pending = accounts.filter(a => !completed.includes(a.id));
-    if (pending.length === 0) {
-        return {};
-    }
-    const player = pending[0];
-    return { heroes: player.heroes, activePlayer: player.id, players };
+    return pending[0];
 }
 
 function newPlayers(app, message) {
@@ -39,14 +39,30 @@ function newPlayers(app, message) {
 }
 
 function handle(app, message) {
+    let nextPlayer = null;
+    let selectedPlayers = [];
+
     switch (message.type) {
     case PLAY:
-        return Object.assign({}, initialState, heroWithCards(), playerData(app));
+        nextPlayer = app.accounts[0];
+        break;
     case HEROSELECTED:
-        return Object.assign({}, initialState, heroWithCards(),
-            playerData(app, newPlayers(app, message)));
-    default: return null;
+        selectedPlayers = newPlayers(app, message);
+        nextPlayer = pendingPlayer(app, selectedPlayers);
+        break;
+    default: break;
     }
+
+    if (!nextPlayer) {
+        return null;
+    }
+
+    return Object.assign(
+        {},
+        initialState,
+        heroWithCards(),
+        playerData(nextPlayer, selectedPlayers),
+    );
 }
 
 exports.handle = handle;
