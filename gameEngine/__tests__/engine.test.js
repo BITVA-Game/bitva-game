@@ -331,3 +331,32 @@ test('msg ACTION CASE4 player wants to move his card from item holder to graveya
     expect(Object.keys(activePlayer.item)).not.toContain(cardToTest);
     expect(inactivePlayer.health.current).toBeGreaterThan(0);
 });
+
+test('EDGE CASE TEST player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
+    const cardToTest = 'key20';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: OPPONENT,
+    };
+
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].item.key7 = shieldSmall;
+    gameForTest.game.players[0].hand.key5 = shieldLarge;
+    gameForTest.game.players[0].hand.key20 = wolf;
+    gameForTest.game.players[1].item.key23 = shieldLarge;
+    gameForTest.game.players[1].hand.key5 = shieldLarge;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+
+    expect(inactivePlayer.item.key23.healthCurrent).toEqual(2);
+    expect(inactivePlayer.hand.key5.healthCurrent).toEqual(4);
+    expect(activePlayer.hand.key5.healthCurrent).toEqual(4);
+    expect(activePlayer.item.key7.healthCurrent).toEqual(2);
+});
