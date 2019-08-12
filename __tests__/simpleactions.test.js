@@ -23,45 +23,7 @@ function getInActivePlayer(newGame) {
 
 
 // player attacks unprotected enemy
-test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
-    const cardToTest = 'key7';
-    const cardTypeToTest = 'action';
-    const cardCategoryToTest = 'attack';
-    const msg = {
-        type: 'ACTION',
-        activeCard: cardToTest,
-        target: 'player2',
-    };
-    // Mock sendReply function
-    const sendReply = jest.fn();
-    // Set application for the correct state BEFORE the test
-    application.setApp(clone(gameP1DamagedState));
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
 
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // expect that we have active player in game
-    expect(result.game.active).toBeDefined();
-    const activePlayer = getActivePlayer(result);
-    const inActivePlayer = getInActivePlayer(result);
-    // expect the counter of actions to grow
-    expect(activePlayer.moveCounter).toEqual(1);
-    // expect that it was the action card
-    expect(activePlayer.grave[cardToTest].type).toEqual(cardTypeToTest);
-    // expect that it was the attack card
-    expect(activePlayer.grave[cardToTest].category).toEqual(cardCategoryToTest);
-    // expect opponent with no shield items
-    expect(inActivePlayer.item).toEqual({});
-    // expect opponents health to decrease
-    expect(inActivePlayer.health.current).toEqual(13);
-    // expect the card to be moved to graveyard
-    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
-    // expect the card to be removed from the hand
-    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
-});
 
 // player attacks enemy with attack power == shield points
 test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
