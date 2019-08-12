@@ -7,6 +7,12 @@ import {
     PLAY, HEROSELECTED, DEALALL, ACTION,
 } from '../../constants';
 
+import cards from '../__data__/cards';
+
+const {
+    apple, bogatyr, shieldSmall, wolf,
+} = cards;
+
 const heroData = require('../../gameTerminal/data/characters.json');
 
 const GameEngine = require('../index');
@@ -102,18 +108,7 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
 
     // Adding a test card for active player so we can test it
-    gameForTest.game.players[0].hand.key20 = {
-        id: 'shieldSmall',
-        name: 'Small Shield',
-        type: 'item',
-        icon: 'shield',
-        category: 'shield',
-        categoryName: 'shield',
-        description: 'The shield',
-        health: 2,
-        healthCurrent: 2,
-        disabled: false,
-    };
+    gameForTest.game.players[0].hand.key20 = shieldSmall;
 
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
@@ -145,18 +140,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     // Making a copy of dealAllState object as we need to give our player correct card
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
 
-    gameForTest.game.players[0].hand.key20 = {
-        id: 'apple',
-        name: 'Apple',
-        type: 'action',
-        icon: 'dropRed',
-        category: 'heal',
-        categoryName: 'heal',
-        description: 'Magic youth-giving apples',
-        initialpoints: 2,
-        points: 2,
-        disabled: false,
-    };
+    gameForTest.game.players[0].hand.key20 = apple;
     gameForTest.game.players[0].health.current = 10;
 
     const engine = new GameEngine(gameForTest);
@@ -189,18 +173,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     };
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
 
-    gameForTest.game.players[0].hand.key20 = {
-        id: 'apple',
-        name: 'Apple',
-        type: 'action',
-        icon: 'dropRed',
-        category: 'heal',
-        categoryName: 'heal',
-        description: 'Magic youth-giving apples',
-        initialpoints: 2,
-        points: 2,
-        disabled: false,
-    };
+    gameForTest.game.players[0].hand.key20 = apple;
     gameForTest.game.players[0].health.current = 15;
 
     const engine = new GameEngine(gameForTest);
@@ -233,18 +206,7 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
 
-    gameForTest.game.players[0].hand.key20 = {
-        id: 'bogatyr',
-        name: 'Bogatyr',
-        type: 'action',
-        icon: 'skull',
-        category: 'attack',
-        categoryName: 'attack',
-        description: 'Hero-warrior',
-        initialpoints: 4,
-        points: 4,
-        disabled: false,
-    };
+    gameForTest.game.players[0].hand.key20 = bogatyr;
 
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
@@ -266,5 +228,45 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     // expect the card to be moved to graveyard
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     // expect the card to be removed from the hand
+    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+});
+
+// player attacks enemy with attack power == shield points
+test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
+    const cardToTest = 'key20';
+    const shieldCard = 'key23';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: OPPONENT,
+    };
+
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = wolf;
+    gameForTest.game.players[1].item.key23 = shieldSmall;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+
+    expect(activePlayer.moveCounter).toEqual(1);
+
+    // expect that it was an action card as we performing the action
+    expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
+    // expect it was the attack card
+    expect(activePlayer.grave[cardToTest].category).toEqual(ATTACKCATEGORY);
+
+    // expect there's no item anymore
+    expect(inactivePlayer.item).toEqual({});
+    // expect the itme is now on graveyard
+    expect(Object.keys(inactivePlayer.grave)).toContain(shieldCard);
+
+    // expect the acting card is now on the graveyard
+    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
+    // expect the acting card is now not in hand
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
