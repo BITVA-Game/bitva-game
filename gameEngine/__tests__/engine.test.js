@@ -169,7 +169,50 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     // expect that the card was an action card
     expect(activePlayer.grave[cardToTest].type).toEqual(cardTypeToTest);
     // expect that hero's health was increased
-    expect(activePlayer.health.current).toEqual(12);
+    expect(activePlayer.health.current).toEqual(gameForTest.game.players[0].health.current + 2);
+    // expect that the card was moved to graveyard
+    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
+    // expect the card not to be in hand
+    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+});
+
+// player heals for over the max
+test('msg ACTION CASE2 player wants to heal himself. He is damaged and the healing will go over max', () => {
+    const cardToTest = 'key20';
+    const cardTypeToTest = 'action';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: HERO,
+    };
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+
+    gameForTest.game.players[0].hand.key20 = {
+        id: 'apple',
+        name: 'Apple',
+        type: 'action',
+        icon: 'dropRed',
+        category: 'heal',
+        categoryName: 'heal',
+        description: 'Magic youth-giving apples',
+        initialpoints: 2,
+        points: 2,
+        disabled: false,
+    };
+    gameForTest.game.players[0].health.current = 14;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    // expect that his counter set to 1 after the action
+    expect(activePlayer.moveCounter).toEqual(1);
+    // expect that the card was an action card
+    expect(activePlayer.grave[cardToTest].type).toEqual(cardTypeToTest);
+    // expect that hero's health was increased
+    expect(activePlayer.health.current).toEqual(heroData[activePlayer.hero].health);
     // expect that the card was moved to graveyard
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     // expect the card not to be in hand
