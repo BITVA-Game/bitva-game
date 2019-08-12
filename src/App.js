@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 import './css/App.css';
 import WebFont from 'webfontloader';
 

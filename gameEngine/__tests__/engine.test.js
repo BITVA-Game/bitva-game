@@ -221,6 +221,8 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
+
+// player attacks unprotected enemy
 test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const cardToTest = 'key20';
     const msg = {

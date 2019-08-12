@@ -4,7 +4,7 @@ import MainMenu from './MainMenu';
 import './css/App.css';
 import './css/MainMenu.css';
 import './css/StartScreen.css';
-import spider from './images/animation/spider.png';
+// import spider from './images/animation/spider.png';
 
 
 const StartScreen = props => (
