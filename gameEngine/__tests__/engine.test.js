@@ -5,7 +5,8 @@ import {
 
 import {
     PLAY, HEROSELECTED, DEALALL, ACTION, HERO,
-    OPPONENT, GRAVE, ACTIONCARD, ATTACKCATEGORY,
+    OPPONENT, GRAVE, ACTIONCARD, ITEMCARD,
+    ATTACKCATEGORY, ITEMCATEGORY,
 } from '../../constants';
 
 import cards from '../__data__/cards';
@@ -62,7 +63,6 @@ test('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, Active
     expect(newGame.screen).toEqual('VERSUS');
 });
 
-// Test that active player gets all the data. Game state VERSUS.
 test('msg DEALALL switch to gameEngine state GAME', () => {
     const msg = { type: DEALALL };
 
@@ -115,7 +115,6 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
-// player heals for less than max
 test('msg ACTION CASE2 player wants to heal himself. He is damaged and the healing is less than his max', () => {
     const cardToTest = 'key20';
     const msg = {
@@ -144,7 +143,6 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
-// player heals for over the max
 test('msg ACTION CASE2 player wants to heal himself. He is damaged and the healing will go over max', () => {
     const cardToTest = 'key20';
     const msg = {
@@ -169,8 +167,6 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
-
-// player attacks unprotected enemy
 test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const cardToTest = 'key20';
     const msg = {
@@ -199,7 +195,6 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
-// player attacks enemy with attack power == shield points
 test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     const cardToTest = 'key20';
     const shieldCard = 'key23';
@@ -230,7 +225,6 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
-// player attacks enemy with attack power > shield points
 test('msg ACTION CASE3 player attacks with more points than shield has, shield & card go to graveyard, opponent hit', () => {
     const cardToTest = 'key20';
     const shieldCard = 'key23';
@@ -261,8 +255,6 @@ test('msg ACTION CASE3 player attacks with more points than shield has, shield &
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
-
-// player attacks enemy with attack power < shield points
 test('msg ACTION CASE3 player attacks with less than shield, card goes to graveyard, shield points decreased', () => {
     const cardToTest = 'key20';
     const shieldCard = 'key23';
@@ -290,4 +282,52 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
     expect(inactivePlayer.item[shieldCard].healthCurrent).toEqual(2);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+});
+
+test('msg ACTION CASE4 active player puts item into his itemholder', () => {
+    const cardToTest = 'key20';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: ITEMCARD,
+    };
+
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = shieldSmall;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+
+    expect(Object.values(activePlayer.item).length).toEqual(1);
+    expect(activePlayer.item[cardToTest].type).toEqual(ITEMCATEGORY);
+    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+});
+
+test('msg ACTION CASE4 player wants to move his card from item holder to graveyard', () => {
+    const cardToTest = 'key20';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: GRAVE,
+    };
+
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = shieldSmall;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+
+    expect(activePlayer.moveCounter).toEqual(1);
+    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
+    expect(Object.keys(activePlayer.item)).not.toContain(cardToTest);
+    expect(inactivePlayer.health.current).toBeGreaterThan(0);
 });

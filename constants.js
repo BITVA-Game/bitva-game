@@ -16,7 +16,9 @@ const HERO = 'hero';
 const OPPONENT = 'opponent';
 const GRAVE = 'graveyard';
 const ACTIONCARD = 'action';
+const ITEMCARD = 'item';
 const ATTACKCATEGORY = 'attack';
+const ITEMCATEGORY = 'item';
 
 module.exports = {
     STARTSCREEN,
@@ -34,5 +36,7 @@ module.exports = {
     OPPONENT,
     GRAVE,
     ACTIONCARD,
+    ITEMCARD,
     ATTACKCATEGORY,
+    ITEMCATEGORY,
 };

@@ -21,41 +21,6 @@ function getInActivePlayer(newGame) {
     return newGame.game.players.find(player => player.id !== newGame.game.active);
 }
 
-// Test, that when massage with item card  received, then
-// if item holder is empty, active player moves item there
-test('msg ACTION CASE4 received: active player choose item, if his item holder is empty player moves item there.', () => {
-    const cardToTest = 'key23';
-    const cardTypeToTest = 'item';
-    const msg = {
-        type: 'ACTION',
-        activeCard: cardToTest,
-        target: 'item',
-    };
-    // Mock sendReply function
-    const sendReply = jest.fn();
-    // Set application for the correct state BEFORE the test
-    application.setApp(clone(gameP2HasSmallShieldState));
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // expect that we have active player in game
-    expect(result.game.active).toBeDefined();
-    const activePlayer = getActivePlayer(result);
-
-    expect(activePlayer.moveCounter).toEqual(1);
-
-    // ожидаем, что item holder активного игрока пустой
-    expect(Object.values(activePlayer.item).length).toEqual(1);
-    // ожидаем, что карта предмет окажется в item holder активного игрока
-    expect(activePlayer.item[cardToTest].type).toEqual(cardTypeToTest);
-    // ожидаем, что карта-item убралась из руки.
-    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
-});
 
 // Test, that active player after his moveCounter = 2 gets missing cards to his hand.
 // Inactive Player becomes active. Turn change.
