@@ -50,6 +50,19 @@ const wolf = {
     disabled: false,
 };
 
+const shieldLarge = {
+    id: 'shieldLarge',
+    name: 'Large Shield',
+    type: 'item',
+    icon: 'shield',
+    category: 'shield',
+    categoryName: 'shield',
+    description: 'The shield, forged by Svarog',
+    health: 4,
+    healthCurrent: 4,
+    disabled: false,
+};
+
 export default {
-    apple, bogatyr, shieldSmall, wolf,
+    apple, bogatyr, shieldSmall, wolf, shieldLarge,
 };

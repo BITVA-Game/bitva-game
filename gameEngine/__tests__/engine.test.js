@@ -4,13 +4,14 @@ import {
 } from '../__data__/states';
 
 import {
-    PLAY, HEROSELECTED, DEALALL, ACTION,
+    PLAY, HEROSELECTED, DEALALL, ACTION, HERO,
+    OPPONENT, GRAVE, ACTIONCARD, ATTACKCATEGORY,
 } from '../../constants';
 
 import cards from '../__data__/cards';
 
 const {
-    apple, bogatyr, shieldSmall, wolf,
+    apple, bogatyr, shieldSmall, wolf, shieldLarge,
 } = cards;
 
 const heroData = require('../../gameTerminal/data/characters.json');
@@ -18,12 +19,6 @@ const heroData = require('../../gameTerminal/data/characters.json');
 const GameEngine = require('../index');
 
 const CARDSINHAND = 5;
-const HERO = 'hero';
-const OPPONENT = 'opponent';
-const GRAVE = 'graveyard';
-
-const ACTIONCARD = 'action';
-const ATTACKCATEGORY = 'attack';
 
 jest.mock('../../gameTerminal/randomFunc');
 
@@ -262,6 +257,37 @@ test('msg ACTION CASE3 player attacks with more points than shield has, shield &
     expect(inactivePlayer.item).toEqual({});
     expect(Object.keys(inactivePlayer.grave)).toContain(shieldCard);
     expect(inactivePlayer.health.current).toEqual(inactivePlayer.health.maximum - 2);
+    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
+    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+});
+
+
+// player attacks enemy with attack power < shield points
+test('msg ACTION CASE3 player attacks with less than shield, card goes to graveyard, shield points decreased', () => {
+    const cardToTest = 'key20';
+    const shieldCard = 'key23';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: OPPONENT,
+    };
+
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = wolf;
+    gameForTest.game.players[1].item.key23 = shieldLarge;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+
+    expect(activePlayer.moveCounter).toEqual(1);
+    expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
+    expect(activePlayer.grave[cardToTest].category).toEqual(ATTACKCATEGORY);
+    expect(inactivePlayer.item[shieldCard].healthCurrent).toEqual(2);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });

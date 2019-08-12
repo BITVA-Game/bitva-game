@@ -21,54 +21,6 @@ function getInActivePlayer(newGame) {
     return newGame.game.players.find(player => player.id !== newGame.game.active);
 }
 
-// player attacks enemy with attack power < shield points
-test('msg ACTION CASE3 player attacks with less than shield, card goes to graveyard, shield points decreased', () => {
-    const cardToTest = 'key1';
-    const cardTypeToTest = 'action';
-    const cardCategoryToTest = 'attack';
-    const shieldCard = 'key23';
-    const msg = {
-        type: 'ACTION',
-        activeCard: cardToTest,
-        target: 'player2',
-    };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-    // Set application for the correct state BEFORE the test
-    application.setApp(clone(gameP2HasSmallShieldState));
-
-    // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-
-    // to use it more easy let's save the received app into result
-    const result = sendReply.mock.calls[0][0];
-
-    // expect that we have active player in game
-    expect(result.game.active).toBeDefined();
-    const activePlayer = getActivePlayer(result);
-    const inActivePlayer = getInActivePlayer(result);
-    // Confirm we removed active player from game. Can be deleted after refactoring
-    expect(activePlayer.active).not.toBeDefined();
-    expect(inActivePlayer.active).not.toBeDefined();
-
-    expect(activePlayer.moveCounter).toEqual(1);
-
-    // expect that it was an action card as we performing the action
-    expect(activePlayer.grave[cardToTest].type).toEqual(cardTypeToTest);
-    // expect it was the attack card
-    expect(activePlayer.grave[cardToTest].category).toEqual(cardCategoryToTest);
-
-    // expect the shield helath to lessen
-    expect(inActivePlayer.item[shieldCard].healthCurrent).toEqual(1);
-
-    // expect the acting card is now on the graveyard
-    expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
-    // expect the acting card is now not in hand
-    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
-});
-
 // Test, that when massage with item card  received, then
 // if item holder is empty, active player moves item there
 test('msg ACTION CASE4 received: active player choose item, if his item holder is empty player moves item there.', () => {
