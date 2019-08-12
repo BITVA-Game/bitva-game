@@ -71,8 +71,8 @@ test('msg DEALALL switch to gameEngine state GAME', () => {
     const newGame = engine.getState();
 
     // Find active player
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
     // Expect player to have relevant data
     expect(activePlayer.hero).toBeDefined();
 
@@ -107,7 +107,7 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     engine.handle(msg);
     const newGame = engine.getState();
 
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
 
     expect(newGame.game.active).toBeDefined();
     expect(activePlayer.moveCounter).toEqual(1);
@@ -133,7 +133,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     engine.handle(msg);
     const newGame = engine.getState();
 
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
 
     expect(newGame.game.active).toBeDefined();
     expect(activePlayer.moveCounter).toEqual(1);
@@ -158,7 +158,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     engine.handle(msg);
     const newGame = engine.getState();
 
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
     expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
@@ -183,8 +183,8 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const newGame = engine.getState();
 
     // Find active player
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
     expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
@@ -213,8 +213,8 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     const newGame = engine.getState();
 
     // Find active player
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
     expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
@@ -243,8 +243,8 @@ test('msg ACTION CASE3 player attacks with more points than shield has, shield &
     const newGame = engine.getState();
 
     // Find active player
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
     expect(activePlayer.grave[cardToTest].category).toEqual(ATTACKCATEGORY);
@@ -273,8 +273,8 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
     const newGame = engine.getState();
 
     // Find active player
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
     expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
@@ -300,7 +300,7 @@ test('msg ACTION CASE4 active player puts item into his itemholder', () => {
     const newGame = engine.getState();
 
     // Find active player
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
 
     expect(Object.values(activePlayer.item).length).toEqual(1);
     expect(activePlayer.item[cardToTest].type).toEqual(ITEMCATEGORY);
@@ -323,8 +323,8 @@ test('msg ACTION CASE4 player wants to move his card from item holder to graveya
     const newGame = engine.getState();
 
     // Find active player
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
@@ -352,11 +352,38 @@ test('EDGE CASE TEST player attacks with less points than shieldLarge has, only 
     const newGame = engine.getState();
 
     // Find active player
-    const activePlayer = newGame.game.players.find(player => player.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(player => player.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(inactivePlayer.item.key23.healthCurrent).toEqual(2);
     expect(inactivePlayer.hand.key5.healthCurrent).toEqual(4);
     expect(activePlayer.hand.key5.healthCurrent).toEqual(4);
     expect(activePlayer.item.key7.healthCurrent).toEqual(2);
+});
+
+test('msg ACTION ANY received: active player moveCounter = 2 after his action, he gets missing cards to hand, inactive player becomes active.', () => {
+    const cardToTest = 'key20';
+    const player = 'player1';
+    const opponent = 'player2';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: OPPONENT,
+    };
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].moveCounter = 2;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+
+    expect(newGame.game.active).toEqual(opponent);
+    expect(inactivePlayer.id).toEqual(player);
+    expect(inactivePlayer.moveCounter).toEqual(0);
+    expect(Object.keys(inactivePlayer.hand).length).toEqual(5);
+    expect(activePlayer.id).toEqual(opponent);
 });
