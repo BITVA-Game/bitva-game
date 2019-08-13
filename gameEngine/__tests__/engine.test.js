@@ -6,7 +6,7 @@ import {
 import {
     PLAY, HEROSELECTED, DEALALL, ACTION, HERO,
     OPPONENT, GRAVE, ACTIONCARD, ITEMCARD,
-    ATTACKCATEGORY, ITEMCATEGORY,
+    ATTACKCATEGORY, ITEMCATEGORY, ITEMOPPONENT,
 } from '../../constants';
 
 import cards from '../__data__/cards';
@@ -414,4 +414,57 @@ test('EDGE CASE TEST for shields with the same key, shields in item', () => {
     expect(activePlayer.item.key7).toEqual(shieldLarge);
     expect(inactivePlayer.item.key7.healthCurrent).toEqual(2);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+});
+
+// Test, that when active player cannot attacks item holder of opponent of it is empty
+test('EDGE CASE TEST no card in opponent item, player trying to attack, but cannot do it.', () => {
+    const cardToTest = 'key20';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: ITEMOPPONENT,
+    };
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = wolf;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+
+    expect(Object.keys(activePlayer.hand)).toContain(cardToTest);
+    expect(activePlayer.moveCounter).toEqual(0);
+    expect(activePlayer.health.current).toEqual(16);
+    expect(inactivePlayer.health.current).toEqual(15);
+});
+
+// Test, that active player cannot attacks shield directly at item holder of opponent
+test('EDGE CASE TEST opponent has shield in item, player trying to attack, but cannot do it.', () => {
+    const cardToTest = 'key20';
+    const opponentItem = 'key10';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: ITEMOPPONENT,
+    };
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = wolf;
+    gameForTest.game.players[1].item.key10 = shieldSmall;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+
+    expect(Object.keys(activePlayer.hand)).toContain(cardToTest);
+    expect(Object.keys(inactivePlayer.item)).toContain(opponentItem);
+    expect(activePlayer.moveCounter).toEqual(0);
+    expect(activePlayer.health.current).toEqual(16);
+    expect(inactivePlayer.health.current).toEqual(15);
 });

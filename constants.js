@@ -17,6 +17,7 @@ const OPPONENT = 'opponent';
 const GRAVE = 'graveyard';
 const ACTIONCARD = 'action';
 const ITEMCARD = 'item';
+const ITEMOPPONENT = 'itemOpponent';
 const ATTACKCATEGORY = 'attack';
 const ITEMCATEGORY = 'item';
 
@@ -39,4 +40,5 @@ module.exports = {
     ITEMCARD,
     ATTACKCATEGORY,
     ITEMCATEGORY,
+    ITEMOPPONENT,
 };
