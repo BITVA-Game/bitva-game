@@ -63,6 +63,22 @@ const shieldLarge = {
     disabled: false,
 };
 
+const waterLiving = {
+
+    id: 'waterLiving',
+    name: 'Living Water',
+    type: 'item',
+    icon: 'heartRed',
+    category: 'heal',
+    categoryName: 'heal',
+    description: 'Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.',
+    health: 3,
+    healthCurrent: 3,
+    initialpoints: 1,
+    points: 1,
+    disabled: false,
+};
+
 export default {
-    apple, bogatyr, shieldSmall, wolf, shieldLarge,
+    apple, bogatyr, shieldSmall, wolf, shieldLarge, waterLiving,
 };
