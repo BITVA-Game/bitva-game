@@ -1,6 +1,4 @@
-import {
-    screen, message,
-} from '../constants';
+const { screen, message } = require('../constants');
 
 function handle(app, msg) {
     switch (msg.type) {

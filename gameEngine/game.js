@@ -7,9 +7,10 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
-import {
-    message, phase, card as cardConst, styles, target as targetConst,
-} from '../constants';
+
+const {
+    message, phase, card: cardConst, styles, target: targetConst,
+} = require('../constants');
 
 const keygen = require('keygenerator');
 const { getRandomUpTo } = require('../gameTerminal/randomFunc');

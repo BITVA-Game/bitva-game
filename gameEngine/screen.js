@@ -1,6 +1,4 @@
-import {
-    screen, message, phase,
-} from '../constants';
+const { screen, message, phase } = require('../constants');
 
 
 function heroSelected(state) {

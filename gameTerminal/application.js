@@ -1,9 +1,8 @@
 // JSON object with allication data
 // const fs = require('fs');
 // const path = require('path');
-import {
-    screen, message,
-} from '../constants';
+
+const { screen, message } = require('../constants');
 
 let application = require('./data/app.json');
 // Additional files that have functions related to this part of application

@@ -1,6 +1,4 @@
-import {
-    message,
-} from '../constants';
+const { message } = require('../constants');
 
 let engine = null;
 const GameEngine = require('../gameEngine');

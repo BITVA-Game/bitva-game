@@ -1,6 +1,4 @@
-import {
-    message,
-} from '../constants';
+const { message } = require('../constants');
 
 const heroes = require('../gameTerminal/data/characters.json');
 const cards = require('../gameTerminal/data/cards.json');
