@@ -12,7 +12,7 @@ import { startscreenState } from '../gameTerminal/__data__/states';
 
 afterEach(cleanup);
 
-test('renders without crashing', () => {
+test.skip('renders without crashing', () => {
     const { getByTestId } = render(<App />);
     expect(getByTestId('app-screen')).toBeTruthy();
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
@@ -29,7 +29,7 @@ test('renders without crashing', () => {
     expect(startScreen).toContainElement(menu);
 });
 
-test('<MainMenu> looks as expected', () => {
+test.skip('<MainMenu> looks as expected', () => {
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
     stateSaver('eventStartSceen', startscreenState);
     const { getByTestId, getAllByTestId } = render(<MainMenu />);
