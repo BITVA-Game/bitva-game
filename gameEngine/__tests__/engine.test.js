@@ -416,7 +416,6 @@ test('EDGE CASE TEST for shields with the same key, shields in item', () => {
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
-// Test, that when active player cannot attacks item holder of opponent of it is empty
 test('EDGE CASE TEST no card in opponent item, player trying to attack, but cannot do it.', () => {
     const cardToTest = 'key20';
     const msg = {
@@ -441,7 +440,6 @@ test('EDGE CASE TEST no card in opponent item, player trying to attack, but cann
     expect(inactivePlayer.health.current).toEqual(15);
 });
 
-// Test, that active player cannot attacks shield directly at item holder of opponent
 test('EDGE CASE TEST opponent has shield in item, player trying to attack, but cannot do it.', () => {
     const cardToTest = 'key20';
     const opponentItem = 'key10';
