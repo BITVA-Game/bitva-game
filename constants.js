@@ -1,44 +1,46 @@
-// Screens
-const STARTSCREEN = 'STARTSCREEN';
-const PROFILE = 'PROFILE';
-const PLAY = 'PLAY';
-const NETWORKPLAY = 'NETWORKPLAY';
-const INIT = 'INIT';
-const HEROSELECTED = 'HEROSELECTED';
-const HEROSELECT = 'HEROSELECT';
-const DEALALL = 'DEALALL';
-const ACTION = 'ACTION';
-const GAMESCREEN = 'GAMESCREEN';
-const VERSUS = 'VERSUS';
+const screen = {
+    STARTSCREEN: 'STARTSCREEN',
+    PROFILE: 'PROFILE',
+    PLAY: 'PLAY',
+    NETWORKPLAY: 'NETWORKPLAY',
+    HEROSELECT: 'HEROSELECT',
+    HEROSELECTED: 'HEROSELECTED',
+    VERSUS: 'VERSUS',
+    GAMESCREEN: 'GAMESCREEN',
+    OVER: 'OVER',
+};
 
-// Messages internal data
-const HERO = 'hero';
-const OPPONENT = 'opponent';
-const GRAVE = 'graveyard';
-const ACTIONCARD = 'action';
-const ITEMCARD = 'item';
-const ITEMOPPONENT = 'itemOpponent';
-const ATTACKCATEGORY = 'attack';
-const ITEMCATEGORY = 'item';
+const message = {
+    STARTSCREEN: 'STARTSCREEN',
+    PROFILE: 'PROFILE',
+    PLAY: 'PLAY',
+    NETWORKPLAY: 'NETWORKPLAY',
+    INIT: 'INIT',
+    DEALALL: 'DEALALL',
+    ACTION: 'ACTION',
+    HEROSELECTED: 'HEROSELECTED',
+};
+
+const phase = {
+    ACTIVE: 'ACTIVE',
+    OVER: 'OVER',
+};
+
+const card = {
+    ACTIONCARD: 'action',
+    ITEMCARD: 'item',
+    ATTACKCATEGORY: 'attack',
+    ITEMCATEGORY: 'item',
+};
+
+const target = {
+    HERO: 'hero',
+    OPPONENT: 'opponent',
+    GRAVE: 'graveyard',
+    ITEMOPPONENT: 'itemOpponent',
+    ITEMCARD: 'item',
+};
 
 module.exports = {
-    STARTSCREEN,
-    PROFILE,
-    PLAY,
-    NETWORKPLAY,
-    HEROSELECT,
-    INIT,
-    HEROSELECTED,
-    DEALALL,
-    ACTION,
-    GAMESCREEN,
-    VERSUS,
-    HERO,
-    OPPONENT,
-    GRAVE,
-    ACTIONCARD,
-    ITEMCARD,
-    ATTACKCATEGORY,
-    ITEMCATEGORY,
-    ITEMOPPONENT,
+    screen, message, phase, card, target,
 };

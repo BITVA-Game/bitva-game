@@ -1,13 +1,13 @@
-const {
-    PROFILE, STARTSCREEN, PLAY, NETWORKPLAY,
-} = require('../constants');
+import {
+    screen, message,
+} from '../constants';
 
-function handle(app, message) {
-    switch (message.type) {
-    case PROFILE: return PROFILE;
-    case PLAY: return PLAY;
-    case NETWORKPLAY: return NETWORKPLAY;
-    case STARTSCREEN: return STARTSCREEN;
+function handle(app, msg) {
+    switch (msg.type) {
+    case message.PROFILE: return screen.PROFILE;
+    case message.PLAY: return screen.PLAY;
+    case message.NETWORKPLAY: return screen.NETWORKPLAY;
+    case message.STARTSCREEN: return screen.STARTSCREEN;
     default: return app.manager;
     }
 }

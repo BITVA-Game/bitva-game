@@ -1,8 +1,9 @@
+import {
+    message,
+} from '../constants';
+
 const heroes = require('../gameTerminal/data/characters.json');
 const cards = require('../gameTerminal/data/cards.json');
-const {
-    PLAY, HEROSELECTED,
-} = require('../constants');
 
 const initialState = {
     players: [],
@@ -33,21 +34,21 @@ function pendingPlayer(app, players) {
     return pending[0];
 }
 
-function newPlayers(app, message) {
-    const player = { id: message.player, hero: message.hero };
+function newPlayers(app, msg) {
+    const player = { id: msg.player, hero: msg.hero };
     return app.heroSelect.players.concat(player);
 }
 
-function handle(app, message) {
+function handle(app, msg) {
     let nextPlayer = null;
     let selectedPlayers = [];
 
-    switch (message.type) {
-    case PLAY:
+    switch (msg.type) {
+    case message.PLAY:
         nextPlayer = app.accounts[0];
         break;
-    case HEROSELECTED:
-        selectedPlayers = newPlayers(app, message);
+    case message.HEROSELECTED:
+        selectedPlayers = newPlayers(app, msg);
         nextPlayer = pendingPlayer(app, selectedPlayers);
         break;
     default: break;

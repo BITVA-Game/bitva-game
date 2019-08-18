@@ -1,30 +1,31 @@
-const {
-    PLAY, HEROSELECT, HEROSELECTED, DEALALL, ACTION, GAMESCREEN, VERSUS,
-} = require('../constants');
+import {
+    screen, message, phase,
+} from '../constants';
+
 
 function heroSelected(state) {
     if (state.game.players.length === 2) {
-        return VERSUS;
+        return screen.VERSUS;
     }
-    return HEROSELECT;
+    return screen.HEROSELECT;
 }
 
 function gameScreen(state) {
-    if (state.game.phase === 'OVER') {
-        return 'OVER';
+    if (state.game.phase === phase.OVER) {
+        return screen.OVER;
     }
-    return 'GAMESCREEN';
+    return screen.GAMESCREEN;
 }
 
-function handle(state, message) {
-    switch (message.type) {
-    case PLAY:
-        return HEROSELECT;
-    case HEROSELECTED:
+function handle(state, msg) {
+    switch (msg.type) {
+    case message.PLAY:
+        return screen.HEROSELECT;
+    case message.HEROSELECTED:
         return heroSelected(state);
-    case DEALALL:
-        return GAMESCREEN;
-    case ACTION:
+    case message.DEALALL:
+        return screen.GAMESCREEN;
+    case message.ACTION:
         return gameScreen(state);
     default: return state.screen;
     }

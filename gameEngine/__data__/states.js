@@ -1,4 +1,7 @@
 /* eslint-disable import/prefer-default-export */
+import {
+    screen,
+} from '../../constants';
 
 export const playState = {
     accounts: [{
@@ -24,7 +27,7 @@ export const playState = {
         activePlayer: 'player1',
         players: [],
     },
-    screen: 'HEROSELECT',
+    screen: screen.HEROSELECT,
     game: {
         players: [],
     },
@@ -89,7 +92,7 @@ export const versusState = {
     ],
     heroSelect: null,
     manager: {
-        screen: 'VERSUS',
+        screen: screen.VERSUS,
     },
     game: {
         active: 'player1',
@@ -213,6 +216,9 @@ export const versusState = {
 };
 
 export const dealAllState = {
+    manager: {
+        screen: screen.GAMESCREEN,
+    },
     game: {
         active: 'player1',
         phase: 'ACTIVE',

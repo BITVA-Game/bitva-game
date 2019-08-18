@@ -1,8 +1,11 @@
 // JSON object with allication data
 // const fs = require('fs');
 // const path = require('path');
+import {
+    screen, message,
+} from '../constants';
+
 let application = require('./data/app.json');
-const { PLAY, INIT } = require('../constants');
 // Additional files that have functions related to this part of application
 const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
@@ -22,23 +25,23 @@ const socketClient = require('./socketClient');
 
 // TODO This is a temporary solution, requires rewriting frontend to read from engine
 function parseApplication(app) {
-    let screen = app.manager;
-    if (screen === PLAY) {
+    let scr = app.manager;
+    if (scr === screen.PLAY) {
         // we're inside game screen playing the game
-        screen = app.engine.screen;
+        scr = app.engine.screen;
     }
     const parsedApp = Object.assign(
-        {}, app, app.engine, { manager: { screen } },
+        {}, app, app.engine, { manager: { screen: scr } },
     );
     delete parsedApp.engine;
     return parsedApp;
 }
 
-function processMessage(message) {
+function processMessage(msg) {
     const newApp = {
         profiles: application.profiles,
-        manager: screenManager.handle(application, message),
-        engine: gameEngineManager.handle(application, message),
+        manager: screenManager.handle(application, msg),
+        engine: gameEngineManager.handle(application, msg),
     };
     return newApp;
 }
@@ -48,15 +51,15 @@ function processMessage(message) {
 // Only those that have relevatn state will be updated
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
-function msgReceived(message, sendReply) {
-    const newApp = message === INIT ? application : processMessage(message);
+function msgReceived(msg, sendReply) {
+    const newApp = msg === message.INIT ? application : processMessage(msg);
 
     // writeGameObject(newApp);
     if (message.network) {
         newApp.network = true;
         console.log('OMG NETWORK PLAY IS: ', newApp.network);
 
-        socketClient.emitMessage(message);
+        socketClient.emitMessage(msg);
     }
 
     application = newApp;

@@ -1,22 +1,23 @@
+import {
+    message,
+} from '../constants';
+
 let engine = null;
-const {
-    PLAY, HEROSELECTED, DEALALL, ACTION,
-} = require('../constants');
 const GameEngine = require('../gameEngine');
 
-function handle(app, message) {
-    switch (message.type) {
-    case PLAY:
+function handle(app, msg) {
+    switch (msg.type) {
+    case message.PLAY:
         // initialize game engine
         engine = new GameEngine();
-        engine.handle(message);
+        engine.handle(msg);
         break;
-    case HEROSELECTED:
-    case DEALALL:
-    case ACTION:
+    case message.HEROSELECTED:
+    case message.DEALALL:
+    case message.ACTION:
     // call game engine to calculate new game state
         if (!engine) engine = new GameEngine();
-        engine.handle(message);
+        engine.handle(msg);
         break;
     // not a game-related message
     default: return app.engine;

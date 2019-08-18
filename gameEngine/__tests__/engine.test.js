@@ -4,10 +4,9 @@ import {
 } from '../__data__/states';
 
 import {
-    PLAY, HEROSELECTED, DEALALL, ACTION, HERO,
-    OPPONENT, GRAVE, ACTIONCARD, ITEMCARD,
-    ATTACKCATEGORY, ITEMCATEGORY, ITEMOPPONENT,
+    screen, message, target, card, phase,
 } from '../../constants';
+
 
 import cards from '../__data__/cards';
 
@@ -25,7 +24,7 @@ jest.mock('../../gameTerminal/randomFunc');
 
 test('First game state Play. Player1 can select any of the characters he has', () => {
     // Again we only need type
-    const msg = { type: PLAY };
+    const msg = { type: message.PLAY };
 
     const engine = new GameEngine();
     engine.handle(msg);
@@ -35,7 +34,7 @@ test('First game state Play. Player1 can select any of the characters he has', (
 
 test('Second game state heroselectStateP1. Player 1 selected one of his characters. Player 2 is active.', () => {
     // we created message sent once Player 1 selected character
-    const msg = { type: HEROSELECTED, hero: 'morevna', player: 'player1' };
+    const msg = { type: message.HEROSELECTED, hero: 'morevna', player: 'player1' };
     // we put GameEngine into previous state
     const engine = new GameEngine(playState);
     // we referencing to GameEngine to work out our message
@@ -47,7 +46,7 @@ test('Second game state heroselectStateP1. Player 1 selected one of his characte
 
 test('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, Active players is set', () => {
     // we created message sent once Player 1 selected character
-    const msg = { type: HEROSELECTED, hero: 'yaga', player: 'player2' };
+    const msg = { type: message.HEROSELECTED, hero: 'yaga', player: 'player2' };
     // we put GameEngine into previous statee
     const engine = new GameEngine(heroselectStateP1);
     // we referencing to GameEngine to work out our message
@@ -60,11 +59,11 @@ test('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, Active
     expect(newGame.game.players.length).toEqual(2);
     expect(newGame.game.players.length).toEqual(2);
     expect(newGame.heroSelect).toEqual(null);
-    expect(newGame.screen).toEqual('VERSUS');
+    expect(newGame.screen).toEqual(screen.VERSUS);
 });
 
 test('msg DEALALL switch to gameEngine state GAME', () => {
-    const msg = { type: DEALALL };
+    const msg = { type: message.DEALALL };
 
     const engine = new GameEngine(versusState);
     engine.handle(msg);
@@ -95,9 +94,9 @@ test('msg DEALALL switch to gameEngine state GAME', () => {
 test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: GRAVE,
+        target: target.GRAVE,
     };
     // Making a copy of dealAllState object as we need to give our player correct card
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -118,9 +117,9 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
 test('msg ACTION CASE2 player wants to heal himself. He is damaged and the healing is less than his max', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: HERO,
+        target: target.HERO,
     };
 
     // Making a copy of dealAllState object as we need to give our player correct card
@@ -137,7 +136,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
 
     expect(newGame.game.active).toBeDefined();
     expect(activePlayer.moveCounter).toEqual(1);
-    expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
+    expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
     expect(activePlayer.health.current).toEqual(gameForTest.game.players[0].health.current + 2);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
@@ -146,9 +145,9 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
 test('msg ACTION CASE2 player wants to heal himself. He is damaged and the healing will go over max', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: HERO,
+        target: target.HERO,
     };
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
     gameForTest.game.players[0].hand.key20 = apple;
@@ -161,7 +160,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
-    expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
+    expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
     expect(activePlayer.health.current).toEqual(heroData[activePlayer.hero].health);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
@@ -170,9 +169,9 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
 test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: OPPONENT,
+        target: target.OPPONENT,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -187,8 +186,8 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
-    expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
-    expect(activePlayer.grave[cardToTest].category).toEqual(ATTACKCATEGORY);
+    expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
+    expect(activePlayer.grave[cardToTest].category).toEqual(card.ATTACKCATEGORY);
     expect(inactivePlayer.item).toEqual({});
     expect(inactivePlayer.health.current).toEqual(gameForTest.game.players[1].health.current - 4);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
@@ -199,9 +198,9 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     const cardToTest = 'key20';
     const shieldCard = 'key23';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: OPPONENT,
+        target: target.OPPONENT,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -217,8 +216,8 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
-    expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
-    expect(activePlayer.grave[cardToTest].category).toEqual(ATTACKCATEGORY);
+    expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
+    expect(activePlayer.grave[cardToTest].category).toEqual(card.ATTACKCATEGORY);
     expect(inactivePlayer.item).toEqual({});
     expect(Object.keys(inactivePlayer.grave)).toContain(shieldCard);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
@@ -229,9 +228,9 @@ test('msg ACTION CASE3 player attacks with more points than shield has, shield &
     const cardToTest = 'key20';
     const shieldCard = 'key23';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: OPPONENT,
+        target: target.OPPONENT,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -246,8 +245,8 @@ test('msg ACTION CASE3 player attacks with more points than shield has, shield &
     const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
     const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
-    expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
-    expect(activePlayer.grave[cardToTest].category).toEqual(ATTACKCATEGORY);
+    expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
+    expect(activePlayer.grave[cardToTest].category).toEqual(card.ATTACKCATEGORY);
     expect(inactivePlayer.item).toEqual({});
     expect(Object.keys(inactivePlayer.grave)).toContain(shieldCard);
     expect(inactivePlayer.health.current).toEqual(inactivePlayer.health.maximum - 2);
@@ -259,9 +258,9 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
     const cardToTest = 'key20';
     const shieldCard = 'key23';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: OPPONENT,
+        target: target.OPPONENT,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -277,8 +276,8 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
     const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
-    expect(activePlayer.grave[cardToTest].type).toEqual(ACTIONCARD);
-    expect(activePlayer.grave[cardToTest].category).toEqual(ATTACKCATEGORY);
+    expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
+    expect(activePlayer.grave[cardToTest].category).toEqual(card.ATTACKCATEGORY);
     expect(inactivePlayer.item[shieldCard].healthCurrent).toEqual(2);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
@@ -287,32 +286,34 @@ test('msg ACTION CASE3 player attacks with less than shield, card goes to gravey
 test('msg ACTION CASE4 active player puts item into his itemholder', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: ITEMCARD,
+        target: target.ITEMCARD,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].item = {};
     gameForTest.game.players[0].hand.key20 = shieldSmall;
-
+    // console.log('BEFORE', gameForTest.game.players[0]);
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
     const newGame = engine.getState();
 
     // Find active player
     const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    // console.log('AFTER', activePlayer);
 
     expect(Object.values(activePlayer.item).length).toEqual(1);
-    expect(activePlayer.item[cardToTest].type).toEqual(ITEMCATEGORY);
+    expect(activePlayer.item[cardToTest].type).toEqual(card.ITEMCATEGORY);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
 });
 
 test('msg ACTION CASE4 player wants to move his card from item holder to graveyard', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: GRAVE,
+        target: target.GRAVE,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -337,9 +338,9 @@ test('ACTION ANY active player moveCounter = 2 after his action, he gets missing
     const player = 'player1';
     const opponent = 'player2';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: OPPONENT,
+        target: target.OPPONENT,
     };
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
     gameForTest.game.players[0].moveCounter = 2;
@@ -362,9 +363,9 @@ test('ACTION ANY active player moveCounter = 2 after his action, he gets missing
 test('EDGE CASE TEST player attacks with less points than shieldLarge has, only attacked shield cards points decreased', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: OPPONENT,
+        target: target.OPPONENT,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -391,9 +392,9 @@ test('EDGE CASE TEST player attacks with less points than shieldLarge has, only 
 test('EDGE CASE TEST for shields with the same key, shields in item', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: OPPONENT,
+        target: target.OPPONENT,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -410,7 +411,7 @@ test('EDGE CASE TEST for shields with the same key, shields in item', () => {
     const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
-    expect(activePlayer.grave.key20.type).toEqual(ACTIONCARD);
+    expect(activePlayer.grave.key20.type).toEqual(card.ACTIONCARD);
     expect(activePlayer.item.key7).toEqual(shieldLarge);
     expect(inactivePlayer.item.key7.healthCurrent).toEqual(2);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
@@ -419,9 +420,9 @@ test('EDGE CASE TEST for shields with the same key, shields in item', () => {
 test('EDGE CASE TEST no card in opponent item, player trying to attack, but cannot do it.', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: ITEMOPPONENT,
+        target: target.ITEMOPPONENT,
     };
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
     gameForTest.game.players[0].hand.key20 = wolf;
@@ -444,9 +445,9 @@ test('EDGE CASE TEST opponent has shield in item, player trying to attack, but c
     const cardToTest = 'key20';
     const opponentItem = 'key10';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: ITEMOPPONENT,
+        target: target.ITEMOPPONENT,
     };
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
     gameForTest.game.players[0].hand.key20 = wolf;
@@ -470,9 +471,9 @@ test('EDGE CASE TEST opponent has shield in item, player trying to attack, but c
 test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: OPPONENT,
+        target: target.OPPONENT,
     };
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
     gameForTest.game.players[0].hand.key20 = wolf;
@@ -489,5 +490,5 @@ test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
     expect(activePlayer.active).not.toBeDefined();
     expect(inactivePlayer.active).not.toBeDefined();
     expect(inactivePlayer.health.current).toBeLessThanOrEqual(0);
-    expect(newGame.game.phase).toEqual('OVER');
+    expect(newGame.game.phase).toEqual(phase.OVER);
 });

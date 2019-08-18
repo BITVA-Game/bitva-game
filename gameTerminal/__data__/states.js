@@ -1,4 +1,7 @@
 /* eslint-disable import/prefer-default-export */
+import {
+    screen,
+} from '../../constants';
 
 export const startscreenState = {
     profiles: [
@@ -10,6 +13,6 @@ export const startscreenState = {
         },
     ],
     manager: {
-        screen: 'STARTSCREEN',
+        screen: screen.STARTSCREEN,
     },
 };

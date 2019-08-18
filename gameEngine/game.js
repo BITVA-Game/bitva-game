@@ -7,11 +7,12 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
+import {
+    message, phase,
+} from '../constants';
+
 const keygen = require('keygenerator');
 const { getRandomUpTo } = require('../gameTerminal/randomFunc');
-const {
-    HEROSELECTED, DEALALL, ACTION, NETWORKPLAY,
-} = require('../constants');
 
 const allCharacters = require('../gameTerminal/data/characters.json');
 const allCards = require('../gameTerminal/data/cards.json');
@@ -712,7 +713,7 @@ function playerActs(game, cardId, target) {
     }
     // we return the whole game to continue
     if (pInactive.health.current <= 0 || pActive.health.current <= 0) {
-        game.phase = 'OVER';
+        game.phase = phase.OVER;
     }
     return game;
 }
@@ -722,25 +723,24 @@ function makeMove(game, msg) {
     return game;
 }
 
-function handle(app, message) {
+function handle(app, msg) {
     const game = Object.assign({}, app.game);
-
-    switch (message.type) {
-    case HEROSELECTED: {
-        const playersInitital = game.players.concat(generatePlayer(message.hero, message.player));
+    switch (msg.type) {
+    case message.HEROSELECTED: {
+        const playersInitital = game.players.concat(generatePlayer(msg.hero, msg.player));
         const active = selectActive(playersInitital);
         const players = assignPlayersPositions(playersInitital);
         return Object.assign(game, { active, players });
     }
-    case DEALALL: {
+    case message.DEALALL: {
         return Object.assign(game, { players: giveCardsToAll(game.players) });
     }
     // All actions have the same action name as they all call the same function
-    case ACTION: {
+    case message.ACTION: {
         // helperToDebug(message, game);
-        return Object.assign(game, makeMove(game, message));
+        return Object.assign(game, makeMove(game, msg));
     }
-    case NETWORKPLAY: { return game; }
+    case message.NETWORKPLAY: { return game; }
 
     default: return game;
     }
