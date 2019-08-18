@@ -79,6 +79,21 @@ const waterLiving = {
     disabled: false,
 };
 
+const waterDead = {
+    id: 'waterDead',
+    name: 'Dead Water',
+    type: 'item',
+    icon: 'heartBlack',
+    category: 'damage',
+    categoryName: 'damage',
+    description: 'Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.',
+    health: 3,
+    healthCurrent: 3,
+    initialpoints: 1,
+    points: 1,
+    disabled: false,
+};
+
 export default {
-    apple, bogatyr, shieldSmall, wolf, shieldLarge, waterLiving,
+    apple, bogatyr, shieldSmall, wolf, shieldLarge, waterLiving, waterDead,
 };
