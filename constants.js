@@ -29,8 +29,25 @@ const phase = {
 const card = {
     ACTIONCARD: 'action',
     ITEMCARD: 'item',
+    HEALCATEGORY: 'heal',
     ATTACKCATEGORY: 'attack',
     ITEMCATEGORY: 'item',
+    REFLECTCATEGORY: 'reflect',
+    SHIELDCATEGORY: 'shield',
+    HOLDCARDCATEGORY: 'holdCard',
+    ATTACKITEMCATEGORY: 'attackItems',
+    SHOWCARDSCATEGORY: 'showCards',
+    TURNINGCATEGORY: 'turning',
+    PANICCATEGORY: 'panic',
+    ITEMINACTIVE: 'itemInactive',
+    MAGICMIRRORCARD: 'magicMirror',
+    PLATEMAILCARD: 'plateMail',
+    SHIELDCARD: 'shield',
+    WATERLIVINGCARD: 'waterLiving',
+    WATERDEADCARD: 'waterDead',
+    BOWARROWCARD: 'bowArrow',
+    MAGICTREECARD: 'magicTree',
+    MALACHITEBOXCARD: 'malachiteBox',
 };
 
 const target = {
@@ -41,6 +58,11 @@ const target = {
     ITEMCARD: 'item',
 };
 
+const styles = {
+    BOTTOM: 'bottom',
+    TOP: 'top',
+};
+
 module.exports = {
-    screen, message, phase, card, target,
+    screen, message, phase, card, target, styles,
 };
