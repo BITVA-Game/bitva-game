@@ -4,10 +4,7 @@ import {
 } from '../__data__/states';
 
 import {
-    ACTION, HEALCATEGORY, ITEMCARD, ITEMCATEGORY,
-    // OPPONENT, GRAVE, ACTIONCARD, 
-    // ATTACKCATEGORY, ITEMOPPONENT,
-    //  PLAY, HEROSELECTED, DEALALL, HERO,
+    screen, message, target, card, phase,
 } from '../../constants';
 
 import cards from '../__data__/cards';
@@ -26,9 +23,9 @@ jest.mock('../../gameTerminal/randomFunc');
 test('msg ACTION received: active player put Living Water in item, it increases players health current for 1pnt.', () => {
     const cardToTest = 'key20';
     const msg = {
-        type: ACTION,
+        type: message.ACTION,
         activeCard: cardToTest,
-        target: ITEMCARD,
+        target: target.ITEMCARD,
     };
 
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
@@ -46,17 +43,17 @@ test('msg ACTION received: active player put Living Water in item, it increases 
     const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
 
     // ожидаем, что карта living water в item holder активного игрока
-    expect(Object.values(activePlayer.item).length).toEqual(1);
-    expect(activePlayer.item[cardToTest].id).toEqual(waterLiving.id);
-    expect(activePlayer.item[cardToTest].type).toEqual(ITEMCATEGORY);
-    expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+    expect(Object.values(inactivePlayer.item).length).toEqual(1);
+    expect(inactivePlayer.item[cardToTest].id).toEqual(waterLiving.id);
+    expect(inactivePlayer.item[cardToTest].type).toEqual(card.ITEMCATEGORY);
+    expect(Object.keys(inactivePlayer.hand)).not.toContain(cardToTest);
     // ожидаем, что карта dead water активного игрока имеет тип - heal
-    expect(activePlayer.item[cardToTest].category).toEqual(HEALCATEGORY);
+    expect(inactivePlayer.item[cardToTest].category).toEqual(card.HEALCATEGORY);
     // ожидаем, что очки карты living water активного игрока > 0
-    expect(activePlayer.item[cardToTest].points).toBeGreaterThan(0);
+    expect(inactivePlayer.item[cardToTest].points).toBeGreaterThan(0);
     // ожидаем, что к текущему здоровью игроков прибавится по 1му очку
-    expect(activePlayer.health.current).toEqual(16);
-    expect(inactivePlayer.health.current).toEqual(15);
+    expect(inactivePlayer.health.current).toEqual(16);
+    expect(activePlayer.health.current).toEqual(15);
     // ожидаем, что карта-water находится в item пока у нее есть очки.
-    expect(activePlayer.item[cardToTest].points).not.toEqual(0);
+    expect(inactivePlayer.item[cardToTest].points).not.toEqual(0);
 });
