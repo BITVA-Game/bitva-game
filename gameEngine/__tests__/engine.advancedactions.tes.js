@@ -76,7 +76,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
     gameForTest.game.players[0].item.key24 = waterDead;
     gameForTest.game.players[0].hand.key20 = wolf;
     gameForTest.game.players[0].moveCounter = 1;
-    
+    // we create new engine with our game state
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
     const newGame = engine.getState();
