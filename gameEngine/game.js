@@ -587,9 +587,6 @@ function pInactiveIsTarget(game, activeCard, cardId) {
         attackOpponent(pInactive, pActive, activeCard.points);
         pActive.turningHand === true
             ? moveCardGraveyard(pInactive, cardId) : moveCardGraveyard(pActive, cardId);
-        if (pInactive.health.current <= 0) {
-            game.phase = 'OVER';
-        }
         break;
         // if player attacks with card category holdCard we call disableCards function
         // then move this attack card to gravyeard
@@ -604,9 +601,6 @@ function pInactiveIsTarget(game, activeCard, cardId) {
         attackItems(game.players);
         pActive.turningHand === true
             ? moveCardGraveyard(pInactive, cardId) : moveCardGraveyard(pActive, cardId);
-        if (pInactive.health.current <= 0) {
-            game.phase = 'OVER';
-        }
         break;
         // if player attackes with clairvoyance card, we call showCards function
         // then move this attack card to gravyeard
@@ -717,6 +711,9 @@ function playerActs(game, cardId, target) {
         waterCard(game.players);
     }
     // we return the whole game to continue
+    if (pInactive.health.current <= 0 || pActive.health.current <= 0) {
+        game.phase = 'OVER';
+    }
     return game;
 }
 
