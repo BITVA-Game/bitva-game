@@ -9,6 +9,13 @@ function heroSelected(state) {
     return HEROSELECT;
 }
 
+function gameScreen(state) {
+    if (state.game.phase === 'OVER') {
+        return 'OVER';
+    }
+    return 'GAMESCREEN';
+}
+
 function handle(state, message) {
     switch (message.type) {
     case PLAY:
@@ -18,7 +25,7 @@ function handle(state, message) {
     case DEALALL:
         return GAMESCREEN;
     case ACTION:
-        return GAMESCREEN;
+        return gameScreen(state);
     default: return state.screen;
     }
 }

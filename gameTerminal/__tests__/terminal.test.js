@@ -122,3 +122,7 @@ test('msg sent twice, we have one instance of engine', () => {
     expect(sendReply.mock.calls.length).toBe(2);
     expect(sendReply.mock.calls[1][0]).toMatchObject(expectedState);
 });
+
+test('msg ACTION ANY, one of the players dies, state is OVER', () => {
+
+});

@@ -466,3 +466,28 @@ test('EDGE CASE TEST opponent has shield in item, player trying to attack, but c
     expect(activePlayer.health.current).toEqual(16);
     expect(inactivePlayer.health.current).toEqual(15);
 });
+
+test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
+    const cardToTest = 'key20';
+    const msg = {
+        type: ACTION,
+        activeCard: cardToTest,
+        target: OPPONENT,
+    };
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = wolf;
+    gameForTest.game.players[1].health.current = 2;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+
+    expect(activePlayer.active).not.toBeDefined();
+    expect(inactivePlayer.active).not.toBeDefined();
+    expect(inactivePlayer.health.current).toBeLessThanOrEqual(0);
+    expect(newGame.game.phase).toEqual('OVER');
+});
