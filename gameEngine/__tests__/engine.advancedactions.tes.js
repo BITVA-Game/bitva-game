@@ -10,8 +10,8 @@ import {
 import cards from '../__data__/cards';
 
 const {
-    // apple, bogatyr, shieldSmall, shieldLarge,
-    waterLiving, waterDead, wolf,
+    // apple, shieldSmall, shieldLarge,
+    waterLiving, waterDead, wolf, bogatyr,
 } = cards;
 
 const GameEngine = require('../index');
@@ -105,7 +105,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
 
 // Test, that  when living water is in item holder, then
 // players get +1 to their current health each until card is in item holder
-test('msg ACTION received: active player put Living Water in item, it increases players health current for 1pnt.', () => {
+test('msg ACTION received: active player already has Living Water in item, it increases players health current for 1pnt.', () => {
     const cardToTest = 'key24';
     const wolfCard = 'key20';
     const msg = {
@@ -140,4 +140,82 @@ test('msg ACTION received: active player put Living Water in item, it increases 
     expect(activePlayer.health.current).toEqual(13);
     // ожидаем, что карта-water находится в item пока у нее есть очки.
     expect(inactivePlayer.item[cardToTest].points).not.toEqual(0);
+});
+
+// Test, that when dead water is attacked once is in any player item holder
+// and gone to graveyard once its health points are == 0
+test('msg ACTION received: after attack the dead water in item, its health =0 and card goes to graveyaed.', () => {
+    // we define card key for testing
+    const cardToTest = 'key24';
+    const bogatyrCard = 'key20';
+    // we mock incoming message from frontend
+    const msg = {
+        type: message.ACTION,
+        activeCard: bogatyrCard,
+        target: target.ITEMOPPONENT,
+    };
+
+    // we put game engine into needed state
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[1].item.key24 = waterDead;
+    gameForTest.game.players[0].hand.key20 = bogatyr;
+    gameForTest.game.players[1].moveCounter = 1;
+    // we create new engine with our game state
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // We find active and inactive players
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    // ожидаем, что карта dead water ушла из item holder активного игрока,
+    // т.к. после атаки е ездоровье  стало == 0 и она ушла на кладбище
+    expect(Object.values(activePlayer.item).length).toEqual(0);
+    expect(inactivePlayer.grave[cardToTest].id).toEqual(waterDead.id);
+    expect(Object.keys(activePlayer.item)).not.toContain(cardToTest);
+    // ожидаем, что очки карты dead water восстановились до первоначальных
+    expect(inactivePlayer.grave[cardToTest].healthCurrent).toEqual(3);
+    // ожидаем, что текущее здоровье игроков не имзеняется ( карта ушла )
+    expect(inactivePlayer.health.current).toEqual(15);
+    expect(activePlayer.health.current).toEqual(16);
+});
+
+// Test, that when living water is attacked once is in any player item holder
+// and gone to graveyard once its health points are == 0
+test('msg ACTION received: after attack the living water in item, its health =0 and card goes to graveyaed.', () => {
+    // we define card key for testing
+    const cardToTest = 'key24';
+    const bogatyrCard = 'key20';
+    // we mock incoming message from frontend
+    const msg = {
+        type: message.ACTION,
+        activeCard: bogatyrCard,
+        target: target.ITEMOPPONENT,
+    };
+
+    // we put game engine into needed state
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[1].item.key24 = waterLiving;
+    gameForTest.game.players[0].hand.key20 = bogatyr;
+    gameForTest.game.players[0].moveCounter = 1;
+    gameForTest.game.players[1].health.current = 12;
+    gameForTest.game.players[0].health.current = 10;
+    // we create new engine with our game state
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // We find active and inactive players
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    // ожидаем, что карта dead water ушла из item holder активного игрока,
+    // т.к. после атаки е ездоровье  стало == 0 и она ушла на кладбище
+    expect(Object.values(activePlayer.item).length).toEqual(0);
+    expect(activePlayer.grave[cardToTest].id).toEqual(waterLiving.id);
+    expect(Object.keys(activePlayer.item)).not.toContain(cardToTest);
+    // ожидаем, что очки карты dead water восстановились до первоначальных
+    expect(activePlayer.grave[cardToTest].healthCurrent).toEqual(3);
+    // ожидаем, что текущее здоровье игроков не имзеняется ( карта ушла )
+    expect(inactivePlayer.health.current).toEqual(10);
+    expect(activePlayer.health.current).toEqual(12);
 });
