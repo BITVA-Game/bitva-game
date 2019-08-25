@@ -86,7 +86,7 @@ class App extends Component {
         });
         const { loaded } = this.state;
         return (
-            <div className="App" data-testid="app-screen">
+            <div className="App">
                 <div id="background" className="start-screen">
                     <CSSTransition
                         classNames="moveForest"
