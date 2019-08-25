@@ -219,3 +219,39 @@ test('msg ACTION received: after attack the living water in item, its health =0 
     expect(inactivePlayer.health.current).toEqual(10);
     expect(activePlayer.health.current).toEqual(12);
 });
+
+// Test, that when living water  is in any player item holder then
+// active player with current health == maximum does not get +1 to current health
+test('msg ACTION received: after attack the living water in item, its health =0 and card goes to graveyaed.', () => {
+    // we define card key for testing
+    const cardToTest = 'key24';
+    const wolfCard = 'key20';
+    // we mock incoming message from frontend
+    const msg = {
+        type: message.ACTION,
+        activeCard: wolfCard,
+        target: target.ITEMOPPONENT,
+    };
+
+    // we put game engine into needed state
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[1].item.key24 = waterLiving;
+    gameForTest.game.players[0].hand.key20 = wolf;
+    gameForTest.game.players[0].moveCounter = 1;
+    // we create new engine with our game state
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // We find active and inactive players
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    // ожидаем, что карта living water в item holder активного игрока,
+    expect(Object.values(activePlayer.item).length).toEqual(1);
+    expect(activePlayer.item[cardToTest].id).toEqual(waterLiving.id);
+    // ожидаем, что очки карты living water уменьшились на очки атаки
+    expect(activePlayer.item[cardToTest].healthCurrent).toEqual(1);
+    // ожидаем, что текущее здоровье игроков не имзеняется ( т.к. === maximum )
+    expect(inactivePlayer.health.current).toEqual(16);
+    expect(activePlayer.health.current).toEqual(15);
+});
