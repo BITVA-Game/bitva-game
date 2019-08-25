@@ -4,7 +4,7 @@ import {
 } from '../__data__/states';
 
 import {
-    screen, message, target, card, phase,
+    message, target, card,
 } from '../../constants';
 
 import cards from '../__data__/cards';
