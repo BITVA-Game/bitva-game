@@ -94,6 +94,19 @@ const waterDead = {
     disabled: false,
 };
 
+const russianOven = {
+    id: 'russianOven',
+    name: 'Russian Oven',
+    type: 'action',
+    icon: 'ballChain',
+    category: 'holdCard',
+    categoryName: 'hold',
+    description: 'Being the fire keeper, Russian Oven possesses the fire power and can stop the enemies, helping Yaga in witchcraft.',
+    initialpoints: 2,
+    points: 2,
+    disabled: false,
+};
+
 export default {
-    apple, bogatyr, shieldSmall, wolf, shieldLarge, waterLiving, waterDead,
+    apple, bogatyr, shieldSmall, wolf, shieldLarge, waterLiving, waterDead, russianOven,
 };

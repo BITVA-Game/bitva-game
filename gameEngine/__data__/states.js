@@ -268,8 +268,8 @@ export const dealAllState = {
                     key25: {},
                 },
                 cards: {
-                    key1: {},
-                    key2: {},
+                    key1: { disabled: false },
+                    key2: { disabled: false },
                     key4: {},
                     key15: {},
                     key17: {},
