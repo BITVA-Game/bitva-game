@@ -25,9 +25,9 @@ import crown from './images/cards/bitva-cardbase.jpg';
 import dolly from './images/cards/bitva-cardbase.jpg';
 import earthquake from './images/cards/bitva-cardbase.jpg';
 import gusiLebedi from './images/cards/bitva-cardbase.jpg';
-import horsemanBlack from './images/cards/bitva-cardbase.jpg';
-import horsemanRed from './images/cards/bitva-cardbase.jpg';
-import horsemanWhite from './images/cards/bitva-cardbase.jpg';
+import horsemanBlack from './images/cards/blackrider.jpg';
+import horsemanRed from './images/cards/redrider.jpg';
+import horsemanWhite from './images/cards/whiterider.jpg';
 import kikimora from './images/cards/bitva-cardbase.jpg';
 import lizard from './images/cards/lizard.jpg';
 import magicTree from './images/cards/tree.jpg';
@@ -105,7 +105,7 @@ const CardPreview = props => (
                     ${props.card.category === 'attack' ? 'icon-attack' : null}
                     ${props.card.category === 'attackItems' ? 'icon-damage' : null}
                     ${props.card.category === 'damage' ? 'icon-damage' : null}
-                    ${props.card.category === 'generator' ? 'icon-move' : null}               
+                    ${props.card.category === 'generator' ? 'icon-move' : null}
                     ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
                     ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
                     ${props.card.category === 'holdCard' ? 'icon-hold' : null}
@@ -122,7 +122,7 @@ const CardPreview = props => (
             <p className="card-category details-card-category">{props.card.categoryName}</p>
             {props.card.initialpoints
                 ? (
-                    <div className={`card-points details-card-points 
+                    <div className={`card-points details-card-points
                         ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
                     >
                         {props.card.initialpoints}
