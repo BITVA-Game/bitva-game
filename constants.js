@@ -30,6 +30,7 @@ const card = {
     ACTIONCARD: 'action',
     ITEMCARD: 'item',
     HEALCATEGORY: 'heal',
+    DAMAGECATEGORY: 'damage',
     ATTACKCATEGORY: 'attack',
     ITEMCATEGORY: 'item',
     REFLECTCATEGORY: 'reflect',

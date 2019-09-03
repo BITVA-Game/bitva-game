@@ -158,6 +158,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     const newGame = engine.getState();
 
     const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    console.log(card.ACTIONCARD);
 
     expect(activePlayer.moveCounter).toEqual(1);
     expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
