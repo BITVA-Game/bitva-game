@@ -24,7 +24,6 @@ import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
 import crown from './images/cards/bitva-cardbase.jpg';
 import dolly from './images/cards/bitva-cardbase.jpg';
 import earthquake from './images/cards/bitva-cardbase.jpg';
-import gusiLebedi from './images/cards/bitva-cardbase.jpg';
 import horsemanBlack from './images/cards/blackrider.jpg';
 import horsemanRed from './images/cards/redrider.jpg';
 import horsemanWhite from './images/cards/whiterider.jpg';
@@ -36,6 +35,7 @@ import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
 import mushrooms from './images/cards/mushrooms.jpg';
 import plateMail from './images/cards/bitva-cardbase.jpg';
+import raven from './images/cards/raven.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
@@ -67,7 +67,6 @@ const imagesCards = {
     crown,
     dolly,
     earthquake,
-    gusiLebedi,
     horsemanBlack,
     horsemanRed,
     horsemanWhite,
@@ -79,6 +78,7 @@ const imagesCards = {
     mortar,
     mushrooms,
     plateMail,
+    raven,
     russianOven,
     shieldLarge,
     shieldSmall,

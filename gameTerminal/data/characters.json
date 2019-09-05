@@ -66,8 +66,8 @@
                 "id": "bajun",
                 "count": 5
             },
-            "gusiLebedi": {
-                "id": "gusiLebedi",
+            "raven": {
+                "id": "raven",
                 "count": 5
             },
             "kikimora": {
@@ -151,7 +151,15 @@
             },
             "waterDead": {
                 "id": "waterDead",
-                "count": 2
+                "count": 1
+            },
+            "malachiteBox": {
+                "id": "malachiteBox",
+                "count": 1
+            },
+            "turningPotion": {
+                "id": "turningPotion",
+                "count": 1
             }
         },
         "background": "green"
@@ -202,6 +210,10 @@
             },
             "magicMirror": {
                 "id": "magicMirror",
+                "count": 1
+            },
+            "clairvoyance": {
+                "id": "clairvoyance",
                 "count": 1
             }
         },
