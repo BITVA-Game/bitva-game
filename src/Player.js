@@ -21,7 +21,6 @@ import crown from './images/cards/bitva-cardbase.jpg';
 import dolly from './images/cards/bitva-cardbase.jpg';
 import earthquake from './images/cards/bitva-cardbase.jpg';
 import forestMushroom from './images/cards/mushrooms.jpg';
-import gusiLebedi from './images/cards/bitva-cardbase.jpg';
 import horsemanBlack from './images/cards/blackrider.jpg';
 import horsemanRed from './images/cards/redrider.jpg';
 import horsemanWhite from './images/cards/whiterider.jpg';
@@ -32,6 +31,7 @@ import magicMirror from './images/cards/bitva-cardbase.jpg';
 import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
 import plateMail from './images/cards/bitva-cardbase.jpg';
+import raven from './images/cards/raven.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
 import shieldLarge from './images/cards/largeshield.jpg';
 import shieldSmall from './images/cards/smallshield.jpg';
@@ -57,7 +57,6 @@ const imagesCards = {
     dolly,
     earthquake,
     forestMushroom,
-    gusiLebedi,
     horsemanBlack,
     horsemanRed,
     horsemanWhite,
@@ -68,6 +67,7 @@ const imagesCards = {
     malachiteBox,
     mortar,
     plateMail,
+    raven,
     russianOven,
     shieldLarge,
     shieldSmall,

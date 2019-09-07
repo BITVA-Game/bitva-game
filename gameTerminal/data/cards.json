@@ -90,6 +90,16 @@
         "description": "The Magic Swan Geese are Yaga's winged warriors. They help to capture and take an enemy to the other world.",
         "initialpoints": 1
     },
+    "raven": {
+        "id": "raven",
+        "name": "Raven",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "categoryName": "attack",
+        "description": "Raven is Yaga's faithful companion. Keeper of arcane knowledge, giving sage advice. Master of Living and Dead Water secrecy.",
+        "initialpoints": 1
+    },
     "kikimora": {
         "id": "kikimora",
         "name": "Kikimora",
@@ -372,19 +382,23 @@
     },
     "ring": {
         "id": "ring",
-        "type": "item"
+        "type": "item",
+        "health": 5
     },
     "helmet": {
         "id": "helmet",
-        "type": "item"
+        "type": "item",
+        "health": 3
     },
     "bracer": {
         "id": "bracer",
-        "type": "item"
+        "type": "item",
+        "health": 2
     },
     "chainMail": {
         "id": "chainMail",
-        "type": "item"
+        "type": "item",
+        "health": 4
     },
     "lapti": {
         "id": "lapti",
