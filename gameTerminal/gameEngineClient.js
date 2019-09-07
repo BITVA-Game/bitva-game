@@ -1,7 +1,9 @@
 /* eslint-disable class-methods-use-this */
 const request = require('superagent');
+const process = require('process');
 
-const address = 'http://localhost:5001/';
+const address = process.env.ENGINE_URL || 'http://localhost:5001/';
+
 class GameEngineClient {
     async handle(message) {
         await request

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const process = require('process');
 
 const app = express();
-const port = 5001;
+const port = process.env.PORT || 5001;
 const GameEngine = require('../gameEngine');
 
 const engine = new GameEngine();

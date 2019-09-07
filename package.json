@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start-react": "cross-env PORT=5000 BROWSER=none react-scripts start",
-    "game-server": "cross-env PORT=5001 node gameEngineServer/server.js",
+    "game-server": "cross-env PORT=6000 node gameEngineServer/server.js",
     "electron": "electron .",
     "build": "react-scripts build",
     "test-react": "react-scripts test --env=jsdom",
