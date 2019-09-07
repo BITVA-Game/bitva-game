@@ -4,7 +4,6 @@ const request = require('superagent');
 const address = 'http://localhost:5001/';
 class GameEngineClient {
     async handle(message) {
-        console.log('Game engine client', message);
         await request
             .post(address)
             .send({ message });
@@ -12,7 +11,7 @@ class GameEngineClient {
 
     async getState() {
         const result = await request.get(address);
-        console.log(result.body);
+        // console.log(result.body);
         return result.body;
     }
 }
