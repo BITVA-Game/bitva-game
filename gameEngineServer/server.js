@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const process = require('process');
 
 const app = express();
-const port = 3000;
+const port = 5001;
 const GameEngine = require('../gameEngine');
 
 const engine = new GameEngine();
@@ -14,6 +14,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
+    console.log(new Date(), req.body);
     engine.handle(req.body.message);
     res.send(engine.getState());
 });

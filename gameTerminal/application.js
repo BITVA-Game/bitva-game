@@ -36,11 +36,11 @@ function parseApplication(app) {
     return parsedApp;
 }
 
-function processMessage(msg) {
+async function processMessage(msg) {
     const newApp = {
         profiles: application.profiles,
         manager: screenManager.handle(application, msg),
-        engine: gameEngineManager.handle(application, msg),
+        engine: await gameEngineManager.handle(application, msg),
     };
     return newApp;
 }
@@ -50,8 +50,8 @@ function processMessage(msg) {
 // Only those that have relevatn state will be updated
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
-function msgReceived(msg, sendReply) {
-    const newApp = msg === message.INIT ? application : processMessage(msg);
+async function msgReceived(msg, sendReply) {
+    const newApp = msg === message.INIT ? application : await processMessage(msg);
 
     // writeGameObject(newApp);
     if (message.network) {

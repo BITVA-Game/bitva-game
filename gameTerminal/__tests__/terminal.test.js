@@ -1,3 +1,4 @@
+import nock from 'nock';
 import {
     startscreenState,
 } from '../__data__/states';
@@ -5,7 +6,6 @@ import {
 import {
     screen as scr, message,
 } from '../../constants';
-
 
 // import module for tests
 const application = require('../application');
@@ -15,7 +15,7 @@ beforeEach(() => {
 });
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
-test('msg INIT Game loaded. Send the app in its initial state', () => {
+test('msg INIT Game loaded. Send the app in its initial state', async () => {
     // Create a messade that has type and may have additional data later.
     // We only need type for this test.
     const msg = { type: message.INIT };
@@ -24,14 +24,14 @@ test('msg INIT Game loaded. Send the app in its initial state', () => {
     const sendReply = jest.fn();
 
     // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
+    await application.msgReceived(msg, sendReply);
 
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenState);
 });
 
 // screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
+test('msg STARTSCREEN switches screen state to STARTSCREEN', async () => {
     // We only need type for this test.
     const msg = { type: message.STARTSCREEN };
 
@@ -39,7 +39,7 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
     const sendReply = jest.fn();
 
     // Call the message function from application with this message and mocked function.
-    application.msgReceived(msg, sendReply);
+    await application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
@@ -50,31 +50,25 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', () => {
         },
     );
 });
-
-// Test that engineManager on PLAY creates engine
-const Engine = require('../../gameEngine');
-
-jest.mock('../../gameEngine');
-test('msg PLAY creates engine and handles the message', () => {
+const address = 'http://localhost:5001/';
+test('msg PLAY creates engine and handles the message', async () => {
     const msg = { type: message.PLAY };
     // Mock sendReply function
     const sendReply = jest.fn();
-    const handleFunc = jest.fn();
     const engineState = {
         screen: scr.HEROSELECT,
         innerState: { a: 1 },
     };
-    const mockEngine = jest.fn().mockImplementation(() => ({
-        handle: handleFunc,
-        getState() { return engineState; },
-    }));
-    Engine.mockImplementation(mockEngine);
+    nock.disableNetConnect();
 
-    application.msgReceived(msg, sendReply);
+    const scope = nock(address)
+        .post('/')
+        .reply(200)
+        .get('/')
+        .reply(200, engineState);
 
-    // handleFunc must have been called once with msg argument
-    expect(handleFunc.mock.calls.length).toBe(1);
-    expect(handleFunc.mock.calls[0]).toEqual([msg]);
+    await application.msgReceived(msg, sendReply);
+    scope.isDone();
 
     const expectedState = Object.assign(
         {},
@@ -85,7 +79,7 @@ test('msg PLAY creates engine and handles the message', () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(expectedState);
 });
 
-test('msg sent twice, we have one instance of engine', () => {
+test.skip('msg sent twice, we have one instance of engine', async () => {
     const msg = { type: message.HEROSELECTED };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -101,8 +95,8 @@ test('msg sent twice, we have one instance of engine', () => {
     }));
     Engine.mockImplementation(mockEngine);
 
-    application.msgReceived(msg, sendReply);
-    application.msgReceived(msg, sendReply);
+    await application.msgReceived(msg, sendReply);
+    await application.msgReceived(msg, sendReply);
 
     // mockEngine must be called once to instantiate the engine
     expect(mockEngine.mock.calls.length).toBe(1);
