@@ -1,21 +1,21 @@
 const { message } = require('../constants');
 
 let engine = null;
-const GameEngine = require('../gameEngine');
+const GameEngine = require('./gameEngineClient');
 
-function handle(app, msg) {
+async function handle(app, msg) {
     switch (msg.type) {
     case message.PLAY:
         // initialize game engine
         engine = new GameEngine();
-        engine.handle(msg);
+        await engine.handle(msg);
         break;
     case message.HEROSELECTED:
     case message.DEALALL:
     case message.ACTION:
     // call game engine to calculate new game state
         if (!engine) engine = new GameEngine();
-        engine.handle(msg);
+        await engine.handle(msg);
         break;
     // not a game-related message
     default: return app.engine;
