@@ -17,12 +17,29 @@ html {
     top: 0;
 }
 
+button,
+.btn {
+    color: #fff;
+    outline: none;
+}
+
+.btn:hover {
+    color: #b74a45;
+}
+
 .background-hut {
   width: 1366px;
   position: absolute;
   overflow: hidden;
   bottom: 0;
   margin: 0 auto;
+}
+
+.moveForest-enter-active .background-hut,
+.moveForest-enter-done .background-hut {
+  opacity: 1;
+  bottom: -30px;
+  transition: all 5000ms ease-in;
 }
 
 .background-greyTreeL {
@@ -34,57 +51,63 @@ html {
   margin: 0 auto;
 }
 
+.moveForest-enter-active .background-greyTreeL,
+.moveForest-enter-done .background-greyTreeL {
+  opacity: 1;
+  bottom: 60px;
+  left: 90px;
+  transition: all 4500ms ease-in;
+}
+
 .background-greyTreeR {
   width: 300px;
   position: absolute;
   overflow: hidden;
   bottom: 100px;
-  right:200px;
+  right: 200px;
   margin: 0 auto;
+}
+
+.moveForest-enter-active .background-greyTreeR,
+.moveForest-enter-done .background-greyTreeR {
+  opacity: 1;
+  bottom: 40px;
+  right: 150px;
+  transition: all 4500ms ease-in;
 }
 
 .background-blackTreeL {
   width: 600px;
+  opacity: 1;
   position: absolute;
   overflow: hidden;
   bottom: 30px;
-  left:0;
+  left:0px;
   margin: 0 auto;
+}
+
+.moveForest-enter-active .background-blackTreeL,
+.moveForest-enter-done .background-blackTreeL {
+  opacity: 1;
+  bottom: -60px;
+  left: -30px;
+  transition: all 4000ms ease-in;
 }
 
 .background-blackTreeR {
   width: 600px;
+  opacity: 1;
   position: absolute;
   overflow: hidden;
-  bottom: 0;
   right:0;
+  bottom:0;
   margin: 0 auto;
 }
 
-button,
-.btn {
-    color: #fff;
-    outline: none;
-}
-
-.btn:hover {
-    color: #b74a45;
-}
-
-.example-enter {
-  opacity: 0;
-}
-
-.example-enter-active {
+.moveForest-enter-active .background-blackTreeR,
+.moveForest-enter-done .background-blackTreeR {
   opacity: 1;
-  transition: opacity 1500ms ease-in;
-}
-
-.example-exit {
-  opacity: 1;
-}
-
-.example-exit-active {
-  opacity: 0.01;
-  transition: opacity 1300ms ease-in;
+  bottom: -80px;
+  right: -80px;
+  transition: all 4000ms ease-in;
 }

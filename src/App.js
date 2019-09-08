@@ -30,7 +30,8 @@ class App extends Component {
     // Bind the function to send messages
     constructor(props) {
         super(props);
-        this.state = { animation: false, app: { manager: { screen: 'LOADING' } } };
+        this.state = { loaded: false, app: { manager: { screen: 'LOADING' } } };
+        this.loadAnimation = this.loadAnimation.bind(this);
     }
 
 
@@ -41,7 +42,11 @@ class App extends Component {
             this.setState({ app: arg });
         });
         sendMessage('INIT');
-        setTimeout(() => this.setState({ animation: true }), 1000);
+        setTimeout(() => this.loadAnimation(), 0);
+    }
+
+    loadAnimation() {
+        this.setState(oldState => ({ loaded: !oldState.loaded }));
     }
 
     showApplication() {
@@ -79,19 +84,20 @@ class App extends Component {
                 urls: ['fonts/RuslanDisplay.css', 'fonts/Sedan-SC.css'],
             },
         });
+        const { loaded } = this.state;
         return (
             <div className="App" data-testid="app-screen">
                 <div id="background" className="start-screen">
-                    <img alt="hut" src={hutImage} className="background-hut" />
-                    <img alt="grey tree 1" src={greyTreeL} className="background-greyTreeL" />
-                    <img alt="grey tree 2" src={greyTreeR} className="background-greyTreeR" />
-                    <img alt="black tree 1" src={blackTreeL} className="background-blackTreeL" />
                     <CSSTransition
-                        classNames="example"
-                        in={this.state.animation}
-                        timeout={5500}
+                        classNames="moveForest"
+                        in={loaded}
+                        timeout={5000}
                     >
                         <div>
+                            <img alt="hut" src={hutImage} className="background-hut" />
+                            <img alt="grey tree 1" src={greyTreeL} className="background-greyTreeL" />
+                            <img alt="grey tree 2" src={greyTreeR} className="background-greyTreeR" />
+                            <img alt="black tree 1" src={blackTreeL} className="background-blackTreeL" />
                             <img alt="black tree 2" src={blackTreeR} className="background-blackTreeR" />
                         </div>
                     </CSSTransition>
