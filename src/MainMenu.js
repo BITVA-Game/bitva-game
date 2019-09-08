@@ -23,7 +23,7 @@ const LogoBlock = props => (
 
 const ToggleButton = props => (
     <div
-    data-testid="toggle-button"
+        data-testid="toggle-button"
         className="btn btn-sidebar-toggle"
         role="button"
         onClick={props.toggle}

@@ -2,3 +2,5 @@
 build/*
 bitva-game-darwin-x64/*
 release-builds/*
+coverage/lcov-report/prettify.js
+coverage/lcov-report/sorter.js

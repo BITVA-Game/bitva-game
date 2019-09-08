@@ -7,12 +7,11 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 /* eslint func-names: ["error", "as-needed"] */
 /* eslint consistent-return: ["error", { "treatUndefinedAsUnspecified": true }] */
-
+const keygen = require('keygenerator');
 const {
     message, phase, card: cardConst, styles, target: targetConst,
 } = require('../constants');
 
-const keygen = require('keygenerator');
 const { getRandomUpTo } = require('../gameTerminal/randomFunc');
 
 const allCharacters = require('../gameTerminal/data/characters.json');
@@ -275,10 +274,12 @@ function reflect(opponent, player, points) {
         points === 1 ? damage = 0 : damage = 1;
         damage === 0 ? opponent.health.current : opponent.health.current -= (points - damage);
     }
-    if (Object.keys(player.item).length === 0 || Object.values(player.item)[0].category !== cardConst.SHIELDCARD) {
+    if (Object.keys(player.item).length === 0
+    || Object.values(player.item)[0].category !== cardConst.SHIELDCARD) {
         player.health.current -= damage;
     }
-    if (Object.keys(player.item).length === 1 && Object.values(player.item)[0].category === cardConst.SHIELDCARD) {
+    if (Object.keys(player.item).length === 1
+    && Object.values(player.item)[0].category === cardConst.SHIELDCARD) {
         attackShield(player, Object.keys(player.item)[0], damage);
     }
     if (player.health.current < 0) {
@@ -645,12 +646,14 @@ function playerActs(game, cardId, target) {
     target === targetConst.GRAVE ? graveyardCheck(game, cardId, activeCard) : null;
 
     // For all the cases when the player acts against himself
-    if (target === targetConst.HERO && activeCard.disabled === false && activeCard.type === cardConst.ACTIONCARD) {
+    if (target === targetConst.HERO && activeCard.disabled === false
+      && activeCard.type === cardConst.ACTIONCARD) {
         pActiveIsTarget(game, activeCard, cardId);
     }
     // if target is inactive player's hero - opponent, player can only attack opponent
     // then his active card moves to graveyard. Other scenarios are not allowed
-    if (target === targetConst.OPPONENT && activeCard.disabled === false && activeCard.type === cardConst.ACTIONCARD) {
+    if (target === targetConst.OPPONENT && activeCard.disabled === false
+      && activeCard.type === cardConst.ACTIONCARD) {
         pInactiveIsTarget(game, activeCard, cardId);
     }
 
@@ -662,7 +665,8 @@ function playerActs(game, cardId, target) {
     // if item is not empty we deduct points of attack from item card points
     // if item card points <= 0 cards get its initial points and goes to graveyard
     if (target === targetConst.ITEMOPPONENT && activeCard.category === cardConst.ATTACKCATEGORY
-    && Object.keys(pInactive.item).length !== 0 && Object.values(pInactive.item)[0].category !== cardConst.SHIELDCATEGORY) {
+    && Object.keys(pInactive.item).length !== 0
+    && Object.values(pInactive.item)[0].category !== cardConst.SHIELDCATEGORY) {
         const itemCard = Object.values(pInactive.item)[0];
         itemCard.healthCurrent -= activeCard.points;
         if (itemCard.healthCurrent <= 0) {
@@ -684,7 +688,9 @@ function playerActs(game, cardId, target) {
     pActive = changeMoveCounter(pActive, cardId);
 
     // after each move of active player we check for forestMushroom in opponent's item
-    Object.keys(pInactive.item).length !== 0 && Object.values(pInactive.item)[0].category === cardConst.PANICCATEGORY && pActive.moveCounter === 1
+    Object.keys(pInactive.item).length !== 0
+    && Object.values(pInactive.item)[0].category === cardConst.PANICCATEGORY
+    && pActive.moveCounter === 1
         ? forestMushroom(pActive) : null;
     // after each move of active player we check whether opponent has magicTree card in item
     magicTree(game);
@@ -707,7 +713,10 @@ function playerActs(game, cardId, target) {
         //  after change of turn,  we check
         // whether inactive player has in item holder card forest Mushroom with category panic,
         // then we call function forestMushroom
-        Object.keys(pActive.item).length !== 0 && Object.values(pActive.item)[0].category === cardConst.PANICCATEGORY ? forestMushroom(pInactive, 'afterTurn') : null;
+        Object.keys(pActive.item).length !== 0
+        && Object.values(pActive.item)[0].category === cardConst.PANICCATEGORY
+            ? forestMushroom(pInactive, 'afterTurn')
+            : null;
         // we run bowArrow function to check if opponent has bow & arrow card in item
         // and to supress attack points if any
         bowArrow(pActive, pInactive);

@@ -3,82 +3,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Hero from './Hero';
+import Card from './Card';
+import Hand from './Hand';
 import rules from './rules';
 import './css/App.css';
 import './css/GameScreen.css';
-import './css/Cards.css';
-
-import apple from './images/cards/apple.jpg';
-import bajun from './images/cards/catbajun.jpg';
-import bat from './images/cards/bat.jpg';
-import bereginya from './images/cards/bitva-cardbase.jpg';
-import bogatyr from './images/cards/bitva-cardbase.jpg';
-import bowArrow from './images/cards/bitva-cardbase.jpg';
-import bulat from './images/cards/sword.jpg';
-import chemise from './images/cards/bitva-cardbase.jpg';
-import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
-import crown from './images/cards/bitva-cardbase.jpg';
-import dolly from './images/cards/bitva-cardbase.jpg';
-import earthquake from './images/cards/bitva-cardbase.jpg';
-import forestMushroom from './images/cards/mushrooms.jpg';
-import horsemanBlack from './images/cards/blackrider.jpg';
-import horsemanRed from './images/cards/redrider.jpg';
-import horsemanWhite from './images/cards/whiterider.jpg';
-import kikimora from './images/cards/bitva-cardbase.jpg';
-import lizard from './images/cards/lizard.jpg';
-import magicTree from './images/cards/tree.jpg';
-import magicMirror from './images/cards/bitva-cardbase.jpg';
-import malachiteBox from './images/cards/malachitebox.jpg';
-import mortar from './images/cards/bitva-cardbase.jpg';
-import plateMail from './images/cards/bitva-cardbase.jpg';
-import raven from './images/cards/raven.jpg';
-import russianOven from './images/cards/bitva-cardbase.jpg';
-import shieldLarge from './images/cards/largeshield.jpg';
-import shieldSmall from './images/cards/smallshield.jpg';
-import sivka from './images/cards/warhorse.jpg';
-import skullLantern from './images/cards/bitva-cardbase.jpg';
-import turningPotion from './images/cards/potion.jpg';
-import warhorse from './images/cards/warhorse.jpg';
-import waterDead from './images/cards/deadwater.jpg';
-import waterLiving from './images/cards/livingwater.jpg';
-import wolf from './images/cards/bitva-cardbase.jpg';
-
-const imagesCards = {
-    apple,
-    bajun,
-    bat,
-    bereginya,
-    bogatyr,
-    bowArrow,
-    bulat,
-    chemise,
-    chickenLegsHut,
-    crown,
-    dolly,
-    earthquake,
-    forestMushroom,
-    horsemanBlack,
-    horsemanRed,
-    horsemanWhite,
-    kikimora,
-    lizard,
-    magicTree,
-    magicMirror,
-    malachiteBox,
-    mortar,
-    plateMail,
-    raven,
-    russianOven,
-    shieldLarge,
-    shieldSmall,
-    sivka,
-    skullLantern,
-    turningPotion,
-    warhorse,
-    waterDead,
-    waterLiving,
-    wolf,
-};
 
 const Animation = props => (
     <div className="stack">
@@ -168,6 +97,7 @@ class Player extends Component {
                 />
                 <Hand
                     active={this.props.active}
+                    dragging={this.props.dragging}
                     hand={this.props.player.hand}
                     cardDragStarted={this.props.cardDragStarted}
                     cardDragEnded={this.props.cardDragEnded}
@@ -195,23 +125,6 @@ const Deck = props => (
         <div className="count">
             {props.active ? Object.keys(props.cards).length : Object.keys(props.cards).length}
         </div>
-    </div>
-);
-
-const Hand = props => (
-    <div className="hand">
-        {Object.keys(props.hand).map(cardId => (
-            <div key={cardId} className="card-place card-like">
-                <Card
-                    cardKey={cardId}
-                    card={props.hand[cardId]}
-                    draggable={props.active}
-                    cardDragStarted={props.cardDragStarted}
-                    cardDragEnded={props.cardDragEnded}
-                    player={props.player}
-                />
-            </div>
-        ))}
     </div>
 );
 
@@ -268,63 +181,6 @@ const Item = props => (
     </div>
 );
 
-const Card = props => (
-    <div
-        className={`card game-card card-like ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
-        data-key={props.cardKey}
-        draggable={props.card.disabled === true || props.card.panic === true
-            ? null : props.draggable}
-        onDragStart={() => props.cardDragStarted(props.cardKey, props.card)}
-        onDragEnd={props.cardDragEnded}
-    >
-        {props.card.disabled === true || props.card.panic === true ? <div className="card-chained" /> : null}
-        <div className="card-header">
-            <div className={`card-icon-container game-card-icon-container ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}>
-                <div className={`card-icon game-card-icon
-                    ${props.card.category === 'attack' ? 'icon-attack' : null}
-                    ${props.card.category === 'attackItems' ? 'icon-damage' : null}
-                    ${props.card.category === 'damage' ? 'icon-damage' : null}
-                    ${props.card.category === 'generator' ? 'icon-move' : null}
-                    ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
-                    ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
-                    ${props.card.category === 'holdCard' ? 'icon-hold' : null}
-                    ${props.card.category === 'holdTurn' ? 'icon-hold' : null}
-                    ${props.card.category === 'panic' ? 'icon-arrows' : null}
-                    ${props.card.category === 'reflect' ? 'icon-reflect' : null}
-                    ${props.card.category === 'shield' ? 'icon-shield' : null}
-                    ${props.card.category === 'showCards' ? 'icon-show' : null}
-                    ${props.card.category === 'shuffling' ? 'icon-move' : null}
-                    ${props.card.category === 'suppress' ? 'icon-damage' : null}
-                    ${props.card.category === 'turning' ? 'icon-arrows' : null}`}
-                />
-            </div>
-            {/* <p className="card-category game-card-category">{props.card.categoryName}</p> */}
-            <p className={`card-category game-card-category ${props.card.categoryName === 'suppress' ? 'suppress' : null}`}>{props.card.categoryName}</p>
-            {props.card.initialpoints
-                ? (
-                    <div className={`card-points game-card-points
-                        ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
-                    >
-                        {props.card.points}
-                    </div>
-                ) : null
-            }
-            {props.card.health
-                ? (
-                    <div className={`card-health game-card-health
-                        ${props.card.type === 'item' ? `${props.player.background}-item` : `${props.player.background}-action`}`}
-                    >
-                        {props.card.healthCurrent}
-                    </div>
-                ) : null
-            }
-        </div>
-        <div className="game-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
-        <div className="card-footer game-card-footer">
-            <p>{props.card.name}</p>
-        </div>
-    </div>
-);
 
 Deck.propTypes = {
     cards: PropTypes.object.isRequired,
@@ -343,30 +199,6 @@ Player.propTypes = {
 
 Player.defaultProps = {
     dragging: null,
-};
-
-Hand.propTypes = {
-    active: PropTypes.bool.isRequired,
-    hand: PropTypes.object.isRequired,
-    cardDragEnded: PropTypes.func.isRequired,
-    cardDragStarted: PropTypes.func.isRequired,
-    player: PropTypes.object.isRequired,
-};
-
-Card.propTypes = {
-    card: PropTypes.object.isRequired,
-    draggable: PropTypes.bool,
-    cardKey: PropTypes.string,
-    cardDragStarted: PropTypes.func,
-    cardDragEnded: PropTypes.func,
-    player: PropTypes.object.isRequired,
-};
-
-Card.defaultProps = {
-    draggable: null,
-    cardKey: null,
-    cardDragStarted: null,
-    cardDragEnded: null,
 };
 
 Grave.propTypes = {
