@@ -1,11 +1,62 @@
 .profile-container {
-	background-image: url(../images/game-background.png);
-	padding: 60px;
+	background-size: cover;
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
 }
 
 .profile {
 	background-color: rgb(0, 0, 0);
 	background-color: rgba(0, 0, 0, .7);
-	font-size: 36px;
-	padding: 20px 60px;
+	font-size: 24px;
+	margin: 60px 120px;
+	padding: 30px 45px;
+}
+
+.profile-header {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+}
+
+.profile-currency {
+	display: flex;
+	flex-direction: row;
+}
+
+.profile-characters {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+.profile-character-container {
+	background: #fff;
+	display: flex;
+	margin: 10px 0;
+	width: 45%;
+}
+
+.profile-character-image-container {
+	height: 210px;
+	width: 218px;
+}
+
+.profile-character-image {
+	height: 200px;
+	width: 208px;
+}
+
+.profile-character-info-container {
+	color: #000;
+	display: flex;
+	flex-direction: column;
+	padding-left: 10px;
+}
+
+.profile-character-name {
+	font-family: "Ruslan Display";
+	text-align: right;
 }
