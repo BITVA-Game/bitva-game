@@ -1,6 +1,9 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import UIFx from 'uifx';
+
 import MainMenu from './MainMenu';
 import ListOfHeroes from './ListOfHeroes';
 import OneHero from './OneHero';
@@ -10,7 +13,6 @@ import './css/HeroSelection.css';
 import styles from './css/HeroSelection.module.css';
 import { sortedHeroesList } from './rules';
 
-import UIFx from 'uifx';
 import click1 from './sound/click.mp3';
 import click2 from './sound/fin.mp3';
 
