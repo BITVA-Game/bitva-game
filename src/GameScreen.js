@@ -6,7 +6,7 @@ import Player from './Player';
 import './css/App.css';
 import './css/GameScreen.css';
 
-import { getActivePlayer } from './rules';
+import { getActivePlayer, getInActivePlayer } from './rules';
 
 // animation duration time
 const animationDuration = 9000;
@@ -21,6 +21,7 @@ class GameScreen extends Component {
         this.cardDropped = this.cardDropped.bind(this);
         this.cardDragEnded = this.cardDragEnded.bind(this);
         this.startBirds = this.startBirds.bind(this);
+        this.playableHand = this.playableHand.bind(this);
     }
 
     componentDidMount() {
@@ -81,6 +82,21 @@ class GameScreen extends Component {
         }, animationDuration + animationStart);
     }
 
+    playableHand(player) {
+        const activePlayer = getActivePlayer(this.props.app);
+        const inactivePlayer = getInActivePlayer(this.props.app);
+        // const ind = num === 0 ? 1 : 0;
+        // console.log(ind);
+        if (player === activePlayer && activePlayer.turningHand === true) {
+            console.log('TURNING POTION! playableHand   - opponent hand!');
+            return inactivePlayer.hand;
+        }
+        if (player === activePlayer && activePlayer.turningHand === false) {
+            return activePlayer.hand;
+        }
+        return inactivePlayer.hand;
+    }
+
     render() {
         const activePlayer = getActivePlayer(this.props.app);
         return (
@@ -94,6 +110,7 @@ class GameScreen extends Component {
                                 key={player.keyHero}
                                 position={player.position}
                                 player={player}
+                                hand={this.playableHand(player)}
                                 sendMessage={this.props.sendMessage}
                                 dragging={this.state.dragging}
                                 cardDropped={this.cardDropped}
@@ -101,7 +118,6 @@ class GameScreen extends Component {
                                 cardDragEnded={this.cardDragEnded}
                             />
                         ))}
-
                         {((this.props.app.game.players[0].moveCounter === 0) && (this.props.app.game.players[0].active === true))
                     || ((this.props.app.game.players[1].moveCounter === 0) && (this.props.app.game.players[1].active === true))
                             ? (
