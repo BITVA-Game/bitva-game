@@ -10,6 +10,13 @@ import './css/HeroSelection.css';
 import styles from './css/HeroSelection.module.css';
 import { sortedHeroesList } from './rules';
 
+import UIFx from 'uifx';
+import click1 from './sound/click.mp3';
+import click2 from './sound/fin.mp3';
+
+const clickSound1 = new UIFx(click1, { volume: 1.0 });
+const clickSound2 = new UIFx(click2, { volume: 1.0 });
+
 // button in the header to choose previous or next character in the list
 const HeaderHeroButton = props => (
     <div className={`btn hero-btn-arrow ${props.direction}`} role="button" onClick={props.funct} onKeyPress={props.funct} tabIndex={props.tabIndex}>
@@ -119,6 +126,7 @@ class HeroSelection extends Component {
         let index = heroes.indexOf(this.state.selected);
         index = index === heroes.length - 1 ? 0 : index + 1;
         this.setState({ selected: heroes[index] });
+        clickSound1.play();
     }
 
     selectLeftHero() {
@@ -126,6 +134,7 @@ class HeroSelection extends Component {
         let index = heroes.indexOf(this.state.selected);
         index = index === 0 ? heroes.length - 1 : index - 1;
         this.setState({ selected: heroes[index] });
+        clickSound1.play();
     }
 
     showRightHero() {
@@ -145,6 +154,7 @@ class HeroSelection extends Component {
     }
 
     selectHero() {
+        clickSound2.play();
         this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.selected, player: this.app.heroSelect.activePlayer });
         this.showHeroList();
     }
