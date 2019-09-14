@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import MainMenu from './MainMenu';
 import './css/Profile.css';
 
-import { getActiveProfile, getInActivePlayer } from './rules';
+// import { getActiveProfile, getInActivePlayer } from './rules';
 
 import yaga from './images/heroes/yaga.jpg';
 import morevna from './images/heroes/morevna.jpg';
-import hozyaika from './images/heroes/hozyaika.jpg';
+// import hozyaika from './images/heroes/hozyaika.jpg';
 import premudraya from './images/heroes/premudraya.jpg';
 
 const Profile = (props) => {
