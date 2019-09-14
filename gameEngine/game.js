@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-plusplus */
 /* eslint-disable default-case */
@@ -557,6 +558,7 @@ function malachiteBox(player, opponent, target) {
 function turningHand(player, opponent) {
     player.turningHand = true;
     opponent.turningHand = true;
+    player.moveCounter === 0 ? player.moveCounter = 0 : player.moveCounter = 1;
 }
 
 function changeMoveCounter(pActive, card) {
@@ -618,7 +620,7 @@ function pInactiveIsTarget(game, activeCard, cardId) {
         // then move this attack card to gravyeard
     case cardConst.TURNINGCATEGORY:
         turningHand(pActive, pInactive);
-        moveCardGraveyard(pInactive, cardId);
+        moveCardGraveyard(pActive, cardId);
         break;
 
         // if any mistake occurs during game process, player gets error message by default

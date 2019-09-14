@@ -107,6 +107,25 @@ const russianOven = {
     disabled: false,
 };
 
+const turningPotion = {
+    id: 'turningPotion',
+    name: 'The Turning Potion',
+    type: 'action',
+    icon: 'arrows',
+    category: 'turning',
+    categoryName: 'turning',
+    description: "Deep underground the luminous moss grows. The Potion made of it allows to intoxicate the enemy's consciousness and to enjoy an advantage",
+    disabled: false,
+};
+
 export default {
-    apple, bogatyr, shieldSmall, wolf, shieldLarge, waterLiving, waterDead, russianOven,
+    apple,
+    bogatyr,
+    shieldSmall,
+    wolf,
+    shieldLarge,
+    waterLiving,
+    waterDead,
+    russianOven,
+    turningPotion,
 };
