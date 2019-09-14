@@ -18,7 +18,8 @@ const GameEngine = require('../index');
 jest.mock('../../gameTerminal/randomFunc');
 
 // Test, that when active player attacks opponent with turningPotion card
-// then active player get turningHand property so next act player can chose any one card from opponent hand to act
+// then active player get turningHand property
+// so next act player can chose any one card from opponent hand to act
 // and his move counter to be increased by 1 only for act by both these cards
 test('msg ACTION received: active player attacks with turningPotion and at next act can choose any 1 card from opponent hand to act for 1 move', () => {
     // we define card key for testing
@@ -207,7 +208,8 @@ test('msg ACTION received: active player attacked with turningPotion and now att
 
 // Test, that when active player has attacked with turningPotion card and got turningHand property,
 // then now player choses one card from opponent's hand to put it to her/his own item holder
-// such card in player's item holder got fromOpponent: true property, so we may return it back to opponent cards
+// such card in player's item holder got fromOpponent: true property,
+// so we may return it back to opponent cards
 // after furutre attack when this card health to be == 0 and card would go to opponent graveyard
 // player's move counter to be increased by 1 (after 2nd act)
 test('msg ACTION received: active player attacked with turningPotion and now put in his/her item holder 1 card from opponent hand', () => {
@@ -257,10 +259,11 @@ test('msg ACTION received: active player attacked with turningPotion and now put
     expect(Object.keys(inactivePlayer.grave)).toContain(cardToTest);
 });
 
-// Test, that when inactive player previoulsy put shield card from opponent's hand to her/his own item holder
-// with the help of turningPotion card
-// opponent now attacks inactive player and shield card goes back to opponent's grave ( so cards remain same as when dealt)
-// fromOpponent: true property has been removed now from this shield card in inactive player's item holder
+// Test, that when inactive player previoulsy put shield card
+// from opponent's hand to her/his own item holder with the help of turningPotion card
+// opponent now attacks inactive player and shield card goes back to opponent's grave
+// ( so cards remain same as when dealt) and fromOpponent: true property has been removed now from
+//  this shield card in inactive player's item holder
 test('msg ACTION received: inactive player put in own item holder shield card from opponent hand, after attack against player it returns to opponent graveyard', () => {
     // we define card key for testing
     const cardToTest = 'key20';
@@ -338,7 +341,7 @@ test('msg ACTION received: active player attacked with turningPotion and now att
     gameForTest.game.players[0].turningHand = true;
     gameForTest.game.players[1].turningHand = true;
     gameForTest.game.players[0].grave[cardToTest] = turningPotion;
-    
+
     // we create new engine with our game state
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
@@ -347,7 +350,7 @@ test('msg ACTION received: active player attacked with turningPotion and now att
     // We find active and inactive players
     const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
     const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
-    
+
     // ожидаем, что у игроков свойство turningHand не равно true
     expect(activePlayer.turningHand).not.toEqual(true);
     expect(inactivePlayer.turningHand).not.toEqual(true);
