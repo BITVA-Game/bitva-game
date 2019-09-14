@@ -20,7 +20,8 @@ import bogatyr from './images/cards/bitva-cardbase.jpg';
 import bowArrow from './images/cards/bitva-cardbase.jpg';
 import bulat from './images/cards/sword.jpg';
 import chemise from './images/cards/bitva-cardbase.jpg';
-import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
+import chickenLegsHut from './images/cards/izba.jpg';
+import clairvoyance from './images/cards/bitva-cardbase.jpg';
 import crown from './images/cards/bitva-cardbase.jpg';
 import dolly from './images/cards/bitva-cardbase.jpg';
 import earthquake from './images/cards/bitva-cardbase.jpg';
@@ -33,7 +34,7 @@ import magicTree from './images/cards/tree.jpg';
 import magicMirror from './images/cards/bitva-cardbase.jpg';
 import malachiteBox from './images/cards/malachitebox.jpg';
 import mortar from './images/cards/bitva-cardbase.jpg';
-import mushrooms from './images/cards/mushrooms.jpg';
+import forestMushroom from './images/cards/mushrooms.jpg';
 import plateMail from './images/cards/bitva-cardbase.jpg';
 import raven from './images/cards/raven.jpg';
 import russianOven from './images/cards/bitva-cardbase.jpg';
@@ -45,7 +46,7 @@ import turningPotion from './images/cards/potion.jpg';
 import warhorse from './images/cards/warhorse.jpg';
 import waterDead from './images/cards/deadwater.jpg';
 import waterLiving from './images/cards/livingwater.jpg';
-import wolf from './images/cards/bitva-cardbase.jpg';
+import wolf from './images/cards/wolf.jpg';
 
 const images = {
     yaga,
@@ -64,9 +65,11 @@ const imagesCards = {
     bulat,
     chemise,
     chickenLegsHut,
+    clairvoyance,
     crown,
     dolly,
     earthquake,
+    forestMushroom,
     horsemanBlack,
     horsemanRed,
     horsemanWhite,
@@ -76,7 +79,6 @@ const imagesCards = {
     magicMirror,
     malachiteBox,
     mortar,
-    mushrooms,
     plateMail,
     raven,
     russianOven,
