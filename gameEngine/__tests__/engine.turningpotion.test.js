@@ -10,7 +10,7 @@ import cards from '../__data__/cards';
 // import { act } from 'react-testing-library';
 
 const {
-    turningPotion, wolf, apple, shieldSmall, bogatyr,
+    turningPotion, wolf, apple, shieldSmall, bogatyr, waterDead,
 } = cards;
 
 const GameEngine = require('../index');
@@ -62,7 +62,7 @@ test('msg ACTION received: active player attacks with turningPotion and at next 
 // and active player has gotten turningHand property,
 // and now player choses one card from opponent's hand to move it to opponent's grave
 // and only now his move counter to be increased by 1 (after 2nd act)
-test('msg ACTION received: active player attacked with turningPotion and now put 1 card from opponent hand to opponent graveyard', () => {
+test.only('msg ACTION received: active player attacked with turningPotion and now put 1 card from opponent hand to opponent graveyard', () => {
     // we define card key for testing
     const cardToTest = 'key20';
     const wolfCard = 'key0';
@@ -286,7 +286,7 @@ test('msg ACTION received: inactive player put in own item holder shield card fr
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
     const newGame = engine.getState();
-    
+
     // We find active and inactive players
     const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
     const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
@@ -311,4 +311,60 @@ test('msg ACTION received: inactive player put in own item holder shield card fr
     expect(inactivePlayer.health.current).toEqual(16);
     // ожидаем, что у Morevna на кладбище карта оборотное зелье
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
+});
+
+// Test, that when active player has attacked with turningPotion card and got turningHand property,
+// then now player choses one card from opponent's hand to attack item card in opponent item holder
+// such card from opponent item holder  and the active card both go to opponent graveyard
+// player's move counter to be increased by 1 (after this 2nd act)
+test('msg ACTION received: active player attacked with turningPotion and now attacks opponent item with the card from opponent hand', () => {
+    // we define card key for testing
+    const cardToTest = 'key20';
+    const itemCard = 'key24';
+    const wolfCard = 'key0';
+    // we mock incoming message from frontend
+    const msg = {
+        type: message.ACTION,
+        activeCard: wolfCard,
+        target: target.ITEMOPPONENT,
+    };
+
+    // we put game engine into needed state
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[1].item[itemCard] = waterDead;
+    gameForTest.game.players[1].item[itemCard].healthCurrent = 2;
+    gameForTest.game.players[1].hand[wolfCard] = wolf;
+    gameForTest.game.players[0].moveCounter = 1;
+    gameForTest.game.players[0].turningHand = true;
+    gameForTest.game.players[1].turningHand = true;
+    gameForTest.game.players[0].grave[cardToTest] = turningPotion;
+    
+    // we create new engine with our game state
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // We find active and inactive players
+    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    
+    // ожидаем, что у игроков свойство turningHand не равно true
+    expect(activePlayer.turningHand).not.toEqual(true);
+    expect(inactivePlayer.turningHand).not.toEqual(true);
+    // ожидаем, что ход сменится и Yaga активный игрок
+    expect(activePlayer.hero).toEqual('yaga');
+    // счетчик хода  Morevna сначала увеличился до 2х, а потом обнулился при переходе хода
+    expect(inactivePlayer.moveCounter).toEqual(0);
+    // ожидаем, что выбранная Моревной карта атаки из руки  Яги ушла в grave yard к Yaga
+    expect(Object.keys(activePlayer.grave)).toContain(wolfCard);
+    expect(Object.keys(activePlayer.hand)).not.toContain(wolfCard);
+    // ожидаем, что из item holder щит ушел на кладбище к Яге
+    expect(Object.keys(activePlayer.grave)).toContain(itemCard);
+    expect(Object.keys(activePlayer.item)).not.toContain(itemCard);
+    // ожидаем, что текущее здоровье Yaga не изменилось
+    expect(activePlayer.health.current).toEqual(15);
+    // ожидаем, что текущее здоровье Премудрой не изменилось
+    expect(inactivePlayer.health.current).toEqual(16);
+    // ожидаем, что у Morevna на кладбище карта оборотное зелье
+    expect(Object.keys(inactivePlayer.grave)).toContain(cardToTest);
 });
