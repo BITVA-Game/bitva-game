@@ -63,7 +63,7 @@ test('msg ACTION received: active player attacks with turningPotion and at next 
 // and active player has gotten turningHand property,
 // and now player choses one card from opponent's hand to move it to opponent's grave
 // and only now his move counter to be increased by 1 (after 2nd act)
-test.only('msg ACTION received: active player attacked with turningPotion and now put 1 card from opponent hand to opponent graveyard', () => {
+test('msg ACTION received: active player attacked with turningPotion and now put 1 card from opponent hand to opponent graveyard', () => {
     // we define card key for testing
     const cardToTest = 'key20';
     const wolfCard = 'key0';

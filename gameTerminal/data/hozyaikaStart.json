@@ -1,0 +1,1171 @@
+{
+    "profiles": [
+        {
+            "id": "player1"
+        },
+        {
+            "id": "player2"
+        }
+    ],
+    "manager": "PLAY",
+    "engine": {
+        "accounts": [
+            {
+                "id": "player1",
+                "heroes": [
+                    "morevna",
+                    "yaga",
+                    "premudraya"
+                ]
+            },
+            {
+                "id": "player2",
+                "heroes": [
+                    "morevna",
+                    "yaga",
+                    "hozyaika"
+                ]
+            }
+        ],
+        "terminals": [
+            {
+                "players": [
+                    "player1",
+                    "player2"
+                ]
+            }
+        ],
+        "heroSelect": null,
+        "game": {
+            "players": [
+                {
+                    "id": "player1",
+                    "hand": {
+                        "key3": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key0": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key4": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key5": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3,
+                            "points": 3,
+                            "disabled": false
+                        },
+                        "key11": {
+                            "id": "horsemanRed",
+                            "name": "Red Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        }
+                    },
+                    "item": {},
+                    "grave": {},
+                    "turningHand": false,
+                    "moveCounter": 0,
+                    "health": {
+                        "current": 14,
+                        "maximum": 14
+                    },
+                    "deal": 0,
+                    "background": "blue",
+                    "hero": "premudraya",
+                    "deck": {
+                        "key0": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key1": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key2": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key3": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key4": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key5": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3,
+                            "points": 3,
+                            "disabled": false
+                        },
+                        "key6": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3
+                        },
+                        "key7": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3,
+                            "points": 3,
+                            "disabled": false
+                        },
+                        "key8": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3,
+                            "points": 3,
+                            "disabled": false
+                        },
+                        "key9": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3,
+                            "points": 3,
+                            "disabled": false
+                        },
+                        "key10": {
+                            "id": "horsemanRed",
+                            "name": "Red Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+                            "initialpoints": 2
+                        },
+                        "key11": {
+                            "id": "horsemanRed",
+                            "name": "Red Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key12": {
+                            "id": "horsemanRed",
+                            "name": "Red Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key13": {
+                            "id": "horsemanRed",
+                            "name": "Red Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+                            "initialpoints": 2
+                        },
+                        "key14": {
+                            "id": "horsemanRed",
+                            "name": "Red Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key15": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                            "initialpoints": 4
+                        },
+                        "key16": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                            "initialpoints": 4,
+                            "points": 4,
+                            "disabled": false
+                        },
+                        "key17": {
+                            "id": "dolly",
+                            "name": "Magic Dolly",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "The mother's gift given before her death with blessing. This is not just a dolly - if to feed her, she always helps in troubles.",
+                            "initialpoints": 2
+                        },
+                        "key18": {
+                            "id": "dolly",
+                            "name": "Magic Dolly",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "The mother's gift given before her death with blessing. This is not just a dolly - if to feed her, she always helps in troubles.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key19": {
+                            "id": "chemise",
+                            "name": "Сhemise ",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "The chemise sewed from the magic sindon, spun and woven by Vasilisa the Wise.",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key20": {
+                            "id": "chemise",
+                            "name": "Сhemise ",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "The chemise sewed from the magic sindon, spun and woven by Vasilisa the Wise.",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key21": {
+                            "id": "shieldLarge",
+                            "name": "Large Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                            "health": 4,
+                            "healthCurrent": 4,
+                            "disabled": false
+                        },
+                        "key22": {
+                            "id": "shieldLarge",
+                            "name": "Large Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                            "health": 4
+                        },
+                        "key23": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2
+                        },
+                        "key24": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2
+                        },
+                        "key25": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2
+                        },
+                        "key26": {
+                            "id": "skullLantern",
+                            "name": "Skull Lantern",
+                            "type": "action",
+                            "icon": "heartBlack",
+                            "category": "attackItems",
+                            "categoryName": "attack",
+                            "description": "Spellfull illuminant, capable to enlight the invisible and to burn to ashes the enchanted characterstics of magic items.",
+                            "initialpoints": 2
+                        },
+                        "key27": {
+                            "id": "magicMirror",
+                            "name": "Magiс Mirror",
+                            "type": "item",
+                            "icon": "hand",
+                            "category": "reflect",
+                            "categoryName": "reflect",
+                            "description": "Magiс Mirror — item that can \"duplicate the reality\". The boundary between the earth and the other Subtle World.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        },
+                        "key28": {
+                            "id": "clairvoyance",
+                            "name": "Clairvoyance",
+                            "type": "action",
+                            "icon": "eye",
+                            "category": "showCards",
+                            "categoryName": "show",
+                            "description": "«Second vision». This gift offers great possibilities. It helps to see the lie, to see damage ahead and to avoid it. ",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        }
+                    },
+                    "cards": {
+                        "key18": {
+                            "id": "dolly",
+                            "name": "Magic Dolly",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "The mother's gift given before her death with blessing. This is not just a dolly - if to feed her, she always helps in troubles.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key27": {
+                            "id": "magicMirror",
+                            "name": "Magiс Mirror",
+                            "type": "item",
+                            "icon": "hand",
+                            "category": "reflect",
+                            "categoryName": "reflect",
+                            "description": "Magiс Mirror — item that can \"duplicate the reality\". The boundary between the earth and the other Subtle World.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        },
+                        "key19": {
+                            "id": "chemise",
+                            "name": "Сhemise ",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "The chemise sewed from the magic sindon, spun and woven by Vasilisa the Wise.",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key21": {
+                            "id": "shieldLarge",
+                            "name": "Large Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                            "health": 4,
+                            "healthCurrent": 4,
+                            "disabled": false
+                        },
+                        "key2": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key16": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                            "initialpoints": 4,
+                            "points": 4,
+                            "disabled": false
+                        },
+                        "key7": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3,
+                            "points": 3,
+                            "disabled": false
+                        },
+                        "key20": {
+                            "id": "chemise",
+                            "name": "Сhemise ",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "The chemise sewed from the magic sindon, spun and woven by Vasilisa the Wise.",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key12": {
+                            "id": "horsemanRed",
+                            "name": "Red Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key1": {
+                            "id": "horsemanWhite",
+                            "name": "White Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key28": {
+                            "id": "clairvoyance",
+                            "name": "Clairvoyance",
+                            "type": "action",
+                            "icon": "eye",
+                            "category": "showCards",
+                            "categoryName": "show",
+                            "description": "«Second vision». This gift offers great possibilities. It helps to see the lie, to see damage ahead and to avoid it. ",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key9": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3,
+                            "points": 3,
+                            "disabled": false
+                        },
+                        "key14": {
+                            "id": "horsemanRed",
+                            "name": "Red Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key8": {
+                            "id": "horsemanBlack",
+                            "name": "Black Horseman",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
+                            "initialpoints": 3,
+                            "points": 3,
+                            "disabled": false
+                        }
+                    },
+                    "keyHero": "96424412",
+                    "position": "bottom"
+                },
+                {
+                    "id": "player2",
+                    "hand": {
+                        "key3": {
+                            "id": "bat",
+                            "name": "Cave Bat",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key25": {
+                            "id": "malachiteBox",
+                            "name": "The Malachite Box",
+                            "type": "item",
+                            "icon": "deckMove",
+                            "category": "generator",
+                            "categoryName": "generator",
+                            "description": "Maid's gift. But it has a hidden agenda and brings miseries to the person who opens box without permission.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        },
+                        "key4": {
+                            "id": "lizard",
+                            "name": "Lizard",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key11": {
+                            "id": "earthquake",
+                            "name": "Earthquake",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key26": {
+                            "id": "turningPotion",
+                            "name": "The Turning Potion",
+                            "type": "action",
+                            "icon": "arrows",
+                            "category": "turning",
+                            "categoryName": "turning",
+                            "description": "Deep underground the luminous moss grows. The Potion made of it allows to intoxicate the enemy's consciousness and to enjoy an advantage"
+                        }
+                    },
+                    "item": {},
+                    "grave": {},
+                    "turningHand": false,
+                    "moveCounter": 0,
+                    "health": {
+                        "current": 13,
+                        "maximum": 13
+                    },
+                    "deal": 0,
+                    "background": "green",
+                    "hero": "hozyaika",
+                    "deck": {
+                        "key0": {
+                            "id": "bat",
+                            "name": "Cave Bat",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key1": {
+                            "id": "bat",
+                            "name": "Cave Bat",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key2": {
+                            "id": "bat",
+                            "name": "Cave Bat",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key3": {
+                            "id": "bat",
+                            "name": "Cave Bat",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key4": {
+                            "id": "lizard",
+                            "name": "Lizard",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key5": {
+                            "id": "lizard",
+                            "name": "Lizard",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key6": {
+                            "id": "lizard",
+                            "name": "Lizard",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key7": {
+                            "id": "lizard",
+                            "name": "Lizard",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key8": {
+                            "id": "earthquake",
+                            "name": "Earthquake",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
+                            "initialpoints": 5
+                        },
+                        "key9": {
+                            "id": "earthquake",
+                            "name": "Earthquake",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key10": {
+                            "id": "earthquake",
+                            "name": "Earthquake",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key11": {
+                            "id": "earthquake",
+                            "name": "Earthquake",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key12": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                            "initialpoints": 4,
+                            "points": 4,
+                            "disabled": false
+                        },
+                        "key13": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                            "initialpoints": 4,
+                            "points": 4,
+                            "disabled": false
+                        },
+                        "key14": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                            "initialpoints": 4
+                        },
+                        "key15": {
+                            "id": "apple",
+                            "name": "Apple",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                            "initialpoints": 2
+                        },
+                        "key16": {
+                            "id": "apple",
+                            "name": "Apple",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                            "initialpoints": 2
+                        },
+                        "key17": {
+                            "id": "apple",
+                            "name": "Apple",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
+                            "initialpoints": 2
+                        },
+                        "key18": {
+                            "id": "crown",
+                            "name": "Copper Crown",
+                            "type": "action",
+                            "icon": "dropRed",
+                            "category": "heal",
+                            "categoryName": "heal",
+                            "description": "Copper Crown possesses great healing power. For a reason the Malachite Maid always wears it. ",
+                            "initialpoints": 4
+                        },
+                        "key19": {
+                            "id": "shieldLarge",
+                            "name": "Large Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                            "health": 4,
+                            "healthCurrent": 4,
+                            "disabled": false
+                        },
+                        "key20": {
+                            "id": "shieldLarge",
+                            "name": "Large Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                            "health": 4,
+                            "healthCurrent": 4,
+                            "disabled": false
+                        },
+                        "key21": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        },
+                        "key22": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        },
+                        "key23": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        },
+                        "key24": {
+                            "id": "waterDead",
+                            "name": "Dead Water",
+                            "type": "item",
+                            "icon": "heartBlack",
+                            "category": "damage",
+                            "categoryName": "damage",
+                            "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
+                            "health": 3,
+                            "initialpoints": 1
+                        },
+                        "key25": {
+                            "id": "malachiteBox",
+                            "name": "The Malachite Box",
+                            "type": "item",
+                            "icon": "deckMove",
+                            "category": "generator",
+                            "categoryName": "generator",
+                            "description": "Maid's gift. But it has a hidden agenda and brings miseries to the person who opens box without permission.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        }                        
+                    },
+                    "cards": {
+                        "key5": {
+                            "id": "lizard",
+                            "name": "Lizard",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key13": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                            "initialpoints": 4,
+                            "points": 4,
+                            "disabled": false
+                        },
+                        "key7": {
+                            "id": "lizard",
+                            "name": "Lizard",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key9": {
+                            "id": "earthquake",
+                            "name": "Earthquake",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
+                            "initialpoints": 5,
+                            "points": 5,
+                            "disabled": false
+                        },
+                        "key2": {
+                            "id": "bat",
+                            "name": "Cave Bat",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key6": {
+                            "id": "lizard",
+                            "name": "Lizard",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
+                            "initialpoints": 2,
+                            "points": 2,
+                            "disabled": false
+                        },
+                        "key1": {
+                            "id": "bat",
+                            "name": "Cave Bat",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key19": {
+                            "id": "shieldLarge",
+                            "name": "Large Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                            "health": 4,
+                            "healthCurrent": 4,
+                            "disabled": false
+                        },
+                        "key12": {
+                            "id": "bogatyr",
+                            "name": "Bogatyr",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
+                            "initialpoints": 4,
+                            "points": 4,
+                            "disabled": false
+                        },
+                        "key0": {
+                            "id": "bat",
+                            "name": "Cave Bat",
+                            "type": "action",
+                            "icon": "skull",
+                            "category": "attack",
+                            "categoryName": "attack",
+                            "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
+                            "initialpoints": 1,
+                            "points": 1,
+                            "disabled": false
+                        },
+                        "key22": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        },
+                        "key20": {
+                            "id": "shieldLarge",
+                            "name": "Large Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
+                            "health": 4,
+                            "healthCurrent": 4,
+                            "disabled": false
+                        },
+                        "key21": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        },
+                        "key23": {
+                            "id": "shieldSmall",
+                            "name": "Small Shield",
+                            "type": "item",
+                            "icon": "shield",
+                            "category": "shield",
+                            "categoryName": "shield",
+                            "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
+                            "health": 2,
+                            "healthCurrent": 2,
+                            "disabled": false
+                        }
+                    },
+                    "keyHero": "47421208",
+                    "position": "top"
+                }
+            ],
+            "phase": "ACTIVE",
+            "active": "player1"
+        },
+        "screen": "GAMESCREEN"
+    }
+}

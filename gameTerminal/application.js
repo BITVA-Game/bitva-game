@@ -16,10 +16,11 @@ const socketClient = require('./socketClient');
 
 // function writeGameObject(newApp) {
 //     fs.writeFileSync(
-//        path.join(__dirname, '../gameTerminal/data/some.json'),
-//        JSON.stringify(newApp), 'utf8', (err) => {
-//         if (err) { throw err; }
-//     });
+//         path.join(__dirname, '../gameTerminal/data/some.json'),
+//         JSON.stringify(newApp), 'utf8', (err) => {
+//             if (err) { throw err; }
+//         }
+// );
 // }
 
 // TODO This is a temporary solution, requires rewriting frontend to read from engine
@@ -52,8 +53,6 @@ async function processMessage(msg) {
 // so we can se what we're sending back.
 async function msgReceived(msg, sendReply) {
     const newApp = msg === message.INIT ? application : await processMessage(msg);
-
-    // writeGameObject(newApp);
     if (message.network) {
         newApp.network = true;
         console.log('OMG NETWORK PLAY IS: ', newApp.network);
@@ -61,6 +60,7 @@ async function msgReceived(msg, sendReply) {
         socketClient.emitMessage(msg);
     }
 
+    // writeGameObject(newApp);
     application = newApp;
     sendReply(parseApplication(newApp));
 }

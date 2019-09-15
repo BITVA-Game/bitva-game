@@ -92,6 +92,7 @@ class GameScreen extends Component {
             return inactivePlayer.hand;
         }
         if (player === activePlayer && activePlayer.turningHand === false) {
+            console.log('playableHand   - player hand!');
             return activePlayer.hand;
         }
         return inactivePlayer.hand;

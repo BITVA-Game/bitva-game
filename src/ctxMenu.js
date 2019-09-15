@@ -5,6 +5,7 @@ const { setApp, getApp } = require('../gameTerminal/application');
 const startScreen = require('../gameTerminal/data/app.json');
 const morevnaStart = require('../gameTerminal/data/morevnaStart.json');
 const selectCharacter = require('../gameTerminal/data/selectCharacter.json');
+const hozyaikaStart = require('../gameTerminal/data/hozyaikaStart.json');
 
 const dialog = electron.dialog;
 
@@ -88,6 +89,17 @@ module.exports = function menu(app, win, e, sendMessage) {
                 console.log('Set app called');
                 // Set backend into correct state for the debug
                 const newState = JSON.parse(JSON.stringify(morevnaStart));
+                setApp(newState);
+                // Send the game object to frontend
+                sendMessage(newState);
+            },
+        },
+        {
+            label: 'start game with Hozyaika',
+            click() {
+                console.log('Set app called for Hozyaika');
+                // Set backend into correct state for the debug
+                const newState = JSON.parse(JSON.stringify(hozyaikaStart));
                 setApp(newState);
                 // Send the game object to frontend
                 sendMessage(newState);

@@ -67,7 +67,6 @@ class Player extends Component {
         this.props.cardDropped(target);
     }
 
-
     render() {
         const playerClass = this.props.active ? 'player-active' : 'player-inactive';
         const playerPosition = this.props.player.position === 'bottom' ? 'player player-bottom' : 'player player-top';
@@ -98,7 +97,8 @@ class Player extends Component {
                 <Hand
                     active={this.props.active}
                     dragging={this.props.dragging}
-                    hand={this.props.player.hand}
+                    // hand={this.props.player.hand}
+                    hand={this.props.hand}
                     cardDragStarted={this.props.cardDragStarted}
                     cardDragEnded={this.props.cardDragEnded}
                     isTarget={this.isTarget}
@@ -236,5 +236,8 @@ Animation.propTypes = {
     background: PropTypes.string.isRequired,
 };
 
+Hand.propTypes = {
+    hand: PropTypes.func.isRequired,
+};
 
 export default Player;
