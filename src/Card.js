@@ -13,7 +13,8 @@ import bogatyr from './images/cards/bitva-cardbase.jpg';
 import bowArrow from './images/cards/bitva-cardbase.jpg';
 import bulat from './images/cards/sword.jpg';
 import chemise from './images/cards/bitva-cardbase.jpg';
-import chickenLegsHut from './images/cards/bitva-cardbase.jpg';
+import chickenLegsHut from './images/cards/izba.jpg';
+import clairvoyance from './images/cards/bitva-cardbase.jpg';
 import crown from './images/cards/bitva-cardbase.jpg';
 import dolly from './images/cards/bitva-cardbase.jpg';
 import earthquake from './images/cards/bitva-cardbase.jpg';
@@ -38,7 +39,7 @@ import turningPotion from './images/cards/potion.jpg';
 import warhorse from './images/cards/warhorse.jpg';
 import waterDead from './images/cards/deadwater.jpg';
 import waterLiving from './images/cards/livingwater.jpg';
-import wolf from './images/cards/bitva-cardbase.jpg';
+import wolf from './images/cards/wolf.jpg';
 
 const imagesCards = {
     apple,
@@ -50,6 +51,7 @@ const imagesCards = {
     bulat,
     chemise,
     chickenLegsHut,
+    clairvoyance,
     crown,
     dolly,
     earthquake,
