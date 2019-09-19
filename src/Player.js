@@ -31,8 +31,12 @@ class Player extends Component {
 
     componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
+        // animation for cards deal from gravyeard to deck
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation();
+        // animation for Turning Potion - active player gets cards from inactive player hand
+        } if (this.props.player.turningHand === true) {
+            this.playAnimationPotion();
         }
     }
 
@@ -190,6 +194,7 @@ Deck.propTypes = {
 
 Player.propTypes = {
     player: PropTypes.object.isRequired,
+    hand: PropTypes.object.isRequired,
     cardDragStarted: PropTypes.func.isRequired,
     cardDragEnded: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
@@ -237,7 +242,7 @@ Animation.propTypes = {
 };
 
 Hand.propTypes = {
-    hand: PropTypes.func.isRequired,
+    hand: PropTypes.object.isRequired,
 };
 
 export default Player;
