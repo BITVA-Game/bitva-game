@@ -17,6 +17,23 @@ const Animation = props => (
     </div>
 );
 
+const AnimatedHand = ({ hand, player }) => (
+    <div className="hand card-hand">
+        {Object.keys(hand).map(cardId => (
+            <div
+                key={cardId}
+                className="card-place card-like"
+            >
+                <Card
+                    cardKey={cardId}
+                    card={hand[cardId]}
+                    player={player}         
+                />
+            </div>
+        ))}
+    </div>
+);
+
 class Player extends Component {
     constructor(props) {
         super(props);
@@ -42,6 +59,14 @@ class Player extends Component {
 
     playAnimation() {
         this.setState({ animation: 'cards' });
+        setTimeout(
+            () => this.setState({ animation: null }),
+            2000,
+        );
+    }
+
+    playAnimationPotion() {
+        this.setState({ animation: 'potion' });
         setTimeout(
             () => this.setState({ animation: null }),
             2000,
@@ -106,6 +131,15 @@ class Player extends Component {
                     cardDragStarted={this.props.cardDragStarted}
                     cardDragEnded={this.props.cardDragEnded}
                     isTarget={this.isTarget}
+                    player={this.props.player}
+                />
+                {/* {this.state.animation === "potion" ? (
+                <AnimatedHand
+                    hand={this.props.hand}
+                    player={this.props.player}
+                />) : null} */}
+                <AnimatedHand
+                    hand={this.props.hand}
                     player={this.props.player}
                 />
                 <Grave

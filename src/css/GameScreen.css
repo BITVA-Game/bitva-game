@@ -733,3 +733,10 @@
     background-repeat: no-repeat;
 	height: 768px;
 }
+
+/* Animation Turning Potion */
+
+.card-hand {
+    filter: hue-rotate(90deg);
+    z-index: 1000;
+}
