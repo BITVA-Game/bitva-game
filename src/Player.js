@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-duplicates */
 
 import React, { Component } from 'react';
@@ -27,7 +28,7 @@ const AnimatedHand = ({ hand, player }) => (
                 <Card
                     cardKey={cardId}
                     card={hand[cardId]}
-                    player={player}         
+                    player={player}
                 />
             </div>
         ))}
@@ -44,6 +45,7 @@ class Player extends Component {
         this.isTarget = this.isTarget.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.playAnimation = this.playAnimation.bind(this);
+        this.playAnimationPotion = this.playAnimationPotion.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -52,12 +54,14 @@ class Player extends Component {
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation();
         // animation for Turning Potion - active player gets cards from inactive player hand
-        } if (this.props.player.turningHand === true) {
+        } if (this.props.player.turningHand !== prevProps.player.turningHand
+            && this.props.player.turningHand === true) {
             this.playAnimationPotion();
         }
     }
 
     playAnimation() {
+        console.log('We are in turning Potion Animation!');
         this.setState({ animation: 'cards' });
         setTimeout(
             () => this.setState({ animation: null }),
@@ -133,15 +137,15 @@ class Player extends Component {
                     isTarget={this.isTarget}
                     player={this.props.player}
                 />
-                {/* {this.state.animation === "potion" ? (
-                <AnimatedHand
-                    hand={this.props.hand}
-                    player={this.props.player}
-                />) : null} */}
-                <AnimatedHand
-                    hand={this.props.hand}
-                    player={this.props.player}
-                />
+                {/* {this.state.animation === "potion" ? ( */}
+                {this.props.active ? null
+                    : (this.state.animation === 'potion' ? (
+                        <AnimatedHand
+                            hand={this.props.hand}
+                            player={this.props.player}
+                        />
+                    ) : null)
+                }
                 <Grave
                     player={this.props.player}
                     active={this.props.active}
@@ -277,6 +281,11 @@ Animation.propTypes = {
 
 Hand.propTypes = {
     hand: PropTypes.object.isRequired,
+};
+
+AnimatedHand.propTypes = {
+    hand: PropTypes.object.isRequired,
+    player: PropTypes.object.isRequired,
 };
 
 export default Player;

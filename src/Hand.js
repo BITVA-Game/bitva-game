@@ -9,7 +9,9 @@ function cardOrigin(dragging, card) {
 }
 
 const Hand = props => (
-    <div className="hand">
+    // const handCharmed = props.player.turningHand === true ? 'hand-dark' : null;
+    // <div className="hand">
+    <div className={`hand ${props.player.turningHand === true ? 'hand-dark' : null}`}>
         {Object.keys(props.hand).map(cardId => (
             <div
                 key={cardId}
@@ -17,6 +19,7 @@ const Hand = props => (
                 style={{ opacity: cardOrigin(props.dragging, props.hand[cardId]) }}
             >
                 <Card
+                    active={props.active}
                     cardKey={cardId}
                     card={props.hand[cardId]}
                     draggable={props.active}
