@@ -11,7 +11,7 @@ afterEach(cleanup);
 
 test.only('renders startScreen and menu', () => {
     const {
-        getByTestId, getByAltText, getAllByTestId, getByText
+        getByTestId, getByAltText, getAllByTestId, getByText,
     } = render(<App />);
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
     stateSaver('eventStartScreen', startscreenState);
