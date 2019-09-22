@@ -61,7 +61,7 @@ class Player extends Component {
     }
 
     playAnimation() {
-        console.log('We are in turning Potion Animation!');
+        // console.log('We are in turning Potion Animation!');
         this.setState({ animation: 'cards' });
         setTimeout(
             () => this.setState({ animation: null }),
