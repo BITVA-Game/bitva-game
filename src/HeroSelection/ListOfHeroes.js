@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../css/App.css';
 import '../css/HeroSelection.css';
@@ -50,18 +50,51 @@ const HeroBlock = (props) => {
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
 // opponent={props.opponent && hero.id === props.app.game.players[0].hero}
-const ListOfHeroes = props => (
-    <div className="heroes-list">
-        {props.allHeroes.map(hero => (
-            <HeroBlock
-                key={hero.id}
-                select={() => props.select(hero.id)}
-                hero={hero}
-                isAvailable={props.heroesID.includes(hero.id)}
-            />
-        ))}
-    </div>
-);
+class ListOfHeroes extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            first: 0,
+        };
+        this.prev = this.prev.bind(this);
+        this.next = this.next.bind(this);
+    }
+
+    prev() {
+        this.setState((state) => {
+            const first = state.first === 0 ? 0 : state.first - 1;
+            return { first };
+        });
+    }
+
+    next() {
+        const maxIndex = this.props.allHeroes.length - 3;
+        this.setState((state) => {
+            const first = state.first === maxIndex ? maxIndex : state.first + 1;
+            return { first };
+        });
+    }
+
+    render() {
+        const heroes = this.props.allHeroes.slice(this.state.first, this.state.first + 3);
+        console.log(heroes);
+        return (
+            <div className="heroes-list">
+                <button type="button" className="hero-block" onClick={this.prev}>◀</button>
+                {heroes.map(hero => (
+                    <HeroBlock
+                        key={hero.id}
+                        select={() => this.props.select(hero.id)}
+                        hero={hero}
+                        isAvailable={this.props.heroesID.includes(hero.id)}
+                    />
+                ))}
+                <button type="button" className="hero-block" onClick={this.next}>▶</button>
+            </div>
+
+        );
+    }
+}
 
 HeroBlock.propTypes = {
     isAvailable: PropTypes.bool.isRequired,

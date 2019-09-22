@@ -133,6 +133,11 @@ section {
 	margin: .5em;
 }
 
+button.hero-block{
+	background-color: transparent;
+	font-size: 200%
+}
+
 .btn-hero {
 	border: 5px solid #fff;
 	position: relative;
