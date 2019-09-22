@@ -4,10 +4,10 @@ import './css/App.css';
 import './css/HeroSelection.css';
 import { sortedHeroesList } from './rules';
 
-import yaga from './images/heroes/yaga.jpg';
-import morevna from './images/heroes/morevna.jpg';
-import hozyaika from './images/heroes/hozyaika.jpg';
-import premudraya from './images/heroes/premudraya.jpg';
+import yaga from './images/heroes/yaga_full.jpg';
+import morevna from './images/heroes/morevna_full.jpg';
+import hozyaika from './images/heroes/hozyaika_full.jpg';
+import premudraya from './images/heroes/premudraya_full.jpg';
 import heart from './images/icons/heart_red.png';
 
 const images = {
@@ -16,6 +16,30 @@ const images = {
     hozyaika,
     premudraya,
 };
+
+// footer section
+const Footer = props => (
+    <section className="heroselection-footer">
+        {props.hero
+            ? <BackButton onBack={props.onBack} />
+            : null
+        }
+        <Play selectHero={props.selectHero} tabIndex="5" />
+
+    </section>
+);
+
+const Play = props => (
+    <div className="btn btn-play footer-menu" role="button" onClick={props.selectHero} onKeyPress={props.selectHero} tabIndex={props.tabIndex}>
+        PLAY
+    </div>
+);
+
+const BackButton = props => (
+    <div className="btn btn-back footer-menu" role="button" onClick={props.onBack} onKeyPress={props.onBack} tabIndex="10">
+        &#767;
+    </div>
+);
 
 // Individual hero block, repeates to display every character
 class HeroBlock extends React.Component {
@@ -57,18 +81,27 @@ const ListOfHeroes = (props) => {
     const characterIDs = props.app.heroSelect.heroes;
 
     return (
-        <div className="heroes-list">
-            {heroes.map(hero => (
-                <HeroBlock
-                    key={hero.id}
-                    onShow={props.onShow}
-                    hero={hero}
-                    app={props.app}
-                    isAvailable={characterIDs.includes(hero.id)}
-                    selected={hero.id === props.selected}
-                    changeSelected={props.changeSelected}
-                />
-            ))}
+        <div>
+            <div className="heroes-list">
+                {heroes.map(hero => (
+                    <HeroBlock
+                        key={hero.id}
+                        onShow={props.onShow}
+                        hero={hero}
+                        app={props.app}
+                        isAvailable={characterIDs.includes(hero.id)}
+                        selected={hero.id === props.selected}
+                        changeSelected={props.changeSelected}
+                    />
+                ))}
+            </div>
+            {/*
+            <Footer
+                hero={this.state.hero}
+                selectHero={this.selectHero}
+                onBack={this.showHeroList}
+            />
+            */}
         </div>
     );
 };
@@ -86,6 +119,16 @@ ListOfHeroes.propTypes = {
     changeSelected: PropTypes.func.isRequired,
     onShow: PropTypes.func.isRequired,
     selected: PropTypes.string.isRequired,
+};
+
+Footer.propTypes = {
+    hero: PropTypes.object,
+    selectHero: PropTypes.func.isRequired,
+    onBack: PropTypes.func.isRequired,
+};
+
+Footer.defaultProps = {
+    hero: null,
 };
 
 export default ListOfHeroes;

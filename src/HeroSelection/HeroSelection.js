@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import UIFx from 'uifx';
 
 import MainMenu from './MainMenu';
@@ -49,31 +48,6 @@ const Header = props => (
     </section>
 );
 
-const Play = props => (
-    <div className="btn btn-play footer-menu" role="button" onClick={props.selectHero} onKeyPress={props.selectHero} tabIndex={props.tabIndex}>
-        PLAY
-    </div>
-);
-
-// footer section
-const Footer = props => (
-    <section className="heroselection-footer">
-        {props.hero
-            ? <BackButton onBack={props.onBack} />
-            : null
-        }
-        <Play selectHero={props.selectHero} tabIndex="5" />
-
-    </section>
-);
-
-const BackButton = props => (
-    <div className="btn btn-back footer-menu" role="button" onClick={props.onBack} onKeyPress={props.onBack} tabIndex="10">
-        &#767;
-    </div>
-);
-
-
 const BackgroundAnimation = () => (
     <div className="hero-selection-screen-animation" />
 );
@@ -86,17 +60,17 @@ class HeroSelection extends Component {
         this.defaultHeroID = this.heroesList[0];
         this.state = {
             hero: null,
-            selected: this.defaultHeroID,
+            // selected: this.defaultHeroID,
             animation: null,
         };
         this.showHero = this.showHero.bind(this);
         this.changeSelected = this.changeSelected.bind(this);
-        this.selectLeftHero = this.selectLeftHero.bind(this);
-        this.selectRightHero = this.selectRightHero.bind(this);
+        // this.selectLeftHero = this.selectLeftHero.bind(this);
+        // this.selectRightHero = this.selectRightHero.bind(this);
         this.selectHero = this.selectHero.bind(this);
         this.showHeroList = this.showHeroList.bind(this);
-        this.showRightHero = this.showRightHero.bind(this);
-        this.showLeftHero = this.showLeftHero.bind(this);
+        // this.showRightHero = this.showRightHero.bind(this);
+        // this.showLeftHero = this.showLeftHero.bind(this);
     }
 
     componentDidMount() {
@@ -193,11 +167,6 @@ class HeroSelection extends Component {
                             }
                         </div>
                         <MainMenu sendMessage={this.props.sendMessage} />
-                        <Footer
-                            hero={this.state.hero}
-                            selectHero={this.selectHero}
-                            onBack={this.showHeroList}
-                        />
                     </div>
                 )
         );
@@ -225,33 +194,8 @@ HeaderHeroButton.propTypes = {
     img: PropTypes.string.isRequired,
 };
 
-HeroSelection.propTypes = {
-    sendMessage: PropTypes.func.isRequired,
-    app: PropTypes.object.isRequired,
-};
-
-
 CharacterDetailsButton.propTypes = {
     onShow: PropTypes.func.isRequired,
-    tabIndex: PropTypes.string.isRequired,
-};
-
-Footer.propTypes = {
-    hero: PropTypes.object,
-    selectHero: PropTypes.func.isRequired,
-    onBack: PropTypes.func.isRequired,
-};
-
-Footer.defaultProps = {
-    hero: null,
-};
-
-BackButton.propTypes = {
-    onBack: PropTypes.func.isRequired,
-};
-
-Play.propTypes = {
-    selectHero: PropTypes.func.isRequired,
     tabIndex: PropTypes.string.isRequired,
 };
 
