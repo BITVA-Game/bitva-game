@@ -1,7 +1,7 @@
 /* game table */
 
-.game-table {
-}
+/* .game-table {
+} */
 
 .player-active .card,
 .player-active .deck,
@@ -202,18 +202,22 @@
 
 .grave-blue {
     background-color: rgb(130, 155, 175); /*#829baf*/
+    
 }
 
 .grave-green {
     background-color: rgb(109, 131, 116); /*#6D8374*/
+    
 }
 
 .grave-ochre {
     background-color: rgb(193, 140, 109); /*#C18C6D*/
+    
 }
 
 .grave-red {
     background-color: rgb(163, 98, 100); /*#A36264*/
+    
 }
 
 .player-top .grave {
@@ -237,7 +241,7 @@
 }
 
 .count {
-    bottom: 0;
+    bottom: 25%;
     font-size: 36px;
     left: 50%;
     position: absolute;
