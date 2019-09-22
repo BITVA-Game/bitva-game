@@ -10,7 +10,9 @@ import { startscreenState } from '../gameTerminal/__data__/states';
 afterEach(cleanup);
 
 test.only('renders startScreen and menu', () => {
-    const { getByTestId, getByAltText, getAllByTestId, getByText } = render(<App />);
+    const {
+        getByTestId, getByAltText, getAllByTestId, getByText
+    } = render(<App />);
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
     stateSaver('eventStartScreen', startscreenState);
 
