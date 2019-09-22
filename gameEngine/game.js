@@ -685,11 +685,7 @@ function playerActs(game, cardId, target) {
     // after each act we delete turningHand property for both players
     // if active player acted after turning potion card
     // we also turn active card's key to null as players's cards keys duplicate
-    // pActive.turningHand === true && (cardId in pInactive.grave || cardId in pActive.item)
-    //     ? console.log('we change turning hand to false') && (pInactive.turningHand = false) && (pActive.turningHand = false)
-    //     && changeMoveCounter(pActive, cardId) && (cardId = null) : null;
     if (pActive.turningHand === true && (cardId in pInactive.grave || cardId in pActive.item)) {
-        console.log('we change turning hand to false');
         pInactive.turningHand = false;
         pActive.turningHand = false;
         cardId = null;
