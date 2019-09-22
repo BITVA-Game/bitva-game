@@ -118,6 +118,32 @@ const turningPotion = {
     disabled: false,
 };
 
+const plateMail = {
+    id: 'plateMail',
+    name: 'Plate Mail',
+    type: 'item',
+    icon: 'hand',
+    category: 'reflect',
+    categoryName: 'reflect',
+    description: "Plate mail is a  bogatyr's armor. Bewitched plate mail is saving warrior's life, reflecting enemy's attack turning stroke back.",
+    health: 3,
+    healthCurrent: 3,
+    disabled: false,
+};
+
+const raven = {
+    id: 'raven',
+    name: 'Raven',
+    type: 'action',
+    icon: 'skull',
+    category: 'attack',
+    categoryName: 'attack',
+    description: "Raven is Yaga's faithful companion. Keeper of arcane knowledge, giving sage advice. Master of Living and Dead Water secrecy.",
+    initialpoints: 1,
+    points: 1,
+    disabled: false,
+};
+
 export default {
     apple,
     bogatyr,
@@ -128,4 +154,6 @@ export default {
     waterDead,
     russianOven,
     turningPotion,
+    plateMail,
+    raven,
 };
