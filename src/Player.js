@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-duplicates */
 
 import React, { Component } from 'react';
@@ -17,6 +18,23 @@ const Animation = props => (
     </div>
 );
 
+const AnimatedHand = ({ hand, player }) => (
+    <div className="hand card-hand">
+        {Object.keys(hand).map(cardId => (
+            <div
+                key={cardId}
+                className="card-place card-like"
+            >
+                <Card
+                    cardKey={cardId}
+                    card={hand[cardId]}
+                    player={player}
+                />
+            </div>
+        ))}
+    </div>
+);
+
 class Player extends Component {
     constructor(props) {
         super(props);
@@ -27,17 +45,32 @@ class Player extends Component {
         this.isTarget = this.isTarget.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.playAnimation = this.playAnimation.bind(this);
+        this.playAnimationPotion = this.playAnimationPotion.bind(this);
     }
 
     componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
+        // animation for cards deal from gravyeard to deck
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation();
+        // animation for Turning Potion - active player gets cards from inactive player hand
+        } if (this.props.player.turningHand !== prevProps.player.turningHand
+            && this.props.player.turningHand === true) {
+            this.playAnimationPotion();
         }
     }
 
     playAnimation() {
+        // console.log('We are in turning Potion Animation!');
         this.setState({ animation: 'cards' });
+        setTimeout(
+            () => this.setState({ animation: null }),
+            2000,
+        );
+    }
+
+    playAnimationPotion() {
+        this.setState({ animation: 'potion' });
         setTimeout(
             () => this.setState({ animation: null }),
             2000,
@@ -66,7 +99,6 @@ class Player extends Component {
         }
         this.props.cardDropped(target);
     }
-
 
     render() {
         const playerClass = this.props.active ? 'player-active' : 'player-inactive';
@@ -98,12 +130,22 @@ class Player extends Component {
                 <Hand
                     active={this.props.active}
                     dragging={this.props.dragging}
-                    hand={this.props.player.hand}
+                    // hand={this.props.player.hand}
+                    hand={this.props.hand}
                     cardDragStarted={this.props.cardDragStarted}
                     cardDragEnded={this.props.cardDragEnded}
                     isTarget={this.isTarget}
                     player={this.props.player}
                 />
+                {/* {this.state.animation === "potion" ? ( */}
+                {this.props.active ? null
+                    : (this.state.animation === 'potion' ? (
+                        <AnimatedHand
+                            hand={this.props.hand}
+                            player={this.props.player}
+                        />
+                    ) : null)
+                }
                 <Grave
                     player={this.props.player}
                     active={this.props.active}
@@ -190,6 +232,7 @@ Deck.propTypes = {
 
 Player.propTypes = {
     player: PropTypes.object.isRequired,
+    hand: PropTypes.object.isRequired,
     cardDragStarted: PropTypes.func.isRequired,
     cardDragEnded: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
@@ -236,5 +279,13 @@ Animation.propTypes = {
     background: PropTypes.string.isRequired,
 };
 
+Hand.propTypes = {
+    hand: PropTypes.object.isRequired,
+};
+
+AnimatedHand.propTypes = {
+    hand: PropTypes.object.isRequired,
+    player: PropTypes.object.isRequired,
+};
 
 export default Player;

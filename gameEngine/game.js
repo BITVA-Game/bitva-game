@@ -305,8 +305,7 @@ function attackOpponent(player, opponent, points) {
         // and if item card does not have 'reflect' category (e.g. magicMirror card)
         // we descrease hero health for attack card points
         if (itemCategory !== cardConst.REFLECTCATEGORY) {
-            opponent.turningHand === true
-                ? opponent.health.current -= points : player.health.current -= points;
+            player.health.current -= points;
         }
         // we check for special mirror card at opponent item holder with category 'reflect'
         // and run reflect function if it is present there
@@ -562,7 +561,10 @@ function turningHand(player, opponent) {
 }
 
 function changeMoveCounter(pActive, card) {
-    pActive.hand[card] || pActive.turningHand === true ? null : pActive.moveCounter += 1;
+    // pActive.hand[card] || pActive.turningHand === true ? null : pActive.moveCounter += 1;
+    if (pActive.hand[card] === false || pActive.turningHand === false) {
+        pActive.moveCounter += 1;
+    }
     return pActive;
 }
 
@@ -683,8 +685,11 @@ function playerActs(game, cardId, target) {
     // after each act we delete turningHand property for both players
     // if active player acted after turning potion card
     // we also turn active card's key to null as players's cards keys duplicate
-    pActive.turningHand === true && (cardId in pInactive.grave || cardId in pActive.item)
-        ? (delete pInactive.turningHand) && (delete pActive.turningHand) && (cardId = null) : null;
+    if (pActive.turningHand === true && (cardId in pInactive.grave || cardId in pActive.item)) {
+        pInactive.turningHand = false;
+        pActive.turningHand = false;
+        cardId = null;
+    }
     // after each move we increase active player's counter for 1 if activeCard acted
     // if activeCard remains in player's hand we do not increase move Counter
     pActive = changeMoveCounter(pActive, cardId);

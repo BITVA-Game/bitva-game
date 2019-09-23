@@ -91,7 +91,7 @@ function cardClass(type, background, dragging) {
 
 const Card = props => (
     <div
-        className={cardClass(props.card.type, props.player.background, false)}
+        className={`${cardClass(props.card.type, props.player.background, false)} ${props.active !== true && props.player.turningHand === true ? 'card-dark' : null}`}
         data-key={props.cardKey}
         draggable={props.card.disabled === true || props.card.panic === true
             ? null : props.draggable}
@@ -149,6 +149,7 @@ const Card = props => (
 
 
 Card.propTypes = {
+    active: PropTypes.bool.isRequired,
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool,
     cardKey: PropTypes.string,

@@ -149,6 +149,7 @@
     width: 680px;
 }
 
+
 /* card-place */
 
 .card-place {
@@ -732,4 +733,18 @@
     background-image: url("../images/backgrounds/animation2.png");
     background-repeat: no-repeat;
 	height: 768px;
+}
+
+/* Animation Turning Potion */
+
+.card-hand {
+    animation: toHand 3s ease-out 1 forwards;
+    z-index: 1000;
+}
+
+/* Animation Turning Potion for bottom player */
+
+@keyframes toHand {
+    0%      { transform: translateX(0px) translateY(0px); }
+    100%     { transform: translateX(-220px) translateY(-555px) }
 }

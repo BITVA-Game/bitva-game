@@ -13,6 +13,7 @@ export default function isTarget(target, dragging, active, player) {
             || (target === 'itemOpponent' && dragging.card.category === 'attack')
             || (target === 'opponent' && dragging.card.category === 'holdCard')
             || (target === 'opponent' && dragging.card.category === 'attackItems')
+            || (target === 'opponent' && dragging.card.category === 'turning')
         );
     }
     return (
