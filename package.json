@@ -43,6 +43,7 @@
     "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=src/icons/png/1024x1024.png --prune=true --out=releases"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "@testing-library/jest-dom": "^4.0.1",

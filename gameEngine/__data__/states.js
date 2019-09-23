@@ -10,7 +10,7 @@ export const playState = {
     },
     {
         id: 'player2',
-        heroes: ['morevna', 'yaga'],
+        heroes: ['morevna', 'yaga', 'hozyaika'],
     },
     ],
     terminals: [{

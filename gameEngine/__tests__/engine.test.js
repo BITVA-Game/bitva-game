@@ -22,7 +22,7 @@ const CARDSINHAND = 5;
 
 jest.mock('../../gameTerminal/randomFunc');
 
-test('First game state Play. Player1 can select any of the characters he has', () => {
+test.only('First game state Play. Player1 can select any of the characters he has', () => {
     // Again we only need type
     const msg = { type: message.PLAY };
 
