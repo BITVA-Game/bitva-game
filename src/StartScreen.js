@@ -8,7 +8,7 @@ import './css/StartScreen.css';
 
 
 const StartScreen = props => (
-    <div data-testid="start-screen">
+    <div>
         {/* <div data-testid="hollow-animation" className="hollow" />
         <div data-testid="window-animation" className="window" />
         <div data-testid="spider-animation" className="spider">
