@@ -13,11 +13,8 @@ import './css/HeroSelection.css';
 import styles from './css/HeroSelection.module.css';
 import { sortedHeroesList } from './rules';
 
-import click1 from './sound/click.mp3';
-import click2 from './sound/fin.mp3';
-
-const clickSound1 = new UIFx(click1, { volume: 1.0 });
-const clickSound2 = new UIFx(click2, { volume: 1.0 });
+const clickSound1 = new UIFx(`${process.env.PUBLIC_URL}/sound/click.mp3`, { volume: 1.0 });
+const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, { volume: 1.0 });
 
 // button in the header to choose previous or next character in the list
 const HeaderHeroButton = props => (
