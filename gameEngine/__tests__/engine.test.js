@@ -22,7 +22,7 @@ const CARDSINHAND = 5;
 
 jest.mock('../../gameTerminal/randomFunc');
 
-test.only('First game state Play. Player1 can select any of the characters he has', () => {
+test('First game state Play. Player1 can select any of the characters he has', () => {
     // Again we only need type
     const msg = { type: message.PLAY };
 
@@ -39,6 +39,7 @@ test('Second game state heroselectStateP1. Player 1 selected one of his characte
     const engine = new GameEngine(playState);
     // we referencing to GameEngine to work out our message
     engine.handle(msg);
+    console.log(engine.getState());
 
     // we expect that engine after receiving above msg will match object
     expect(engine.getState()).toMatchObject(heroselectStateP1);
@@ -345,7 +346,6 @@ test('ACTION ANY active player moveCounter = 2 after his action, he gets missing
     };
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
     gameForTest.game.players[0].moveCounter = 2;
-
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
     const newGame = engine.getState();

@@ -520,11 +520,14 @@ function bowArrow(player, opponent) {
 
 // function that change turn in the game
 function changeTurn(game) {
+    console.log('AM I CALLED AT ALL');
     // active player becomes inactive
     const pActive = getActivePlayer(game);
     const pInactive = getInActivePlayer(game);
     // player's counter set to 0
     pActive.moveCounter = 0;
+    console.log('Change Turn', pInactive.moveCounter);
+    console.log('Change Turn', pActive.moveCounter);
     // inactive player becomes active
     game.active = pInactive.id;
 }
@@ -561,8 +564,7 @@ function turningHand(player, opponent) {
 }
 
 function changeMoveCounter(pActive, card) {
-    // pActive.hand[card] || pActive.turningHand === true ? null : pActive.moveCounter += 1;
-    if (pActive.hand[card] === false || pActive.turningHand === false) {
+    if (pActive.hand[card] === undefined && pActive.turningHand === false) {
         pActive.moveCounter += 1;
     }
     return pActive;
@@ -631,6 +633,33 @@ function pInactiveIsTarget(game, activeCard, cardId) {
     }
 }
 
+function playerMoveEnd(pActive, pInactive, game) {
+    // console.log(game);
+    // we call function to return disabled cards property to false if any have true
+    removeDisable(pActive);
+    // we check then if any cardsShown property in opponent cards
+    // and remove by calling deleteCardsShown function
+    deleteCardsShown(pInactive);
+    // we call function to give cards to players up to 5
+    giveCardsTo(pActive);
+
+    // run changeTurn function
+    changeTurn(game);
+
+    //  after change of turn,  we check
+    // whether inactive player has in item holder card forest Mushroom with category panic,
+    // then we call function forestMushroom
+    Object.keys(pActive.item).length !== 0
+  && Object.values(pActive.item)[0].category === cardConst.PANICCATEGORY
+        ? forestMushroom(pInactive, 'afterTurn')
+        : null;
+    // we run bowArrow function to check if opponent has bow & arrow card in item
+    // and to supress attack points if any
+    bowArrow(pActive, pInactive);
+    // and run function water if any
+    waterCard(game.players);
+}
+
 // basic function for the game that represents each act of active player
 function playerActs(game, cardId, target) {
     let pActive = getActivePlayer(game);
@@ -642,6 +671,12 @@ function playerActs(game, cardId, target) {
     // TODO Move this out
     bowArrow(pActive, pInactive);
     let activeCard;
+
+    // Player is acting with a full moveCounter, do not approve;
+    if (pActive.moveCounter === 2) {
+        playerMoveEnd(pActive, pInactive, game);
+        return game;
+    }
 
     pActive.turningHand !== true
         ? activeCard = pActive.hand[cardId] : activeCard = pInactive.hand[cardId];
@@ -705,30 +740,7 @@ function playerActs(game, cardId, target) {
     malachiteBox(pActive, pInactive, target);
     // once active player's move counter == 2
     if (pActive.moveCounter === 2 && game.phase === phase.ACTIVE) {
-        // console.log(game);
-        // we call function to return disabled cards property to false if any have true
-        removeDisable(pActive);
-        // we check then if any cardsShown property in opponent cards
-        // and remove by calling deleteCardsShown function
-        deleteCardsShown(pInactive);
-        // we call function to give cards to players up to 5
-        giveCardsTo(pActive);
-
-        // run changeTurn function
-        changeTurn(game);
-
-        //  after change of turn,  we check
-        // whether inactive player has in item holder card forest Mushroom with category panic,
-        // then we call function forestMushroom
-        Object.keys(pActive.item).length !== 0
-        && Object.values(pActive.item)[0].category === cardConst.PANICCATEGORY
-            ? forestMushroom(pInactive, 'afterTurn')
-            : null;
-        // we run bowArrow function to check if opponent has bow & arrow card in item
-        // and to supress attack points if any
-        bowArrow(pActive, pInactive);
-        // and run function water if any
-        waterCard(game.players);
+        playerMoveEnd(pActive, pInactive, game);
     }
     // we return the whole game to continue
     if (pInactive.health.current <= 0 || pActive.health.current <= 0) {

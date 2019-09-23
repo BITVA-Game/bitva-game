@@ -1,0 +1,19 @@
+{
+	"accounts": [{
+			"id": "player1",
+			"heroes": ["morevna", "yaga", "premudraya"]
+		},
+		{
+			"id": "player2",
+			"heroes": ["morevna", "yaga", "hozyaika"]
+		}
+	],
+	"terminals": [{
+		"players": ["player1", "player2"]
+	}],
+	"game": {
+		"players": [],
+		"phase": "ACTIVE"
+	},
+  	"screen": "HEROSELECT"
+}
