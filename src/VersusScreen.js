@@ -21,7 +21,7 @@ const images = {
     });
 }; */
 
-const OneHero = props => (
+const OneHero = (props) => (
     <div className="versus-one-hero">
         <img src={images[props.hero]} alt={props.hero} />
     </div>

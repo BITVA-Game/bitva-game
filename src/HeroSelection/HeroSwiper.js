@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import '../css/App.css';
 import '../css/HeroSelection.css';
 
-const HeaderHeroButton = props => (
+const HeaderHeroButton = (props) => (
     <div className={`btn hero-btn-arrow ${props.direction}`} role="button" onClick={props.funct} onKeyPress={props.funct} tabIndex={props.tabIndex}>
         {props.img}
     </div>
 );
 
 const HeroSwiper = (props) => {
-    const heroIndex = props.allHeroes.findIndex(hero => hero.id === props.hero.id);
+    const heroIndex = props.allHeroes.findIndex((hero) => hero.id === props.hero.id);
     const prevIndex = heroIndex === 0 ? props.allHeroes.length - 1 : heroIndex - 1;
     const nextIndex = heroIndex === props.allHeroes.length - 1 ? 0 : heroIndex + 1;
     const prevID = props.allHeroes[prevIndex].id;

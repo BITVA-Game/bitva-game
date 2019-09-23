@@ -46,7 +46,7 @@ class App extends Component {
     }
 
     loadAnimation() {
-        this.setState(oldState => ({ loaded: !oldState.loaded }));
+        this.setState((oldState) => ({ loaded: !oldState.loaded }));
     }
 
     showApplication() {

@@ -45,8 +45,8 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     // ожидаем, что карта plateMail в item holder неактивного игрока,
     expect(Object.values(inactivePlayer.item).length).toEqual(1);
@@ -92,8 +92,8 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     // ожидаем, что карта plateMail в item holder неактивного игрока,
     expect(inactivePlayer.item[cardToTest].id).toEqual(plateMail.id);

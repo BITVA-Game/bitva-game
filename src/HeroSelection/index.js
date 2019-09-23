@@ -9,16 +9,15 @@ import ListOfHeroes from './ListOfHeroes';
 import OneHero from './OneHero';
 import '../css/App.css';
 import '../css/HeroSelection.css';
-import styles from '../css/HeroSelection.module.css';
 import '../css/Cards.css';
 
 import { sortedHeroesList } from '../rules';
-import click2 from '../sound/fin.mp3';
 
-const clickSound2 = new UIFx(click2, { volume: 1.0 });
+// const clickSound1 = new UIFx(`${process.env.PUBLIC_URL}/sound/click.mp3`, { volume: 1.0 });
+const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, { volume: 1.0 });
 
 
-const Header = props => (
+const Header = (props) => (
     <section className="heroselection-header">
         <div className="header-menu heroselection-title">
             {props.title}
@@ -98,6 +97,12 @@ class HeroSelection extends Component {
 HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
+};
+
+
+Header.propTypes = {
+    title: PropTypes.string.isRequired,
+    centre: PropTypes.object.isRequired,
 };
 
 export default HeroSelection;

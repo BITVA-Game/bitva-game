@@ -16,14 +16,6 @@ const images = {
     premudraya,
 };
 
-const Header = () => (
-    <section className="heroselection-header">
-        <div className="header-menu heroselection-title">
-            Select Character
-        </div>
-    </section>
-);
-
 // Individual hero block, repeates to display every character
 const HeroBlock = (props) => {
     const { hero, isAvailable, select } = props;
@@ -81,7 +73,7 @@ class ListOfHeroes extends Component {
         return (
             <div className="heroes-list">
                 <button type="button" className="hero-block" onClick={this.prev}>◀</button>
-                {heroes.map(hero => (
+                {heroes.map((hero) => (
                     <HeroBlock
                         key={hero.id}
                         select={() => this.props.select(hero.id)}

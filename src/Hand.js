@@ -8,11 +8,11 @@ function cardOrigin(dragging, card) {
     return dragging !== null && card === dragging.card ? 0 : 1.0;
 }
 
-const Hand = props => (
+const Hand = (props) => (
     // const handCharmed = props.player.turningHand === true ? 'hand-dark' : null;
     // <div className="hand">
     <div className={`hand ${props.player.turningHand === true ? 'hand-dark' : null}`}>
-        {Object.keys(props.hand).map(cardId => (
+        {Object.keys(props.hand).map((cardId) => (
             <div
                 key={cardId}
                 className="card-place card-like"

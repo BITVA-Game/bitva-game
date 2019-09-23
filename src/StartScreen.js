@@ -7,7 +7,7 @@ import './css/StartScreen.css';
 // import spider from './images/animation/spider.png';
 
 
-const StartScreen = props => (
+const StartScreen = (props) => (
     <div>
         {/* <div data-testid="hollow-animation" className="hollow" />
         <div data-testid="window-animation" className="window" />

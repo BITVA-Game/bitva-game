@@ -93,13 +93,13 @@ const imagesCards = {
     wolf,
 };
 
-const HeroImage = props => (
+const HeroImage = (props) => (
     <div className="details-hero">
         <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }} />
     </div>
 );
 
-const CardPreview = props => (
+const CardPreview = (props) => (
     <div className={`card details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
         <div className="card-header">
             <div className={`card-icon-container details-card-icon-container ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
@@ -129,8 +129,7 @@ const CardPreview = props => (
                     >
                         {props.card.initialpoints}
                     </div>
-                ) : null
-            }
+                ) : null}
             {props.card.health
                 ? (
                     <div className={`card-health details-card-health
@@ -138,8 +137,7 @@ const CardPreview = props => (
                     >
                         {props.card.health}
                     </div>
-                ) : null
-            }
+                ) : null}
         </div>
         <div className="details-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
         <div className="card-footer details-card-footer">
@@ -148,7 +146,7 @@ const CardPreview = props => (
     </div>
 );
 
-const CardsRow = props => (
+const CardsRow = (props) => (
     <>
         <CardPreview card={props.cards[props.currentCard]} hero={props.hero} />
         <div className="card-description">
@@ -160,13 +158,13 @@ const CardsRow = props => (
     </>
 );
 
-const Play = props => (
+const Play = (props) => (
     <div className="btn btn-play footer-menu" role="button" onClick={props.play} onKeyPress={props.play} tabIndex={props.tabIndex}>
         PLAY
     </div>
 );
 
-const BackButton = props => (
+const BackButton = (props) => (
     <div className="btn btn-back footer-menu" role="button" onClick={props.unselect} onKeyPress={props.unselect} tabIndex="10">
         &#767;
     </div>
@@ -222,7 +220,7 @@ class CardsBlock extends Component {
 }
 
 // Info about one hero.
-const OneHero = props => (
+const OneHero = (props) => (
     <div className={styles.details}>
         <HeroImage heroid={props.hero.id} hero={props.hero} />
         <div className="details-info-block">
@@ -275,6 +273,8 @@ CardsRow.propTypes = {
 
 OneHero.propTypes = {
     hero: PropTypes.object.isRequired,
+    unselect: PropTypes.func.isRequired,
+    play: PropTypes.func.isRequired,
 };
 
 BackButton.propTypes = {

@@ -30,9 +30,9 @@ function parseApplication(app) {
         // we're inside game screen playing the game
         scr = app.engine.screen;
     }
-    const parsedApp = Object.assign(
-        {}, app, app.engine, { manager: { screen: scr } },
-    );
+    const parsedApp = {
+        ...app, ...app.engine, manager: { screen: scr },
+    };
     delete parsedApp.engine;
     return parsedApp;
 }

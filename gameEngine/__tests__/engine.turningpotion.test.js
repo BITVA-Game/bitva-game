@@ -42,8 +42,8 @@ test('msg ACTION received: active player attacks with turningPotion and at next 
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что Morevna сходила картой turningPotion, и та после ходя ушла на кладбище
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     // ожидаем, что карта turning Potion имеет category: 'turning'
@@ -88,8 +88,8 @@ test('msg ACTION received: active player attacked with turningPotion and now put
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что у игроков свойство turningHand не равно true
     expect(activePlayer.turningHand).not.toEqual(true);
     expect(inactivePlayer.turningHand).not.toEqual(true);
@@ -134,8 +134,8 @@ test('msg ACTION rcvd: active player attacked with turningPotion and can heal ow
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что у игроков свойство turningHand не равно true
     expect(activePlayer.turningHand).not.toEqual(true);
     expect(inactivePlayer.turningHand).not.toEqual(true);
@@ -184,8 +184,8 @@ test('msg ACTION received: active player attacked with turningPotion and now att
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что у игроков свойство turningHand не равно true
     expect(activePlayer.turningHand).not.toEqual(true);
     expect(inactivePlayer.turningHand).not.toEqual(true);
@@ -237,8 +237,8 @@ test('msg ACTION received: active player attacked with turningPotion and now put
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что у игроков свойство turningHand не равно true
     expect(activePlayer.turningHand).not.toEqual(true);
     expect(inactivePlayer.turningHand).not.toEqual(true);
@@ -291,8 +291,8 @@ test('msg ACTION received: inactive player put in own item holder shield card fr
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что у игроков свойство turningHand не равно true
     expect(activePlayer.turningHand).not.toEqual(true);
     expect(inactivePlayer.turningHand).not.toEqual(true);
@@ -348,8 +348,8 @@ test('msg ACTION received: active player attacked with turningPotion and now att
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     // ожидаем, что у игроков свойство turningHand не равно true
     expect(activePlayer.turningHand).not.toEqual(true);

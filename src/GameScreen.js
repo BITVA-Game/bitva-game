@@ -104,7 +104,7 @@ class GameScreen extends Component {
             this.state.animation === 'background' ? <BackgroundAnimation />
                 : (
                     <div className="game-table app-background">
-                        {this.props.app.game.players.map(player => (
+                        {this.props.app.game.players.map((player) => (
                             <Player
                                 active={player.id === activePlayer.id}
                                 item={player.item}

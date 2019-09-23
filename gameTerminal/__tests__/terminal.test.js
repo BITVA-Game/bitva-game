@@ -70,11 +70,11 @@ test('msg PLAY creates engine and handles the message', async () => {
     await application.msgReceived(msg, sendReply);
     scope.isDone();
 
-    const expectedState = Object.assign(
-        {},
-        { manager: { screen: scr.HEROSELECT } },
-        { innerState: engineState.innerState },
-    );
+    const expectedState = {
+
+        manager: { screen: scr.HEROSELECT },
+        innerState: engineState.innerState,
+    };
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(expectedState);
 });
@@ -93,7 +93,7 @@ test.skip('msg sent twice, we have one instance of engine', async () => {
         handle: handleFunc,
         getState() { return engineState; },
     }));
-    Engine.mockImplementation(mockEngine);
+    // Engine.mockImplementation(mockEngine);
 
     await application.msgReceived(msg, sendReply);
     await application.msgReceived(msg, sendReply);
@@ -105,11 +105,11 @@ test.skip('msg sent twice, we have one instance of engine', async () => {
     expect(handleFunc.mock.calls.length).toBe(2);
     expect(handleFunc.mock.calls[0]).toEqual([msg]);
 
-    const expectedState = Object.assign(
-        {},
-        { manager: { screen: scr.STARTSCREEN } },
-        { innerState: engineState.innerState },
-    );
+    const expectedState = {
+
+        manager: { screen: scr.STARTSCREEN },
+        innerState: engineState.innerState,
+    };
     expect(sendReply.mock.calls.length).toBe(2);
     expect(sendReply.mock.calls[1][0]).toMatchObject(expectedState);
 });

@@ -17,13 +17,13 @@ const images = {
     premudraya,
 };
 
-const Hero = props => (
+const Hero = (props) => (
     <div
         className={`hero ${props.isTarget(props.active ? 'hero' : 'opponent') ? 'target' : null}`}
         style={style}
         id={props.active ? 'hero' : 'enemy'}
         onDrop={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
-        onDragOver={e => props.cardOver(e, props.active ? 'hero' : 'opponent')}
+        onDragOver={(e) => props.cardOver(e, props.active ? 'hero' : 'opponent')}
     >
         <img
             className="hero-image"
