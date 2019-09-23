@@ -9,6 +9,7 @@ import Hand from './Hand';
 import rules from './rules';
 import './css/App.css';
 import './css/GameScreen.css';
+import graveyard from './images/cards/graveyard.png';
 
 const Animation = props => (
     <div className="stack">
@@ -172,14 +173,12 @@ const Deck = props => (
 
 const Grave = props => (
     <div
-        className={`grave card-like grave-${props.background} ${props.isTarget('graveyard') ? 'target' : null}`}
+        className={`grave card-like  grave-${props.background} ${props.isTarget('graveyard') ? 'target' : null}`}
+        style={{ backgroundImage: `url(${graveyard})`, backgroundSize: '100% 100%' }}
         id={props.active ? 'grave' : null}
         onDrop={() => props.cardDropped('graveyard')}
         onDragOver={e => props.cardOver(e, 'graveyard')}
     >
-        <div className="grave-name">
-          grave
-        </div>
         <div className="count">
             {props.active ? Object.keys(props.grave).length : Object.keys(props.grave).length}
         </div>
