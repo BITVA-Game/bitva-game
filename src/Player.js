@@ -11,7 +11,7 @@ import './css/App.css';
 import './css/GameScreen.css';
 import graveyard from './images/cards/graveyard.png';
 
-const Animation = props => (
+const Animation = (props) => (
     <div className="stack">
         <div className={`deck card-like deck-${props.background} one`} />
         <div className={`deck card-like deck-${props.background} two`} />
@@ -21,7 +21,7 @@ const Animation = props => (
 
 const AnimatedHand = ({ hand, player }) => (
     <div className="hand card-hand">
-        {Object.keys(hand).map(cardId => (
+        {Object.keys(hand).map((cardId) => (
             <div
                 key={cardId}
                 className="card-place card-like"
@@ -145,8 +145,7 @@ class Player extends Component {
                             hand={this.props.hand}
                             player={this.props.player}
                         />
-                    ) : null)
-                }
+                    ) : null)}
                 <Grave
                     player={this.props.player}
                     active={this.props.active}
@@ -163,7 +162,7 @@ class Player extends Component {
     }
 }
 
-const Deck = props => (
+const Deck = (props) => (
     <div className={`deck card-like deck-${props.background}`}>
         <div className="count">
             {props.active ? Object.keys(props.cards).length : Object.keys(props.cards).length}
@@ -171,13 +170,13 @@ const Deck = props => (
     </div>
 );
 
-const Grave = props => (
+const Grave = (props) => (
     <div
         className={`grave card-like  grave-${props.background} ${props.isTarget('graveyard') ? 'target' : null}`}
         style={{ backgroundImage: `url(${graveyard})`, backgroundSize: '100% 100%' }}
         id={props.active ? 'grave' : null}
         onDrop={() => props.cardDropped('graveyard')}
-        onDragOver={e => props.cardOver(e, 'graveyard')}
+        onDragOver={(e) => props.cardOver(e, 'graveyard')}
     >
         <div className="count">
             {props.active ? Object.keys(props.grave).length : Object.keys(props.grave).length}
@@ -186,7 +185,7 @@ const Grave = props => (
     </div>
 );
 
-const Item = props => (
+const Item = (props) => (
     <div
         className={`item card-place card-like
             ${props.player.background}
@@ -204,8 +203,8 @@ const Item = props => (
         onDragOver={
             // eslint-disable-next-line no-nested-ternary
             props.active
-                ? e => props.cardOver(e, 'item')
-                : props.item ? e => props.cardOver(e, 'itemOpponent') : null
+                ? (e) => props.cardOver(e, 'item')
+                : props.item ? (e) => props.cardOver(e, 'itemOpponent') : null
         }
     >
         {props.item

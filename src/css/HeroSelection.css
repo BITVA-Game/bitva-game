@@ -122,7 +122,9 @@ section {
 
 .heroes-list {
 	padding: 1em 2em;
-	width: 100%;
+	width: 90%;
+	text-align: center;
+	margin: 0 auto;
 }
 
 .hero-block {
@@ -131,11 +133,15 @@ section {
 	margin: .5em;
 }
 
+button.hero-block{
+	background-color: transparent;
+	font-size: 200%
+}
+
 .btn-hero {
 	border: 5px solid #fff;
-	height: 275px;
 	position: relative;
-	width: 235px;
+	width: 300px;
 }
 
 .btn-hero:hover {

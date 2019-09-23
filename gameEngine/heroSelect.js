@@ -15,7 +15,7 @@ function heroWithCards() {
         for (let i = 0; i < heroCards.length; i += 1) {
             const cardData = cards[heroCards[i]];
             const heroCard = heroes[hero].cards[heroCards[i]];
-            heroes[hero].cards[heroCards[i]] = Object.assign({}, heroCard, cardData);
+            heroes[hero].cards[heroCards[i]] = { ...heroCard, ...cardData };
         }
     }
     return { allHeroes: heroes };
@@ -27,8 +27,8 @@ function playerData(player, players = []) {
 
 function pendingPlayer(app, players) {
     const accounts = app.accounts;
-    const completed = players.map(p => p.id);
-    const pending = accounts.filter(a => !completed.includes(a.id));
+    const completed = players.map((p) => p.id);
+    const pending = accounts.filter((a) => !completed.includes(a.id));
     return pending[0];
 }
 
@@ -56,12 +56,12 @@ function handle(app, msg) {
         return null;
     }
 
-    return Object.assign(
-        {},
-        initialState,
-        heroWithCards(),
-        playerData(nextPlayer, selectedPlayers),
-    );
+    return {
+
+        ...initialState,
+        ...heroWithCards(),
+        ...playerData(nextPlayer, selectedPlayers),
+    };
 }
 
 exports.handle = handle;

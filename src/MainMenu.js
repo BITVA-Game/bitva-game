@@ -4,7 +4,7 @@ import './css/App.css';
 import './css/MainMenu.css';
 import logo from './images/dark_logo.png';
 
-const MenuButton = props => (
+const MenuButton = (props) => (
     <li>
         <button data-testid="menu-button" className="menu-button" type="button" onClick={() => props.sendMessage({ type: props.type })}>
             {props.name}
@@ -12,16 +12,15 @@ const MenuButton = props => (
     </li>
 );
 
-const LogoBlock = props => (
+const LogoBlock = (props) => (
     <div className="logo-container">
         {props.opened
             ? <img className="logo" src={logo} alt="logo" />
-            : null
-        }
+            : null}
     </div>
 );
 
-const ToggleButton = props => (
+const ToggleButton = (props) => (
     <div
         data-testid="close-menu-btn"
         className="btn btn-sidebar-toggle"

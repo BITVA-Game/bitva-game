@@ -41,8 +41,8 @@ test('msg ACTION received: active player put Living Water in item, it increases 
     const newGame = engine.getState();
 
     // Find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     // ожидаем, что карта living water в item holder неактивного игрока
     expect(Object.values(inactivePlayer.item).length).toEqual(1);
@@ -84,8 +84,8 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     // ожидаем, что карта dead water в item holder неактивного игрока,
     // т.к. после перехода хода бывший активный игрок стал неактивным
@@ -128,8 +128,8 @@ test('msg ACTION received: active player already has Living Water in item, it in
     const newGame = engine.getState();
 
     // Find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что карта living water в item holder неактивного игрока
     expect(Object.values(inactivePlayer.item).length).toEqual(1);
     expect(inactivePlayer.item[cardToTest].id).toEqual(waterLiving.id);
@@ -168,8 +168,8 @@ test('msg ACTION received: after attack the dead water in item, its health =0 an
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что карта dead water ушла из item holder активного игрока,
     // т.к. после атаки е ездоровье  стало == 0 и она ушла на кладбище
     expect(Object.values(activePlayer.item).length).toEqual(0);
@@ -208,8 +208,8 @@ test('msg ACTION received: after attack the living water in item, its health =0 
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что карта dead water ушла из item holder активного игрока,
     // т.к. после атаки е ездоровье  стало == 0 и она ушла на кладбище
     expect(Object.values(activePlayer.item).length).toEqual(0);
@@ -246,8 +246,8 @@ test('msg ACTION received: after attack the living water in item, its health =0 
     const newGame = engine.getState();
 
     // We find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что карта living water в item holder активного игрока,
     expect(Object.values(activePlayer.item).length).toEqual(1);
     expect(activePlayer.item[cardToTest].id).toEqual(waterLiving.id);

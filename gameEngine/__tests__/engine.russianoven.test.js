@@ -45,8 +45,8 @@ test('msg ACTION received: active player attacks with russianOven, it disables 2
     const newGame = engine.getState();
 
     // Find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     // ожидаем, что карта russianOven на кладбище походившего игрока
     expect(activePlayer.grave[cardToTest].id).toEqual(russianOven.id);
@@ -92,8 +92,8 @@ test('msg ACTION received: inactive player attacked with russianOven, 2 cards in
     const newGame = engine.getState();
 
     // Find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     // ожидаем, что карта russianOven на кладбище неактивного игрока
     expect(inactivePlayer.grave[cardToTest].id).toEqual(russianOven.id);
@@ -133,8 +133,8 @@ test('msg ACTION received:  all cards (incl disabled by russianOven prev) in han
     const newGame = engine.getState();
 
     // Find active and inactive players
-    const activePlayer = newGame.game.players.find(p => p.id === newGame.game.active);
-    const inactivePlayer = newGame.game.players.find(p => p.id !== newGame.game.active);
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     // ожидаем, что карта russianOven на кладбище активного игрока
     expect(activePlayer.grave[cardToTest].id).toEqual(russianOven.id);

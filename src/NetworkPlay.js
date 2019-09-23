@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MainMenu from './MainMenu';
 import './css/Profile.css';
 
-const WaitingForHost = props => (
+const WaitingForHost = (props) => (
     <form onSubmit={props.gameConnect}>
         <label htmlFor="text">ENETER IP</label>
         <input type="text" name="address" />
@@ -11,7 +11,7 @@ const WaitingForHost = props => (
 );
 
 
-const SelectRole = props => (
+const SelectRole = (props) => (
     <div>
         <h3>Select your role</h3>
         <form onSubmit={props.estConnection}>

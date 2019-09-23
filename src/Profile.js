@@ -11,7 +11,7 @@ import morevna from './images/heroes/morevna.jpg';
 // import hozyaika from './images/heroes/hozyaika.jpg';
 import premudraya from './images/heroes/premudraya.jpg';
 
-const Profile = (props) => {
+const Profile = (props) =>
     // const profile = getActiveProfile(props.app);
     // console.log(profile);
     // const characters = profile.characters.map(character => (
@@ -20,7 +20,7 @@ const Profile = (props) => {
     // const deck = profile.deck.map(card => (
     //     <span key={card}>{card}</span>
     // ));
-    return (
+    (
         <div className="profile-container">
             <div className="profile">
                 <div className="profile-header">
@@ -71,8 +71,6 @@ const Profile = (props) => {
             <MainMenu sendMessage={props.sendMessage} />
         </div>
     );
-};
-
 Profile.propTypes = {
     app: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,

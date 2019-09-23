@@ -23,9 +23,9 @@ function formReport(arr, n) {
     const player1name = arr[0].players[0].name;
     const player2name = arr[0].players[1].name;
     console.log('PLAYERS: ', player1name, player2name);
-    const player = (players, name) => players.find(p => p.name === name);
-    const player2wins = arr.filter(a => player(a.players, player1name).health <= 0);
-    const player1wins = arr.filter(a => player(a.players, player2name).health <= 0);
+    const player = (players, name) => players.find((p) => p.name === name);
+    const player2wins = arr.filter((a) => player(a.players, player1name).health <= 0);
+    const player1wins = arr.filter((a) => player(a.players, player2name).health <= 0);
     console.log(`From ${n} games, ${player2name} has ${
         player2wins.length} and ${player1name} has ${
         player1wins.length} wins`);

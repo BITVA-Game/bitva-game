@@ -24,11 +24,11 @@ function getRandomBool() {
 }
 
 function getActivePlayer(game) {
-    return game.players.find(p => p.id === game.active);
+    return game.players.find((p) => p.id === game.active);
 }
 
 function getInActivePlayer(game) {
-    return game.players.find(p => p.id !== game.active);
+    return game.players.find((p) => p.id !== game.active);
 }
 
 function assignCards(deck, cardsNumber) {
@@ -81,7 +81,7 @@ function createDeck(heroName) {
         // take count, create a new card for this type
         for (let i = 0; i < cards[cardType].count; i += 1) {
             const keyId = `key${key}`;
-            deck[keyId] = Object.assign({}, allCards[cardType]);
+            deck[keyId] = { ...allCards[cardType] };
             key += 1;
         }
     }
@@ -182,7 +182,7 @@ function giveCardsToAll(players) {
 // from player's hand cards
 function removePanic(player) {
     const playerCards = Object.values(player.hand);
-    playerCards.forEach(card => (card.panic === true ? delete card.panic : null));
+    playerCards.forEach((card) => (card.panic === true ? delete card.panic : null));
     if (Object.keys(player.item).length !== 0) {
         delete Object.values(player.item)[0].panic;
     }
@@ -391,10 +391,7 @@ function cardIncreaseHealth(players) {
     for (let i = 0; i < players.length; i += 1) {
         // if any player has current health == maximum health
         // then player remains with current health
-        if (players[i].health.current === players[i].health.maximum) {
-            players[i].health.current = players[i].health.current;
-        // in other cases we increase each player's health with 1 point
-        } else {
+        if (players[i].health.current !== players[i].health.maximum) {
             players[i].health.current += 1;
         }
     }
@@ -755,7 +752,7 @@ function makeMove(game, msg) {
 }
 
 function handle(app, msg) {
-    const game = Object.assign({}, app.game);
+    const game = { ...app.game };
     switch (msg.type) {
     case message.HEROSELECTED: {
         const playersInitital = game.players.concat(generatePlayer(msg.hero, msg.player));

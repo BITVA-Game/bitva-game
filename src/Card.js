@@ -89,7 +89,7 @@ function cardClass(type, background, dragging) {
     return `card game-card card-like ${background}-item`;
 }
 
-const Card = props => (
+const Card = (props) => (
     <div
         className={`${cardClass(props.card.type, props.player.background, false)} ${props.active !== true && props.player.turningHand === true ? 'card-dark' : null}`}
         data-key={props.cardKey}
@@ -128,8 +128,7 @@ const Card = props => (
                     >
                         {props.card.points}
                     </div>
-                ) : null
-            }
+                ) : null}
             {props.card.health
                 ? (
                     <div className={`card-health game-card-health
@@ -137,8 +136,7 @@ const Card = props => (
                     >
                         {props.card.healthCurrent}
                     </div>
-                ) : null
-            }
+                ) : null}
         </div>
         <div className="game-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
         <div className="card-footer game-card-footer">

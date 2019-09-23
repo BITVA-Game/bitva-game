@@ -2,51 +2,51 @@
 /* eslint-disable import/no-duplicates */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './css/App.css';
-import './css/HeroSelection.css';
-import styles from './css/HeroSelection.module.css';
-import './css/Cards.css';
+import '../css/App.css';
+import '../css/HeroSelection.css';
+import styles from '../css/HeroSelection.module.css';
+import '../css/Cards.css';
 
-import yaga from './images/heroes/yaga.jpg';
-import morevna from './images/heroes/morevna.jpg';
-import hozyaika from './images/heroes/hozyaika.jpg';
-import premudraya from './images/heroes/premudraya.jpg';
+import yaga from '../images/heroes/yaga.jpg';
+import morevna from '../images/heroes/morevna.jpg';
+import hozyaika from '../images/heroes/hozyaika.jpg';
+import premudraya from '../images/heroes/premudraya.jpg';
 
-import apple from './images/cards/apple.jpg';
-import bajun from './images/cards/catbajun.jpg';
-import bat from './images/cards/bat.jpg';
-import bereginya from './images/cards/bitva-cardbase.jpg';
-import bogatyr from './images/cards/bitva-cardbase.jpg';
-import bowArrow from './images/cards/bitva-cardbase.jpg';
-import bulat from './images/cards/sword.jpg';
-import chemise from './images/cards/bitva-cardbase.jpg';
-import chickenLegsHut from './images/cards/izba.jpg';
-import clairvoyance from './images/cards/bitva-cardbase.jpg';
-import crown from './images/cards/bitva-cardbase.jpg';
-import dolly from './images/cards/bitva-cardbase.jpg';
-import earthquake from './images/cards/bitva-cardbase.jpg';
-import horsemanBlack from './images/cards/blackrider.jpg';
-import horsemanRed from './images/cards/redrider.jpg';
-import horsemanWhite from './images/cards/whiterider.jpg';
-import kikimora from './images/cards/bitva-cardbase.jpg';
-import lizard from './images/cards/lizard.jpg';
-import magicTree from './images/cards/tree.jpg';
-import magicMirror from './images/cards/bitva-cardbase.jpg';
-import malachiteBox from './images/cards/malachitebox.jpg';
-import mortar from './images/cards/bitva-cardbase.jpg';
-import forestMushroom from './images/cards/mushrooms.jpg';
-import plateMail from './images/cards/bitva-cardbase.jpg';
-import raven from './images/cards/raven.jpg';
-import russianOven from './images/cards/bitva-cardbase.jpg';
-import shieldLarge from './images/cards/largeshield.jpg';
-import shieldSmall from './images/cards/smallshield.jpg';
-import sivka from './images/cards/warhorse.jpg';
-import skullLantern from './images/cards/bitva-cardbase.jpg';
-import turningPotion from './images/cards/potion.jpg';
-import warhorse from './images/cards/warhorse.jpg';
-import waterDead from './images/cards/deadwater.jpg';
-import waterLiving from './images/cards/livingwater.jpg';
-import wolf from './images/cards/wolf.jpg';
+import apple from '../images/cards/apple.jpg';
+import bajun from '../images/cards/catbajun.jpg';
+import bat from '../images/cards/bat.jpg';
+import bereginya from '../images/cards/bitva-cardbase.jpg';
+import bogatyr from '../images/cards/bitva-cardbase.jpg';
+import bowArrow from '../images/cards/bitva-cardbase.jpg';
+import bulat from '../images/cards/sword.jpg';
+import chemise from '../images/cards/bitva-cardbase.jpg';
+import chickenLegsHut from '../images/cards/izba.jpg';
+import clairvoyance from '../images/cards/bitva-cardbase.jpg';
+import crown from '../images/cards/bitva-cardbase.jpg';
+import dolly from '../images/cards/bitva-cardbase.jpg';
+import earthquake from '../images/cards/bitva-cardbase.jpg';
+import horsemanBlack from '../images/cards/blackrider.jpg';
+import horsemanRed from '../images/cards/redrider.jpg';
+import horsemanWhite from '../images/cards/whiterider.jpg';
+import kikimora from '../images/cards/bitva-cardbase.jpg';
+import lizard from '../images/cards/lizard.jpg';
+import magicTree from '../images/cards/tree.jpg';
+import magicMirror from '../images/cards/bitva-cardbase.jpg';
+import malachiteBox from '../images/cards/malachitebox.jpg';
+import mortar from '../images/cards/bitva-cardbase.jpg';
+import forestMushroom from '../images/cards/mushrooms.jpg';
+import plateMail from '../images/cards/bitva-cardbase.jpg';
+import raven from '../images/cards/raven.jpg';
+import russianOven from '../images/cards/bitva-cardbase.jpg';
+import shieldLarge from '../images/cards/largeshield.jpg';
+import shieldSmall from '../images/cards/smallshield.jpg';
+import sivka from '../images/cards/warhorse.jpg';
+import skullLantern from '../images/cards/bitva-cardbase.jpg';
+import turningPotion from '../images/cards/potion.jpg';
+import warhorse from '../images/cards/warhorse.jpg';
+import waterDead from '../images/cards/deadwater.jpg';
+import waterLiving from '../images/cards/livingwater.jpg';
+import wolf from '../images/cards/wolf.jpg';
 
 const images = {
     yaga,
@@ -93,13 +93,13 @@ const imagesCards = {
     wolf,
 };
 
-const HeroImage = props => (
+const HeroImage = (props) => (
     <div className="details-hero">
         <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }} />
     </div>
 );
 
-const CardPreview = props => (
+const CardPreview = (props) => (
     <div className={`card details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
         <div className="card-header">
             <div className={`card-icon-container details-card-icon-container ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
@@ -129,8 +129,7 @@ const CardPreview = props => (
                     >
                         {props.card.initialpoints}
                     </div>
-                ) : null
-            }
+                ) : null}
             {props.card.health
                 ? (
                     <div className={`card-health details-card-health
@@ -138,8 +137,7 @@ const CardPreview = props => (
                     >
                         {props.card.health}
                     </div>
-                ) : null
-            }
+                ) : null}
         </div>
         <div className="details-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
         <div className="card-footer details-card-footer">
@@ -148,7 +146,7 @@ const CardPreview = props => (
     </div>
 );
 
-const CardsRow = props => (
+const CardsRow = (props) => (
     <>
         <CardPreview card={props.cards[props.currentCard]} hero={props.hero} />
         <div className="card-description">
@@ -159,6 +157,19 @@ const CardsRow = props => (
         </div>
     </>
 );
+
+const Play = (props) => (
+    <div className="btn btn-play footer-menu" role="button" onClick={props.play} onKeyPress={props.play} tabIndex={props.tabIndex}>
+        PLAY
+    </div>
+);
+
+const BackButton = (props) => (
+    <div className="btn btn-back footer-menu" role="button" onClick={props.unselect} onKeyPress={props.unselect} tabIndex="10">
+        &#767;
+    </div>
+);
+
 
 class CardsBlock extends Component {
     constructor(props) {
@@ -209,14 +220,13 @@ class CardsBlock extends Component {
 }
 
 // Info about one hero.
-const OneHero = props => (
+const OneHero = (props) => (
     <div className={styles.details}>
         <HeroImage heroid={props.hero.id} hero={props.hero} />
         <div className="details-info-block">
             <article className="details-description">
                 <span>
                     {props.hero.description}
-                    {/* {console.log('PROPS HERO ', props.hero)} */}
                 </span>
                 <div className="icons-container">
                     <div className="icon-deck icon-text">
@@ -229,6 +239,10 @@ const OneHero = props => (
             </article>
             <CardsBlock heroId={props.hero.id} cards={props.hero.cards} hero={props.hero} />
         </div>
+        <section className="heroselection-footer">
+            <BackButton unselect={props.unselect} />
+            <Play play={props.play} tabIndex="5" />
+        </section>
     </div>
 );
 
@@ -259,6 +273,17 @@ CardsRow.propTypes = {
 
 OneHero.propTypes = {
     hero: PropTypes.object.isRequired,
+    unselect: PropTypes.func.isRequired,
+    play: PropTypes.func.isRequired,
+};
+
+BackButton.propTypes = {
+    unselect: PropTypes.func.isRequired,
+};
+
+Play.propTypes = {
+    play: PropTypes.func.isRequired,
+    tabIndex: PropTypes.string.isRequired,
 };
 
 export default OneHero;
