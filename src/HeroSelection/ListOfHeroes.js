@@ -9,6 +9,8 @@ import hozyaika from '../images/heroes/hozyaika_full.jpg';
 import premudraya from '../images/heroes/premudraya_full.jpg';
 import heart from '../images/icons/heart_red.png';
 
+import ornament from '../images/patterns/sideOrnament.png';
+
 const images = {
     yaga,
     morevna,
@@ -71,17 +73,24 @@ class ListOfHeroes extends Component {
         const heroes = this.props.allHeroes.slice(this.state.first, this.state.first + 3);
         console.log(heroes);
         return (
-            <div className="heroes-list">
-                <button type="button" className="hero-block" onClick={this.prev}>◀</button>
-                {heroes.map((hero) => (
-                    <HeroBlock
-                        key={hero.id}
-                        select={() => this.props.select(hero.id)}
-                        hero={hero}
-                        isAvailable={this.props.heroesID.includes(hero.id)}
-                    />
-                ))}
-                <button type="button" className="hero-block" onClick={this.next}>▶</button>
+            <div>
+                <div className="heroes-list">
+                    <button type="button" className="hero-block left-arrow" onClick={this.prev} />
+                    {heroes.map((hero) => (
+                        <HeroBlock
+                            key={hero.id}
+                            select={() => this.props.select(hero.id)}
+                            hero={hero}
+                            isAvailable={this.props.heroesID.includes(hero.id)}
+                        />
+                    ))}
+                    <button type="button" className="hero-block right-arrow" onClick={this.next} />
+                </div>
+                <div className="heroes-name">
+                    <img src={ornament} />
+                    <div><h3>HERO NAME GOES HERE</h3></div>
+                    <img src={ornament} />
+                </div>
             </div>
 
         );

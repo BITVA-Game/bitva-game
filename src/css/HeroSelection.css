@@ -123,8 +123,34 @@ section {
 .heroes-list {
 	padding: 1em 2em;
 	width: 90%;
-	text-align: center;
 	margin: 0 auto;
+	margin-top: 1em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/*background-color: rgba(0, 0, 1,0.3);*/
+}
+
+.heroes-name{
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 1em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.heroes-name img{
+	width: 50px;
+	height: 95px;
+}
+
+.heroes-name :nth-child(3){
+		transform: scaleX(-1);
+}
+
+.heroes-name div{
+	background-color: rgba(185, 185, 185, 0.7)
 }
 
 .hero-block {
@@ -133,9 +159,26 @@ section {
 	margin: .5em;
 }
 
-button.hero-block{
+button.hero-block {
+	height: 470px;
+	width: 50px;
 	background-color: transparent;
-	font-size: 200%
+	background-image: url("../images/patterns/arrow1.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+button.hero-block:hover {
+	background-color: transparent;
+	background-image: url("../images/patterns/arrow2.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+button.hero-block.left-arrow{
+	transform: scaleX(-1);
 }
 
 .btn-hero {

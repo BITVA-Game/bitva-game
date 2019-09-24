@@ -50,7 +50,11 @@ class HeroSelection extends Component {
     play() {
         console.log('PLAY MESSAGE SENT', this.state.hero);
         clickSound2.play();
-        this.props.sendMessage({ type: 'HEROSELECTED', hero: this.state.hero.id, player: this.app.heroSelect.activePlayer });
+        this.props.sendMessage({
+            type: 'HEROSELECTED',
+            hero: this.state.hero.id,
+            player: this.app.heroSelect.activePlayer,
+        });
     }
 
     heroesList() {
@@ -58,7 +62,13 @@ class HeroSelection extends Component {
     }
 
     renderOneHero() {
-        const swiper = <HeroSwiper hero={this.state.hero} allHeroes={this.heroesList()} select={this.select} />;
+        const swiper = (
+            <HeroSwiper
+                hero={this.state.hero}
+                allHeroes={this.heroesList()}
+                select={this.select}
+            />
+        );
         return (
             <div>
                 <Header title="Character Details" centre={swiper} />
