@@ -38,6 +38,10 @@
 
 /* hero */
 
+.player-inactive .hero-image {
+    filter: grayscale(100%);
+}
+
 .hero {
     border-radius: 50%;
     bottom: 180px;
@@ -58,7 +62,6 @@
 
 .hero-image {
     border-radius: 50%;
-    filter: invert(.2) sepia(1);
 }
 
 .hero-health {
