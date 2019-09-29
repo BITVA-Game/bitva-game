@@ -36,22 +36,27 @@ const AnimatedHand = ({ hand, player }) => (
     </div>
 );
 
-const Clairvoyance = ({player, active}) => (
-    <div>
-        {Object.keys(player.cardsShown).map(cardId => (
-            <div
-                key={cardId}
-                className="card-place card-like"
-            >
-                <Card
-                    cardKey={cardId}
-                    card={hand[cardId]}
-                    player={player}
-                />
+function Clairvoyance({player}) {
+    if  (player.cardsShown) {
+        return (
+            <div >
+                {Object.keys(player.cardsShown).map(cardId => (
+                    <div
+                        key={cardId}
+                        className="card-place card-like clairvoyance"
+                    >
+                        <Card
+                            cardKey={cardId}
+                            card={player.cardsShown[cardId]}
+                            player={player}
+                        />
+                    </div>
+                ))}
             </div>
-        ))}
-    </div>
-);
+        );
+    }
+        return null;
+    }
 
 class Player extends Component {
     constructor(props) {
@@ -144,11 +149,11 @@ class Player extends Component {
                     active={this.props.active}
                     cards={this.props.player.cards}
                     background={this.props.player.background}
-                />
+                />                
                 <Clairvoyance 
                     player={this.props.player} 
-                    active={this.props.active} 
-                />
+                    active={this.props.active}
+                />                                    
                 <Hand
                     active={this.props.active}
                     dragging={this.props.dragging}

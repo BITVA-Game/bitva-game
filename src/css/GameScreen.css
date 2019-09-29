@@ -750,5 +750,31 @@
 
 @keyframes toHand {
     0%      { transform: translateX(0px) translateY(0px); }
-    100%     { transform: translateX(-220px) translateY(-555px) }
+    100%     { transform: translateX(-220px) translateY(-555px); }
 }
+
+/* Animation Clairvoyance */
+
+.clairvoyance {
+    left: 73px;
+    margin-bottom: -100px;
+    margin-left: 60px;
+     
+}
+
+
+/*Animation to be fixed*/
+/* 
+@keyframes show {
+    0% { 
+        bottom: 126px;
+        left: 50px;
+        margin-left: 20px;
+        position: absolute;   
+     }
+    100% {
+        left: 73px;
+        margin-bottom: -100px;
+        margin-left: 60px;
+    }
+} */
