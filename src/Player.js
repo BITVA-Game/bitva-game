@@ -36,8 +36,8 @@ const AnimatedHand = ({ hand, player }) => (
     </div>
 );
 
-function Clairvoyance({player}) {
-    if  (player.cardsShown) {
+function Clairvoyance({ player }) {
+    if(player.cardsShown) {
         return (
             <div >
                 {Object.keys(player.cardsShown).map(cardId => (
@@ -55,8 +55,8 @@ function Clairvoyance({player}) {
             </div>
         );
     }
-        return null;
-    }
+    return null;
+}
 
 class Player extends Component {
     constructor(props) {
@@ -149,8 +149,8 @@ class Player extends Component {
                     active={this.props.active}
                     cards={this.props.player.cards}
                     background={this.props.player.background}
-                />                
-                <Clairvoyance 
+                />            
+                <Clairvoyance
                     player={this.props.player} 
                     active={this.props.active}
                 />                                    
@@ -309,6 +309,10 @@ Hand.propTypes = {
 
 AnimatedHand.propTypes = {
     hand: PropTypes.object.isRequired,
+    player: PropTypes.object.isRequired,
+};
+
+Clairvoyance.propTypes = {
     player: PropTypes.object.isRequired,
 };
 
