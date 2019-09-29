@@ -67,7 +67,7 @@ test('msg ACTION received: when turn changes cardsShown is removed from player w
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
     gameForTest.game.players[0].grave.key8 = clairvoyance;
     gameForTest.game.players[0].hand.key21 = wolf;
-    
+
     // we create new engine with our game state
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
@@ -78,7 +78,6 @@ test('msg ACTION received: when turn changes cardsShown is removed from player w
     const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
     // ожидаем, что Morevna ранее сходила картой clairvoyance, и та после ходя ушла на кладбище
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
-
     // ожидаем, что у противника исчезнет cardsShown после 1 хода
     expect(Object.values(inactivePlayer)).not.toContain('cardsShown');
 });

@@ -37,10 +37,10 @@ const AnimatedHand = ({ hand, player }) => (
 );
 
 function Clairvoyance({ player }) {
-    if(player.cardsShown) {
+    if (player.cardsShown) {
         return (
-            <div >
-                {Object.keys(player.cardsShown).map(cardId => (
+            <div>
+                {Object.keys(player.cardsShown).map((cardId) => (
                     <div
                         key={cardId}
                         className="card-place card-like clairvoyance"
@@ -149,11 +149,11 @@ class Player extends Component {
                     active={this.props.active}
                     cards={this.props.player.cards}
                     background={this.props.player.background}
-                />            
+                />
                 <Clairvoyance
-                    player={this.props.player} 
+                    player={this.props.player}
                     active={this.props.active}
-                />                                    
+                />
                 <Hand
                     active={this.props.active}
                     dragging={this.props.dragging}
@@ -192,7 +192,7 @@ const Deck = (props) => (
     <div className={`deck card-like deck-${props.background}`}>
         <div className="count">
             {props.active ? Object.keys(props.cards).length : Object.keys(props.cards).length}
-        </div>        
+        </div>
     </div>
 );
 
