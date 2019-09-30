@@ -756,25 +756,109 @@
 /* Animation Clairvoyance */
 
 .clairvoyance {
-    left: 73px;
+    /* left: 73px; */
     margin-bottom: -100px;
-    margin-left: 60px;
-     
+    margin-left: 50px;
+    
 }
 
+.upper {
+    animation: topOnUpper 5s 1s ease infinite; 
+    z-index: 2;
+}
+
+.middle {
+    animation: topOnMid 5s 1s ease infinite; 
+    z-index: 1;
+}
 
 /*Animation to be fixed*/
-/* 
-@keyframes show {
-    0% { 
-        bottom: 126px;
-        left: 50px;
-        margin-left: 20px;
-        position: absolute;   
-     }
-    100% {
-        left: 73px;
-        margin-bottom: -100px;
-        margin-left: 60px;
+@keyframes topOnUpper {
+    5% {
+        left: 0;
+        top: 0;
+        transform:  translateY(-30px);
+        z-index: 1;
     }
-} */
+    15% {
+        left: 0;
+        top: 0;
+        transform: translateY(-15px);
+        z-index: 0;
+    }
+    35% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    50% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(20px);
+        z-index: 1;
+    }
+    75% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(30px);
+        z-index: 1;
+    }
+    85% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(40px);
+        z-index: 1;
+    }
+    100% {
+        left: 0;
+        top: 0;
+        transform: translateY(60px);
+        z-index: 2;
+    }
+}
+
+@keyframes topOnMid {
+    5% {
+        left: 0;
+        top: 0;
+        transform: translateY(-30px);
+        z-index: 2;
+    }
+    15% {
+        left: 0;
+        top: 0;
+        transform:  translateY(-15px);
+        z-index: 2;
+    }
+    35% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    50% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(20px);
+        z-index: 0;
+    }
+    65% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(30px);
+        z-index: 0;
+    }
+    80% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(60px);
+        z-index: 1;
+    }
+    100% {
+        left: 0;
+        top: 0;
+        transform:  translateY(60px);
+        z-index: 1;
+    }
+}

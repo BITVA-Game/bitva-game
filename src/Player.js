@@ -37,23 +37,56 @@ const AnimatedHand = ({ hand, player }) => (
 );
 
 function Clairvoyance({ player }) {
-    if (player.cardsShown) {
+    let showCardsKeys;
+    // eslint-disable-next-line no-unused-expressions
+    player.cardsShown
+        ? showCardsKeys = Object.keys(player.cardsShown)
+        : null;
+
+    if (showCardsKeys) {
         return (
             <div>
-                {Object.keys(player.cardsShown).map((cardId) => (
-                    <div
-                        key={cardId}
-                        className="card-place card-like clairvoyance"
-                    >
-                        <Card
-                            cardKey={cardId}
-                            card={player.cardsShown[cardId]}
-                            player={player}
-                        />
-                    </div>
-                ))}
+                <div key={showCardsKeys[0]} className="card-place card-like clairvoyance bottom">
+                    <Card
+                        cardKey={showCardsKeys[0]}
+                        card={player.cardsShown[showCardsKeys[0]]}
+                        player={player}
+                    />
+                </div>
+                <div key={showCardsKeys[1]} className="card-place card-like clairvoyance middle">
+                    <Card
+                        cardKey={showCardsKeys[1]}
+                        card={player.cardsShown[showCardsKeys[1]]}
+                        player={player}
+                    />
+                </div>
+                <div key={showCardsKeys[2]} className="card-place card-like clairvoyance upper">
+                    <Card
+                        cardKey={showCardsKeys[2]}
+                        card={player.cardsShown[showCardsKeys[2]]}
+                        player={player}
+                    />
+                </div>
             </div>
-        );
+        ); 
+        // return (
+        //     <div>
+        //         {Object.keys(player.cardsShown).map((cardId, index) => (
+
+        //             <div
+        //                 key={cardId}
+        //                 className="card-place card-like clairvoyance"
+        //             >
+        //                 <Card
+        //                     cardKey={cardId}
+        //                     card={player.cardsShown[cardId]}
+        //                     player={player}
+        //                 />
+        //                 {console.log(cardId, index)}
+        //             </div>
+        //         ))}
+        //     </div>
+        // );
     }
     return null;
 }
