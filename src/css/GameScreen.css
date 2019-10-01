@@ -769,7 +769,6 @@
 }
 
 .middle {
-    /* animation: topOnMid 5s 1s ease infinite;  */
     animation: topOnMid 2s 1s ease-in-out infinite;
     left: 20px;
 	top: 20px;
@@ -778,7 +777,6 @@
 
 .bottom {
     animation: topOnLower 2s 1s ease-in-out infinite;
-    /* animation: topOnLower 5s 1s ease infinite;  */
     left: 40px;
 	top: 40px;
 	z-index: 0;

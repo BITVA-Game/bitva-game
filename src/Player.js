@@ -37,6 +37,9 @@ const AnimatedHand = ({ hand, player }) => (
     </div>
 );
 
+// Clairvoyance showed 3 1st cards from deck -from backend
+// this function create them to appear with 3 different
+// classNames for each to create different animation
 function Clairvoyance({ player }) {
     const findPosition = (index) => {
         if (index === 2) {
@@ -61,13 +64,10 @@ function Clairvoyance({ player }) {
                         card={player.cardsShown[cardId]}
                         player={player}
                     />
-                    {console.log(cardId, index)}
                 </div>
             ))}
         </div>
     );
-    // }
-    // return null;
 }
 
 class Player extends Component {
@@ -89,6 +89,7 @@ class Player extends Component {
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation();
         // animation for Turning Potion - active player gets cards from inactive player hand
+        // doesn't work ---> to be fixed!
         } if (this.props.player.turningHand !== prevProps.player.turningHand
             && this.props.player.turningHand === true) {
             this.playAnimationPotion();
