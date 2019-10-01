@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-duplicates */
 
@@ -37,58 +38,36 @@ const AnimatedHand = ({ hand, player }) => (
 );
 
 function Clairvoyance({ player }) {
-    let showCardsKeys;
-    // eslint-disable-next-line no-unused-expressions
-    player.cardsShown
-        ? showCardsKeys = Object.keys(player.cardsShown)
-        : null;
+    const findPosition = (index) => {
+        if (index === 2) {
+            return 'upper';
+        } if (index === 1) {
+            return 'middle';
+        } if (index === 0) {
+            return 'bottom';
+        }
+    };
 
-    if (showCardsKeys) {
-        return (
-            <div>
-                <div key={showCardsKeys[0]} className="card-place card-like clairvoyance bottom">
-                    <Card
-                        cardKey={showCardsKeys[0]}
-                        card={player.cardsShown[showCardsKeys[0]]}
-                        player={player}
-                    />
-                </div>
-                <div key={showCardsKeys[1]} className="card-place card-like clairvoyance middle">
-                    <Card
-                        cardKey={showCardsKeys[1]}
-                        card={player.cardsShown[showCardsKeys[1]]}
-                        player={player}
-                    />
-                </div>
-                <div key={showCardsKeys[2]} className="card-place card-like clairvoyance upper">
-                    <Card
-                        cardKey={showCardsKeys[2]}
-                        card={player.cardsShown[showCardsKeys[2]]}
-                        player={player}
-                    />
-                </div>
-            </div>
-        ); 
-        // return (
-        //     <div>
-        //         {Object.keys(player.cardsShown).map((cardId, index) => (
+    return (
+        <div>
+            {Object.keys(player.cardsShown).map((cardId, index) => (
 
-        //             <div
-        //                 key={cardId}
-        //                 className="card-place card-like clairvoyance"
-        //             >
-        //                 <Card
-        //                     cardKey={cardId}
-        //                     card={player.cardsShown[cardId]}
-        //                     player={player}
-        //                 />
-        //                 {console.log(cardId, index)}
-        //             </div>
-        //         ))}
-        //     </div>
-        // );
-    }
-    return null;
+                <div
+                    key={cardId}
+                    className={`card-place card-like clairvoyance ${findPosition(index)}`}
+                >
+                    <Card
+                        cardKey={cardId}
+                        card={player.cardsShown[cardId]}
+                        player={player}
+                    />
+                    {console.log(cardId, index)}
+                </div>
+            ))}
+        </div>
+    );
+    // }
+    // return null;
 }
 
 class Player extends Component {
@@ -183,10 +162,13 @@ class Player extends Component {
                     cards={this.props.player.cards}
                     background={this.props.player.background}
                 />
-                <Clairvoyance
-                    player={this.props.player}
-                    active={this.props.active}
-                />
+                {this.props.player.cardsShown
+                    ? (
+                        <Clairvoyance
+                            player={this.props.player}
+                            active={this.props.active}
+                        />
+                    ) : null}
                 <Hand
                     active={this.props.active}
                     dragging={this.props.dragging}
