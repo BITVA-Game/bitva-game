@@ -111,8 +111,8 @@
     },
     "hozyaika": {
         "id": "hozyaika",
-        "name": "The Malachite Maid",
-        "description": "The Malachite Maid is the mountain spirit from the legends of the Ural miners and the Mistress of the Ural Mountains",
+        "name": "Malachite Maid",
+        "description": "Malachite Maid is the mountain spirit from the legends of the Ural miners and the Mistress of the Ural Mountains",
         "health": 13,
         "cardsNumber": 19,
         "img": "character_ex.png",
@@ -155,7 +155,7 @@
             },
             "malachiteBox": {
                 "id": "malachiteBox",
-                "count": 1
+                "count": 10
             },
             "turningPotion": {
                 "id": "turningPotion",

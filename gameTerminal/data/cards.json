@@ -272,11 +272,11 @@
     },
     "malachiteBox": {
         "id": "malachiteBox",
-        "name": "The Malachite Box",
+        "name": "Malachite Box",
         "type": "item",
         "icon": "deckMove",
         "category": "generator",
-        "categoryName": "generator",
+        "categoryName": "create",
         "description": "Maid's gift. But it has a hidden agenda and brings miseries to the person who opens box without permission.",
         "health": 2
     },
