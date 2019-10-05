@@ -53,13 +53,18 @@ async function processMessage(msg) {
     return newApp;
 }
 
+function initApplication() {
+    // HACK until we have initial auth flow in place
+    return { ...application, account: gameAccounts.alice };
+}
+
 // This function is called from main.js
 // It redirects the message to all handlers
 // Only those that have relevatn state will be updated
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
 async function msgReceived(msg, sendReply) {
-    const newApp = msg === message.INIT ? application : await processMessage(msg);
+    const newApp = msg.type === message.INIT ? initApplication() : await processMessage(msg);
     if (message.network) {
         newApp.network = true;
         console.log('OMG NETWORK PLAY IS: ', newApp.network);

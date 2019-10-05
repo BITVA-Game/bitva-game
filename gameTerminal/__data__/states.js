@@ -3,11 +3,10 @@ import {
     screen,
 } from '../../constants';
 
+import gameAccounts from '../../gameAccounts';
+
 export const startscreenState = {
-    account: {
-    		id: 'Alice',
-    		name: 'Alice Adams',
-    	},
+    account: gameAccounts.alice,
     manager: {
         screen: screen.STARTSCREEN,
     },

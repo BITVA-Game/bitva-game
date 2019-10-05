@@ -7,6 +7,8 @@ import {
     screen as scr, message,
 } from '../../constants';
 
+import gameAccounts from '../../gameAccounts';
+
 // import module for tests
 const application = require('../application');
 
@@ -43,10 +45,7 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', async () => {
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
-            account: {
-                id: 'Alice',
-                name: 'Alice Adams',
-            },
+            account: gameAccounts.alice,
             manager: {
                 screen: scr.STARTSCREEN,
             },
@@ -64,16 +63,12 @@ test('msg PLAY creates engine and handles the message', async () => {
         innerState: { a: 1 },
     };
     nock.disableNetConnect();
-    const alice = {
-        id: 'Alice',
-        name: 'Alice Adams',
-    };
-    const bob = {
-        id: 'Bob',
-        name: 'Bob Brown',
-    };
+
     const scope = nock(address)
-        .post('/', { message: { type: 'PLAY', accounts: [alice, bob] } })
+        .post(
+            '/',
+            { message: { type: 'PLAY', accounts: [gameAccounts.alice, gameAccounts.bob] } },
+        )
         .reply(200)
         .get('/')
         .reply(200, engineState);
@@ -82,8 +77,8 @@ test('msg PLAY creates engine and handles the message', async () => {
     scope.isDone();
 
     const expectedState = {
-        account: alice,
-        guest: bob,
+        account: gameAccounts.alice,
+        guest: gameAccounts.bob,
         manager: { screen: scr.HEROSELECT },
         innerState: engineState.innerState,
     };
@@ -118,14 +113,8 @@ test.skip('msg sent twice, we have one instance of engine', async () => {
     expect(handleFunc.mock.calls[0]).toEqual([msg]);
 
     const expectedState = {
-        account: {
-            id: 'Alice',
-            name: 'Alice Adams',
-        },
-        guest: {
-            id: 'Bob',
-            name: 'Bob Brown',
-        },
+        account: gameAccounts.alice,
+        guest: gameAccounts.bob,
         manager: { screen: scr.STARTSCREEN },
         innerState: engineState.innerState,
     };

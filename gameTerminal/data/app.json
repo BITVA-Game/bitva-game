@@ -1,8 +1,4 @@
 {
-	"account" : {
-		"id": "Alice",
-		"name": "Alice Adams"
-	},
+	"account" : null,
 	"manager": "STARTSCREEN"
-
 }

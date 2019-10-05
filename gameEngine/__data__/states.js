@@ -3,11 +3,13 @@ import {
     screen,
 } from '../../constants';
 
+import gameAccounts from '../../gameAccounts';
+
 export const alice = {
-    id: 'Alice',
+    id: gameAccounts.alice.id,
 };
 export const bob = {
-    id: 'Bob',
+    id: gameAccounts.bob.id,
 };
 
 export const playState = {
