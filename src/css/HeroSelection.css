@@ -36,148 +36,106 @@ section {
 /* header */
 
 .heroselection-header {
+	align-items: center;
 	background: rgb(0,0,0);
 	background: rgba(0,0,0,0.5);
+	display: flex;
 	font-size: 36px;
-	height: 7.4rem;
+	height: 60px;
 	text-align: center;
 	width: 100%;
 }
 
 .header-menu {
-	position: absolute;
-	text-align: center;
-	top: 2rem;
+	display: flex;
 }
 
 .heroselection-title {
-	color: #9c9c9c;
-	left: 4rem;
-}
-
-.header-nav-menu {
-    left: 40%;
-	right: 40%;
+	color: #FFF;
+	font-family: "Ruslan Display";
+	margin: 0 78px 0 50px;
 }
 
 .hero-nav-menu-name {
-	left: 50%;
-	position: fixed;
-	transform: translateX(-50%);
-}
-
-.hero-btn-arrow {
-	display: inline-block;
-	position: relative;
-	top: .3rem;
-	transform: scale(.8, 2.8);
-}
-
-.hero-btn-arrow-left {
-	left: -7rem;
-}
-
-.hero-btn-arrow-right {
-	right: -7rem;
-}
-
-.btn-hero-details {
-	font-size: 24px;
-	position: fixed;
-	right: 2rem;
-	top: 2.6rem;
-}
-
-/* footer */
-
-.heroselection-footer {
-	background-color: rgb(0,0,0);
-	background-color: rgba(0,0,0,0.5);
-	bottom: 0;
-	font-size: 36px;
-	height: 4.2rem;
-	left: 0;
-	position: fixed;
-	right: 0;
-	text-align: center;
-}
-
-.footer-menu {
-	bottom: .2rem;
-	position: absolute;
-}
-
-.btn-back {
-	bottom: .1rem;
-	font-size: 6rem;
-	left: 4rem;
-}
-
-.btn-play {
-	left: 40%;
-	right: 40%;
+	padding: 0 30px;
 }
 
 /* list of heroes */
 
 .heroes-list {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	margin-top: 1em;
 	padding: 1em 2em;
-	width: 90%;
-	margin: 0 auto;
-	margin-top: 1em;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	/*background-color: rgba(0, 0, 1,0.3);*/
+	width: 90%;	
 }
 
-.heroes-name{
-	width: 90%;
+.heroes-names {
+	align-items: center;
+	display: flex;
+	justify-content: center;
 	margin: 0 auto;
 	margin-top: 1em;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width: 90%;	
 }
 
-.heroes-name img{
-	width: 50px;
+.hero-name {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	margin: 0 10px;
+}
+
+.hero-name img {
 	height: 95px;
+	width: 50px;
 }
 
-.heroes-name :nth-child(3){
-		transform: scaleX(-1);
+.hero-name img:last-child {
+	transform: scaleX(-1);
 }
 
-.heroes-name div{
-	background-color: rgba(185, 185, 185, 0.7)
+.hero-name div {
+	align-items: center;
+	background-color: rgb(185, 185, 185);
+	background-color: rgba(185, 185, 185, 0.7);
+	display: flex;
+	height: 40px;
+	justify-content: center;
+	width: 190px;
+}
+
+.hero-name div h3 {
+	font-size: 36px;
 }
 
 .hero-block {
-	background-color: #fff;
+	background-color: #ECEBEB;
 	display: inline-flex;
 	margin: .5em;
 }
 
 button.hero-block {
-	height: 470px;
-	width: 50px;
 	background-color: transparent;
 	background-image: url("../images/patterns/arrow1.png");
-	background-size: contain;
-	background-repeat: no-repeat;
 	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;	
+	height: 470px;
+	width: 50px;
 }
 
-button.hero-block:hover {
+.hero-block:hover {
 	background-color: transparent;
 	background-image: url("../images/patterns/arrow2.png");
-	background-size: contain;
-	background-repeat: no-repeat;
 	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 
-button.hero-block.left-arrow{
+.hero-block.left-arrow{
 	transform: scaleX(-1);
 }
 
@@ -214,7 +172,6 @@ button.hero-block.left-arrow{
 
 .deck-icon {
 	background-color: #898989;
-    border: 1px solid #fff;
 	border-radius: 3px;
 	height: 40px;
 	left: 5px;
@@ -238,8 +195,6 @@ button.hero-block.left-arrow{
 }
 
 .health {
-	/*-webkit-filter: drop-shadow(0 0 2px #fff);
-	filter: drop-shadow(0 0 2px #fff);*/
 	height: 38px;
 	width: 38px;
 }
@@ -254,7 +209,7 @@ button.hero-block.left-arrow{
 
 .hero-inaccessable .btn-hero {
 	border-color: #747474;
-	opacity: .5;
+	filter: grayscale(100%);
 }
 
 .icons-inactive div{
@@ -263,95 +218,104 @@ button.hero-block.left-arrow{
 
 /* hero details (OneHero) screen */
 
-.details-hero {
-	flex: 1 1 35%;
-	padding: 40px 20px;
-}
-
-.details-hero-avatar {
+.heroselection-details {
 	display: flex;
-	height: 35rem;
 	justify-content: space-between;
+	padding: 36px 78px;
 	width: 100%;
 }
 
-.details-hero-avatar .icon-deck {
-	transform: scale(2) translate(8px, 10px);
+.details-hero {
+	display: flex;
+	padding: 0;
 }
 
-.details-hero-avatar .icon-heal {
-	align-self: flex-end;
-	transform: scale(2) translate(-10px, -8px);
+.details-hero-avatar {
+	height: 576px;
+	width: 366px;
 }
 
 /* details information block */
 
 .details-info-block {
-	flex: 1 1 65%;
+	background: rgb(236, 235, 235);
+	background: rgba(236, 235, 235, .8);
+	flex: 1 1 766px;
+	margin-left: 78px;
+	padding: 0 34px;
 }
 
-.details-description {
-	bottom: 33rem;
+.details-description-container {
 	color: #000;
-	font-size: 22px;
-	height: 12rem;
-	padding: 2rem 5rem;
-	position: absolute;
-}
-
-.details-cards {
-	bottom: 8rem;
-	display: flex;
-	height: 301px;
-	justify-content: space-between;
-	position: absolute;
-	right: 6.8rem;
-	width: 700px;
-}
-
-.cards-btn {
-	bottom: 10rem;
-	position: absolute;
-    transform: scale(3.4,12);
-}
-
-.cards-btn-left {
-	left: -3rem;
-}
-
-.cards-btn-right {
-	right: -3rem;
+	font-size: 26px;
+	padding-bottom: 17px;
 }
 
 /* description icons */
 
-.icons-container {
+.details-info {
+	align-items: center;
 	display: flex;
+	font-family: "Sedan SC";
+	font-size: 36px;
+	padding: 10px 0;
 }
 
-.icons-container .icon-deck {
-	margin-right: 17px;
+.details-name {
+	font-family: "Ruslan Display";
 }
 
-.icon-heart-description {
-	background-size: 68px 68px;
-	flex-basis: 68px;
+.details-health-container {
+	align-items: center;
+	display: flex;
 	height: 68px;
-	margin: 14px 8px 2px 8px;
+	justify-content: center;
+	margin: 0 10px 0 20px;
+	position: relative;
 	width: 68px;
+}
+
+.details-health {
+	height: 100%;
+	position: absolute;
+	top: 4px;
+	width: 100%;
+}
+
+.details-health-text{
+	color: #fff;
+	font-size: 44px;
+	position: absolute;
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	top: 0;
 }
 
 .icon-deck {
 	align-items: center;
 	background-color: #898989;
-    border: 1px solid #fff;
 	border-radius: 3px;
 	display: flex;
 	flex-basis: 51px;
 	height: 68px;
 	justify-content: center;
-	margin: 8px 0;
+	margin-left: 10px;
     width: 51px;
+}
+
+.icon-deck-blue {
+    background-color: rgb(130, 155, 175);
+}
+
+.icon-deck-green {
+    background-color: rgb(109, 131, 116);
+}
+
+.icon-deck-ochre {
+    background-color: rgb(193, 140, 109);
+}
+
+.icon-deck-red {
+    background-color: rgb(163, 98, 100);
 }
 
 .icon-text {
@@ -362,11 +326,81 @@ button.hero-block.left-arrow{
 	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
+.details-description {
+	height: 105px;
+}
+
+.details-cards {
+	display: flex;
+	width: 700px;
+}
+
 .card-description {
 	color: #000;
+	display: flex;
+	flex-direction: column;
 	font-size: 22px;
+	justify-content: space-between;
+	margin-left: 10px;
 	width: 450px;
 }
+
+.card-description-amount {
+	align-items: center;
+	display: flex;
+}
+
+.details-cards-buttons {
+	display: flex;
+	justify-content: center;
+	padding-top: 12px;
+	width: 210px;
+}
+
+.cards-btn {
+	background: #ECEBEB;
+	border: 2px solid #000;
+	border-radius: 22px;
+	color: #000;
+	font-size: 22px;
+	padding: 0 20px;
+}
+
+.cards-btn:first-child {
+	margin-right: 20px;
+}
+
+/* footer */
+
+.heroselection-footer {
+	align-items: center;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.5);
+	display: flex;
+	font-family: "Ruslan Display";
+	font-size: 36px;
+	height: 60px;
+}
+
+.btn-back {
+	background: #ECEBEB;
+	border-radius: 50%;
+	color: #000;
+	font-size: 28px;
+	height: 36px;
+	line-height: 48px;
+	margin: 0 520px 0 50px;
+	padding: 0 9px 0 5px;
+}
+
+.btn-play {
+	background: #ECEBEB;
+	border-radius: 30px;
+	color: #000;
+	padding: 0 35px;
+}
+
+/* animations */
 
 .hero-selection-screen-animation {
 	animation: moveScreen 1s linear 1 forwards;

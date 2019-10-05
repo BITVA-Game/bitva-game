@@ -19,7 +19,7 @@ const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, { volume
 
 const Header = (props) => (
     <section className="heroselection-header">
-        <div className="header-menu heroselection-title">
+        <div className="heroselection-title">
             {props.title}
         </div>
         {props.centre}
@@ -112,7 +112,11 @@ HeroSelection.propTypes = {
 
 Header.propTypes = {
     title: PropTypes.string.isRequired,
-    centre: PropTypes.object.isRequired,
+    centre: PropTypes.object,
+};
+
+Header.defaultProps = {
+    centre: undefined,
 };
 
 export default HeroSelection;

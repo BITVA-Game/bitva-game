@@ -3,7 +3,7 @@
 /* .game-table {
 } */
 
-.player-active .card,
+/* .player-active .card,
 .player-active .deck,
 .player-active .item,
 .player-active .grave {
@@ -15,7 +15,7 @@
 .player-inactive .item,
 .player-inactive .grave {
     border: 3px solid #000;
-}
+} */
 
 /* player */
 

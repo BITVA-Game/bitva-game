@@ -18,6 +18,14 @@ const images = {
     premudraya,
 };
 
+const HeroName = ({ name }) => (
+    <div className="hero-name">
+        <img src={ornament} alt="" />
+        <div><h3>{name}</h3></div>
+        <img src={ornament} alt="" />
+    </div>
+);
+
 // Individual hero block, repeates to display every character
 const HeroBlock = (props) => {
     const { hero, isAvailable, select } = props;
@@ -25,7 +33,7 @@ const HeroBlock = (props) => {
         <div className={isAvailable ? 'hero-block' : 'hero-block hero-inaccessable'}>
             <div role="button" className="btn-hero" onClick={select} onKeyPress={select} tabIndex="-1">
                 <img className="heroselection-hero-image" src={images[hero.id]} alt={hero.id} />
-                <div className="deck-icon">
+                <div className={`deck-icon icon-deck-${props.hero.background}`}>
                     <div className="deck-text">
                         {hero.cardsNumber}
                     </div>
@@ -85,16 +93,20 @@ class ListOfHeroes extends Component {
                     ))}
                     <button type="button" className="hero-block right-arrow" onClick={this.next} />
                 </div>
-                <div className="heroes-name">
-                    <img src={ornament} alt="ornament" />
-                    <div><h3>HERO NAME GOES HERE</h3></div>
-                    <img src={ornament} alt="ornament" />
+                <div className="heroes-names">
+                    {heroes.map((hero) => (
+                        <HeroName key={hero.id} name={hero.id} />
+                    ))}
                 </div>
             </div>
 
         );
     }
 }
+
+HeroName.propTypes = {
+    name: PropTypes.string.isRequired,
+};
 
 HeroBlock.propTypes = {
     isAvailable: PropTypes.bool.isRequired,

@@ -4,13 +4,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../css/App.css';
 import '../css/HeroSelection.css';
-import styles from '../css/HeroSelection.module.css';
 import '../css/Cards.css';
 
-import yaga from '../images/heroes/yaga.jpg';
-import morevna from '../images/heroes/morevna.jpg';
-import hozyaika from '../images/heroes/hozyaika.jpg';
-import premudraya from '../images/heroes/premudraya.jpg';
+import heart from '../images/icons/heart_red.png';
+
+import yaga from '../images/heroes/yaga_full.jpg';
+import morevna from '../images/heroes/morevna_full.jpg';
+import hozyaika from '../images/heroes/hozyaika_full.jpg';
+import premudraya from '../images/heroes/premudraya_full.jpg';
 
 import apple from '../images/cards/apple.jpg';
 import bajun from '../images/cards/catbajun.jpg';
@@ -95,7 +96,9 @@ const imagesCards = {
 
 const HeroImage = (props) => (
     <div className="details-hero">
-        <div className="details-hero-avatar" style={{ backgroundImage: `url(${images[props.heroid]})`, backgroundSize: 'cover' }} />
+        <div className="details-hero-avatar">
+            <img src={`${images[props.heroid]}`} style={{ height: '100%', width: '100%' }} alt={props.heroid} />
+        </div>
     </div>
 );
 
@@ -150,23 +153,24 @@ const CardsRow = (props) => (
     <>
         <CardPreview card={props.cards[props.currentCard]} hero={props.hero} />
         <div className="card-description">
-            {props.cards[props.currentCard].description}
-            <div className="icon-deck icon-text">
-                {props.cards[props.currentCard].count}
+            <div>{props.cards[props.currentCard].description}</div>
+            <div className="card-description-amount">
+                <div>X</div>
+                <div className={`icon-deck icon-text icon-deck-${props.hero.background}`}>{props.cards[props.currentCard].count}</div>
             </div>
         </div>
     </>
 );
 
 const Play = (props) => (
-    <div className="btn btn-play footer-menu" role="button" onClick={props.play} onKeyPress={props.play} tabIndex={props.tabIndex}>
+    <div className="btn btn-play" role="button" onClick={props.play} onKeyPress={props.play} tabIndex={props.tabIndex}>
         PLAY
     </div>
 );
 
 const BackButton = (props) => (
-    <div className="btn btn-back footer-menu" role="button" onClick={props.unselect} onKeyPress={props.unselect} tabIndex="10">
-        &#767;
+    <div className="btn btn-back" role="button" onClick={props.unselect} onKeyPress={props.unselect} tabIndex="10">
+        ◀
     </div>
 );
 
@@ -206,38 +210,47 @@ class CardsBlock extends Component {
         this.deck = Object.keys(this.props.cards);
         // console.log(this.props.cards, this.deck);
         return (
-            <section className="details-cards">
-                <div className="btn cards-btn cards-btn-left" role="button" onClick={this.changeRowPrev} onKeyPress={this.changeRow} tabIndex="5">
-                    ◀
+            <div className="details-cards-container">
+                <div className="details-cards">
+                    <CardsRow heroId={this.props.heroId} currentCard={this.deck[this.state.cardIndex]} cards={this.props.cards} hero={this.props.hero} />
                 </div>
-                <CardsRow heroId={this.props.heroId} currentCard={this.deck[this.state.cardIndex]} cards={this.props.cards} hero={this.props.hero} />
-                <div className="btn cards-btn cards-btn-right" role="button" onClick={this.changeRowNext} onKeyPress={this.changeRow} tabIndex="6">
-                    ▶
+                <div className="details-cards-buttons">
+                    <div className="btn cards-btn" role="button" onClick={this.changeRowPrev} onKeyPress={this.changeRow} tabIndex="5">
+                        ◀
+                    </div>
+                    <div className="btn cards-btn" role="button" onClick={this.changeRowNext} onKeyPress={this.changeRow} tabIndex="6">
+                        ▶
+                    </div>
                 </div>
-            </section>
+            </div>
         );
     }
 }
 
 // Info about one hero.
 const OneHero = (props) => (
-    <div className={styles.details}>
-        <HeroImage heroid={props.hero.id} hero={props.hero} />
-        <div className="details-info-block">
-            <article className="details-description">
-                <span>
-                    {props.hero.description}
-                </span>
-                <div className="icons-container">
-                    <div className="icon-deck icon-text">
-                        {props.hero.cardsNumber}
+    <div>
+        <div className="heroselection-details">
+            <HeroImage heroid={props.hero.id} hero={props.hero} />
+            <div className="details-info-block">
+                <div className="details-description-container">
+                    <div className="details-info">
+                        <div className="details-name">{props.hero.name}</div>
+                        {/* <div className="icon-text icon-heart icon-heart-description"> */}
+                        <div className="details-health-container">
+                            <img className="details-health" src={heart} alt="" />
+                            <div className="details-health-text">{props.hero.health}</div>
+                        </div>
+                        <div className={`icon-deck icon-text icon-deck-${props.hero.background}`}>
+                            {props.hero.cardsNumber}
+                        </div>
                     </div>
-                    <div className="icon-text icon-heart icon-heart-description">
-                        {props.hero.health}
+                    <div className="details-description">
+                        {props.hero.description}
                     </div>
                 </div>
-            </article>
-            <CardsBlock heroId={props.hero.id} cards={props.hero.cards} hero={props.hero} />
+                <CardsBlock heroId={props.hero.id} cards={props.hero.cards} hero={props.hero} />
+            </div>
         </div>
         <section className="heroselection-footer">
             <BackButton unselect={props.unselect} />
