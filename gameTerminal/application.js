@@ -8,6 +8,7 @@ let application = require('./data/app.json');
 // Additional files that have functions related to this part of application
 const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
+const gameAccounts = require('../gameAccounts');
 const socketClient = require('./socketClient');
 const account = require('./accountManager');
 
@@ -41,10 +42,7 @@ async function processMessage(msg) {
     console.log('process', msg);
     // HACK until we have auth flow
     if (msg.type === message.PLAY) {
-        application.guest = {
-            id: 'Bob',
-            name: 'Bob Brown',
-        };
+        application.guest = gameAccounts.bob;
     }
     const newApp = {
         account: application.account,

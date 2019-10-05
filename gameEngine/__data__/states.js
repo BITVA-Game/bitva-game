@@ -3,18 +3,16 @@ import {
     screen,
 } from '../../constants';
 
+export const alice = {
+    id: 'Alice',
+};
+export const bob = {
+    id: 'Bob',
+};
+
 export const playState = {
-    accounts: [{
-        id: 'player1',
-        heroes: ['morevna', 'yaga', 'premudraya'],
-    },
-    {
-        id: 'player2',
-        heroes: ['morevna', 'yaga', 'hozyaika'],
-    },
-    ],
     terminals: [{
-        players: ['player1', 'player2'],
+        accounts: [alice, bob],
     }],
     heroSelect: {
         allHeroes: {
@@ -24,7 +22,7 @@ export const playState = {
             hozyaika: {},
         },
         heroes: ['morevna', 'yaga', 'premudraya'],
-        activePlayer: 'player1',
+        activePlayer: alice.id,
         players: [],
     },
     screen: screen.HEROSELECT,
@@ -34,17 +32,8 @@ export const playState = {
 };
 
 export const heroselectStateP1 = {
-    accounts: [{
-        id: 'player1',
-        heroes: ['morevna', 'yaga', 'premudraya'],
-    },
-    {
-        id: 'player2',
-        heroes: ['morevna', 'yaga', 'hozyaika'],
-    },
-    ],
     terminals: [{
-        players: ['player1', 'player2'],
+        accounts: [alice, bob],
     }],
     heroSelect: {
         allHeroes: {
@@ -82,14 +71,9 @@ export const heroselectStateP1 = {
 };
 
 export const versusState = {
-    profiles: [
-        {
-            id: 'player1',
-        },
-        {
-            id: 'player2',
-        },
-    ],
+    terminals: [{
+        accounts: [alice, bob],
+    }],
     heroSelect: null,
     manager: {
         screen: screen.VERSUS,

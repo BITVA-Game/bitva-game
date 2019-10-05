@@ -1,5 +1,7 @@
 const { message } = require('../constants');
 
+const gameAccounts = require('../gameAccounts');
+
 const heroes = require('../gameTerminal/data/characters.json');
 const cards = require('../gameTerminal/data/cards.json');
 
@@ -9,7 +11,7 @@ const initialState = {
     heroes: [],
 };
 
-function heroWithCards() {
+function allHeroesWithCards() {
     for (const hero in heroes) {
         const heroCards = Object.keys(heroes[hero].cards);
         for (let i = 0; i < heroCards.length; i += 1) {
@@ -18,7 +20,7 @@ function heroWithCards() {
             heroes[hero].cards[heroCards[i]] = { ...heroCard, ...cardData };
         }
     }
-    return { allHeroes: heroes };
+    return heroes;
 }
 
 function playerData(player, players = []) {
@@ -37,13 +39,17 @@ function newPlayers(app, msg) {
     return app.heroSelect.players.concat(player);
 }
 
+function accounts(app) {
+    return app.terminals.reduce((accs, terminal) => accs.concat(terminal.accounts), []);
+}
+
 function handle(app, msg) {
     let nextPlayer = null;
     let selectedPlayers = [];
 
     switch (msg.type) {
     case message.PLAY:
-        nextPlayer = app.accounts[0];
+        nextPlayer = accounts(app)[0];
         break;
     case message.HEROSELECTED:
         selectedPlayers = newPlayers(app, msg);
@@ -56,11 +62,14 @@ function handle(app, msg) {
         return null;
     }
 
+    const allHeroes = allHeroesWithCards();
     return {
-
         ...initialState,
-        ...heroWithCards(),
-        ...playerData(nextPlayer, selectedPlayers),
+
+        heroes: gameAccounts.heroes(nextPlayer.id),
+        activePlayer: nextPlayer.id,
+        players: selectedPlayers,
+        allHeroes,
     };
 }
 

@@ -1,6 +1,4 @@
-import {
-    message,
-} from '../constants';
+const { message } = require('../constants');
 
 function handle(app, msg) {
     console.log('handle account');

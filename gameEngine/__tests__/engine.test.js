@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import {
+    alice, bob,
     playState, heroselectStateP1, versusState, dealAllState,
 } from '../__data__/states';
 
@@ -22,9 +23,9 @@ const CARDSINHAND = 5;
 
 jest.mock('../../gameTerminal/randomFunc');
 
-test('First game state Play. Player1 can select any of the characters he has', () => {
+test.only('First game state Play. Player1 can select any of the characters he has', () => {
     // Again we only need type
-    const msg = { type: message.PLAY };
+    const msg = { type: message.PLAY, accounts: [alice, bob] };
 
     const engine = new GameEngine();
     engine.handle(msg);
