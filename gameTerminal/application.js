@@ -9,7 +9,7 @@ let application = require('./data/app.json');
 const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
 const socketClient = require('./socketClient');
-// const profiles = require('./profiles');
+const account = require('./accountManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -38,8 +38,17 @@ function parseApplication(app) {
 }
 
 async function processMessage(msg) {
+    console.log('process', msg);
+    // HACK until we have auth flow
+    if (msg.type === message.PLAY) {
+        application.guest = {
+            id: 'Bob',
+            name: 'Bob Brown',
+        };
+    }
     const newApp = {
-        profiles: application.profiles,
+        account: application.account,
+        guest: application.guest,
         manager: screenManager.handle(application, msg),
         engine: await gameEngineManager.handle(application, msg),
     };

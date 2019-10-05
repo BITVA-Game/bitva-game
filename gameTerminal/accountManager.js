@@ -3,10 +3,11 @@ import {
 } from '../constants';
 
 function handle(app, msg) {
+    console.log('handle account');
     switch (msg.type) {
     case message.INIT:
-        return app.profiles;
-    default: return app.profiles;
+        return app.account;
+    default: return app.account;
     }
 }
 

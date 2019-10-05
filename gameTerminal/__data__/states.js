@@ -4,14 +4,10 @@ import {
 } from '../../constants';
 
 export const startscreenState = {
-    profiles: [
-        {
-            id: 'player1',
-        },
-        {
-            id: 'player2',
-        },
-    ],
+    account: {
+    		id: 'Alice',
+    		name: 'Alice Adams',
+    	},
     manager: {
         screen: screen.STARTSCREEN,
     },

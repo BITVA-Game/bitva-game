@@ -1,15 +1,21 @@
 {
 	"accounts": [{
-			"id": "player1",
+			"id": "Alice",
 			"heroes": ["morevna", "yaga", "premudraya"]
 		},
 		{
-			"id": "player2",
+			"id": "Bob",
 			"heroes": ["morevna", "yaga", "hozyaika"]
 		}
 	],
 	"terminals": [{
-		"players": ["player1", "player2"]
+		"players": [
+			{
+				"id": "Alice",
+			},
+			{
+				"id": "Bob",
+			}]
 	}],
 	"game": {
 		"players": [],

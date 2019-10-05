@@ -8,7 +8,8 @@ async function handle(app, msg) {
     case message.PLAY:
         // initialize game engine
         engine = new GameEngine();
-        await engine.handle(msg);
+
+        await engine.handle({ ...msg, accounts: [app.account, app.guest] });
         break;
     case message.HEROSELECTED:
     case message.DEALALL:

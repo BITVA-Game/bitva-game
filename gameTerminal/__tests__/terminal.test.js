@@ -43,6 +43,10 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', async () => {
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(
         {
+            account: {
+                id: 'Alice',
+                name: 'Alice Adams',
+            },
             manager: {
                 screen: scr.STARTSCREEN,
             },
@@ -60,9 +64,16 @@ test('msg PLAY creates engine and handles the message', async () => {
         innerState: { a: 1 },
     };
     nock.disableNetConnect();
-
+    const alice = {
+        id: 'Alice',
+        name: 'Alice Adams',
+    };
+    const bob = {
+        id: 'Bob',
+        name: 'Bob Brown',
+    };
     const scope = nock(address)
-        .post('/')
+        .post('/', { message: { type: 'PLAY', accounts: [alice, bob] } })
         .reply(200)
         .get('/')
         .reply(200, engineState);
@@ -71,7 +82,8 @@ test('msg PLAY creates engine and handles the message', async () => {
     scope.isDone();
 
     const expectedState = {
-
+        account: alice,
+        guest: bob,
         manager: { screen: scr.HEROSELECT },
         innerState: engineState.innerState,
     };
@@ -106,7 +118,14 @@ test.skip('msg sent twice, we have one instance of engine', async () => {
     expect(handleFunc.mock.calls[0]).toEqual([msg]);
 
     const expectedState = {
-
+        account: {
+            id: 'Alice',
+            name: 'Alice Adams',
+        },
+        guest: {
+            id: 'Bob',
+            name: 'Bob Brown',
+        },
         manager: { screen: scr.STARTSCREEN },
         innerState: engineState.innerState,
     };
