@@ -17,8 +17,10 @@ html {
 }
 
 button,
-.btn {
+.btn,
+.btn-hero {
     color: #fff;
+    cursor: pointer;
     outline: none;
 }
 
@@ -27,86 +29,86 @@ button,
 }
 
 .background-hut {
-  width: 1366px;
-  position: absolute;
-  overflow: hidden;
   bottom: 0;
   margin: 0 auto;
+  overflow: hidden;
+  position: absolute;
+  width: 1366px;
 }
 
 .moveForest-enter-active .background-hut,
 .moveForest-enter-done .background-hut {
-  opacity: 1;
   bottom: -30px;
+  opacity: 1;
   transition: all 5000ms ease-in;
 }
 
 .background-greyTreeL {
-  width: 300px;
-  position: absolute;
-  overflow: hidden;
   bottom: 130px;
   left:120px;
   margin: 0 auto;
+  overflow: hidden;
+  position: absolute;
+  width: 300px;
 }
 
 .moveForest-enter-active .background-greyTreeL,
 .moveForest-enter-done .background-greyTreeL {
-  opacity: 1;
   bottom: 60px;
   left: 90px;
+  opacity: 1;
   transition: all 4500ms ease-in;
 }
 
 .background-greyTreeR {
-  width: 300px;
-  position: absolute;
-  overflow: hidden;
   bottom: 100px;
-  right: 200px;
   margin: 0 auto;
+  overflow: hidden;
+  position: absolute;
+  right: 200px;
+  width: 300px;
 }
 
 .moveForest-enter-active .background-greyTreeR,
 .moveForest-enter-done .background-greyTreeR {
-  opacity: 1;
   bottom: 40px;
+  opacity: 1;
   right: 150px;
   transition: all 4500ms ease-in;
 }
 
 .background-blackTreeL {
-  width: 600px;
-  opacity: 1;
-  position: absolute;
-  overflow: hidden;
   bottom: 30px;
-  left:0px;
+  left: 0;
   margin: 0 auto;
+  opacity: 1;
+  overflow: hidden;
+  position: absolute;
+  width: 600px;
 }
 
 .moveForest-enter-active .background-blackTreeL,
 .moveForest-enter-done .background-blackTreeL {
-  opacity: 1;
   bottom: -60px;
   left: -30px;
+  opacity: 1;  
   transition: all 4000ms ease-in;
 }
 
 .background-blackTreeR {
-  width: 600px;
-  opacity: 1;
-  position: absolute;
-  overflow: hidden;
-  right:0;
   bottom:0;
   margin: 0 auto;
+  opacity: 1;
+  overflow: hidden;
+  position: absolute;
+  right:0;  
+  width: 600px;
 }
 
 .moveForest-enter-active .background-blackTreeR,
 .moveForest-enter-done .background-blackTreeR {
-  opacity: 1;
   bottom: -80px;
+  opacity: 1;
   right: -80px;
   transition: all 4000ms ease-in;
 }
