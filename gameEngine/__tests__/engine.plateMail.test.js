@@ -1,5 +1,5 @@
 import {
-    alice, bob,
+    bob,
     dealAllState,
 } from '../__data__/states';
 

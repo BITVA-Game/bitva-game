@@ -11,6 +11,10 @@ const initialState = {
     heroes: [],
 };
 
+function accounts(app) {
+    return app.terminals.reduce((accs, terminal) => accs.concat(terminal.accounts), []);
+}
+
 function allHeroesWithCards() {
     for (const hero in heroes) {
         const heroCards = Object.keys(heroes[hero].cards);
@@ -23,10 +27,6 @@ function allHeroesWithCards() {
     return heroes;
 }
 
-function playerData(player, players = []) {
-    return { heroes: player.heroes, activePlayer: player.id, players };
-}
-
 function pendingPlayer(app, players) {
     const accs = accounts(app);
     const completed = players.map((p) => p.id);
@@ -37,10 +37,6 @@ function pendingPlayer(app, players) {
 function newPlayers(app, msg) {
     const player = { id: msg.player, hero: msg.hero };
     return app.heroSelect.players.concat(player);
-}
-
-function accounts(app) {
-    return app.terminals.reduce((accs, terminal) => accs.concat(terminal.accounts), []);
 }
 
 function handle(app, msg) {

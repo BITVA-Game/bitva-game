@@ -71,7 +71,6 @@ class ListOfHeroes extends Component {
 
     render() {
         const heroes = this.props.allHeroes.slice(this.state.first, this.state.first + 3);
-        console.log(heroes);
         return (
             <div>
                 <div className="heroes-list">
@@ -87,9 +86,9 @@ class ListOfHeroes extends Component {
                     <button type="button" className="hero-block right-arrow" onClick={this.next} />
                 </div>
                 <div className="heroes-name">
-                    <img src={ornament} />
+                    <img src={ornament} alt="ornament" />
                     <div><h3>HERO NAME GOES HERE</h3></div>
-                    <img src={ornament} />
+                    <img src={ornament} alt="ornament" />
                 </div>
             </div>
 

@@ -10,7 +10,6 @@ const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
 const gameAccounts = require('../gameAccounts');
 const socketClient = require('./socketClient');
-const account = require('./accountManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality

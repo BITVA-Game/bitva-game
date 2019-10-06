@@ -11,11 +11,7 @@ function takeOneCardAtRand(hand) {
 }
 
 function isDead(appObject) {
-    appObject.game.players.forEach((p) => {
-        if (p.health.current <= 0) {
-            return true;
-        }
-    });
+    appObject.game.players.forEach((p) => p.health.current <= 0);
     return false;
 }
 

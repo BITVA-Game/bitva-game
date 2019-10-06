@@ -16,7 +16,9 @@ module.exports = {
       "guard-for-in": [0],
       "no-restricted-syntax": [0],
 			"jsx-a11y/tabindex-no-positive": [0],
-			"jsx-a11y/no-noninteractive-tabindex": [0]
+			"jsx-a11y/no-noninteractive-tabindex": [0],
+			"jsx-a11y/control-has-associated-label": [0],
+			"jsx-a11y/label-has-associated-control": [0]
     },
     "env": {
     	"browser": true,

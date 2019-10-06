@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import MainMenu from './MainMenu';
 import './css/Profile.css';
 
@@ -57,9 +58,9 @@ class NetworkPlay extends Component {
 
     estConnection(event) {
         event.preventDefault();
-        this.setState({
-            screen: this.state.role === 'host' ? 'waiting' : 'selection',
-        });
+        this.setState((prevState) => ({
+            screen: prevState.role === 'host' ? 'waiting' : 'selection',
+        }));
     }
 
     clearSelection() {
@@ -97,5 +98,19 @@ class NetworkPlay extends Component {
         );
     }
 }
+
+NetworkPlay.propTypes = {
+    sendMessage: PropTypes.func.isRequired,
+};
+
+WaitingForHost.propTypes = {
+    gameConnect: PropTypes.func.isRequired,
+};
+
+SelectRole.propTypes = {
+    estConnection: PropTypes.func.isRequired,
+    role: PropTypes.string.isRequired,
+    assignRole: PropTypes.func.isRequired,
+};
 
 export default NetworkPlay;
