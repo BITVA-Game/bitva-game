@@ -282,7 +282,7 @@
     },
     "turningPotion": {
         "id": "turningPotion",
-        "name": "The Turning Potion",
+        "name": "Turning Potion",
         "type": "action",
         "icon": "arrows",
         "category": "turning",
