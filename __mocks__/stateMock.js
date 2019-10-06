@@ -1,22 +1,22 @@
 export const heroselectStateP1 = {
     accounts: [{
-        id: 'player1',
+        id: 'Alice',
         heroes: ['morevna', 'yaga', 'premudraya'],
     },
     {
-        id: 'player2',
+        id: 'Bob',
         heroes: ['morevna', 'yaga'],
     },
     ],
     terminals: [{
-        players: ['player1', 'player2'],
+        players: ['Alice', 'Bob'],
     }],
     profiles: [
         {
-            id: 'player1',
+            id: 'Alice',
         },
         {
-            id: 'player2',
+            id: 'Bob',
         },
     ],
     heroSelect: {
@@ -27,36 +27,36 @@ export const heroselectStateP1 = {
             hozyaika: {},
         },
         heroes: ['morevna', 'yaga', 'premudraya'],
-        activePlayer: 'player1',
-        players: [{ hero: 'yaga', id: 'player1' }],
+        activePlayer: 'Alice',
+        players: [{ hero: 'yaga', id: 'Alice' }],
     },
     manager: {
         screen: 'HEROSELECT',
     },
     game: {
-        players: [{ hero: 'yaga', id: 'player1' }],
+        players: [{ hero: 'yaga', id: 'Alice' }],
     },
 };
 
 export const heroselectStateP2 = {
     accounts: [{
-        id: 'player1',
+        id: 'Alice',
         heroes: ['morevna', 'yaga', 'premudraya'],
     },
     {
-        id: 'player2',
+        id: 'Bob',
         heroes: ['morevna', 'yaga'],
     },
     ],
     terminals: [{
-        players: ['player1', 'player2'],
+        players: ['Alice', 'Bob'],
     }],
     profiles: [
         {
-            id: 'player1',
+            id: 'Alice',
         },
         {
-            id: 'player2',
+            id: 'Bob',
         },
     ],
     heroSelect: {
@@ -67,45 +67,45 @@ export const heroselectStateP2 = {
             hozyaika: {},
         },
         heroes: ['morevna', 'yaga'],
-        activePlayer: 'player2',
-        players: [{ hero: 'morevna', id: 'player2' }],
+        activePlayer: 'Bob',
+        players: [{ hero: 'morevna', id: 'Bob' }],
     },
     manager: {
         screen: 'HEROSELECT',
     },
     game: {
-        players: [{ hero: 'morevna', id: 'player2' }],
+        players: [{ hero: 'morevna', id: 'Bob' }],
     },
 };
 
 export const versusState = {
     profiles: [
         {
-            id: 'player1',
+            id: 'Alice',
         },
         {
-            id: 'player2',
+            id: 'Bob',
         },
     ],
     manager: {
         screen: 'VERSUS',
     },
     game: {
-        active: 'player1',
+        active: 'Alice',
         players: [
-            { hero: 'morevna', id: 'player1', turningHand: false },
-            { hero: 'yaga', id: 'player2', turningHand: false },
+            { hero: 'morevna', id: 'Alice', turningHand: false },
+            { hero: 'yaga', id: 'Bob', turningHand: false },
         ],
     },
 };
 
 export const dealAllState = {
     game: {
-        active: 'player1',
+        active: 'Alice',
         phase: 'ACTIVE',
         players: [
             {
-                id: 'player1',
+                id: 'Alice',
                 hand: {},
                 item: {},
                 grave: {},
@@ -661,7 +661,7 @@ export const dealAllState = {
                 turningHand: false,
             },
             {
-                id: 'player2',
+                id: 'Bob',
                 hand: {},
                 item: {},
                 grave: {},
@@ -1238,11 +1238,11 @@ export const dealAllState = {
 
 export const gameStartState = {
     game: {
-        active: 'player1',
+        active: 'Alice',
         phase: 'ACTIVE',
         players: [
             {
-                id: 'player1',
+                id: 'Alice',
                 turningHand: false,
                 item: {},
                 grave: {},
@@ -1795,7 +1795,7 @@ export const gameStartState = {
                },
             },
             {
-                id: 'player2',
+                id: 'Bob',
                 turningHand: false,
                 item: {},
                 grave: {},
@@ -2333,11 +2333,11 @@ export const gameStartState = {
 
 export const gameP1DamagedState = {
     game: {
-        active: 'player1',
+        active: 'Alice',
         phase: 'ACTIVE',
         players: [
             {
-                id: 'player1',
+                id: 'Alice',
                 turningHand: false,
                 item: {},
                 grave: {},
@@ -2890,7 +2890,7 @@ export const gameP1DamagedState = {
                },
             },
             {
-                id: 'player2',
+                id: 'Bob',
                 turningHand: false,
                 item: {},
                 grave: {},
@@ -3428,11 +3428,11 @@ export const gameP1DamagedState = {
 
 export const gameP2HasShieldState = {
     game: {
-        active: 'player1',
+        active: 'Alice',
         phase: 'ACTIVE',
         players: [
             {
-                id: 'player1',
+                id: 'Alice',
                 turningHand: false,
                 item: {},
                 grave: {},
@@ -3985,7 +3985,7 @@ export const gameP2HasShieldState = {
                },
             },
             {
-                id: 'player2',
+                id: 'Bob',
                 turningHand: false,
                 item: {
                     key23: {
@@ -4537,11 +4537,11 @@ export const gameP2HasShieldState = {
 
 export const gameP2HasSmallShieldState = {
     game: {
-        active: 'player1',
+        active: 'Alice',
         phase: 'ACTIVE',
         players: [
             {
-                id: 'player1',
+                id: 'Alice',
                 turningHand: false,
                 item: {},
                 grave: {},
@@ -5094,7 +5094,7 @@ export const gameP2HasSmallShieldState = {
                },
             },
             {
-                id: 'player2',
+                id: 'Bob',
                 turningHand: false,
                 item: {
                     key23: {
@@ -5646,11 +5646,11 @@ export const gameP2HasSmallShieldState = {
 
 export const gameP1Action2 = {
     game: {
-        active: 'player1',
+        active: 'Alice',
         phase: 'ACTIVE',
         players: [
             {
-                id: 'player1',
+                id: 'Alice',
                 turningHand: false,
                 item: {
                 },
@@ -6204,7 +6204,7 @@ export const gameP1Action2 = {
                },
             },
             {
-                id: 'player2',
+                id: 'Bob',
                 turningHand: false,
                 item: {
                     key23: {
@@ -6756,11 +6756,11 @@ export const gameP1Action2 = {
 
 export const gameP2Dying = {
     game: {
-        active: 'player1',
+        active: 'Alice',
         phase: 'ACTIVE',
         players: [
             {
-                id: 'player1',
+                id: 'Alice',
                 turningHand: false,
                 item: {
                     key19:
@@ -7328,7 +7328,7 @@ export const gameP2Dying = {
                },
             },
             {
-                id: 'player2',
+                id: 'Bob',
                 turningHand: false,
                 item: {},
                 grave: {},

@@ -1,4 +1,5 @@
 import {
+    alice, bob,
     dealAllState,
 } from '../__data__/states';
 
@@ -38,7 +39,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
     gameForTest.game.players[0].item.key24 = plateMail;
     gameForTest.game.players[1].hand.key20 = bogatyr;
     gameForTest.game.players[1].health.current = 1;
-    gameForTest.game.active = 'player2';
+    gameForTest.game.active = bob.id;
     // we create new engine with our game state
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
@@ -85,7 +86,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
     gameForTest.game.players[0].item.key24 = plateMail;
     gameForTest.game.players[1].hand.key20 = raven;
     gameForTest.game.players[1].health.current = 1;
-    gameForTest.game.active = 'player2';
+    gameForTest.game.active = bob.id;
     // we create new engine with our game state
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);

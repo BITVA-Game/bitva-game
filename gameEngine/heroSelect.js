@@ -28,9 +28,9 @@ function playerData(player, players = []) {
 }
 
 function pendingPlayer(app, players) {
-    const accounts = app.accounts;
+    const accs = accounts(app);
     const completed = players.map((p) => p.id);
-    const pending = accounts.filter((a) => !completed.includes(a.id));
+    const pending = accs.filter((a) => !completed.includes(a.id));
     return pending[0];
 }
 
@@ -54,6 +54,7 @@ function handle(app, msg) {
     case message.HEROSELECTED:
         selectedPlayers = newPlayers(app, msg);
         nextPlayer = pendingPlayer(app, selectedPlayers);
+        console.log(nextPlayer);
         break;
     default: break;
     }

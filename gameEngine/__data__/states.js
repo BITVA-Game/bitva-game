@@ -45,15 +45,15 @@ export const heroselectStateP1 = {
             hozyaika: {},
         },
         heroes: ['morevna', 'yaga', 'hozyaika'],
-        activePlayer: 'player2',
+        activePlayer: bob.id,
         players: [{
             hero: 'morevna',
-            id: 'player1',
+            id: alice.id,
         }],
     },
     game: {
         players: [{
-            id: 'player1',
+            id: alice.id,
             hand: {},
             item: {},
             grave: {},
@@ -81,10 +81,10 @@ export const versusState = {
         screen: screen.VERSUS,
     },
     game: {
-        active: 'player1',
+        active: alice.id,
         players: [
             {
-                id: 'player1',
+                id: alice.id,
                 hand: {},
                 item: {},
                 grave: {},
@@ -141,7 +141,7 @@ export const versusState = {
                 },
             },
             {
-                id: 'player2',
+                id: bob.id,
                 hand: {},
                 item: {},
                 grave: {},
@@ -206,11 +206,11 @@ export const dealAllState = {
         screen: screen.GAMESCREEN,
     },
     game: {
-        active: 'player1',
+        active: alice.id,
         phase: 'ACTIVE',
         players: [
             {
-                id: 'player1',
+                id: alice.id,
                 item: {},
                 grave: {},
                 moveCounter: 0,
@@ -274,7 +274,7 @@ export const dealAllState = {
                 turningHand: false,
             },
             {
-                id: 'player2',
+                id: bob.id,
                 item: {},
                 grave: {},
                 moveCounter: 0,

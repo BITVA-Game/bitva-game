@@ -517,14 +517,11 @@ function bowArrow(player, opponent) {
 
 // function that change turn in the game
 function changeTurn(game) {
-    console.log('AM I CALLED AT ALL');
     // active player becomes inactive
     const pActive = getActivePlayer(game);
     const pInactive = getInActivePlayer(game);
     // player's counter set to 0
     pActive.moveCounter = 0;
-    console.log('Change Turn', pInactive.moveCounter);
-    console.log('Change Turn', pActive.moveCounter);
     // inactive player becomes active
     game.active = pInactive.id;
 }

@@ -23,7 +23,7 @@ const CARDSINHAND = 5;
 
 jest.mock('../../gameTerminal/randomFunc');
 
-test.only('First game state Play. Player1 can select any of the characters he has', () => {
+test('First game state Play. Player1 can select any of the characters he has', () => {
     // Again we only need type
     const msg = { type: message.PLAY, accounts: [alice, bob] };
 
@@ -35,7 +35,7 @@ test.only('First game state Play. Player1 can select any of the characters he ha
 
 test('Second game state heroselectStateP1. Player 1 selected one of his characters. Player 2 is active.', () => {
     // we created message sent once Player 1 selected character
-    const msg = { type: message.HEROSELECTED, hero: 'morevna', player: 'player1' };
+    const msg = { type: message.HEROSELECTED, hero: 'morevna', player: alice.id };
     // we put GameEngine into previous state
     const engine = new GameEngine(playState);
     // we referencing to GameEngine to work out our message
@@ -48,7 +48,7 @@ test('Second game state heroselectStateP1. Player 1 selected one of his characte
 
 test('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, Active players is set', () => {
     // we created message sent once Player 1 selected character
-    const msg = { type: message.HEROSELECTED, hero: 'yaga', player: 'player2' };
+    const msg = { type: message.HEROSELECTED, hero: 'yaga', player: bob.id };
     // we put GameEngine into previous statee
     const engine = new GameEngine(heroselectStateP1);
     // we referencing to GameEngine to work out our message
@@ -58,7 +58,6 @@ test('msg HEROSELECTED for 2 players switches gameEngine state to VERSUS, Active
 
     // we expect that engine after receiving above msg will match object
     expect(newGame.game.active).toBeDefined();
-    expect(newGame.game.players.length).toEqual(2);
     expect(newGame.game.players.length).toEqual(2);
     expect(newGame.heroSelect).toEqual(null);
     expect(newGame.screen).toEqual(screen.VERSUS);
@@ -338,8 +337,8 @@ test('msg ACTION CASE4 player wants to move his card from item holder to graveya
 
 test('ACTION ANY active player moveCounter = 2 after his action, he gets missing cards to hand, inactive player becomes active.', () => {
     const cardToTest = 'key20';
-    const player = 'player1';
-    const opponent = 'player2';
+    const player = alice.id;
+    const opponent = bob.id;
     const msg = {
         type: message.ACTION,
         activeCard: cardToTest,
