@@ -923,3 +923,15 @@
         }
     100%    { transform: translateX(560px) translateY(-200px) }
 }
+
+/*Animation for Malachite box - bat card attaks opponent*/
+
+.item-attacks {
+    animation: attackOpponent 3s;
+    z-index: 20;
+}
+
+@keyframes attackOpponent {
+    0% { transform: translateX(0px) translateY(0px); }
+    100%     { transform: translateX(560px) translateY(-200px) }
+}
