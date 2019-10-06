@@ -750,5 +750,151 @@
 
 @keyframes toHand {
     0%      { transform: translateX(0px) translateY(0px); }
-    100%     { transform: translateX(-220px) translateY(-555px) }
+    100%     { transform: translateX(-220px) translateY(-555px); }
+}
+
+/* Animation Clairvoyance */
+
+.clairvoyance {
+    margin-left: 20px;
+    margin-top: 20px;
+    position: absolute;    
+}
+
+.upper {
+    animation: topOnUpper 2s 1s ease-in-out infinite;
+    left: 0;
+	top: 0;
+    z-index: 2;
+}
+
+.middle {
+    animation: topOnMid 2s 1s ease-in-out infinite;
+    left: 20px;
+	top: 20px;
+    z-index: 1;
+}
+
+.bottom {
+    animation: topOnLower 2s 1s ease-in-out infinite;
+    left: 40px;
+	top: 40px;
+	z-index: 0;
+}
+
+@keyframes topOnUpper {
+    5% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(-50px);
+        z-index: 1;
+    }
+    10% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    40% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    50% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    70% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    80% {
+        left: 0;
+        top: 0;
+        transform:  translateY(0);
+        z-index: 2;
+    }
+}
+
+@keyframes topOnMid {
+    10% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    40% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    45% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(-50px);
+        z-index: 1;
+    }
+    50% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    70% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    80% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+}
+
+@keyframes topOnLower {
+    10% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    40% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    50% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    70% {
+        left: 0;
+        top: 0;
+        transform: ranslateY(0);
+        z-index: 2;
+    }
+    75% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(-50px);
+        z-index: 1;
+    }
+    80% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
 }

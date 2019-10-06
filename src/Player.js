@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-duplicates */
 
@@ -36,6 +37,39 @@ const AnimatedHand = ({ hand, player }) => (
     </div>
 );
 
+// Clairvoyance showed 3 1st cards from deck -from backend
+// this function create them to appear with 3 different
+// classNames for each to create different animation
+function Clairvoyance({ player }) {
+    const findPosition = (index) => {
+        if (index === 2) {
+            return 'upper';
+        } if (index === 1) {
+            return 'middle';
+        } if (index === 0) {
+            return 'bottom';
+        }
+    };
+
+    return (
+        <div>
+            {Object.keys(player.cardsShown).map((cardId, index) => (
+
+                <div
+                    key={cardId}
+                    className={`card-place card-like clairvoyance ${findPosition(index)}`}
+                >
+                    <Card
+                        cardKey={cardId}
+                        card={player.cardsShown[cardId]}
+                        player={player}
+                    />
+                </div>
+            ))}
+        </div>
+    );
+}
+
 class Player extends Component {
     constructor(props) {
         super(props);
@@ -55,6 +89,7 @@ class Player extends Component {
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation();
         // animation for Turning Potion - active player gets cards from inactive player hand
+        // doesn't work ---> to be fixed!
         } if (this.props.player.turningHand !== prevProps.player.turningHand
             && this.props.player.turningHand === true) {
             this.playAnimationPotion();
@@ -128,6 +163,13 @@ class Player extends Component {
                     cards={this.props.player.cards}
                     background={this.props.player.background}
                 />
+                {this.props.player.cardsShown
+                    ? (
+                        <Clairvoyance
+                            player={this.props.player}
+                            active={this.props.active}
+                        />
+                    ) : null}
                 <Hand
                     active={this.props.active}
                     dragging={this.props.dragging}
@@ -283,6 +325,10 @@ Hand.propTypes = {
 
 AnimatedHand.propTypes = {
     hand: PropTypes.object.isRequired,
+    player: PropTypes.object.isRequired,
+};
+
+Clairvoyance.propTypes = {
     player: PropTypes.object.isRequired,
 };
 

@@ -23,7 +23,7 @@ jest.mock('../../gameTerminal/randomFunc');
 // Morevna get damage = attack card points -1 to her health current until card has it health points.
 // Yaga get 1 reflected pnt damage to her health
 // and if Yaga health =<0 after attack then game is over
-test('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt.', () => {
+test('msg ACTION received: inactive player has plaitMail in item, it reflect 1pnt back from opponent attack.', () => {
     // we define card key for testing
     const cardToTest = 'key24';
     const bogatyrCard = 'key20';
@@ -70,7 +70,7 @@ test('msg ACTION received: active player has dead water in item, it decreases pl
 // Test, that when Plate Mail is in Morevna item holder
 // then once Yaga attacks with attack card which points == 1
 // neither Morevna nor Yaga get any damage
-test('msg ACTION received: active player has dead water in item, it decreases players health current for 1pnt.', () => {
+test('msg ACTION received: inactive player has plateMail in item, if opponent attack with 1pnt card then heros get no health damage.', () => {
     // we define card key for testing
     const cardToTest = 'key24';
     const ravenCard = 'key20';

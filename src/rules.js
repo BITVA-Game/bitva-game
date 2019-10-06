@@ -14,6 +14,7 @@ export default function isTarget(target, dragging, active, player) {
             || (target === 'opponent' && dragging.card.category === 'holdCard')
             || (target === 'opponent' && dragging.card.category === 'attackItems')
             || (target === 'opponent' && dragging.card.category === 'turning')
+            || (target === 'opponent' && dragging.card.category === 'showCards')
         );
     }
     return (

@@ -144,6 +144,19 @@ const raven = {
     disabled: false,
 };
 
+const clairvoyance = {
+    id: 'clairvoyance',
+    name: 'Clairvoyance',
+    type: 'action',
+    icon: 'eye',
+    category: 'showCards',
+    categoryName: 'show',
+    description: '«Second vision». This gift offers great possibilities. It helps to see the lie, to see damage ahead and to avoid it. ',
+    initialpoints: 1,
+    points: 1,
+    disabled: false,
+};
+
 export default {
     apple,
     bogatyr,
@@ -156,4 +169,5 @@ export default {
     turningPotion,
     plateMail,
     raven,
+    clairvoyance,
 };
