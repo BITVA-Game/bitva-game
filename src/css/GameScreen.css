@@ -927,7 +927,7 @@
 /*Animation for Malachite box - bat card attaks opponent*/
 
 .item-attacks {
-    animation: attackOpponent 2s ease-out infinite;
+    animation: attackOpponent 2s ease-out forwards;
     margin-left: 444px;
     perspective: 100px;
     z-index: 20;
@@ -940,7 +940,7 @@
         transform-style: preserve-3d;
         }
     20% { 
-        transform: translateX(0px) translateY(0px);
+        transform: rotateX(45deg) translateX(0px) translateY(0px);
         opacity: 20%;
         }
     100%    { transform: translateX(560px) translateY(-200px) }
