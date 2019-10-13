@@ -68,8 +68,14 @@ function Clairvoyance({ player }) {
 // bat card image for malachite box card
 // once in item holder, malachite box generates bat card
 // that attacks opponent with any other player action
-const BatCard = () => (
+
+const BatCard = ({ player, active }) => (
     <div className="item-attacks">
+        {/* <Card
+            player={player}
+            active={active === true}
+            card={Object.values(player.cards).find((card) => card.id === 'bat')}
+        /> */}
         <img src={bat} alt="bat card" />
     </div>
 );
@@ -98,6 +104,17 @@ class Player extends Component {
       && this.props.player.turningHand === true
         ) {
             this.playAnimation('potion');
+        }
+        if (
+            item
+      && this.props.player.moveCounter !== prevProps.player.moveCounter
+        ) {
+            if (item.category === 'generator') {
+                // if (this.cardDropped ) {
+                console.log('animation - bat!');
+                this.playAnimation('bat');
+                // }
+            }
         }
     }
 
