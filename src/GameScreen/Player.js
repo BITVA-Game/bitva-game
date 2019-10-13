@@ -159,8 +159,12 @@ class Player extends Component {
                     player={this.props.player}
                 />
                 {/* {this.state.animation === "potion" ? ( */}
-                {this.props.active ? null : this.state.animation === 'potion' ? (
-                    <AnimatedHand hand={this.props.hand} player={this.props.player} />
+
+                {this.state.animation === 'potion' ? (
+                    <AnimatedHand
+                        hand={this.props.hand}
+                        player={this.props.player}
+                    />
                 ) : null}
                 <Grave
                     player={this.props.player}
