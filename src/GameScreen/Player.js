@@ -30,6 +30,7 @@ const AnimatedHand = ({ hand, player }) => (
         ))}
     </div>
 );
+
 // Clairvoyance showed 3 1st cards from deck -from backend
 // this function create them to appear with 3 different
 // classNames for each to create different animation
@@ -67,29 +68,10 @@ function Clairvoyance({ player }) {
 // bat card image for malachite box card
 // once in item holder, malachite box generates bat card
 // that attacks opponent with any other player action
-
-const BatCard = ({ player, active }) => (
-<<<<<<< HEAD:src/GameScreen/Player.js
-=======
-
-=======
-// bat card image for malachite box card
-// once in item malachite box generate bat
-// that attacks opponent with any other player action
 const BatCard = () => (
->>>>>>> bat card animation is called from cardDropped now
->>>>>>> bat card animation is called from cardDropped now:src/Player.js
     <div className="item-attacks">
         <img src={bat} alt="bat card" />
     </div>
-<<<<<<< HEAD:src/GameScreen/Player.js
-=======
-<<<<<<< HEAD
-
->>>>>>> added img for batCard and some animation conditions change
-=======
->>>>>>> bat card animation is called from cardDropped now
->>>>>>> bat card animation is called from cardDropped now:src/Player.js
 );
 
 class Player extends Component {
@@ -105,57 +87,18 @@ class Player extends Component {
     }
 
     componentDidUpdate(prevProps) {
-<<<<<<< HEAD:src/GameScreen/Player.js
     // Typical usage (don't forget to compare props):
     // animation for cards deal from gravyeard to deck
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        let item;
-        // eslint-disable-next-line no-unused-expressions
-        Object.keys(this.props.player.item) !== undefined
-            ? item = Object.values(this.props.player.item)[0] : null;
-
->>>>>>> added img for batCard and some animation conditions change
-=======
->>>>>>> bat card animation is called from cardDropped now
-        // Typical usage (don't forget to compare props):
-        // animation for cards deal from gravyeard to deck
->>>>>>> bat card animation is called from cardDropped now:src/Player.js
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation('cards');
             // animation for Turning Potion - active player gets cards from inactive player hand
+            // doesn't work ---> to be fixed!
         }
         if (
             this.props.player.turningHand !== prevProps.player.turningHand
       && this.props.player.turningHand === true
         ) {
             this.playAnimation('potion');
-<<<<<<< HEAD:src/GameScreen/Player.js
-        }
-        if (
-            item
-      && this.props.player.moveCounter !== prevProps.player.moveCounter
-        ) {
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        } if (item && this.props.player.moveCounter !== prevProps.player.moveCounter) {
->>>>>>> bat card animation is called from cardDropped now:src/Player.js
-            if (item.category === 'generator') {
-                // if (this.cardDropped ) {
-                console.log('animation - bat!');
-                this.playAnimation('bat');
-                // }
-            }
-<<<<<<< HEAD:src/GameScreen/Player.js
-=======
->>>>>>> added img for batCard and some animation conditions change
-=======
->>>>>>> bat card animation is called from cardDropped now
->>>>>>> bat card animation is called from cardDropped now:src/Player.js
         }
     }
 
