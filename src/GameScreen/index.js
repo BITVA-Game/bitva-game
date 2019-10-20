@@ -119,11 +119,11 @@ class GameScreen extends Component {
                                 cardDragEnded={this.cardDragEnded}
                             />
                         ))}
-                        {((this.props.app.game.players[0].moveCounter === 0) && (this.props.app.game.players[0].active === true))
-                    || ((this.props.app.game.players[1].moveCounter === 0) && (this.props.app.game.players[1].active === true))
+                        {((this.props.app.game.players[0].moveCounter === 0) && (this.props.app.game.players[0].id === this.props.app.game.active))
+                    || ((this.props.app.game.players[1].moveCounter === 0) && (this.props.app.game.players[1].id === this.props.app.game.active))
                             ? (
                                 <ChangeTurn
-                                    players={this.props.app.game.players}
+                                    app={this.props.app}
                                 />
                             )
                             : null}
@@ -175,19 +175,13 @@ const GameOver = (props) => {
     );
 };
 
-const ChangeTurn = (props) => {
-    let activePlayer = props.players[0];
-    if (props.players[0].active === false) {
-        activePlayer = props.players[1];
-    }
-    return (
-        <div className="changeturn">
-            <p className="changeturn-message">
-                {`${activePlayer.hero}'s turn`}
-            </p>
-        </div>
-    );
-};
+const ChangeTurn = ({ app }) => (
+    <div className="changeturn">
+        <p className="changeturn-message">
+            {`${getActivePlayer(app).hero}'s turn`}
+        </p>
+    </div>
+);
 
 GameScreen.propTypes = {
     app: PropTypes.object.isRequired,
@@ -199,7 +193,7 @@ GameOver.propTypes = {
 };
 
 ChangeTurn.propTypes = {
-    players: PropTypes.array.isRequired,
+    app: PropTypes.object.isRequired,
 };
 
 export default GameScreen;
