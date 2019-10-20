@@ -111,6 +111,7 @@ class GameScreen extends Component {
                                 key={player.keyHero}
                                 position={player.position}
                                 player={player}
+                                activePlayer={activePlayer}
                                 hand={this.playableHand(player)}
                                 sendMessage={this.props.sendMessage}
                                 dragging={this.state.dragging}

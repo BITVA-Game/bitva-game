@@ -125,22 +125,29 @@ class Player extends Component {
     }
 
     cardDropped(target) {
-        let item;
+        // we define item of active player if any
+        let itemActive;
         // eslint-disable-next-line no-unused-expressions
-        Object.keys(this.props.player.item) !== undefined
-            ? (item = Object.values(this.props.player.item)[0])
+        Object.keys(this.props.activePlayer.item) !== undefined
+            ? (itemActive = Object.values(this.props.activePlayer.item)[0])
+            : null;
+        // we define active player if she / he has Malachite box in item
+        let playerWithMalachiteBox;
+        // eslint-disable-next-line no-unused-expressions
+        itemActive && itemActive.category === 'generator'
+            ? playerWithMalachiteBox = this.props.activePlayer.hero : null;
+
+        // if active player has malachite box card
+        // every other card drop calls animation of bat card
+        // eslint-disable-next-line no-unused-expressions
+        itemActive && itemActive.category === 'generator' && this.props.activePlayer.hero === playerWithMalachiteBox
+            ? this.playAnimation('bat')
             : null;
 
         if (!this.isTarget(target)) {
             return;
         }
         this.props.cardDropped(target);
-        // if player has malachite box card
-        // every other card drop calls animation of bat card
-        // eslint-disable-next-line no-unused-expressions
-        this.props.active && item && item.category === 'generator'
-            ? this.playAnimation('bat')
-            : null;
     }
 
     render() {
@@ -297,6 +304,7 @@ Player.propTypes = {
     cardDropped: PropTypes.func.isRequired,
     dragging: PropTypes.object,
     active: PropTypes.bool.isRequired,
+    activePlayer: PropTypes.object.isRequired,
 };
 
 Player.defaultProps = {
