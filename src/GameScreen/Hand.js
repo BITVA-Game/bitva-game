@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
-import './css/App.css';
-import './css/GameScreen.css';
+import '../css/App.css';
+import '../css/GameScreen.css';
 
 function cardOrigin(dragging, card) {
     return dragging !== null && card === dragging.card ? 0 : 1.0;

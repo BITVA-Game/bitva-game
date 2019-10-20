@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import yaga from './images/heroes/yaga.jpg';
-import morevna from './images/heroes/morevna.jpg';
-import hozyaika from './images/heroes/hozyaika.jpg';
-import premudraya from './images/heroes/premudraya.jpg';
+import yaga from '../images/heroes/yaga.jpg';
+import morevna from '../images/heroes/morevna.jpg';
+import hozyaika from '../images/heroes/hozyaika.jpg';
+import premudraya from '../images/heroes/premudraya.jpg';
 
 const width = 200;
 const height = 200;

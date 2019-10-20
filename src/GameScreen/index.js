@@ -3,10 +3,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Player from './Player';
-import './css/App.css';
-import './css/GameScreen.css';
+import '../css/App.css';
+import '../css/GameScreen.css';
 
-import { getActivePlayer, getInActivePlayer } from './rules';
+import { getActivePlayer, getInActivePlayer } from '../rules';
 
 // animation duration time
 const animationDuration = 9000;

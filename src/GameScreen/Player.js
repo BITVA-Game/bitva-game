@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 import Hero from './Hero';
 import Card from './Card';
 import Hand from './Hand';
-import rules from './rules';
-import './css/App.css';
-import './css/GameScreen.css';
-import graveyard from './images/cards/graveyard.png';
+import rules from '../rules';
+import '../css/App.css';
+import '../css/GameScreen.css';
+import graveyard from '../images/cards/graveyard.png';
 
 const Animation = (props) => (
     <div className="stack">
