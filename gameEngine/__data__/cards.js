@@ -157,6 +157,19 @@ const clairvoyance = {
     disabled: false,
 };
 
+const malachiteBox = {
+    id: 'malachiteBox',
+    name: 'Malachite Box',
+    type: 'item',
+    icon: 'deckMove',
+    category: 'generator',
+    categoryName: 'create',
+    description: "Maid's gift. But it has a hidden agenda and brings miseries to the person who opens box without permission.",
+    health: 2,
+    healthCurrent: 2,
+    disabled: false,
+};
+
 export default {
     apple,
     bogatyr,
@@ -170,4 +183,5 @@ export default {
     plateMail,
     raven,
     clairvoyance,
+    malachiteBox,
 };

@@ -545,7 +545,10 @@ function malachiteBox(player, opponent, target) {
     let itemId;
     const itemKey = Object.keys(player.item)[0];
     itemKey ? itemId = player.item[itemKey].id : null;
-    itemId === cardConst.MALACHITEBOXCARD && (target === targetConst.OPPONENT || target === 'grave' || target === targetConst.HERO) ? opponent.health.current -= 1 : null;
+    itemId === cardConst.MALACHITEBOXCARD
+    && (target === targetConst.OPPONENT
+        || target === targetConst.GRAVE || target === targetConst.HERO)
+        ? opponent.health.current -= 1 : null;
 }
 
 // function set turningHand property to both players

@@ -11,6 +11,7 @@ import rules from '../rules';
 import '../css/App.css';
 import '../css/GameScreen.css';
 import graveyard from '../images/cards/graveyard.png';
+import bat from '../images/cards/batCard.png';
 
 const Animation = (props) => (
     <div className="stack">
@@ -23,15 +24,8 @@ const Animation = (props) => (
 const AnimatedHand = ({ hand, player }) => (
     <div className="hand card-hand">
         {Object.keys(hand).map((cardId) => (
-            <div
-                key={cardId}
-                className="card-place card-like"
-            >
-                <Card
-                    cardKey={cardId}
-                    card={hand[cardId]}
-                    player={player}
-                />
+            <div key={cardId} className="card-place card-like">
+                <Card cardKey={cardId} card={hand[cardId]} player={player} />
             </div>
         ))}
     </div>
@@ -44,9 +38,11 @@ function Clairvoyance({ player }) {
     const findPosition = (index) => {
         if (index === 2) {
             return 'upper';
-        } if (index === 1) {
+        }
+        if (index === 1) {
             return 'middle';
-        } if (index === 0) {
+        }
+        if (index === 0) {
             return 'bottom';
         }
     };
@@ -54,7 +50,6 @@ function Clairvoyance({ player }) {
     return (
         <div>
             {Object.keys(player.cardsShown).map((cardId, index) => (
-
                 <div
                     key={cardId}
                     className={`card-place card-like clairvoyance ${findPosition(index)}`}
@@ -70,6 +65,15 @@ function Clairvoyance({ player }) {
     );
 }
 
+// bat card image for malachite box card
+// once in item holder, malachite box generates bat card
+// that attacks opponent with any other player action
+const BatCard = () => (
+    <div className="item-attacks">
+        <img src={bat} alt="bat card" />
+    </div>
+);
+
 class Player extends Component {
     constructor(props) {
         super(props);
@@ -80,37 +84,28 @@ class Player extends Component {
         this.isTarget = this.isTarget.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.playAnimation = this.playAnimation.bind(this);
-        this.playAnimationPotion = this.playAnimationPotion.bind(this);
     }
 
     componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-        // animation for cards deal from gravyeard to deck
+    // animation for cards deal from gravyeard to deck
         if (this.props.player.deal !== prevProps.player.deal) {
-            this.playAnimation();
-        // animation for Turning Potion - active player gets cards from inactive player hand
-        // doesn't work ---> to be fixed!
-        } if (this.props.player.turningHand !== prevProps.player.turningHand
-            && this.props.player.turningHand === true) {
-            this.playAnimationPotion();
+            this.playAnimation('cards');
+            // animation for Turning Potion - active player gets cards from inactive player hand
+            // doesn't work ---> to be fixed!
+        }
+        if (
+            this.props.player.turningHand !== prevProps.player.turningHand
+      && this.props.player.turningHand === true
+        ) {
+            this.playAnimation('potion');
         }
     }
 
-    playAnimation() {
-        // console.log('We are in turning Potion Animation!');
-        this.setState({ animation: 'cards' });
-        setTimeout(
-            () => this.setState({ animation: null }),
-            2000,
-        );
-    }
-
-    playAnimationPotion() {
-        this.setState({ animation: 'potion' });
-        setTimeout(
-            () => this.setState({ animation: null }),
-            2000,
-        );
+    playAnimation(animName) {
+        console.log('We are in Animation!', animName);
+        this.setState({ animation: animName });
+        setTimeout(() => this.setState({ animation: null }), 2000);
     }
 
     isTarget(target) {
@@ -130,15 +125,29 @@ class Player extends Component {
     }
 
     cardDropped(target) {
+        let item;
+        // eslint-disable-next-line no-unused-expressions
+        Object.keys(this.props.player.item) !== undefined
+            ? (item = Object.values(this.props.player.item)[0])
+            : null;
+
         if (!this.isTarget(target)) {
             return;
         }
         this.props.cardDropped(target);
+        // if player has malachite box card
+        // every other card drop calls animation of bat card
+        // eslint-disable-next-line no-unused-expressions
+        this.props.active && item && item.category === 'generator'
+            ? this.playAnimation('bat')
+            : null;
     }
 
     render() {
         const playerClass = this.props.active ? 'player-active' : 'player-inactive';
-        const playerPosition = this.props.player.position === 'bottom' ? 'player player-bottom' : 'player player-top';
+        const playerPosition = this.props.player.position === 'bottom'
+            ? 'player player-bottom'
+            : 'player player-top';
         return (
             <div className={`${playerPosition} ${playerClass}`}>
                 <Hero
@@ -158,18 +167,15 @@ class Player extends Component {
                     cardDragEnded={this.props.cardDragEnded}
                     active={this.props.active}
                 />
+                {this.state.animation === 'bat' ? <BatCard /> : null}
                 <Deck
                     active={this.props.active}
                     cards={this.props.player.cards}
                     background={this.props.player.background}
                 />
-                {this.props.player.cardsShown
-                    ? (
-                        <Clairvoyance
-                            player={this.props.player}
-                            active={this.props.active}
-                        />
-                    ) : null}
+                {this.props.player.cardsShown ? (
+                    <Clairvoyance player={this.props.player} active={this.props.active} />
+                ) : null}
                 <Hand
                     active={this.props.active}
                     dragging={this.props.dragging}
@@ -181,13 +187,9 @@ class Player extends Component {
                     player={this.props.player}
                 />
                 {/* {this.state.animation === "potion" ? ( */}
-                {this.props.active ? null
-                    : (this.state.animation === 'potion' ? (
-                        <AnimatedHand
-                            hand={this.props.hand}
-                            player={this.props.player}
-                        />
-                    ) : null)}
+                {this.props.active ? null : this.state.animation === 'potion' ? (
+                    <AnimatedHand hand={this.props.hand} player={this.props.player} />
+                ) : null}
                 <Grave
                     player={this.props.player}
                     active={this.props.active}
@@ -199,7 +201,6 @@ class Player extends Component {
                     animation={this.state.animation}
                 />
             </div>
-
         );
     }
 }
@@ -207,23 +208,34 @@ class Player extends Component {
 const Deck = (props) => (
     <div className={`deck card-like deck-${props.background}`}>
         <div className="count">
-            {props.active ? Object.keys(props.cards).length : Object.keys(props.cards).length}
+            {props.active
+                ? Object.keys(props.cards).length
+                : Object.keys(props.cards).length}
         </div>
     </div>
 );
 
 const Grave = (props) => (
     <div
-        className={`grave card-like  grave-${props.background} ${props.isTarget('graveyard') ? 'target' : null}`}
-        style={{ backgroundImage: `url(${graveyard})`, backgroundSize: '100% 100%' }}
+        className={`grave card-like  grave-${props.background} ${
+            props.isTarget('graveyard') ? 'target' : null
+        }`}
+        style={{
+            backgroundImage: `url(${graveyard})`,
+            backgroundSize: '100% 100%',
+        }}
         id={props.active ? 'grave' : null}
         onDrop={() => props.cardDropped('graveyard')}
         onDragOver={(e) => props.cardOver(e, 'graveyard')}
     >
         <div className="count">
-            {props.active ? Object.keys(props.grave).length : Object.keys(props.grave).length}
+            {props.active
+                ? Object.keys(props.grave).length
+                : Object.keys(props.grave).length}
         </div>
-        {props.animation === 'cards' ? <Animation background={props.background} /> : null}
+        {props.animation === 'cards' ? (
+            <Animation background={props.background} />
+        ) : null}
     </div>
 );
 
@@ -232,37 +244,44 @@ const Item = (props) => (
         className={`item card-place card-like
             ${props.player.background}
             ${props.isTarget('item') ? 'target' : null}
-            ${props.isTarget('itemOpponent') && props.item && props.item.category !== 'shield' ? 'target' : null}
+            ${
+    props.isTarget('itemOpponent')
+              && props.item
+              && props.item.category !== 'shield'
+        ? 'target'
+        : null
+    }
         `}
         id={props.active ? 'item' : null}
-
         onDrop={
             // eslint-disable-next-line no-nested-ternary
             props.active
                 ? () => props.cardDropped('item', Object.keys(props.player.item))
-                : props.item ? () => props.cardDropped('itemOpponent') : null
+                : props.item
+                    ? () => props.cardDropped('itemOpponent')
+                    : null
         }
         onDragOver={
             // eslint-disable-next-line no-nested-ternary
             props.active
                 ? (e) => props.cardOver(e, 'item')
-                : props.item ? (e) => props.cardOver(e, 'itemOpponent') : null
+                : props.item
+                    ? (e) => props.cardOver(e, 'itemOpponent')
+                    : null
         }
     >
-        {props.item
-            ? (
-                <Card
-                    card={props.item}
-                    player={props.player}
-                    cardKey={Object.keys(props.player.item)[0]}
-                    draggable={props.active}
-                    cardDragStarted={props.cardDragStarted}
-                    cardDragEnded={props.cardDragEnded}
-                />
-            ) : null}
+        {props.item ? (
+            <Card
+                card={props.item}
+                player={props.player}
+                cardKey={Object.keys(props.player.item)[0]}
+                draggable={props.active}
+                cardDragStarted={props.cardDragStarted}
+                cardDragEnded={props.cardDragEnded}
+            />
+        ) : null}
     </div>
 );
-
 
 Deck.propTypes = {
     cards: PropTypes.object.isRequired,
