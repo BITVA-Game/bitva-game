@@ -933,15 +933,19 @@
     z-index: 20;
 }
 
+.player-top .bat-img {
+    transform: rotate(180deg);
+}
+
 @keyframes attackOpponent {
     0% { 
         opacity: 0;
         transform: rotateX(45deg) translateX(0px) translateY(0px);
         transform-style: preserve-3d;
         }
-    20% { 
-        transform: rotateX(45deg) translateX(0px) translateY(0px);
-        opacity: 20%;
+    20% {
+        opacity: 20%; 
+        transform: rotateX(45deg) translateX(0px) translateY(0px);        
         }
     100%    { transform: translateX(560px) translateY(-200px) }
 }

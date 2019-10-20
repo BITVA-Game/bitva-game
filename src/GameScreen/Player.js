@@ -70,7 +70,7 @@ function Clairvoyance({ player }) {
 // that attacks opponent with any other player action
 const BatCard = () => (
     <div className="item-attacks">
-        <img src={bat} alt="bat card" />
+        <img className="bat-img" src={bat} alt="bat card" />
     </div>
 );
 
