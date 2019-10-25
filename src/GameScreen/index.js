@@ -151,15 +151,7 @@ class GameScreen extends Component {
     playableHand(player) {
         const activePlayer = getActivePlayer(this.props.app);
         const inactivePlayer = getInActivePlayer(this.props.app);
-        // const ind = num === 0 ? 1 : 0;
-        // console.log(ind);
         if (player === activePlayer && activePlayer.turningHand === true) {
-            // useEffect(() => {
-            //     const timer = setTimeout(() => {
-            //         console.log('This will run after 2 seconds!');
-            //     }, 2000);
-            //     return () => clearTimeout(timer);
-            // }, []);
             // console.log('TURNING POTION! playableHand   - opponent hand!');
             return inactivePlayer.hand;
         }

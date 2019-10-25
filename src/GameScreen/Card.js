@@ -189,7 +189,6 @@ const Card = (props) => {
 };
 
 Card.propTypes = {
-    active: PropTypes.bool.isRequired,
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool,
     cardKey: PropTypes.string,

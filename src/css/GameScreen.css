@@ -748,6 +748,15 @@
 	filter: opacity(0%)
 }
 
+.hand-await {
+    animation: noHand 2s;
+}
+
+@keyframes noHand {
+    0%      { filter: opacity(0%) }
+    100%     { filter: opacity(0%) }
+}
+
 .card-hand {
     animation: toHand 2s ease-in reverse;
     z-index: 1000;
