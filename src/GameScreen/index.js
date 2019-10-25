@@ -1,6 +1,6 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable max-len */
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import UIFx from 'uifx';
 import Player from './Player';
@@ -154,7 +154,13 @@ class GameScreen extends Component {
         // const ind = num === 0 ? 1 : 0;
         // console.log(ind);
         if (player === activePlayer && activePlayer.turningHand === true) {
-            console.log('TURNING POTION! playableHand   - opponent hand!');
+            // useEffect(() => {
+            //     const timer = setTimeout(() => {
+            //         console.log('This will run after 2 seconds!');
+            //     }, 2000);
+            //     return () => clearTimeout(timer);
+            // }, []);
+            // console.log('TURNING POTION! playableHand   - opponent hand!');
             return inactivePlayer.hand;
         }
         if (player === activePlayer && activePlayer.turningHand === false) {
