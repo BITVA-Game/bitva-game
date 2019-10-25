@@ -282,8 +282,3 @@
     line-height: 15px;
     padding: 0 4px;
 }
-
-/*once attacked by turning potion inactive player's cards get this css property*/
-.card-dark {
-	filter: opacity(0%)
-}

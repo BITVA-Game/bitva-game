@@ -96,14 +96,10 @@ const Card = (props) => {
         id, name, type, disabled, panic, category,
         categoryName, healthCurrent, health, points, initialpoints,
     } = props.card;
-    const { background, turningHand } = props.player;
+    const { background } = props.player;
     return (
         <div
-            className={`${cardClass(type, background, false)} ${
-                props.active !== true && turningHand === true
-                    ? 'card-dark'
-                    : null
-            }`}
+            className={`${cardClass(type, background, false)}`}
             data-key={props.cardKey}
             draggable={
                 disabled === true || panic === true

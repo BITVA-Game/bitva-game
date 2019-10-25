@@ -15,9 +15,7 @@ function cardOrigin(dragging, card) {
 }
 
 const Hand = (props) => (
-    // const handCharmed = props.player.turningHand === true ? 'hand-dark' : null;
-    // <div className="hand">
-    <div className={`hand ${props.player.turningHand === true ? 'hand-dark' : null}`}>
+    <div className={`hand ${props.player.turningHand === true && props.active === false ? 'no-hand' : null}`}>
         {Object.keys(props.hand).map((cardId) => (
             <div
                 key={cardId}

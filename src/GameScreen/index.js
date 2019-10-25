@@ -167,6 +167,7 @@ class GameScreen extends Component {
     render() {
         console.log('app game: ', this.props.app.game);
         const activePlayer = getActivePlayer(this.props.app);
+        const inactivePlayer = getInActivePlayer(this.props.app);
         return this.state.animation === 'background' ? (
             <BackgroundAnimation />
         ) : (
@@ -177,6 +178,7 @@ class GameScreen extends Component {
                         key={player.keyHero}
                         player={player}
                         activePlayer={activePlayer}
+                        inactivePlayer={inactivePlayer}
                         hand={this.playableHand(player)}
                         sendMessage={this.props.sendMessage}
                         dragging={this.state.dragging}
