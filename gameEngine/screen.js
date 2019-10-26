@@ -17,6 +17,8 @@ function gameScreen(state) {
 
 function handle(state, msg) {
     switch (msg.type) {
+    case message.LOGIN:
+        return screen.LOGIN;
     case message.PLAY:
         return screen.HEROSELECT;
     case message.HEROSELECTED:
