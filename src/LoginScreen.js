@@ -26,7 +26,7 @@ const Profile = ({ accId }) => (
     </div>
 );
 
-const Profiles = (props) => (
+const Profiles = props => (
     <section className="login-content">
         <div className="login-profiles-container">
             <div className="login-profiles">
