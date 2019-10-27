@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import Player from './Player';
 import '../css/App.css';
 import '../css/GameScreen.css';
-
 import { getActivePlayer, getInActivePlayer } from '../rules';
 
 // animation duration time
@@ -72,6 +71,7 @@ class GameScreen extends Component {
         this.setState({
             dragging: null,
         });
+
     }
 
     startBirds() {

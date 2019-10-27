@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import UIFx from 'uifx';
 import Hero from './Hero';
 import Card from './Card';
 import Hand from './Hand';
@@ -12,6 +13,8 @@ import '../css/App.css';
 import '../css/GameScreen.css';
 import graveyard from '../images/cards/graveyard.png';
 import bat from '../images/cards/batCard.png';
+
+const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 
 const Animation = (props) => (
     <div className="stack">
@@ -137,6 +140,14 @@ class Player extends Component {
         itemActive && itemActive.category === 'generator'
             ? playerWithMalachiteBox = this.props.activePlayer.hero : null;
 
+        if (!this.isTarget(target)) {
+            return;
+        }
+        this.props.cardDropped(target);
+        // we play attack sound if active player attacks opponent or its item
+        if (!this.props.active && target !== 'graveyard') {
+            attackSound.play();
+        }
         // if active player has malachite box card
         // every other card drop calls animation of bat card
         // eslint-disable-next-line no-unused-expressions
