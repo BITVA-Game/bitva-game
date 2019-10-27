@@ -146,7 +146,9 @@ class Player extends Component {
         this.props.cardDropped(target);
         // we play attack sound if active player attacks opponent or its item
         if (!this.props.active && target !== 'graveyard') {
-            attackSound.play();
+            if (this.isTarget(target)) {
+                attackSound.play();
+            }
         }
         // if active player has malachite box card
         // every other card drop calls animation of bat card
