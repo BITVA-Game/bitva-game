@@ -27,7 +27,6 @@ function handClass(active, player) {
     return 'hand';
 }
 
-
 const Hand = (props) => (
     <div className={`${handClass(props.active, props.player)}`}>
         {Object.keys(props.hand).map((cardId) => (

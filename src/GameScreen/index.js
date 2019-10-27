@@ -152,11 +152,9 @@ class GameScreen extends Component {
         const activePlayer = getActivePlayer(this.props.app);
         const inactivePlayer = getInActivePlayer(this.props.app);
         if (player === activePlayer && activePlayer.turningHand === true) {
-            // console.log('TURNING POTION! playableHand   - opponent hand!');
             return inactivePlayer.hand;
         }
         if (player === activePlayer && activePlayer.turningHand === false) {
-            // console.log('playableHand   - player hand!');
             return activePlayer.hand;
         }
         return inactivePlayer.hand;
