@@ -169,6 +169,18 @@ const malachiteBox = {
     healthCurrent: 2,
     disabled: false,
 };
+const skullLantern = {
+    id: 'skullLantern',
+    name: 'Skull Lantern',
+    type: 'action',
+    icon: 'heartBlack',
+    category: 'attackItems',
+    categoryName: 'attack',
+    description: 'Spellfull illuminant, capable to enlight the invisible and to burn to ashes the enchanted characterstics of magic items.',
+    initialpoints: 2,
+    points: 2,
+    disabled: false,
+};
 
 export default {
     apple,
@@ -184,4 +196,5 @@ export default {
     raven,
     clairvoyance,
     malachiteBox,
+    skullLantern,
 };
