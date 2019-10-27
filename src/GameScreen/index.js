@@ -71,7 +71,6 @@ class GameScreen extends Component {
         this.setState({
             dragging: null,
         });
-
     }
 
     startBirds() {
