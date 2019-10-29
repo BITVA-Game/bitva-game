@@ -254,7 +254,7 @@ const OneHero = (props) => (
         </div>
         <section className="heroselection-footer">
             <BackButton unselect={props.unselect} />
-            <Play play={props.play} tabIndex="5" />
+            {props.isAvailable ? <Play play={props.play} tabIndex="5" /> : null}
         </section>
     </div>
 );
@@ -288,6 +288,7 @@ OneHero.propTypes = {
     hero: PropTypes.object.isRequired,
     unselect: PropTypes.func.isRequired,
     play: PropTypes.func.isRequired,
+    isAvailable: PropTypes.bool.isRequired,
 };
 
 BackButton.propTypes = {
