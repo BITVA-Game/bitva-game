@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 import './css/App.css';
 import WebFont from 'webfontloader';
 
+import LoginScreen from './LoginScreen';
 import StartScreen from './StartScreen';
 import Profile from './Profile';
 import HeroSelection from './HeroSelection';
@@ -41,7 +42,7 @@ class App extends Component {
             console.log({ app: arg });
             this.setState({ app: arg });
         });
-        sendMessage('INIT');
+        sendMessage({ type: 'LOGIN' });
         setTimeout(() => this.loadAnimation(), 0);
     }
 
@@ -53,6 +54,8 @@ class App extends Component {
         switch (this.state.app.manager.screen) {
         case 'LOADING':
             return 'LOADING';
+        case 'LOGIN':
+            return <LoginScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'STARTSCREEN':
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PROFILE':

@@ -1,0 +1,94 @@
+.login-container {
+    background-size: cover;
+    bottom: 0;
+    height: 100vh;
+	left: 0;
+	position: fixed;
+	right: 0;
+    top: 0;
+    width: 100vw;
+}
+
+/* header and footer */
+
+.login-header,
+.login-footer {
+    align-items: center;
+    background: rgb(0,0,0);
+    background: rgba(0,0,0,.8);
+    display: flex;
+    font-family: "Ruslan Display";
+    font-size: 36px;
+    height: 60px;
+    width: 100%;
+}
+
+.login-header {
+    color: #ECEBEB;
+    padding-left: 66px;
+}
+
+.login-footer {
+    justify-content: center;
+}
+
+.login-play-btn {
+    background: #ECEBEB;
+    border: 2px solid #000;
+    border-radius: 28px;
+    color: #000;
+    cursor: pointer;
+    padding: 6px 35px 7px;
+}
+
+/* content */
+
+.login-content {
+    align-items: center;
+    display: flex;
+    height: 648px;
+    justify-content: center;
+}
+
+.login-profiles-container {
+    background: rgb(236, 235, 235);
+    background: rgba(236, 235, 235, .8);
+    font-size: 36px;
+    min-width: 676px;
+}
+
+.login-profiles {
+    padding: 80px 0;
+}
+
+.login-profile {
+    color: #ECEBEB;
+    cursor: pointer;
+    text-align: center;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    -webkit-text-stroke: 1px #000;
+}
+.login-profile:hover,
+.login-selected {
+    background: #B74A45;
+}
+
+.login-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.login-button {
+    background: #ECEBEB;
+    border: 2px solid #000;
+    border-radius: 27.5px;
+    color: #000;
+    cursor: pointer;
+    font-size: 33px;
+    padding: 3px 20px;
+}

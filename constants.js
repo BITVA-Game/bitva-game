@@ -1,4 +1,5 @@
 const screen = {
+    LOGIN: 'LOGIN',
     STARTSCREEN: 'STARTSCREEN',
     PROFILE: 'PROFILE',
     PLAY: 'PLAY',
