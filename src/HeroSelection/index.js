@@ -76,6 +76,7 @@ class HeroSelection extends Component {
                     hero={this.state.hero}
                     unselect={this.unselect}
                     play={this.play}
+                    isAvailable={this.app.heroSelect.heroes.includes(this.state.hero.id)}
                 />
             </div>
         );
