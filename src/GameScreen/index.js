@@ -17,13 +17,6 @@ class GameScreen extends Component {
         this.state = {
             animation: null,
         };
-<<<<<<< HEAD
-
-=======
-        this.cardSelect = this.cardSelect.bind(this);
-        this.cardAct = this.cardAct.bind(this);
-        this.cardAim = this.cardAim.bind(this);
->>>>>>> Renamed action functions for cards
         this.startBirds = this.startBirds.bind(this);
         this.playableHand = this.playableHand.bind(this);
     }
@@ -91,13 +84,6 @@ class GameScreen extends Component {
                         inactivePlayer={inactivePlayer}
                         hand={this.playableHand(player)}
                         sendMessage={this.props.sendMessage}
-<<<<<<< HEAD
-=======
-                        dragging={this.state.dragging}
-                        cardDropped={this.cardAct}
-                        cardDragStarted={this.cardSelect}
-                        cardDragEnded={this.cardAim}
->>>>>>> Renamed action functions for cards
                     />
                 ))}
                 {activePlayer.moveCounter === 0
