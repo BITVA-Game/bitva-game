@@ -14,14 +14,13 @@ import '../css/Cards.css';
 import { sortedHeroesList } from '../rules';
 
 // const clickSound1 = new UIFx(`${process.env.PUBLIC_URL}/sound/click.mp3`, { volume: 1.0 });
-const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, { volume: 1.0 });
-
+const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
+    volume: 1.0,
+});
 
 const Header = (props) => (
     <section className="heroselection-header">
-        <div className="heroselection-title">
-            {props.title}
-        </div>
+        <div className="heroselection-title">{props.title}</div>
         {props.centre}
     </section>
 );
@@ -48,7 +47,7 @@ class HeroSelection extends Component {
     }
 
     play() {
-        console.log('PLAY MESSAGE SENT', this.state.hero);
+    // console.log('PLAY MESSAGE SENT', this.state.hero);
         clickSound2.play();
         this.props.sendMessage({
             type: 'HEROSELECTED',
@@ -98,7 +97,7 @@ class HeroSelection extends Component {
     render() {
         return (
             <div>
-                {this.state.hero ? this.renderOneHero() : this.renderListOfHeroes() }
+                {this.state.hero ? this.renderOneHero() : this.renderListOfHeroes()}
                 <MainMenu sendMessage={this.props.sendMessage} />
             </div>
         );
@@ -109,7 +108,6 @@ HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
 };
-
 
 Header.propTypes = {
     title: PropTypes.string.isRequired,

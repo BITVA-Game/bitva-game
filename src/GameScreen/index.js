@@ -15,7 +15,8 @@ class GameScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dragging: null, animation: null,
+            dragging: null,
+            animation: null,
         };
         this.cardDragStarted = this.cardDragStarted.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
@@ -54,7 +55,7 @@ class GameScreen extends Component {
     }
 
     cardDragStarted(key, card) {
-        console.log('cardDragStarted', key, card);
+    // console.log('cardDragStarted', key, card);
         this.setState({
             dragging: { key, card },
         });
@@ -62,7 +63,11 @@ class GameScreen extends Component {
 
     cardDropped(target) {
         console.log('Sending message');
-        this.props.sendMessage({ type: 'ACTION', activeCard: this.state.dragging.key, target });
+        this.props.sendMessage({
+            type: 'ACTION',
+            activeCard: this.state.dragging.key,
+            target,
+        });
 
         this.setState({
             dragging: null,
@@ -70,13 +75,13 @@ class GameScreen extends Component {
     }
 
     startBirds() {
-        // min time delay to start animation
+    // min time delay to start animation
         const minStart = 60000;
         // max time delay to start animation
         const maxStart = 180000;
         // random time delay to start animation between mmin and max values
         const animationStart = Math.floor(Math.random() * (maxStart - minStart + 1)) + minStart;
-        console.log('birds animation starts in', animationStart / 60000);
+        // console.log('birds animation starts in', animationStart / 60000);
         this.birdsInterval = setInterval(() => {
             this.setState({ animation: 'birds' });
         }, animationDuration + animationStart);
@@ -100,54 +105,43 @@ class GameScreen extends Component {
 
     render() {
         const activePlayer = getActivePlayer(this.props.app);
-        return (
-            this.state.animation === 'background' ? <BackgroundAnimation />
-                : (
-                    <div className="game-table app-background">
-                        {this.props.app.game.players.map((player) => (
-                            <Player
-                                active={player.id === activePlayer.id}
-                                item={player.item}
-                                key={player.keyHero}
-                                position={player.position}
-                                player={player}
-                                activePlayer={activePlayer}
-                                hand={this.playableHand(player)}
-                                sendMessage={this.props.sendMessage}
-                                dragging={this.state.dragging}
-                                cardDropped={this.cardDropped}
-                                cardDragStarted={this.cardDragStarted}
-                                cardDragEnded={this.cardDragEnded}
-                            />
-                        ))}
-                        {((this.props.app.game.players[0].moveCounter === 0) && (this.props.app.game.players[0].id === this.props.app.game.active))
-                    || ((this.props.app.game.players[1].moveCounter === 0) && (this.props.app.game.players[1].id === this.props.app.game.active))
-                            ? (
-                                <ChangeTurn
-                                    app={this.props.app}
-                                />
-                            )
-                            : null}
+        return this.state.animation === 'background' ? (
+            <BackgroundAnimation />
+        ) : (
+            <div className="game-table app-background">
+                {this.props.app.game.players.map((player) => (
+                    <Player
+                        active={player.id === activePlayer.id}
+                        item={player.item}
+                        key={player.keyHero}
+                        position={player.position}
+                        player={player}
+                        activePlayer={activePlayer}
+                        hand={this.playableHand(player)}
+                        sendMessage={this.props.sendMessage}
+                        dragging={this.state.dragging}
+                        cardDropped={this.cardDropped}
+                        cardDragStarted={this.cardDragStarted}
+                        cardDragEnded={this.cardDragEnded}
+                    />
+                ))}
+                {(this.props.app.game.players[0].moveCounter === 0
+          && this.props.app.game.players[0].id === this.props.app.game.active)
+        || (this.props.app.game.players[1].moveCounter === 0
+          && this.props.app.game.players[1].id === this.props.app.game.active) ? (
+              <ChangeTurn app={this.props.app} />
+                    ) : null}
 
-                        {this.props.app.game.phase === 'OVER'
-                            ? (
-                                <GameOver
-                                    app={this.props.app}
-                                />
-                            )
-                            : null}
-                        {this.state.animation === 'birds'
-                            ? <BirdsAnimation />
-                            : null}
-                    </div>
-                )
+                {this.props.app.game.phase === 'OVER' ? (
+                    <GameOver app={this.props.app} />
+                ) : null}
+                {this.state.animation === 'birds' ? <BirdsAnimation /> : null}
+            </div>
         );
     }
 }
 
-const BackgroundAnimation = () => (
-    <div className="game-screen-animation" />
-);
+const BackgroundAnimation = () => <div className="game-screen-animation" />;
 
 const BirdsAnimation = () => (
     <div className="animation-game-screen">
@@ -170,7 +164,9 @@ const GameOver = (props) => {
             {/* for pvp mode: if player is active and alive, the message is 'you win' */}
             {/* <p className="gameover-message">{activePlayer && activePlayer.health.current > 0 ? 'you win' : 'you lose'}</p> */}
             <p className="gameover-message">
-                {activePlayer && activePlayer.health.current > 0 ? `${activePlayer.hero} wins` : `${activePlayer.hero} loses`}
+                {activePlayer && activePlayer.health.current > 0
+                    ? `${activePlayer.hero} wins`
+                    : `${activePlayer.hero} loses`}
             </p>
         </div>
     );

@@ -22,7 +22,7 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 function sendMessage(msg) {
-    console.log('MESSAGE', msg);
+    // console.log('MESSAGE', msg);
     ipcRenderer.send('APP', msg);
 }
 
@@ -35,11 +35,10 @@ class App extends Component {
         this.loadAnimation = this.loadAnimation.bind(this);
     }
 
-
     // When the page loads, get GSO from backend, save it to state.
     componentDidMount() {
         ipcRenderer.on('APP', (event, arg) => {
-            console.log({ app: arg });
+            // console.log({ app: arg });
             this.setState({ app: arg });
         });
         sendMessage({ type: 'LOGIN' });
@@ -80,7 +79,7 @@ class App extends Component {
     }
 
     render() {
-        // console.log('APP ', this.state.app);
+    // console.log('APP ', this.state.app);
         WebFont.load({
             custom: {
                 families: ['Ruslan Display', 'Sedan SC'],
@@ -91,17 +90,29 @@ class App extends Component {
         return (
             <div className="App">
                 <div id="background" className="start-screen">
-                    <CSSTransition
-                        classNames="moveForest"
-                        in={loaded}
-                        timeout={5000}
-                    >
+                    <CSSTransition classNames="moveForest" in={loaded} timeout={5000}>
                         <div>
                             <img alt="hut" src={hutImage} className="background-hut" />
-                            <img alt="grey tree 1" src={greyTreeL} className="background-greyTreeL" />
-                            <img alt="grey tree 2" src={greyTreeR} className="background-greyTreeR" />
-                            <img alt="black tree 1" src={blackTreeL} className="background-blackTreeL" />
-                            <img alt="black tree 2" src={blackTreeR} className="background-blackTreeR" />
+                            <img
+                                alt="grey tree 1"
+                                src={greyTreeL}
+                                className="background-greyTreeL"
+                            />
+                            <img
+                                alt="grey tree 2"
+                                src={greyTreeR}
+                                className="background-greyTreeR"
+                            />
+                            <img
+                                alt="black tree 1"
+                                src={blackTreeL}
+                                className="background-blackTreeL"
+                            />
+                            <img
+                                alt="black tree 2"
+                                src={blackTreeR}
+                                className="background-blackTreeR"
+                            />
                         </div>
                     </CSSTransition>
                 </div>
