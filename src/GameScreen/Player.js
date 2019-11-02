@@ -86,7 +86,7 @@ class Player extends Component {
     // Typical usage (don't forget to compare props):
     // animation for cards deal from gravyeard to deck
         if (this.props.player.deal !== prevProps.player.deal) {
-            this.playAnimation('cards');            
+            this.playAnimation('cards');
         }
         // animation for Turning Potion - active player gets cards from inactive player hand
         if (
