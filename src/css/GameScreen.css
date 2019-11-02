@@ -911,37 +911,40 @@
     z-index: 20;
 }
 
+.player-top .bat-img {
+    transform: rotate(180deg);
+}
+
 @keyframes attackOpponent {
     0% { 
         opacity: 0;
         transform: rotateX(45deg) translateX(0px) translateY(0px);
         transform-style: preserve-3d;
         }
-    20% { 
-        transform: rotateX(45deg) translateX(0px) translateY(0px);
-        opacity: 20%;
+    20% {
+        opacity: 0.4; 
+        transform: rotateX(45deg) translateX(0px) translateY(0px);        
         }
     100%    { transform: translateX(560px) translateY(-200px) }
 }
 
-/*Animation for Malachite box - bat card attaks opponent*/
-
-.item-attacks {
-    animation: attackOpponent 2s ease-out forwards;
-    margin-left: 444px;
+/*fix item-attacks bat card's position for bottom player*/
+.player-bottom .item-attacks {
+    animation: attackOpponentTop 2s ease-out infinite;
+    margin-bottom: -200px;
+    margin-left: 800px;
     perspective: 100px;
-    z-index: 20;
+    z-index: 2000;
 }
 
-@keyframes attackOpponent {
+@keyframes attackOpponentTop {
     0% { 
         opacity: 0;
-        transform: rotateX(45deg) translateX(0px) translateY(0px);
-        transform-style: preserve-3d;
+        transform: rotateX(45deg) translateX(10px) translateY(-250px);               
         }
-    20% { 
-        transform: rotateX(45deg) translateX(0px) translateY(0px);
-        opacity: 20%;
+    20% {
+        opacity: 0.4; 
+        transform: rotateX(45deg) translateX(0px) translateY(-250px);          
         }
-    100%    { transform: translateX(560px) translateY(-200px) }
+    100%    { transform: translateX(-560px) translateY(30px) }
 }
