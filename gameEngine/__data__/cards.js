@@ -195,6 +195,19 @@ const magicMirror = {
     disabled: false,
 };
 
+const warhorse = {
+    id: 'warhorse',
+    name: 'War Horse',
+    type: 'action',
+    icon: 'skull',
+    category: 'attack',
+    categoryName: 'attack',
+    description: 'Loyal friend, warning his owner of the danger. Horse helps his Lady bogatyr both to slip her pursuers and joins the battle - hoofs the enemy warriors.',
+    initialpoints: 3,
+    points: 3,
+    disabled: false,
+};
+
 export default {
     apple,
     bogatyr,
@@ -208,7 +221,8 @@ export default {
     shieldSmall,
     skullLantern,
     turningPotion,
-    wolf,
-    waterLiving,
+    warhorse,
     waterDead,
+    waterLiving,
+    wolf,
 };
