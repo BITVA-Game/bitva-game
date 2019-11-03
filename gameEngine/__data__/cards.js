@@ -182,6 +182,19 @@ const skullLantern = {
     disabled: false,
 };
 
+const magicMirror = {
+    id: 'magicMirror',
+    name: 'Magiс Mirror',
+    type: 'item',
+    icon: 'hand',
+    category: 'reflect',
+    categoryName: 'reflect',
+    description: 'Magiс Mirror — item that can "duplicate the reality". The boundary between the earth and the other Subtle World.',
+    health: 2,
+    healthCurrent: 2,
+    disabled: false,
+};
+
 export default {
     apple,
     bogatyr,
@@ -197,4 +210,5 @@ export default {
     clairvoyance,
     malachiteBox,
     skullLantern,
+    magicMirror,
 };
