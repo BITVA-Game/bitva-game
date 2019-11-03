@@ -32,7 +32,7 @@ test('EDGE CASE TEST active player can put Magic Mirror in item holder.', () => 
     // we put game engine into needed state
     const gameForTest = JSON.parse(JSON.stringify(dealAllState));
     gameForTest.game.players[0].hand.key20 = magicMirror;
-   
+
     // we create new engine with our game state
     const engine = new GameEngine(gameForTest);
     engine.handle(msg);
@@ -132,7 +132,8 @@ test('EDGE CASE TEST inactive player has Magic Mirror in item, it reflects half 
 
 // Test, that when Magic Mirror card is at any player's item holder and when
 // it reflects half of damage back to the opponent (or round down damage points to integer)
-// and if opponent has a shield then reflected damage goes to the shield and rest to opponent if damage is more than shield health
+// and if opponent has a shield then reflected damage goes to the shield
+// remaining attack points are deducted from opponent health, if damage is more than shield health
 test('EDGE CASE TEST inactive player has Magic Mirror in item, it reflects half of active player attack to shield and then damage player.', () => {
     // we define card key for testing
     const cardToTest = 'key20';
