@@ -15,6 +15,7 @@ import graveyard from '../images/cards/graveyard.png';
 import bat from '../images/cards/batCard.png';
 
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
+const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });
 
 const Animation = (props) => (
     <div className="stack">
@@ -161,6 +162,10 @@ class Player extends Component {
             return;
         }
         this.props.cardDropped(target);
+        // we play graveyard sound if player drops card to graveyard
+        if (target === 'graveyard') {
+            graveyardSound.play();
+        }
     }
 
     render() {
