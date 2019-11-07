@@ -182,19 +182,47 @@ const skullLantern = {
     disabled: false,
 };
 
+const magicMirror = {
+    id: 'magicMirror',
+    name: 'Magiс Mirror',
+    type: 'item',
+    icon: 'hand',
+    category: 'reflect',
+    categoryName: 'reflect',
+    description: 'Magiс Mirror — item that can "duplicate the reality". The boundary between the earth and the other Subtle World.',
+    health: 2,
+    healthCurrent: 2,
+    disabled: false,
+};
+
+const warhorse = {
+    id: 'warhorse',
+    name: 'War Horse',
+    type: 'action',
+    icon: 'skull',
+    category: 'attack',
+    categoryName: 'attack',
+    description: 'Loyal friend, warning his owner of the danger. Horse helps his Lady bogatyr both to slip her pursuers and joins the battle - hoofs the enemy warriors.',
+    initialpoints: 3,
+    points: 3,
+    disabled: false,
+};
+
 export default {
     apple,
     bogatyr,
-    shieldSmall,
-    wolf,
-    shieldLarge,
-    waterLiving,
-    waterDead,
-    russianOven,
-    turningPotion,
+    clairvoyance,
+    magicMirror,
+    malachiteBox,
     plateMail,
     raven,
-    clairvoyance,
-    malachiteBox,
+    russianOven,
+    shieldLarge,
+    shieldSmall,
     skullLantern,
+    turningPotion,
+    warhorse,
+    waterDead,
+    waterLiving,
+    wolf,
 };
