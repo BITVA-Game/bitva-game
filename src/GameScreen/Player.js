@@ -216,6 +216,7 @@ class Player extends Component {
                     cardDragEnded={this.props.cardDragEnded}
                     isTarget={this.isTarget}
                     player={this.props.player}
+                    mode={this.props.mode}
                 />
                 {/* {this.state.animation === "potion" ? ( */}
                 {this.props.active ? null : this.state.animation === 'potion' ? (
@@ -256,9 +257,9 @@ const Grave = (props) => (
             backgroundSize: '100% 100%',
         }}
         id={props.active ? 'grave' : null}
-        XonDrop={() => props.cardDropped('graveyard')}
+        onDrop={() => props.cardDropped('graveyard')}
         onClick={() => props.cardDropped('graveyard')}
-        XonDragOver={(e) => props.cardOver(e, 'graveyard')}
+        onDragOver={(e) => props.cardOver(e, 'graveyard')}
     >
         <div className="count">
             {props.active
@@ -285,7 +286,7 @@ const Item = (props) => (
     }
         `}
         id={props.active ? 'item' : null}
-        xonDrop={
+        onDrop={
             // eslint-disable-next-line no-nested-ternary
             props.active
                 ? () => props.cardDropped('item', Object.keys(props.player.item))

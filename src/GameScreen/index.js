@@ -54,10 +54,13 @@ class GameScreen extends Component {
         });
     }
 
-    cardSelect(key, card) {
-        console.log('cardDragStarted');
-        this.setState({
-            dragging: { key, card },
+    cardSelect(key, card, mode) {
+        this.setState((oldState) => {
+            if(oldState.dragging && mode=="click"){
+                return { dragging:null }
+            } else {
+                return { dragging: { key, card, mode}}
+            }
         });
     }
 

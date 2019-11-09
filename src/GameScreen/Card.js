@@ -102,8 +102,8 @@ const Card = (props) => (
                 ? null
                 : props.draggable
         }
-        XonDragStart={() => props.cardDragStarted(props.cardKey, props.card)}
-        onClick={() => props.cardDragStarted(props.cardKey, props.card)}
+        onDragStart={() => props.cardDragStarted(props.cardKey, props.card, "drag")}
+        onClick={() => props.active && props.cardDragStarted(props.cardKey, props.card, "click")}
         onDragEnd={props.cardDragEnded}
     >
         {props.card.disabled === true || props.card.panic === true ? (
@@ -120,25 +120,13 @@ const Card = (props) => (
                 <div
                     className={`card-icon game-card-icon
                     ${props.card.category === 'attack' ? 'icon-attack' : null}
-                    ${
-    props.card.category === 'attackItems'
-        ? 'icon-damage'
-        : null
-    }
+                    ${props.card.category === 'attackItems' ? 'icon-damage' : null}
                     ${props.card.category === 'damage' ? 'icon-damage' : null}
                     ${props.card.category === 'generator' ? 'icon-move' : null}
-                    ${
-    props.card.category === 'heal'
-                      && props.card.type === 'action'
-        ? 'icon-heal'
-        : null
-    }
-                    ${
-    props.card.category === 'heal'
-                      && props.card.type === 'item'
-        ? 'icon-heart'
-        : null
-    }
+                    ${props.card.category === 'heal'
+                      && props.card.type === 'action' ? 'icon-heal' : null}
+                    ${props.card.category === 'heal'
+                      && props.card.type === 'item' ? 'icon-heart' : null}
                     ${props.card.category === 'holdCard' ? 'icon-hold' : null}
                     ${props.card.category === 'holdTurn' ? 'icon-hold' : null}
                     ${props.card.category === 'panic' ? 'icon-arrows' : null}
@@ -147,9 +135,7 @@ const Card = (props) => (
                     ${props.card.category === 'showCards' ? 'icon-show' : null}
                     ${props.card.category === 'shuffling' ? 'icon-move' : null}
                     ${props.card.category === 'suppress' ? 'icon-damage' : null}
-                    ${
-    props.card.category === 'turning' ? 'icon-arrows' : null
-    }`}
+                    ${props.card.category === 'turning' ? 'icon-arrows' : null}`}
                 />
             </div>
             {/* <p className="card-category game-card-category">{props.card.categoryName}</p> */}

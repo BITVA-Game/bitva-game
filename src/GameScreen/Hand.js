@@ -5,7 +5,15 @@ import '../css/App.css';
 import '../css/GameScreen.css';
 
 function cardOrigin(dragging, card) {
-    return dragging !== null && card === dragging.card ? 0 : 1.0;
+
+    if (dragging !== null && card === dragging.card && dragging.mode=="drag") {
+        return { opacity: 0, transform: "scale(1.0)"}
+    } else if(dragging !== null && card === dragging.card && dragging.mode=="click"){
+        return { opacity: 1.0, transform: "scale(1.2)"}
+    } else {
+        return { opacity: 1.0, transform: "scale(1.0)"}
+    } 
+    
 }
 
 const Hand = (props) => (
@@ -16,7 +24,7 @@ const Hand = (props) => (
             <div
                 key={cardId}
                 className="card-place card-like"
-                style={{ opacity: cardOrigin(props.dragging, props.hand[cardId]) }}
+                style={cardOrigin(props.dragging, props.hand[cardId])}
             >
                 <Card
                     active={props.active}

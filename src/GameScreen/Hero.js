@@ -24,7 +24,7 @@ const Hero = (props) => (
         }`}
         style={style}
         id={props.active ? 'hero' : 'enemy'}
-        XonDrop={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
+        onDrop={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
         onClick={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
         onDragOver={(e) => props.cardOver(e, props.active ? 'hero' : 'opponent')}
     >
