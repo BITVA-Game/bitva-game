@@ -62,7 +62,7 @@ class GameScreen extends Component {
     }
 
     cardAct(target) {
-        console.log('CardActcardDropped');
+        console.log('cardDropped');
         this.props.sendMessage({
             type: 'ACTION',
             activeCard: this.state.dragging.key,

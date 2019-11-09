@@ -19,10 +19,13 @@ const images = {
 
 const Hero = (props) => (
     <div
-        className={`hero ${props.isTarget(props.active ? 'hero' : 'opponent') ? 'target' : null}`}
+        className={`hero ${
+            props.isTarget(props.active ? 'hero' : 'opponent') ? 'target' : null
+        }`}
         style={style}
         id={props.active ? 'hero' : 'enemy'}
-        onDrop={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
+        XonDrop={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
+        onClick={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
         onDragOver={(e) => props.cardOver(e, props.active ? 'hero' : 'opponent')}
     >
         <img
@@ -46,26 +49,42 @@ class HealthMeter extends Component {
         this.cx = props.width / 2;
         this.cy = props.height / 2;
         this.sw = 6;
-        this.r = this.cx - (this.sw / 2);
+        this.r = this.cx - this.sw / 2;
         const cl = 2 * Math.PI * this.r;
 
         const maximum = props.health.maximum;
-        const angle = ((360 / maximum) * props.health.current) - 90;
+        const angle = (360 / maximum) * props.health.current - 90;
         const long = angle + 90 > 180 ? 1 : 0;
-        const x = this.cx + (this.r * Math.cos(((angle * Math.PI) - 1) / 180));
-        const y = this.cy + (this.r * Math.sin(((angle * Math.PI) - 1) / 180));
+        const x = this.cx + this.r * Math.cos((angle * Math.PI - 1) / 180);
+        const y = this.cy + this.r * Math.sin((angle * Math.PI - 1) / 180);
 
-        this.d = `M ${this.cx} ${this.sw / 2} A ${this.r} ${this.r} 0 ${long} 1 ${x} ${y}`;
-        this.sda = `${(cl / maximum) - 1},1`;
+        this.d = `M ${this.cx} ${this.sw / 2} A ${this.r} ${
+            this.r
+        } 0 ${long} 1 ${x} ${y}`;
+        this.sda = `${cl / maximum - 1},1`;
         this.sdo = (cl / 360) * 90;
     }
 
     render() {
         return (
             <>
-                <svg className="hero-health" width={(this.cx) * 2} height={(this.cy) * 2}>
-                    <circle cx={this.cx} cy={this.cy} r={this.r} stroke="black" strokeWidth={this.sw + 1} fill="transparent" />
-                    <path className="hero-health-points" d={this.d} strokeWidth={this.sw} strokeDasharray={this.sda} strokeLinecap="butt" fill="transparent" />
+                <svg className="hero-health" width={this.cx * 2} height={this.cy * 2}>
+                    <circle
+                        cx={this.cx}
+                        cy={this.cy}
+                        r={this.r}
+                        stroke="black"
+                        strokeWidth={this.sw + 1}
+                        fill="transparent"
+                    />
+                    <path
+                        className="hero-health-points"
+                        d={this.d}
+                        strokeWidth={this.sw}
+                        strokeDasharray={this.sda}
+                        strokeLinecap="butt"
+                        fill="transparent"
+                    />
                 </svg>
                 <div className="hero-icon game-icon-text icon-heart">
                     {this.props.health.current}
@@ -88,6 +107,5 @@ HealthMeter.propTypes = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
 };
-
 
 export default Hero;

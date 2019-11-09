@@ -131,6 +131,19 @@ class Player extends Component {
         event.preventDefault();
     }
 
+    actionSound(target) {
+        // we play attack sound if active player attacks opponent or its item
+        if (!this.props.active && target !== 'graveyard') {
+            if (this.isTarget(target)) {
+                attackSound.play();
+            }
+        }
+        // we play graveyard sound if player drops card to graveyard
+        if (target === 'graveyard') {
+            graveyardSound.play();
+        }
+    }
+
     malachiteBox() {
         // we define item of active player if any
         let itemActive;
@@ -146,19 +159,6 @@ class Player extends Component {
         itemActive && itemActive.category === 'generator' && this.props.activePlayer.hero === playerWithMalachiteBox
             ? this.playAnimation('bat') && attackSound.play()
             : null;
-    }
-
-    actionSound(target) {
-        // we play attack sound if active player attacks opponent or its item
-        if (!this.props.active && target !== 'graveyard') {
-            if (this.isTarget(target)) {
-                attackSound.play();
-            }
-        }
-        // we play graveyard sound if player drops card to graveyard
-        if (target === 'graveyard') {
-            graveyardSound.play();
-        }
     }
 
     cardDropped(target) {
@@ -256,8 +256,9 @@ const Grave = (props) => (
             backgroundSize: '100% 100%',
         }}
         id={props.active ? 'grave' : null}
-        onDrop={() => props.cardDropped('graveyard')}
-        onDragOver={(e) => props.cardOver(e, 'graveyard')}
+        XonDrop={() => props.cardDropped('graveyard')}
+        onClick={() => props.cardDropped('graveyard')}
+        XonDragOver={(e) => props.cardOver(e, 'graveyard')}
     >
         <div className="count">
             {props.active
@@ -284,7 +285,15 @@ const Item = (props) => (
     }
         `}
         id={props.active ? 'item' : null}
-        onDrop={
+        xonDrop={
+            // eslint-disable-next-line no-nested-ternary
+            props.active
+                ? () => props.cardDropped('item', Object.keys(props.player.item))
+                : props.item
+                    ? () => props.cardDropped('itemOpponent')
+                    : null
+        }
+        onClick={
             // eslint-disable-next-line no-nested-ternary
             props.active
                 ? () => props.cardDropped('item', Object.keys(props.player.item))
