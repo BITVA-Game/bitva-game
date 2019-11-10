@@ -103,6 +103,7 @@ class GameScreen extends Component {
     }
 
     render() {
+        console.log('app game: ', this.props.app.game);
         const activePlayer = getActivePlayer(this.props.app);
         return this.state.animation === 'background' ? (
             <BackgroundAnimation />
@@ -124,11 +125,9 @@ class GameScreen extends Component {
                         cardDragEnded={this.cardDragEnded}
                     />
                 ))}
-                {(this.props.app.game.players[0].moveCounter === 0
-          && this.props.app.game.players[0].id === this.props.app.game.active)
-        || (this.props.app.game.players[1].moveCounter === 0
-          && this.props.app.game.players[1].id === this.props.app.game.active) ? (
-              <ChangeTurn app={this.props.app} />
+                {activePlayer.moveCounter === 0
+                && activePlayer.health.current > 0
+                    ? (<ChangeTurn app={this.props.app} />
                     ) : null}
 
                 {this.props.app.game.phase === 'OVER' ? (
