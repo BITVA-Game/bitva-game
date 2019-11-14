@@ -234,11 +234,26 @@ const bowArrow = {
     disabled: false,
 };
 
+const forestMushroom = {
+    id: 'forestMushroom',
+    name: 'Forest Mushrooms',
+    type: 'item',
+    icon: 'arrows',
+    category: 'panic',
+    categoryName: 'panic',
+    description: "Forest Mushroom cooked by Yaga are dangerous. Yaga's guest shoudn't treat oneself with them, if wishes to retain the clear consciousness.",
+    health: 2,
+    healthCurrent: 2,
+    disabled: false,
+};
+
+
 export default {
     apple,
     bogatyr,
     bowArrow,
     clairvoyance,
+    forestMushroom,
     magicMirror,
     magicTree,
     malachiteBox,
