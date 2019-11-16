@@ -17,9 +17,9 @@ class GameScreen extends Component {
             dragging: null,
             animation: null,
         };
-        this.cardDragStarted = this.cardDragStarted.bind(this);
-        this.cardDropped = this.cardDropped.bind(this);
-        this.cardDragEnded = this.cardDragEnded.bind(this);
+        this.cardSelect = this.cardSelect.bind(this);
+        this.cardAct = this.cardAct.bind(this);
+        this.cardAim = this.cardAim.bind(this);
         this.startBirds = this.startBirds.bind(this);
         this.playableHand = this.playableHand.bind(this);
     }
@@ -47,21 +47,25 @@ class GameScreen extends Component {
         clearInterval(this.birdsInterval);
     }
 
-    cardDragEnded() {
+    cardAim() {
+        console.log('cardDragEnded');
         this.setState({
             dragging: null,
         });
     }
 
-    cardDragStarted(key, card) {
-    // console.log('cardDragStarted', key, card);
-        this.setState({
-            dragging: { key, card },
+    cardSelect(key, card, mode) {
+        this.setState((oldState) => {
+            if(oldState.dragging && mode==="click"){
+                return { dragging:null }
+            } else {
+                return { dragging: { key, card, mode}}
+            }
         });
     }
 
-    cardDropped(target) {
-        console.log('Sending message');
+    cardAct(target) {
+        console.log('cardDropped');
         this.props.sendMessage({
             type: 'ACTION',
             activeCard: this.state.dragging.key,
@@ -120,9 +124,9 @@ class GameScreen extends Component {
                         hand={this.playableHand(player)}
                         sendMessage={this.props.sendMessage}
                         dragging={this.state.dragging}
-                        cardDropped={this.cardDropped}
-                        cardDragStarted={this.cardDragStarted}
-                        cardDragEnded={this.cardDragEnded}
+                        cardDropped={this.cardAct}
+                        cardDragStarted={this.cardSelect}
+                        cardDragEnded={this.cardAim}
                     />
                 ))}
                 {activePlayer.moveCounter === 0
