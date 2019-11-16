@@ -71,6 +71,8 @@ class App extends Component {
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'GAMESCREEN':
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
+        case 'OVER':
+            return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'NETWORKPLAY':
             return <NetworkPlay sendMessage={sendMessage} app={this.state.app} />;
         default:
