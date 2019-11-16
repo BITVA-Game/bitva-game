@@ -5,15 +5,13 @@ import '../css/App.css';
 import '../css/GameScreen.css';
 
 function cardOrigin(dragging, card) {
-
-    if (dragging !== null && card === dragging.card && dragging.mode==="drag") {
-        return { opacity: 0, transform: "scale(1.0)"}
-    } else if(dragging !== null && card === dragging.card && dragging.mode==="click"){
-        return { opacity: 1.0, transform: "scale(1.2)"}
-    } else {
-        return { opacity: 1.0, transform: "scale(1.0)"}
-    } 
-    
+    if (dragging !== null && card === dragging.card && dragging.mode === 'drag') {
+        return { opacity: 0, transform: 'scale(1.0)' };
+    }
+    if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
+        return { opacity: 1.0, transform: 'scale(1.2)' };
+    }
+    return { opacity: 1.0, transform: 'scale(1.0)' };
 }
 
 const Hand = (props) => (
