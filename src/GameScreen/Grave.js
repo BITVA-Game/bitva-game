@@ -17,16 +17,16 @@ const Animation = (props) => (
 const Grave = (props) => (
     <div
         className={`grave card-like  grave-${props.background} ${
-            props.isTarget('graveyard') ? 'target' : null
+            props.isTarget('graveyard', props.player) ? 'target' : null
         }`}
         style={{
             backgroundImage: `url(${graveyard})`,
             backgroundSize: '100% 100%',
         }}
         id={props.active ? 'grave' : null}
-        onDrop={() => props.cardDropped('graveyard')}
-        onClick={() => props.cardDropped('graveyard')}
-        onDragOver={(e) => props.cardOver(e, 'graveyard')}
+        onDrop={() => props.cardDropped('graveyard', props.player)}
+        onClick={() => props.cardDropped('graveyard', props.player)}
+        onDragOver={(e) => props.cardOver(e, 'graveyard', props.player)}
     >
         <div className="count">
             {props.active
@@ -41,6 +41,7 @@ const Grave = (props) => (
 
 Grave.propTypes = {
     grave: PropTypes.object.isRequired,
+    player: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
     isTarget: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,

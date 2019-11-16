@@ -2,10 +2,13 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import UIFx from 'uifx';
 import Player from './Player';
 import '../css/App.css';
 import '../css/GameScreen.css';
-import { getActivePlayer, getInActivePlayer } from '../rules';
+import rules, { getActivePlayer, getInActivePlayer } from '../rules';
+
+const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 
 // animation duration time
 const animationDuration = 9000;
@@ -19,7 +22,11 @@ class GameScreen extends Component {
         };
         this.cardSelect = this.cardSelect.bind(this);
         this.cardAct = this.cardAct.bind(this);
+        this.isTarget = this.isTarget.bind(this);
+        this.cardDropped = this.cardDropped.bind(this);
+        this.cardOver = this.cardOver.bind(this);
         this.cardAim = this.cardAim.bind(this);
+
         this.startBirds = this.startBirds.bind(this);
         this.playableHand = this.playableHand.bind(this);
     }
@@ -64,6 +71,7 @@ class GameScreen extends Component {
     }
 
     cardAct(target) {
+        this.malachiteBox();
         this.props.sendMessage({
             type: 'ACTION',
             activeCard: this.state.dragging.key,
@@ -73,6 +81,37 @@ class GameScreen extends Component {
         this.setState({
             dragging: null,
         });
+    }
+
+
+    cardDropped(target, player) {
+        // we run malachite box function to check
+        // this card and execute it if any
+        this.malachiteBox();
+
+        if (!this.isTarget(target, player)) {
+            return;
+        }
+        this.cardAct(target);
+        // we run actionSound function to play sound once player acts
+        // this.actionSound(target);
+    }
+
+    isTarget(target, player) {
+        const activePlayer = getActivePlayer(this.props.app);
+        return rules(
+            target,
+            this.state.dragging,
+            player.id === activePlayer.id,
+            player,
+        );
+    }
+
+    cardOver(event, target, player) {
+        if (!this.isTarget(target, player)) {
+            return;
+        }
+        event.preventDefault();
     }
 
     startBirds() {
@@ -86,6 +125,27 @@ class GameScreen extends Component {
         this.birdsInterval = setInterval(() => {
             this.setState({ animation: 'birds' });
         }, animationDuration + animationStart);
+    }
+
+    malachiteBox() {
+        const activePlayer = getActivePlayer(this.props.app);
+        // we define item of active player if any
+        let itemActive;
+        if (Object.keys(activePlayer.item) !== undefined) {
+            itemActive = Object.values(activePlayer.item)[0];
+        }
+
+        // we define active player if she / he has Malachite box in item
+        let playerWithMalachiteBox;
+        if (itemActive && itemActive.category === 'generator') {
+            playerWithMalachiteBox = activePlayer.hero;
+        }
+        // if active player has malachite box card
+        // every other card drop calls animation of bat card
+        if (itemActive && itemActive.category === 'generator' && activePlayer.hero === playerWithMalachiteBox) {
+            // this.playAnimation('bat');
+            attackSound.play();
+        }
     }
 
     playableHand(player) {
@@ -123,6 +183,9 @@ class GameScreen extends Component {
                         cardAct={this.cardAct}
                         cardSelect={this.cardSelect}
                         cardAim={this.cardAim}
+                        isTarget={this.isTarget}
+                        cardDropped={this.cardDropped}
+                        cardOver={this.cardOver}
                     />
                 ))}
                 {activePlayer.moveCounter === 0

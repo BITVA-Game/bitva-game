@@ -11,7 +11,6 @@ import Card from './Card';
 import Item from './Item';
 import Hand from './Hand';
 import Grave from './Grave';
-import rules from '../rules';
 import '../css/App.css';
 import '../css/GameScreen.css';
 import bat from '../images/cards/batCard.png';
@@ -78,11 +77,7 @@ class Player extends Component {
         this.state = {
             animation: null,
         };
-        this.cardOver = this.cardOver.bind(this);
-        this.isTarget = this.isTarget.bind(this);
-        this.cardDropped = this.cardDropped.bind(this);
         this.playAnimation = this.playAnimation.bind(this);
-        this.malachiteBox = this.malachiteBox.bind(this);
         this.actionSound = this.actionSound.bind(this);
     }
 
@@ -108,26 +103,10 @@ class Player extends Component {
         setTimeout(() => this.setState({ animation: null }), 2000);
     }
 
-    isTarget(target) {
-        return rules(
-            target,
-            this.props.dragging,
-            this.props.active,
-            this.props.player,
-        );
-    }
-
-    cardOver(event, target) {
-        if (!this.isTarget(target)) {
-            return;
-        }
-        event.preventDefault();
-    }
-
     actionSound(target) {
         // we play attack sound if active player attacks opponent or its item
         if (!this.props.active && target !== 'graveyard') {
-            if (this.isTarget(target)) {
+            if (this.isTarget(target, this.props.player)) {
                 attackSound.play();
             }
         }
@@ -135,36 +114,6 @@ class Player extends Component {
         if (target === 'graveyard') {
             graveyardSound.play();
         }
-    }
-
-    malachiteBox() {
-        // we define item of active player if any
-        let itemActive;
-        Object.keys(this.props.activePlayer.item) !== undefined
-            ? (itemActive = Object.values(this.props.activePlayer.item)[0])
-            : null;
-        // we define active player if she / he has Malachite box in item
-        let playerWithMalachiteBox;
-        itemActive && itemActive.category === 'generator'
-            ? playerWithMalachiteBox = this.props.activePlayer.hero : null;
-        // if active player has malachite box card
-        // every other card drop calls animation of bat card
-        itemActive && itemActive.category === 'generator' && this.props.activePlayer.hero === playerWithMalachiteBox
-            ? this.playAnimation('bat') && attackSound.play()
-            : null;
-    }
-
-    cardDropped(target) {
-        // we run malachite box function to check
-        // this card and execute it if any
-        this.malachiteBox();
-
-        if (!this.isTarget(target)) {
-            return;
-        }
-        this.props.cardAct(target);
-        // we run actionSound function to play sound once player acts
-        this.actionSound(target);
     }
 
     render() {
@@ -176,16 +125,16 @@ class Player extends Component {
             <div className={`${playerPosition} ${playerClass}`}>
                 <Hero
                     player={this.props.player}
-                    cardDropped={this.cardDropped}
-                    cardOver={this.cardOver}
-                    isTarget={this.isTarget}
+                    cardDropped={this.props.cardDropped}
+                    cardOver={this.props.cardOver}
+                    isTarget={this.props.isTarget}
                     active={this.props.active}
                 />
                 <Item
                     item={Object.values(this.props.player.item)[0]}
-                    isTarget={this.isTarget}
-                    cardDropped={this.cardDropped}
-                    cardOver={this.cardOver}
+                    isTarget={this.props.isTarget}
+                    cardDropped={this.props.cardDropped}
+                    cardOver={this.props.cardOver}
                     player={this.props.player}
                     cardSelect={this.props.cardSelect}
                     cardAim={this.props.cardAim}
@@ -207,7 +156,6 @@ class Player extends Component {
                     hand={this.props.hand}
                     cardSelect={this.props.cardSelect}
                     cardAim={this.props.cardAim}
-                    isTarget={this.isTarget}
                     player={this.props.player}
                 />
                 {/* {this.state.animation === "potion" ? ( */}
@@ -218,9 +166,9 @@ class Player extends Component {
                     player={this.props.player}
                     active={this.props.active}
                     grave={this.props.player.grave}
-                    isTarget={this.isTarget}
-                    cardDropped={this.cardDropped}
-                    cardOver={this.cardOver}
+                    isTarget={this.props.isTarget}
+                    cardDropped={this.props.cardDropped}
+                    cardOver={this.props.cardOver}
                     background={this.props.player.background}
                     animation={this.state.animation}
                 />

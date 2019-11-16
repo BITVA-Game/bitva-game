@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -20,13 +22,13 @@ const images = {
 const Hero = (props) => (
     <div
         className={`hero ${
-            props.isTarget(props.active ? 'hero' : 'opponent') ? 'target' : null
+            props.isTarget(props.active ? 'hero' : 'opponent', props.player) ? 'target' : null
         }`}
         style={style}
         id={props.active ? 'hero' : 'enemy'}
-        onDrop={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
-        onClick={() => props.cardDropped(props.active ? 'hero' : 'opponent')}
-        onDragOver={(e) => props.cardOver(e, props.active ? 'hero' : 'opponent')}
+        onDrop={() => props.cardDropped(props.active ? 'hero' : 'opponent', props.player)}
+        onClick={() => props.cardDropped(props.active ? 'hero' : 'opponent', props.player)}
+        onDragOver={(e) => props.cardOver(e, props.active ? 'hero' : 'opponent', props.player)}
     >
         <img
             className="hero-image"

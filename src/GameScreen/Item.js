@@ -10,9 +10,9 @@ const Item = (props) => (
     <div
         className={`item card-place card-like
             ${props.player.background}
-            ${props.isTarget('item') ? 'target' : null}
+            ${props.isTarget('item', props.player) ? 'target' : null}
             ${
-    props.isTarget('itemOpponent')
+    props.isTarget('itemOpponent', props.player)
               && props.item
               && props.item.category !== 'shield'
         ? 'target'
@@ -23,25 +23,25 @@ const Item = (props) => (
         onDrop={
             // eslint-disable-next-line no-nested-ternary
             props.active
-                ? () => props.cardDropped('item', Object.keys(props.player.item))
+                ? () => props.cardDropped('item', props.player)
                 : props.item
-                    ? () => props.cardDropped('itemOpponent')
+                    ? () => props.cardDropped('itemOpponent', props.player)
                     : null
         }
         onClick={
             // eslint-disable-next-line no-nested-ternary
             props.active
-                ? () => props.cardDropped('item', Object.keys(props.player.item))
+                ? () => props.cardDropped('item', props.player)
                 : props.item
-                    ? () => props.cardDropped('itemOpponent')
+                    ? () => props.cardDropped('itemOpponent', props.player)
                     : null
         }
         onDragOver={
             // eslint-disable-next-line no-nested-ternary
             props.active
-                ? (e) => props.cardOver(e, 'item')
+                ? (e) => props.cardOver(e, 'item', props.player)
                 : props.item
-                    ? (e) => props.cardOver(e, 'itemOpponent')
+                    ? (e) => props.cardOver(e, 'itemOpponent', props.player)
                     : null
         }
     >
