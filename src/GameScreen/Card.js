@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/no-duplicates */
 
 import React from 'react';
@@ -102,8 +104,8 @@ const Card = (props) => (
                 ? null
                 : props.draggable
         }
-        onDragStart={() => props.cardDragStarted(props.cardKey, props.card, "drag")}
-        onClick={() => props.active && props.cardDragStarted(props.cardKey, props.card, "click")}
+        onDragStart={() => props.cardSelect(props.cardKey, props.card, 'drag')}
+        onClick={() => props.active && props.cardSelect(props.cardKey, props.card, 'click')}
         onDragEnd={props.cardDragEnded}
     >
         {props.card.disabled === true || props.card.panic === true ? (
@@ -189,7 +191,7 @@ Card.propTypes = {
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool,
     cardKey: PropTypes.string,
-    cardDragStarted: PropTypes.func,
+    cardSelect: PropTypes.func,
     cardDragEnded: PropTypes.func,
     player: PropTypes.object.isRequired,
 };
@@ -197,7 +199,7 @@ Card.propTypes = {
 Card.defaultProps = {
     draggable: null,
     cardKey: null,
-    cardDragStarted: null,
+    cardSelect: null,
     cardDragEnded: null,
 };
 

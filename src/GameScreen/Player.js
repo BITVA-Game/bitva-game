@@ -162,7 +162,7 @@ class Player extends Component {
         if (!this.isTarget(target)) {
             return;
         }
-        this.props.cardDropped(target);
+        this.props.cardAct(target);
         // we run actionSound function to play sound once player acts
         this.actionSound(target);
     }
@@ -187,8 +187,8 @@ class Player extends Component {
                     cardDropped={this.cardDropped}
                     cardOver={this.cardOver}
                     player={this.props.player}
-                    cardDragStarted={this.props.cardDragStarted}
-                    cardDragEnded={this.props.cardDragEnded}
+                    cardSelect={this.props.cardSelect}
+                    cardAim={this.props.cardAim}
                     active={this.props.active}
                 />
                 {this.state.animation === 'bat' ? <BatCard /> : null}
@@ -205,8 +205,8 @@ class Player extends Component {
                     dragging={this.props.dragging}
                     // hand={this.props.player.hand}
                     hand={this.props.hand}
-                    cardDragStarted={this.props.cardDragStarted}
-                    cardDragEnded={this.props.cardDragEnded}
+                    cardSelect={this.props.cardSelect}
+                    cardAim={this.props.cardAim}
                     isTarget={this.isTarget}
                     player={this.props.player}
                 />
@@ -248,9 +248,9 @@ Deck.propTypes = {
 Player.propTypes = {
     player: PropTypes.object.isRequired,
     hand: PropTypes.object.isRequired,
-    cardDragStarted: PropTypes.func.isRequired,
-    cardDragEnded: PropTypes.func.isRequired,
-    cardDropped: PropTypes.func.isRequired,
+    cardSelect: PropTypes.func.isRequired,
+    cardAim: PropTypes.func.isRequired,
+    cardAct: PropTypes.func.isRequired,
     dragging: PropTypes.object,
     active: PropTypes.bool.isRequired,
     activePlayer: PropTypes.object.isRequired,

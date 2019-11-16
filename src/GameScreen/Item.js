@@ -51,8 +51,8 @@ const Item = (props) => (
                 player={props.player}
                 cardKey={Object.keys(props.player.item)[0]}
                 draggable={props.active}
-                cardDragStarted={props.cardDragStarted}
-                cardDragEnded={props.cardDragEnded}
+                cardSelect={props.cardSelect}
+                cardAim={props.cardAim}
             />
         ) : null}
     </div>
@@ -62,8 +62,8 @@ Item.propTypes = {
     player: PropTypes.object.isRequired,
     item: PropTypes.object,
     isTarget: PropTypes.func.isRequired,
-    cardDragStarted: PropTypes.func,
-    cardDragEnded: PropTypes.func,
+    cardSelect: PropTypes.func,
+    cardAim: PropTypes.func,
     cardOver: PropTypes.func.isRequired,
     cardDropped: PropTypes.func.isRequired,
     active: PropTypes.bool.isRequired,
@@ -71,8 +71,8 @@ Item.propTypes = {
 
 Item.defaultProps = {
     item: null,
-    cardDragStarted: null,
-    cardDragEnded: null,
+    cardSelect: null,
+    cardAim: null,
 };
 
 export default Item;

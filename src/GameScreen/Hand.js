@@ -29,8 +29,8 @@ const Hand = (props) => (
                     cardKey={cardId}
                     card={props.hand[cardId]}
                     draggable={props.active}
-                    cardDragStarted={props.cardDragStarted}
-                    cardDragEnded={props.cardDragEnded}
+                    cardSelect={props.cardSelect}
+                    cardAim={props.cardAim}
                     player={props.player}
                 />
             </div>
@@ -42,8 +42,8 @@ Hand.propTypes = {
     dragging: PropTypes.object,
     active: PropTypes.bool.isRequired,
     hand: PropTypes.object.isRequired,
-    cardDragEnded: PropTypes.func.isRequired,
-    cardDragStarted: PropTypes.func.isRequired,
+    cardAim: PropTypes.func.isRequired,
+    cardSelect: PropTypes.func.isRequired,
     player: PropTypes.object.isRequired,
 };
 

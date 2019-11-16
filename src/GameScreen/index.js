@@ -48,7 +48,7 @@ class GameScreen extends Component {
     }
 
     cardAim() {
-        console.log('cardDragEnded');
+        console.log('I am in GameScreen');
         this.setState({
             dragging: null,
         });
@@ -64,7 +64,6 @@ class GameScreen extends Component {
     }
 
     cardAct(target) {
-        console.log('cardDropped');
         this.props.sendMessage({
             type: 'ACTION',
             activeCard: this.state.dragging.key,
@@ -115,17 +114,15 @@ class GameScreen extends Component {
                 {this.props.app.game.players.map((player) => (
                     <Player
                         active={player.id === activePlayer.id}
-                        item={player.item}
                         key={player.keyHero}
-                        position={player.position}
                         player={player}
                         activePlayer={activePlayer}
                         hand={this.playableHand(player)}
                         sendMessage={this.props.sendMessage}
                         dragging={this.state.dragging}
-                        cardDropped={this.cardAct}
-                        cardDragStarted={this.cardSelect}
-                        cardDragEnded={this.cardAim}
+                        cardAct={this.cardAct}
+                        cardSelect={this.cardSelect}
+                        cardAim={this.cardAim}
                     />
                 ))}
                 {activePlayer.moveCounter === 0
