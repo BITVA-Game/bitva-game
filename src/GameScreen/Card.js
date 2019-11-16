@@ -201,4 +201,5 @@ Card.defaultProps = {
     cardDragEnded: null,
 };
 
+
 export default Card;

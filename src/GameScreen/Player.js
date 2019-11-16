@@ -8,23 +8,16 @@ import PropTypes from 'prop-types';
 import UIFx from 'uifx';
 import Hero from './Hero';
 import Card from './Card';
+import Item from './Item';
 import Hand from './Hand';
+import Grave from './Grave';
 import rules from '../rules';
 import '../css/App.css';
 import '../css/GameScreen.css';
-import graveyard from '../images/cards/graveyard.png';
 import bat from '../images/cards/batCard.png';
 
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });
-
-const Animation = (props) => (
-    <div className="stack">
-        <div className={`deck card-like deck-${props.background} one`} />
-        <div className={`deck card-like deck-${props.background} two`} />
-        <div className={`deck card-like deck-${props.background} three`} />
-    </div>
-);
 
 const AnimatedHand = ({ hand, player }) => (
     <div className="hand card-hand">
@@ -216,7 +209,6 @@ class Player extends Component {
                     cardDragEnded={this.props.cardDragEnded}
                     isTarget={this.isTarget}
                     player={this.props.player}
-                    mode={this.props.mode}
                 />
                 {/* {this.state.animation === "potion" ? ( */}
                 {this.props.active ? null : this.state.animation === 'potion' ? (
@@ -247,83 +239,6 @@ const Deck = (props) => (
     </div>
 );
 
-const Grave = (props) => (
-    <div
-        className={`grave card-like  grave-${props.background} ${
-            props.isTarget('graveyard') ? 'target' : null
-        }`}
-        style={{
-            backgroundImage: `url(${graveyard})`,
-            backgroundSize: '100% 100%',
-        }}
-        id={props.active ? 'grave' : null}
-        onDrop={() => props.cardDropped('graveyard')}
-        onClick={() => props.cardDropped('graveyard')}
-        onDragOver={(e) => props.cardOver(e, 'graveyard')}
-    >
-        <div className="count">
-            {props.active
-                ? Object.keys(props.grave).length
-                : Object.keys(props.grave).length}
-        </div>
-        {props.animation === 'cards' ? (
-            <Animation background={props.background} />
-        ) : null}
-    </div>
-);
-
-const Item = (props) => (
-    <div
-        className={`item card-place card-like
-            ${props.player.background}
-            ${props.isTarget('item') ? 'target' : null}
-            ${
-    props.isTarget('itemOpponent')
-              && props.item
-              && props.item.category !== 'shield'
-        ? 'target'
-        : null
-    }
-        `}
-        id={props.active ? 'item' : null}
-        onDrop={
-            // eslint-disable-next-line no-nested-ternary
-            props.active
-                ? () => props.cardDropped('item', Object.keys(props.player.item))
-                : props.item
-                    ? () => props.cardDropped('itemOpponent')
-                    : null
-        }
-        onClick={
-            // eslint-disable-next-line no-nested-ternary
-            props.active
-                ? () => props.cardDropped('item', Object.keys(props.player.item))
-                : props.item
-                    ? () => props.cardDropped('itemOpponent')
-                    : null
-        }
-        onDragOver={
-            // eslint-disable-next-line no-nested-ternary
-            props.active
-                ? (e) => props.cardOver(e, 'item')
-                : props.item
-                    ? (e) => props.cardOver(e, 'itemOpponent')
-                    : null
-        }
-    >
-        {props.item ? (
-            <Card
-                card={props.item}
-                player={props.player}
-                cardKey={Object.keys(props.player.item)[0]}
-                draggable={props.active}
-                cardDragStarted={props.cardDragStarted}
-                cardDragEnded={props.cardDragEnded}
-            />
-        ) : null}
-    </div>
-);
-
 Deck.propTypes = {
     cards: PropTypes.object.isRequired,
     background: PropTypes.string.isRequired,
@@ -345,41 +260,6 @@ Player.defaultProps = {
     dragging: null,
 };
 
-Grave.propTypes = {
-    grave: PropTypes.object.isRequired,
-    active: PropTypes.bool.isRequired,
-    isTarget: PropTypes.func.isRequired,
-    cardDropped: PropTypes.func.isRequired,
-    cardOver: PropTypes.func.isRequired,
-    background: PropTypes.string.isRequired,
-    animation: PropTypes.string,
-};
-
-Grave.defaultProps = {
-    animation: null,
-};
-
-Item.propTypes = {
-    player: PropTypes.object.isRequired,
-    item: PropTypes.object,
-    isTarget: PropTypes.func.isRequired,
-    cardDragStarted: PropTypes.func,
-    cardDragEnded: PropTypes.func,
-    cardOver: PropTypes.func.isRequired,
-    cardDropped: PropTypes.func.isRequired,
-    active: PropTypes.bool.isRequired,
-};
-
-Item.defaultProps = {
-    item: null,
-    cardDragStarted: null,
-    cardDragEnded: null,
-};
-
-Animation.propTypes = {
-    background: PropTypes.string.isRequired,
-};
-
 Hand.propTypes = {
     hand: PropTypes.object.isRequired,
 };
@@ -392,5 +272,6 @@ AnimatedHand.propTypes = {
 Clairvoyance.propTypes = {
     player: PropTypes.object.isRequired,
 };
+
 
 export default Player;
