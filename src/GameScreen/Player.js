@@ -198,10 +198,11 @@ Player.propTypes = {
     hand: PropTypes.object.isRequired,
     cardSelect: PropTypes.func.isRequired,
     cardAim: PropTypes.func.isRequired,
-    cardAct: PropTypes.func.isRequired,
+    cardDropped: PropTypes.func.isRequired,
     dragging: PropTypes.object,
     active: PropTypes.bool.isRequired,
-    activePlayer: PropTypes.object.isRequired,
+    isTarget: PropTypes.func.isRequired,
+    cardOver: PropTypes.func.isRequired,
 };
 
 Player.defaultProps = {
