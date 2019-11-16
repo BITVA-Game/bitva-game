@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable consistent-return */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-duplicates */
@@ -15,6 +16,7 @@ import graveyard from '../images/cards/graveyard.png';
 import bat from '../images/cards/batCard.png';
 
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
+const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });
 
 const Animation = (props) => (
     <div className="stack">
@@ -87,6 +89,8 @@ class Player extends Component {
         this.isTarget = this.isTarget.bind(this);
         this.cardDropped = this.cardDropped.bind(this);
         this.playAnimation = this.playAnimation.bind(this);
+        this.malachiteBox = this.malachiteBox.bind(this);
+        this.actionSound = this.actionSound.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -127,40 +131,47 @@ class Player extends Component {
         event.preventDefault();
     }
 
-    cardDropped(target) {
+    malachiteBox() {
         // we define item of active player if any
         let itemActive;
-        // eslint-disable-next-line no-unused-expressions
         Object.keys(this.props.activePlayer.item) !== undefined
             ? (itemActive = Object.values(this.props.activePlayer.item)[0])
             : null;
         // we define active player if she / he has Malachite box in item
         let playerWithMalachiteBox;
-        // eslint-disable-next-line no-unused-expressions
         itemActive && itemActive.category === 'generator'
             ? playerWithMalachiteBox = this.props.activePlayer.hero : null;
+        // if active player has malachite box card
+        // every other card drop calls animation of bat card
+        itemActive && itemActive.category === 'generator' && this.props.activePlayer.hero === playerWithMalachiteBox
+            ? this.playAnimation('bat') && attackSound.play()
+            : null;
+    }
 
-        if (!this.isTarget(target)) {
-            return;
-        }
-        this.props.cardDropped(target);
+    actionSound(target) {
         // we play attack sound if active player attacks opponent or its item
         if (!this.props.active && target !== 'graveyard') {
             if (this.isTarget(target)) {
                 attackSound.play();
             }
         }
-        // if active player has malachite box card
-        // every other card drop calls animation of bat card
-        // eslint-disable-next-line no-unused-expressions
-        itemActive && itemActive.category === 'generator' && this.props.activePlayer.hero === playerWithMalachiteBox
-            ? this.playAnimation('bat')
-            : null;
+        // we play graveyard sound if player drops card to graveyard
+        if (target === 'graveyard') {
+            graveyardSound.play();
+        }
+    }
+
+    cardDropped(target) {
+        // we run malachite box function to check
+        // this card and execute it if any
+        this.malachiteBox();
 
         if (!this.isTarget(target)) {
             return;
         }
         this.props.cardDropped(target);
+        // we run actionSound function to play sound once player acts
+        this.actionSound(target);
     }
 
     render() {
