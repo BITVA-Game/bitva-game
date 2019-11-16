@@ -38,6 +38,7 @@ const card = {
     REFLECTCATEGORY: 'reflect',
     SHIELDCATEGORY: 'shield',
     HOLDCARDCATEGORY: 'holdCard',
+    HOLDTURNCATEGORY: 'holdTurn',
     ATTACKITEMCATEGORY: 'attackItems',
     SHOWCARDSCATEGORY: 'showCards',
     TURNINGCATEGORY: 'turning',

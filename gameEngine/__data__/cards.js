@@ -208,11 +208,25 @@ const warhorse = {
     disabled: false,
 };
 
+const magicTree = {
+    id: 'magicTree',
+    name: 'Magic Tree',
+    type: 'item',
+    icon: 'ballChain',
+    category: 'holdTurn',
+    categoryName: 'hold',
+    description: 'Yaga resuscitated the age-old oak with her magic. It guards the forest and detains trespassers.',
+    health: 2,
+    healthCurrent: 2,
+    disabled: false,
+};
+
 export default {
     apple,
     bogatyr,
     clairvoyance,
     magicMirror,
+    magicTree,
     malachiteBox,
     plateMail,
     raven,
