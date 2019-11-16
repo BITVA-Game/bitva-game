@@ -56,7 +56,7 @@ class GameScreen extends Component {
 
     cardSelect(key, card, mode) {
         this.setState((oldState) => {
-            if(oldState.dragging && mode=="click"){
+            if(oldState.dragging && mode==="click"){
                 return { dragging:null }
             } else {
                 return { dragging: { key, card, mode}}
