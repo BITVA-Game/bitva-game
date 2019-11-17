@@ -20,6 +20,7 @@ class GameScreen extends Component {
             dragging: null,
             animation: null,
         };
+        
         this.cardSelect = this.cardSelect.bind(this);
         this.cardAct = this.cardAct.bind(this);
         this.isTarget = this.isTarget.bind(this);

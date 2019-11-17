@@ -91,6 +91,16 @@ function cardClass(type, background, dragging) {
     return `card game-card card-like ${background}-item`;
 }
 
+function cardOrigin(dragging, card) {
+    if (dragging !== null && card === dragging.card && dragging.mode === 'drag') {
+        return { opacity: 0, transform: 'scale(1.0)' };
+    }
+    if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
+        return { opacity: 1.0, transform: 'scale(1.2)' };
+    }
+    return { opacity: 1.0, transform: 'scale(1.0)' };
+}
+
 const Card = (props) => {
     const {
         id, name, type, disabled, panic, category,
@@ -99,90 +109,95 @@ const Card = (props) => {
     const { background } = props.player;
     return (
         <div
-            className={`${cardClass(type, background, false)}`}
-            data-key={props.cardKey}
-            draggable={
-                disabled === true || panic === true
-                    ? null
-                    : props.draggable
-            }
-            onDragStart={() => props.cardSelect(props.cardKey, props.card, 'drag')}
-            onClick={() => props.active && props.cardSelect(props.cardKey, props.card, 'click')}
-            onDragEnd={props.cardDragEnded}
+            className="card-place card-like"
+            style={cardOrigin(props.dragging, props.card)}
         >
-            {disabled === true || panic === true ? (
-                <div className="card-chained" />
-            ) : null}
-            <div className="card-header">
-                <div
-                    className={`card-icon-container game-card-icon-container ${
+            <div
+                className={`${cardClass(type, background, false)}`}
+                data-key={props.cardKey}
+                draggable={
+                    disabled === true || panic === true
+                        ? null
+                        : props.draggable
+                }
+                onDragStart={() => props.cardSelect(props.cardKey, props.card, 'drag')}
+                onClick={() => props.active && props.cardSelect(props.cardKey, props.card, 'click')}
+                onDragEnd={props.cardDragEnded}
+            >
+                {disabled === true || panic === true ? (
+                    <div className="card-chained" />
+                ) : null}
+                <div className="card-header">
+                    <div
+                        className={`card-icon-container game-card-icon-container ${
+                            type === 'item'
+                                ? `${background}-item`
+                                : `${background}-action`
+                        }`}
+                    >
+                        <div
+                            className={`card-icon game-card-icon
+                            ${category === 'attack' ? 'icon-attack' : null}
+                            ${category === 'attackItems' ? 'icon-damage' : null}
+                            ${category === 'damage' ? 'icon-damage' : null}
+                            ${category === 'generator' ? 'icon-move' : null}
+                            ${category === 'heal'
+                            && type === 'action' ? 'icon-heal' : null}
+                            ${category === 'heal'
+                            && type === 'item' ? 'icon-heart' : null}
+                            ${category === 'holdCard' ? 'icon-hold' : null}
+                            ${category === 'holdTurn' ? 'icon-hold' : null}
+                            ${category === 'panic' ? 'icon-arrows' : null}
+                            ${category === 'reflect' ? 'icon-reflect' : null}
+                            ${category === 'shield' ? 'icon-shield' : null}
+                            ${category === 'showCards' ? 'icon-show' : null}
+                            ${category === 'shuffling' ? 'icon-move' : null}
+                            ${category === 'suppress' ? 'icon-damage' : null}
+                            ${category === 'turning' ? 'icon-arrows' : null}`}
+                        />
+                    </div>
+                    <p
+                        className={`card-category game-card-category ${
+                            categoryName === 'suppress' ? 'suppress' : null
+                        }`}
+                    >
+                        {categoryName}
+                    </p>
+                    {initialpoints ? (
+                        <div
+                            className={`card-points game-card-points
+                                ${
                         type === 'item'
                             ? `${background}-item`
                             : `${background}-action`
-                    }`}
-                >
-                    <div
-                        className={`card-icon game-card-icon
-                        ${category === 'attack' ? 'icon-attack' : null}
-                        ${category === 'attackItems' ? 'icon-damage' : null}
-                        ${category === 'damage' ? 'icon-damage' : null}
-                        ${category === 'generator' ? 'icon-move' : null}
-                        ${category === 'heal'
-                        && type === 'action' ? 'icon-heal' : null}
-                        ${category === 'heal'
-                        && type === 'item' ? 'icon-heart' : null}
-                        ${category === 'holdCard' ? 'icon-hold' : null}
-                        ${category === 'holdTurn' ? 'icon-hold' : null}
-                        ${category === 'panic' ? 'icon-arrows' : null}
-                        ${category === 'reflect' ? 'icon-reflect' : null}
-                        ${category === 'shield' ? 'icon-shield' : null}
-                        ${category === 'showCards' ? 'icon-show' : null}
-                        ${category === 'shuffling' ? 'icon-move' : null}
-                        ${category === 'suppress' ? 'icon-damage' : null}
-                        ${category === 'turning' ? 'icon-arrows' : null}`}
-                    />
+                        }`}
+                        >
+                            {points}
+                        </div>
+                    ) : null}
+                    {health ? (
+                        <div
+                            className={`card-health game-card-health
+                                ${
+                        type === 'item'
+                            ? `${background}-item`
+                            : `${background}-action`
+                        }`}
+                        >
+                            {healthCurrent}
+                        </div>
+                    ) : null}
                 </div>
-                <p
-                    className={`card-category game-card-category ${
-                        categoryName === 'suppress' ? 'suppress' : null
-                    }`}
-                >
-                    {categoryName}
-                </p>
-                {initialpoints ? (
-                    <div
-                        className={`card-points game-card-points
-                            ${
-                    type === 'item'
-                        ? `${background}-item`
-                        : `${background}-action`
-                    }`}
-                    >
-                        {points}
-                    </div>
-                ) : null}
-                {health ? (
-                    <div
-                        className={`card-health game-card-health
-                            ${
-                    type === 'item'
-                        ? `${background}-item`
-                        : `${background}-action`
-                    }`}
-                    >
-                        {healthCurrent}
-                    </div>
-                ) : null}
-            </div>
-            <div
-                className="game-card-image"
-                style={{
-                    backgroundImage: `url(${imagesCards[id]})`,
-                    backgroundSize: '100% 100%',
-                }}
-            />
-            <div className="card-footer game-card-footer">
-                <p>{name}</p>
+                <div
+                    className="game-card-image"
+                    style={{
+                        backgroundImage: `url(${imagesCards[id]})`,
+                        backgroundSize: '100% 100%',
+                    }}
+                />
+                <div className="card-footer game-card-footer">
+                    <p>{name}</p>
+                </div>
             </div>
         </div>
     );
@@ -196,6 +211,7 @@ Card.propTypes = {
     cardSelect: PropTypes.func,
     cardDragEnded: PropTypes.func,
     player: PropTypes.object.isRequired,
+    dragging: PropTypes.object,
 };
 
 Card.defaultProps = {
@@ -203,6 +219,7 @@ Card.defaultProps = {
     cardKey: null,
     cardSelect: null,
     cardDragEnded: null,
+    dragging: null,
 };
 
 
