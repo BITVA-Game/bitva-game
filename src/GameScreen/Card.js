@@ -12,7 +12,7 @@ import apple from '../images/cards/apple.png';
 import bajun from '../images/cards/catbajun.png';
 import bat from '../images/cards/bat.png';
 import backgroundCommon from '../images/cards/background_common1.jpg';
-import backgroundAttack from '../images/cards/background_common1.jpg';
+import backgroundAttack from '../images/cards/background_common2.jpg';
 import bereginya from '../images/cards/bitva-cardbase.jpg';
 import bogatyr from '../images/cards/bitva-cardbase.jpg';
 import bowArrow from '../images/cards/bitva-cardbase.jpg';
@@ -92,6 +92,12 @@ function cardClass(type, background, dragging) {
         return `card game-card card-like ${background}-action`;
     }
     return `card game-card card-like ${background}-item`;
+}
+
+function backgroundImg(category) {
+    if (category === 'attackItems' || category === 'attack') {
+        return backgroundAttack;
+    } return backgroundCommon;
 }
 
 function cardOrigin(dragging, card) {
