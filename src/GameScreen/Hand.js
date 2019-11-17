@@ -4,16 +4,6 @@ import Card from './Card';
 import '../css/App.css';
 import '../css/GameScreen.css';
 
-function cardOrigin(dragging, card) {
-    if (dragging !== null && card === dragging.card && dragging.mode === 'drag') {
-        return { opacity: 0, transform: 'scale(1.0)' };
-    }
-    if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
-        return { opacity: 1.0, transform: 'scale(1.2)' };
-    }
-    return { opacity: 1.0, transform: 'scale(1.0)' };
-}
-
 function handClass(active, player) {
     let potion;
     // eslint-disable-next-line no-unused-expressions
@@ -30,36 +20,23 @@ function handClass(active, player) {
 const Hand = (props) => (
     <div className={`${handClass(props.active, props.player)}`}>
         {Object.keys(props.hand).map((cardId) => (
-            <div
+            <Card
                 key={cardId}
-                className="card-place card-like"
-                style={cardOrigin(props.dragging, props.hand[cardId])}
-            >
-                <Card
-                    active={props.active}
-                    cardKey={cardId}
-                    card={props.hand[cardId]}
-                    draggable={props.active}
-                    cardSelect={props.cardSelect}
-                    cardAim={props.cardAim}
-                    player={props.player}
-                />
-            </div>
+                active={props.active}
+                cardKey={cardId}
+                card={props.hand[cardId]}
+                draggable={props.active}
+                player={props.player}
+            />
         ))}
     </div>
 );
 
 Hand.propTypes = {
-    dragging: PropTypes.object,
     active: PropTypes.bool.isRequired,
     hand: PropTypes.object.isRequired,
-    cardAim: PropTypes.func.isRequired,
-    cardSelect: PropTypes.func.isRequired,
     player: PropTypes.object.isRequired,
 };
 
-Hand.defaultProps = {
-    dragging: null,
-};
 
 export default Hand;

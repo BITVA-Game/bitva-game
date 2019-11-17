@@ -125,19 +125,11 @@ class Player extends Component {
             <div className={`${playerPosition} ${playerClass}`}>
                 <Hero
                     player={this.props.player}
-                    cardDropped={this.props.cardDropped}
-                    cardOver={this.props.cardOver}
-                    isTarget={this.props.isTarget}
                     active={this.props.active}
                 />
                 <Item
                     item={Object.values(this.props.player.item)[0]}
-                    isTarget={this.props.isTarget}
-                    cardDropped={this.props.cardDropped}
-                    cardOver={this.props.cardOver}
                     player={this.props.player}
-                    cardSelect={this.props.cardSelect}
-                    cardAim={this.props.cardAim}
                     active={this.props.active}
                 />
                 {this.state.animation === 'bat' ? <BatCard /> : null}
@@ -151,11 +143,7 @@ class Player extends Component {
                 ) : null}
                 <Hand
                     active={this.props.active}
-                    dragging={this.props.dragging}
-                    // hand={this.props.player.hand}
                     hand={this.props.hand}
-                    cardSelect={this.props.cardSelect}
-                    cardAim={this.props.cardAim}
                     player={this.props.player}
                 />
                 {this.state.animation === 'potion' && this.props.active ? (
@@ -168,9 +156,6 @@ class Player extends Component {
                     player={this.props.player}
                     active={this.props.active}
                     grave={this.props.player.grave}
-                    isTarget={this.props.isTarget}
-                    cardDropped={this.props.cardDropped}
-                    cardOver={this.props.cardOver}
                     background={this.props.player.background}
                     animation={this.state.animation}
                 />
@@ -199,17 +184,7 @@ Player.propTypes = {
     player: PropTypes.object.isRequired,
     inactivePlayer: PropTypes.object.isRequired,
     hand: PropTypes.object.isRequired,
-    cardSelect: PropTypes.func.isRequired,
-    cardAim: PropTypes.func.isRequired,
-    cardDropped: PropTypes.func.isRequired,
-    dragging: PropTypes.object,
     active: PropTypes.bool.isRequired,
-    isTarget: PropTypes.func.isRequired,
-    cardOver: PropTypes.func.isRequired,
-};
-
-Player.defaultProps = {
-    dragging: null,
 };
 
 Hand.propTypes = {
