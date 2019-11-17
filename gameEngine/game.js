@@ -524,6 +524,8 @@ function changeTurn(game) {
     pActive.moveCounter = 0;
     // inactive player becomes active
     game.active = pInactive.id;
+    // and run function water if any
+    waterCard(game.players);
 }
 
 // function checks whether opponent item is not empty
@@ -653,8 +655,6 @@ function playerMoveEnd(pActive, pInactive, game) {
     // we run bowArrow function to check if opponent has bow & arrow card in item
     // and to supress attack points if any
     bowArrow(pActive, pInactive);
-    // and run function water if any
-    waterCard(game.players);
 }
 
 // basic function for the game that represents each act of active player
