@@ -221,9 +221,23 @@ const magicTree = {
     disabled: false,
 };
 
+const bowArrow = {
+    id: 'bowArrow',
+    name: 'Bow And Arrows',
+    type: 'item',
+    icon: 'heartBlack',
+    category: 'suppress',
+    categoryName: 'suppress',
+    description: 'Magic Bow possesses the precious characteristic - his owner can see and aim to the invisible creatures. And an arrow shot with this bow destroyes the illusion. ',
+    health: 2,
+    healthCurrent: 2,
+    disabled: false,
+};
+
 export default {
     apple,
     bogatyr,
+    bowArrow,
     clairvoyance,
     magicMirror,
     magicTree,
