@@ -6,6 +6,8 @@ import '../css/App.css';
 import '../css/HeroSelection.css';
 import '../css/Cards.css';
 
+import { backgroundImg } from '../GameScreen/Card';
+
 import heart from '../images/icons/heart_red.png';
 
 import yaga from '../images/heroes/yaga_full.jpg';
@@ -13,41 +15,41 @@ import morevna from '../images/heroes/morevna_full.jpg';
 import hozyaika from '../images/heroes/hozyaika_full.jpg';
 import premudraya from '../images/heroes/premudraya_full.jpg';
 
-import apple from '../images/cards/apple.jpg';
-import bajun from '../images/cards/catbajun.jpg';
-import bat from '../images/cards/bat.jpg';
+import apple from '../images/cards/apple.png';
+import bajun from '../images/cards/catbajun.png';
+import bat from '../images/cards/bat.png';
 import bereginya from '../images/cards/bitva-cardbase.jpg';
 import bogatyr from '../images/cards/bitva-cardbase.jpg';
 import bowArrow from '../images/cards/bitva-cardbase.jpg';
-import bulat from '../images/cards/sword.jpg';
+import bulat from '../images/cards/sword.png';
 import chemise from '../images/cards/bitva-cardbase.jpg';
-import chickenLegsHut from '../images/cards/izba.jpg';
+import chickenLegsHut from '../images/cards/izba.png';
 import clairvoyance from '../images/cards/bitva-cardbase.jpg';
 import crown from '../images/cards/bitva-cardbase.jpg';
 import dolly from '../images/cards/bitva-cardbase.jpg';
 import earthquake from '../images/cards/bitva-cardbase.jpg';
-import horsemanBlack from '../images/cards/blackrider.jpg';
-import horsemanRed from '../images/cards/redrider.jpg';
-import horsemanWhite from '../images/cards/whiterider.jpg';
+import horsemanBlack from '../images/cards/blackrider.png';
+import horsemanRed from '../images/cards/redrider.png';
+import horsemanWhite from '../images/cards/whiterider.png';
 import kikimora from '../images/cards/bitva-cardbase.jpg';
-import lizard from '../images/cards/lizard.jpg';
-import magicTree from '../images/cards/tree.jpg';
+import lizard from '../images/cards/lizard.png';
+import magicTree from '../images/cards/tree.png';
 import magicMirror from '../images/cards/bitva-cardbase.jpg';
-import malachiteBox from '../images/cards/malachitebox.jpg';
+import malachiteBox from '../images/cards/malachitebox.png';
 import mortar from '../images/cards/bitva-cardbase.jpg';
-import forestMushroom from '../images/cards/mushrooms.jpg';
+import forestMushroom from '../images/cards/mushrooms.png';
 import plateMail from '../images/cards/bitva-cardbase.jpg';
-import raven from '../images/cards/raven.jpg';
+import raven from '../images/cards/raven.png';
 import russianOven from '../images/cards/bitva-cardbase.jpg';
-import shieldLarge from '../images/cards/largeshield.jpg';
-import shieldSmall from '../images/cards/smallshield.jpg';
-import sivka from '../images/cards/warhorse.jpg';
+import shieldLarge from '../images/cards/largeshield.png';
+import shieldSmall from '../images/cards/smallshield.png';
+import sivka from '../images/cards/warhorse.png';
 import skullLantern from '../images/cards/bitva-cardbase.jpg';
-import turningPotion from '../images/cards/potion.jpg';
-import warhorse from '../images/cards/warhorse.jpg';
-import waterDead from '../images/cards/deadwater.jpg';
-import waterLiving from '../images/cards/livingwater.jpg';
-import wolf from '../images/cards/wolf.jpg';
+import turningPotion from '../images/cards/potion.png';
+import warhorse from '../images/cards/warhorse.png';
+import waterDead from '../images/cards/deadwater.png';
+import waterLiving from '../images/cards/livingwater.png';
+import wolf from '../images/cards/wolf.png';
 
 const images = {
     yaga,
@@ -142,7 +144,15 @@ const CardPreview = (props) => (
                     </div>
                 ) : null}
         </div>
-        <div className="details-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
+        <div
+            className="details-card-image"
+            style={{
+                backgroundImage: `url(${backgroundImg(props.card.category)})`,
+                backgroundSize: '100% 100%',
+            }}
+        >
+            <div className="details-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
+        </div>
         <div className="card-footer details-card-footer">
             <p>{props.card.name}</p>
         </div>

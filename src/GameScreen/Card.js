@@ -93,8 +93,7 @@ function cardClass(type, background, dragging) {
     }
     return `card game-card card-like ${background}-item`;
 }
-
-function backgroundImg(category) {
+export function backgroundImg(category) {
     if (category === 'attackItems' || category === 'attack') {
         return backgroundAttack;
     } return backgroundCommon;
