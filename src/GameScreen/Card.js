@@ -2,8 +2,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/no-duplicates */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import BoardContext from './BoardContext';
 
 import '../css/Cards.css';
 
@@ -107,10 +108,11 @@ const Card = (props) => {
         categoryName, healthCurrent, health, points, initialpoints,
     } = props.card;
     const { background } = props.player;
+    const { cardSelect, dragging } = useContext(BoardContext);
     return (
         <div
             className="card-place card-like"
-            style={cardOrigin(props.dragging, props.card)}
+            style={cardOrigin(dragging, props.card)}
         >
             <div
                 className={`${cardClass(type, background, false)}`}
@@ -120,8 +122,8 @@ const Card = (props) => {
                         ? null
                         : props.draggable
                 }
-                onDragStart={() => props.cardSelect(props.cardKey, props.card, 'drag')}
-                onClick={() => props.active && props.cardSelect(props.cardKey, props.card, 'click')}
+                onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
+                onClick={() => props.active && cardSelect(props.cardKey, props.card, 'click')}
                 onDragEnd={props.cardDragEnded}
             >
                 {disabled === true || panic === true ? (
@@ -208,18 +210,14 @@ Card.propTypes = {
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool,
     cardKey: PropTypes.string,
-    cardSelect: PropTypes.func,
     cardDragEnded: PropTypes.func,
     player: PropTypes.object.isRequired,
-    dragging: PropTypes.object,
 };
 
 Card.defaultProps = {
     draggable: null,
     cardKey: null,
-    cardSelect: null,
     cardDragEnded: null,
-    dragging: null,
 };
 
 

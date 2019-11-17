@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import PropTypes from 'prop-types';
+import BoardContext from './BoardContext';
 
 import yaga from '../images/heroes/yaga.jpg';
 import morevna from '../images/heroes/morevna.jpg';
@@ -19,31 +20,33 @@ const images = {
     premudraya,
 };
 
-const Hero = (props) => (
-    <div
-        className={`hero ${
-            props.isTarget(props.active ? 'hero' : 'opponent', props.player) ? 'target' : null
-        }`}
-        style={style}
-        id={props.active ? 'hero' : 'enemy'}
-        onDrop={() => props.cardDropped(props.active ? 'hero' : 'opponent', props.player)}
-        onClick={() => props.cardDropped(props.active ? 'hero' : 'opponent', props.player)}
-        onDragOver={(e) => props.cardOver(e, props.active ? 'hero' : 'opponent', props.player)}
-    >
-        <img
-            className="hero-image"
-            src={images[props.player.hero]}
-            alt={props.player.hero}
+const Hero = (props) => {
+    const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
+    const heroClass = isTarget(props.active ? 'hero' : 'opponent', props.player) ? 'target' : null;
+    return (
+        <div
+            className={`hero ${heroClass}`}
             style={style}
-        />
-        <HealthMeter
-            key={props.player.health.current}
-            health={props.player.health}
-            width={width}
-            height={height}
-        />
-    </div>
-);
+            id={props.active ? 'hero' : 'enemy'}
+            onDrop={() => cardDropped(props.active ? 'hero' : 'opponent', props.player)}
+            onClick={() => cardDropped(props.active ? 'hero' : 'opponent', props.player)}
+            onDragOver={(e) => cardOver(e, props.active ? 'hero' : 'opponent', props.player)}
+        >
+            <img
+                className="hero-image"
+                src={images[props.player.hero]}
+                alt={props.player.hero}
+                style={style}
+            />
+            <HealthMeter
+                key={props.player.health.current}
+                health={props.player.health}
+                width={width}
+                height={height}
+            />
+        </div>
+    );
+};
 
 class HealthMeter extends Component {
     constructor(props) {
@@ -98,9 +101,6 @@ class HealthMeter extends Component {
 
 Hero.propTypes = {
     player: PropTypes.object.isRequired,
-    cardDropped: PropTypes.func.isRequired,
-    cardOver: PropTypes.func.isRequired,
-    isTarget: PropTypes.func.isRequired,
     active: PropTypes.bool.isRequired,
 };
 

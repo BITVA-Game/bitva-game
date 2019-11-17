@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import UIFx from 'uifx';
 import Player from './Player';
+import BoardContext from './BoardContext';
 import '../css/App.css';
 import '../css/GameScreen.css';
 import rules, { getActivePlayer, getInActivePlayer } from '../rules';
@@ -20,7 +21,6 @@ class GameScreen extends Component {
             dragging: null,
             animation: null,
         };
-        
         this.cardSelect = this.cardSelect.bind(this);
         this.cardAct = this.cardAct.bind(this);
         this.isTarget = this.isTarget.bind(this);
@@ -165,43 +165,43 @@ class GameScreen extends Component {
         console.log('app game: ', this.props.app.game);
         const activePlayer = getActivePlayer(this.props.app);
         const inactivePlayer = getInActivePlayer(this.props.app);
-        return this.state.animation === 'background' ? (
-            <BackgroundAnimation />
-        ) : (
-            <div className="game-table app-background">
-                {this.props.app.game.players.map((player) => (
-                    <Player
-                        active={player.id === activePlayer.id}
-                        key={player.keyHero}
-                        player={player}
-                        activePlayer={activePlayer}
-                        inactivePlayer={inactivePlayer}
-                        hand={this.playableHand(player)}
-                        sendMessage={this.props.sendMessage}
-                        dragging={this.state.dragging}
-                        cardAct={this.cardAct}
-                        cardSelect={this.cardSelect}
-                        cardAim={this.cardAim}
-                        isTarget={this.isTarget}
-                        cardDropped={this.cardDropped}
-                        cardOver={this.cardOver}
-                    />
-                ))}
-                {activePlayer.moveCounter === 0
-                && activePlayer.health.current > 0
-                    ? (<ChangeTurn app={this.props.app} />
-                    ) : null}
+        const value = {
+            dragging: this.state.dragging,
+            cardSelect: this.cardSelect,
+            cardAct: this.cardAct,
+            isTarget: this.isTarget,
+            cardDropped: this.cardDropped,
+            cardOver: this.cardOver,
+            cardAim: this.cardAim,
+        };
+        return (
+            <BoardContext.Provider value={value}>
+                <div className="game-table app-background">
+                    {this.props.app.game.players.map((player) => (
+                        <Player
+                            active={player.id === activePlayer.id}
+                            key={player.keyHero}
+                            player={player}
+                            activePlayer={activePlayer}
+                            inactivePlayer={inactivePlayer}
+                            hand={this.playableHand(player)}
+                            sendMessage={this.props.sendMessage}
+                        />
+                    ))}
+                    {activePlayer.moveCounter === 0
+                    && activePlayer.health.current > 0
+                        ? (<ChangeTurn app={this.props.app} />
+                        ) : null}
 
-                {this.props.app.game.phase === 'OVER' ? (
-                    <GameOver app={this.props.app} />
-                ) : null}
-                {this.state.animation === 'birds' ? <BirdsAnimation /> : null}
-            </div>
+                    {this.props.app.game.phase === 'OVER' ? (
+                        <GameOver app={this.props.app} />
+                    ) : null}
+                    {this.state.animation === 'birds' ? <BirdsAnimation /> : null}
+                </div>
+            </BoardContext.Provider>
         );
     }
 }
-
-const BackgroundAnimation = () => <div className="game-screen-animation" />;
 
 const BirdsAnimation = () => (
     <div className="animation-game-screen">

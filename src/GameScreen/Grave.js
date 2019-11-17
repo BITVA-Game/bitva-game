@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import '../css/GameScreen.css';
+import BoardContext from './BoardContext';
 
 import graveyard from '../images/cards/graveyard.png';
 
@@ -14,38 +15,38 @@ const Animation = (props) => (
     </div>
 );
 
-const Grave = (props) => (
-    <div
-        className={`grave card-like  grave-${props.background} ${
-            props.isTarget('graveyard', props.player) ? 'target' : null
-        }`}
-        style={{
-            backgroundImage: `url(${graveyard})`,
-            backgroundSize: '100% 100%',
-        }}
-        id={props.active ? 'grave' : null}
-        onDrop={() => props.cardDropped('graveyard', props.player)}
-        onClick={() => props.cardDropped('graveyard', props.player)}
-        onDragOver={(e) => props.cardOver(e, 'graveyard', props.player)}
-    >
-        <div className="count">
-            {props.active
-                ? Object.keys(props.grave).length
-                : Object.keys(props.grave).length}
+const Grave = (props) => {
+    const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
+    return (
+        <div
+            className={`grave card-like  grave-${props.background} ${
+                isTarget('graveyard', props.player) ? 'target' : null
+            }`}
+            style={{
+                backgroundImage: `url(${graveyard})`,
+                backgroundSize: '100% 100%',
+            }}
+            id={props.active ? 'grave' : null}
+            onDrop={() => cardDropped('graveyard', props.player)}
+            onClick={() => cardDropped('graveyard', props.player)}
+            onDragOver={(e) => cardOver(e, 'graveyard', props.player)}
+        >
+            <div className="count">
+                {props.active
+                    ? Object.keys(props.grave).length
+                    : Object.keys(props.grave).length}
+            </div>
+            {props.animation === 'cards' ? (
+                <Animation background={props.background} />
+            ) : null}
         </div>
-        {props.animation === 'cards' ? (
-            <Animation background={props.background} />
-        ) : null}
-    </div>
-);
+    );
+};
 
 Grave.propTypes = {
     grave: PropTypes.object.isRequired,
     player: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
-    isTarget: PropTypes.func.isRequired,
-    cardDropped: PropTypes.func.isRequired,
-    cardOver: PropTypes.func.isRequired,
     background: PropTypes.string.isRequired,
     animation: PropTypes.string,
 };

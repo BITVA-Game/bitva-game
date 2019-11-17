@@ -21,14 +21,11 @@ const Hand = (props) => (
     <div className={`${handClass(props.active, props.player)}`}>
         {Object.keys(props.hand).map((cardId) => (
             <Card
-                dragging={props.dragging}
                 key={cardId}
                 active={props.active}
                 cardKey={cardId}
                 card={props.hand[cardId]}
                 draggable={props.active}
-                cardSelect={props.cardSelect}
-                cardAim={props.cardAim}
                 player={props.player}
             />
         ))}
@@ -36,16 +33,10 @@ const Hand = (props) => (
 );
 
 Hand.propTypes = {
-    dragging: PropTypes.object,
     active: PropTypes.bool.isRequired,
     hand: PropTypes.object.isRequired,
-    cardAim: PropTypes.func.isRequired,
-    cardSelect: PropTypes.func.isRequired,
     player: PropTypes.object.isRequired,
 };
 
-Hand.defaultProps = {
-    dragging: null,
-};
 
 export default Hand;
