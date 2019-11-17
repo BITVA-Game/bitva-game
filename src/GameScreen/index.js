@@ -151,14 +151,10 @@ class GameScreen extends Component {
     playableHand(player) {
         const activePlayer = getActivePlayer(this.props.app);
         const inactivePlayer = getInActivePlayer(this.props.app);
-        // const ind = num === 0 ? 1 : 0;
-        // console.log(ind);
         if (player === activePlayer && activePlayer.turningHand === true) {
-            console.log('TURNING POTION! playableHand   - opponent hand!');
             return inactivePlayer.hand;
         }
         if (player === activePlayer && activePlayer.turningHand === false) {
-            // console.log('playableHand   - player hand!');
             return activePlayer.hand;
         }
         return inactivePlayer.hand;
@@ -167,6 +163,7 @@ class GameScreen extends Component {
     render() {
         console.log('app game: ', this.props.app.game);
         const activePlayer = getActivePlayer(this.props.app);
+        const inactivePlayer = getInActivePlayer(this.props.app);
         return this.state.animation === 'background' ? (
             <BackgroundAnimation />
         ) : (
@@ -177,6 +174,7 @@ class GameScreen extends Component {
                         key={player.keyHero}
                         player={player}
                         activePlayer={activePlayer}
+                        inactivePlayer={inactivePlayer}
                         hand={this.playableHand(player)}
                         sendMessage={this.props.sendMessage}
                         dragging={this.state.dragging}

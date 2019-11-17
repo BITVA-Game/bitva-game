@@ -14,10 +14,21 @@ function cardOrigin(dragging, card) {
     return { opacity: 1.0, transform: 'scale(1.0)' };
 }
 
+function handClass(active, player) {
+    let potion;
+    // eslint-disable-next-line no-unused-expressions
+    player.turningHand === true ? potion = true : null;
+    if (potion && active === false) {
+        return 'hand no-hand';
+    }
+    if (potion && active) {
+        return 'hand hand-await';
+    }
+    return 'hand';
+}
+
 const Hand = (props) => (
-    // const handCharmed = props.player.turningHand === true ? 'hand-dark' : null;
-    // <div className="hand">
-    <div className={`hand ${props.player.turningHand === true ? 'hand-dark' : null}`}>
+    <div className={`${handClass(props.active, props.player)}`}>
         {Object.keys(props.hand).map((cardId) => (
             <div
                 key={cardId}

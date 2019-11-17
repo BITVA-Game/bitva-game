@@ -18,15 +18,16 @@ import bat from '../images/cards/batCard.png';
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });
 
-const AnimatedHand = ({ hand, player }) => (
+const AnimatedHand = ({ inactivePlayer, hand }) => (
     <div className="hand card-hand">
         {Object.keys(hand).map((cardId) => (
             <div key={cardId} className="card-place card-like">
-                <Card cardKey={cardId} card={hand[cardId]} player={player} />
+                <Card cardKey={cardId} card={hand[cardId]} player={inactivePlayer} />
             </div>
         ))}
     </div>
 );
+
 
 // Clairvoyance showed 3 1st cards from deck -from backend
 // this function create them to appear with 3 different
@@ -86,9 +87,8 @@ class Player extends Component {
     // animation for cards deal from gravyeard to deck
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation('cards');
-            // animation for Turning Potion - active player gets cards from inactive player hand
-            // doesn't work ---> to be fixed!
         }
+        // animation for Turning Potion - active player gets cards from inactive player hand
         if (
             this.props.player.turningHand !== prevProps.player.turningHand
       && this.props.player.turningHand === true
@@ -158,9 +158,11 @@ class Player extends Component {
                     cardAim={this.props.cardAim}
                     player={this.props.player}
                 />
-                {/* {this.state.animation === "potion" ? ( */}
-                {this.props.active ? null : this.state.animation === 'potion' ? (
-                    <AnimatedHand hand={this.props.hand} player={this.props.player} />
+                {this.state.animation === 'potion' && this.props.active ? (
+                    <AnimatedHand
+                        inactivePlayer={this.props.inactivePlayer}
+                        hand={this.props.inactivePlayer.hand}
+                    />
                 ) : null}
                 <Grave
                     player={this.props.player}
@@ -195,6 +197,7 @@ Deck.propTypes = {
 
 Player.propTypes = {
     player: PropTypes.object.isRequired,
+    inactivePlayer: PropTypes.object.isRequired,
     hand: PropTypes.object.isRequired,
     cardSelect: PropTypes.func.isRequired,
     cardAim: PropTypes.func.isRequired,
@@ -215,7 +218,7 @@ Hand.propTypes = {
 
 AnimatedHand.propTypes = {
     hand: PropTypes.object.isRequired,
-    player: PropTypes.object.isRequired,
+    inactivePlayer: PropTypes.object.isRequired,
 };
 
 Clairvoyance.propTypes = {

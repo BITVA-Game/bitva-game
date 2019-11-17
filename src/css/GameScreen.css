@@ -743,9 +743,30 @@
 }
 
 /* Animation Turning Potion */
+/*once attacked by turning potion inactive player's hand get this css property*/
+.no-hand {
+	filter: opacity(0%);
+}
+.hand-await {
+    animation: noHand 2s;
+}
+
+@keyframes noHand {
+    0%      { filter: opacity(0%); }
+    100%     { filter: opacity(0%) }
+}
+
+.hand-await {
+    animation: noHand 2s;
+}
+
+@keyframes noHand {
+    0%      { filter: opacity(0%) }
+    100%     { filter: opacity(0%) }
+}
 
 .card-hand {
-    animation: toHand 3s ease-out 1 forwards;
+    animation: toHand 2s ease-in reverse;
     z-index: 1000;
 }
 
