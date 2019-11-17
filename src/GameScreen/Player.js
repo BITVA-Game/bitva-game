@@ -13,6 +13,7 @@ import Hand from './Hand';
 import Grave from './Grave';
 import '../css/App.css';
 import '../css/GameScreen.css';
+
 import bat from '../images/cards/batCard.png';
 
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
