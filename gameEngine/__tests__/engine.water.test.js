@@ -11,7 +11,7 @@ import {
 import cards from '../__data__/cards';
 
 const {
-    waterLiving, waterDead, wolf, bogatyr,
+    waterLiving, waterDead, wolf, bogatyr, magicTree,
 } = cards;
 
 const GameEngine = require('../index');
@@ -256,4 +256,42 @@ test('msg ACTION received: after attack the living water in item, its health =0 
     // ожидаем, что текущее здоровье игроков не имзеняется ( т.к. === maximum )
     expect(inactivePlayer.health.current).toEqual(16);
     expect(activePlayer.health.current).toEqual(15);
+});
+
+// Test, that when one player has living water as item card
+// and 2nd player has magicTree as item card, then
+// players get +1 to their current health each until card is in item holder
+test('msg ACTION received: active player already has Living Water in item, it increases players health current for 1pnt.', () => {
+    const cardToTest = 'key24';
+    const wolfCard = 'key20';
+    const treeCard = 'key17';
+    const msg = {
+        type: message.ACTION,
+        activeCard: wolfCard,
+        target: target.OPPONENT,
+    };
+
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].item[cardToTest] = waterLiving;
+    gameForTest.game.players[0].hand[wolfCard] = wolf;
+    gameForTest.game.players[0].health.current = 15;
+    gameForTest.game.players[1].health.current = 14;
+    gameForTest.game.players[1].item[treeCard] = magicTree;
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active and inactive players
+    const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
+    const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
+    // ожидаем, что карта living water в item holder неактивного игрока
+    expect(inactivePlayer.item[cardToTest].id).toEqual(waterLiving.id);
+    // ожидаем, что очки карты living water неактивного игрока > 0
+    expect(inactivePlayer.item[cardToTest].points).toBeGreaterThan(0);
+    // ожидаем, что карта magicTree находится в item активного игрока.
+    expect(activePlayer.item[treeCard].id).toEqual(magicTree.id);
+    // ожидаем, что к текущему здоровью игроков прибавится по 1му очку
+    expect(inactivePlayer.health.current).toEqual(16);
+    expect(activePlayer.health.current).toEqual(13);
 });
