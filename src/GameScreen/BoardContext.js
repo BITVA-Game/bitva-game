@@ -123,6 +123,8 @@ export function withBoardContext(GameScreen) {
         app: PropTypes.object.isRequired,
         sendMessage: PropTypes.func.isRequired,
     };
+
+    return Board;
 }
 
 const BoardContext = React.createContext({});
