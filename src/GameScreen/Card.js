@@ -8,41 +8,43 @@ import BoardContext from './BoardContext';
 
 import '../css/Cards.css';
 
-import apple from '../images/cards/apple.jpg';
-import bajun from '../images/cards/catbajun.jpg';
-import bat from '../images/cards/bat.jpg';
+import apple from '../images/cards/apple.png';
+import bajun from '../images/cards/catbajun.png';
+import bat from '../images/cards/bat.png';
+import backgroundCommon from '../images/cards/background_common1.jpg';
+import backgroundAttack from '../images/cards/background_common2.jpg';
 import bereginya from '../images/cards/bitva-cardbase.jpg';
 import bogatyr from '../images/cards/bitva-cardbase.jpg';
 import bowArrow from '../images/cards/bitva-cardbase.jpg';
-import bulat from '../images/cards/sword.jpg';
+import bulat from '../images/cards/sword.png';
 import chemise from '../images/cards/bitva-cardbase.jpg';
-import chickenLegsHut from '../images/cards/izba.jpg';
+import chickenLegsHut from '../images/cards/izba.png';
 import clairvoyance from '../images/cards/bitva-cardbase.jpg';
 import crown from '../images/cards/bitva-cardbase.jpg';
 import dolly from '../images/cards/bitva-cardbase.jpg';
 import earthquake from '../images/cards/bitva-cardbase.jpg';
-import forestMushroom from '../images/cards/mushrooms.jpg';
-import horsemanBlack from '../images/cards/blackrider.jpg';
-import horsemanRed from '../images/cards/redrider.jpg';
-import horsemanWhite from '../images/cards/whiterider.jpg';
+import forestMushroom from '../images/cards/mushrooms.png';
+import horsemanBlack from '../images/cards/blackrider.png';
+import horsemanRed from '../images/cards/redrider.png';
+import horsemanWhite from '../images/cards/whiterider.png';
 import kikimora from '../images/cards/bitva-cardbase.jpg';
-import lizard from '../images/cards/lizard.jpg';
-import magicTree from '../images/cards/tree.jpg';
+import lizard from '../images/cards/lizard.png';
+import magicTree from '../images/cards/tree.png';
 import magicMirror from '../images/cards/bitva-cardbase.jpg';
-import malachiteBox from '../images/cards/malachitebox.jpg';
+import malachiteBox from '../images/cards/malachitebox.png';
 import mortar from '../images/cards/bitva-cardbase.jpg';
 import plateMail from '../images/cards/bitva-cardbase.jpg';
-import raven from '../images/cards/raven.jpg';
+import raven from '../images/cards/raven.png';
 import russianOven from '../images/cards/bitva-cardbase.jpg';
-import shieldLarge from '../images/cards/largeshield.jpg';
-import shieldSmall from '../images/cards/smallshield.jpg';
-import sivka from '../images/cards/warhorse.jpg';
+import shieldLarge from '../images/cards/largeshield.png';
+import shieldSmall from '../images/cards/smallshield.png';
+import sivka from '../images/cards/warhorse.png';
 import skullLantern from '../images/cards/bitva-cardbase.jpg';
-import turningPotion from '../images/cards/potion.jpg';
-import warhorse from '../images/cards/warhorse.jpg';
-import waterDead from '../images/cards/deadwater.jpg';
-import waterLiving from '../images/cards/livingwater.jpg';
-import wolf from '../images/cards/wolf.jpg';
+import turningPotion from '../images/cards/potion.png';
+import warhorse from '../images/cards/warhorse.png';
+import waterDead from '../images/cards/deadwater.png';
+import waterLiving from '../images/cards/livingwater.png';
+import wolf from '../images/cards/wolf.png';
 
 const imagesCards = {
     apple,
@@ -90,6 +92,11 @@ function cardClass(type, background, dragging) {
         return `card game-card card-like ${background}-action`;
     }
     return `card game-card card-like ${background}-item`;
+}
+export function backgroundImg(category) {
+    if (category === 'attackItems' || category === 'attack') {
+        return backgroundAttack;
+    } return backgroundCommon;
 }
 
 function cardOrigin(dragging, card) {

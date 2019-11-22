@@ -17,7 +17,6 @@ class GameScreen extends Component {
         this.state = {
             animation: null,
         };
-
         this.startBirds = this.startBirds.bind(this);
         this.playableHand = this.playableHand.bind(this);
     }
