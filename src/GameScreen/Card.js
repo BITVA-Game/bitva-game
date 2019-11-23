@@ -200,10 +200,18 @@ const Card = (props) => {
                 <div
                     className="game-card-image"
                     style={{
-                        backgroundImage: `url(${imagesCards[id]})`,
+                        backgroundImage: `url(${backgroundImg(category)})`,
                         backgroundSize: '100% 100%',
                     }}
-                />
+                >
+                    <div
+                        className="game-card-image"
+                        style={{
+                            backgroundImage: `url(${imagesCards[id]})`,
+                            backgroundSize: '100% 100%',
+                        }}
+                    />
+                </div>
                 <div className="card-footer game-card-footer">
                     <p>{name}</p>
                 </div>
