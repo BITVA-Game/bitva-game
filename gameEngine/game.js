@@ -59,6 +59,7 @@ function disableCards(opponent) {
     opponentCards[index2].disabled = true;
     opponentCards[index1].panic === false ? opponentCards[index1].disabled = false : null;
     opponentCards[index2].panic === false ? opponentCards[index2].disabled = false : null;
+    opponent.chained === true;
 }
 
 
@@ -113,6 +114,7 @@ const generatePlayer = function (heroName, id) {
     player.item = {};
     player.grave = {};
     player.turningHand = false;
+    player.chained = false;
     player.moveCounter = 0;
     player.health = {};
     player.deal = 0;
@@ -342,10 +344,11 @@ function forestMushroom(opponent) {
     const opponentCards = Object.values(opponent.hand);
     if (chance <= 6) {
         for (let i = 0; i < Object.keys(opponent.hand).length; i++) {
-            opponentCards[i].panic = true;
+            opponentCards[i].panic = true;            
         }
         Object.keys(opponent.item).length !== 0
             ? Object.values(opponent.item)[0].panic = true : null;
+        opponent.chained = true;
         const index = getRandomUpTo(opponentCards.length, 'indexMushroom');
         opponentCards[index].panic = false;
         if (opponentCards[index].disabled === true) {
@@ -563,6 +566,9 @@ function turningHand(player, opponent) {
 }
 
 function changeMoveCounter(pActive, card) {
+    if (pActive.chained === true) {
+        pActive.chained = false;
+    }
     if (pActive.hand[card] === undefined && pActive.turningHand === false) {
         pActive.moveCounter += 1;
     }
