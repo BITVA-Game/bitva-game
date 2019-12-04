@@ -25,12 +25,12 @@ const shortcuts = {
 
 
 function showDialog(win, msg, e) {
-    dialog.showMessageBox(win, msg, e.x, e.y, (m) => {
+    dialog.showMessageBox(win, msg, e, (m) => {
         console.log(m);
     });
 }
 
-module.exports = function menu(app, win, e, sendMessage) {
+module.exports = function menu(app, win, e, x, y, sendMessage) {
     return (
         [{
             label: 'devTools',
@@ -49,7 +49,7 @@ module.exports = function menu(app, win, e, sendMessage) {
             label: 'inspect element',
             click() {
                 console.log(e);
-                win.webContents.inspectElement(e.x, e.y);
+                win.webContents.inspectElement(x, y);
             },
         },
         {
@@ -63,16 +63,16 @@ module.exports = function menu(app, win, e, sendMessage) {
             label: 'about',
             click() {
                 // const display = electron.screen.getPrimaryDisplay();
-                const display = electron.screen.getDisplayNearestPoint({ x: e.x, y: e.y });
-                about.message = `${app.getName()}:\t${app.getVersion()}\n`;
-                about.message += `chrome:\t${process.versions.chrome}\n`;
-                about.message += `electron:\t${process.versions.electron}\n`;
-                about.message += `node.js:\t\t${process.versions.node}\n`;
-                about.message += `process id:\t${process.pid}\n`;
-                about.message += `memory:\t${(process.getProcessMemoryInfo().sharedBytes / 1024).toFixed(2)}K\n`;
-                about.message += `screen:\t\t${display.size.width}x${display.size.height}\n`;
-                about.message += `window:\t${win.getSize().join('x')}\n`;
-                about.message += `${process.platform}-${process.arch}:\t${os.release}`;
+                const display = electron.screen.getDisplayNearestPoint({ x, y });
+                about.message = `${app.getName()}: ${app.getVersion()}\n`;
+                about.message += `chrome: ${process.versions.chrome}\n`;
+                about.message += `electron: ${process.versions.electron}\n`;
+                about.message += `node.js: ${process.versions.node}\n`;
+                about.message += `process id: ${process.pid}\n`;
+                about.message += `memory: ${(process.getProcessMemoryInfo().sharedBytes / 1024).toFixed(2)}K\n`;
+                about.message += `screen: ${display.size.width}x${display.size.height}\n`;
+                about.message += `window: ${win.getSize().join('x')}\n`;
+                about.message += `${process.platform}-${process.arch}: ${os.release}`;
                 showDialog(win, about, e);
             },
         },
