@@ -17,6 +17,8 @@ function heroes(id) {
     return heroData[id];
 }
 
+const accounts = [alice, bob];
+
 module.exports = {
-    alice, bob, heroes,
+    alice, bob, heroes, accounts,
 };

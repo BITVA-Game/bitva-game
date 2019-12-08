@@ -4,12 +4,12 @@
 
 const { screen, message } = require('../constants');
 
-let application = require('./data/app.json');
+let application = JSON.stringify();
 // Additional files that have functions related to this part of application
 const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
-const gameAccounts = require('../gameAccounts');
 const socketClient = require('./socketClient');
+const accountManager = require('./accountManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -40,21 +40,20 @@ function parseApplication(app) {
 async function processMessage(msg) {
     console.log('process', msg);
     // HACK until we have auth flow
-    if (msg.type === message.PLAY) {
-        application.guest = gameAccounts.bob;
-    }
     const newApp = {
-        account: application.account,
-        guest: application.guest,
+        accounts: accountManager.handle(application, msg),
         manager: screenManager.handle(application, msg),
         engine: await gameEngineManager.handle(application, msg),
     };
+    console.log('NEW APP', newApp);
     return newApp;
 }
 
-function initApplication() {
+function initApplication(msg) {
     // HACK until we have initial auth flow in place
-    return { ...application, account: gameAccounts.alice };
+    const accounts = accountManager.handle({}, msg);
+    const manager = screenManager.handle({}, msg);
+    return { ...application, accounts, manager };
 }
 
 // This function is called from main.js
@@ -63,7 +62,7 @@ function initApplication() {
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
 async function msgReceived(msg, sendReply) {
-    const newApp = msg.type === message.INIT ? initApplication() : await processMessage(msg);
+    const newApp = msg.type === message.INIT ? initApplication(msg) : await processMessage(msg);
     if (message.network) {
         newApp.network = true;
         console.log('OMG NETWORK PLAY IS: ', newApp.network);
