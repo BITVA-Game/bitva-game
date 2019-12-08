@@ -20,6 +20,8 @@ const message = {
     DEALALL: 'DEALALL',
     ACTION: 'ACTION',
     HEROSELECTED: 'HEROSELECTED',
+    CREATEACC: 'CREATEACC',
+    DELETEACC: 'DELETEACC',
 };
 
 const phase = {
