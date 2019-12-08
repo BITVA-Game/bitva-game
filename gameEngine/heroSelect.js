@@ -50,7 +50,6 @@ function handle(app, msg) {
     case message.HEROSELECTED:
         selectedPlayers = newPlayers(app, msg);
         nextPlayer = pendingPlayer(app, selectedPlayers);
-        console.log(nextPlayer);
         break;
     default: break;
     }

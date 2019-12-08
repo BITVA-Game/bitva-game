@@ -375,7 +375,7 @@ function moveItem(game, player, key, opponent) {
             // we check if card has panic  == false property (forest Mushroom card)
             // and delete it, then we call function removePanic
             if (player.item[key].panic === false) {
-                console.log('We delete panic!');
+                // console.log('We delete panic!');
                 delete player.item[key].panic;
                 player.turningHand === true ? removePanic(opponent) : removePanic(player);
             }

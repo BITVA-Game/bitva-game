@@ -45,7 +45,7 @@ async function processMessage(msg) {
         manager: screenManager.handle(application, msg),
         engine: await gameEngineManager.handle(application, msg),
     };
-    console.log('NEW APP', newApp);
+    // console.log('NEW APP', newApp);
     return newApp;
 }
 

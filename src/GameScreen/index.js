@@ -85,7 +85,6 @@ class GameScreen extends Component {
     }
 
     render() {
-        console.log('app game: ', this.props.app.game);
         const activePlayer = getActivePlayer(this.props.app);
         const inactivePlayer = getInActivePlayer(this.props.app);
         return (

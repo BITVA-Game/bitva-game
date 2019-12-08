@@ -40,7 +40,6 @@ test('Second game state heroselectStateP1. Player 1 selected one of his characte
     const engine = new GameEngine(playState);
     // we referencing to GameEngine to work out our message
     engine.handle(msg);
-    console.log(engine.getState());
 
     // we expect that engine after receiving above msg will match object
     expect(engine.getState()).toMatchObject(heroselectStateP1);

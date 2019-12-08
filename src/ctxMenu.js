@@ -87,7 +87,6 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
         {
             label: 'start game with Morevna',
             click() {
-                console.log('Set app called');
                 // Set backend into correct state for the debug
                 const newState = JSON.parse(JSON.stringify(morevnaStart));
                 setApp(newState);
@@ -98,7 +97,6 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
         {
             label: 'start game with Hozyaika',
             click() {
-                console.log('Set app called for Hozyaika');
                 // Set backend into correct state for the debug
                 const newState = JSON.parse(JSON.stringify(hozyaikaStart));
                 setApp(newState);

@@ -81,7 +81,6 @@ class NetworkPlay extends Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className="profile-container app-background">
                 { this.state.screen == null

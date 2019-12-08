@@ -94,7 +94,6 @@ class Player extends Component {
     }
 
     playAnimation(animName) {
-        console.log('We are in Animation!', animName);
         this.setState({ animation: animName });
         setTimeout(() => this.setState({ animation: null }), 2000);
     }
