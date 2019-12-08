@@ -41,7 +41,7 @@ class App extends Component {
             // console.log({ app: arg });
             this.setState({ app: arg });
         });
-        sendMessage({ type: 'LOGIN' });
+        sendMessage({ type: 'INIT' });
         setTimeout(() => this.loadAnimation(), 0);
     }
 
@@ -50,11 +50,12 @@ class App extends Component {
     }
 
     showApplication() {
+        console.log('APP: ', this.state.app.manager.screen, this.state.app);
         switch (this.state.app.manager.screen) {
         case 'LOADING':
             return 'LOADING';
         case 'LOGIN':
-            return <LoginScreen sendMessage={sendMessage} app={this.state.app} />;
+            return <LoginScreen sendMessage={sendMessage} accounts={this.state.app.accounts} />;
         case 'STARTSCREEN':
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PROFILE':

@@ -5,8 +5,24 @@ import {
 
 import gameAccounts from '../../gameAccounts';
 
+export const loginState = {
+    accounts: {
+        accounts: gameAccounts.accounts,
+        account: null,
+        guest: null,
+    },
+    manager: {
+        screen: screen.LOGIN,
+    },
+};
+
+
 export const startscreenState = {
-    account: gameAccounts.alice,
+    accounts: {
+        accounts: gameAccounts.accounts,
+        account: gameAccounts.alice.id,
+        guest: null,
+    },
     manager: {
         screen: screen.STARTSCREEN,
     },
