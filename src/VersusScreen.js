@@ -40,7 +40,6 @@ class VersusScreen extends Component {
     }
 
     waitForIt() {
-        console.log('waiting');
         setTimeout(this.sendDealAllMessage, 5000);
     }
 

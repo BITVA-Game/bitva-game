@@ -13,7 +13,6 @@ const Header = () => (
 
 const LoginScreen = ({ accounts, sendMessage }) => (
     <div className="login-container">
-        {console.log(accounts)}
         <Header />
         <Login accounts={accounts} sendMessage={sendMessage} />
     </div>

@@ -13,16 +13,16 @@ class NewLogin extends Component {
     }
 
 
-    createAccount() {
-        console.log(this.state.value);
+    createAccount(event) {
+        event.preventDefault();
         this.props.sendMessage({
             type: 'CREATEACC',
             account: this.state.value,
         });
+        this.props.toggleForm();
     }
 
     inputChange(event) {
-        console.log('changing');
         this.setState({ value: event.target.value });
     }
 
@@ -44,6 +44,7 @@ class NewLogin extends Component {
 
 NewLogin.propTypes = {
     sendMessage: PropTypes.func.isRequired,
+    toggleForm: PropTypes.func.isRequired,
 };
 
 export default NewLogin;

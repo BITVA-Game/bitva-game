@@ -17,25 +17,16 @@ beforeEach(() => {
     application.reset();
 });
 
-test.only('msg INIT Game loaded - no profiles', async () => {
-    const msg = { type: message.INIT };
+test.skip('msg INIT Game loaded - no profiles', async () => {
 
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    await application.msgReceived(msg, sendReply);
-
-    expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(loginState);
 });
 
-test('msg INIT Game loaded - one profile', async () => {
+test.skip('msg INIT Game loaded - one profile', async () => {
 
 });
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
-test('msg INIT Game loaded. Send the app in its initial state', async () => {
+test.only('msg INIT Game loaded. Send the app in its initial state', async () => {
     // Create a messade that has type and may have additional data later.
     const msg = { type: message.INIT };
 

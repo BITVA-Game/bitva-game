@@ -19,7 +19,6 @@ export function withBoardContext(GameScreen) {
         }
 
         cardAim() {
-            console.log('I am in GameScreen');
             this.setState({
                 dragging: null,
             });

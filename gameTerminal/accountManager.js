@@ -29,10 +29,8 @@ function write(obj) {
 }
 
 function readAccounts() {
-    console.log('READ ACCOUNTS');
     const accounts = read().accounts;
     const result = { accounts, account: null, guest: null };
-    console.log('readAccounts', result);
     return result;
 }
 
@@ -53,7 +51,6 @@ function secondAccount(firsAccId) {
 }
 
 function createAccount(name) {
-    console.log('CALLED create account');
     const accounts = read();
     accounts.accounts.push({ id: uuid(), name });
     write(accounts);
@@ -61,13 +58,12 @@ function createAccount(name) {
 
 function deleteAccount(id) {
     const accounts = read();
-    const updatedAccs = accounts.account.find((a) => a.id !== id);
+    const updatedAccs = accounts.accounts.filter((a) => a.id !== id);
     accounts.accounts = updatedAccs;
     write(accounts);
 }
 
 function handle(app, msg) {
-    console.log('handle accounts', msg);
     switch (msg.type) {
     case message.INIT:
         return readAccounts();
