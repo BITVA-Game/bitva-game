@@ -54,6 +54,8 @@ test('msg ACTION received: active player attacks with russianOven, it disables 2
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
     // ожидаем, что карта russianOven неактивного игрока имеет category - holdCard
     expect(activePlayer.grave[cardToTest].category).toEqual(card.HOLDCARDCATEGORY);
+    // ожидаем, что атакованный игрок получил свойство chained == ['oven']
+    expect(inactivePlayer.chained).toContain(card.OVENCARD);
     // ожидаем, что 2 карты  атакованного игрока получили свойство disabled: true
     expect(Object.values(inactivePlayer.hand)).toContainEqual(
         { disabled: true },
