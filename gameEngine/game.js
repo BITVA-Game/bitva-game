@@ -348,7 +348,6 @@ function forestMushroom(opponent) {
         }
         Object.keys(opponent.item).length !== 0
             ? Object.values(opponent.item)[0].panic = true : null;
-        console.log(opponent.chained);
         opponent.chained.push(cardConst.MUSHROOMCARD);
         const index = getRandomUpTo(opponentCards.length, 'indexMushroom');
         opponentCards[index].panic = false;
