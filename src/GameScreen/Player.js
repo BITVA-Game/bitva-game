@@ -13,10 +13,12 @@ import Hand from './Hand';
 import Grave from './Grave';
 import '../css/App.css';
 import '../css/GameScreen.css';
+
 import bat from '../images/cards/batCard.png';
 
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });
+const chainsSound = new UIFx(`${process.env.PUBLIC_URL}/sound/chains.mp3`, { volume: 1.0 });
 
 const AnimatedHand = ({ inactivePlayer, hand }) => (
     <div className="hand card-hand">
@@ -94,6 +96,15 @@ class Player extends Component {
       && this.props.player.turningHand === true
         ) {
             this.playAnimation('potion');
+        }
+        if (
+            this.props.player.chained !== prevProps.player.chained
+            && (
+                this.props.player.chained.includes('mushroom')
+                || this.props.player.chained.includes('oven')
+            )
+        ) {
+            chainsSound.play();
         }
     }
 

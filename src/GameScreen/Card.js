@@ -5,7 +5,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import BoardContext from './BoardContext';
-
 import '../css/Cards.css';
 
 import apple from '../images/cards/apple.png';

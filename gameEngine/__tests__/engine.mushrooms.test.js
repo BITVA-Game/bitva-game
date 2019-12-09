@@ -4,7 +4,7 @@ import {
 } from '../__data__/states';
 
 import {
-    message, target,
+    message, target, card,
 } from '../../constants';
 
 import cards from '../__data__/cards';
@@ -92,6 +92,8 @@ test('EDGE CASE TEST once player put forestMushroom card as item, then with 60% 
             },
         },
     );
+    // ожидаем, что атакованный игрок получил свойство chained == ['mushroom']
+    expect(activePlayer.chained).toContain(card.MUSHROOMCARD);
 });
 
 // Test that if opponent has forestMushroom card in item holder, then with 60 % chance,

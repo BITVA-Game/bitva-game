@@ -52,6 +52,8 @@ const card = {
     BOWARROWCARD: 'bowArrow',
     MAGICTREECARD: 'magicTree',
     MALACHITEBOXCARD: 'malachiteBox',
+    OVENCARD: 'oven',
+    MUSHROOMCARD: 'mushroom',
 };
 
 const target = {
