@@ -25,7 +25,7 @@ const Account = ({
 
 const Accounts = ({ accounts, selected, toggle }) => (
     <div>
-        {accounts.map(
+        {accounts && accounts.map(
             (a) => (
                 <Account
                     accId={a.id}
@@ -58,7 +58,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accountId: (props.accounts.accounts[0] || {}).id,
+            accountId: null,
             form: false,
             delete: false,
         };
@@ -69,8 +69,6 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('Update', this.props.accounts.accounts.length);
-        console.log('Update1', prevProps.accounts.accounts.length);
         if (this.props.accounts.accounts.length !== prevProps.accounts.accounts.length) {
             this.setState({
                 accountId: (this.props.accounts.accounts[0] || {}).id,
@@ -140,7 +138,7 @@ class Login extends Component {
     }
 
     render() {
-        const account = this.props.accounts.accounts.find((a) => a.id === this.state.accountId);
+        const account = this.props.accounts.accounts ? this.props.accounts.accounts.find((a) => a.id === this.state.accountId) : null;
         return (
             <>
                 <section className="login-content">

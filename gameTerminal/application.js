@@ -10,6 +10,7 @@ const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
 const socketClient = require('./socketClient');
 const accountManager = require('./accountManager');
+const playerManager = require('./playerManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -41,7 +42,8 @@ async function processMessage(msg) {
     console.log('process', msg);
     // HACK until we have auth flow
     const newApp = {
-        accounts: accountManager.handle(application, msg),
+        accounts: await accountManager.handle(application, msg),
+        playeraccs: await playerManager.handle(application, msg),
         manager: screenManager.handle(application, msg),
         engine: await gameEngineManager.handle(application, msg),
     };
@@ -49,9 +51,9 @@ async function processMessage(msg) {
     return newApp;
 }
 
-function initApplication(msg) {
-    // HACK until we have initial auth flow in place
-    const accounts = accountManager.handle({}, msg);
+async function initApplication(msg) {
+    console.log('initApplication');
+    const accounts = await accountManager.handle({}, msg);
     const manager = screenManager.handle({}, msg);
     return { ...application, accounts, manager };
 }
@@ -62,7 +64,10 @@ function initApplication(msg) {
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
 async function msgReceived(msg, sendReply) {
-    const newApp = msg.type === message.INIT ? initApplication(msg) : await processMessage(msg);
+    console.log('msgReceived');
+    const newApp = msg.type === message.INIT
+        ? await initApplication(msg)
+        : await processMessage(msg);
     if (message.network) {
         newApp.network = true;
         console.log('OMG NETWORK PLAY IS: ', newApp.network);

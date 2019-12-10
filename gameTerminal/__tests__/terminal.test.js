@@ -1,7 +1,6 @@
 import nock from 'nock';
-import { app } from 'electron';
 import {
-    startscreenState, loginState,
+    loginState,
 } from '../__data__/states';
 
 import {
@@ -26,7 +25,7 @@ test.skip('msg INIT Game loaded - one profile', async () => {
 });
 
 // If it's the first INITIAL message from frontend, return the app in it's initial state
-test.only('msg INIT Game loaded. Send the app in its initial state', async () => {
+test('msg INIT Game loaded. Send the app in its initial state', async () => {
     // Create a messade that has type and may have additional data later.
     const msg = { type: message.INIT };
 
@@ -41,9 +40,9 @@ test.only('msg INIT Game loaded. Send the app in its initial state', async () =>
 });
 
 // screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test('msg STARTSCREEN switches screen state to STARTSCREEN', async () => {
+test('msg STARTSCREEN switches screen state to STARTSCREEN with Alice', async () => {
     // We only need type for this test.
-    const msg = { type: message.STARTSCREEN, account: 'Alice' };
+    const msg = { type: message.STARTSCREEN, account: gameAccounts.alice.id };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -67,9 +66,9 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', async () => {
 });
 
 // screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test('msg STARTSCREEN switches screen state to STARTSCREEN', async () => {
+test('msg STARTSCREEN switches screen state to STARTSCREEN with Bob', async () => {
     // We only need type for this test.
-    const msg = { type: message.STARTSCREEN, account: 'Bob' };
+    const msg = { type: message.STARTSCREEN, account: gameAccounts.bob.id };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -94,7 +93,7 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN', async () => {
 
 const address = 'http://localhost:5001/';
 
-test('msg PLAY creates engine and handles the message', async () => {
+test.skip('msg PLAY creates engine and handles the message', async () => {
     const msg = { type: message.PLAY };
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -102,7 +101,7 @@ test('msg PLAY creates engine and handles the message', async () => {
         screen: scr.HEROSELECT,
         accounts: {
             accounts: gameAccounts.accounts,
-            account: 'Alice',
+            account: gameAccounts.alice.id,
             guest: null,
         },
         innerState: { a: 1 },
@@ -133,7 +132,7 @@ test('msg PLAY creates engine and handles the message', async () => {
 });
 
 
-test('msg sent twice, we have one instance of engine', async () => {
+test.skip('msg sent twice, we have one instance of engine', async () => {
     const msg = { type: message.HEROSELECTED };
     // Mock sendReply function
     const sendReply = jest.fn();
