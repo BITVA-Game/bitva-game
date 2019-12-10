@@ -23,6 +23,9 @@ function createWindow() {
         show: false,
         icon: path.join(__dirname, 'src/icons/png/64x64.png'),
         resizable: false,
+        webPreferences: {
+            nodeIntegration: true,
+        },
         // create a Frameless Window
         frame: false,
     });
