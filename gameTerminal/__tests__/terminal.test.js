@@ -93,7 +93,7 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN with Bob', async () =
 
 const address = 'http://localhost:5001/';
 
-test.skip('msg PLAY creates engine and handles the message', async () => {
+test('msg PLAY creates engine and handles the message', async () => {
     const msg = { type: message.PLAY };
     // Mock sendReply function
     const sendReply = jest.fn();
