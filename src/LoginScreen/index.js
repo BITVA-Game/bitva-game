@@ -14,7 +14,9 @@ const Header = () => (
 const LoginScreen = ({ accounts, sendMessage }) => (
     <div className="login-container">
         <Header />
-        <Login accounts={accounts} sendMessage={sendMessage} />
+        {accounts.loading
+            ? <h1>SO LOADING</h1>
+            : <Login accounts={accounts} sendMessage={sendMessage} />}
     </div>
 );
 

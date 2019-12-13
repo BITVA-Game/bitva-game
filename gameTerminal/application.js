@@ -38,24 +38,26 @@ function parseApplication(app) {
     return parsedApp;
 }
 
-async function processMessage(msg) {
+async function processMessage(msg, reply) {
     console.log('process', msg);
-    // HACK until we have auth flow
+    const reProcess = (m) => processMessage(m, reply);
+
     const newApp = {
-        accounts: await accountManager.handle(application, msg),
-        playeraccs: await playerManager.handle(application, msg),
-        manager: screenManager.handle(application, msg),
-        engine: await gameEngineManager.handle(application, msg),
+        accounts: accountManager.handle(application, msg, reProcess),
+        players: playerManager.handle(application, msg, reProcess),
+        manager: screenManager.handle(application, msg, reProcess),
+        engine: await gameEngineManager.handle(application, msg, reProcess),
     };
     // console.log('NEW APP', newApp);
-    return newApp;
+    reply(newApp);
 }
 
-async function initApplication(msg) {
-    console.log('initApplication');
-    const accounts = await accountManager.handle({}, msg);
-    const manager = screenManager.handle({}, msg);
-    return { ...application, accounts, manager };
+async function initApplication(msg, reply) {
+    const reProcess = (m) => processMessage(m, reply);
+    const accounts = accountManager.handle({}, msg, reProcess);
+    const manager = screenManager.handle({}, msg, reProcess);
+    const newApp = { ...application, accounts, manager };
+    reply(newApp);
 }
 
 // This function is called from main.js
@@ -65,19 +67,25 @@ async function initApplication(msg) {
 // so we can se what we're sending back.
 async function msgReceived(msg, sendReply) {
     console.log('msgReceived');
-    const newApp = msg.type === message.INIT
-        ? await initApplication(msg)
-        : await processMessage(msg);
-    if (message.network) {
-        newApp.network = true;
-        console.log('OMG NETWORK PLAY IS: ', newApp.network);
+    const reply = (app) => {
+        application = app;
+        console.log('sending reply', parseApplication(app));
+        sendReply(parseApplication(app));
+    };
 
-        socketClient.emitMessage(msg);
+    if (msg.type === message.INIT) {
+        await initApplication(msg, reply);
+    } else {
+        await processMessage(msg, reply);
     }
+    // if (message.network) {
+    //     newApp.network = true;
+    //     console.log('OMG NETWORK PLAY IS: ', newApp.network);
+
+    //     socketClient.emitMessage(msg);
+    // }
 
     // writeGameObject(newApp);
-    application = newApp;
-    sendReply(parseApplication(newApp));
 }
 
 function setApp(newApp) {

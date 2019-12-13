@@ -69,7 +69,7 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.accounts.accounts.length !== prevProps.accounts.accounts.length) {
+        if (this.props.accounts.accounts && (this.props.accounts.accounts.length !== prevProps.accounts.accounts.length)) {
             this.setState({
                 accountId: (this.props.accounts.accounts[0] || {}).id,
             });
