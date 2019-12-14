@@ -32,6 +32,7 @@ class GameScreen extends Component {
     }
 
     componentDidUpdate() {
+        const actionType = this.props.app.game.lastAction.type;
         if (this.state.animation === 'birds') {
             setTimeout(() => {
                 this.setState({ animation: null });
@@ -39,29 +40,29 @@ class GameScreen extends Component {
             clearInterval(this.birdsInterval);
             this.startBirds();
         }
-        if (this.props.app.game.lastAction.type === 'attackOpponent') {
-            soundController('attackOpponent');
-            setTimeout(() => {
-                this.props.app.game.lastAction.type = '';
-            }, 500);
+        if (actionType === 'attackOpponent') {
+            soundController(this.props.app.game, 'attackOpponent');
+            // setTimeout(() => {
+            //     this.props.app.game.lastAction.type = '';
+            // }, 1000);
         }
-        if (this.props.app.game.lastAction.type === 'attackItemOpponent') {
-            soundController('attackItemOpponent');
-            setTimeout(() => {
-                this.props.app.game.lastAction.type = '';
-            }, 500);
+        if (actionType === 'attackItemOpponent') {
+            soundController(this.props.app.game, 'attackItemOpponent');
+            // setTimeout(() => {
+            //     this.props.app.game.lastAction.type = '';
+            // }, 1000);
         }
-        if (this.props.app.game.lastAction.type === 'graveyard') {
+        if (actionType === 'graveyard') {
             soundController('graveyard');
             setTimeout(() => {
                 this.props.app.game.lastAction.type = '';
             }, 1000);
         }
-        if (this.props.app.game.lastAction.type === 'chains') {
-            soundController('chains');
-            setTimeout(() => {
-                this.props.app.game.lastAction.type = '';
-            }, 500);
+        if (actionType === 'chains') {
+            soundController(this.props.app.game, 'chains');
+            // setTimeout(() => {
+            //     this.props.app.game.lastAction.type = '';
+            // }, 1000);
         }
     }
 
