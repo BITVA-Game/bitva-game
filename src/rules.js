@@ -3,7 +3,7 @@ export default function isTarget(target, dragging, active, player) {
         return false;
     }
     if (!active) {
-        console.log(player);
+        // console.log(player);
         const itemKey = Object.keys(player.item)[0];
         let itemCategory;
         // eslint-disable-next-line no-unused-expressions

@@ -313,6 +313,7 @@ test('msg ACTION CASE4 active player puts item into his itemholder', () => {
     expect(Object.values(activePlayer.item).length).toEqual(1);
     expect(activePlayer.item[cardToTest].type).toEqual(card.ITEMCATEGORY);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+    expect(newGame.game.lastAction.type).toEqual('');
 });
 
 test('msg ACTION CASE4 player wants to move his card from item holder to graveyard', () => {
@@ -472,7 +473,7 @@ test('EDGE CASE TEST opponent has shield in item, player trying to attack, but c
     expect(Object.keys(inactivePlayer.item)).toContain(opponentItem);
     expect(activePlayer.moveCounter).toEqual(0);
     expect(activePlayer.health.current).toEqual(16);
-    expect(inactivePlayer.health.current).toEqual(15);    
+    expect(inactivePlayer.health.current).toEqual(15);
 });
 
 test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {

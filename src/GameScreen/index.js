@@ -41,6 +41,27 @@ class GameScreen extends Component {
         }
         if (this.props.app.game.lastAction.type === 'attackOpponent') {
             soundController('attackOpponent');
+            setTimeout(() => {
+                this.props.app.game.lastAction.type = '';
+            }, 500);
+        }
+        if (this.props.app.game.lastAction.type === 'attackItemOpponent') {
+            soundController('attackItemOpponent');
+            setTimeout(() => {
+                this.props.app.game.lastAction.type = '';
+            }, 500);
+        }
+        if (this.props.app.game.lastAction.type === 'graveyard') {
+            soundController('graveyard');
+            setTimeout(() => {
+                this.props.app.game.lastAction.type = '';
+            }, 1000);
+        }
+        if (this.props.app.game.lastAction.type === 'chains') {
+            soundController('chains');
+            setTimeout(() => {
+                this.props.app.game.lastAction.type = '';
+            }, 500);
         }
     }
 

@@ -15,7 +15,6 @@ import '../css/App.css';
 import '../css/GameScreen.css';
 
 import bat from '../images/cards/batCard.png';
-import soundController from '../soundController';
 
 const AnimatedHand = ({ inactivePlayer, hand }) => (
     <div className="hand card-hand">
@@ -78,7 +77,6 @@ class Player extends Component {
             animation: null,
         };
         this.playAnimation = this.playAnimation.bind(this);
-        this.actionSound = this.actionSound.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -94,17 +92,6 @@ class Player extends Component {
         ) {
             this.playAnimation('potion');
         }
-
-        if (
-            this.props.player.chained !== prevProps.player.chained
-            && (
-                this.props.player.chained.includes('mushroom')
-                || this.props.player.chained.includes('oven')
-            )
-        ) {
-            console.log('We are in componentDidUpdate calling sound');
-            soundController('chains');
-        }
     }
 
     playAnimation(animName) {
@@ -113,7 +100,7 @@ class Player extends Component {
         setTimeout(() => this.setState({ animation: null }), 2000);
     }
 
-  
+
     render() {
         const playerClass = this.props.active ? 'player-active' : 'player-inactive';
         const playerPosition = this.props.player.position === 'bottom'
