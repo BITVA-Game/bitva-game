@@ -5,7 +5,7 @@ import {
 } from '../__data__/states';
 
 import {
-    message, target, card,
+    message, target, card, action,
 } from '../../constants';
 
 import cards from '../__data__/cards';
@@ -64,6 +64,8 @@ test('msg ACTION received: active player attacks with russianOven, it disables 2
         { disabled: false },
         { disabled: false },
     );
+    // ожидаем, что lastAction.type == CHAINS (используется для вызова звука)
+    expect(newGame.game.lastAction.type).toEqual(action.CHAINS);
 });
 
 // Test, that when a player is attacked with  russianOven card by opponent, then this player

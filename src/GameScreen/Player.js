@@ -17,10 +17,6 @@ import '../css/GameScreen.css';
 import bat from '../images/cards/batCard.png';
 import soundController from '../soundController';
 
-// const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
-// const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });
-// const chainsSound = new UIFx(`${process.env.PUBLIC_URL}/sound/chains.mp3`, { volume: 1.0 });
-
 const AnimatedHand = ({ inactivePlayer, hand }) => (
     <div className="hand card-hand">
         {Object.keys(hand).map((cardId) => (
@@ -101,14 +97,13 @@ class Player extends Component {
 
         if (
             this.props.player.chained !== prevProps.player.chained
-            // && (
-            //     this.props.player.chained.includes('mushroom')
-            //     || this.props.player.chained.includes('oven')
-            // )
+            && (
+                this.props.player.chained.includes('mushroom')
+                || this.props.player.chained.includes('oven')
+            )
         ) {
-            // chainsSound.play();
             console.log('We are in componentDidUpdate calling sound');
-            soundController(this.props.player, this.props.active);
+            soundController('chains');
         }
     }
 
@@ -118,22 +113,7 @@ class Player extends Component {
         setTimeout(() => this.setState({ animation: null }), 2000);
     }
 
-    actionSound(target) {
-        console.log('We are in actionSound');
-        soundController(target, this.props.player, this.props.active);
-        // // we play attack sound if active player attacks opponent or its item
-        // if (!this.props.active && target !== 'graveyard') {
-        //     if (this.isTarget(target, this.props.player)) {
-        //         attackSound.play();
-        //     }
-        // }
-        // // we play graveyard sound if player drops card to graveyard
-        // if (target === 'graveyard') {
-        //     graveyardSound.play();
-        // }
-    }
-
-
+  
     render() {
         const playerClass = this.props.active ? 'player-active' : 'player-inactive';
         const playerPosition = this.props.player.position === 'bottom'

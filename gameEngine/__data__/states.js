@@ -208,6 +208,7 @@ export const dealAllState = {
     game: {
         active: alice.id,
         phase: 'ACTIVE',
+        lastAction: { type: 'heal' },
         players: [
             {
                 id: alice.id,

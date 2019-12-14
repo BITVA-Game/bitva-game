@@ -7,6 +7,7 @@ import '../css/App.css';
 import '../css/GameScreen.css';
 import { getActivePlayer, getInActivePlayer } from '../rules';
 import { withBoardContext } from './BoardContext';
+import soundController from '../soundController';
 
 // animation duration time
 const animationDuration = 9000;
@@ -37,6 +38,9 @@ class GameScreen extends Component {
             }, animationDuration);
             clearInterval(this.birdsInterval);
             this.startBirds();
+        }
+        if (this.props.app.game.lastAction.type === 'attackOpponent') {
+            soundController('attackOpponent');
         }
     }
 

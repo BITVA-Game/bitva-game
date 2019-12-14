@@ -4,7 +4,7 @@ import {
 } from '../__data__/states';
 
 import {
-    message, target, card,
+    message, target, card, action,
 } from '../../constants';
 
 import cards from '../__data__/cards';
@@ -94,6 +94,7 @@ test('EDGE CASE TEST once player put forestMushroom card as item, then with 60% 
     );
     // ожидаем, что атакованный игрок получил свойство chained == ['mushroom']
     expect(activePlayer.chained).toContain(card.MUSHROOMCARD);
+    expect(newGame.game.lastAction.type).toEqual(action.CHAINS);
 });
 
 // Test that if opponent has forestMushroom card in item holder, then with 60 % chance,
@@ -173,6 +174,8 @@ test('EDGE CASE TEST if forestMushroom card is at opponent item, then with 60% p
             id: 'horsemanWhite', type: 'action', category: 'attack', points: 1, initialpoints: 1, disabled: false,
         },
     );
+    // ожидаем, что lastAction.type == CHAINS (используется для вызова звука)
+    expect(newGame.game.lastAction.type).toEqual(action.CHAINS);
 });
 
 // Test that if opponent has forestMushroom card in item holder, and with 60 % chance,
@@ -234,6 +237,8 @@ test('EDGE CASE TEST if by forestMushroom card player got 60% chance and acted b
             id: 'bogatyr', type: 'action', category: 'attack', points: 4, initialpoints: 4, disabled: false,
         },
     );
+    // ожидаем, что lastAction.type == ATTACKITEMOPPONENT (используется для вызова звука)
+    expect(newGame.game.lastAction.type).toEqual(action.ATTACKITEMOPPONENT);
 });
 
 // Test that if active player has forestMushroom card in item from previous turn,
