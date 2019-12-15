@@ -1,33 +1,32 @@
 import UIFx from 'uifx';
 
-
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.05 });
 const chainsSound = new UIFx(`${process.env.PUBLIC_URL}/sound/chains.mp3`, { volume: 1.0 });
+const healSound = graveyardSound;
+const itemSound = graveyardSound;
+const clairvoyanceSound = graveyardSound;
+const turningPotionSound = graveyardSound;
 
-// sound controller function to manage all sounds in project
-export default function isSound(game, type) {
-    console.log('We are in isSound - Sound controller!');
+const action = {
+    graveyard: graveyardSound,
+    attackOpponent: attackSound,
+    attackItemOpponent: attackSound,
+    chains: chainsSound,
+    heal: healSound,
+    item: itemSound,
+    clairvoyance: clairvoyanceSound,
+    turningPotion: turningPotionSound,
+};
 
-    // we play attack sound if active player attacks opponent or its item
-    if (type === 'attackOpponent' || type === 'attackItemOpponent') {
-        console.log('We are in isSound - attack Opponent or its item!');
-        attackSound.play();
-        // eslint-disable-next-line no-param-reassign
-        game.lastAction.type = '';
-    }
-    // we play graveyard sound if player drops card to graveyard
-    if (type === 'graveyard') {
-        console.log('We are in isSound - graveyard!');
-        graveyardSound.play();
-        // eslint-disable-next-line no-param-reassign
-        game.lastAction.type = '';
-    }
-    // we play chains sound if player got chained property by oven or mushroom card
-    if (type === 'chains') {
-        chainsSound.play();
-        // eslint-disable-next-line no-param-reassign
-        game.lastAction.type = '';
-    }
-
+function playSound(type) {
+    action[type].play();
 }
+
+function soundController(type) {
+    console.log('We are in isSound - graveyard!');
+
+    playSound(type);
+}
+
+export default soundController;

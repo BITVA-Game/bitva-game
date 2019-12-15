@@ -70,6 +70,9 @@ const action = {
     GRAVEYARD: 'graveyard',
     ATTACKITEMOPPONENT: 'attackItemOpponent',
     CHAINS: 'chains',
+    ITEM: 'item',
+    CLAIRVOYANCE: 'clairvoyance',
+    TURNINGPOTION: 'turningPotion',
 };
 
 const styles = {

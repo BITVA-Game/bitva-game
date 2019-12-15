@@ -313,7 +313,7 @@ test('msg ACTION CASE4 active player puts item into his itemholder', () => {
     expect(Object.values(activePlayer.item).length).toEqual(1);
     expect(activePlayer.item[cardToTest].type).toEqual(card.ITEMCATEGORY);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
-    expect(newGame.game.lastAction.type).toEqual('');
+    expect(newGame.game.lastAction.type).toEqual(action.ITEM);
 });
 
 test('msg ACTION CASE4 player wants to move his card from item holder to graveyard', () => {

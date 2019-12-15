@@ -40,30 +40,7 @@ class GameScreen extends Component {
             clearInterval(this.birdsInterval);
             this.startBirds();
         }
-        if (actionType === 'attackOpponent') {
-            soundController(this.props.app.game, 'attackOpponent');
-            // setTimeout(() => {
-            //     this.props.app.game.lastAction.type = '';
-            // }, 1000);
-        }
-        if (actionType === 'attackItemOpponent') {
-            soundController(this.props.app.game, 'attackItemOpponent');
-            // setTimeout(() => {
-            //     this.props.app.game.lastAction.type = '';
-            // }, 1000);
-        }
-        if (actionType === 'graveyard') {
-            soundController('graveyard');
-            setTimeout(() => {
-                this.props.app.game.lastAction.type = '';
-            }, 1000);
-        }
-        if (actionType === 'chains') {
-            soundController(this.props.app.game, 'chains');
-            // setTimeout(() => {
-            //     this.props.app.game.lastAction.type = '';
-            // }, 1000);
-        }
+        soundController(actionType);
     }
 
     componentWillUnmount() {

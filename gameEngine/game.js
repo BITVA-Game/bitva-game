@@ -209,6 +209,15 @@ function lastActionChange(game, lastAction) {
     case action.CHAINS:
         game.lastAction.type = action.CHAINS;
         break;
+    case action.ITEM:
+        game.lastAction.type = action.ITEM;
+        break;
+    case action.TURNINGPOTION:
+        game.lastAction.type = action.TURNINGPOTION;
+        break;
+    case action.CLAIRVOYANCE:
+        game.lastAction.type = action.CLAIRVOYANCE;
+        break;
 
         // if any mistake occurs during game process, player gets error message by default
     default:
@@ -388,7 +397,7 @@ function forestMushroom(game, opponent) {
 }
 
 // we move item card from active player's hand to his item holder
-function moveItem(player, key, opponent) {
+function moveItem(game, player, key, opponent) {
     // we check if there is no card in item holder of active player
     if (Object.keys(player.item).length === 0) {
         // if active player has not gotten property turningHand
@@ -416,6 +425,8 @@ function moveItem(player, key, opponent) {
             delete opponent.hand[key];
         }
     }
+    // after player's act we change lastAction property of the game
+    lastActionChange(game, action.ITEM);
 }
 
 function cardIncreaseHealth(players) {
@@ -660,12 +671,16 @@ function pInactiveIsTarget(game, activeCard, cardId) {
         showCards(pInactive);
         pActive.turningHand === true
             ? moveCardGraveyard(pInactive, cardId) : moveCardGraveyard(pActive, cardId);
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.CLAIRVOYANCE);
         break;
         // if player attackes with turningPotion card, we call turningHand function
         // then move this attack card to gravyeard
     case cardConst.TURNINGCATEGORY:
         turningHand(pActive, pInactive);
         moveCardGraveyard(pActive, cardId);
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.TURNINGPOTION);
         break;
 
         // if any mistake occurs during game process, player gets error message by default
@@ -741,7 +756,7 @@ function playerActs(game, cardId, target) {
 
     if (target === targetConst.ITEMCARD && activeCard.type === cardConst.ITEMCARD) {
         // console.log('We are in move item case');
-        moveItem(pActive, cardId, pInactive);
+        moveItem(game, pActive, cardId, pInactive);
     }
     // if player attacks opponent item with card type action, then
     // if item is not empty we deduct points of attack from item card points
