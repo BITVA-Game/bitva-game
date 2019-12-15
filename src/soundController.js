@@ -24,8 +24,7 @@ function playSound(type) {
 }
 
 function soundController(type) {
-    console.log('We are in isSound - graveyard!');
-
+    // console.log('We are in isSound - graveyard!', type);
     playSound(type);
 }
 
