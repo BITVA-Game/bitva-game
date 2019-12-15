@@ -1,31 +1,29 @@
 import nock from 'nock';
 import {
-    loginState,
+    loadingState, loadedState, startscreenStateP1, startscreenStateP2,
 } from '../__data__/states';
 
 import {
     screen as scr, message,
 } from '../../constants';
 
-import gameAccounts from '../../gameAccounts';
+import testAccounts from '../__data__/accounts';
+import { read } from '../../gameAccounts/index';
+
+jest.mock('../../gameAccounts/index');
 
 // import module for tests
 const application = require('../application');
+
+const address = 'http://localhost:5001/';
 
 beforeEach(() => {
     application.reset();
 });
 
-test.skip('msg INIT Game loaded - no profiles', async () => {
+test('msg INIT Game loaded - no profiles', async () => {
+    read.mockImplementation(jest.fn(() => Promise.resolve({ records: testAccounts.accounts })));
 
-});
-
-test.skip('msg INIT Game loaded - one profile', async () => {
-
-});
-
-// If it's the first INITIAL message from frontend, return the app in it's initial state
-test('msg INIT Game loaded. Send the app in its initial state', async () => {
     // Create a messade that has type and may have additional data later.
     const msg = { type: message.INIT };
 
@@ -35,14 +33,17 @@ test('msg INIT Game loaded. Send the app in its initial state', async () => {
     // Call the message function from application with this message and mocked function.
     await application.msgReceived(msg, sendReply);
 
-    expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(loginState);
+    expect(sendReply.mock.calls.length).toBe(2);
+    expect(read.mock.calls.length).toBe(1);
+    expect(sendReply.mock.calls[0][0]).toMatchObject(loadingState);
+    expect(sendReply.mock.calls[1][0]).toMatchObject(loadedState);
 });
+
 
 // screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
 test('msg STARTSCREEN switches screen state to STARTSCREEN with Alice', async () => {
     // We only need type for this test.
-    const msg = { type: message.STARTSCREEN, account: gameAccounts.alice.id };
+    const msg = { type: message.STARTSCREEN, account: testAccounts.alice.id };
 
     // Mock sendReply function
     const sendReply = jest.fn();
@@ -50,48 +51,9 @@ test('msg STARTSCREEN switches screen state to STARTSCREEN with Alice', async ()
     // Call the message function from application with this message and mocked function.
     await application.msgReceived(msg, sendReply);
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            accounts: {
-                accounts: gameAccounts.accounts,
-                account: gameAccounts.alice.id,
-                guest: null,
-            },
-            manager: {
-                screen: scr.STARTSCREEN,
-            },
-
-        },
-    );
+    expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenStateP1);
 });
 
-// screen swtich to state STARTSCREEN after button TO START SCREEN is clicked
-test('msg STARTSCREEN switches screen state to STARTSCREEN with Bob', async () => {
-    // We only need type for this test.
-    const msg = { type: message.STARTSCREEN, account: gameAccounts.bob.id };
-
-    // Mock sendReply function
-    const sendReply = jest.fn();
-
-    // Call the message function from application with this message and mocked function.
-    await application.msgReceived(msg, sendReply);
-    expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(
-        {
-            accounts: {
-                accounts: gameAccounts.accounts,
-                account: gameAccounts.bob.id,
-                guest: null,
-            },
-            manager: {
-                screen: scr.STARTSCREEN,
-            },
-
-        },
-    );
-});
-
-const address = 'http://localhost:5001/';
 
 test('msg PLAY creates engine and handles the message', async () => {
     const msg = { type: message.PLAY };
@@ -100,9 +62,10 @@ test('msg PLAY creates engine and handles the message', async () => {
     const engineState = {
         screen: scr.HEROSELECT,
         accounts: {
-            accounts: gameAccounts.accounts,
-            account: gameAccounts.alice.id,
-            guest: null,
+            records: testAccounts.accounts,
+        },
+        players: {
+            player: testAccounts.alice.id,
         },
         innerState: { a: 1 },
     };
@@ -110,7 +73,7 @@ test('msg PLAY creates engine and handles the message', async () => {
     const scope = nock(address)
         .post(
             '/',
-            { message: { type: 'PLAY' }, accounts: [gameAccounts.alice, gameAccounts.bob] },
+            { message: { type: 'PLAY' } },
         )
         .reply(200)
         .get('/')
@@ -118,17 +81,8 @@ test('msg PLAY creates engine and handles the message', async () => {
     await application.msgReceived(msg, sendReply);
     scope.isDone();
 
-    const expectedState = {
-        accounts: {
-            accounts: gameAccounts.accounts,
-            account: gameAccounts.alice.id,
-            guest: gameAccounts.bob.id,
-        },
-        manager: { screen: scr.HEROSELECT },
-        innerState: engineState.innerState,
-    };
     expect(sendReply.mock.calls.length).toBe(1);
-    expect(sendReply.mock.calls[0][0]).toMatchObject(expectedState);
+    expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenStateP2);
 });
 
 
@@ -159,8 +113,8 @@ test.skip('msg sent twice, we have one instance of engine', async () => {
     expect(handleFunc.mock.calls[0]).toEqual([msg]);
 
     const expectedState = {
-        account: gameAccounts.alice,
-        guest: gameAccounts.bob,
+        account: testAccounts.alice,
+        guest: testAccounts.bob,
         manager: { screen: scr.STARTSCREEN },
         innerState: engineState.innerState,
     };

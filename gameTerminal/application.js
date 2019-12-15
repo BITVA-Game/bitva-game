@@ -10,7 +10,7 @@ const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
 const socketClient = require('./socketClient');
 const accountManager = require('./accountManager');
-const playerManager = require('./playerManager');
+const participantManager = require('./participantManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -44,11 +44,11 @@ async function processMessage(msg, reply) {
 
     const newApp = {
         accounts: accountManager.handle(application, msg, reProcess),
-        players: playerManager.handle(application, msg, reProcess),
+        participants: participantManager.handle(application, msg, reProcess),
         manager: screenManager.handle(application, msg, reProcess),
         engine: await gameEngineManager.handle(application, msg, reProcess),
     };
-    // console.log('NEW APP', newApp);
+    console.log('NEW APP', newApp);
     reply(newApp);
 }
 
@@ -56,7 +56,11 @@ async function initApplication(msg, reply) {
     const reProcess = (m) => processMessage(m, reply);
     const accounts = accountManager.handle({}, msg, reProcess);
     const manager = screenManager.handle({}, msg, reProcess);
-    const newApp = { ...application, accounts, manager };
+    const participants = participantManager.handle({}, msg, reProcess);
+    const newApp = {
+        ...application, accounts, manager, participants,
+    };
+    console.log('initApp', newApp);
     reply(newApp);
 }
 
@@ -69,7 +73,6 @@ async function msgReceived(msg, sendReply) {
     console.log('msgReceived');
     const reply = (app) => {
         application = app;
-        console.log('sending reply', parseApplication(app));
         sendReply(parseApplication(app));
     };
 

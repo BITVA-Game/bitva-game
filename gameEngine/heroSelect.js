@@ -1,6 +1,6 @@
 const { message } = require('../constants');
 
-const gameAccounts = require('../gameAccounts');
+const testAccounts = require('../gameTerminal/__data__/accounts');
 
 const heroes = require('../gameTerminal/data/characters.json');
 const cards = require('../gameTerminal/data/cards.json');
@@ -62,7 +62,7 @@ function handle(app, msg) {
     return {
         ...initialState,
 
-        heroes: gameAccounts.heroes(nextPlayer.id),
+        heroes: testAccounts.heroes(nextPlayer.id),
         activePlayer: nextPlayer.id,
         players: selectedPlayers,
         allHeroes,

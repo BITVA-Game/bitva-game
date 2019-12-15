@@ -6,11 +6,6 @@ const GameEngine = require('./gameEngineClient');
 async function handle(app, msg) {
     switch (msg.type) {
     case message.PLAY:
-        // initialize game engine
-        engine = new GameEngine();
-
-        await engine.handle({ ...msg, accounts: [app.account, app.guest] });
-        break;
     case message.HEROSELECTED:
     case message.DEALALL:
     case message.ACTION:
