@@ -121,7 +121,6 @@ ipcMain.on('APP', async (event, arg) => {
 });
 
 process.on('unhandledRejection', (reason) => {
-    console.log(process.versions);
     console.log('Unhandled Rejection at:', reason.stack || reason);
     // Recommended: send the information to sentry.io
     // or whatever crash reporting service you use

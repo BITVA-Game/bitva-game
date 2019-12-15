@@ -1,24 +1,38 @@
-const alice = {
-    id: 'Alice',
-    name: 'Alice Adams',
-};
+const fs = require('fs').promises;
 
-const bob = {
-    id: 'Bob',
-    name: 'Bob Brown',
-};
+const path = `${__dirname}/../gameTerminal/data/accounts.json`;
 
-const heroData = {
-    [alice.id]: ['morevna', 'yaga', 'premudraya'],
-    [bob.id]: ['morevna', 'yaga', 'hozyaika'],
-};
-
-function heroes(id) {
-    return heroData[id];
+async function write(accounts) {
+    await fs.writeFile(path, JSON.stringify(accounts));
+    return accounts;
 }
 
-const accounts = [alice, bob];
+async function init() {
+    try {
+        await fs.access(path);
+    } catch (e) {
+        await write({ records: [] });
+    }
+}
+
+async function read() {
+    await init();
+    return JSON.parse(await fs.readFile(path));
+}
+
+async function create(record) {
+    const accounts = await read();
+    accounts.records.push(record);
+    return write(accounts);
+}
+
+async function remove(id) {
+    const accounts = await read();
+    const records = accounts.records.filter((a) => a.id !== id);
+    accounts.records = records;
+    return write(accounts);
+}
 
 module.exports = {
-    alice, bob, heroes, accounts,
+    read, create, remove,
 };

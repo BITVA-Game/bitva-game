@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect';
 import electron from './electron-test';
 import App from './App';
 
-import { startscreenState } from '../gameTerminal/__data__/states';
+import { startscreenStateP1 } from '../gameTerminal/__data__/states';
 
 afterEach(cleanup);
 
@@ -14,7 +14,7 @@ test.only('renders startScreen and menu', () => {
         getByTestId, getByAltText, getAllByTestId, getByText,
     } = render(<App />);
     const stateSaver = electron.ipcRenderer.on.mock.calls[0][1];
-    stateSaver('eventStartScreen', startscreenState);
+    stateSaver('eventStartScreen', startscreenStateP1);
 
     expect(getByTestId('main-menu')).toBeTruthy();
     expect(getByTestId('main-menu')).toHaveClass('sidebar-opened');

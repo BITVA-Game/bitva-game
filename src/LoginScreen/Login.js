@@ -69,9 +69,9 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.accounts.accounts && (this.props.accounts.accounts.length !== prevProps.accounts.accounts.length)) {
+        if (this.props.accounts.records && (this.props.accounts.records.length !== prevProps.accounts.records.length)) {
             this.setState({
-                accountId: (this.props.accounts.accounts[0] || {}).id,
+                accountId: (this.props.accounts.records[0] || {}).id,
             });
         }
     }
@@ -96,7 +96,7 @@ class Login extends Component {
     }
 
     toggleDelete() {
-        console.log('TOGGLE DELETE', this.props.accounts.accounts);
+        console.log('TOGGLE DELETE', this.props.accounts.records);
         this.setState((oldState) => ({
             delete: !oldState.delete,
             form: false,
@@ -108,7 +108,7 @@ class Login extends Component {
             <>
                 <div className="login-profiles">
                     <Accounts
-                        accounts={this.props.accounts.accounts}
+                        accounts={this.props.accounts.records}
                         selected={this.state.accountId}
                         toggle={this.toggleAccount}
                     />
@@ -138,7 +138,9 @@ class Login extends Component {
     }
 
     render() {
-        const account = this.props.accounts.accounts ? this.props.accounts.accounts.find((a) => a.id === this.state.accountId) : null;
+        const account = this.props.accounts.records
+            ? this.props.accounts.records.find((a) => a.id === this.state.accountId)
+            : null;
         return (
             <>
                 <section className="login-content">

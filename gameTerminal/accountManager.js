@@ -1,54 +1,64 @@
 const uuid = require('uuid/v1');
 const { message } = require('../constants');
-const { init, read, write } = require('../gameAccounts/manager');
+const { read, create, remove } = require('../gameAccounts');
+
+const DELAY = 3000;
 
 function initAccounts(process) {
     (async () => {
-        await init();
         const accounts = await read();
-        process({ type: 'SETACCOUNTS', payload: accounts.accounts });
+        // Use this to see the delay on frontend
+        // setTimeout(() => process({ type: 'READACCOUNTS', payload: accounts.accounts }), DELAY);
+        process({ type: 'READACCOUNTS', payload: accounts.records });
     })();
 
     const result = {
         loading: true,
-        accounts: [],
-        account: null,
-        guest: null,
     };
 
     return result;
 }
 
-// function readAccounts() {
-//     const accounts = await read().accounts;
-//     return accounts
-// }
+function createAccount(name, process) {
+    (async () => {
+        const accounts = await create({ id: uuid(), name });
+        // Use this to see the delay on frontend
+        // setTimeout(() => process({ type: 'READACCOUNTS', payload: accounts.records }), DELAY);
+        process({ type: 'READACCOUNTS', payload: accounts.records });
+    })();
 
-// function createAccount(name) {
-//     const accounts = await read();
-//     accounts.accounts.push({ id: uuid(), name });
-//     await write(accounts);
-// }
+    const result = {
+        loading: true,
+    };
 
-// function deleteAccount(id) {
-//     const accounts = await read();
-//     const updatedAccs = accounts.accounts.filter((a) => a.id !== id);
-//     accounts.accounts = updatedAccs;
-//     await write(accounts);
-// }
+    return result;
+}
+
+function deleteAccount(id, process) {
+    (async () => {
+        const accounts = await remove(id);
+        // Use this to see the delay on frontend
+        // setTimeout(() => process({ type: 'READACCOUNTS', payload: accounts.records }), DELAY);
+        process({ type: 'READACCOUNTS', payload: accounts.records });
+    })();
+
+    const result = {
+        loading: true,
+    };
+
+    return result;
+}
 
 function handle(app, msg, process) {
     switch (msg.type) {
     case message.INIT:
         return initAccounts(process);
-    case 'SETACCOUNTS':
-        return { loading: false, accounts: msg.payload };
-    // case message.CREATEACC:
-    //     createAccount(msg.account);
-    //     return readAccounts();
-    // case message.DELETEACC:
-    //     deleteAccount(msg.account);
-    //     return readAccounts();
+    case 'READACCOUNTS':
+        return { loading: false, records: msg.payload };
+    case message.CREATEACC:
+        return createAccount(msg.account, process);
+    case message.DELETEACC:
+        return deleteAccount(msg.account, process);
     default: return app.accounts;
     }
 }
