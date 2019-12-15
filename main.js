@@ -58,9 +58,11 @@ function createWindow() {
         await application.msgReceived({ type: 'INIT' }, sendMessage);
     });
 
-    win.webContents.on('context-menu', (s, e) => {
+    win.webContents.on('before-input-event', (s, e) => {
+        if (e.key !== 'F4') return;
         s.preventDefault();
-        const temp = ctxMenu(app, win, e, sendMessage);
+        const { x, y } = electron.screen.getCursorScreenPoint();
+        const temp = ctxMenu(app, win, e, x, y, sendMessage);
         const c = electron.Menu.buildFromTemplate(temp);
         c.popup(win);
     });
