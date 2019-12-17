@@ -23,9 +23,4 @@ function playSound(type) {
     action[type].play();
 }
 
-function soundController(type) {
-    // console.log('We are in isSound - graveyard!', type);
-    playSound(type);
-}
-
-export default soundController;
+export default playSound;
