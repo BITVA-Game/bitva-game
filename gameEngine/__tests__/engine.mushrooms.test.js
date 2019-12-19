@@ -92,8 +92,6 @@ test('EDGE CASE TEST once player put forestMushroom card as item, then with 60% 
             },
         },
     );
-    // ожидаем, что атакованный игрок получил свойство chained == ['mushroom']
-    expect(activePlayer.chained).toContain(card.MUSHROOMCARD);
     expect(newGame.game.lastAction.type).toEqual(action.CHAINS);
 });
 

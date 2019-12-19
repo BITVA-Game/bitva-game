@@ -5,7 +5,6 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import UIFx from 'uifx';
 import Hero from './Hero';
 import Card from './Card';
 import Item from './Item';

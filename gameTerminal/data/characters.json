@@ -96,11 +96,11 @@
             },
             "russianOven": {
                 "id": "russianOven",
-                "count": 1
+                "count": 10
             },
             "forestMushroom": {
                 "id": "forestMushroom",
-                "count": 1
+                "count": 10
             },
             "magicTree": {
                 "id": "magicTree",
