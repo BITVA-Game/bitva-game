@@ -4,7 +4,7 @@ import {
 } from '../__data__/states';
 
 import {
-    message, target, card, action,
+    message, target, action,
 } from '../../constants';
 
 import cards from '../__data__/cards';
