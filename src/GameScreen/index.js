@@ -44,7 +44,6 @@ class GameScreen extends Component {
         } if (this.state.sound === '' && getActivePlayer(this.props.app).moveCounter !== getActivePlayer(prevProps.app).moveCounter) {
             this.startSound(actionType);
         } if (this.state.sound === actionType) {
-            console.log('sound state', this.state.sound);
             playSound(actionType);
             setTimeout(() => {
                 this.setState({ sound: '' });
@@ -58,7 +57,6 @@ class GameScreen extends Component {
 
     startSound(actionType) {
         this.setState({ sound: actionType });
-
     }
 
     startBirds() {
