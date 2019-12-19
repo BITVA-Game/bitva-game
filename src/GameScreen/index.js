@@ -21,7 +21,7 @@ class GameScreen extends Component {
         };
         this.startBirds = this.startBirds.bind(this);
         this.playableHand = this.playableHand.bind(this);
-        this.changeSound = this.changeSound.bind(this);
+        this.startSound = this.startSound.bind(this);
     }
 
     componentDidMount() {
@@ -33,7 +33,7 @@ class GameScreen extends Component {
         this.startBirds();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
         const actionType = this.props.app.game.lastAction.type;
         if (this.state.animation === 'birds') {
             setTimeout(() => {
@@ -41,15 +41,14 @@ class GameScreen extends Component {
             }, animationDuration);
             clearInterval(this.birdsInterval);
             this.startBirds();
-        }
-
-
-        if (this.state.sound !== '') {
+        } if (this.state.sound === '' && getActivePlayer(this.props.app).moveCounter !== getActivePlayer(prevProps.app).moveCounter) {
+            this.startSound(actionType);
+        } if (this.state.sound === actionType) {
+            console.log('sound state', this.state.sound);
             playSound(actionType);
             setTimeout(() => {
                 this.setState({ sound: '' });
             }, 1000);
-            this.changeSound(actionType);
         }
     }
 
@@ -57,11 +56,9 @@ class GameScreen extends Component {
         clearInterval(this.birdsInterval);
     }
 
-    changeSound(actionType) {
-        if (actionType !== '') {
-            this.setState({ sound: actionType });
-            console.log('sound state', this.state.sound);
-        }
+    startSound(actionType) {
+        this.setState({ sound: actionType });
+
     }
 
     startBirds() {
