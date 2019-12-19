@@ -193,36 +193,7 @@ function removePanic(player) {
 
 // function to change lastAction game property (using for playing sound)
 function lastActionChange(game, lastAction) {
-    switch (lastAction) {
-    case action.GRAVEYARD:
-        game.lastAction.type = action.GRAVEYARD;
-        break;
-    case action.HEAL:
-        game.lastAction.type = action.HEAL;
-        break;
-    case action.ATACKOPPONENT:
-        game.lastAction.type = action.ATACKOPPONENT;
-        break;
-    case action.ATTACKITEMOPPONENT:
-        game.lastAction.type = action.ATTACKITEMOPPONENT;
-        break;
-    case action.CHAINS:
-        game.lastAction.type = action.CHAINS;
-        break;
-    case action.ITEM:
-        game.lastAction.type = action.ITEM;
-        break;
-    case action.TURNINGPOTION:
-        game.lastAction.type = action.TURNINGPOTION;
-        break;
-    case action.CLAIRVOYANCE:
-        game.lastAction.type = action.CLAIRVOYANCE;
-        break;
-
-        // if any mistake occurs during game process, player gets error message by default
-    default:
-        return new Error('You are under spell. Wait for redemption!');
-    }
+    game.lastAction.type = lastAction;
 }
 
 // This function takes the player and the key for his card
