@@ -19,15 +19,17 @@ function handClass(active, player) {
 
 const Hand = (props) => (
     <div className={`${handClass(props.active, props.player)}`}>
-        {Object.keys(props.hand).map((cardId) => (
-            <Card
-                key={cardId}
-                active={props.active}
-                cardKey={cardId}
-                card={props.hand[cardId]}
-                draggable={props.active}
-                player={props.player}
-            />
+        {Object.keys(props.hand).map((cardId, index) => (
+            <div className={`animated-card-${index}`}>
+                <Card
+                    key={cardId}
+                    active={props.active}
+                    cardKey={cardId}
+                    card={props.hand[cardId]}
+                    draggable={props.active}
+                    player={props.player}
+                />
+            </div>
         ))}
     </div>
 );

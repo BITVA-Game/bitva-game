@@ -969,3 +969,59 @@
         }
     100%    { transform: translateX(-560px) translateY(30px) }
 }
+
+/*Animation deck to hand first deal*/
+.animated-card-0 {
+    animation: deckToHand-0 3s infinite;
+    animation-delay: 6s;
+    
+}
+
+@keyframes deckToHand-0 {
+    0% {transform: translate(-407px, -4px)}
+    10% {transform: translate(-407px,-10px)}
+    100% {transform: translate(0, 0)}
+}
+
+.animated-card-1 {
+    animation: deckToHand-1 3s infinite;
+    animation-delay: 5s;
+    
+}
+
+@keyframes deckToHand-1 {
+    0% {transform: translate(-552px, -4px)}
+    100% {transform: translate(0, 0)}
+}
+
+.animated-card-2 {
+    animation: deckToHand-2 3s infinite;
+    animation-delay: 4s;
+    
+}
+
+@keyframes deckToHand-2 {
+    0% {transform: translate(-697px, -4px)}
+    100% {transform: translate(0, 0)}
+}
+
+.animated-card-3 {
+    animation: deckToHand-3 3s infinite;
+    animation-delay: 3s;
+    
+}
+
+@keyframes deckToHand-3 {
+    0% {transform: translate(-842px, -4px)}
+    100% {transform: translate(0, 0)}
+}
+
+.animated-card-4 {
+    animation: deckToHand-4 3s infinite;
+    
+}
+
+@keyframes deckToHand-4 {
+    0% {transform: translate(-987px, -4px)}
+    100% {transform: translate(0, 0)}
+}
