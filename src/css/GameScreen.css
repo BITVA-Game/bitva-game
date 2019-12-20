@@ -972,7 +972,7 @@
 
 /*Animation deck to hand first deal*/
 .animated-card-0 {
-    animation: deckToHand-0 3s infinite;
+    animation: deckToHand-0 3s ease-out infinite;
     animation-delay: 6s;
     
 }
@@ -984,7 +984,7 @@
 }
 
 .animated-card-1 {
-    animation: deckToHand-1 3s infinite;
+    animation: deckToHand-1 3s ease-out infinite;
     animation-delay: 5s;
     
 }
@@ -995,7 +995,7 @@
 }
 
 .animated-card-2 {
-    animation: deckToHand-2 3s infinite;
+    animation: deckToHand-2 3s ease-out infinite;
     animation-delay: 4s;
     
 }
@@ -1006,7 +1006,7 @@
 }
 
 .animated-card-3 {
-    animation: deckToHand-3 3s infinite;
+    animation: deckToHand-3 3s ease-out infinite;
     animation-delay: 3s;
     
 }
@@ -1017,7 +1017,7 @@
 }
 
 .animated-card-4 {
-    animation: deckToHand-4 3s infinite;
+    animation: deckToHand-4 3s ease-out infinite;
     
 }
 
