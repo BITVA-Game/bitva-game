@@ -84,6 +84,9 @@ class Player extends Component {
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation('cards');
         }
+        if (Object.keys(this.props.player.hand).length === 0) {
+            this.playAnimation('cardsDeal');
+        }
         // animation for Turning Potion - active player gets cards from inactive player hand
         if (
             this.props.player.turningHand !== prevProps.player.turningHand
@@ -126,8 +129,10 @@ class Player extends Component {
                 ) : null}
                 <Hand
                     active={this.props.active}
+                    background={this.props.player.background}
                     hand={this.props.hand}
                     player={this.props.player}
+                    dealAnim={this.state.animation === 'cardsDeal'}
                 />
                 {this.state.animation === 'potion' && this.props.active ? (
                     <AnimatedHand
@@ -172,6 +177,7 @@ Player.propTypes = {
 
 Hand.propTypes = {
     hand: PropTypes.object.isRequired,
+    dealAnim: PropTypes.bool.isRequired,
 };
 
 AnimatedHand.propTypes = {

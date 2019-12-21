@@ -17,10 +17,24 @@ function handClass(active, player) {
     return 'hand';
 }
 
+function cardAnimClass(dealAnim, index) {
+    if (!dealAnim) {
+        return `animated-card-${index}`;
+    }
+    return null;
+}
+
 const Hand = (props) => (
     <div className={`${handClass(props.active, props.player)}`}>
         {Object.keys(props.hand).map((cardId, index) => (
-            <div className={`animated-card-${index}`}>
+            // <div className={`animated-card-${index}`}>
+            <div className={`${cardAnimClass(props.dealAnim, index)}`}>
+                {!props.dealAnim
+                && (
+                    <div
+                        className={`card-like card-back deck-${props.background}`}
+                    />
+                )}
                 <Card
                     key={cardId}
                     active={props.active}
@@ -36,6 +50,8 @@ const Hand = (props) => (
 
 Hand.propTypes = {
     active: PropTypes.bool.isRequired,
+    background: PropTypes.string.isRequired,
+    dealAnim: PropTypes.bool.isRequired,
     hand: PropTypes.object.isRequired,
     player: PropTypes.object.isRequired,
 };
