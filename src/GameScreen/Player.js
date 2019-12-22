@@ -84,7 +84,9 @@ class Player extends Component {
         if (this.props.player.deal !== prevProps.player.deal) {
             this.playAnimation('cards');
         }
-        if (Object.keys(this.props.player.hand).length === 0) {
+        if ((this.props.activePlayer.id !== prevProps.activePlayer.id && !this.props.active)) {
+            // || (Object.keys(this.props.activePlayer.cards).length === 10 && Object.keys(this.props.inactivePlayer.cards).length === 10)) {
+            console.log('we call cardsDeal anim for ', this.props.inactivePlayer.hero);
             this.playAnimation('cardsDeal');
         }
         // animation for Turning Potion - active player gets cards from inactive player hand
@@ -170,6 +172,7 @@ Deck.propTypes = {
 
 Player.propTypes = {
     player: PropTypes.object.isRequired,
+    activePlayer: PropTypes.object.isRequired,
     inactivePlayer: PropTypes.object.isRequired,
     hand: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,

@@ -17,8 +17,9 @@ function handClass(active, player) {
     return 'hand';
 }
 
-function cardAnimClass(dealAnim, index) {
-    if (!dealAnim) {
+function cardAnimClass(dealAnim, index, player) {
+    if (dealAnim || (!dealAnim && Object.keys(player.cards).length === 10)) {
+        console.log('we animate cards deal for card index ', index);
         return `animated-card-${index}`;
     }
     return null;
@@ -27,9 +28,9 @@ function cardAnimClass(dealAnim, index) {
 const Hand = (props) => (
     <div className={`${handClass(props.active, props.player)}`}>
         {Object.keys(props.hand).map((cardId, index) => (
-            // <div className={`animated-card-${index}`}>
-            <div className={`${cardAnimClass(props.dealAnim, index)}`}>
-                {!props.dealAnim
+            <div className={`${cardAnimClass(props.dealAnim, index, props.player)}`}>
+                {(props.dealAnim
+                || (!props.dealAnim && Object.keys(props.player.cards).length === 10))
                 && (
                     <div
                         className={`card-like card-back deck-${props.background}`}
