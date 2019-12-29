@@ -64,11 +64,22 @@ const target = {
     ITEMCARD: 'item',
 };
 
+const action = {
+    HEAL: 'heal',
+    ATACKOPPONENT: 'attackOpponent',
+    GRAVEYARD: 'graveyard',
+    ATTACKITEMOPPONENT: 'attackItemOpponent',
+    CHAINS: 'chains',
+    ITEM: 'item',
+    CLAIRVOYANCE: 'clairvoyance',
+    TURNINGPOTION: 'turningPotion',
+};
+
 const styles = {
     BOTTOM: 'bottom',
     TOP: 'top',
 };
 
 module.exports = {
-    screen, message, phase, card, target, styles,
+    screen, message, phase, card, target, styles, action,
 };

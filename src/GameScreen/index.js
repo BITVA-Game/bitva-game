@@ -7,6 +7,7 @@ import '../css/App.css';
 import '../css/GameScreen.css';
 import { getActivePlayer, getInActivePlayer } from '../rules';
 import { withBoardContext } from './BoardContext';
+import playSound from '../soundController';
 
 // animation duration time
 const animationDuration = 9000;
@@ -16,9 +17,11 @@ class GameScreen extends Component {
         super(props);
         this.state = {
             animation: null,
+            sound: '',
         };
         this.startBirds = this.startBirds.bind(this);
         this.playableHand = this.playableHand.bind(this);
+        this.startSound = this.startSound.bind(this);
     }
 
     componentDidMount() {
@@ -30,18 +33,30 @@ class GameScreen extends Component {
         this.startBirds();
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
+        const actionType = this.props.app.game.lastAction.type;
         if (this.state.animation === 'birds') {
             setTimeout(() => {
                 this.setState({ animation: null });
             }, animationDuration);
             clearInterval(this.birdsInterval);
             this.startBirds();
+        } if (this.state.sound === '' && getActivePlayer(this.props.app).moveCounter !== getActivePlayer(prevProps.app).moveCounter) {
+            this.startSound(actionType);
+        } if (this.state.sound !== '') {
+            playSound(actionType);
+            setTimeout(() => {
+                this.setState({ sound: '' });
+            }, 1000);
         }
     }
 
     componentWillUnmount() {
         clearInterval(this.birdsInterval);
+    }
+
+    startSound(actionType) {
+        this.setState({ sound: actionType });
     }
 
     startBirds() {

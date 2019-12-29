@@ -3,7 +3,7 @@ import {
 } from '../__data__/states';
 
 import {
-    message, target, card,
+    message, target, card, action,
 } from '../../constants';
 
 import cards from '../__data__/cards';
@@ -57,6 +57,7 @@ test('msg ACTION received: active player attacks with turningPotion and at next 
     // и у inactivePlayer также появилось это свойство (для frontend)
     expect(activePlayer.turningHand).toEqual(true);
     expect(inactivePlayer.turningHand).toEqual(true);
+    expect(newGame.game.lastAction.type).toEqual(action.TURNINGPOTION);
 });
 
 // Test, that when active player has already attacked opponent with turningPotion card

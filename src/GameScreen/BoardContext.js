@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UIFx from 'uifx';
 import rules, { getActivePlayer } from '../rules';
-
-const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
+import playSound from '../soundController';
 
 export function withBoardContext(GameScreen) {
     const Board = class extends Component {
@@ -53,7 +51,7 @@ export function withBoardContext(GameScreen) {
             // every other card drop calls animation of bat card
             if (itemActive && itemActive.category === 'generator' && activePlayer.hero === playerWithMalachiteBox) {
                 // this.playAnimation('bat');
-                attackSound.play();
+                playSound('attackOpponent');
             }
         }
 
@@ -80,8 +78,6 @@ export function withBoardContext(GameScreen) {
                 return;
             }
             this.cardAct(target);
-            // we run actionSound function to play sound once player acts
-            // this.actionSound(target);
         }
 
         isTarget(target, player) {

@@ -5,7 +5,7 @@ import {
 } from '../__data__/states';
 
 import {
-    screen, message, target, card, phase,
+    screen, message, target, card, phase, action,
 } from '../../constants';
 
 
@@ -110,6 +110,7 @@ test('msg ACTION CASE1, player wants to move his card to graveyard', () => {
     const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
 
     expect(newGame.game.active).toBeDefined();
+    expect(newGame.game.lastAction.type).toEqual(action.GRAVEYARD);
     expect(activePlayer.moveCounter).toEqual(1);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
@@ -137,6 +138,7 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
 
     expect(newGame.game.active).toBeDefined();
     expect(activePlayer.moveCounter).toEqual(1);
+    expect(newGame.game.lastAction.type).toEqual(action.HEAL);
     expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
     expect(activePlayer.health.current).toEqual(gameForTest.game.players[0].health.current + 2);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
@@ -159,9 +161,9 @@ test('msg ACTION CASE2 player wants to heal himself. He is damaged and the heali
     const newGame = engine.getState();
 
     const activePlayer = newGame.game.players.find((p) => p.id === newGame.game.active);
-    console.log(card.ACTIONCARD);
 
     expect(activePlayer.moveCounter).toEqual(1);
+    expect(newGame.game.lastAction.type).toEqual(action.HEAL);
     expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
     expect(activePlayer.health.current).toEqual(heroData[activePlayer.hero].health);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
@@ -188,6 +190,7 @@ test('msg ACTION CASE3 player attacks the enemy, no protection', () => {
     const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
+    expect(newGame.game.lastAction.type).toEqual(action.ATACKOPPONENT);
     expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
     expect(activePlayer.grave[cardToTest].category).toEqual(card.ATTACKCATEGORY);
     expect(inactivePlayer.item).toEqual({});
@@ -218,6 +221,7 @@ test('msg ACTION CASE3 player attacks, shield & card go to graveyard', () => {
     const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
+    expect(newGame.game.lastAction.type).toEqual(action.ATACKOPPONENT);
     expect(activePlayer.grave[cardToTest].type).toEqual(card.ACTIONCARD);
     expect(activePlayer.grave[cardToTest].category).toEqual(card.ATTACKCATEGORY);
     expect(inactivePlayer.item).toEqual({});
@@ -254,6 +258,7 @@ test('msg ACTION CASE3 player attacks with more points than shield has, shield &
     expect(inactivePlayer.health.current).toEqual(inactivePlayer.health.maximum - 2);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+    expect(newGame.game.lastAction.type).toEqual(action.ATACKOPPONENT);
 });
 
 test('msg ACTION CASE3 player attacks with less than shield, card goes to graveyard, shield points decreased', () => {
@@ -308,6 +313,7 @@ test('msg ACTION CASE4 active player puts item into his itemholder', () => {
     expect(Object.values(activePlayer.item).length).toEqual(1);
     expect(activePlayer.item[cardToTest].type).toEqual(card.ITEMCATEGORY);
     expect(Object.keys(activePlayer.hand)).not.toContain(cardToTest);
+    expect(newGame.game.lastAction.type).toEqual(action.ITEM);
 });
 
 test('msg ACTION CASE4 player wants to move his card from item holder to graveyard', () => {
@@ -330,6 +336,7 @@ test('msg ACTION CASE4 player wants to move his card from item holder to graveya
     const inactivePlayer = newGame.game.players.find((p) => p.id !== newGame.game.active);
 
     expect(activePlayer.moveCounter).toEqual(1);
+    expect(newGame.game.lastAction.type).toEqual(action.GRAVEYARD);
     expect(Object.keys(activePlayer.grave)).toContain(cardToTest);
     expect(Object.keys(activePlayer.item)).not.toContain(cardToTest);
     expect(inactivePlayer.health.current).toBeGreaterThan(0);

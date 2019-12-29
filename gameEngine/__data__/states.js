@@ -208,6 +208,7 @@ export const dealAllState = {
     game: {
         active: alice.id,
         phase: 'ACTIVE',
+        lastAction: { type: '' },
         players: [
             {
                 id: alice.id,
@@ -272,7 +273,6 @@ export const dealAllState = {
                 keyHero: '19355969',
                 position: 'bottom',
                 turningHand: false,
-                chained: [],
             },
             {
                 id: bob.id,
@@ -283,7 +283,6 @@ export const dealAllState = {
                 deal: 0,
                 background: 'red',
                 turningHand: false,
-                chained: [],
                 hero: 'yaga',
                 hand: {
                     key20: {},
