@@ -87,7 +87,18 @@ class Player extends Component {
         if ((this.props.activePlayer.id !== prevProps.activePlayer.id && !this.props.active)) {
             // || (Object.keys(this.props.activePlayer.cards).length === 10 && Object.keys(this.props.inactivePlayer.cards).length === 10)) {
             console.log('we call cardsDeal anim for ', this.props.inactivePlayer.hero);
-            this.playAnimation('cardsDeal');
+
+
+            // eslint-disable-next-line no-plusplus
+            for (let i = 0; i < Object.keys(this.props.inactivePlayer.hand).length; i++) {
+                console.log(Object.keys(this.props.inactivePlayer.hand));
+                if (Object.keys(this.props.inactivePlayer.hand)[i] !== Object.keys(prevProps.activePlayer.hand)[i]) {
+                    const index = Object.keys(this.props.inactivePlayer.hand).indexOf(Object.keys(this.props.inactivePlayer.hand)[i]);
+                    console.log(Object.keys(this.props.inactivePlayer.hand)[i], 'we animate cards deal for card index ', index);
+                    this.playAnimation('cardsDeal');
+                    return index;
+                }
+            }
         }
         // animation for Turning Potion - active player gets cards from inactive player hand
         if (
@@ -135,6 +146,7 @@ class Player extends Component {
                     hand={this.props.hand}
                     player={this.props.player}
                     dealAnim={this.state.animation === 'cardsDeal'}
+                    cardIndex={this.index}
                 />
                 {this.state.animation === 'potion' && this.props.active ? (
                     <AnimatedHand
