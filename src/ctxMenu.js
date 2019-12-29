@@ -53,7 +53,7 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
             },
         },
         {
-            label: 'reload',
+            label: 'reload (F5)',
             click() {
                 console.log(e);
                 win.reload();
@@ -114,7 +114,7 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
             },
         },
         {
-            label: 'quit',
+            label: 'quit (F8)',
             click() {
                 win.close();
             },

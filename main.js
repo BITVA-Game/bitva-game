@@ -67,6 +67,16 @@ function createWindow() {
         c.popup(win);
     });
 
+    win.webContents.on('before-input-event', (s, e) => {
+        if (e.key !== 'F5') return;
+        win.reload();
+    });
+
+    win.webContents.on('before-input-event', (s, e) => {
+        if (e.key !== 'F8') return;
+        win.close();
+    });
+
     // Emitted when the window is closed.
     win.on('closed', () => {
         // Dereference the window object, usually you would store windows
