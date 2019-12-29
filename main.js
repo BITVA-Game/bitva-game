@@ -59,22 +59,19 @@ function createWindow() {
     });
 
     win.webContents.on('before-input-event', (s, e) => {
-        if (e.key !== 'F4') return;
-        s.preventDefault();
-        const { x, y } = electron.screen.getCursorScreenPoint();
-        const temp = ctxMenu(app, win, e, x, y, sendMessage);
-        const c = electron.Menu.buildFromTemplate(temp);
-        c.popup(win);
-    });
-
-    win.webContents.on('before-input-event', (s, e) => {
-        if (e.key !== 'F5') return;
-        win.reload();
-    });
-
-    win.webContents.on('before-input-event', (s, e) => {
-        if (e.key !== 'F8') return;
-        win.close();
+        if (e.key === 'F4') {
+            s.preventDefault();
+            const { x, y } = electron.screen.getCursorScreenPoint();
+            const temp = ctxMenu(app, win, e, x, y, sendMessage);
+            const c = electron.Menu.buildFromTemplate(temp);
+            c.popup(win);
+        }
+        if (e.key === 'F5') {
+            win.reload();
+        }
+        if (e.key === 'F8') {
+            win.close();
+        }
     });
 
     // Emitted when the window is closed.
