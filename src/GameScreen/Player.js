@@ -146,7 +146,6 @@ class Player extends Component {
                     hand={this.props.hand}
                     player={this.props.player}
                     dealAnim={this.state.animation === 'cardsDeal'}
-                    cardIndex={this.index}
                 />
                 {this.state.animation === 'potion' && this.props.active ? (
                     <AnimatedHand

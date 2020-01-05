@@ -17,12 +17,12 @@ function handClass(active, player) {
     return 'hand';
 }
 
-function cardAnimClass(dealAnim, index, player, cardIndex) {
+function cardAnimClass(dealAnim, index, player) {
     if (!dealAnim && Object.keys(player.cards).length === 10 && player.deal === 0) {
         return `animated-card-${index}`;
     } if (dealAnim) {
-        console.log(`animated-card-${cardIndex}`);
-        return `animated-card-${cardIndex}`;
+        console.log(`animated-card-${index}`);
+        return `animated-card-${index}`;
     }
     return null;
 }
@@ -32,7 +32,7 @@ const Hand = (props) => (
         {/* eslint-disable-next-line react/no-array-index-key */}
         {/* {Array(5).fill().map((c, index) => <div key={index} className={`card-like card-back deck-${props.background}`} />)} */}
         {Object.keys(props.hand).map((cardId, index) => (
-            <div className={`${cardAnimClass(props.dealAnim, index, props.player, props.cardIndex)}`}>
+            <div className={`${cardAnimClass(props.dealAnim, index, props.player)}`}>
                 {(props.dealAnim
                 || (!props.dealAnim && Object.keys(props.player.cards).length === 10))
                 && (<div className={`card-like card-back deck-${props.background}`} />)}
