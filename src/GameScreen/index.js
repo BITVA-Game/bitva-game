@@ -116,20 +116,21 @@ class GameScreen extends Component {
 }
 
 const BirdsAnimation = () => {
-  playSound('birds'); 
-   return (
-    <div className="animation-game-screen">
-        <div className="bird-container bird-container-one">
-            <div className="bird bird-one" />
+    playSound('birds');
+    return (
+        <div className="animation-game-screen">
+            <div className="bird-container bird-container-one">
+                <div className="bird bird-one" />
+            </div>
+            <div className="bird-container bird-container-two">
+                <div className="bird bird-two" />
+            </div>
+            <div className="bird-container bird-container-three">
+                <div className="bird bird-three" />
+            </div>
         </div>
-        <div className="bird-container bird-container-two">
-            <div className="bird bird-two" />
-        </div>
-        <div className="bird-container bird-container-three">
-            <div className="bird bird-three" />
-        </div>
-    </div>
-)};
+    );
+};
 
 const GameOver = (props) => {
     const activePlayer = getActivePlayer(props.app);
