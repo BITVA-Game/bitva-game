@@ -8,11 +8,13 @@ const healSound = graveyardSound;
 const itemSound = graveyardSound;
 const clairvoyanceSound = graveyardSound;
 const turningPotionSound = graveyardSound;
+const birds  = new UIFx(`${process.env.PUBLIC_URL}/sound/birds.mp3`, { volume: 1.0 });
 
 const action = {
     graveyard: graveyardSound,
     attackOpponent: attackSound,
     attackItemOpponent,
+    birds,
     chains: chainsSound,
     heal: healSound,
     item: itemSound,
