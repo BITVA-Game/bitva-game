@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
 import '../css/App.css';
@@ -27,11 +27,20 @@ function handClass(active, player) {
 //     return null;
 // }
 
+function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    });
+    return ref.current;
+}
+
 const useCardAnimClass = (index, player, inactivePlayer, cardId) => {
     const [dealAnim, setDealAnim] = useState(cardId);
-
+    const idInactiveP = inactivePlayer.id;
+    const prevData = usePrevious({ cardId, idInactiveP });
     useEffect(() => {
-        if ((inactivePlayer.id && !this.props.active)
+        if ((inactivePlayer.id !== prevData.idInactiveP && !this.props.active)
             || (Object.keys(player.cards).length === 10 && player.deal === 0)) {
             console.log('we call cardsDeal anim for ', this.props.inactivePlayer.hero);
             setDealAnim(true);
@@ -41,17 +50,16 @@ const useCardAnimClass = (index, player, inactivePlayer, cardId) => {
                 console.log(inactivePHandKeys);
                 const newIndex = inactivePHandKeys.indexOf(inactivePHandKeys[i]);
                 // if (Object.keys(inactivePlayer.hand)[i] !== Object.keys(prevProps.activePlayer.hand)[i]) {
-                if (dealAnim === true && cardId
-                    && (index === newIndex)) {
+                if (dealAnim === true && cardId !== prevData.cardId
+                    && index === newIndex) {
                     console.log(inactivePHandKeys[i], 'we animate cards deal for card index ', index);
-
+                    setDealAnim(false);
                     return index;
                 }
             }
         }
-        setDealAnim(false);
         return `animated-card-${index}`;
-    }, [cardId, inactivePlayer.id]);
+    }, [cardId, idInactiveP]);
 };
 
 const Hand = (props) => (
@@ -83,6 +91,7 @@ Hand.propTypes = {
     dealAnim: PropTypes.bool.isRequired,
     hand: PropTypes.object.isRequired,
     player: PropTypes.object.isRequired,
+    inactivePlayer: PropTypes.object.isRequired,
 };
 
 
