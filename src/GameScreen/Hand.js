@@ -27,44 +27,46 @@ function handClass(active, player) {
 //     return null;
 // }
 
-function cardAnimClass(index, player, cardId) {
+const useCardAnimClass = (index, player, inactivePlayer, cardId) => {
     const [dealAnim, setDealAnim] = useState(cardId);
-    
+
     useEffect(() => {
-        if ((this.props.activePlayer.id !== prevProps.activePlayer.id && !this.props.active)
-            || Object.keys(player.cards).length === 10 && player.deal === 0) {
+        if ((inactivePlayer.id && !this.props.active)
+            || (Object.keys(player.cards).length === 10 && player.deal === 0)) {
             console.log('we call cardsDeal anim for ', this.props.inactivePlayer.hero);
             setDealAnim(true);
+            const inactivePHandKeys = Object.keys(inactivePlayer.hand);
             // eslint-disable-next-line no-plusplus
-            for (let i = 0; i < Object.keys(this.props.inactivePlayer.hand).length; i++) {
-                console.log(Object.keys(this.props.inactivePlayer.hand));
-                if (Object.keys(this.props.inactivePlayer.hand)[i] !== Object.keys(prevProps.activePlayer.hand)[i]) {
-                    const index = Object.keys(this.props.inactivePlayer.hand).indexOf(Object.keys(this.props.inactivePlayer.hand)[i]);
-                    console.log(Object.keys(this.props.inactivePlayer.hand)[i], 'we animate cards deal for card index ', index);
-                    
+            for (let i = 0; i < inactivePHandKeys.length; i++) {
+                console.log(inactivePHandKeys);
+                const newIndex = inactivePHandKeys.indexOf(inactivePHandKeys[i]);
+                // if (Object.keys(inactivePlayer.hand)[i] !== Object.keys(prevProps.activePlayer.hand)[i]) {
+                if (dealAnim === true && cardId
+                    && (index === newIndex)) {
+                    console.log(inactivePHandKeys[i], 'we animate cards deal for card index ', index);
+
                     return index;
                 }
             }
         }
+        setDealAnim(false);
         return `animated-card-${index}`;
-
-    }, [cardId]);
-        
-    
-}
+    }, [cardId, inactivePlayer.id]);
+};
 
 const Hand = (props) => (
     <div className={`${handClass(props.active, props.player)}`}>
         {/* eslint-disable-next-line react/no-array-index-key */}
         {/* {Array(5).fill().map((c, index) => <div key={index} className={`card-like card-back deck-${props.background}`} />)} */}
         {Object.keys(props.hand).map((cardId, index) => (
-            <div className={`${cardAnimClass(index, props.player, cardId)}`}>
+            <div className={`${useCardAnimClass(index, props.player, props.inactivePlayer, cardId)}`}>
                 {(props.dealAnim
                 || (!props.dealAnim && Object.keys(props.player.cards).length === 10))
                 && (<div className={`card-like card-back deck-${props.background}`} />)}
                 <Card
                     key={cardId}
                     active={props.active}
+                    inactivePlayer={props.inactivePlayer}
                     cardKey={cardId}
                     card={props.hand[cardId]}
                     draggable={props.active}

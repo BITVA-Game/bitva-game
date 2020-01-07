@@ -142,6 +142,7 @@ class Player extends Component {
                 ) : null}
                 <Hand
                     active={this.props.active}
+                    inactivePlayer={this.props.inactivePlayer}
                     background={this.props.player.background}
                     hand={this.props.hand}
                     player={this.props.player}
