@@ -31,7 +31,7 @@ import earthquake from '../images/cards/bitva-cardbase.jpg';
 import horsemanBlack from '../images/cards/blackrider.png';
 import horsemanRed from '../images/cards/redrider.png';
 import horsemanWhite from '../images/cards/whiterider.png';
-import kikimora from '../images/cards/bitva-cardbase.jpg';
+import kikimora from '../images/cards/kikimora.png';
 import lizard from '../images/cards/lizard.png';
 import magicTree from '../images/cards/tree.png';
 import magicMirror from '../images/cards/bitva-cardbase.jpg';
