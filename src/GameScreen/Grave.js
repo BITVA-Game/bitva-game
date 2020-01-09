@@ -4,16 +4,20 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import '../css/GameScreen.css';
 import BoardContext from './BoardContext';
+import playSound from '../soundController';
 
 import graveyard from '../images/cards/graveyard.png';
 
-const Animation = (props) => (
-    <div className="stack">
-        <div className={`deck card-like deck-${props.background} one`} />
-        <div className={`deck card-like deck-${props.background} two`} />
-        <div className={`deck card-like deck-${props.background} three`} />
-    </div>
-);
+const Animation = (props) => {
+    playSound('cardsFromGrave');
+    return (
+        <div className="stack">
+            <div className={`deck card-like deck-${props.background} one`} />
+            <div className={`deck card-like deck-${props.background} two`} />
+            <div className={`deck card-like deck-${props.background} three`} />
+        </div>
+    );
+};
 
 const Grave = (props) => {
     const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
