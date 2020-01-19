@@ -28,11 +28,13 @@ const participantManager = require('./participantManager');
 function parseApplication(app) {
     let scr = app.manager;
     if (scr === screen.PLAY) {
-        // we're inside game screen playing the game
+    // we're inside game screen playing the game
         scr = app.engine.screen;
     }
     const parsedApp = {
-        ...app, ...app.engine, manager: { screen: scr },
+        ...app,
+        ...app.engine,
+        manager: { screen: scr },
     };
     delete parsedApp.engine;
     return parsedApp;
@@ -58,9 +60,11 @@ async function initApplication(msg, reply) {
     const manager = screenManager.handle({}, msg, reProcess);
     const participants = participantManager.handle({}, msg, reProcess);
     const newApp = {
-        ...application, accounts, manager, participants,
+        ...application,
+        accounts,
+        manager,
+        participants,
     };
-    console.log('initApp', newApp);
     reply(newApp);
 }
 
@@ -70,7 +74,6 @@ async function initApplication(msg, reply) {
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
 async function msgReceived(msg, sendReply) {
-    console.log('msgReceived');
     const reply = (app) => {
         application = app;
         sendReply(parseApplication(app));
@@ -96,7 +99,7 @@ function setApp(newApp) {
 }
 
 function getApp() {
-    return parseApplication(application);
+    return application;
 }
 
 function reset() {

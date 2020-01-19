@@ -1,7 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import {
-    screen,
-} from '../../constants';
+import { screen } from '../../constants';
 
 import testAccounts from './accounts';
 
@@ -45,6 +43,6 @@ export const startscreenStateP2 = {
         guest: testAccounts.bob.id,
     },
     manager: {
-        screen: screen.HEROSELECT,
+        screen: screen.PLAY,
     },
 };

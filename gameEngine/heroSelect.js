@@ -1,7 +1,5 @@
 const { message } = require('../constants');
 
-const testAccounts = require('../gameTerminal/__data__/accounts');
-
 const heroes = require('../gameTerminal/data/characters.json');
 const cards = require('../gameTerminal/data/cards.json');
 
@@ -10,13 +8,6 @@ const initialState = {
     activeAccount: '',
     heroes: [],
 };
-
-function accounts(app) {
-    return app.terminals.reduce(
-        (accs, terminal) => accs.concat(terminal.accounts),
-        [],
-    );
-}
 
 function allHeroesWithCards() {
     for (const hero in heroes) {
@@ -28,13 +19,6 @@ function allHeroesWithCards() {
         }
     }
     return heroes;
-}
-
-function pendingPlayer(app, players) {
-    const accs = accounts(app);
-    const completed = players.map((p) => p.id);
-    const pending = accs.filter((a) => !completed.includes(a.id));
-    return pending[0];
 }
 
 function newPlayers(app, msg) {
