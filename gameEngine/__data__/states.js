@@ -1,7 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import {
-    screen,
-} from '../../constants';
+import { screen } from '../../constants';
 
 import testAccounts from '../../gameTerminal/__data__/accounts';
 
@@ -13,9 +11,11 @@ export const bob = {
 };
 
 export const playState = {
-    terminals: [{
-        accounts: [alice, bob],
-    }],
+    terminals: [
+        {
+            accounts: [alice, bob],
+        },
+    ],
     heroSelect: {
         allHeroes: {
             morevna: {},
@@ -34,9 +34,11 @@ export const playState = {
 };
 
 export const heroselectStateP1 = {
-    terminals: [{
-        accounts: [alice, bob],
-    }],
+    terminals: [
+        {
+            accounts: [alice, bob],
+        },
+    ],
     heroSelect: {
         allHeroes: {
             morevna: {},
@@ -46,36 +48,42 @@ export const heroselectStateP1 = {
         },
         heroes: ['morevna', 'yaga', 'hozyaika'],
         activePlayer: bob.id,
-        players: [{
-            hero: 'morevna',
-            id: alice.id,
-        }],
+        players: [
+            {
+                hero: 'morevna',
+                id: alice.id,
+            },
+        ],
     },
     game: {
-        players: [{
-            id: alice.id,
-            hand: {},
-            item: {},
-            grave: {},
-            moveCounter: 0,
-            health: {
-                current: 16,
-                maximum: 16,
+        players: [
+            {
+                id: alice.id,
+                hand: {},
+                item: {},
+                grave: {},
+                moveCounter: 0,
+                health: {
+                    current: 16,
+                    maximum: 16,
+                },
+                deal: 0,
+                background: 'ochre',
+                hero: 'morevna',
+                cards: {},
+                deck: {},
+                turningHand: false,
             },
-            deal: 0,
-            background: 'ochre',
-            hero: 'morevna',
-            cards: {},
-            deck: {},
-            turningHand: false,
-        }],
+        ],
     },
 };
 
 export const versusState = {
-    terminals: [{
-        accounts: [alice, bob],
-    }],
+    terminals: [
+        {
+            accounts: [alice, bob],
+        },
+    ],
     heroSelect: null,
     manager: {
         screen: screen.VERSUS,

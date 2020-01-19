@@ -6,9 +6,7 @@ const address = process.env.ENGINE_URL || 'http://localhost:5001/';
 
 class GameEngineClient {
     async handle(message) {
-        await request
-            .post(address)
-            .send({ message });
+        await request.post(address).send({ message });
     }
 
     async getState() {

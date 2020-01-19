@@ -5,10 +5,12 @@ import UIFx from 'uifx';
 import NewLogin from './NewLogin';
 import DeleteLogin from './DeleteLogin';
 
-const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, { volume: 1.0 });
+const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
+    volume: 1.0,
+});
 
 const Account = ({
-    accId, accName, selected, toggle,
+ accId, accName, selected, toggle 
 }) => (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
@@ -25,17 +27,16 @@ const Account = ({
 
 const Accounts = ({ accounts, selected, toggle }) => (
     <div>
-        {accounts && accounts.map(
-            (a) => (
-                <Account
-                    accId={a.id}
-                    accName={a.name}
-                    key={a.id}
-                    selected={a.id === selected}
-                    toggle={toggle}
-                />
-            ),
-        )}
+        {accounts
+      && accounts.map((a) => (
+          <Account
+              accId={a.id}
+              accName={a.name}
+              key={a.id}
+              selected={a.id === selected}
+              toggle={toggle}
+          />
+      ))}
     </div>
 );
 
@@ -48,11 +49,10 @@ const Footer = ({ toStartScreen }) => (
             onKeyPress={toStartScreen}
             tabIndex="1"
         >
-            Play
+      Play
         </div>
     </footer>
 );
-
 
 class Login extends Component {
     constructor(props) {
@@ -69,7 +69,10 @@ class Login extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.accounts.records && (this.props.accounts.records.length !== prevProps.accounts.records.length)) {
+        if (
+            this.props.accounts.records
+      && this.props.accounts.records.length !== prevProps.accounts.records.length
+        ) {
             this.setState({
                 accountId: (this.props.accounts.records[0] || {}).id,
             });
@@ -83,7 +86,7 @@ class Login extends Component {
     toStartScreen() {
         clickSound2.play();
         this.props.sendMessage({
-            type: 'STARTSCREEN',
+            type: this.props.message,
             account: this.state.accountId,
         });
     }
@@ -121,7 +124,7 @@ class Login extends Component {
                         onKeyPress={this.toggleDelete}
                         tabIndex="2"
                     >
-                        Delete profile
+            Delete profile
                     </div>
                     <div
                         className="login-button"
@@ -130,7 +133,7 @@ class Login extends Component {
                         onKeyPress={this.toggleForm}
                         tabIndex="2"
                     >
-                        Create new profile
+            Create new profile
                     </div>
                 </div>
             </>
@@ -145,28 +148,28 @@ class Login extends Component {
             <>
                 <section className="login-content">
                     <div className="login-profiles-container">
-                        {!this.state.form && !this.state.delete ? this.showAccounts() : null }
-                        {this.state.form
-                            ? (
-                                <NewLogin
-                                    sendMessage={this.props.sendMessage}
-                                    toggleForm={this.toggleForm}
-                                />
-                            )
-                            : null }
-                        {this.state.delete && this.state.accountId
-                            ? (
-                                <DeleteLogin
-                                    sendMessage={this.props.sendMessage}
-                                    accId={account.id}
-                                    accName={account.name}
-                                    toggleDelete={this.toggleDelete}
-                                />
-                            )
-                            : null }
+                        {!this.state.form && !this.state.delete
+                            ? this.showAccounts()
+                            : null}
+                        {this.state.form ? (
+                            <NewLogin
+                                sendMessage={this.props.sendMessage}
+                                toggleForm={this.toggleForm}
+                            />
+                        ) : null}
+                        {this.state.delete && this.state.accountId ? (
+                            <DeleteLogin
+                                sendMessage={this.props.sendMessage}
+                                accId={account.id}
+                                accName={account.name}
+                                toggleDelete={this.toggleDelete}
+                            />
+                        ) : null}
                     </div>
                 </section>
-                {this.state.accountId ? <Footer toStartScreen={this.toStartScreen} /> : null}
+                {this.state.accountId ? (
+                    <Footer toStartScreen={this.toStartScreen} />
+                ) : null}
             </>
         );
     }
@@ -179,6 +182,7 @@ Footer.propTypes = {
 Login.propTypes = {
     accounts: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
+    message: PropTypes.string.isRequired,
 };
 
 Accounts.propTypes = {
