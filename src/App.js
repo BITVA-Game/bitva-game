@@ -10,6 +10,8 @@ import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
 import NetworkPlay from './NetworkPlay';
+import SelectOpponent from './SelectOpponent';
+import PlayScreen from './PlayScreen';
 
 import hutImage from './images/backgrounds/Background_hut.png';
 import greyTreeL from './images/backgrounds/GreyTree_2.png';
@@ -55,11 +57,25 @@ class App extends Component {
         case 'LOADING':
             return 'LOADING';
         case 'LOGIN':
-            return <LoginScreen sendMessage={sendMessage} accounts={this.state.app.accounts} />;
+            return (
+                <LoginScreen
+                    sendMessage={sendMessage}
+                    accounts={this.state.app.accounts}
+                    message="LOGIN"
+                />
+            );
         case 'STARTSCREEN':
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PROFILE':
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
+        case 'SELECTOPPONENT':
+            return (
+                <LoginScreen
+                    sendMessage={sendMessage}
+                    accounts={this.state.app.accounts}
+                    message="OPPONENT"
+                />
+            );
         case 'HEROSELECT':
             return (
                 <HeroSelection
@@ -68,6 +84,8 @@ class App extends Component {
                     key={this.state.app.heroSelect.activePlayer}
                 />
             );
+        case 'VS':
+            return <PlayScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'VERSUS':
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'GAMESCREEN':

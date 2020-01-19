@@ -9,9 +9,12 @@ const screen = {
     VERSUS: 'VERSUS',
     GAMESCREEN: 'GAMESCREEN',
     OVER: 'OVER',
+    VS: 'VS',
+    SELECTOPPONENT: 'SELECTOPPONENT',
 };
 
 const message = {
+    LOGIN: 'LOGIN',
     STARTSCREEN: 'STARTSCREEN',
     PROFILE: 'PROFILE',
     PLAY: 'PLAY',
@@ -22,6 +25,8 @@ const message = {
     HEROSELECTED: 'HEROSELECTED',
     CREATEACC: 'CREATEACC',
     DELETEACC: 'DELETEACC',
+    START: 'START',
+    OPPONENT: 'OPPONENT',
 };
 
 const phase = {
@@ -83,5 +88,11 @@ const styles = {
 };
 
 module.exports = {
-    screen, message, phase, card, target, styles, action,
+    screen,
+    message,
+    phase,
+    card,
+    target,
+    styles,
+    action,
 };

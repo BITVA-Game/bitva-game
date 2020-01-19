@@ -7,12 +7,15 @@ const cards = require('../gameTerminal/data/cards.json');
 
 const initialState = {
     players: [],
-    activePlayer: '',
+    activeAccount: '',
     heroes: [],
 };
 
 function accounts(app) {
-    return app.terminals.reduce((accs, terminal) => accs.concat(terminal.accounts), []);
+    return app.terminals.reduce(
+        (accs, terminal) => accs.concat(terminal.accounts),
+        [],
+    );
 }
 
 function allHeroesWithCards() {
@@ -40,21 +43,22 @@ function newPlayers(app, msg) {
 }
 
 function handle(app, msg) {
-    let nextPlayer = null;
+    let activeAccount = null;
     let selectedPlayers = [];
 
     switch (msg.type) {
     case message.PLAY:
-        nextPlayer = accounts(app)[0];
+        activeAccount = app.participants.player;
         break;
     case message.HEROSELECTED:
         selectedPlayers = newPlayers(app, msg);
-        nextPlayer = pendingPlayer(app, selectedPlayers);
+        activeAccount = app.participants.guest;
         break;
-    default: break;
+    default:
+        break;
     }
 
-    if (!nextPlayer) {
+    if (!activeAccount) {
         return null;
     }
 
@@ -62,8 +66,8 @@ function handle(app, msg) {
     return {
         ...initialState,
 
-        heroes: testAccounts.heroes(nextPlayer.id),
-        activePlayer: nextPlayer.id,
+        heroes: activeAccount.heroes,
+        activePlayer: activeAccount.id,
         players: selectedPlayers,
         allHeroes,
     };
