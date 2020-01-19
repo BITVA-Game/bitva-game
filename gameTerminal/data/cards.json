@@ -340,6 +340,16 @@
         "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
         "initialpoints": 4
     },
+    "bolotnitsa": {
+        "id": "bolotnitsa",
+        "name": "Bolotnitsa",
+        "type": "action",
+        "icon": "skull",
+        "category": "attack",
+        "categoryName": "attack",
+        "description": "Evil swamp spirit. When saw a man Bolotnitsa turns into lovely maiden and starts weeping bitterly. But once man steps to her swamp, the villain lashes out at him, smothers with embraces and drags man to the bog depth.",
+        "initialpoints": 4
+    },
     "plateMail": {
         "id": "plateMail",
         "name": "Plate Mail",

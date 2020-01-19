@@ -14,6 +14,7 @@ import backgroundCommon from '../images/cards/background_common1.jpg';
 import backgroundAttack from '../images/cards/background_common2.jpg';
 import bereginya from '../images/cards/bitva-cardbase.jpg';
 import bogatyr from '../images/cards/bitva-cardbase.jpg';
+import bolotnitsa from '../images/cards/bolotnitsa.png';
 import bowArrow from '../images/cards/bitva-cardbase.jpg';
 import bulat from '../images/cards/sword.png';
 import chemise from '../images/cards/bitva-cardbase.jpg';
@@ -51,6 +52,7 @@ const imagesCards = {
     bat,
     bereginya,
     bogatyr,
+    bolotnitsa,
     bowArrow,
     bulat,
     chemise,

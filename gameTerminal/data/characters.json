@@ -74,8 +74,8 @@
                 "id": "kikimora",
                 "count": 3
             },
-            "bogatyr": {
-                "id": "bogatyr",
+            "bolotnitsa": {
+                "id": "bolotnitsa",
                 "count": 3
             },
             "mortar": {
@@ -112,7 +112,7 @@
     "hozyaika": {
         "id": "hozyaika",
         "name": "Malachite Maid",
-        "description": "Malachite Maid is the mountain spirit from the legends of the Ural miners and the Mistress of the Ural Mountains",
+        "description": "The Malachite Maid is the mountain spirit from the legends of the Ural miners and the Mistress of the Ural Mountains",
         "health": 13,
         "cardsNumber": 19,
         "img": "character_ex.png",
