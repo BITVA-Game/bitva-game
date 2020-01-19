@@ -10,6 +10,8 @@ import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
 import NetworkPlay from './NetworkPlay';
+import SelectOpponent from './SelectOpponent';
+import PlayScreen from './PlayScreen';
 
 import hutImage from './images/backgrounds/Background_hut.png';
 import greyTreeL from './images/backgrounds/GreyTree_2.png';
@@ -22,7 +24,7 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
 function sendMessage(msg) {
-    // console.log('MESSAGE', msg);
+    console.log('MESSAGE', msg);
     ipcRenderer.send('APP', msg);
 }
 
@@ -41,7 +43,7 @@ class App extends Component {
             // console.log({ app: arg });
             this.setState({ app: arg });
         });
-        sendMessage({ type: 'LOGIN' });
+        sendMessage({ type: 'INIT' });
         setTimeout(() => this.loadAnimation(), 0);
     }
 
@@ -50,15 +52,30 @@ class App extends Component {
     }
 
     showApplication() {
+        console.log('APP: ', this.state.app.manager.screen, this.state.app);
         switch (this.state.app.manager.screen) {
         case 'LOADING':
             return 'LOADING';
         case 'LOGIN':
-            return <LoginScreen sendMessage={sendMessage} app={this.state.app} />;
+            return (
+                <LoginScreen
+                    sendMessage={sendMessage}
+                    accounts={this.state.app.accounts}
+                    message="LOGIN"
+                />
+            );
         case 'STARTSCREEN':
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PROFILE':
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
+        case 'SELECTOPPONENT':
+            return (
+                <LoginScreen
+                    sendMessage={sendMessage}
+                    accounts={this.state.app.accounts}
+                    message="OPPONENT"
+                />
+            );
         case 'HEROSELECT':
             return (
                 <HeroSelection
@@ -67,6 +84,8 @@ class App extends Component {
                     key={this.state.app.heroSelect.activePlayer}
                 />
             );
+        case 'VS':
+            return <PlayScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'VERSUS':
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'GAMESCREEN':

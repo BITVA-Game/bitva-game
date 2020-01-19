@@ -10,12 +10,13 @@ class GameEngine {
     }
 
     handle(msg) {
-        // HACK until we init engine in prev game state
+    // HACK until we init engine in prev game state
         if (msg.type === message.PLAY) {
-            this.state.terminals = [{ accounts: msg.accounts }];
+            this.state.participants = msg.participants;
         }
         const newState = {
             terminals: this.state.terminals,
+            participants: this.state.participants,
             heroSelect: heroSelect.handle(this.state, msg),
             game: game.handle(this.state, msg),
         };

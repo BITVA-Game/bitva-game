@@ -3,15 +3,16 @@ export default function isTarget(target, dragging, active, player) {
         return false;
     }
     if (!active) {
-        // console.log(player);
         const itemKey = Object.keys(player.item)[0];
         let itemCategory;
         // eslint-disable-next-line no-unused-expressions
-        itemKey ? itemCategory = player.item[itemKey].category : null;
+        itemKey ? (itemCategory = player.item[itemKey].category) : null;
         //    console.log(itemCategory);
         return (
             (target === 'opponent' && dragging.card.category === 'attack')
-      || (target === 'itemOpponent' && dragging.card.category === 'attack' && itemCategory !== 'shield')
+      || (target === 'itemOpponent'
+        && dragging.card.category === 'attack'
+        && itemCategory !== 'shield')
       || (target === 'opponent' && dragging.card.category === 'holdCard')
       || (target === 'opponent' && dragging.card.category === 'attackItems')
       || (target === 'opponent' && dragging.card.category === 'turning')
@@ -49,4 +50,8 @@ export function getActivePlayer(app) {
 
 export function getInActivePlayer(app) {
     return app.game.players.find((p) => p.id !== app.game.active);
+}
+
+export function getAccountForPart(app, id) {
+    return app.accounts.records.find((a) => a.id === id);
 }

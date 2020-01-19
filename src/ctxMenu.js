@@ -1,8 +1,13 @@
 const electron = require('electron');
 const os = require('os');
 const fs = require('fs');
-const { setApp, getApp } = require('../gameTerminal/application');
-const startScreen = require('../gameTerminal/data/app.json');
+const {
+    setApp,
+    parseApplication,
+    getApp,
+} = require('../gameTerminal/application');
+
+const startScreen = JSON.stringify({});
 const morevnaStart = require('../gameTerminal/data/morevnaStart.json');
 const selectCharacter = require('../gameTerminal/data/selectCharacter.json');
 const hozyaikaStart = require('../gameTerminal/data/hozyaikaStart.json');
@@ -23,7 +28,6 @@ const shortcuts = {
     buttons: ['ok'],
 };
 
-
 function showDialog(win, msg, e) {
     dialog.showMessageBox(win, msg, e, (m) => {
         console.log(m);
@@ -31,8 +35,8 @@ function showDialog(win, msg, e) {
 }
 
 module.exports = function menu(app, win, e, x, y, sendMessage) {
-    return (
-        [{
+    return [
+        {
             label: 'devTools',
             click() {
                 win.webContents.openDevTools();
@@ -41,7 +45,9 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
         {
             label: 'shortcuts',
             click() {
-                shortcuts.message = fs.readFileSync(`${app.getAppPath()}/src/shortcuts`).toString();
+                shortcuts.message = fs
+                    .readFileSync(`${app.getAppPath()}/src/shortcuts`)
+                    .toString();
                 showDialog(win, shortcuts, e);
             },
         },
@@ -69,7 +75,9 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
                 about.message += `electron: ${process.versions.electron}\n`;
                 about.message += `node.js: ${process.versions.node}\n`;
                 about.message += `process id: ${process.pid}\n`;
-                about.message += `memory: ${(process.getProcessMemoryInfo().sharedBytes / 1024).toFixed(2)}K\n`;
+                about.message += `memory: ${(
+                    process.getProcessMemoryInfo().sharedBytes / 1024
+                ).toFixed(2)}K\n`;
                 about.message += `screen: ${display.size.width}x${display.size.height}\n`;
                 about.message += `window: ${win.getSize().join('x')}\n`;
                 about.message += `${process.platform}-${process.arch}: ${os.release}`;
@@ -79,14 +87,13 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
         {
             label: 'to Start Screen',
             click() {
-                setApp(startScreen);
-                sendMessage(getApp());
+                // setApp(startScreen);
+                sendMessage(parseApplication(getApp()));
             },
         },
         {
             label: 'start game with Morevna',
             click() {
-                console.log('Set app called');
                 // Set backend into correct state for the debug
                 const newState = JSON.parse(JSON.stringify(morevnaStart));
                 setApp(newState);
@@ -97,7 +104,6 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
         {
             label: 'start game with Hozyaika',
             click() {
-                console.log('Set app called for Hozyaika');
                 // Set backend into correct state for the debug
                 const newState = JSON.parse(JSON.stringify(hozyaikaStart));
                 setApp(newState);
@@ -118,6 +124,6 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
             click() {
                 win.close();
             },
-        }]
-    );
+        },
+    ];
 };

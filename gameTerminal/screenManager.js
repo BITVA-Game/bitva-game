@@ -1,16 +1,25 @@
 const { screen, message } = require('../constants');
 
 function handle(app, msg) {
-    console.log('screenmanager', msg);
+    // console.log('screenManager handle', msg.type);
     switch (msg.type) {
-    case message.LOGIN: return screen.LOGIN;
-    case message.PROFILE: return screen.PROFILE;
-    case message.PLAY: return screen.PLAY;
-    case message.NETWORKPLAY: return screen.NETWORKPLAY;
-    case message.STARTSCREEN: return screen.STARTSCREEN;
-    default: return app.manager;
+    case message.INIT:
+        return screen.LOGIN;
+    case message.LOGIN:
+        return screen.STARTSCREEN;
+    case message.PROFILE:
+        return screen.PROFILE;
+    case message.START:
+        return screen.SELECTOPPONENT;
+    case message.OPPONENT:
+        return screen.VS;
+    case message.PLAY:
+        return screen.PLAY;
+    case message.NETWORKPLAY:
+        return screen.NETWORKPLAY;
+    default:
+        return app.manager;
     }
 }
-
 
 exports.handle = handle;

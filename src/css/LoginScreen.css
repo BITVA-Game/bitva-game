@@ -41,6 +41,13 @@
     padding: 6px 35px 7px;
 }
 
+.login-new-form {
+    background: red;
+    text-align: center;
+    height: 400px;
+    width: 600px;
+}
+
 /* content */
 
 .login-content {

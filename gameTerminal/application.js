@@ -4,12 +4,13 @@
 
 const { screen, message } = require('../constants');
 
-let application = require('./data/app.json');
+let application = JSON.stringify();
 // Additional files that have functions related to this part of application
 const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
-const gameAccounts = require('../gameAccounts');
 const socketClient = require('./socketClient');
+const accountManager = require('./accountManager');
+const participantManager = require('./participantManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -27,34 +28,44 @@ const socketClient = require('./socketClient');
 function parseApplication(app) {
     let scr = app.manager;
     if (scr === screen.PLAY) {
-        // we're inside game screen playing the game
+    // we're inside game screen playing the game
         scr = app.engine.screen;
     }
     const parsedApp = {
-        ...app, ...app.engine, manager: { screen: scr },
+        ...app,
+        ...app.engine,
+        manager: { screen: scr },
     };
     delete parsedApp.engine;
     return parsedApp;
 }
 
-async function processMessage(msg) {
+async function processMessage(msg, reply) {
     console.log('process', msg);
-    // HACK until we have auth flow
-    if (msg.type === message.PLAY) {
-        application.guest = gameAccounts.bob;
-    }
+    const reProcess = (m) => processMessage(m, reply);
+
     const newApp = {
-        account: application.account,
-        guest: application.guest,
-        manager: screenManager.handle(application, msg),
-        engine: await gameEngineManager.handle(application, msg),
+        accounts: accountManager.handle(application, msg, reProcess),
+        participants: participantManager.handle(application, msg, reProcess),
+        manager: screenManager.handle(application, msg, reProcess),
+        engine: await gameEngineManager.handle(application, msg, reProcess),
     };
-    return newApp;
+    console.log('NEW APP', newApp);
+    reply(newApp);
 }
 
-function initApplication() {
-    // HACK until we have initial auth flow in place
-    return { ...application, account: gameAccounts.alice };
+async function initApplication(msg, reply) {
+    const reProcess = (m) => processMessage(m, reply);
+    const accounts = accountManager.handle({}, msg, reProcess);
+    const manager = screenManager.handle({}, msg, reProcess);
+    const participants = participantManager.handle({}, msg, reProcess);
+    const newApp = {
+        ...application,
+        accounts,
+        manager,
+        participants,
+    };
+    reply(newApp);
 }
 
 // This function is called from main.js
@@ -63,17 +74,24 @@ function initApplication() {
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
 async function msgReceived(msg, sendReply) {
-    const newApp = msg.type === message.INIT ? initApplication() : await processMessage(msg);
-    if (message.network) {
-        newApp.network = true;
-        console.log('OMG NETWORK PLAY IS: ', newApp.network);
+    const reply = (app) => {
+        application = app;
+        sendReply(parseApplication(app));
+    };
 
-        socketClient.emitMessage(msg);
+    if (msg.type === message.INIT) {
+        await initApplication(msg, reply);
+    } else {
+        await processMessage(msg, reply);
     }
+    // if (message.network) {
+    //     newApp.network = true;
+    //     console.log('OMG NETWORK PLAY IS: ', newApp.network);
+
+    //     socketClient.emitMessage(msg);
+    // }
 
     // writeGameObject(newApp);
-    application = newApp;
-    sendReply(parseApplication(newApp));
 }
 
 function setApp(newApp) {
@@ -81,7 +99,7 @@ function setApp(newApp) {
 }
 
 function getApp() {
-    return parseApplication(application);
+    return application;
 }
 
 function reset() {

@@ -33,7 +33,7 @@ async function formatOriginalCards() {
 }
 
 async function getCardsFor(name) {
-    console.log(`Cards_${name}`);
+    // console.log(`Cards_${name}`);
     const cardsOrigin = await gsjson({
         spreadsheetId: '1o5JJRR8JY0TCUzoRR81ghhrhUhdDjTV81ANWCxTKgBA',
         worksheet: `Cards_${name}`,
@@ -80,11 +80,11 @@ function writeToFile(obj, filepath) {
 async function getAllCards() {
     const cards = await formatOriginalCards();
     writeToFile(cards, '/data/cards.json');
-    console.log('CARDS file has been saved.');
+    // console.log('CARDS file has been saved.');
     const characters = await formatOriginalCharacters();
     writeToFile(characters, '/data/characters.json');
 
-    console.log('CHARACTERS file has been saved.');
+    // console.log('CHARACTERS file has been saved.');
 }
 
 exports.getAllCards = getAllCards;

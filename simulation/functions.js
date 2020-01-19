@@ -6,7 +6,7 @@ function takeOneCardAtRand(hand) {
     console.log(Object.keys(hand));
     const rand = Math.floor(Math.random() * Math.floor(Object.keys(hand).length));
     console.log(rand);
-    // console.log('takeOneCardAtRand ', Object.keys(hand).length, rand, Object.keys(hand)[rand]);
+    console.log('takeOneCardAtRand ', Object.keys(hand).length, rand, Object.keys(hand)[rand]);
     return Object.keys(hand)[rand];
 }
 
