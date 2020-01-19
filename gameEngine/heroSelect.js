@@ -5,7 +5,7 @@ const cards = require('../gameTerminal/data/cards.json');
 
 const initialState = {
     players: [],
-    activeAccount: '',
+    activePlayer: '',
     heroes: [],
 };
 

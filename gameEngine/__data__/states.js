@@ -1,21 +1,20 @@
 /* eslint-disable import/prefer-default-export */
 import { screen } from '../../constants';
 
-import testAccounts from '../../gameTerminal/__data__/accounts';
-
 export const alice = {
-    id: testAccounts.alice.id,
+    id: 'Alice',
+    name: 'Alice Adams',
+    heroes: ['morevna', 'yaga', 'premudraya'],
 };
+
 export const bob = {
-    id: testAccounts.bob.id,
+    id: 'Bob',
+    name: 'Bob Brown',
+    heroes: ['morevna', 'yaga', 'hozyaika'],
 };
 
 export const playState = {
-    terminals: [
-        {
-            accounts: [alice, bob],
-        },
-    ],
+    participants: { player: alice, guest: bob },
     heroSelect: {
         allHeroes: {
             morevna: {},
@@ -34,11 +33,7 @@ export const playState = {
 };
 
 export const heroselectStateP1 = {
-    terminals: [
-        {
-            accounts: [alice, bob],
-        },
-    ],
+    participants: { player: alice, guest: bob },
     heroSelect: {
         allHeroes: {
             morevna: {},
@@ -79,11 +74,7 @@ export const heroselectStateP1 = {
 };
 
 export const versusState = {
-    terminals: [
-        {
-            accounts: [alice, bob],
-        },
-    ],
+    participants: { player: alice, guest: bob },
     heroSelect: null,
     manager: {
         screen: screen.VERSUS,
