@@ -124,21 +124,23 @@ class Login extends Component {
                     <div
                         className="login-button"
                         role="button"
-                        onClick={this.toggleDelete}
-                        onKeyPress={this.toggleDelete}
-                        tabIndex="2"
-                    >
-            Delete profile
-                    </div>
-                    <div
-                        className="login-button"
-                        role="button"
                         onClick={this.toggleForm}
                         onKeyPress={this.toggleForm}
                         tabIndex="2"
                     >
-            Create new profile
+                        Create new profile
                     </div>
+                    {this.state.accountId ? (
+                        <div
+                            className="login-button"
+                            role="button"
+                            onClick={this.toggleDelete}
+                            onKeyPress={this.toggleDelete}
+                            tabIndex="2"
+                        >
+                            Delete profile
+                        </div>
+                    ) : null}
                 </div>
             </>
         );
