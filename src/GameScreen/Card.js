@@ -100,7 +100,7 @@ export function backgroundImg(category) {
     } return backgroundCommon;
 }
 
-function cardOrigin(dragging, card) {
+export function cardOrigin(dragging, card) {
     if (dragging !== null && card === dragging.card && dragging.mode === 'drag') {
         return { opacity: 0, transform: 'scale(1.0)' };
     }
