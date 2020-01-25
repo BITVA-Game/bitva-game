@@ -16,9 +16,9 @@ const Account = ({
     <div
         className={`login-profile ${selected ? 'login-selected' : null} ${disabled ? 'profile-inaccessable' : null}`}
         data-id={accId}
-        onClick={(e) => {if(!disabled) toggle(e)}}
+        onClick={(e) => { if (!disabled) toggle(e); }}
         role="button"
-        onKeyPress={(e) => {if(!disabled) toggle(e)}}
+        onKeyPress={(e) => { if (!disabled) toggle(e); }}
         tabIndex="1"
     >
         {accName}
@@ -26,22 +26,21 @@ const Account = ({
 );
 
 const Accounts = ({ accounts, selected, toggle, participants }) => (
-        <div>
-            {accounts
-            && accounts.map((a) => {
-            const disabled = participants && participants.player === a.id ? true : false;
-            return (
-                <Account
-                accId={a.id}
-                accName={a.name}
-                key={a.id}
-                selected={a.id === selected}
-                toggle={toggle}
-                disabled={disabled}
-            />
-            )
-            })}
-        </div>
+    <div>
+        {accounts
+        && accounts.map((a) => {
+        const disabled = participants && participants.player === a.id ? true : false;
+        return (
+            <Account
+            accId={a.id}
+            accName={a.name}
+            key={a.id}
+            selected={a.id === selected}
+            toggle={toggle}
+            disabled={disabled} />
+        );
+        })}
+    </div>
 );
 
 const Footer = ({ toStartScreen }) => (

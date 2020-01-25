@@ -14,7 +14,12 @@ const LoginScreen = ({ accounts, sendMessage, message, participants }) => (
         {accounts.loading ? (
             <h1>SO LOADING</h1>
         ) : (
-            <Login accounts={accounts} sendMessage={sendMessage} message={message} participants={participants}/>
+            <Login 
+                accounts={accounts} 
+                sendMessage={sendMessage} 
+                message={message} 
+                participants={participants}
+            />
         )}
     </div>
 );
