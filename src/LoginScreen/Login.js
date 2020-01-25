@@ -10,34 +10,38 @@ const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
 });
 
 const Account = ({
- accId, accName, selected, toggle 
+ accId, accName, selected, toggle, disabled 
 }) => (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
-        className={`login-profile ${selected ? 'login-selected' : null}`}
+        className={`login-profile ${selected ? 'login-selected' : null} ${disabled ? 'profile-inaccessable' : null}`}
         data-id={accId}
-        onClick={(e) => toggle(e)}
+        onClick={(e) => {if(!disabled) toggle(e)}}
         role="button"
-        onKeyPress={(e) => toggle(e)}
+        onKeyPress={(e) => {if(!disabled) toggle(e)}}
         tabIndex="1"
     >
         {accName}
     </div>
 );
 
-const Accounts = ({ accounts, selected, toggle }) => (
-    <div>
-        {accounts
-      && accounts.map((a) => (
-          <Account
-              accId={a.id}
-              accName={a.name}
-              key={a.id}
-              selected={a.id === selected}
-              toggle={toggle}
-          />
-      ))}
-    </div>
+const Accounts = ({ accounts, selected, toggle, participants }) => (
+        <div>
+            {accounts
+            && accounts.map((a) => {
+            const disabled = participants && participants.player === a.id ? true : false;
+            return (
+                <Account
+                accId={a.id}
+                accName={a.name}
+                key={a.id}
+                selected={a.id === selected}
+                toggle={toggle}
+                disabled={disabled}
+            />
+            )
+            })}
+        </div>
 );
 
 const Footer = ({ toStartScreen }) => (
@@ -114,6 +118,7 @@ class Login extends Component {
                         accounts={this.props.accounts.records}
                         selected={this.state.accountId}
                         toggle={this.toggleAccount}
+                        participants={this.props.participants}
                     />
                 </div>
                 <div className="login-buttons">
@@ -183,16 +188,23 @@ Login.propTypes = {
     accounts: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,
     message: PropTypes.string.isRequired,
+    participants: PropTypes.object,
+};
+
+Login.defaultProps = {
+    participants: undefined,
 };
 
 Accounts.propTypes = {
     accounts: PropTypes.array.isRequired,
     selected: PropTypes.string,
     toggle: PropTypes.func.isRequired,
+    participants: PropTypes.object,
 };
 
 Accounts.defaultProps = {
     selected: undefined,
+    participants: undefined,
 };
 
 Account.propTypes = {
@@ -200,10 +212,12 @@ Account.propTypes = {
     accId: PropTypes.string.isRequired,
     selected: PropTypes.bool,
     toggle: PropTypes.func.isRequired,
+    disabled: PropTypes.bool,
 };
 
 Account.defaultProps = {
     selected: false,
+    disabled: false,
 };
 
 export default Login;

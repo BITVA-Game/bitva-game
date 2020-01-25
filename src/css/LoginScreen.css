@@ -99,3 +99,12 @@
     font-size: 33px;
     padding: 3px 20px;
 }
+
+.profile-inaccessable {
+    opacity: .5;
+}
+
+.profile-inaccessable:hover {
+    background: transparent;
+    cursor: not-allowed;
+}
