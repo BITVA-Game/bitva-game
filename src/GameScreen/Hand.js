@@ -95,6 +95,7 @@ const Hand = ({
         </div>
     );
 };
+
 Hand.propTypes = {
     active: PropTypes.bool.isRequired,
     background: PropTypes.string.isRequired,
