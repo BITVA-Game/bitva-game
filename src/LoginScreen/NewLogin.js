@@ -31,11 +31,14 @@ class NewLogin extends Component {
             <div className="login-new-form">
                 <h3>Enter Account Name</h3>
                 <form onSubmit={this.createAccount}>
-                    <div>
+                    <div className="account-name-input">
                         <label htmlFor="name">Name</label>
                         <input type="text" name="name" value={this.state.value} onChange={this.inputChange} />
                     </div>
-                    <input type="submit" value="Create" />
+                    <div className="login-buttons">
+                        <input className="login-button" type="button" value="Cancel" onClick={() => this.props.toggleForm()} />
+                        <input className="login-button" type="submit" value="Create" />
+                    </div>
                 </form>
             </div>
         );

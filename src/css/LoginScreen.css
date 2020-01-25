@@ -113,12 +113,24 @@
     background: #ECEBEB;
     border: 2px solid #000;
     color: #000;
+    min-height: 440px;
     text-align: center;
     width: 676px;
 }
 
 .login-new-form h3 {
     font-size: .85em;
+}
+
+.account-name-input {
+    padding: 55px 0;
+}
+
+input[type="text"] {
+    display: block;
+    font-family: "Sedan SC";
+    font-size: 1.25em;
+    margin: 0 auto;
 }
 
 .warning {
