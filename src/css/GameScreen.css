@@ -195,6 +195,7 @@
     transform: rotate(180deg);
 }
 
+
 /* graveyard */
 
 .grave {
@@ -973,9 +974,9 @@
 
 /*Animation deck to hand first deal*/
 .card-back {
+    opacity: 0.9;
     transform: rotateY(180deg);
-    position: absolute;
-    
+    position: absolute;   
 }
 
 .player-top .card-back {

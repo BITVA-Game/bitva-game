@@ -286,3 +286,11 @@
 .card-container {
 	position: relative;
 }
+
+.card-holder {
+	opacity: 0.9;
+}
+
+.player-top .card-holder {
+	transform: rotate(180deg);	
+}
