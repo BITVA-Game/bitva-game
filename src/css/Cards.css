@@ -282,3 +282,7 @@
     line-height: 15px;
     padding: 0 4px;
 }
+
+.card-container {
+	position: relative;
+}
