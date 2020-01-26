@@ -74,6 +74,7 @@ class App extends Component {
                     sendMessage={sendMessage}
                     accounts={this.state.app.accounts}
                     message="OPPONENT"
+                    participants={this.state.app.participants}
                 />
             );
         case 'HEROSELECT':
