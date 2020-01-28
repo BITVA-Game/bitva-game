@@ -12,12 +12,18 @@ const DeleteLogin = ({
     <div className="login-new-form">
         <h3>Account deletion</h3>
         <form onSubmit={() => deleteAccount(sendMessage, toggleDelete, accId)}>
-            <p>{`Delete account ${accName}?`}</p>
-            <p>
-                All the statistics for this account will be deleted,
-                including available heroes, cards and silver
-            </p>
-            <input type="submit" value="Delete" />
+            <p className="warning">{`Delete account ${accName}?`}</p>
+            <div className="warning-container">
+                <div className="warning-sign">!</div>
+                <div className="warning-text">
+                    All the statistics for this account will be deleted,
+                    including available heroes, cards and silver
+                </div>
+            </div>
+            <div className="login-buttons">
+                <input className="login-button button-red" type="submit" value="Delete" />
+                <input className="login-button" type="button" value="Cancel" onClick={() => toggleDelete()} />
+            </div>
         </form>
     </div>
 );

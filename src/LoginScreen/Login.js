@@ -10,7 +10,7 @@ const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
 });
 
 const Account = ({
- accId, accName, selected, toggle, disabled 
+    accId, accName, selected, toggle, disabled,
 }) => (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div
@@ -25,20 +25,23 @@ const Account = ({
     </div>
 );
 
-const Accounts = ({ accounts, selected, toggle, participants }) => (
+const Accounts = ({
+    accounts, selected, toggle, participants,
+}) => (
     <div>
         {accounts
         && accounts.map((a) => {
-        const disabled = participants && participants.player === a.id ? true : false;
-        return (
-            <Account
-            accId={a.id}
-            accName={a.name}
-            key={a.id}
-            selected={a.id === selected}
-            toggle={toggle}
-            disabled={disabled} />
-        );
+            const disabled = participants && participants.player === a.id ? true : false;
+            return (
+                <Account
+                    accId={a.id}
+                    accName={a.name}
+                    key={a.id}
+                    selected={a.id === selected}
+                    toggle={toggle}
+                    disabled={disabled}
+                />
+            );
         })}
     </div>
 );
@@ -124,21 +127,23 @@ class Login extends Component {
                     <div
                         className="login-button"
                         role="button"
-                        onClick={this.toggleDelete}
-                        onKeyPress={this.toggleDelete}
-                        tabIndex="2"
-                    >
-            Delete profile
-                    </div>
-                    <div
-                        className="login-button"
-                        role="button"
                         onClick={this.toggleForm}
                         onKeyPress={this.toggleForm}
                         tabIndex="2"
                     >
-            Create new profile
+                        Create new profile
                     </div>
+                    {this.state.accountId ? (
+                        <div
+                            className="login-button"
+                            role="button"
+                            onClick={this.toggleDelete}
+                            onKeyPress={this.toggleDelete}
+                            tabIndex="2"
+                        >
+                            Delete profile
+                        </div>
+                    ) : null}
                 </div>
             </>
         );
@@ -171,9 +176,10 @@ class Login extends Component {
                         ) : null}
                     </div>
                 </section>
-                {this.state.accountId ? (
-                    <Footer toStartScreen={this.toStartScreen} />
-                ) : null}
+                {this.state.accountId
+                    && (this.state.form === false && this.state.delete === false) ? (
+                        <Footer toStartScreen={this.toStartScreen} />
+                    ) : null}
             </>
         );
     }
