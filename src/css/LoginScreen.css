@@ -32,15 +32,6 @@
     justify-content: center;
 }
 
-.login-play-btn {
-    background: #ECEBEB;
-    border: 2px solid #000;
-    border-radius: 28px;
-    color: #000;
-    cursor: pointer;
-    padding: 6px 35px 7px;
-}
-
 /* content */
 
 .login-content {

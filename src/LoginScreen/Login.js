@@ -49,13 +49,13 @@ const Accounts = ({
 const Footer = ({ toStartScreen }) => (
     <footer className="login-footer">
         <div
-            className="login-play-btn"
+            className="btn btn-play"
             role="button"
             onClick={toStartScreen}
             onKeyPress={toStartScreen}
             tabIndex="1"
         >
-      Play
+            Play
         </div>
     </footer>
 );
