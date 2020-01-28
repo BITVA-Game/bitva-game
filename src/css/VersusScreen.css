@@ -43,7 +43,49 @@
     text-shadow: 0 0 10px #fff;
 }
 
-/* play button */
+/* profiles */
+
+.versus-profiles-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 708px;
+    justify-content: center;
+}
+
+.versus-profile {
+    background: rgb(236, 235, 235);
+    background: rgba(236, 235, 235, .8);
+    color: #000;
+    font-size: 46px;
+    height: 270px;
+    padding: 40px 20px;
+    text-align: center;
+    width: 400px;
+}
+
+.versus-profile-player {
+    font-family: "Ruslan Display";
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.versus-profile-name {
+    align-items: center;
+    color: #b74a45;
+    display: flex;
+    height: 127px;
+    justify-content: center;
+    text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+    -webkit-text-stroke: 1px #000;
+}
+
+/* loading */
 
 .versus-loading-container {
     align-items: center;
