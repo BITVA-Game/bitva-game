@@ -96,6 +96,7 @@ const Hand = ({
     );
 };
 
+
 Hand.propTypes = {
     active: PropTypes.bool.isRequired,
     background: PropTypes.string.isRequired,
