@@ -102,6 +102,7 @@ export function backgroundImg(category) {
 
 export function cardOrigin(dragging, card) {
     if (dragging !== null && card === dragging.card && dragging.mode === 'drag') {
+        console.log('card from dragging', dragging);
         return { opacity: 0, transform: 'scale(1.0)' };
     }
     if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
@@ -132,7 +133,8 @@ const Card = (props) => {
                 }
                 onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
                 onClick={() => props.active && cardSelect(props.cardKey, props.card, 'click')}
-                onDragEnd={props.cardDragEnded}
+                onDragEnd={() => cardSelect(props.cardKey, props.card, 'stop')}
+                // onDragEnd={props.cardDragEnded}
             >
                 {disabled === true || panic === true ? (
                     <div className="card-chained" />

@@ -27,6 +27,10 @@ export function withBoardContext(GameScreen) {
         cardSelect(key, card, mode) {
             this.setState((oldState) => {
                 if (oldState.dragging && mode === 'click') {
+                    console.log(oldState);
+                    return { dragging: null };
+                } if (oldState.dragging && mode === 'stop') {
+                    console.log('oldstate from drag', oldState);
                     return { dragging: null };
                 }
                 return { dragging: { key, card, mode } };
@@ -81,6 +85,7 @@ export function withBoardContext(GameScreen) {
 
         isTarget(target, player) {
             const activePlayer = getActivePlayer(this.props.app);
+            console.log('from isTarget');
             return rules(
                 target,
                 this.state.dragging,
