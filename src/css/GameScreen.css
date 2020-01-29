@@ -195,6 +195,7 @@
     transform: rotate(180deg);
 }
 
+
 /* graveyard */
 
 .grave {
@@ -951,7 +952,7 @@
 
 /*fix item-attacks bat card's position for bottom player*/
 .player-bottom .item-attacks {
-    animation: attackOpponentTop 2s ease-out infinite;
+    animation: attackOpponentTop 2s ease-in infinite;
     margin-bottom: -200px;
     margin-left: 800px;
     perspective: 100px;
@@ -968,4 +969,106 @@
         transform: rotateX(45deg) translateX(0px) translateY(-250px);          
         }
     100%    { transform: translateX(-560px) translateY(30px) }
+}
+
+
+/*Animation deck to hand first deal*/
+.card-back {
+    opacity: 0.9;
+    position: absolute;
+    transform: rotateY(180deg);
+       
+}
+
+.player-top .card-back {
+    transform: rotateX(180deg);
+}
+
+.animated-card-0 {
+    animation: deckToHand-0 3s ease-in;
+    animation-delay: 2s;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;
+    transform-style: preserve-3d;   
+}
+
+@keyframes deckToHand-0 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(407px) translateY(4px);
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
+}
+
+.animated-card-1 {
+    animation: deckToHand-1 3s ease-in;
+    animation-delay: 1.5s;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;    
+    transform-style: preserve-3d;
+}
+
+@keyframes deckToHand-1 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(552px) translateY(4px);
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
+}
+
+.animated-card-2 {
+    animation: deckToHand-2 3s ease-in;
+    animation-delay: 1s;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;   
+    transform-style: preserve-3d;
+}
+
+@keyframes deckToHand-2 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(697px) translateY(4px);
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
+}
+
+.animated-card-3 {
+    animation: deckToHand-3 3s ease-in;
+    animation-delay: 0.5s;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;   
+    transform-style: preserve-3d;
+}
+
+@keyframes deckToHand-3 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(842px) translateY(4px);
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
+}
+
+.animated-card-4 {
+    animation: deckToHand-4 3s ease-in;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;
+    transform-style: preserve-3d;
+}
+
+@keyframes deckToHand-4 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(987px) translateY(4px);
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
 }

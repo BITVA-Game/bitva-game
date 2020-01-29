@@ -253,8 +253,9 @@
 }
 
 .card-like {
-    height: 168px;
-    width: 120px;
+	height: 168px;
+	min-width: 120px;
+	width: 120px;
 }
 
 .game-card-image {
@@ -281,4 +282,17 @@
     font-size: 15px;
     line-height: 15px;
     padding: 0 4px;
+}
+
+.card-container {
+	position: relative;
+}
+
+.card-holder {
+	opacity: 0.9;
+	position: absolute;
+}
+
+.player-top .card-holder {
+	transform: rotate(180deg);	
 }
