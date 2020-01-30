@@ -117,7 +117,7 @@ const Card = (props) => {
         categoryName, healthCurrent, health, points, initialpoints,
     } = props.card;
     const { background } = props.player;
-    const { cardSelect, dragging } = useContext(BoardContext);
+    const { cardSelect, cardAim, dragging } = useContext(BoardContext);
     return (
         <div
             className="card-place card-like"
@@ -133,8 +133,8 @@ const Card = (props) => {
                 }
                 onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
                 onClick={() => props.active && cardSelect(props.cardKey, props.card, 'click')}
-                onDragEnd={() => cardSelect(props.cardKey, props.card, 'stop')}
-                // onDragEnd={props.cardDragEnded}
+                onDragEnd={cardAim}
+                //onDragEnd={props.cardDragEnded}
             >
                 {disabled === true || panic === true ? (
                     <div className="card-chained" />
