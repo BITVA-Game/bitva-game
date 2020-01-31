@@ -134,7 +134,6 @@ const Card = (props) => {
                 onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
                 onClick={() => props.active && cardSelect(props.cardKey, props.card, 'click')}
                 onDragEnd={cardAim}
-                //onDragEnd={props.cardDragEnded}
             >
                 {disabled === true || panic === true ? (
                     <div className="card-chained" />
@@ -228,14 +227,12 @@ Card.propTypes = {
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool,
     cardKey: PropTypes.string,
-    cardDragEnded: PropTypes.func,
     player: PropTypes.object.isRequired,
 };
 
 Card.defaultProps = {
     draggable: null,
     cardKey: null,
-    cardDragEnded: null,
 };
 
 
