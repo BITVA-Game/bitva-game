@@ -83,6 +83,7 @@ const Hand = ({
         <div className={`${handClass(active, player)}`}>
             {Object.keys(cardContainers).map((key) => (
                 <CardContainer
+                    key={key}
                     index={key}
                     player={player}
                     inactivePlayer={inactivePlayer}
@@ -105,7 +106,7 @@ Hand.propTypes = {
 };
 
 CardContainer.propTypes = {
-    index: PropTypes.number.isRequired,
+    index: PropTypes.string.isRequired,
     player: PropTypes.object.isRequired,
     inactivePlayer: PropTypes.object.isRequired,
     cardId: PropTypes.string,
