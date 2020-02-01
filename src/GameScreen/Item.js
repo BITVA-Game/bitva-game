@@ -7,7 +7,9 @@ import BoardContext from './BoardContext';
 import Card from './Card';
 
 const Item = (props) => {
-    const { isTarget, cardDropped, cardOver, cardSelect } = useContext(BoardContext);
+    const {
+        isTarget, cardDropped, cardOver, cardSelect,
+    } = useContext(BoardContext);
     return (
         <div
             className={`item card-place card-like
@@ -38,11 +40,6 @@ const Item = (props) => {
                     : props.item
                         ? () => cardDropped('itemOpponent', props.player)
                         : null
-                // props.active
-                //     ? () => cardDropped('item', props.player) || (props.item && cardSelect(Object.keys(props.player.item)[0], props.item, 'click'))
-                //     : props.item
-                //         ? () => cardDropped('itemOpponent', props.player)
-                //         : null
             }
             onDragOver={
                 // eslint-disable-next-line no-nested-ternary
