@@ -67,17 +67,18 @@ const Hand = ({
         // eslint-disable-next-line max-len
         const newCardsInHand = handKeys.filter((el) => (!Object.values(cardContainers).includes(el)));
 
-        // put new cards in new object
-        let index = 0;
-        Object.keys(cardContainers).forEach((el) => {
-            if (!handKeys.includes(cardContainers[el])) {
-                updatedCardContainers[el] = newCardsInHand[index];
-                index++;
-            }
-        });
-
-        setCardContainers(updatedCardContainers);
-    }, [handKeys.length]);
+        if (newCardsInHand.length > 0) {
+            // put new cards in new object
+            let index = 0;
+            Object.keys(cardContainers).forEach((el) => {
+                if (!handKeys.includes(cardContainers[el])) {
+                    updatedCardContainers[el] = newCardsInHand[index];
+                    index++;
+                }
+            });
+            setCardContainers(updatedCardContainers);
+        }
+    }, [handKeys]);
 
     return (
         <div className={`${handClass(active, player)}`}>
