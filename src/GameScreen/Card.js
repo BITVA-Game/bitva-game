@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import BoardContext from './BoardContext';
@@ -16,10 +15,48 @@ function cardClass(type, background, dragging) {
     }
     return `card game-card card-like ${background}-item`;
 }
+
 export function backgroundImg(category) {
     if (category === 'attackItems' || category === 'attack') {
         return imagesCards.backgroundAttack;
     } return imagesCards.backgroundCommon;
+}
+
+// eslint-disable-next-line consistent-return
+export function iconImg(category, type) {
+    switch (category) {
+    case 'attack':
+        return 'icon-attack';
+    case 'attackItems':
+    case 'damage':
+    case 'suppress':
+        return 'icon-damage';
+    case 'generator':
+    case 'shuffling':
+        return 'icon-move';
+    case 'holdCard':
+    case 'holdTurn':
+        return 'icon-hold';
+    case 'panic':
+    case 'turning':
+        return 'icon-arrows';
+    case 'reflect':
+        return 'icon-reflect';
+    case 'shield':
+        return 'icon-shield';
+    case 'showCards':
+        return 'icon-show';
+    case 'heal':
+        if (type === 'action') {
+            return 'icon-heal';
+        }
+        if (type === 'item') {
+            return 'icon-heart';
+        }
+        break;
+    default:
+        return '';
+    }
 }
 
 export function cardOrigin(dragging, card) {
@@ -73,26 +110,7 @@ const Card = (props) => {
                                 : `${background}-action`
                         }`}
                     >
-                        <div
-                            className={`card-icon game-card-icon
-                            ${category === 'attack' ? 'icon-attack' : null}
-                            ${category === 'attackItems' ? 'icon-damage' : null}
-                            ${category === 'damage' ? 'icon-damage' : null}
-                            ${category === 'generator' ? 'icon-move' : null}
-                            ${category === 'heal'
-                            && type === 'action' ? 'icon-heal' : null}
-                            ${category === 'heal'
-                            && type === 'item' ? 'icon-heart' : null}
-                            ${category === 'holdCard' ? 'icon-hold' : null}
-                            ${category === 'holdTurn' ? 'icon-hold' : null}
-                            ${category === 'panic' ? 'icon-arrows' : null}
-                            ${category === 'reflect' ? 'icon-reflect' : null}
-                            ${category === 'shield' ? 'icon-shield' : null}
-                            ${category === 'showCards' ? 'icon-show' : null}
-                            ${category === 'shuffling' ? 'icon-move' : null}
-                            ${category === 'suppress' ? 'icon-damage' : null}
-                            ${category === 'turning' ? 'icon-arrows' : null}`}
-                        />
+                        <div className={`card-icon game-card-icon ${iconImg(category, type)}`} />
                     </div>
                     <p
                         className={`card-category game-card-category ${

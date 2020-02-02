@@ -6,7 +6,7 @@ import '../css/HeroSelection.css';
 import '../css/Cards.css';
 import imagesCards from '../cardImages';
 
-import { backgroundImg } from '../GameScreen/Card';
+import { backgroundImg, iconImg } from '../GameScreen/Card';
 
 import heart from '../images/icons/heart_red.png';
 
@@ -34,23 +34,7 @@ const CardPreview = (props) => (
     <div className={`card details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
         <div className="card-header">
             <div className={`card-icon-container details-card-icon-container ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
-                <div className={`card-icon details-card-icon
-                    ${props.card.category === 'attack' ? 'icon-attack' : null}
-                    ${props.card.category === 'attackItems' ? 'icon-damage' : null}
-                    ${props.card.category === 'damage' ? 'icon-damage' : null}
-                    ${props.card.category === 'generator' ? 'icon-move' : null}
-                    ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
-                    ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
-                    ${props.card.category === 'holdCard' ? 'icon-hold' : null}
-                    ${props.card.category === 'holdTurn' ? 'icon-hold' : null}
-                    ${props.card.category === 'panic' ? 'icon-arrows' : null}
-                    ${props.card.category === 'reflect' ? 'icon-reflect' : null}
-                    ${props.card.category === 'shield' ? 'icon-shield' : null}
-                    ${props.card.category === 'showCards' ? 'icon-show' : null}
-                    ${props.card.category === 'shuffling' ? 'icon-move' : null}
-                    ${props.card.category === 'suppress' ? 'icon-damage' : null}
-                    ${props.card.category === 'turning' ? 'icon-arrows' : null}`}
-                />
+                <div className={`card-icon details-card-icon ${iconImg(props.card.category, props.card.type)}`} />
             </div>
             <p className="card-category details-card-category">{props.card.categoryName}</p>
             {props.card.initialpoints
