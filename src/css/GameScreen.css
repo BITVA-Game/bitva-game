@@ -986,10 +986,57 @@
 
 .animated-card-0 {
     animation: deckToHand-0 3s ease-in;
-    animation-delay: 2s;
     animation-direction:alternate;
     animation-fill-mode: backwards;
     transform-style: preserve-3d;   
+}
+
+.animated-card-1 {
+    animation: deckToHand-1 3s ease-in;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;    
+    transform-style: preserve-3d;
+}
+
+.animated-card-2 {
+    animation: deckToHand-2 3s ease-in;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;   
+    transform-style: preserve-3d;
+}
+
+.animated-card-3 {
+    animation: deckToHand-3 3s ease-in;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;   
+    transform-style: preserve-3d;
+}
+
+.animated-card-4 {
+    animation: deckToHand-4 3s ease-in;
+    animation-direction:alternate;
+    animation-fill-mode: backwards;
+    transform-style: preserve-3d;
+}
+
+.card-animation-delay-0 {
+    animation-delay: 0s;
+}
+
+.card-animation-delay-1 {
+    animation-delay: 0.5s;
+}
+
+.card-animation-delay-2 {
+    animation-delay: 1s;
+}
+
+.card-animation-delay-3 {
+    animation-delay: 1.5s;
+}
+
+.card-animation-delay-4 {
+    animation-delay: 2s;
 }
 
 @keyframes deckToHand-0 {
@@ -1002,14 +1049,6 @@
     100% {transform: translate(0, 0)}
 }
 
-.animated-card-1 {
-    animation: deckToHand-1 3s ease-in;
-    animation-delay: 1.5s;
-    animation-direction:alternate;
-    animation-fill-mode: backwards;    
-    transform-style: preserve-3d;
-}
-
 @keyframes deckToHand-1 {
     0% {
         transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(552px) translateY(4px);
@@ -1018,14 +1057,6 @@
         transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
       }
     100% {transform: translate(0, 0)}
-}
-
-.animated-card-2 {
-    animation: deckToHand-2 3s ease-in;
-    animation-delay: 1s;
-    animation-direction:alternate;
-    animation-fill-mode: backwards;   
-    transform-style: preserve-3d;
 }
 
 @keyframes deckToHand-2 {
@@ -1038,14 +1069,6 @@
     100% {transform: translate(0, 0)}
 }
 
-.animated-card-3 {
-    animation: deckToHand-3 3s ease-in;
-    animation-delay: 0.5s;
-    animation-direction:alternate;
-    animation-fill-mode: backwards;   
-    transform-style: preserve-3d;
-}
-
 @keyframes deckToHand-3 {
     0% {
         transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(842px) translateY(4px);
@@ -1054,13 +1077,6 @@
         transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
       }
     100% {transform: translate(0, 0)}
-}
-
-.animated-card-4 {
-    animation: deckToHand-4 3s ease-in;
-    animation-direction:alternate;
-    animation-fill-mode: backwards;
-    transform-style: preserve-3d;
 }
 
 @keyframes deckToHand-4 {
