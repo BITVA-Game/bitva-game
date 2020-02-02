@@ -102,7 +102,6 @@ export function backgroundImg(category) {
 
 export function cardOrigin(dragging, card) {
     if (dragging !== null && card === dragging.card && dragging.mode === 'drag') {
-        console.log('card from dragging', dragging);
         return { opacity: 0, transform: 'scale(1.0)' };
     }
     if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
@@ -118,6 +117,12 @@ const Card = (props) => {
     } = props.card;
     const { background } = props.player;
     const { cardSelect, cardAim, dragging } = useContext(BoardContext);
+
+    function handleClick(event) {
+        event.stopPropagation();
+        props.active && cardSelect(props.cardKey, props.card, 'click');     
+    }
+
     return (
         <div
             className="card-place card-like"
@@ -132,7 +137,7 @@ const Card = (props) => {
                         : props.draggable
                 }
                 onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
-                onClick={() => props.active && cardSelect(props.cardKey, props.card, 'click')}
+                onClick={handleClick}
                 onDragEnd={cardAim}
             >
                 {disabled === true || panic === true ? (
