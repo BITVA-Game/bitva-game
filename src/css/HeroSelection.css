@@ -38,7 +38,7 @@ section {
 .heroselection-header {
 	align-items: center;
 	background: rgb(0,0,0);
-	background: rgba(0,0,0,0.5);
+	background: rgba(0,0,0,0.8);
 	display: flex;
 	font-size: 36px;
 	height: 60px;
@@ -375,7 +375,7 @@ button.hero-block {
 .heroselection-footer {
 	align-items: center;
 	background-color: rgb(0,0,0);
-	background-color: rgba(0,0,0,0.5);
+	background-color: rgba(0,0,0,0.8);
 	display: flex;
 	font-family: "Ruslan Display";
 	font-size: 36px;
@@ -391,13 +391,6 @@ button.hero-block {
 	line-height: 48px;
 	margin: 0 520px 0 50px;
 	padding: 0 9px 0 5px;
-}
-
-.btn-play {
-	background: #ECEBEB;
-	border-radius: 30px;
-	color: #000;
-	padding: 0 35px;
 }
 
 /* animations */

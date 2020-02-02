@@ -1,44 +1,34 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import "./css/App.css";
-import "./css/VersusScreen.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './css/App.css';
+import './css/VersusScreen.css';
 
-import { getAccountForPart } from "./rules";
+import { getAccountForPart } from './rules';
 
-class PlayScreen extends Component {
-  render() {
-    return (
-      <div>
-        <div>
-          <h1>
-            {
-              getAccountForPart(
-                this.props.app,
-                this.props.app.participants.player
-              ).name
-            }
-          </h1>
-          <h1>VS</h1>
-          <h1>
-            {
-              getAccountForPart(
-                this.props.app,
-                this.props.app.participants.guest
-              ).name
-            }
-          </h1>
-          <button onClick={() => this.props.sendMessage({ type: "PLAY" })}>
-            CLICK ME
-          </button>
+const PlayScreen = ({ app, sendMessage }) => (
+    <div className="versus-screen-container">
+        <div className="versus-profiles-container">
+            <div className="versus-profile">
+                <div className="versus-profile-player">Player 1</div>
+                <div className="versus-profile-name">{getAccountForPart(app, app.participants.player).name}</div>
+            </div>
+            <div className="vs">VS</div>
+            <div className="versus-profile">
+                <div className="versus-profile-player">Player 2</div>
+                <div className="versus-profile-name">{getAccountForPart(app, app.participants.guest).name}</div>
+            </div>
         </div>
-      </div>
-    );
-  }
-}
+        <div className="login-footer">
+            <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: 'PLAY' })}>
+                Play
+            </button>
+        </div>
+    </div>
+);
 
 PlayScreen.propTypes = {
-  app: PropTypes.object.isRequired,
-  sendMessage: PropTypes.func.isRequired
+    app: PropTypes.object.isRequired,
+    sendMessage: PropTypes.func.isRequired,
 };
 
 export default PlayScreen;
