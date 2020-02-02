@@ -8,7 +8,7 @@ import Card from './Card';
 
 const Item = (props) => {
     const {
-        isTarget, cardDropped, cardOver
+        isTarget, cardDropped, cardOver,
     } = useContext(BoardContext);
     return (
         <div

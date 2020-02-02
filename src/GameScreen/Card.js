@@ -120,7 +120,7 @@ const Card = (props) => {
 
     function handleClick(event) {
         event.stopPropagation();
-        props.active && cardSelect(props.cardKey, props.card, 'click');     
+        props.active && cardSelect(props.cardKey, props.card, 'click');    
     }
 
     return (
