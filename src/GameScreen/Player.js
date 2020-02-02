@@ -202,7 +202,6 @@ Player.propTypes = {
 
 Hand.propTypes = {
     hand: PropTypes.object.isRequired,
-    dealAnim: PropTypes.bool.isRequired,
 };
 
 AnimatedHand.propTypes = {
