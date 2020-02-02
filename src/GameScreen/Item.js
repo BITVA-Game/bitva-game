@@ -7,7 +7,9 @@ import BoardContext from './BoardContext';
 import Card from './Card';
 
 const Item = (props) => {
-    const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
+    const {
+        isTarget, cardDropped, cardOver, cardSelect,
+    } = useContext(BoardContext);
     return (
         <div
             className={`item card-place card-like
@@ -32,7 +34,9 @@ const Item = (props) => {
             onClick={
                 // eslint-disable-next-line no-nested-ternary
                 props.active
-                    ? () => cardDropped('item', props.player)
+                    ? props.item
+                        ? () => cardSelect(Object.keys(props.player.item)[0], props.item, 'click')
+                        : () => cardDropped('item', props.player)
                     : props.item
                         ? () => cardDropped('itemOpponent', props.player)
                         : null
