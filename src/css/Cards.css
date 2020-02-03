@@ -210,11 +210,79 @@
 	padding: 0 7px;
 }
 
-/* Player (GameScreen) */
+/* GameScreen */
+
+.card-container {
+	position: relative;
+}
+
+.card-place {
+    margin-right: 26px;
+}
+
+.card-like {
+    height: 168px;
+    min-width: 120px;
+    width: 120px;
+}
+
+.card-holder {
+	opacity: 0.9;
+	position: absolute;
+}
+
+.player-top .card-holder {
+    transform: rotate(180deg);
+}
+
+.game-card-container {
+    background: transparent;
+    perspective: 1000px;
+}
 
 .game-card {
-    transform: rotate(0);
-    width: 120px;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s;
+    width: 100%;
+}
+
+.player-top .card {
+    transform: rotate(180deg);
+}
+
+.player-bottom .card {
+    transform: rotate(0deg);
+}
+
+.player-top .card-flipped {
+    transform: rotateX(180deg);
+}
+
+.player-bottom .card-flipped {
+    transform: rotateY(-180deg);
+}
+
+.game-card-back,
+.game-card-front {
+    backface-visibility: hidden;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+}
+
+.game-card-back {
+    transform: rotateY(180deg);
+}
+
+.card-info {
+    background: #fff;
+    color: #000;
+    height: 106px;
+    margin: 10px auto 0;
+    padding: 5px 10px;
+    width: 104px;
 }
 
 .game-card-icon-container {
@@ -244,23 +312,10 @@
     width: 30px;
 }
 
-.player-top .card {
-    transform: rotate(180deg);
-}
-
-.player-bottom .card {
-    transform: rotate(0deg);
-}
-
-.card-like {
-	height: 168px;
-	min-width: 120px;
-	width: 120px;
-}
-
 .game-card-image {
     background-size: 100% 100%;
     height: 100px;
+    margin: 0 auto;
     width: 104px;
 }
 
@@ -274,8 +329,8 @@
 }
 
 .game-card-footer {
-	height: 36px;
-    margin-top: 6px;
+    height: 36px;
+    margin: 6px auto 0;
     width: 104px;
 }
 
@@ -283,17 +338,4 @@
     font-size: 15px;
     line-height: 15px;
     padding: 0 4px;
-}
-
-.card-container {
-	position: relative;
-}
-
-.card-holder {
-	opacity: 0.9;
-	position: absolute;
-}
-
-.player-top .card-holder {
-	transform: rotate(180deg);	
 }

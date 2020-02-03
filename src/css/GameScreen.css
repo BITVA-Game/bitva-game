@@ -132,16 +132,6 @@
     background-color: rgba(163, 98, 100, .5); /*#A36264*/
 }
 
-/*fix card-in-item's position for bottom player*/
-.player-bottom .item .card {
-    transform: rotate(0deg) translate(-3px, -3px);
-}
-
-/*fix card-in-item's position for top player*/
-.player-top .item .card {
-    transform: rotate(180deg) translate(3px, 3px);
-}
-
 /* hand */
 
 .hand {
@@ -150,15 +140,6 @@
     left: 442px;
     position: absolute;
     width: 680px;
-}
-
-
-/* card-place */
-
-.card-place {
-    /*background-color: rgb(211, 226, 243);
-    background-color: rgba(211, 226, 243, 0.55);*/
-    margin-right: 26px;
 }
 
 /* deck */
