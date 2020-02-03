@@ -7,7 +7,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Loyal friend, warning his owner of the danger. Horse helps his Lady bogatyr both to slip her pursuers and joins the battle - hoofs the enemy warriors.",
-        "initialpoints": 3
+        "initialpoints": 3,
+        "info": "Deals 3 points of damage"
     },
     "bulat": {
         "id": "bulat",
@@ -17,7 +18,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Damask steel dagger - sword with sorcery charmed blade. Its steel is quenched not by the water but the wind, possesses wind's power and force.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Deals 2 points of damage"
     },
     "wolf": {
         "id": "wolf",
@@ -27,7 +29,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Strong and dangerous enemy. Lives in a deep forest, aggresive and unpredictable.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Deals 2 points of damage"
     },
     "apple": {
         "id": "apple",
@@ -37,7 +40,8 @@
         "category": "heal",
         "categoryName": "heal",
         "description": "In far off lands there is a garden with magic youth-giving apples. If an elder eats such apple — gets younger, and an ill — gets his health back. ",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Heals for 2 points"
     },
     "bereginya": {
         "id": "bereginya",
@@ -47,7 +51,8 @@
         "category": "heal",
         "categoryName": "heal",
         "description": "Plenty of Keepers live in our world, inhabiting the forests. Promised in marriage fiancees, gone before their wedding. Keepers appear from the other realm: come out from under ground, descend from the sky on the birch branches, emerge from the rivers and lakes.",
-        "initialpoints": 4
+        "initialpoints": 4,
+        "info": "Heals 4 points"
     },
     "waterLiving": {
         "id": "waterLiving",
@@ -58,7 +63,8 @@
         "categoryName": "heal",
         "description": "Water with magic specific properties. E.g. living water is able to reanimate. During long-time storage it looses its healing properties.",
         "health": 3,
-        "initialpoints": 1
+        "initialpoints": 1,
+        "info": "Heroes get + 1 health point at the beggining of their turn until card is destroyed"
     },
     "bowArrow": {
         "id": "bowArrow",
@@ -68,7 +74,8 @@
         "category": "suppress",
         "categoryName": "suppress",
         "description": "Magic Bow possesses the precious characteristic - his owner can see and aim to the invisible creatures. And an arrow shot with this bow destroyes the illusion. ",
-        "health": 2
+        "health": 2,
+        "info": "60% chance that opponent's 2 action cards with initial point value > 1 loose 1 point at the beggining of opponent's turn"
     },
     "bajun": {
         "id": "bajun",
@@ -78,7 +85,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Magic were-cat. Can attack the enemy with his songs and spells. Lives at Yaga's hut.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Deals 2 points of damage"
     },
     "gusiLebedi": {
         "id": "gusiLebedi",
@@ -88,7 +96,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "The Magic Swan Geese are Yaga's winged warriors. They help to capture and take an enemy to the other world.",
-        "initialpoints": 1
+        "initialpoints": 1,
+        "info": "Deals 1 point of damage"
     },
     "raven": {
         "id": "raven",
@@ -98,7 +107,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Raven is Yaga's faithful companion. Keeper of arcane knowledge, giving sage advice. Master of Living and Dead Water secrecy.",
-        "initialpoints": 1
+        "initialpoints": 1,
+        "info": "Deals 1 point of damage"
     },
     "kikimora": {
         "id": "kikimora",
@@ -108,7 +118,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Kikimora -- a female swamp spirit who may inhabit a house too. She likes to harm or misdirect people. Kikimora is capable to put on human or animal shape.",
-        "initialpoints": 1
+        "initialpoints": 1,
+        "info": "Deals 1 point of damage"
     },
     "chickenLegsHut": {
         "id": "chickenLegsHut",
@@ -118,7 +129,8 @@
         "category": "heal",
         "categoryName": "heal",
         "description": "Yaga's place of living. Once hut turns its front to a viator, back to the forest and then vice versa, the hut opens entrance to the living and then to the Nether world.",
-        "initialpoints": 5
+        "initialpoints": 5,
+        "info": "Heals for 5 points"
     },
     "mortar": {
         "id": "mortar",
@@ -128,7 +140,8 @@
         "category": "heal",
         "categoryName": "heal",
         "description": "Mortar possess magic powers and can, not only fly, but also grind the desease, pound an ill person into healthy.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Heals for 2 points"
     },
     "forestMushroom": {
         "id": "forestMushroom",
@@ -138,7 +151,8 @@
         "category": "panic",
         "categoryName": "panic",
         "description": "Forest Mushroom cooked by Yaga are dangerous. Yaga's guest shoudn't treat oneself with them, if wishes to retain the clear consciousness.",
-        "health": 2
+        "health": 2,
+        "info": "60% chance that opponent  can use only random card at the beggining of turn"
     },
     "russianOven": {
         "id": "russianOven",
@@ -148,7 +162,8 @@
         "category": "holdCard",
         "categoryName": "hold",
         "description": "Being the fire keeper, Russian Oven possesses the fire power and can stop the enemies, helping Yaga in witchcraft.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Opponent can not use 2 random cards for one move"
     },
     "magicTree": {
         "id": "magicTree",
@@ -158,7 +173,8 @@
         "category": "holdTurn",
         "categoryName": "hold",
         "description": "Yaga resuscitated the age-old oak with her magic. It guards the forest and detains trespassers.",
-        "health": 2
+        "health": 2,
+        "info": "Opponent can make only one move once card is on table"
     },
     "horsemanBlack": {
         "id": "horsemanBlack",
@@ -168,7 +184,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Black horseman on black horse enters to house and brings the night. He helps sorcerers and covers up traces.",
-        "initialpoints": 3
+        "initialpoints": 3,
+        "info": "Deals 3 points of damage"
     },
     "horsemanWhite": {
         "id": "horsemanWhite",
@@ -178,7 +195,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "When White horseman rides on his white horse, then the day arrives. And wherever evil spirits hides, the day light catchs them up.",
-        "initialpoints": 1
+        "initialpoints": 1,
+        "info": "Deals 1 point of damage"
     },
     "horsemanRed": {
         "id": "horsemanRed",
@@ -188,7 +206,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "When Red horseman rides on his red horse, then sun uprises. It gives power to the Allies and weaken the enemies.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Deals 2 points of damage"
     },
     "skullLantern": {
         "id": "skullLantern",
@@ -198,7 +217,8 @@
         "category": "attackItems",
         "categoryName": "attack",
         "description": "Spellfull illuminant, capable to enlight the invisible and to burn to ashes the enchanted characterstics of magic items.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Destroys all item cards on the table"
     },
     "magicMirror": {
         "id": "magicMirror",
@@ -208,7 +228,8 @@
         "category": "reflect",
         "categoryName": "reflect",
         "description": "Magiс Mirror — item that can \"duplicate the reality\". The boundary between the earth and the other Subtle World.",
-        "health": 2
+        "health": 2,
+        "info": "Reflects half of damage (if attack = 1 then each hero gets 1 damage point)"
     },
     "clairvoyance": {
         "id": "clairvoyance",
@@ -218,7 +239,8 @@
         "category": "showCards",
         "categoryName": "show",
         "description": "«Second vision». This gift offers great possibilities. It helps to see the lie, to see damage ahead and to avoid it. ",
-        "initialpoints": 1
+        "initialpoints": 1,
+        "info": "Shows three next cards in opponent's deck"
     },
     "dolly": {
         "id": "dolly",
@@ -228,7 +250,8 @@
         "category": "heal",
         "categoryName": "heal",
         "description": "The mother's gift given before her death with blessing. This is not just a dolly - if to feed her, she always helps in troubles.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Heals for 2 points"
     },
     "chemise": {
         "id": "chemise",
@@ -238,7 +261,8 @@
         "category": "heal",
         "categoryName": "heal",
         "description": "The chemise sewed from the magic sindon, spun and woven by Vasilisa the Wise.",
-        "initialpoints": 5
+        "initialpoints": 5,
+        "info": "Heals for 5 points"
     },
     "bat": {
         "id": "bat",
@@ -248,7 +272,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Maid's flying warrior, can be met deep underground, attacks from air, raven on living being's blood.",
-        "initialpoints": 1
+        "initialpoints": 1,
+        "info": "Deals 1 point of damage"
     },
     "lizard": {
         "id": "lizard",
@@ -258,7 +283,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Maid's irreplaceable warrior. Can appear from the stone and melt into it. Maneuvers both under and above ground.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Deals 2 points of damage"
     },
     "earthquake": {
         "id": "earthquake",
@@ -268,7 +294,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "The Malachite Maid is fearful in anger. The stone in her control and quakes according to her will, and earth layers come apart...",
-        "initialpoints": 5
+        "initialpoints": 5,
+        "info": "Deals 5 points of damage"
     },
     "malachiteBox": {
         "id": "malachiteBox",
@@ -278,7 +305,8 @@
         "category": "generator",
         "categoryName": "create",
         "description": "Maid's gift. But it has a hidden agenda and brings miseries to the person who opens box without permission.",
-        "health": 2
+        "health": 2,
+        "info": "Generates a bat at the beggining of eaсh turn"
     },
     "turningPotion": {
         "id": "turningPotion",
@@ -287,7 +315,8 @@
         "icon": "arrows",
         "category": "turning",
         "categoryName": "turning",
-        "description": "Deep underground the luminous moss grows. The Potion made of it allows to intoxicate the enemy's consciousness and to enjoy an advantage"
+        "description": "Deep underground the luminous moss grows. The Potion made of it allows to intoxicate the enemy's consciousness and to enjoy an advantage",
+        "info": "Player have to choose one card from opponent's hand"
     },
     "crown": {
         "id": "crown",
@@ -297,7 +326,8 @@
         "category": "heal",
         "categoryName": "heal",
         "description": "Copper Crown possesses great healing power. For a reason the Malachite Maid always wears it. ",
-        "initialpoints": 4
+        "initialpoints": 4,
+        "info": "Heals for 4 points"
     },
     "shieldSmall": {
         "id": "shieldSmall",
@@ -307,7 +337,8 @@
         "category": "shield",
         "categoryName": "shield",
         "description": "The shield, begot by the tree nymph. The bark of a magic oak from curved sea-shore Lukomore helps in battle dealing with the damage and also can ward off an attacks.",
-        "health": 2
+        "health": 2,
+        "info": "Takes 2 damage points"
     },
     "waterDead": {
         "id": "waterDead",
@@ -318,7 +349,8 @@
         "categoryName": "damage",
         "description": "Dead water deals damage to the health. It kills the wounded and turns enemy into forever dead.",
         "health": 3,
-        "initialpoints": 1
+        "initialpoints": 1,
+        "info": "Heroes get + 1 health point at the beggining of their turn until card is destroyed"
     },
     "shieldLarge": {
         "id": "shieldLarge",
@@ -328,7 +360,8 @@
         "category": "shield",
         "categoryName": "shield",
         "description": "The shield, forged by Svarog — divinity-blacksmith. After recognition of his owner, it can reflect the damage and ensure protection from witchcraft.",
-        "health": 4
+        "health": 4,
+        "info": "Takes 4 damage points"
     },
     "bogatyr": {
         "id": "bogatyr",
@@ -338,7 +371,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Hero-warrior possessing great power, protector, distinguishes not only by courage, but also by diplomatic abilities.",
-        "initialpoints": 4
+        "initialpoints": 4,
+        "info": "Deals 4 points of damage"
     },
     "bolotnitsa": {
         "id": "bolotnitsa",
@@ -348,7 +382,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Evil swamp spirit. When saw a man Bolotnitsa turns into lovely maiden and starts weeping bitterly. But once man steps to her swamp, the villain lashes out at him, smothers with embraces and drags man to the bog depth.",
-        "initialpoints": 4
+        "initialpoints": 4,
+        "info": "Deals 4 points of damage"
     },
     "plateMail": {
         "id": "plateMail",
@@ -358,7 +393,8 @@
         "category": "reflect",
         "categoryName": "reflect",
         "description": "Plate mail is a  bogatyr's armor. Bewitched plate mail is saving warrior's life, reflecting enemy's attack turning stroke back.",
-        "health": 3
+        "health": 3,
+        "info": "Reflects -1 attack point to opponent (if attack = 1 then each hero gets no damage)"
     },
     "sivka": {
         "id": "sivka",
@@ -368,7 +404,8 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Magic prophetic \"wild\"-colored horse, mediating the living and realm of the dead.",
-        "initialpoints": 2
+        "initialpoints": 2,
+        "info": "Deals 2 points of damage"
     },
     "firebird": {
         "id": "firebird",
@@ -378,7 +415,8 @@
         "category": "shuffling",
         "categoryName": "shuffling",
         "description": "Magic fire bird. Her feathers have the ability to glow and can blind the human vision.  Firebird dies every year in autumn and returns to life in spring.",
-        "health": 1
+        "health": 1,
+        "info": "Opponents get all new cards from their decks on each move"
     },
     "kladenets": {
         "id": "kladenets",
@@ -388,27 +426,32 @@
         "category": "attack",
         "categoryName": "attack",
         "description": "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.",
-        "health": 2
+        "health": 2,
+        "info": "Player gets +1 point to all attacks"
     },
     "ring": {
         "id": "ring",
         "type": "item",
-        "health": 5
+        "health": 5,
+        "info": "If ring is on table at the end of game - player gets  + 10 gold coins"
     },
     "helmet": {
         "id": "helmet",
         "type": "item",
-        "health": 3
+        "health": 3,
+        "info": "50% chance that opponent direct attack fails"
     },
     "bracer": {
         "id": "bracer",
         "type": "item",
-        "health": 2
+        "health": 2,
+        "info": "All attack cards in active player''s hand with 1 point get 2 points as far as bracer is on table and remain these 2 points untill their usage"
     },
     "chainMail": {
         "id": "chainMail",
         "type": "item",
-        "health": 4
+        "health": 4,
+        "info": "75% of all direct attacks from opponent deal - 1 point and all attacks with 1 point = 0 and deal no damage at all"
     },
     "lapti": {
         "id": "lapti",
