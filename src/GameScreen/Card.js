@@ -6,16 +6,6 @@ import BoardContext from './BoardContext';
 import '../css/Cards.css';
 import imagesCards from '../cardImages';
 
-function cardClass(type, background, dragging) {
-    if (!dragging && type === 'item') {
-        return `card game-card card-like ${background}-item`;
-    }
-    if (!dragging && type !== 'item') {
-        return `card game-card card-like ${background}-action`;
-    }
-    return `card game-card card-like ${background}-item`;
-}
-
 export function backgroundImg(category) {
     if (category === 'attackItems' || category === 'attack') {
         return imagesCards.backgroundAttack;
@@ -75,11 +65,14 @@ const Card = (props) => {
         categoryName, healthCurrent, health, points, initialpoints,
     } = props.card;
     const { background } = props.player;
+    const backgroundColor = type === 'item' ? `${background}-item` : `${background}-action`;
     const { cardSelect, cardAim, dragging } = useContext(BoardContext);
+    const isDraggable = disabled === true || panic === true;
+    const categoryTitle = categoryName === 'suppress' ? 'suppress' : '';
 
     function handleClick(event) {
         event.stopPropagation();
-        props.active && cardSelect(props.cardKey, props.card, 'click');    
+        props.active && cardSelect(props.cardKey, props.card, 'click');
     }
 
     return (
@@ -88,76 +81,34 @@ const Card = (props) => {
             style={cardOrigin(dragging, props.card)}
         >
             <div
-                className={`${cardClass(type, background, false)}`}
+                className={`card game-card card-like ${backgroundColor}`}
                 data-key={props.cardKey}
-                draggable={
-                    disabled === true || panic === true
-                        ? null
-                        : props.draggable
-                }
+                draggable={isDraggable ? null : props.draggable}
                 onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
                 onClick={handleClick}
                 onDragEnd={cardAim}
             >
-                {disabled === true || panic === true ? (
-                    <div className="card-chained" />
-                ) : null}
+                {isDraggable ? <div className="card-chained" /> : null}
                 <div className="card-header">
-                    <div
-                        className={`card-icon-container game-card-icon-container ${
-                            type === 'item'
-                                ? `${background}-item`
-                                : `${background}-action`
-                        }`}
-                    >
+                    <div className={`card-icon-container game-card-icon-container ${backgroundColor}`}>
                         <div className={`card-icon game-card-icon ${iconImg(category, type)}`} />
                     </div>
-                    <p
-                        className={`card-category game-card-category ${
-                            categoryName === 'suppress' ? 'suppress' : null
-                        }`}
-                    >
+                    <p className={`card-category game-card-category ${categoryTitle}`}>
                         {categoryName}
                     </p>
                     {initialpoints ? (
-                        <div
-                            className={`card-points game-card-points
-                                ${
-                        type === 'item'
-                            ? `${background}-item`
-                            : `${background}-action`
-                        }`}
-                        >
+                        <div className={`card-points game-card-points ${backgroundColor}`}>
                             {points}
                         </div>
                     ) : null}
                     {health ? (
-                        <div
-                            className={`card-health game-card-health
-                                ${
-                        type === 'item'
-                            ? `${background}-item`
-                            : `${background}-action`
-                        }`}
-                        >
+                        <div className={`card-health game-card-health ${backgroundColor}`}>
                             {healthCurrent}
                         </div>
                     ) : null}
                 </div>
-                <div
-                    className="game-card-image"
-                    style={{
-                        backgroundImage: `url(${backgroundImg(category)})`,
-                        backgroundSize: '100% 100%',
-                    }}
-                >
-                    <div
-                        className="game-card-image"
-                        style={{
-                            backgroundImage: `url(${imagesCards[id]})`,
-                            backgroundSize: '100% 100%',
-                        }}
-                    />
+                <div className="game-card-image" style={{ backgroundImage: `url(${backgroundImg(category)})` }}>
+                    <div className="game-card-image" style={{ backgroundImage: `url(${imagesCards[id]})` }} />
                 </div>
                 <div className="card-footer game-card-footer">
                     <p>{name}</p>
@@ -179,6 +130,5 @@ Card.defaultProps = {
     draggable: null,
     cardKey: null,
 };
-
 
 export default Card;
