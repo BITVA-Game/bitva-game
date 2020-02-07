@@ -108,8 +108,9 @@ class App extends Component {
             },
         });
         const { loaded } = this.state;
+        const needAdjustment = false;
         return (
-            <div className="App">
+            <div className={needAdjustment ? 'app-768' : ''}>
                 <div id="background" className="start-screen">
                     <CSSTransition classNames="moveForest" in={loaded} timeout={5000}>
                         <div>

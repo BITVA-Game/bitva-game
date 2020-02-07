@@ -124,3 +124,16 @@ button,
   right: -80px;
   transition: all 4000ms ease-in;
 }
+
+/* for 1366x768 only */
+
+.app-768 .login-content {
+    height: 608px;
+}
+.app-768 .versus-profiles-container {
+    height: 668px;
+}
+
+.app-768 .heroselection-details {
+    padding: 16px 78px;
+}
