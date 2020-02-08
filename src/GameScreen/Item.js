@@ -8,7 +8,7 @@ import Card from './Card';
 
 const Item = (props) => {
     const {
-        isTarget, cardDropped, cardOver, cardSelect,
+        isTarget, cardDropped, cardOver,
     } = useContext(BoardContext);
     return (
         <div
@@ -34,9 +34,7 @@ const Item = (props) => {
             onClick={
                 // eslint-disable-next-line no-nested-ternary
                 props.active
-                    ? props.item
-                        ? () => cardSelect(Object.keys(props.player.item)[0], props.item, 'click')
-                        : () => cardDropped('item', props.player)
+                    ? () => cardDropped('item', props.player)
                     : props.item
                         ? () => cardDropped('itemOpponent', props.player)
                         : null
@@ -56,6 +54,7 @@ const Item = (props) => {
                     player={props.player}
                     cardKey={Object.keys(props.player.item)[0]}
                     draggable={props.active}
+                    active={props.active}
                 />
             ) : null}
         </div>

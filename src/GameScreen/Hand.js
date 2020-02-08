@@ -9,7 +9,7 @@ import '../css/GameScreen.css';
 function handClass(active, player) {
     let potion;
     // eslint-disable-next-line no-unused-expressions
-    player.turningHand === true ? potion = true : null;
+    player.turningHand === true ? (potion = true) : null;
     if (potion && active === false) {
         return 'hand no-hand';
     }
@@ -20,13 +20,19 @@ function handClass(active, player) {
 }
 
 const CardContainer = ({
-    index, player, inactivePlayer, cardId, active, card, background,
+    index,
+    player,
+    inactivePlayer,
+    cardId,
+    active,
+    card,
+    background,
 }) => {
     const { dragging } = useContext(BoardContext);
     return (
         <div className="card-container card-like card-place">
             <div key={index} className={`card-like card-holder deck-${background}`} />
-            { cardId && card && (
+            {cardId && card && (
                 <div
                     className={`animated-card-${index}`}
                     style={cardOrigin(dragging, card)}
@@ -48,7 +54,7 @@ const CardContainer = ({
 };
 
 const Hand = ({
-    active, background, hand, inactivePlayer, player,
+ active, background, hand, inactivePlayer, player 
 }) => {
     const handKeys = Object.keys(hand);
     const [cardContainers, setCardContainers] = useState({
@@ -60,12 +66,14 @@ const Hand = ({
     });
 
     useEffect(() => {
-        // new object for state
+    // new object for state
         const updatedCardContainers = { ...cardContainers };
 
         // compare props and state to find new cards in hand
         // eslint-disable-next-line max-len
-        const newCardsInHand = handKeys.filter((el) => (!Object.values(cardContainers).includes(el)));
+        const newCardsInHand = handKeys.filter(
+            (el) => !Object.values(cardContainers).includes(el),
+        );
 
         if (newCardsInHand.length > 0) {
             // put new cards in new object
@@ -78,7 +86,7 @@ const Hand = ({
             });
             setCardContainers(updatedCardContainers);
         }
-    }, [handKeys]);
+    }, [handKeys, cardContainers]);
 
     return (
         <div className={`${handClass(active, player)}`}>

@@ -10,7 +10,6 @@ import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
 import NetworkPlay from './NetworkPlay';
-import SelectOpponent from './SelectOpponent';
 import PlayScreen from './PlayScreen';
 
 import hutImage from './images/backgrounds/Background_hut.png';
