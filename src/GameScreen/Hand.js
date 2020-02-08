@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import BoardContext from './BoardContext';
 import Card, { cardOrigin } from './Card';
+import playSound from '../soundController';
 import '../css/App.css';
 import '../css/GameScreen.css';
 
@@ -48,8 +49,9 @@ const CardContainer = ({
     );
 };
 
-// eslint-disable-next-line object-curly-newline
-const Hand = ({ active, background, hand, inactivePlayer, player }) => {
+const Hand = ({
+    active, background, hand, inactivePlayer, player,
+}) => {
     const handKeys = Object.keys(hand);
 
     // need key to hold the space for card container; animationDelay will change after card's shift
@@ -76,7 +78,9 @@ const Hand = ({ active, background, hand, inactivePlayer, player }) => {
         const newCardsInHand = handKeys.filter((el) => !cardIdObjFromState[el]);
 
         if (newCardsInHand.length > 0) {
-            // put new cards and animation delay in new object for state
+            // eslint-disable-next-line no-unused-expressions
+            playSound('card', newCardsInHand.length);
+            // put new cards in new object
             let index = 0;
             Object.keys(cardContainers).forEach((el) => {
                 if (!handKeys.includes(cardContainers[el].cardId)) {
@@ -88,6 +92,12 @@ const Hand = ({ active, background, hand, inactivePlayer, player }) => {
             setCardContainers(updatedCardContainers);
         }
     }, [handKeys, cardContainers]);
+
+    useEffect(() => {
+        if (!active) {
+            playSound('card', Object.keys(inactivePlayer.hand).length);
+        }
+    }, []);
 
     return (
         <div className={`${handClass(active, player)}`}>

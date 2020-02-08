@@ -10,6 +10,7 @@ const itemSound = graveyardSound;
 const clairvoyanceSound = graveyardSound;
 const turningPotionSound = graveyardSound;
 const birds = new UIFx(`${process.env.PUBLIC_URL}/sound/birds.mp3`, { volume: 1.0 });
+const card = new UIFx(`${process.env.PUBLIC_URL}/sound/card.mp3`, { volume: 1.0 });
 
 const action = {
     graveyard: graveyardSound,
@@ -22,10 +23,23 @@ const action = {
     clairvoyance: clairvoyanceSound,
     turningPotion: turningPotionSound,
     cardsFromGrave,
+    card,
 };
 
-function playSound(type) {
-    action[type].play();
+function playSound(type, count) {
+    console.log('We play Sound:', type, count);
+    if (!count) {
+        action[type].play();
+    } else {
+        const time = 500 * count;
+        setTimeout(() => action[type].play(), time);
+        const n = count - 1;
+        if (n === 0) {
+            return null;
+        }
+        return playSound(type, n);
+    }
+    return null;
 }
 
 export default playSound;
