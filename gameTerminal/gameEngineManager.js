@@ -1,7 +1,7 @@
 const { message } = require('../constants');
 
 let engine = null;
-const GameEngine = require('./gameEngineClient');
+const { GameEngineLocal } = require('./gameEngineClient');
 
 const account = (app, id) => app.accounts.records.find((a) => a.id === id);
 const participants = (app) => ({
@@ -14,7 +14,7 @@ async function handle(app, msg) {
     case message.PLAY:
         // call game engine to calculate new game state
         if (!engine) {
-            engine = new GameEngine();
+            engine = new GameEngineLocal();
         }
         await engine.handle({
             type: message.PLAY,

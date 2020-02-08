@@ -8,7 +8,6 @@ let application = JSON.stringify();
 // Additional files that have functions related to this part of application
 const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
-const socketClient = require('./socketClient');
 const accountManager = require('./accountManager');
 const participantManager = require('./participantManager');
 
