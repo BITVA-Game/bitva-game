@@ -4,7 +4,7 @@ import backgroundAttack from './images/cards/background_common2.jpg';
 import backgroundCommon from './images/cards/background_common1.jpg';
 import bajun from './images/cards/catbajun.png';
 import bat from './images/cards/bat.png';
-import bereginya from './images/cards/bitva-cardbase.jpg';
+import bereginya from './images/cards/bereginia.png';
 import bogatyr from './images/cards/bitva-cardbase.jpg';
 import bolotnitsa from './images/cards/bolotnitsa.png';
 import bowArrow from './images/cards/bitva-cardbase.jpg';
