@@ -74,8 +74,8 @@ test('msg PLAY creates engine and handles the message', async () => {
     // Mock sendReply function
     const sendReply = jest.fn();
     const engineState = {
-        screen: 'PLAY',
-        innerState: { a: 1 },
+        screen: scr.HEROSELECT,
+        // innerState: { a: 1 },
     };
     nock.disableNetConnect();
     const scope = nock(address)

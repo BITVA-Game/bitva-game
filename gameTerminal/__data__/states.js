@@ -39,10 +39,10 @@ export const startscreenStateP2 = {
         records: testAccounts.accounts,
     },
     participants: {
-        player: testAccounts.alice.id,
-        guest: testAccounts.bob.id,
+        player: testAccounts.alice,
+        guest: testAccounts.bob,
     },
     manager: {
-        screen: screen.PLAY,
+        screen: screen.HEROSELECT,
     },
 };
