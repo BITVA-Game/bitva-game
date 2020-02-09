@@ -95,14 +95,28 @@ test('msg PLAY creates engine and handles the message', async () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenStateP2);
 });
 
-test.skip('msg sent twice, we have one instance of engine', async () => {
+test.only('msg sent after 2nd hero selection, we have one instance of engine', async () => {
     const msg = { type: message.HEROSELECTED };
+    application.setApp({
+        accounts: {
+            loading: false,
+            records: testAccounts.accounts,
+        },
+        participants: {
+            player: testAccounts.alice,
+            guest: testAccounts.bob,
+        },
+        manager: {
+            screen: scr.HEROSELECT,
+        },
+        engine: undefined,
+    });
     // Mock sendReply function
     const sendReply = jest.fn();
     const handleFunc = jest.fn();
     const engineState = {
-        screen: scr.STARTSCREEN,
-        innerState: { a: 1 },
+        screen: scr.HEROSELECT,
+        // innerState: { a: 1 },
     };
 
     const mockEngine = jest.fn().mockImplementation(() => ({
@@ -126,8 +140,8 @@ test.skip('msg sent twice, we have one instance of engine', async () => {
     const expectedState = {
         account: testAccounts.alice,
         guest: testAccounts.bob,
-        manager: { screen: scr.STARTSCREEN },
-        innerState: engineState.innerState,
+        manager: { screen: scr.VERSUS },
+        // innerState: engineState.innerState,
     };
     expect(sendReply.mock.calls.length).toBe(2);
     expect(sendReply.mock.calls[1][0]).toMatchObject(expectedState);
