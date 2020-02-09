@@ -20,21 +20,16 @@ function handClass(active, player) {
 }
 
 const CardContainer = ({
-    index,
-    player,
-    inactivePlayer,
-    cardId,
-    active,
-    card,
-    background,
+    index, player, inactivePlayer, cardId, active, card, background, animationDelay,
 }) => {
     const { dragging } = useContext(BoardContext);
+
     return (
         <div className="card-container card-like card-place">
             <div key={index} className={`card-like card-holder deck-${background}`} />
             {cardId && card && (
                 <div
-                    className={`animated-card-${index}`}
+                    className={`animated-card-${index} card-animation-delay-${animationDelay}`}
                     style={cardOrigin(dragging, card)}
                 >
                     <div className={`card-like card-back deck-${background}`} />
@@ -53,34 +48,40 @@ const CardContainer = ({
     );
 };
 
-const Hand = ({
- active, background, hand, inactivePlayer, player 
-}) => {
+// eslint-disable-next-line object-curly-newline
+const Hand = ({ active, background, hand, inactivePlayer, player }) => {
     const handKeys = Object.keys(hand);
+
+    // need key to hold the space for card container; animationDelay will change after card's shift
     const [cardContainers, setCardContainers] = useState({
-        0: handKeys[0],
-        1: handKeys[1],
-        2: handKeys[2],
-        3: handKeys[3],
-        4: handKeys[4],
+        0: { cardId: handKeys[0], animationDelay: 4 },
+        1: { cardId: handKeys[1], animationDelay: 3 },
+        2: { cardId: handKeys[2], animationDelay: 2 },
+        3: { cardId: handKeys[3], animationDelay: 1 },
+        4: { cardId: handKeys[4], animationDelay: 0 },
     });
 
     useEffect(() => {
     // new object for state
         const updatedCardContainers = { ...cardContainers };
 
-        // compare props and state to find new cards in hand
-        // eslint-disable-next-line max-len
-        const newCardsInHand = handKeys.filter(
-            (el) => !Object.values(cardContainers).includes(el),
-        );
+        // put cardIds from state to object to make it easier to compare with props
+        const cardIdObjFromState = {};
+        Object.keys(cardContainers).forEach((objKey) => {
+            const cardId = cardContainers[objKey].cardId;
+            cardIdObjFromState[cardId] = true;
+        });
+
+        // compare cardIds in props and cardIds in obj from state to find new cards in hand
+        const newCardsInHand = handKeys.filter((el) => !cardIdObjFromState[el]);
 
         if (newCardsInHand.length > 0) {
-            // put new cards in new object
+            // put new cards and animation delay in new object for state
             let index = 0;
             Object.keys(cardContainers).forEach((el) => {
-                if (!handKeys.includes(cardContainers[el])) {
-                    updatedCardContainers[el] = newCardsInHand[index];
+                if (!handKeys.includes(cardContainers[el].cardId)) {
+                    updatedCardContainers[el].cardId = newCardsInHand[index];
+                    updatedCardContainers[el].animationDelay = index;
                     index++;
                 }
             });
@@ -96,10 +97,11 @@ const Hand = ({
                     index={key}
                     player={player}
                     inactivePlayer={inactivePlayer}
-                    cardId={cardContainers[key]}
+                    cardId={cardContainers[key].cardId}
                     active={active}
-                    card={hand[cardContainers[key]]}
+                    card={hand[cardContainers[key].cardId]}
                     background={background}
+                    animationDelay={cardContainers[key].animationDelay}
                 />
             ))}
         </div>
@@ -122,6 +124,7 @@ CardContainer.propTypes = {
     active: PropTypes.bool.isRequired,
     card: PropTypes.object,
     background: PropTypes.string.isRequired,
+    animationDelay: PropTypes.string.isRequired,
 };
 
 CardContainer.defaultProps = {
