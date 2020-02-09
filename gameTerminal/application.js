@@ -10,6 +10,7 @@ const screenManager = require('./screenManager');
 const gameEngineManager = require('./gameEngineManager');
 const accountManager = require('./accountManager');
 const participantManager = require('./participantManager');
+const systemManager = require('./systemManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -48,6 +49,7 @@ async function processMessage(msg, reply) {
         participants: participantManager.handle(application, msg, reProcess),
         manager: screenManager.handle(application, msg, reProcess),
         engine: await gameEngineManager.handle(application, msg, reProcess),
+        system: systemManager.handle(application, msg, reProcess),
     };
     console.log('NEW APP', newApp);
     reply(newApp);
@@ -58,11 +60,13 @@ async function initApplication(msg, reply) {
     const accounts = accountManager.handle({}, msg, reProcess);
     const manager = screenManager.handle({}, msg, reProcess);
     const participants = participantManager.handle({}, msg, reProcess);
+    const system = systemManager.handle({}, msg, reProcess);
     const newApp = {
         ...application,
         accounts,
         manager,
         participants,
+        system,
     };
     reply(newApp);
 }

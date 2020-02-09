@@ -90,13 +90,6 @@ app.on('ready', createWindow);
 
 console.log(app);
 
-function getDisplayHeight() {
-    const display = electron.screen.getPrimaryDisplay();
-    return display.size.height;
-}
-
-app.on('ready', getDisplayHeight);
-
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar
