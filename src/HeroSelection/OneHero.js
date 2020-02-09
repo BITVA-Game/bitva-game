@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
-/* eslint-disable import/no-duplicates */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../css/App.css';
 import '../css/HeroSelection.css';
 import '../css/Cards.css';
+import imagesCards from '../cardImages';
 
-import { backgroundImg } from '../GameScreen/Card';
+import { backgroundImg, iconImg } from '../GameScreen/Card';
 
 import heart from '../images/icons/heart_red.png';
 
@@ -15,87 +15,11 @@ import morevna from '../images/heroes/morevna_full.jpg';
 import hozyaika from '../images/heroes/hozyaika_full.jpg';
 import premudraya from '../images/heroes/premudraya_full.jpg';
 
-import apple from '../images/cards/apple.png';
-import bajun from '../images/cards/catbajun.png';
-import bat from '../images/cards/bat.png';
-import bereginya from '../images/cards/bitva-cardbase.jpg';
-import bogatyr from '../images/cards/bitva-cardbase.jpg';
-import bolotnitsa from '../images/cards/bolotnitsa.png';
-import bowArrow from '../images/cards/bitva-cardbase.jpg';
-import bulat from '../images/cards/sword.png';
-import chemise from '../images/cards/bitva-cardbase.jpg';
-import chickenLegsHut from '../images/cards/izba.png';
-import clairvoyance from '../images/cards/bitva-cardbase.jpg';
-import crown from '../images/cards/bitva-cardbase.jpg';
-import dolly from '../images/cards/bitva-cardbase.jpg';
-import earthquake from '../images/cards/bitva-cardbase.jpg';
-import horsemanBlack from '../images/cards/blackrider.png';
-import horsemanRed from '../images/cards/redrider.png';
-import horsemanWhite from '../images/cards/whiterider.png';
-import kikimora from '../images/cards/kikimora.png';
-import lizard from '../images/cards/lizard.png';
-import magicTree from '../images/cards/tree.png';
-import magicMirror from '../images/cards/bitva-cardbase.jpg';
-import malachiteBox from '../images/cards/malachitebox.png';
-import mortar from '../images/cards/bitva-cardbase.jpg';
-import forestMushroom from '../images/cards/mushrooms.png';
-import plateMail from '../images/cards/bitva-cardbase.jpg';
-import raven from '../images/cards/raven.png';
-import russianOven from '../images/cards/bitva-cardbase.jpg';
-import shieldLarge from '../images/cards/largeshield.png';
-import shieldSmall from '../images/cards/smallshield.png';
-import sivka from '../images/cards/warhorse.png';
-import skullLantern from '../images/cards/bitva-cardbase.jpg';
-import turningPotion from '../images/cards/potion.png';
-import warhorse from '../images/cards/warhorse.png';
-import waterDead from '../images/cards/deadwater.png';
-import waterLiving from '../images/cards/livingwater.png';
-import wolf from '../images/cards/wolf.png';
-
 const images = {
     yaga,
     morevna,
     hozyaika,
     premudraya,
-};
-
-const imagesCards = {
-    apple,
-    bajun,
-    bat,
-    bereginya,
-    bogatyr,
-    bolotnitsa,
-    bowArrow,
-    bulat,
-    chemise,
-    chickenLegsHut,
-    clairvoyance,
-    crown,
-    dolly,
-    earthquake,
-    forestMushroom,
-    horsemanBlack,
-    horsemanRed,
-    horsemanWhite,
-    kikimora,
-    lizard,
-    magicTree,
-    magicMirror,
-    malachiteBox,
-    mortar,
-    plateMail,
-    raven,
-    russianOven,
-    shieldLarge,
-    shieldSmall,
-    sivka,
-    skullLantern,
-    turningPotion,
-    warhorse,
-    waterDead,
-    waterLiving,
-    wolf,
 };
 
 const HeroImage = (props) => (
@@ -110,23 +34,7 @@ const CardPreview = (props) => (
     <div className={`card details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
         <div className="card-header">
             <div className={`card-icon-container details-card-icon-container ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
-                <div className={`card-icon details-card-icon
-                    ${props.card.category === 'attack' ? 'icon-attack' : null}
-                    ${props.card.category === 'attackItems' ? 'icon-damage' : null}
-                    ${props.card.category === 'damage' ? 'icon-damage' : null}
-                    ${props.card.category === 'generator' ? 'icon-move' : null}
-                    ${props.card.category === 'heal' && props.card.type === 'action' ? 'icon-heal' : null}
-                    ${props.card.category === 'heal' && props.card.type === 'item' ? 'icon-heart' : null}
-                    ${props.card.category === 'holdCard' ? 'icon-hold' : null}
-                    ${props.card.category === 'holdTurn' ? 'icon-hold' : null}
-                    ${props.card.category === 'panic' ? 'icon-arrows' : null}
-                    ${props.card.category === 'reflect' ? 'icon-reflect' : null}
-                    ${props.card.category === 'shield' ? 'icon-shield' : null}
-                    ${props.card.category === 'showCards' ? 'icon-show' : null}
-                    ${props.card.category === 'shuffling' ? 'icon-move' : null}
-                    ${props.card.category === 'suppress' ? 'icon-damage' : null}
-                    ${props.card.category === 'turning' ? 'icon-arrows' : null}`}
-                />
+                <div className={`card-icon details-card-icon ${iconImg(props.card.category, props.card.type)}`} />
             </div>
             <p className="card-category details-card-category">{props.card.categoryName}</p>
             {props.card.initialpoints
