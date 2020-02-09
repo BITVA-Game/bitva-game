@@ -54,7 +54,7 @@ export function cardOrigin(dragging, card) {
         return { opacity: 0, transform: 'scale(1.0)' };
     }
     if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
-        return { opacity: 1.0, transform: 'scale(1.2)' };
+        return { opacity: 1.0, transform: 'scale(1.1)' };
     }
     return { opacity: 1.0, transform: 'scale(1.0)' };
 }
