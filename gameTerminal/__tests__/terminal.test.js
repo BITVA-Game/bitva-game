@@ -56,15 +56,15 @@ test('msg LOGIN switches screen state to STARTSCREEN with Alice', async () => {
     expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenStateP1);
 });
 
-test('msg PLAY creates engine and handles the message', async () => {
+test.only('msg PLAY creates engine and handles the message', async () => {
     const msg = { type: message.PLAY };
     application.setApp({
         accounts: {
             records: testAccounts.accounts,
         },
         participants: {
-            player: testAccounts.alice.id,
-            guest: testAccounts.bob.id,
+            player: testAccounts.alice,
+            guest: testAccounts.bob,
         },
         manager: {
             screen: scr.HEROSELECT,
@@ -75,7 +75,7 @@ test('msg PLAY creates engine and handles the message', async () => {
     const sendReply = jest.fn();
     const engineState = {
         screen: scr.HEROSELECT,
-        // innerState: { a: 1 },
+        innerState: { a: 1 },
     };
     nock.disableNetConnect();
     const scope = nock(address)
@@ -90,12 +90,13 @@ test('msg PLAY creates engine and handles the message', async () => {
         .reply(200, engineState);
     await application.msgReceived(msg, sendReply);
     scope.isDone();
+    console.log(application.getApp());
     expect(application.getApp().engine).toMatchObject(engineState);
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenStateP2);
 });
 
-test.only('msg sent after 2nd hero selection, we have one instance of engine', async () => {
+test.skip('msg sent after 2nd hero selection, we have one instance of engine', async () => {
     const msg = { type: message.HEROSELECTED };
     application.setApp({
         accounts: {
