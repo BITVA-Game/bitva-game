@@ -64,7 +64,7 @@ const Hand = ({
     });
 
     useEffect(() => {
-    // new object for state
+        // new object for state
         const updatedCardContainers = { ...cardContainers };
 
         // put cardIds from state to object to make it easier to compare with props
