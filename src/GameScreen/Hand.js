@@ -29,7 +29,7 @@ const CardContainer = ({
             <div key={index} className={`card-like card-holder deck-${background}`} />
             {cardId && card && (
                 <div
-                    className={`animated-card-${index} card-animation-delay-${animationDelay}`}
+                    className={`animated-card animated-card-${index} card-animation-delay-${animationDelay}`}
                     style={cardOrigin(dragging, card)}
                 >
                     <div className={`card-like card-back deck-${background}`} />
