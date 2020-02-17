@@ -19,7 +19,7 @@ const MenuButton = (props) => (
 
 const LogoBlock = (props) => (
     <div className="logo-container">
-        {props.opened ? <img className="logo" src={logo} alt="logo" /> : null}
+        <img className="logo" src={logo} alt="logo" />
     </div>
 );
 
