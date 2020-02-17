@@ -966,8 +966,10 @@
 
 /*Animation deck to hand first deal*/
 .card-back {
-    opacity: 0.9;
-    position: absolute;     
+    /* opacity: 0.9; */
+    position: absolute;
+    /* transform: rotateY(180deg); */
+
 }
 
 .player-top .card-back {

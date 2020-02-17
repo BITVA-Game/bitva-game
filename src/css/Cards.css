@@ -286,7 +286,7 @@
 
 .game-card-back,
 .game-card-front {
-    backface-visibility: hidden;
+    /* backface-visibility: hidden; */
     height: 100%;
     position: absolute;
     width: 100%;

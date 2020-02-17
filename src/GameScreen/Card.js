@@ -132,37 +132,44 @@ const Card = (props) => {
                 className="game-card-container card-place card-like"
                 style={cardOrigin(dragging, props.card)}
             >
-                <div
-                    className={`card game-card card-like card${flipped ? '-flipped' : ''}`}
-                    data-key={props.cardKey}
-                    draggable={isDraggable ? null : props.draggable}
-                    onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
-                    onClick={handleClick}
-                    onDragEnd={cardAim}
-                    onContextMenu={() => setFlipped(!flipped)}
-                >
-                    {isDraggable ? <div className="card-chained" /> : null}
-                    {flipped ? (
-                        <CardBack
-                            backgroundColor={backgroundColor}
-                            info={info}
-                            name={name}
-                        />
-                    ) : (
-                        <CardFront
-                            backgroundColor={backgroundColor}
-                            type={type}
-                            category={category}
-                            categoryName={categoryName}
-                            healthCurrent={healthCurrent}
-                            health={health}
-                            points={points}
-                            initialpoints={initialpoints}
-                            id={id}
-                            name={name}
-                        />
-                    )}
-                </div>
+                {isDraggable ? <div className="card-chained" /> : null}
+                {/* {flipped ? (
+                    <CardBack
+                        backgroundColor={backgroundColor}
+                        info={info}
+                        name={name}
+                    />
+                ) : (
+                    <CardFront
+                        backgroundColor={backgroundColor}
+                        type={type}
+                        category={category}
+                        categoryName={categoryName}
+                        healthCurrent={healthCurrent}
+                        health={health}
+                        points={points}
+                        initialpoints={initialpoints}
+                        id={id}
+                        name={name}
+                    />
+                )} */}
+                <CardBack
+                    backgroundColor={backgroundColor}
+                    info={info}
+                    name={name}
+                    />
+                <CardFront
+                    backgroundColor={backgroundColor}
+                    type={type}
+                    category={category}
+                    categoryName={categoryName}
+                    healthCurrent={healthCurrent}
+                    health={health}
+                    points={points}
+                    initialpoints={initialpoints}
+                    id={id}
+                    name={name}
+                />
             </div>
         </>
     );
