@@ -215,6 +215,19 @@
 	position: relative;
 }
 
+.card-container-size {
+	background: transparent;
+	height: 172px;
+	min-width: 124px;
+    padding: 2px;
+    width: 124px;
+}
+
+.card-frame-wrapper{
+	position: absolute;
+    top: 0;
+    left: 0;
+}
 .card-place {
     margin-right: 26px;
 }

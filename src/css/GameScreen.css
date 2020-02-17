@@ -760,13 +760,14 @@
 }
 
 .card-frame {
-     position: relative;
-     z-index: 0;
-     width: 205px;
-     height: 205px;
-     border-radius: 80px;
+	position: relative;
+	z-index: 0;
+	width: 124px;
+	height: 172px;
+     
+     /*border-radius: 80px;*/
      overflow: hidden;
-     padding: 5rem;
+    /* padding: 5rem;*/
 }
  .card-frame::before {
      content: '';

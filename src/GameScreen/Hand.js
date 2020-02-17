@@ -33,7 +33,10 @@ const CardContainer = ({
     const { dragging } = useContext(BoardContext);
 
     return (
-        <div className="card-container card-like card-place">
+        <div className={`card-container card-container-size card-place`}>
+           <div className='card-frame-wrapper'>
+            <div className={`${active ? 'card-frame' : ''} `}/>
+            </div>
             <div key={index} className={`card-like card-holder deck-${background}`} />
             {cardId && card && (
                 <div
