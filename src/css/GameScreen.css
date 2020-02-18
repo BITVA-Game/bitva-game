@@ -964,7 +964,7 @@
 }
 
 .animated-card {
-    animation-direction:alternate;
+    animation-direction: alternate;
     animation-fill-mode: backwards;   
 }
 
