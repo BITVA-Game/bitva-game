@@ -123,6 +123,10 @@ const Card = (props) => {
     }
 
     return (
+        <>
+            <div className='card-frame-wrapper'>
+                <div className={`${props.active && !isDraggable ? 'card-frame' : ''} `}/>
+            </div>
         <div
             className="game-card-container card-place card-like"
             style={cardOrigin(dragging, props.card)}
@@ -159,6 +163,7 @@ const Card = (props) => {
                 )}
             </div>
         </div>
+        </>
     );
 };
 

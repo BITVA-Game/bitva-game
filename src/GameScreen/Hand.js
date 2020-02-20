@@ -32,6 +32,7 @@ const CardContainer = ({
 }) => {
     const { dragging } = useContext(BoardContext);
 
+
     return (
         <div className="card-container card-container-size card-place">
             <div key={index} className={`card-like card-holder deck-${background}`} />
@@ -40,9 +41,6 @@ const CardContainer = ({
                     className={`animated-card-${index} card-container-size card-animation-delay-${animationDelay}`}
                     style={cardOrigin(dragging, card)}
                 >
-                    <div className="card-frame-wrapper">
-                        <div className={`${active ? 'card-frame' : ''} `} />
-                    </div>
                     <div className={`card-like card-back deck-${background}`} />
                     <Card
                         key={cardId}
