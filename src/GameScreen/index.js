@@ -25,11 +25,6 @@ class GameScreen extends Component {
     }
 
     componentDidMount() {
-        // this.setState({ animation: 'background' });
-        // setTimeout(() => {
-        //     this.setState({ animation: null });
-        // }, 1000);
-
         this.startBirds();
     }
 
