@@ -20,6 +20,11 @@ const LoginScreen = ({
                 <img src={spider} alt="spider icon" />
             </div>
             <div data-testid="mushroom-animation" className="mushroom" />
+            <div className="lemon">
+                <div className="eye" />
+            </div>
+            <div className="eyePupil" />
+            <div className="eyePupilBackground" />
         </div>
         <Header />
         {accounts.loading ? (
