@@ -11,7 +11,7 @@ const BirdsAnimation = () => {
     // max time delay to start animation
     const maxStart = 180000;
     // random time delay to start animation between mmin and max values
-    const animationStart = Math.floor(Math.random() * (maxStart - minStart + 1)) + minStart;
+    const animationStart = Math.floor(Math.random() * ((maxStart - minStart) + 1)) + minStart;
 
     // we need to change state after 1st render - didMount
     // and birdsAnim === true to return BIRDS

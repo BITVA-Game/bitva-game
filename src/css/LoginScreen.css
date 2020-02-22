@@ -330,8 +330,8 @@ input[type="text"] {
     border-radius: 20px 150px 30px 150px;
     height: 20px;
     left: 15.2%;
-    overflow: hidden;
     opacity: 0;
+    overflow: hidden;
     position: absolute;    
     top: 48%;
     transform: rotate(-45deg);
