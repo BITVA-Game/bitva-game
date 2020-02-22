@@ -160,6 +160,7 @@ input[type="text"] {
     animation-duration: 1s;
     animation-fill-mode: forwards;
     height: 30px;
+    opacity: 0;
     position: fixed;
     right: 133px;
     top: 175px;
@@ -299,10 +300,12 @@ input[type="text"] {
 
 .mushroom {
     animation: glow 4s ease-in infinite alternate;
+    animation-delay: 5s;    
     background: url(../images/animation/mushroom.png);
     background-repeat: no-repeat;
     bottom: 393px;
     height: 89px;
+    opacity: 0;
     position: absolute;
     right: 102px;
     width: 61px;
@@ -320,90 +323,85 @@ input[type="text"] {
 /*lizard eye*/
 
 .lemon {
-    position: absolute;
-    left: 15.2%;
-    top: 48%;
-    width: 20px;
-    height: 20px;
+    animation: moveLemon 4s infinite alternate;
+    animation-delay: 5s;
     background: rgb(104, 124, 35);
     border: 3px solid black;
     border-radius: 20px 150px 30px 150px;
-    transform: rotate(-45deg);
+    height: 20px;
+    left: 15.2%;
     overflow: hidden;
-
-    -webkit-animation: moveLemon 4s infinite alternate;
-    animation: moveLemon 4s infinite alternate;
+    opacity: 0;
+    position: absolute;    
+    top: 48%;
+    transform: rotate(-45deg);
+    width: 20px;    
 }
 
 @keyframes moveLemon {
     0% {
             border-radius: 20px 150px 30px 150px;
+            opacity: 1;
     }
     80% {
             border-radius: 10px 190px 20px 190px;
-    }
+        }
 100% {
             opacity: 0;
     }
 }
 
 .eye {
-    position: relative;
+    animation: moveEye 4s infinite alternate;
+    animation-delay: 5s;
+    background-image: radial-gradient(50% 50%, #92fa00, #1cbd04);
+    border: 0.5px solid black;
+    border-radius: 50%;    
+    box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.3), inset 0 0 4.5px 1px black;
+    height: 13px;
     margin-left: 10%;
     margin-top: 15%;
+    opacity: 0;
+    position: relative;    
     width: 13px;
-    height: 13px;
-    border: 0.5px solid black;
-    border-radius: 50%;
-    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 212, from(#92fa00), to(#1cbd04));
-    background-image: -webkit-radial-gradient(50% 50%, #92fa00, #1cbd04);
-    background-image: -moz-radial-gradient(50% 50%, #92fa00, #1cbd04);
-    background-image: -o-radial-gradient(50% 50%, #92fa00, #1cbd04);
-    background-image: -ms-radial-gradient(50% 50%, #92fa00, #1cbd04);
-    background-image: radial-gradient(50% 50%, #92fa00, #1cbd04);
-    -webkit-box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.3), inset 0 0 4.5px 1px black;
-    -moz-box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.3), inset 0 0 4.5px 1px black;
-    box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.3), inset 0 0 4.5px 1px black;
-
-    -webkit-animation: moveEye 4s infinite alternate;
-    animation: moveEye 4s infinite alternate;
-
 }
 
 @keyframes moveEye {
     0% {
-            transform: scale(1);
+        opacity: 1;
+        transform: scale(1);        
     }
     100% {
-            transform: scale(0.9);
+        opacity: 1;
+        transform: scale(0.9);
     }
 }
 
 .eyePupil {
-    position: absolute;
+    animation: moveEyePupil 4s infinite alternate;
+    animation-delay: 5s;
+    background: black;
+    border-radius: 5px 100px 5px 100px;    
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3), inset 0 0 45px 10px black;
+    height: 7px;
     left: 15.9%;
+    opacity: 0;
+    position: absolute;    
     top: 49%;
     width: 7px;
-    height: 7px;
-    background: black;
-    border-radius: 5px 100px 5px 100px;
-
-    -webkit-box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3), inset 0 0 45px 10px black;
-    -moz-box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3), inset 0 0 45px 10px black;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3), inset 0 0 45px 10px black;
-
-    -webkit-animation: moveEyePupil 4s infinite alternate;
-    animation: moveEyePupil 4s infinite alternate;
 }
 
 @keyframes moveEyePupil {
     0% {
-            transform: rotate(45deg) scale(1);
+        opacity: 1;
+        transform: rotate(45deg) scale(1);
     }
     80% {
-            transform: rotate(45deg) scale(0.75);
+        opacity: 1;
+        transform: rotate(45deg) scale(0.75);
     }
-100% {
-            transform: rotate(45deg) scale(0.1);
+    100% {
+        opacity: 1;
+        transform: rotate(45deg) scale(0.1);
     }
 }
