@@ -8,35 +8,22 @@ import '../css/GameScreen.css';
 import { getActivePlayer, getInActivePlayer } from '../rules';
 import { withBoardContext } from './BoardContext';
 import playSound from '../soundController';
+import BirdsAnimation from './animationController';
 
-// animation duration time
-const animationDuration = 9000;
 
 class GameScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            animation: null,
             sound: '',
         };
-        this.startBirds = this.startBirds.bind(this);
         this.playableHand = this.playableHand.bind(this);
         this.startSound = this.startSound.bind(this);
     }
 
-    componentDidMount() {
-        this.startBirds();
-    }
-
     componentDidUpdate(prevProps) {
         const actionType = this.props.app.game.lastAction.type;
-        if (this.state.animation === 'birds') {
-            setTimeout(() => {
-                this.setState({ animation: null });
-            }, animationDuration);
-            clearInterval(this.birdsInterval);
-            this.startBirds();
-        } if (this.state.sound === '' && getActivePlayer(this.props.app).moveCounter !== getActivePlayer(prevProps.app).moveCounter) {
+        if (this.state.sound === '' && getActivePlayer(this.props.app).moveCounter !== getActivePlayer(prevProps.app).moveCounter) {
             this.startSound(actionType);
         } if (this.state.sound !== '') {
             playSound(actionType);
@@ -46,25 +33,8 @@ class GameScreen extends Component {
         }
     }
 
-    componentWillUnmount() {
-        clearInterval(this.birdsInterval);
-    }
-
     startSound(actionType) {
         this.setState({ sound: actionType });
-    }
-
-    startBirds() {
-    // min time delay to start animation
-        const minStart = 60000;
-        // max time delay to start animation
-        const maxStart = 180000;
-        // random time delay to start animation between mmin and max values
-        const animationStart = Math.floor(Math.random() * (maxStart - minStart + 1)) + minStart;
-        // console.log('birds animation starts in', animationStart / 60000);
-        this.birdsInterval = setInterval(() => {
-            this.setState({ animation: 'birds' });
-        }, animationDuration + animationStart);
     }
 
     playableHand(player) {
@@ -103,28 +73,12 @@ class GameScreen extends Component {
                 {this.props.app.game.phase === 'OVER' ? (
                     <GameOver app={this.props.app} />
                 ) : null}
-                {this.state.animation === 'birds' ? <BirdsAnimation /> : null}
+                <BirdsAnimation />
             </div>
         );
     }
 }
 
-const BirdsAnimation = () => {
-    playSound('birds');
-    return (
-        <div className="animation-game-screen">
-            <div className="bird-container bird-container-one">
-                <div className="bird bird-one" />
-            </div>
-            <div className="bird-container bird-container-two">
-                <div className="bird bird-two" />
-            </div>
-            <div className="bird-container bird-container-three">
-                <div className="bird bird-three" />
-            </div>
-        </div>
-    );
-};
 
 const GameOver = (props) => {
     const activePlayer = getActivePlayer(props.app);

@@ -155,6 +155,10 @@ input[type="text"] {
 /* hollow */
 
 .hollow {
+    animation-name: visability;
+    animation-delay: 5s;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
     height: 30px;
     position: fixed;
     right: 133px;
@@ -162,6 +166,8 @@ input[type="text"] {
     transform: translateX(50%);
     width: 30px;
 }
+
+@keyframes visability { 0%, 100% {opacity: 1;} }
 
 .hollow::after {
     animation: eyes 5s ease-in 15s infinite;
@@ -252,7 +258,7 @@ input[type="text"] {
 /* spider */
 
 .spider {
-    animation-name: spider;
+    animation-name: visability;
     animation-delay: 5s;
     animation-duration: 1s;
     animation-fill-mode: forwards;
@@ -265,7 +271,7 @@ input[type="text"] {
     top: 42px;
     width: 45px;
 }
-@keyframes spider { 0%, 100% {opacity: 1;} }
+@keyframes visability { 0%, 100% {opacity: 1;} }
 
 @keyframes spider-move {
     0% {height: 0;}
