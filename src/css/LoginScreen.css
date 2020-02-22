@@ -154,11 +154,11 @@ input[type="text"] {
 
 /* hollow */
 
-.hollow {
-    animation-name: visability;
+.hollow {    
     animation-delay: 5s;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+    animation-name: visability;
     height: 30px;
     opacity: 0;
     position: fixed;
@@ -258,11 +258,11 @@ input[type="text"] {
 
 /* spider */
 
-.spider {
-    animation-name: visability;
+.spider {    
     animation-delay: 5s;
     animation-duration: 1s;
     animation-fill-mode: forwards;
+    animation-name: visability;
     display: block;
     height: 15px;
     left: 5%;
