@@ -100,7 +100,7 @@ class App extends Component {
     }
 
     render() {
-    // console.log('APP ', this.state.app);
+        // console.log('APP ', this.state.app);
         WebFont.load({
             custom: {
                 families: ['Ruslan Display', 'Sedan SC'],
@@ -108,8 +108,9 @@ class App extends Component {
             },
         });
         const { loaded } = this.state;
+        const needAdjustment = this.state.app.system === 768;
         return (
-            <div className="App">
+            <div className={needAdjustment ? 'app-768' : ''}>
                 <div id="background" className="start-screen">
                     <CSSTransition classNames="moveForest" in={loaded} timeout={5000}>
                         <div>
