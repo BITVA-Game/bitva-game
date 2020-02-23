@@ -1,12 +1,11 @@
 .card-chained {
-	background-image: url("../images/chain.png");
-	height: 168px;
-	left: -3px;
-	position: absolute;
-	right: -3px;
-	top: -3px;
-	width: 120px;
-	z-index: 100;
+    background-image: url("../images/chain.png");
+    height: 168px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 120px;
+    z-index: 100;
 }
 
 /* icons */
