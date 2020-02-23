@@ -17,9 +17,9 @@ const MenuButton = (props) => (
     </li>
 );
 
-const LogoBlock = (props) => (
+const LogoBlock = () => (
     <div className="logo-container">
-        {props.opened ? <img className="logo" src={logo} alt="logo" /> : null}
+        <img className="logo" src={logo} alt="logo" />
     </div>
 );
 
@@ -54,7 +54,7 @@ class MainMenu extends Component {
                 data-testid="main-menu"
                 className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}
             >
-                <LogoBlock opened={this.state.opened} />
+                <LogoBlock />
                 <div className="menu-buttons-container">
                     <ul className="menu-buttons-group">
                         <MenuButton
@@ -121,14 +121,6 @@ MainMenu.propTypes = {
 };
 
 MainMenu.defaultProps = {
-    opened: false,
-};
-
-LogoBlock.propTypes = {
-    opened: PropTypes.bool,
-};
-
-LogoBlock.defaultProps = {
     opened: false,
 };
 
