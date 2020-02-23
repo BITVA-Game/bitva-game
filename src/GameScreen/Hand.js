@@ -21,7 +21,14 @@ function handClass(active, player) {
 }
 
 const CardContainer = ({
-    index, player, inactivePlayer, cardId, active, card, background, animationDelay,
+    index,
+    player,
+    inactivePlayer,
+    cardId,
+    active,
+    card,
+    background,
+    animationDelay,
 }) => {
     const { dragging } = useContext(BoardContext);
 
@@ -50,7 +57,7 @@ const CardContainer = ({
 };
 
 const Hand = ({
-    active, background, hand, inactivePlayer, player,
+ active, background, hand, inactivePlayer, player 
 }) => {
     const handKeys = Object.keys(hand);
 
@@ -64,7 +71,7 @@ const Hand = ({
     });
 
     useEffect(() => {
-        // new object for state
+    // new object for state
         const updatedCardContainers = { ...cardContainers };
 
         // put cardIds from state to object to make it easier to compare with props
@@ -97,7 +104,7 @@ const Hand = ({
         if (!active) {
             playSound('card', Object.keys(inactivePlayer.hand).length);
         }
-    }, []);
+    }, [active, inactivePlayer.hand]);
 
     return (
         <div className={`${handClass(active, player)}`}>
