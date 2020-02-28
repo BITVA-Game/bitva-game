@@ -104,7 +104,7 @@ const Hand = ({
         if (!active) {
             playSound('card', Object.keys(inactivePlayer.hand).length);
         }
-    }, [active, inactivePlayer.hand]);
+    }, []);
 
     return (
         <div className={`${handClass(active, player)}`}>
