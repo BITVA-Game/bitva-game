@@ -10,7 +10,6 @@ import { withBoardContext } from './BoardContext';
 import playSound from '../soundController';
 import BirdsAnimation from './AnimationController';
 
-
 class GameScreen extends Component {
     constructor(props) {
         super(props);
