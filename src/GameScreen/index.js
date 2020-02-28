@@ -8,7 +8,7 @@ import '../css/GameScreen.css';
 import { getActivePlayer, getInActivePlayer } from '../rules';
 import { withBoardContext } from './BoardContext';
 import playSound from '../soundController';
-import BirdsAnimation from './AnimationController';
+import BirdsAnimation from './AnimationBirds';
 
 class GameScreen extends Component {
     constructor(props) {
