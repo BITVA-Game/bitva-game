@@ -141,7 +141,7 @@ CardContainer.propTypes = {
     active: PropTypes.bool.isRequired,
     card: PropTypes.object,
     background: PropTypes.string.isRequired,
-    animationDelay: PropTypes.string.isRequired,
+    animationDelay: PropTypes.number.isRequired,
 };
 
 CardContainer.defaultProps = {
