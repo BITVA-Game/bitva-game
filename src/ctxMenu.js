@@ -9,7 +9,7 @@ const {
 
 
 // const startScreen = JSON.stringify({ manager: { screen: 'LOADING' } });
-const startScreen = { manager: { screen: 'LOADING' } };
+const startScreen = { manager: { screen: 'LOADING' }, backTostart: true };
 const morevnaStart = require('../gameTerminal/data/morevnaStart.json');
 const selectCharacter = require('../gameTerminal/data/selectCharacter.json');
 const hozyaikaStart = require('../gameTerminal/data/hozyaikaStart.json');
@@ -90,7 +90,6 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
             label: 'to Start Screen',
             click() {
                 // setApp(startScreen);
-                console.log('We are checking parseApplication!', parseApplication, typeof parseApplication);
                 // sendMessage(parseApplication(getApp()));
                 sendMessage(startScreen);
             },
