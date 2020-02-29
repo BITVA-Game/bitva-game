@@ -100,14 +100,15 @@ const Hand = ({
         }
     }, [handKeys, cardContainers]);
 
-    const cardsSound = () => {
-        if (!active) {
+    // we call useState hook in order to call sound only once for 1st cards deal
+    const [firstSound, setFirstSound] = useState(true);
+    // we call playSound in one hand only to avoid cards sound to be called twice
+    useEffect(() => {
+        if (firstSound === true && !active) {
             playSound('card', Object.keys(inactivePlayer.hand).length);
         }
-    };
-    useEffect(() => {
-        cardsSound();
-    }, []);
+        setFirstSound(false);
+    }, [firstSound, active, inactivePlayer.hand]);
 
     return (
         <div className={`${handClass(active, player)}`}>
