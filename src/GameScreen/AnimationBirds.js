@@ -24,11 +24,11 @@ const BirdsAnimation = () => {
     const [birdsAnim, setBirdsAnim] = useState(false);
 
     // min time delay to start animation
-    // const minStart = 60000;
-    const minStart = 20000;
+    const minStart = 60000;
+
     // max time delay to start animation
-    // const maxStart = 180000;
-    const maxStart = 60000;
+    const maxStart = 180000;
+
     // random time delay to start animation between mmin and max values
     const animationStart = Math.floor(Math.random() * ((maxStart - minStart) + 1)) + minStart;
 
@@ -45,7 +45,7 @@ const BirdsAnimation = () => {
                 setBirdsAnim(false);
             }, animationDuration);
         }
-    }, [birdsAnim]);
+    }, [birdsAnim, animationStart, animationDuration]);
 
     const birdsAnimComp = birdsAnim
         ? (
