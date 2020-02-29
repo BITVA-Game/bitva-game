@@ -114,3 +114,4 @@ exports.msgReceived = msgReceived;
 exports.setApp = setApp;
 exports.getApp = getApp;
 exports.reset = reset;
+exports.parseApplication = parseApplication;
