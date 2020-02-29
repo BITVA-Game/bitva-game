@@ -57,7 +57,7 @@ const CardContainer = ({
 };
 
 const Hand = ({
- active, background, hand, inactivePlayer, player 
+    active, background, hand, inactivePlayer, player,
 }) => {
     const handKeys = Object.keys(hand);
 
@@ -100,10 +100,13 @@ const Hand = ({
         }
     }, [handKeys, cardContainers]);
 
-    useEffect(() => {
+    const cardsSound = () => {
         if (!active) {
             playSound('card', Object.keys(inactivePlayer.hand).length);
         }
+    };
+    useEffect(() => {
+        cardsSound();
     }, []);
 
     return (
