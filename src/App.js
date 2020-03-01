@@ -92,7 +92,7 @@ class App extends Component {
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'OVER':
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
-        case 'NETWORKPLAY':
+        case 'NETWORKSCREEN':
             return <NetworkPlay sendMessage={sendMessage} app={this.state.app} />;
         default:
             return `UNKNOWN SCREEN NAME ${this.state.app.manager.screen}`;
@@ -100,7 +100,7 @@ class App extends Component {
     }
 
     render() {
-        // console.log('APP ', this.state.app);
+    // console.log('APP ', this.state.app);
         WebFont.load({
             custom: {
                 families: ['Ruslan Display', 'Sedan SC'],

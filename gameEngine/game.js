@@ -859,10 +859,6 @@ function handle(app, msg) {
         // helperToDebug(message, game);
         return Object.assign(game, makeMove(game, msg));
     }
-    case message.NETWORKPLAY: {
-        return game;
-    }
-
     default:
         return game;
     }

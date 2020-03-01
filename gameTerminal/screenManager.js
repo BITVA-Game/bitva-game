@@ -1,7 +1,7 @@
 const { screen, message } = require('../constants');
 
 function handle(app, msg) {
-    // console.log('screenManager handle', msg.type);
+    console.log('screenManager handle', msg.type);
     switch (msg.type) {
     case message.INIT:
         return screen.LOGIN;
@@ -15,8 +15,8 @@ function handle(app, msg) {
         return screen.VS;
     case message.PLAY:
         return screen.PLAY;
-    case message.NETWORKPLAY:
-        return screen.NETWORKPLAY;
+    case message.NETWORKSCREEN:
+        return screen.NETWORKSCREEN;
     default:
         return app.manager;
     }

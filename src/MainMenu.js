@@ -59,12 +59,12 @@ class MainMenu extends Component {
                     <ul className="menu-buttons-group">
                         <MenuButton
                             name="Network Play"
-                            type="NETWORKPLAY"
+                            type="NETWORKSCREEN"
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton
                             name="Player vs Player"
-                            type="START"
+                            type="LOCALPLAY"
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton

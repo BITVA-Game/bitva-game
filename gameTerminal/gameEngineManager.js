@@ -1,7 +1,7 @@
 const { message } = require('../constants');
 
 let engine = null;
-const { GameEngineLocal } = require('./gameEngineClient');
+const { GameEngineLocal, GameEngineNetwork } = require('./gameEngineClient');
 
 const account = (app, id) => app.accounts.records.find((a) => a.id === id);
 const participants = (app) => ({
@@ -9,13 +9,23 @@ const participants = (app) => ({
     guest: account(app, app.participants.guest),
 });
 
-async function handle(app, msg) {
+async function handle(app, msg, process) {
     switch (msg.type) {
-    case message.PLAY:
+    case message.LOCALPLAY:
         // call game engine to calculate new game state
         if (!engine) {
             engine = new GameEngineLocal();
         }
+        process({ type: message.START }, false);
+        break;
+    case message.NETWORKPLAY:
+        // call game engine to calculate new game state
+        if (!engine) {
+            engine = new GameEngineNetwork(msg.ip);
+        }
+        process({ type: message.START }, false);
+        break;
+    case message.PLAY:
         await engine.handle({
             type: message.PLAY,
             participants: participants(app),

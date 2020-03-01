@@ -1,43 +1,43 @@
 body,
 html {
-    color: #fff;
-    font-family: "Sedan SC", "Ruslan Display", cursive;
-    font-size: 14px;
-    min-height: 100%;
+  color: #fff;
+  font-family: "Sedan SC", "Ruslan Display", cursive;
+  font-size: 14px;
+  min-height: 100%;
 }
 
 .app-background {
-    background: transparent center no-repeat fixed;
-    background-size: cover;
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    top: 0;
+  background: transparent center no-repeat fixed;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 button,
 .btn,
 .btn-hero {
-    color: #fff;
-    cursor: pointer;
-    outline: none;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
 }
 
 .btn:hover {
-    color: #b74a45;
+  color: #b74a45;
 }
 
 .btn-play {
-    background: #ECEBEB;
-    border: 2px solid #000;
-    border-radius: 28px;
-    color: #000;
-    cursor: pointer;
-    font-family: "Ruslan Display";
-    font-size: 36px;
-    padding: 6px 35px 7px;
-    text-transform: uppercase;
+  background: #ecebeb;
+  border: 2px solid #000;
+  border-radius: 28px;
+  color: #000;
+  cursor: pointer;
+  font-family: "Ruslan Display";
+  font-size: 36px;
+  padding: 6px 35px 7px;
+  text-transform: uppercase;
 }
 
 .background-hut {
@@ -57,7 +57,7 @@ button,
 
 .background-greyTreeL {
   bottom: 130px;
-  left:120px;
+  left: 120px;
   margin: 0 auto;
   overflow: hidden;
   position: absolute;
@@ -103,17 +103,17 @@ button,
 .moveForest-enter-done .background-blackTreeL {
   bottom: -60px;
   left: -30px;
-  opacity: 1;  
+  opacity: 1;
   transition: all 4000ms ease-in;
 }
 
 .background-blackTreeR {
-  bottom:0;
+  bottom: 0;
   margin: 0 auto;
   opacity: 1;
   overflow: hidden;
   position: absolute;
-  right:0;  
+  right: 0;
   width: 600px;
 }
 
@@ -128,12 +128,16 @@ button,
 /* for 1366x768 only */
 
 .app-768 .login-content {
-    height: 608px;
+  height: 608px;
 }
 .app-768 .versus-profiles-container {
-    height: 668px;
+  height: 668px;
 }
 
 .app-768 .heroselection-details {
-    padding: 16px 78px;
+  padding: 16px 78px;
+}
+
+.role-selection {
+  margin-left: 5em;
 }

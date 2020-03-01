@@ -42,7 +42,22 @@ function parseApplication(app) {
 
 async function processMessage(msg, reply) {
     console.log('process', msg);
-    const reProcess = (m) => processMessage(m, reply);
+    // We need to have a way to NOT send app if message
+    // is being reprocessed.
+    //
+    // For example, when we're
+    // initialising game engine, we want to reply
+    // with the result of START given to reProcess function,
+    // and ignore the result of original NETWORKPLAY/LOCALPLAY message.
+    let sendReply = true;
+    const reProcess = (m, keepApp = true) => {
+    // if reProcess was called multiple times, and at lease one of
+    // them was marked as replacement app - we should not be sending
+    // out this app reply
+        sendReply = sendReply && keepApp;
+        console.log('ReProcess called', m, keepApp, sendReply);
+        processMessage(m, reply);
+    };
 
     const newApp = {
         accounts: accountManager.handle(application, msg, reProcess),
@@ -51,8 +66,13 @@ async function processMessage(msg, reply) {
         engine: await gameEngineManager.handle(application, msg, reProcess),
         system: systemManager.handle(application, msg, reProcess),
     };
-    console.log('NEW APP', newApp);
-    reply(newApp);
+
+    if (sendReply) {
+        console.log('NEW APP', newApp);
+        reply(newApp);
+    } else {
+        console.log('not sending replaced NEW APP for ', msg);
+    }
 }
 
 async function initApplication(msg, reply) {

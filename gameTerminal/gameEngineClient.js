@@ -1,18 +1,21 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable class-methods-use-this */
 const request = require('superagent');
-const process = require('process');
 const GameEngine = require('../gameEngine');
 
-const address = process.env.ENGINE_URL || 'http://localhost:5001/';
+// const address = process.env.ENGINE_URL || 'http://localhost:6000/';
 
 class GameEngineNetwork {
+    constructor(address) {
+        this.address = address;
+    }
+
     async handle(message) {
-        await request.post(address).send({ message });
+        await request.post(this.address).send({ message });
     }
 
     async getState() {
-        const result = await request.get(address);
+        const result = await request.get(this.address);
         // console.log(result.body);
         return result.body;
     }
