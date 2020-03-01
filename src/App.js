@@ -32,7 +32,7 @@ class App extends Component {
     // Bind the function to send messages
     constructor(props) {
         super(props);
-        this.state = { loaded: false, app: { manager: { screen: 'LOADING' }, backTostart: false } };
+        this.state = { loaded: false, app: { manager: { screen: 'LOADING' } } };
         this.loadAnimation = this.loadAnimation.bind(this);
     }
 
@@ -48,7 +48,7 @@ class App extends Component {
 
     componentDidUpdate() {
         console.log('backToStart == ', this.state.app.backTostart);
-        if (this.state.app.backTostart === true) {
+        if (this.state.app.backTostart) {
             sendMessage({ type: 'INIT' });
             this.state.app.backTostart = false;
         }
