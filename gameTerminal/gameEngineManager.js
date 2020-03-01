@@ -1,7 +1,10 @@
 const { message } = require('../constants');
 
 let engine = null;
-const { GameEngineLocal, GameEngineNetwork } = require('./gameEngineClient');
+const {
+    createLocalEngine,
+    createNetworkEngine,
+} = require('./gameEngineClient');
 
 const account = (app, id) => app.accounts.records.find((a) => a.id === id);
 const participants = (app) => ({
@@ -14,14 +17,14 @@ async function handle(app, msg, process) {
     case message.LOCALPLAY:
         // call game engine to calculate new game state
         if (!engine) {
-            engine = new GameEngineLocal();
+            engine = createLocalEngine();
         }
         process({ type: message.START }, false);
         break;
     case message.NETWORKPLAY:
         // call game engine to calculate new game state
         if (!engine) {
-            engine = new GameEngineNetwork(msg.ip);
+            engine = createNetworkEngine(msg.ip);
         }
         process({ type: message.START }, false);
         break;
@@ -45,8 +48,8 @@ async function handle(app, msg, process) {
     return engine.getState();
 }
 
-function reset() {
-    engine = null;
+function reset(newEngine = null) {
+    engine = newEngine;
 }
 
 exports.handle = handle;
