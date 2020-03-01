@@ -1,4 +1,5 @@
 import nock from 'nock';
+import electron from 'electron';
 import {
     loadingState,
     loadedState,
@@ -12,6 +13,9 @@ import testAccounts from '../__data__/accounts';
 import { read } from '../../gameAccounts/index';
 
 jest.mock('../../gameAccounts/index');
+jest.mock('electron', () => ({
+    screen: { getPrimaryDisplay: () => ({ size: { height: 700 } }) },
+}));
 
 // import module for tests
 const application = require('../application');
@@ -22,7 +26,8 @@ beforeEach(() => {
     application.reset();
 });
 
-test('msg INIT Game loaded - no profiles', async () => {
+test.only('msg INIT Game loaded - no profiles', async () => {
+    // global.electron = { screen: { getPrimaryDisplay: jest.fn() } };
     read.mockImplementation(
         jest.fn(() => Promise.resolve({ records: testAccounts.accounts })),
     );
