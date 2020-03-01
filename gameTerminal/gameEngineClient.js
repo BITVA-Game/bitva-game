@@ -36,4 +36,8 @@ class GameEngineLocal {
     }
 }
 
-module.exports = { GameEngineNetwork, GameEngineLocal };
+const createLocalEngine = () => new GameEngineLocal();
+
+const createNetworkEngine = (address) => new GameEngineNetwork(address);
+
+module.exports = { createLocalEngine, createNetworkEngine };

@@ -1,5 +1,3 @@
-import nock from 'nock';
-import electron from 'electron';
 import {
     loadingState,
     loadedState,
@@ -11,22 +9,30 @@ import { screen as scr, message } from '../../constants';
 
 import testAccounts from '../__data__/accounts';
 import { read } from '../../gameAccounts/index';
+import { reset } from '../gameEngineManager';
 
 jest.mock('../../gameAccounts/index');
 jest.mock('electron', () => ({
     screen: { getPrimaryDisplay: () => ({ size: { height: 700 } }) },
 }));
+jest.mock('../gameEngineClient', () => ({
+    createLocalEngine: jest.fn(),
+    createNetworkEngine: jest.fn(),
+}));
 
 // import module for tests
 const application = require('../application');
 
-const address = 'http://localhost:5001/';
+const {
+    createLocalEngine,
+    createNetworkEngine,
+} = require('../gameEngineClient');
 
 beforeEach(() => {
     application.reset();
 });
 
-test.only('msg INIT Game loaded - no profiles', async () => {
+test('msg INIT Game loaded - no profiles', async () => {
     // global.electron = { screen: { getPrimaryDisplay: jest.fn() } };
     read.mockImplementation(
         jest.fn(() => Promise.resolve({ records: testAccounts.accounts })),
@@ -63,6 +69,17 @@ test('msg LOGIN switches screen state to STARTSCREEN with Alice', async () => {
 
 test('msg PLAY creates engine and handles the message', async () => {
     const msg = { type: message.PLAY };
+    // Mock engine internal state for this test
+    const engineState = {
+        screen: 'PLAY',
+        innerState: { some: 1 },
+    };
+    const engine = {
+        handle: jest.fn(),
+        getState: () => engineState,
+    };
+    reset(engine);
+
     application.setApp({
         accounts: {
             records: testAccounts.accounts,
@@ -76,64 +93,87 @@ test('msg PLAY creates engine and handles the message', async () => {
         },
         engine: undefined,
     });
-    // Mock sendReply function
     const sendReply = jest.fn();
-    const engineState = {
-        screen: 'PLAY',
-        innerState: { a: 1 },
-    };
-    nock.disableNetConnect();
-    const scope = nock(address)
-        .post('/', {
-            message: {
-                type: 'PLAY',
-                participants: { player: testAccounts.alice, guest: testAccounts.bob },
-            },
-        })
-        .reply(200)
-        .get('/')
-        .reply(200, engineState);
     await application.msgReceived(msg, sendReply);
-    scope.isDone();
     expect(application.getApp().engine).toMatchObject(engineState);
     expect(sendReply.mock.calls.length).toBe(1);
     expect(sendReply.mock.calls[0][0]).toMatchObject(startscreenStateP2);
+    expect(engine.handle.mock.calls.length).toBe(1);
+    expect(engine.handle.mock.calls[0][0]).toMatchObject({
+        type: message.PLAY,
+        participants: {
+            guest: testAccounts.bob,
+            player: testAccounts.alice,
+        },
+    });
 });
 
-test.skip('msg sent twice, we have one instance of engine', async () => {
-    const msg = { type: message.HEROSELECTED };
-    // Mock sendReply function
-    const sendReply = jest.fn();
-    const handleFunc = jest.fn();
+test('NetworkPlay creates GameEngineNetwork', async () => {
+    const msg = { type: message.NETWORKPLAY, ip: '12345' };
+    // Mock engine for this test
     const engineState = {
-        screen: scr.STARTSCREEN,
-        innerState: { a: 1 },
+        screen: 'PLAY',
+        innerState: { some: 1 },
     };
+    const engine = {
+        getState: () => engineState,
+    };
+    createNetworkEngine.mockReturnValue(engine);
 
-    const mockEngine = jest.fn().mockImplementation(() => ({
-        handle: handleFunc,
-        getState() {
-            return engineState;
+    application.setApp({
+        accounts: {
+            records: testAccounts.accounts,
         },
-    }));
-    // Engine.mockImplementation(mockEngine);
-
+        participants: {
+            player: testAccounts.alice.id,
+            guest: testAccounts.bob.id,
+        },
+        manager: {
+            screen: scr.HEROSELECT,
+        },
+        engine: undefined,
+    });
+    const sendReply = jest.fn();
     await application.msgReceived(msg, sendReply);
-    await application.msgReceived(msg, sendReply);
+    expect(createNetworkEngine.mock.calls.length).toBe(1);
+    expect(createNetworkEngine.mock.calls[0][0]).toBe('12345');
+    expect(sendReply.mock.calls.length).toBe(1);
+    expect(sendReply.mock.calls[0][0]).toMatchObject({
+        manager: { screen: scr.SELECTOPPONENT },
+    });
+});
 
-    // mockEngine must be called once to instantiate the engine
-    expect(mockEngine.mock.calls.length).toBe(1);
-
-    // handleFunc must have been called once with msg argument
-    expect(handleFunc.mock.calls.length).toBe(2);
-    expect(handleFunc.mock.calls[0]).toEqual([msg]);
-
-    const expectedState = {
-        account: testAccounts.alice,
-        guest: testAccounts.bob,
-        manager: { screen: scr.STARTSCREEN },
-        innerState: engineState.innerState,
+test('LocalPlay creates GameEngineLocal', async () => {
+    const msg = { type: message.LOCALPLAY };
+    // Mock engine for this test
+    const engineState = {
+        screen: 'PLAY',
+        innerState: { some: 1 },
     };
-    expect(sendReply.mock.calls.length).toBe(2);
-    expect(sendReply.mock.calls[1][0]).toMatchObject(expectedState);
+    const engine = {
+        getState: () => engineState,
+    };
+    createLocalEngine.mockReturnValue(engine);
+
+    application.setApp({
+        accounts: {
+            records: testAccounts.accounts,
+        },
+        participants: {
+            player: testAccounts.alice.id,
+            guest: testAccounts.bob.id,
+        },
+        manager: {
+            screen: scr.HEROSELECT,
+        },
+        engine: undefined,
+    });
+    const sendReply = jest.fn();
+    await application.msgReceived(msg, sendReply);
+    expect(createLocalEngine.mock.calls.length).toBe(1);
+    expect(createLocalEngine.mock.calls[0][0]).toBe(undefined);
+    expect(sendReply.mock.calls.length).toBe(1);
+    expect(sendReply.mock.calls[0][0]).toMatchObject({
+        manager: { screen: scr.SELECTOPPONENT },
+    });
 });
