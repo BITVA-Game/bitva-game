@@ -223,11 +223,17 @@
     width: 124px;
 }
 
-.card-frame-wrapper{
-	position: absolute;
-    top: 0;
-    left: 0;
+.card-frame-wrapper {	
+	left: 0;
+	top: 0;
+    position: absolute;
 }
+
+.item .card-frame-wrapper {
+	top: -2px;
+	left: -2px;
+}
+
 .card-place {
     margin-right: 26px;
 }
@@ -243,7 +249,6 @@
 	position: absolute;
 	top: 4px;
     left: 4px;
-
 }
 
 .player-top .card-holder {
