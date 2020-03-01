@@ -9,6 +9,7 @@ cache:
   directories:
     - node_modules
 script:
+  - npm run test
   - npm run build
   - npm run package-mac && tar -zcf releases/mac.tar.gz releases/bitva-game-darwin-x64
   - npm run package-win && tar -zcf releases/win.tar.gz releases/bitva-game-win32-x64
