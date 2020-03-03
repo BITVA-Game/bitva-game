@@ -89,7 +89,7 @@ module.exports = function menu(app, win, e, x, y, sendMessage) {
         {
             label: 'to Start Screen',
             click() {
-                // setApp(startScreen);
+                setApp({});
                 // sendMessage(parseApplication(getApp()));
                 sendMessage(startScreen);
             },

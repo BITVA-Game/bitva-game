@@ -47,7 +47,6 @@ class App extends Component {
     }
 
     componentDidUpdate() {
-        console.log('backToStart == ', this.state.app.backTostart);
         if (this.state.app.backTostart) {
             sendMessage({ type: 'INIT' });
             this.state.app.backTostart = false;
