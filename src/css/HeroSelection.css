@@ -173,10 +173,10 @@ button.hero-block {
 .deck-icon {
 	background-color: #898989;
 	border-radius: 3px;
+	bottom: 9px;
 	height: 40px;
 	left: 5px;
-	position: absolute;
-	bottom: 9px;
+	position: absolute;	
     width: 30px;
 }
 
