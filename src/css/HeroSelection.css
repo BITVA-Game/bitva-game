@@ -176,7 +176,7 @@ button.hero-block {
 	height: 40px;
 	left: 5px;
 	position: absolute;
-	top: 5px;
+	bottom: 9px;
     width: 30px;
 }
 
