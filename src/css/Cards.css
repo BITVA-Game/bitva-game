@@ -381,11 +381,10 @@
      top: -50%;
      width: 200%;
      height: 200%;
-     background-color: #399953;
      background-repeat: no-repeat;
      background-size: 50% 50%, 50% 50%;
      background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-     background-image: linear-gradient(#d96262, #d96262), linear-gradient(#fbb300, #fbb300), linear-gradient(#d53e33, #d53e33), linear-gradient(#8c8787, #8c8787);
+     background-image: linear-gradient(#b74a45, #b74a45), linear-gradient(transparent,transparent), linear-gradient(#d53e33, #d53e33), linear-gradient(transparent, transparent);
      animation: rotate 4s linear infinite;
 }
  .card-frame::after {
