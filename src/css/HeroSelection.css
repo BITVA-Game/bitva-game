@@ -163,8 +163,8 @@ button.hero-block {
 	height: 100%;
 	max-width: 290px;
 	object-fit: cover;
-	top: 0;
 	position: absolute;
+	top: 0;	
 	width: 100%;
 }
 
