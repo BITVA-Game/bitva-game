@@ -5,6 +5,9 @@ const url = require('url');
 
 const ctxMenu = require('./src/ctxMenu');
 
+const windowWidth = 1366;
+const windowHeight = 768;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
@@ -15,11 +18,16 @@ function sendMessage(received) {
     win.webContents.send('APP', received);
 }
 
+
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 1366,
-        height: 768,
+        width: windowWidth,
+        minWidth: windowWidth,
+        maxWidth: windowWidth,
+        height: windowHeight,
+        minHeight: windowHeight,
+        maxHeight: windowHeight,
         show: false,
         icon: path.join(__dirname, 'src/icons/png/64x64.png'),
         resizable: false,
@@ -29,6 +37,11 @@ function createWindow() {
         // create a Frameless Window
         frame: false,
     });
+
+    // to set maximum & minimum sizes of the window
+    win.setMaximumSize(windowWidth, windowHeight);
+    win.setMinimumSize(windowWidth, windowHeight);
+    win.setContentSize(windowWidth, windowHeight);
 
     // remove menubar
     if (process.platform !== 'darwin') {
@@ -53,7 +66,7 @@ function createWindow() {
     // When we are ready to show - display initial state
     win.once('ready-to-show', async () => {
         win.show();
-
+        win.setSize(windowWidth, windowHeight);
         // Send the message to show the first screen
         await application.msgReceived({ type: 'INIT' }, sendMessage);
     });
