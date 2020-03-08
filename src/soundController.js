@@ -27,7 +27,7 @@ const action = {
 };
 
 function playSound(type, count) {
-    console.log('We play Sound:', type, count);
+    // console.log('We play Sound:', type, count);
     if (!count) {
         action[type].play();
     } else {
