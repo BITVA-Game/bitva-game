@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, {
-    Component, useContext, useEffect, useState,
-} from 'react';
+// we disable curly-newline as Code Climate gives error if on new line
+// eslint-disable-next-line object-curly-newline
+import React, { Component, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import BoardContext from './BoardContext';
 
@@ -24,15 +24,24 @@ const images = {
     premudraya,
 };
 
+const HeroImage = ({ hero }) => (
+    <img
+        className="hero-image"
+        src={images[hero]}
+        alt={hero}
+        style={style}
+    />
+
+);
+
+
 const Hero = (props) => {
     const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
     const heroClass = isTarget(props.active ? 'hero' : 'opponent', props.player) ? 'target' : '';
-    // state for heart beat sound
     const [heartSound, setHeartSound] = useState(false);
 
     useEffect(() => {
         const heartTime = setTimeout(() => setHeartSound(true), 3000);
-
         return () => {
             clearTimeout(heartTime);
             playSound('heartBeat');
@@ -49,12 +58,7 @@ const Hero = (props) => {
             onClick={() => cardDropped(props.active ? 'hero' : 'opponent', props.player)}
             onDragOver={(e) => cardOver(e, props.active ? 'hero' : 'opponent', props.player)}
         >
-            <img
-                className="hero-image"
-                src={images[props.player.hero]}
-                alt={props.player.hero}
-                style={style}
-            />
+            <HeroImage hero={props.player.hero} />
             <HealthMeter
                 key={props.player.health.current}
                 health={props.player.health}
@@ -137,6 +141,10 @@ class HealthMeter extends Component {
 Hero.propTypes = {
     player: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
+};
+
+HeroImage.propTypes = {
+    hero: PropTypes.string.isRequired,
 };
 
 HealthMeter.propTypes = {
