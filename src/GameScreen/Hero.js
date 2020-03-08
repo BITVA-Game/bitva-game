@@ -1,8 +1,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { Component, useContext } from 'react';
+import React, {
+    Component, useContext, useEffect, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import BoardContext from './BoardContext';
+
+import playSound from '../soundController';
 
 import yaga from '../images/heroes/yaga.jpg';
 import morevna from '../images/heroes/morevna.jpg';
@@ -23,6 +27,28 @@ const images = {
 const Hero = (props) => {
     const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
     const heroClass = isTarget(props.active ? 'hero' : 'opponent', props.player) ? 'target' : '';
+    // state for heart beat sound
+    const [heartSound, setHeartSound] = useState(false);
+
+    // we change state after 1st render - didMount and heartSound === true
+    // to start heart beat for active player after cards deal sound - 4s
+    // after heart stop will be another re-render and we make heartSound = false
+    // then we return heartSound == true heart stop == 0.050s
+    useEffect(() => {
+        if (!heartSound) {
+            setTimeout(() => {
+                setHeartSound(true);
+            }, 3000);
+        } if (heartSound) {
+            setTimeout(() => {
+                setHeartSound(false);
+            }, 5);
+        }
+    }, [heartSound]);
+
+    if (heartSound) {
+        playSound('heartBeat');
+    }
     return (
         <div
             className={`hero ${heroClass}`}
