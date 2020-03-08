@@ -112,7 +112,6 @@ section {
 }
 
 .hero-block {
-	background-color: #ECEBEB;
 	display: inline-flex;
 	margin: .5em;
 }
@@ -127,20 +126,23 @@ button.hero-block {
 	width: 50px;
 }
 
-.hero-block:hover {
-	background-color: transparent;
-	background-image: url("../images/patterns/arrow2.png");
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: contain;
-}
 
 .hero-block.left-arrow{
 	transform: scaleX(-1);
 }
 
 .btn-hero {
-	border: 5px solid #fff;
+	border: 5px solid #fff;	
+	overflow: hidden;	
+	position: relative;
+	width: 300px;	
+}
+
+/*added to reserve place for each hero container*/
+.btn-hero::before {	
+	content: "";
+	display: block;	
+	padding-bottom: 150%;
 	position: relative;
 	width: 300px;
 }
@@ -158,9 +160,12 @@ button.hero-block {
 }
 
 .heroselection-hero-image {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
+	height: 100%;
+	max-width: 290px;
+	object-fit: cover;
+	position: absolute;
+	top: 0;	
+	width: 100%;
 }
 
 .deck-icon,

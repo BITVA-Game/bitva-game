@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../css/App.css';
 import '../css/HeroSelection.css';
@@ -20,9 +20,9 @@ const images = {
 
 const HeroName = ({ name }) => (
     <div className="hero-name">
-        <img src={ornament} alt="" />
+        <img src={ornament} alt="ornament" />
         <div><h3>{name}</h3></div>
-        <img src={ornament} alt="" />
+        <img src={ornament} alt="ornament" />
     </div>
 );
 
@@ -52,57 +52,43 @@ const HeroBlock = (props) => {
 // List of all characters, for each the HeroBlock is displayed.
 // Click will take the player into character info screen
 // opponent={props.opponent && hero.id === props.app.game.players[0].hero}
-class ListOfHeroes extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            first: 0,
-        };
-        this.prev = this.prev.bind(this);
-        this.next = this.next.bind(this);
-    }
+const ListOfHeroes = (props) => {
+    const [firstHero, setFirstHero] = useState(0);
 
-    prev() {
-        this.setState((state) => {
-            const first = state.first === 0 ? 0 : state.first - 1;
-            return { first };
-        });
-    }
+    const prev = () => {
+        const first = firstHero === 0 ? 0 : firstHero - 1;
+        setFirstHero(first);
+    };
 
-    next() {
-        const maxIndex = this.props.allHeroes.length - 3;
-        this.setState((state) => {
-            const first = state.first === maxIndex ? maxIndex : state.first + 1;
-            return { first };
-        });
-    }
+    const next = () => {
+        const maxIndex = props.allHeroes.length - 3;
+        const first = firstHero === maxIndex ? maxIndex : firstHero + 1;
+        setFirstHero(first);
+    };
 
-    render() {
-        const heroes = this.props.allHeroes.slice(this.state.first, this.state.first + 3);
-        return (
-            <div>
-                <div className="heroes-list">
-                    <button type="button" className="hero-block left-arrow" onClick={this.prev} />
-                    {heroes.map((hero) => (
-                        <HeroBlock
-                            key={hero.id}
-                            select={() => this.props.select(hero.id)}
-                            hero={hero}
-                            isAvailable={this.props.heroesID.includes(hero.id)}
-                        />
-                    ))}
-                    <button type="button" className="hero-block right-arrow" onClick={this.next} />
-                </div>
-                <div className="heroes-names">
-                    {heroes.map((hero) => (
-                        <HeroName key={hero.id} name={hero.id} />
-                    ))}
-                </div>
+    const heroes = props.allHeroes.slice(firstHero, firstHero + 3);
+    return (
+        <div>
+            <div className="heroes-list">
+                <button type="button" className="hero-block left-arrow" onClick={prev} />
+                {[...heroes].map((hero) => (
+                    <HeroBlock
+                        key={hero.id}
+                        select={() => props.select(hero.id)}
+                        hero={hero}
+                        isAvailable={props.heroesID.includes(hero.id)}
+                    />
+                ))}
+                <button type="button" className="hero-block right-arrow" onClick={next} />
             </div>
-
-        );
-    }
-}
+            <div className="heroes-names">
+                {[...heroes].map((hero) => (
+                    <HeroName key={hero.id} name={hero.id} />
+                ))}
+            </div>
+        </div>
+    );
+};
 
 HeroName.propTypes = {
     name: PropTypes.string.isRequired,
