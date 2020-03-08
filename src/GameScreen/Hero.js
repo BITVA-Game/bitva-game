@@ -47,7 +47,7 @@ const Hero = (props) => {
             playSound('heartBeat');
             setHeartSound(false);
         };
-    }, [props.active, heartSound, props.player.health]);
+    }, [props.active, heartSound]);
 
     return (
         <div
