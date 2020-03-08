@@ -35,20 +35,22 @@ const Hero = (props) => {
     // after heart stop will be another re-render and we make heartSound = false
     // then we return heartSound == true heart stop == 0.050s
     useEffect(() => {
-        if (!heartSound) {
+        if (props.active && !heartSound) {
             setTimeout(() => {
                 setHeartSound(true);
             }, 3000);
         } if (heartSound) {
+            // playSound('heartBeat');
             setTimeout(() => {
                 setHeartSound(false);
             }, 5);
         }
-    }, [heartSound]);
+    }, [heartSound, props.active]);
 
     if (heartSound) {
         playSound('heartBeat');
     }
+
     return (
         <div
             className={`hero ${heroClass}`}
