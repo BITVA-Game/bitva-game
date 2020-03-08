@@ -119,46 +119,52 @@ const Card = (props) => {
 
     function handleClick(event) {
         event.stopPropagation();
+        // eslint-disable-next-line no-unused-expressions
         props.active && cardSelect(props.cardKey, props.card, 'click');
     }
 
     return (
-        <div
-            className="game-card-container card-place card-like"
-            style={cardOrigin(dragging, props.card)}
-        >
-            <div
-                className={`card game-card card-like card${flipped ? '-flipped' : ''}`}
-                data-key={props.cardKey}
-                draggable={isDraggable ? null : props.draggable}
-                onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
-                onClick={handleClick}
-                onDragEnd={cardAim}
-                onContextMenu={() => setFlipped(!flipped)}
-            >
-                {isDraggable ? <div className="card-chained" /> : null}
-                {flipped ? (
-                    <CardBack
-                        backgroundColor={backgroundColor}
-                        info={info}
-                        name={name}
-                    />
-                ) : (
-                    <CardFront
-                        backgroundColor={backgroundColor}
-                        type={type}
-                        category={category}
-                        categoryName={categoryName}
-                        healthCurrent={healthCurrent}
-                        health={health}
-                        points={points}
-                        initialpoints={initialpoints}
-                        id={id}
-                        name={name}
-                    />
-                )}
+        <>
+            <div className="card-frame-wrapper">
+                <div className={`${props.active && !isDraggable ? 'card-frame' : ''} `} />
             </div>
-        </div>
+            <div
+                className="game-card-container card-place card-like"
+                style={cardOrigin(dragging, props.card)}
+            >
+                <div
+                    className={`card game-card card-like card${flipped ? '-flipped' : ''}`}
+                    data-key={props.cardKey}
+                    draggable={isDraggable ? null : props.draggable}
+                    onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
+                    onClick={handleClick}
+                    onDragEnd={cardAim}
+                    onContextMenu={() => setFlipped(!flipped)}
+                >
+                    {isDraggable ? <div className="card-chained" /> : null}
+                    {flipped ? (
+                        <CardBack
+                            backgroundColor={backgroundColor}
+                            info={info}
+                            name={name}
+                        />
+                    ) : (
+                        <CardFront
+                            backgroundColor={backgroundColor}
+                            type={type}
+                            category={category}
+                            categoryName={categoryName}
+                            healthCurrent={healthCurrent}
+                            health={health}
+                            points={points}
+                            initialpoints={initialpoints}
+                            id={id}
+                            name={name}
+                        />
+                    )}
+                </div>
+            </div>
+        </>
     );
 };
 

@@ -49,6 +49,7 @@ const Item = (props) => {
             }
         >
             {props.item ? (
+
                 <Card
                     card={props.item}
                     player={props.player}
@@ -56,6 +57,7 @@ const Item = (props) => {
                     draggable={props.active}
                     active={props.active}
                 />
+
             ) : null}
         </div>
     );

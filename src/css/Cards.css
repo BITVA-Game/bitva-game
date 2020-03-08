@@ -215,6 +215,25 @@
 	position: relative;
 }
 
+.card-container-size {
+	background: transparent;
+	height: 172px;
+	min-width: 124px;
+    padding: 2px;
+    width: 124px;
+}
+
+.card-frame-wrapper {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.item .card-frame-wrapper {
+    left: -2px;
+    top: -2px;
+}
+
 .card-place {
     margin-right: 26px;
 }
@@ -226,8 +245,10 @@
 }
 
 .card-holder {
-	opacity: 0.9;
-	position: absolute;
+    left: 4px;
+    opacity: 0.9;
+    position: absolute;
+    top: 4px;
 }
 
 .player-top .card-holder {
@@ -337,4 +358,43 @@
     font-size: 15px;
     line-height: 15px;
     padding: 0 4px;
+}
+
+
+/*card frame animation*/
+
+.card-frame {
+    height: 172px;
+    overflow: hidden;
+    position: relative;
+    width: 124px;
+    z-index: 0;
+}
+.card-frame::before {
+    animation: rotate 4s linear infinite;
+    background-image: linear-gradient(#b74a45, #b74a45), linear-gradient(transparent,transparent), linear-gradient(#d53e33, #d53e33), linear-gradient(transparent, transparent);
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    background-size: 50% 50%, 50% 50%;
+    content: '';
+    height: 200%;
+    left: -50%;
+    position: absolute;
+    top: -50%;
+    width: 200%;
+    z-index: -2;
+}
+.card-frame::after {
+    border-radius: 5px;
+    content: '';
+    height: calc(100% - 12px);
+    left: 6px;
+    position: absolute;
+    top: 6px;
+    width: calc(100% - 12px);
+    z-index: -1;
+}
+
+@keyframes rotate {
+    100% { transform: rotate(1turn); }
 }
