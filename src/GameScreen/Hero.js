@@ -30,26 +30,15 @@ const Hero = (props) => {
     // state for heart beat sound
     const [heartSound, setHeartSound] = useState(false);
 
-    // we change state after 1st render - didMount and heartSound === true
-    // to start heart beat for active player after cards deal sound - 4s
-    // after heart stop will be another re-render and we make heartSound = false
-    // then we return heartSound == true heart stop == 0.050s
     useEffect(() => {
-        if (props.active && !heartSound) {
-            setTimeout(() => {
-                setHeartSound(true);
-            }, 3000);
-        } if (heartSound) {
-            // playSound('heartBeat');
-            setTimeout(() => {
-                setHeartSound(false);
-            }, 5);
-        }
-    }, [heartSound, props.active]);
+        const heartTime = setTimeout(() => setHeartSound(true), 3000);
 
-    if (heartSound) {
-        playSound('heartBeat');
-    }
+        return () => {
+            clearTimeout(heartTime);
+            playSound('heartBeat');
+            setHeartSound(false);
+        };
+    }, [props.active, heartSound, props.player.health]);
 
     return (
         <div
