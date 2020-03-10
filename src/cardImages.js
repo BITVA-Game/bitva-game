@@ -12,7 +12,7 @@ import bulat from './images/cards/sword.png';
 import chemise from './images/cards/bitva-cardbase.jpg';
 import chickenLegsHut from './images/cards/izba.png';
 import clairvoyance from './images/cards/bitva-cardbase.jpg';
-import crown from './images/cards/bitva-cardbase.jpg';
+import crown from './images/cards/crown.png';
 import dolly from './images/cards/bitva-cardbase.jpg';
 import earthquake from './images/cards/bitva-cardbase.jpg';
 import forestMushroom from './images/cards/mushrooms.png';
