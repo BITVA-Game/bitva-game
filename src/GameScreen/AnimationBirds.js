@@ -24,10 +24,12 @@ const BirdsAnimation = () => {
     const [birdsAnim, setBirdsAnim] = useState(false);
 
     // min time delay to start animation
-    const minStart = 60000;
+    // const minStart = 60000;
+    const minStart = 6000;
 
     // max time delay to start animation
-    const maxStart = 180000;
+    // const maxStart = 180000;
+    const maxStart = 18000;
 
     // random time delay to start animation between mmin and max values
     const animationStart = Math.floor(Math.random() * ((maxStart - minStart) + 1)) + minStart;
@@ -36,15 +38,16 @@ const BirdsAnimation = () => {
     // after we call random delay there will be another re-render and we make birdsAnim = false
     // then we return birdsAnim == true with random delay
     useEffect(() => {
-        if (birdsAnim === false) {
-            setTimeout(() => {
+        const birdsFly = !birdsAnim
+            ? setTimeout(() => {
                 setBirdsAnim(true);
-            }, animationStart);
-        } if (birdsAnim === true) {
-            setTimeout(() => {
+                console.log('BIRDS are flying now!');
+            }, animationStart)
+            : setTimeout(() => {
                 setBirdsAnim(false);
             }, animationDuration);
-        }
+
+        return () => clearTimeout(birdsFly);
     }, [birdsAnim, animationStart, animationDuration]);
 
     const birdsAnimComp = birdsAnim
