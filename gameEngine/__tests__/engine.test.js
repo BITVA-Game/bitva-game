@@ -9,13 +9,13 @@ import {
 } from '../__data__/states';
 
 import {
- screen, message, target, card, phase, action 
+    screen, message, target, card, phase, action,
 } from '../../constants';
 
 import cards from '../__data__/cards';
 
 const {
- apple, bogatyr, shieldSmall, wolf, shieldLarge 
+    apple, bogatyr, shieldSmall, wolf, shieldLarge, magicMirror,
 } = cards;
 
 const heroData = require('../../gameTerminal/data/characters.json');
@@ -572,4 +572,32 @@ test('msg ACTION ANY, player life points === 0, game.phase = "OVER" ', () => {
     expect(inactivePlayer.active).not.toBeDefined();
     expect(inactivePlayer.health.current).toBeLessThanOrEqual(0);
     expect(newGame.game.phase).toEqual(phase.OVER);
+});
+
+test('msg ACTION ANY, if active player loses game, no cards deal ', () => {
+    const wolfCard = 'key20';
+    const msg = {
+        type: message.ACTION,
+        activeCard: wolfCard,
+        target: target.OPPONENT,
+    };
+    const gameForTest = JSON.parse(JSON.stringify(dealAllState));
+    gameForTest.game.players[0].hand.key20 = wolf;
+    gameForTest.game.players[0].health.current = 1;
+    gameForTest.game.players[0].moveCounter = 1;
+    gameForTest.game.players[1].item.key24 = magicMirror;
+
+
+    const engine = new GameEngine(gameForTest);
+    engine.handle(msg);
+    const newGame = engine.getState();
+
+    // Find active player
+    const inactivePlayer = newGame.game.players.find(
+        (p) => p.id !== newGame.game.active,
+    );
+
+    expect(inactivePlayer.health.current).toBeLessThanOrEqual(0);
+    expect(newGame.game.phase).toEqual(phase.OVER);
+    expect(Object.keys(inactivePlayer.hand).length).toBeLessThan(5);
 });
