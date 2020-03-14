@@ -2,8 +2,7 @@ const { message } = require('../constants');
 
 let engine = null;
 const {
-    createLocalEngine,
-    createNetworkEngine,
+    createLocalOfflineEngine, createLocalNetworkEngine, createRemoteEngine,
 } = require('./gameEngineClient');
 
 const account = (app, id) => app.accounts.records.find((a) => a.id === id);
@@ -17,14 +16,20 @@ async function handle(app, msg, process) {
     case message.LOCALPLAY:
         // call game engine to calculate new game state
         if (!engine) {
-            engine = createLocalEngine();
+            engine = createLocalOfflineEngine();
         }
         process({ type: message.START }, false);
         break;
     case message.NETWORKPLAY:
         // call game engine to calculate new game state
+        if (!engine && msg.role === 'client') {
+            engine = createRemoteEngine(msg.ip);
+        }
+        if (!engine && msg.role === 'host') {
+            engine = createLocalNetworkEngine();
+        }
         if (!engine) {
-            engine = createNetworkEngine(msg.ip);
+            throw new Error('NO ENGINE!');
         }
         process({ type: message.START }, false);
         break;

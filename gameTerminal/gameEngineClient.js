@@ -1,11 +1,13 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable class-methods-use-this */
 const request = require('superagent');
+
 const GameEngine = require('../gameEngine');
+const server = require('../gameEngineServer');
 
-// const address = process.env.ENGINE_URL || 'http://localhost:6000/';
+const port = 5001;
 
-class GameEngineNetwork {
+class GameEngineRemote {
     constructor(address) {
         this.address = address;
     }
@@ -21,7 +23,7 @@ class GameEngineNetwork {
     }
 }
 
-class GameEngineLocal {
+class GameEngineLocalOffline {
     constructor() {
         this.gameEngine = new GameEngine();
     }
@@ -36,8 +38,27 @@ class GameEngineLocal {
     }
 }
 
-const createLocalEngine = () => new GameEngineLocal();
+class GameEngineLocalNetwork {
+    constructor() {
+        this.gameEngine = new GameEngine();
+        this.app = server(this.gameEngine);
+        this.app.listen(port, () => console.log(`Engine listening on port ${port}!`));
+    }
 
-const createNetworkEngine = (address) => new GameEngineNetwork(address);
+    async handle(message) {
+        this.gameEngine.handle(message);
+        return Promise.resolve();
+    }
 
-module.exports = { createLocalEngine, createNetworkEngine };
+    async getState() {
+        return Promise.resolve(this.gameEngine.getState());
+    }
+}
+
+const createLocalOfflineEngine = () => new GameEngineLocalOffline();
+
+const createLocalNetworkEngine = () => new GameEngineLocalNetwork();
+
+const createRemoteEngine = (address) => new GameEngineRemote(address);
+
+module.exports = { createLocalOfflineEngine, createLocalNetworkEngine, createRemoteEngine };
