@@ -966,8 +966,9 @@
 
 /*Animation deck to hand first deal*/
 .card-back {
-    opacity: 0.9;
-    position: absolute;     
+    position: absolute;
+    transform: rotateY(180deg);
+       
 }
 
 .player-top .card-back {
@@ -975,28 +976,29 @@
 }
 
 .animated-card {
-    animation-direction: alternate;
-    animation-fill-mode: backwards;   
+    animation-direction:alternate;
+    animation-fill-mode: backwards;
+    transform-style: preserve-3d;   
 }
 
 .animated-card-0 {
-    animation: deckToHand-0 3s ease-in;         
+    animation: deckToHand-0 3s ease-in;       
 }
 
 .animated-card-1 {
-    animation: deckToHand-1 3s ease-in;       
+    animation: deckToHand-1 3s ease-in;    
 }
 
 .animated-card-2 {
-    animation: deckToHand-2 3s ease-in;       
+    animation: deckToHand-2 3s ease-in;    
 }
 
 .animated-card-3 {
-    animation: deckToHand-3 3s ease-in;       
+    animation: deckToHand-3 3s ease-in;    
 }
 
 .animated-card-4 {
-    animation: deckToHand-4 3s ease-in;      
+    animation: deckToHand-4 3s ease-in;    
 }
 
 .card-animation-delay-0 {
