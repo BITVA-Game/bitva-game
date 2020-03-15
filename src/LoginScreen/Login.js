@@ -31,7 +31,7 @@ const Accounts = ({
     <div>
         {accounts
         && accounts.map((a) => {
-            const disabled = participants && participants.player === a.id ? true : false;
+            const disabled = participants && participants.player === a.id;
             return (
                 <Account
                     accId={a.id}
@@ -47,7 +47,7 @@ const Accounts = ({
 );
 
 const Footer = ({ toStartScreen }) => (
-    <footer className="login-footer">
+    <footer className="main-footer">
         <div
             className="btn btn-play"
             role="button"
@@ -155,7 +155,7 @@ class Login extends Component {
             : null;
         return (
             <>
-                <section className="login-content">
+                <section className="main-content">
                     <div className="login-profiles-container">
                         {!this.state.form && !this.state.delete
                             ? this.showAccounts()

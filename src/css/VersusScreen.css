@@ -1,56 +1,9 @@
-/* versus */
-
-.versus-screen-container {
-    background-size: cover;
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
-/* heroes */
-
-.versus-heroes-container {
-    align-items: center;
-    display: flex;
-    flex-wrap: nowrap;
-    height: 80vh;
-    justify-content: center;
-}
-
-.versus-one-hero {
-    margin-top: 1em;
-}
-
-.versus-one-hero img {
-    border: .3em solid #fff;
-    justify-content: center;
-}
-
-.versus-one-hero div {
-    display: flex;
-    justify-content: center;
-    margin-top: 1em;
-}
-
-.vs {
-    color: #000;
-    font-family: 'Sedan SC', 'Ruslan Display', cursive;
-    font-size: 9em;
-	margin: 0 .5em;
-    text-align: center;
-    text-shadow: 0 0 10px #fff;
-}
-
 /* profiles */
 
 .versus-profiles-container {
     align-items: center;
     display: flex;
     flex-wrap: nowrap;
-    height: 708px;
-    justify-content: center;
 }
 
 .versus-profile {
@@ -85,15 +38,52 @@
     -webkit-text-stroke: 1px #000;
 }
 
+/* heroes */
+
+.versus-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.versus-heroes-container {
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 80vh;
+    justify-content: center;
+}
+
+.versus-one-hero {
+    margin-top: 1em;
+}
+
+.versus-one-hero img {
+    border: .3em solid #fff;
+    justify-content: center;
+}
+
+.versus-one-hero div {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.vs {
+    color: #000;
+    font-family: 'Sedan SC', 'Ruslan Display', cursive;
+    font-size: 9em;
+    margin: 0 .5em;
+    text-align: center;
+    text-shadow: 0 0 10px #fff;
+}
+
 /* loading */
 
 .versus-loading-container {
     align-items: center;
-    box-sizing: border-box;
     display: flex;
     height: 20vh;
     justify-content: center;
-    width: 100%;
 }
 
 .versus-loading {
