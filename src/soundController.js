@@ -11,6 +11,7 @@ const clairvoyanceSound = graveyardSound;
 const turningPotionSound = graveyardSound;
 const birds = new UIFx(`${process.env.PUBLIC_URL}/sound/birds.mp3`, { volume: 1.0 });
 const card = new UIFx(`${process.env.PUBLIC_URL}/sound/card.mp3`, { volume: 1.0 });
+const heartBeat = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.03 });
 
 const action = {
     graveyard: graveyardSound,
@@ -24,6 +25,7 @@ const action = {
     turningPotion: turningPotionSound,
     cardsFromGrave,
     card,
+    heartBeat,
 };
 
 function playSound(type, count) {
