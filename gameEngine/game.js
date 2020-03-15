@@ -702,7 +702,9 @@ function playerMoveEnd(pActive, pInactive, game) {
     // and remove by calling deleteCardsShown function
     deleteCardsShown(pInactive);
     // we call function to give cards to players up to 5
-    giveCardsTo(pActive);
+    if (pActive.health.current > 0) {
+        giveCardsTo(pActive);
+    }
 
     // run changeTurn function
     changeTurn(game);
