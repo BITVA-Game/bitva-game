@@ -251,6 +251,7 @@
     top: 4px;
 }
 
+
 .player-top .card-holder {
     transform: rotate(180deg);
 }
@@ -286,7 +287,7 @@
 
 .game-card-back,
 .game-card-front {
-    backface-visibility: hidden;
+    /* backface-visibility: hidden; */
     height: 100%;
     position: absolute;
     width: 100%;
@@ -359,7 +360,6 @@
     line-height: 15px;
     padding: 0 4px;
 }
-
 
 /*card frame animation*/
 
