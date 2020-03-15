@@ -1,9 +1,18 @@
 body,
 html {
   color: #fff;
+  cursor: default;
   font-family: "Sedan SC", "Ruslan Display", cursive;
   font-size: 14px;
   min-height: 100%;
+  user-select: none;
+}
+
+article,
+body,
+div,
+section {
+  box-sizing: border-box;
 }
 
 .app-background {
@@ -39,6 +48,41 @@ button,
   padding: 6px 35px 7px;
   text-transform: uppercase;
 }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-header,
+.main-footer {
+  align-items: center;
+  background: rgb(0,0,0);
+  background: rgba(0,0,0,.8);
+  color: #ECEBEB;
+  display: flex;
+  flex: 0 0 60px;
+  font-family: "Ruslan Display";
+  font-size: 36px;
+}
+
+.main-header {
+  padding-left: 66px;
+}
+
+.main-footer {
+  justify-content: center;
+}
+
+.main-content {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+/* backgrounds */
 
 .background-hut {
   bottom: 0;
@@ -136,8 +180,4 @@ button,
 
 .app-768 .heroselection-details {
   padding: 16px 78px;
-}
-
-.role-selection {
-  margin-left: 5em;
 }

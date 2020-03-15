@@ -6,13 +6,13 @@ import Login from './Login';
 import spider from '../images/animation/spider.png';
 
 const Header = () => (
-    <header className="login-header">Select Your Profile</header>
+    <header className="main-header">Select Your Profile</header>
 );
 
 const LoginScreen = ({
     accounts, sendMessage, message, participants,
 }) => (
-    <div className="login-container">
+    <div className="main-container">
         <div>
             <div data-testid="hollow-animation" className="hollow" />
             {/* <div data-testid="window-animation" className="window" /> */}

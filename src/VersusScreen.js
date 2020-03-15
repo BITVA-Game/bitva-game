@@ -45,19 +45,21 @@ class VersusScreen extends Component {
 
     render() {
         return (
-            <div className="versus-screen-container">
-                <div className="versus-heroes-container">
-                    <OneHero hero={this.props.app.game.players[0].hero} />
-                    <div className="vs">
-                        <p>
-                            VS
-                        </p>
+            <div className="main-container">
+                <div className="versus-container">
+                    <div className="versus-heroes-container">
+                        <OneHero hero={this.props.app.game.players[0].hero} />
+                        <div className="vs">
+                            <p>
+                                VS
+                            </p>
+                        </div>
+                        <OneHero hero={this.props.app.game.players[1].hero} />
                     </div>
-                    <OneHero hero={this.props.app.game.players[1].hero} />
-                </div>
-                <div className="versus-loading-container">
-                    <div className="versus-loading" onLoad={this.waitForIt.call(this)}>
-                        <div className="loading" />
+                    <div className="versus-loading-container">
+                        <div className="versus-loading" onLoad={this.waitForIt.call(this)}>
+                            <div className="loading" />
+                        </div>
                     </div>
                 </div>
             </div>
