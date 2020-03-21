@@ -50,8 +50,7 @@ export function iconImg(category, type) {
 }
 
 export function cardOrigin(dragging, card, from) {
-    if ((dragging !== null && card === dragging.card && dragging.mode === 'drag')
-        || (dragging !== null && card === dragging.card && from === 'itemFrame')) {
+    if (dragging !== null && card === dragging.card && (dragging.mode === 'drag' || from === 'itemFrame')) {
         return { opacity: 0, transform: 'scale(1.0)' };
     }
     if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
