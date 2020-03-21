@@ -30,7 +30,7 @@ const CardContainer = ({
     background,
     animationDelay,
 }) => {
-    const { dragging } = useContext(BoardContext);
+    const { dragging, cardDropped } = useContext(BoardContext);
 
 
     return (
@@ -50,6 +50,7 @@ const CardContainer = ({
                         card={card}
                         draggable={active}
                         player={player}
+                        style={cardDropped ? cardOrigin(dragging, card) : null}
                     />
                 </div>
             )}
