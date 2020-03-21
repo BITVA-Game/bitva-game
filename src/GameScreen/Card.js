@@ -49,8 +49,9 @@ export function iconImg(category, type) {
     }
 }
 
-export function cardOrigin(dragging, card) {
-    if (dragging !== null && card === dragging.card && dragging.mode === 'drag') {
+export function cardOrigin(dragging, card, from) {
+    if ((dragging !== null && card === dragging.card && dragging.mode === 'drag')
+        || (dragging !== null && card === dragging.card && from === 'itemFrame')) {
         return { opacity: 0, transform: 'scale(1.0)' };
     }
     if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
@@ -126,7 +127,10 @@ const Card = (props) => {
     return (
         <>
             <div className="card-frame-wrapper">
-                <div className={`${props.active && !isDraggable ? 'card-frame' : ''} `} />
+                <div
+                    className={`${props.active && !isDraggable ? 'card-frame' : ''} `}
+                    style={cardOrigin(dragging, props.card, 'itemFrame')}
+                />
             </div>
             <div
                 className="game-card-container card-place card-like"
