@@ -49,7 +49,7 @@ const Hero = (props) => {
             }
             setHeartSound(false);
         };
-    }, [props.active, heartSound]);
+    }, [props.active, heartSound, props.gamePhase]);
 
     return (
         <div

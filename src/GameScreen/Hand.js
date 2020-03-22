@@ -72,6 +72,11 @@ const Hand = ({
         4: { cardId: handKeys[4], animationDelay: 0 },
     });
 
+    const [gameOver, setGameOver] = useState(false);
+
+    if (gamePhase === 'OVER') {
+        setGameOver(true);
+    }
     useEffect(() => {
     // new object for state
         const updatedCardContainers = { ...cardContainers };
@@ -86,7 +91,7 @@ const Hand = ({
         // compare cardIds in props and cardIds in obj from state to find new cards in hand
         const newCardsInHand = handKeys.filter((el) => !cardIdObjFromState[el]);
 
-        if (gamePhase === 'ACTIVE' && newCardsInHand.length > 0) {
+        if (!gameOver && newCardsInHand.length > 0) {
             // eslint-disable-next-line no-unused-expressions
             playSound('card', newCardsInHand.length);
             // put new cards in new object
@@ -100,7 +105,7 @@ const Hand = ({
             });
             setCardContainers(updatedCardContainers);
         }
-    }, [handKeys, cardContainers]);
+    }, [handKeys, cardContainers, gameOver]);
 
     // we call useState hook in order to call sound only once for 1st cards deal
     const [firstSound, setFirstSound] = useState(true);
