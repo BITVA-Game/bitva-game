@@ -44,7 +44,9 @@ const Hero = (props) => {
         const heartTime = setTimeout(() => setHeartSound(true), 3000);
         return () => {
             clearTimeout(heartTime);
-            playSound('heartBeat');
+            if (props.gamePhase !== 'OVER') {
+                playSound('heartBeat');
+            }
             setHeartSound(false);
         };
     }, [props.active, heartSound]);
@@ -141,6 +143,7 @@ class HealthMeter extends Component {
 Hero.propTypes = {
     player: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
+    gamePhase: PropTypes.string.isRequired,
 };
 
 HeroImage.propTypes = {

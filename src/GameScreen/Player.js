@@ -137,6 +137,7 @@ class Player extends Component {
                 <Hero
                     player={this.props.player}
                     active={this.props.active}
+                    gamePhase={this.props.gamePhase}
                 />
                 <Item
                     item={Object.values(this.props.player.item)[0]}
@@ -198,10 +199,12 @@ Player.propTypes = {
     inactivePlayer: PropTypes.object.isRequired,
     hand: PropTypes.object.isRequired,
     active: PropTypes.bool.isRequired,
+    gamePhase: PropTypes.string.isRequired,
 };
 
 Hand.propTypes = {
     hand: PropTypes.object.isRequired,
+    gamePhase: PropTypes.string.isRequired,
 };
 
 AnimatedHand.propTypes = {

@@ -59,7 +59,7 @@ const CardContainer = ({
 };
 
 const Hand = ({
-    active, background, hand, inactivePlayer, player,
+    active, background, hand, inactivePlayer, player, gamePhase,
 }) => {
     const handKeys = Object.keys(hand);
 
@@ -86,7 +86,7 @@ const Hand = ({
         // compare cardIds in props and cardIds in obj from state to find new cards in hand
         const newCardsInHand = handKeys.filter((el) => !cardIdObjFromState[el]);
 
-        if (newCardsInHand.length > 0) {
+        if (gamePhase === 'ACTIVE' && newCardsInHand.length > 0) {
             // eslint-disable-next-line no-unused-expressions
             playSound('card', newCardsInHand.length);
             // put new cards in new object
@@ -137,6 +137,7 @@ Hand.propTypes = {
     hand: PropTypes.object.isRequired,
     player: PropTypes.object.isRequired,
     inactivePlayer: PropTypes.object.isRequired,
+    gamePhase: PropTypes.string.isRequired,
 };
 
 CardContainer.propTypes = {
