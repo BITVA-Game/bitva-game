@@ -23,7 +23,8 @@
     "superagent": "^5.2.1",
     "uifx": "^2.0.7",
     "uuid": "^3.4.0",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "electron-devtools-installer": "^2.2.4"
   },
   "scripts": {
     "start-react": "cross-env PORT=5000 BROWSER=none react-scripts start",

@@ -1,4 +1,5 @@
 const electron = require('electron');
+const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
 const { app, ipcMain, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
@@ -86,9 +87,17 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', async () => {
+    if (process.env.REACT_URL) {
+        await
+        installExtension([REACT_DEVELOPER_TOOLS])
+            .then((name) => console.log(`Added Extension:  ${name}`))
+            .catch((err) => console.log('An error occurred: ', err));
+    }
 
-console.log(app);
+    createWindow();
+});
+
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
