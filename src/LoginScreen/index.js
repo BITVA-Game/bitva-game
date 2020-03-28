@@ -20,7 +20,7 @@ const LoginScreen = ({
                 <img src={spider} alt="spider icon" />
             </div>
             <div data-testid="mushroom-animation" className="mushroom" />
-            <div className="lemon">
+            <div className="lizard-eye">
                 <div className="eye" />
             </div>
             <div className="eyePupil" />

@@ -112,18 +112,18 @@ input[type="text"] {
 
 /* hollow */
 
-.hollow {    
+.hollow {
     animation-delay: 5s;
     animation-duration: 1s;
     animation-fill-mode: forwards;
     animation-name: visability;
-    height: 30px;
+    height: 3.90625%;
     opacity: 0;
     position: fixed;
-    right: 133px;
-    top: 175px;
+    right: 9.736456%;
+    top: 22.786458%;
     transform: translateX(50%);
-    width: 30px;
+    width: 2.196193%;
 }
 
 @keyframes visability { 0%, 100% {opacity: 1;} }
@@ -216,19 +216,22 @@ input[type="text"] {
 
 /* spider */
 
-.spider {    
+.spider {
     animation-delay: 5s;
     animation-duration: 1s;
     animation-fill-mode: forwards;
     animation-name: visability;
     display: block;
-    height: 15px;
-    left: 5%;
-    margin-left: 214px;
+    left: 20.644216%;
     opacity: 0;
     position: absolute;
-    top: 42px;
-    width: 45px;
+    top: 6%;
+    width: 3.513909%;
+}
+
+.spider img {
+    margin-left: -2px;
+    width: 100%;
 }
 @keyframes visability { 0%, 100% {opacity: 1;} }
 
@@ -246,11 +249,9 @@ input[type="text"] {
     animation: spider-move 20s linear infinite alternate;
     animation-delay: 5s;
     background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, .5);
     content: "";
     display: block;
-    margin-bottom: -1px;
-    margin-left: 26px;
+    margin: 0 auto -2px;
     width: 1px;
 }
 
@@ -258,54 +259,51 @@ input[type="text"] {
 
 .mushroom {
     animation: glow 4s ease-in infinite alternate;
-    animation-delay: 5s;    
+    animation-delay: 5s;
     background: url(../images/animation/mushroom.png);
     background-repeat: no-repeat;
-    bottom: 393px;
-    height: 89px;
+    background-size: contain;
+    bottom: 51.171875%;
+    height: 11.588541%;
     opacity: 0;
     position: absolute;
-    right: 102px;
-    width: 61px;
+    right: 7.467057%;
+    width: 4.465592%;
 }
 
 @keyframes glow {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: .7;
-    }
+    from { opacity: 0; }
+    to { opacity: .7; }
 }
 
 /*lizard eye*/
 
-.lemon {
-    animation: moveLemon 4s infinite alternate;
+.lizard-eye {
+    animation: moveLizardEye 4s infinite alternate;
     animation-delay: 5s;
     background: rgb(104, 124, 35);
     border: 3px solid black;
     border-radius: 20px 150px 30px 150px;
-    height: 20px;
+    height: 2.604166%;
     left: 15.2%;
     opacity: 0;
     overflow: hidden;
-    position: absolute;    
+    position: absolute;
     top: 48%;
     transform: rotate(-45deg);
-    width: 20px;    
+    width: 1.464128%;
 }
 
-@keyframes moveLemon {
+@keyframes moveLizardEye {
     0% {
-            border-radius: 20px 150px 30px 150px;
-            opacity: 1;
+        border-radius: 20px 150px 30px 150px;
+        opacity: 1;
     }
     80% {
-            border-radius: 10px 190px 20px 190px;
-        }
-100% {
-            opacity: 0;
+        border-radius: 10px 190px 20px 190px;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -314,20 +312,20 @@ input[type="text"] {
     animation-delay: 5s;
     background-image: radial-gradient(50% 50%, #92fa00, #1cbd04);
     border: 0.5px solid black;
-    border-radius: 50%;    
+    border-radius: 50%;
     box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.3), inset 0 0 4.5px 1px black;
-    height: 13px;
+    height: 100%;
     margin-left: 10%;
     margin-top: 15%;
     opacity: 0;
-    position: relative;    
-    width: 13px;
+    position: relative;
+    width: 100%;
 }
 
 @keyframes moveEye {
     0% {
         opacity: 1;
-        transform: scale(1);        
+        transform: scale(1);
     }
     100% {
         opacity: 1;
@@ -339,14 +337,14 @@ input[type="text"] {
     animation: moveEyePupil 4s infinite alternate;
     animation-delay: 5s;
     background: black;
-    border-radius: 5px 100px 5px 100px;    
+    border-radius: 5px 100px 5px 100px;
     box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3), inset 0 0 45px 10px black;
-    height: 7px;
+    height: 0.911458%;
     left: 15.9%;
     opacity: 0;
-    position: absolute;    
+    position: absolute;
     top: 49%;
-    width: 7px;
+    width: 0.512445%;
 }
 
 @keyframes moveEyePupil {
