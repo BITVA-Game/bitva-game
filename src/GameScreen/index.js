@@ -62,6 +62,7 @@ class GameScreen extends Component {
                         inactivePlayer={inactivePlayer}
                         hand={this.playableHand(player)}
                         sendMessage={this.props.sendMessage}
+                        gamePhase={this.props.app.game.phase}
                     />
                 ))}
                 {activePlayer.moveCounter === 0
@@ -71,8 +72,7 @@ class GameScreen extends Component {
 
                 {this.props.app.game.phase === 'OVER' ? (
                     <GameOver app={this.props.app} />
-                ) : null}
-                <BirdsAnimation />
+                ) : <BirdsAnimation />}
             </div>
         );
     }
