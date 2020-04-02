@@ -89,7 +89,7 @@ button,
   margin: 0 auto;
   overflow: hidden;
   position: absolute;
-  width: 1366px;
+  width: 100%;
 }
 
 .moveForest-enter-active .background-hut,
@@ -100,72 +100,72 @@ button,
 }
 
 .background-greyTreeL {
-  bottom: 130px;
-  left: 120px;
+  bottom: 16.927083%;
+  left: 15.625%;
   margin: 0 auto;
   overflow: hidden;
   position: absolute;
-  width: 300px;
+  width: 21.961932%;
 }
 
 .moveForest-enter-active .background-greyTreeL,
 .moveForest-enter-done .background-greyTreeL {
-  bottom: 60px;
-  left: 90px;
+  bottom: 7.8125%;
+  left: 6.588579%;
   opacity: 1;
   transition: all 4500ms ease-in;
 }
 
 .background-greyTreeR {
-  bottom: 100px;
+  bottom: 13.020833%;
   margin: 0 auto;
   overflow: hidden;
   position: absolute;
-  right: 200px;
-  width: 300px;
+  right: 14.641288%;
+  width: 21.961932%;
 }
 
 .moveForest-enter-active .background-greyTreeR,
 .moveForest-enter-done .background-greyTreeR {
-  bottom: 40px;
+  bottom: 5.208333%;
   opacity: 1;
-  right: 150px;
+  right: 10.980966%;
   transition: all 4500ms ease-in;
 }
 
 .background-blackTreeL {
-  bottom: 30px;
+  bottom: 3.90625%;
+  height: 176.1718%;
   left: 0;
   margin: 0 auto;
   opacity: 1;
   overflow: hidden;
   position: absolute;
-  width: 600px;
 }
 
 .moveForest-enter-active .background-blackTreeL,
 .moveForest-enter-done .background-blackTreeL {
-  bottom: -60px;
-  left: -30px;
+  bottom: -7.8125%;
+  left: -2.1962%;
   opacity: 1;
   transition: all 4000ms ease-in;
 }
 
 .background-blackTreeR {
   bottom: 0;
+  height: 159.6354%;
   margin: 0 auto;
   opacity: 1;
   overflow: hidden;
   position: absolute;
   right: 0;
-  width: 600px;
 }
 
 .moveForest-enter-active .background-blackTreeR,
 .moveForest-enter-done .background-blackTreeR {
-  bottom: -80px;
+  bottom: -10.4167%;
   opacity: 1;
-  right: -80px;
+  right: -5.8566%;
   transition: all 4000ms ease-in;
 }
 
