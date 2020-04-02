@@ -14,8 +14,9 @@ import chickenLegsHut from './images/cards/izba.png';
 import clairvoyance from './images/cards/clairvoyance.png';
 import crown from './images/cards/crown.png';
 import dolly from './images/cards/dolly.png';
-import earthquake from './images/cards/bitva-cardbase.jpg';
+import earthquake from './images/cards/earthquake.png';
 import forestMushroom from './images/cards/mushrooms.png';
+import gusiLebedi from './images/cards/gusi.png';
 import horsemanBlack from './images/cards/blackrider.png';
 import horsemanRed from './images/cards/redrider.png';
 import horsemanWhite from './images/cards/whiterider.png';
@@ -56,6 +57,7 @@ const imagesCards = {
     dolly,
     earthquake,
     forestMushroom,
+    gusiLebedi,
     horsemanBlack,
     horsemanRed,
     horsemanWhite,
