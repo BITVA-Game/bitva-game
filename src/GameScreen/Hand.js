@@ -7,6 +7,8 @@ import playSound from '../soundController';
 import '../css/App.css';
 import '../css/GameScreen.css';
 
+const { phase: phaseConst, sound: soundConst } = require('../constants');
+
 function handClass(active, player) {
     let potion;
     // eslint-disable-next-line no-unused-expressions
@@ -74,7 +76,7 @@ const Hand = ({
 
     const [gameOver, setGameOver] = useState(false);
 
-    if (gamePhase === 'OVER') {
+    if (gamePhase === phaseConst.OVER) {
         setGameOver(true);
     }
     useEffect(() => {
@@ -93,7 +95,7 @@ const Hand = ({
 
         if (!gameOver && newCardsInHand.length > 0) {
             // eslint-disable-next-line no-unused-expressions
-            playSound('card', newCardsInHand.length);
+            playSound(soundConst.CARD, newCardsInHand.length);
             // put new cards in new object
             let index = 0;
             Object.keys(cardContainers).forEach((el) => {
@@ -112,7 +114,7 @@ const Hand = ({
     // we call playSound in one hand only to avoid cards sound to be called twice
     useEffect(() => {
         if (firstSound === true && !active) {
-            playSound('card', Object.keys(inactivePlayer.hand).length);
+            playSound(soundConst.CARD, Object.keys(inactivePlayer.hand).length);
         }
         setFirstSound(false);
     }, [firstSound, active, inactivePlayer.hand]);
