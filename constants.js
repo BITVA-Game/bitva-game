@@ -90,6 +90,12 @@ const styles = {
     TOP: 'top',
 };
 
+const animation = {
+    CARDS: 'cards',
+    POTION: 'potion',
+    BAT: 'bat',
+};
+
 module.exports = {
     screen,
     message,
@@ -98,4 +104,5 @@ module.exports = {
     target,
     styles,
     action,
+    animation,
 };
