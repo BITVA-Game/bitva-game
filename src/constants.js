@@ -12,6 +12,9 @@ const screen = {
     VS: 'VS',
     NETWORKSCREEN: 'NETWORKSCREEN',
     SELECTOPPONENT: 'SELECTOPPONENT',
+    LOADING: 'LOADING',
+    WAITINGSTATE: 'waiting',
+    SELECTIONSTATE: 'selection',
 };
 
 const message = {
@@ -30,6 +33,9 @@ const message = {
     DELETEACC: 'DELETEACC',
     START: 'START',
     OPPONENT: 'OPPONENT',
+    SETTINGS: 'SETTINGS',
+    QUIT: 'QUIT',
+    READACCOUNTS: 'READACCOUNTS',
 };
 
 const phase = {
@@ -64,6 +70,9 @@ const card = {
     MALACHITEBOXCARD: 'malachiteBox',
     OVENCARD: 'oven',
     MUSHROOMCARD: 'mushroom',
+    SUPRESSCATEGORY: 'suppress',
+    GENERATORCATEGORY: 'generator',
+    SHUFFLINGCATEGORY: 'shuffling',
 };
 
 const target = {
@@ -96,6 +105,27 @@ const animation = {
     BAT: 'bat',
 };
 
+const sound = {
+    HEARTBEAT: 'heartBeat',
+    HEARTBEATFAST: 'heartBeatFast',
+    CARD: 'card',
+    BIRDS: 'birds',
+    CARDSFROMGRAVE: 'cardsFromGrave',
+    ATTACKOPPONENT: 'attackOpponent',
+};
+
+const dragging = {
+    DRAGMODE: 'drag',
+    CLICKMODE: 'click',
+    FROMITEMFRAME: 'itemFrame',
+};
+
+const role = {
+    HOST: 'host',
+    CLIENT: 'client',
+    GUEST: 'guest',
+};
+
 module.exports = {
     screen,
     message,
@@ -105,4 +135,7 @@ module.exports = {
     styles,
     action,
     animation,
+    sound,
+    dragging,
+    role,
 };

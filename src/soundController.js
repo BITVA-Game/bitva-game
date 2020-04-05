@@ -14,7 +14,7 @@ const card = new UIFx(`${process.env.PUBLIC_URL}/sound/card.mp3`, { volume: 1.0 
 const heartBeat = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.03 });
 const heartBeatFast = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeatFast.mp3`, { volume: 0.5 });
 
-const action = {
+export const action = {
     graveyard: graveyardSound,
     attackOpponent: attackSound,
     attackItemOpponent,

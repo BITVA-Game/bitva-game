@@ -13,6 +13,8 @@ import morevna from '../images/heroes/morevna.jpg';
 import hozyaika from '../images/heroes/hozyaika.jpg';
 import premudraya from '../images/heroes/premudraya.jpg';
 
+const { phase: phaseConst, sound: soundConst, target } = require('../constants');
+
 const width = 200;
 const height = 200;
 const style = { height: `${height}px`, width: `${width}px` };
@@ -37,19 +39,19 @@ const HeroImage = ({ hero }) => (
 
 const Hero = (props) => {
     const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
-    const heroClass = isTarget(props.active ? 'hero' : 'opponent', props.player) ? 'target' : '';
+    const heroClass = isTarget(props.active ? target.HERO : target.OPPONENT, props.player) ? 'target' : '';
     const [heartSound, setHeartSound] = useState(false);
 
     useEffect(() => {
         const heartTime = setTimeout(() => setHeartSound(true), 3000);
         return () => {
             clearTimeout(heartTime);
-            if (props.gamePhase !== 'OVER' && props.active) {
+            if (props.gamePhase !== phaseConst.OVER && props.active) {
                 if (props.player.health.current <= 3) {
-                    playSound('heartBeatFast');
+                    playSound(soundConst.HEARTBEATFAST);
                 }
                 if (props.player.health.current <= 6 && props.player.health.current > 3) {
-                    playSound('heartBeat');
+                    playSound(soundConst.HEARTBEAT);
                 }
             }
 
@@ -61,10 +63,10 @@ const Hero = (props) => {
         <div
             className={`hero ${heroClass}`}
             style={style}
-            id={props.active ? 'hero' : 'enemy'}
-            onDrop={() => cardDropped(props.active ? 'hero' : 'opponent', props.player)}
-            onClick={() => cardDropped(props.active ? 'hero' : 'opponent', props.player)}
-            onDragOver={(e) => cardOver(e, props.active ? 'hero' : 'opponent', props.player)}
+            id={props.active ? target.HERO : target.OPPONENT}
+            onDrop={() => cardDropped(props.active ? target.HERO : target.OPPONENT, props.player)}
+            onClick={() => cardDropped(props.active ? target.HERO : target.OPPONENT, props.player)}
+            onDragOver={(e) => cardOver(e, props.active ? target.HERO : target.OPPONENT, props.player)}
         >
             <HeroImage hero={props.player.hero} />
             <HealthMeter
