@@ -44,7 +44,7 @@ const Hero = (props) => {
         const heartTime = setTimeout(() => setHeartSound(true), 3000);
         return () => {
             clearTimeout(heartTime);
-            if (props.gamePhase !== 'OVER') {
+            if (props.gamePhase !== 'OVER' && props.player.health.current <= 6) {
                 playSound('heartBeat');
             }
             setHeartSound(false);
