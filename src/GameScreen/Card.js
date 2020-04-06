@@ -6,8 +6,10 @@ import BoardContext from './BoardContext';
 import '../css/Cards.css';
 import imagesCards from '../cardImages';
 
+const { phase: phaseConst, sound: soundConst, card: cardConst, dragging: draggingConst } = require('../constants');
+
 export function backgroundImg(category) {
-    if (category === 'attackItems' || category === 'attack') {
+    if (category === cardConst.ATTACKITEMSCATEGORY || category === cardConst.ATTACKCATEGORY) {
         return imagesCards.backgroundAttack;
     } return imagesCards.backgroundCommon;
 }
@@ -15,32 +17,32 @@ export function backgroundImg(category) {
 // eslint-disable-next-line consistent-return
 export function iconImg(category, type) {
     switch (category) {
-    case 'attack':
+    case cardConst.ATTACKCATEGORY:
         return 'icon-attack';
-    case 'attackItems':
-    case 'damage':
-    case 'suppress':
+    case cardConst.ATTACKITEMSCATEGORY:
+    case cardConst.DAMAGECATEGORY:
+    case cardConst.SUPRESSCATEGORY:
         return 'icon-damage';
-    case 'generator':
-    case 'shuffling':
+    case cardConst.GENERATORCATEGORY:
+    case cardConst.SHUFFLINGCATEGORY:
         return 'icon-move';
-    case 'holdCard':
-    case 'holdTurn':
+    case cardConst.HOLDCARDCATEGORY:
+    case cardConst.HOLDTURNCATEGORY:
         return 'icon-hold';
-    case 'panic':
-    case 'turning':
+    case cardConst.PANICCATEGORY:
+    case cardConst.TURNINGCATEGORY:
         return 'icon-arrows';
-    case 'reflect':
+    case cardConst.REFLECTCATEGORY:
         return 'icon-reflect';
-    case 'shield':
+    case cardConst.SHIELDCATEGORY:
         return 'icon-shield';
-    case 'showCards':
+    case cardConst.SHOWCARDSCATEGORY:
         return 'icon-show';
-    case 'heal':
-        if (type === 'action') {
+    case cardConst.HEALCATEGORY:
+        if (type === cardConst.ACTIONCARD) {
             return 'icon-heal';
         }
-        if (type === 'item') {
+        if (type === cardConst.ITEMCARD) {
             return 'icon-heart';
         }
         break;
@@ -50,10 +52,13 @@ export function iconImg(category, type) {
 }
 
 export function cardOrigin(dragging, card, from) {
-    if (dragging !== null && card === dragging.card && (dragging.mode === 'drag' || from === 'itemFrame')) {
+    if (dragging !== null && card === dragging.card
+        && (dragging.mode === draggingConst.DRAGMODE
+            || from === draggingConst.FROMITEMFRAME)) {
         return { opacity: 0, transform: 'scale(1.0)' };
     }
-    if (dragging !== null && card === dragging.card && dragging.mode === 'click') {
+    if (dragging !== null && card === dragging.card
+        && dragging.mode === draggingConst.CLICKMODE) {
         return { opacity: 1.0, transform: 'scale(1.1)' };
     }
     return { opacity: 1.0, transform: 'scale(1.0)' };
@@ -64,7 +69,7 @@ const CardFront = (props) => {
         backgroundColor, type, category, categoryName,
         healthCurrent, health, points, initialpoints, id, name,
     } = props;
-    const categoryTitle = categoryName === 'suppress' ? 'suppress' : '';
+    const categoryTitle = categoryName === cardConst.SUPRESSCATEGORY ? 'suppress' : '';
     return (
         <div className={`game-card-front ${backgroundColor}`}>
             <div className="card-header">
@@ -112,7 +117,7 @@ const Card = (props) => {
         categoryName, healthCurrent, health, points, initialpoints,
     } = props.card;
     const { background } = props.player;
-    const backgroundColor = type === 'item' ? `${background}-item` : `${background}-action`;
+    const backgroundColor = type === cardConst.ITEMCARD ? `${background}-item` : `${background}-action`;
     const { cardSelect, cardAim, dragging } = useContext(BoardContext);
     const isDraggable = disabled === true || panic === true;
     const [flipped, setFlipped] = useState(false);
@@ -120,7 +125,7 @@ const Card = (props) => {
     function handleClick(event) {
         event.stopPropagation();
         // eslint-disable-next-line no-unused-expressions
-        props.active && cardSelect(props.cardKey, props.card, 'click');
+        props.active && cardSelect(props.cardKey, props.card, draggingConst.CLICKMODE);
     }
 
     return (
@@ -128,7 +133,7 @@ const Card = (props) => {
             <div className="card-frame-wrapper">
                 <div
                     className={`${props.active && !isDraggable ? 'card-frame' : ''} `}
-                    style={cardOrigin(dragging, props.card, 'itemFrame')}
+                    style={cardOrigin(dragging, props.card, draggingConst.FROMITEMFRAME)}
                 />
             </div>
             <div
@@ -139,7 +144,7 @@ const Card = (props) => {
                     className={`card game-card card-like card${flipped ? '-flipped' : ''}`}
                     data-key={props.cardKey}
                     draggable={isDraggable ? null : props.draggable}
-                    onDragStart={() => cardSelect(props.cardKey, props.card, 'drag')}
+                    onDragStart={() => cardSelect(props.cardKey, props.card, draggingConst.DRAGMODE)}
                     onClick={handleClick}
                     onDragEnd={cardAim}
                     onContextMenu={() => setFlipped(!flipped)}
