@@ -6,7 +6,7 @@ import BoardContext from './BoardContext';
 import '../css/Cards.css';
 import imagesCards from '../cardImages';
 
-const { phase: phaseConst, sound: soundConst, card: cardConst, dragging: draggingConst } = require('../constants');
+const { card: cardConst, dragging: draggingConst } = require('../constants');
 
 export function backgroundImg(category) {
     if (category === cardConst.ATTACKITEMSCATEGORY || category === cardConst.ATTACKCATEGORY) {
