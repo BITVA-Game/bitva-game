@@ -2,7 +2,7 @@
 // const fs = require('fs');
 // const path = require('path');
 
-const { screen, message } = require('../constants');
+const { screen, message } = require('../src/constants');
 
 let application = JSON.stringify();
 // Additional files that have functions related to this part of application

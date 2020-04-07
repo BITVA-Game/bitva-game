@@ -10,7 +10,7 @@ import { withBoardContext } from './BoardContext';
 import playSound from '../soundController';
 import BirdsAnimation from './AnimationBirds';
 
-const { phase: phaseConst } = require('../../constants');
+const { phase: phaseConst } = require('../constants');
 
 class GameScreen extends Component {
     constructor(props) {

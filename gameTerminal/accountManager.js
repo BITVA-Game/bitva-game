@@ -1,5 +1,5 @@
 const uuid = require('uuid/v1');
-const { message } = require('../constants');
+const { message } = require('../src/constants');
 const { read, create, remove } = require('../gameAccounts');
 
 const DELAY = 3000;

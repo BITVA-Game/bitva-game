@@ -1,4 +1,4 @@
-const { message } = require('../constants');
+const { message } = require('../src/constants');
 
 const heroes = require('../gameTerminal/data/characters.json');
 const cards = require('../gameTerminal/data/cards.json');

@@ -1,4 +1,4 @@
-const { message } = require('../constants');
+const { message } = require('../src/constants');
 
 function handle(state, msg) {
     switch (msg.type) {
