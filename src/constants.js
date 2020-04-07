@@ -126,11 +126,6 @@ const role = {
     GUEST: 'guest',
 };
 
-const dragging = {
-    DRAGMODE: 'drag',
-    CLICKMODE: 'click',
-    FROMITEMFRAME: 'itemFrame',
-};
 
 module.exports = {
     screen,
