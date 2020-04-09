@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const { message } = require('../constants');
+
 function deleteAccount(sendMessage, toggleDelete, accId) {
-    sendMessage({ type: 'DELETEACC', account: accId });
+    sendMessage({ type: message.DELETEACC, account: accId });
     toggleDelete();
 }
 
