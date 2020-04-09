@@ -22,6 +22,8 @@ import blackTreeR from './images/backgrounds/BlackTree_1.png';
 const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 
+const { message: messageConst, screen: screenConst } = require('./constants');
+
 function sendMessage(msg) {
     console.log('MESSAGE', msg);
     ipcRenderer.send('APP', msg);
@@ -32,7 +34,7 @@ class App extends Component {
     // Bind the function to send messages
     constructor(props) {
         super(props);
-        this.state = { loaded: false, app: { manager: { screen: 'LOADING' } } };
+        this.state = { loaded: false, app: { manager: { screen: screenConst.LOADING } } };
         this.loadAnimation = this.loadAnimation.bind(this);
     }
 
@@ -42,7 +44,7 @@ class App extends Component {
             // console.log({ app: arg });
             this.setState({ app: arg });
         });
-        sendMessage({ type: 'INIT' });
+        sendMessage({ type: messageConst.INIT });
         setTimeout(() => this.loadAnimation(), 0);
     }
 
@@ -53,30 +55,30 @@ class App extends Component {
     showApplication() {
         console.log('APP: ', this.state.app.manager.screen, this.state.app);
         switch (this.state.app.manager.screen) {
-        case 'LOADING':
-            return 'LOADING';
-        case 'LOGIN':
+        case screenConst.LOADING:
+            return screenConst.LOADING;
+        case screenConst.LOGIN:
             return (
                 <LoginScreen
                     sendMessage={sendMessage}
                     accounts={this.state.app.accounts}
-                    message="LOGIN"
+                    message={messageConst.LOGIN}
                 />
             );
-        case 'STARTSCREEN':
+        case screenConst.STARTSCREEN:
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
-        case 'PROFILE':
+        case screenConst.PROFILE:
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
-        case 'SELECTOPPONENT':
+        case screenConst.SELECTOPPONENT:
             return (
                 <LoginScreen
                     sendMessage={sendMessage}
                     accounts={this.state.app.accounts}
-                    message="OPPONENT"
+                    message={messageConst.OPPONENT}
                     participants={this.state.app.participants}
                 />
             );
-        case 'HEROSELECT':
+        case screenConst.HEROSELECT:
             return (
                 <HeroSelection
                     sendMessage={sendMessage}
@@ -84,15 +86,15 @@ class App extends Component {
                     key={this.state.app.heroSelect.activePlayer}
                 />
             );
-        case 'VS':
+        case screenConst.VS:
             return <PlayScreen sendMessage={sendMessage} app={this.state.app} />;
-        case 'VERSUS':
+        case screenConst.VERSUS:
             return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
-        case 'GAMESCREEN':
+        case screenConst.GAMESCREEN:
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
-        case 'OVER':
+        case screenConst.OVER:
             return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
-        case 'NETWORKSCREEN':
+        case screenConst.NETWORKSCREEN:
             return <NetworkPlay sendMessage={sendMessage} app={this.state.app} />;
         default:
             return `UNKNOWN SCREEN NAME ${this.state.app.manager.screen}`;
