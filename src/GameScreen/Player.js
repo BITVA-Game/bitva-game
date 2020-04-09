@@ -16,7 +16,7 @@ import '../css/GameScreen.css';
 
 import bat from '../images/cards/batCard.png';
 
-const { animation: animationConst, card: cardConst, target: targetConst } = require('../../constants');
+const { animation: animationConst, card: cardConst, target: targetConst } = require('../constants');
 
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });

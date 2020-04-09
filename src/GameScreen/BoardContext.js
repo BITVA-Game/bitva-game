@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import rules, { getActivePlayer } from '../rules';
 import playSound from '../soundController';
 
+const {
+    card: cardConst,
+    dragging: draggingConst,
+    sound: soundConst,
+    message,
+} = require('../constants');
+
 export function withBoardContext(GameScreen) {
     const Board = class extends Component {
         constructor(props) {
@@ -26,7 +33,7 @@ export function withBoardContext(GameScreen) {
 
         cardSelect(key, card, mode) {
             this.setState((oldState) => {
-                if (oldState.dragging && mode === 'click') {
+                if (oldState.dragging && mode === draggingConst.CLICKMODE) {
                     return { dragging: null };
                 }
                 return { dragging: { key, card, mode } };
@@ -43,21 +50,22 @@ export function withBoardContext(GameScreen) {
 
             // we define active player if she / he has Malachite box in item
             let playerWithMalachiteBox;
-            if (itemActive && itemActive.category === 'generator') {
+            if (itemActive && itemActive.category === cardConst.GENERATORCATEGORY) {
                 playerWithMalachiteBox = activePlayer.hero;
             }
             // if active player has malachite box card
             // every other card drop calls animation of bat card
-            if (itemActive && itemActive.category === 'generator' && activePlayer.hero === playerWithMalachiteBox) {
+            if (itemActive && itemActive.category === cardConst.GENERATORCATEGORY
+                && activePlayer.hero === playerWithMalachiteBox) {
                 // this.playAnimation('bat');
-                playSound('attackOpponent');
+                playSound(soundConst.ATTACKOPPONENT);
             }
         }
 
         cardAct(target) {
             this.malachiteBox();
             this.props.sendMessage({
-                type: 'ACTION',
+                type: message.ACTION,
                 activeCard: this.state.dragging.key,
                 target,
             });

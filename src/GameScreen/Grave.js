@@ -26,16 +26,16 @@ const Grave = (props) => {
     return (
         <div
             className={`grave card-like  grave-${props.background} ${
-                isTarget(target.GRAVEYARD, props.player) ? 'target' : null
+                isTarget(target.GRAVE, props.player) ? 'target' : null
             }`}
             style={{
                 backgroundImage: `url(${graveyard})`,
                 backgroundSize: '100% 100%',
             }}
-            id={props.active ? target.GRAVEYARD : null}
-            onDrop={() => cardDropped(target.GRAVEYARD, props.player)}
-            onClick={() => cardDropped(target.GRAVEYARD, props.player)}
-            onDragOver={(e) => cardOver(e, target.GRAVEYARD, props.player)}
+            id={props.active ? target.GRAVE : null}
+            onDrop={() => cardDropped(target.GRAVE, props.player)}
+            onClick={() => cardDropped(target.GRAVE, props.player)}
+            onDragOver={(e) => cardOver(e, target.GRAVE, props.player)}
         >
             <div className="count">
                 {props.active
