@@ -15,6 +15,8 @@ import morevna from '../images/heroes/morevna_full.jpg';
 import hozyaika from '../images/heroes/hozyaika_full.jpg';
 import premudraya from '../images/heroes/premudraya_full.jpg';
 
+const { card: cardConst } = require('../constants');
+
 const images = {
     yaga,
     morevna,
@@ -31,16 +33,16 @@ const HeroImage = (props) => (
 );
 
 const CardPreview = (props) => (
-    <div className={`card details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
+    <div className={`card details-card ${props.card.type === cardConst.ITEMCARD ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
         <div className="card-header">
-            <div className={`card-icon-container details-card-icon-container ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
+            <div className={`card-icon-container details-card-icon-container ${props.card.type === cardConst.ITEMCARD ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
                 <div className={`card-icon details-card-icon ${iconImg(props.card.category, props.card.type)}`} />
             </div>
             <p className="card-category details-card-category">{props.card.categoryName}</p>
             {props.card.initialpoints
                 ? (
                     <div className={`card-points details-card-points
-                        ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
+                        ${props.card.type === cardConst.ITEMCARD ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
                     >
                         {props.card.initialpoints}
                     </div>
@@ -48,7 +50,7 @@ const CardPreview = (props) => (
             {props.card.health
                 ? (
                     <div className={`card-health details-card-health
-                        ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
+                        ${props.card.type === cardConst.ITEMCARD ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
                     >
                         {props.card.health}
                     </div>
