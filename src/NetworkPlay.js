@@ -4,7 +4,7 @@ import MainMenu from './MainMenu';
 import './css/Profile.css';
 import './css/NetworkPlay.css';
 
-const { message, role: roleConst, screen: screenConst } = require('./constants');
+const { message, screen: screenConst, role: roleConst } = require('./constants');
 
 const WaitingForHost = (props) => (
     <div className="role-selection">
@@ -90,15 +90,15 @@ class NetworkPlay extends Component {
 
     renderPopup() {
         return (
-            <div>
+            <div className="role-selection" style={{ opacity: 0.8, width: 400 }}>
                 <h1>I AM POPUP</h1>
                 {this.state.screen === screenConst.WAITINGSTATE ? (
                     <h1>Waiting</h1>
                 ) : (
                     <WaitingForHost gameConnect={this.gameConnect} />
                 )}
-                <button type="button" onClick={this.clearSelection}>
-          Back
+                <button type="button" style={{ backgroundColor: 'black' }} onClick={this.clearSelection}>
+                    Back
                 </button>
             </div>
         );
