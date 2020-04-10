@@ -8,6 +8,8 @@ import morevna from './images/heroes/morevna.jpg';
 import hozyaika from './images/heroes/hozyaika.jpg';
 import premudraya from './images/heroes/premudraya.jpg';
 
+const { message } = require('./constants');
+
 const images = {
     yaga,
     morevna,
@@ -36,7 +38,7 @@ class VersusScreen extends Component {
     }
 
     sendDealAllMessage() {
-        this.props.sendMessage({ type: 'DEALALL' });
+        this.props.sendMessage({ type: message.DEALALL });
     }
 
     waitForIt() {
