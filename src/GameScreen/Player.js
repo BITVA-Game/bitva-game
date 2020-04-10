@@ -206,7 +206,11 @@ Player.propTypes = {
 
 Hand.propTypes = {
     hand: PropTypes.object.isRequired,
-    gamePhase: PropTypes.string.isRequired,
+    gamePhase: PropTypes.string,
+};
+
+Hand.defaultProps = {
+    gamePhase: undefined,
 };
 
 AnimatedHand.propTypes = {
