@@ -4,11 +4,11 @@ import './css/Profile.css';
 
 const { message, role } = require('./constants');
 
-const SelectOpponent = (props) => (
+const SelectOpponent = ({ sendMessage }) => (
     <div className="profile-container app-background">
         <button
             type="button"
-            onClick={() => props.sendMessage({ type: message.OPPONENT, account: role.GUEST })}
+            onClick={() => sendMessage({ type: message.OPPONENT, account: role.GUEST })}
         >
           MAIN BUTTON
         </button>
