@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { screen } from '../../constants';
+import { screen } from '../../src/constants';
 
 import testAccounts from './accounts';
 

@@ -5,7 +5,7 @@ import {
 
 import {
     message, target, action,
-} from '../../constants';
+} from '../../src/constants';
 
 import cards from '../__data__/cards';
 
