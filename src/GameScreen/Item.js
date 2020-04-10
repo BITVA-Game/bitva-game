@@ -12,6 +12,16 @@ const Item = (props) => {
     const {
         isTarget, cardDropped, cardOver,
     } = useContext(BoardContext);
+
+    const cardDropToItem = (
+        // eslint-disable-next-line no-nested-ternary
+        props.active
+            ? () => cardDropped(target.ITEMCARD, props.player)
+            : props.item
+                ? () => cardDropped(target.ITEMOPPONENT, props.player)
+                : null
+    );
+
     return (
         <div
             className={`item card-place card-like
@@ -25,22 +35,9 @@ const Item = (props) => {
         }
             `}
             id={props.active ? cardConst.ITEMCATEGORY : null}
-            onDrop={
-                // eslint-disable-next-line no-nested-ternary
-                props.active
-                    ? () => cardDropped(target.ITEMCARD, props.player)
-                    : props.item
-                        ? () => cardDropped(target.ITEMOPPONENT, props.player)
-                        : null
-            }
-            onClick={
-                // eslint-disable-next-line no-nested-ternary
-                props.active
-                    ? () => cardDropped(target.ITEMCARD, props.player)
-                    : props.item
-                        ? () => cardDropped(target.ITEMOPPONENT, props.player)
-                        : null
-            }
+
+            onDrop={cardDropToItem}
+            onClick={cardDropToItem}
             onDragOver={
                 // eslint-disable-next-line no-nested-ternary
                 props.active
