@@ -111,12 +111,14 @@ const CardBack = ({ backgroundColor, info, name }) => (
     </div>
 );
 
-const Card = (props) => {
+const Card = ({
+    active, card, cardKey, draggable, player,
+}) => {
     const {
         id, name, info, type, disabled, panic, category,
         categoryName, healthCurrent, health, points, initialpoints,
-    } = props.card;
-    const { background } = props.player;
+    } = card;
+    const { background } = player;
     const backgroundColor = type === cardConst.ITEMCARD ? `${background}-item` : `${background}-action`;
     const { cardSelect, cardAim, dragging } = useContext(BoardContext);
     const isDraggable = disabled === true || panic === true;
@@ -125,26 +127,26 @@ const Card = (props) => {
     function handleClick(event) {
         event.stopPropagation();
         // eslint-disable-next-line no-unused-expressions
-        props.active && cardSelect(props.cardKey, props.card, draggingConst.CLICKMODE);
+        active && cardSelect(cardKey, card, draggingConst.CLICKMODE);
     }
 
     return (
         <>
             <div className="card-frame-wrapper">
                 <div
-                    className={`${props.active && !isDraggable ? 'card-frame' : ''} `}
-                    style={cardOrigin(dragging, props.card, draggingConst.FROMITEMFRAME)}
+                    className={`${active && !isDraggable ? 'card-frame' : ''} `}
+                    style={cardOrigin(dragging, card, draggingConst.FROMITEMFRAME)}
                 />
             </div>
             <div
                 className="game-card-container card-place card-like"
-                style={cardOrigin(dragging, props.card)}
+                style={cardOrigin(dragging, card)}
             >
                 <div
                     className={`card game-card card-like card${flipped ? '-flipped' : ''}`}
-                    data-key={props.cardKey}
-                    draggable={isDraggable ? null : props.draggable}
-                    onDragStart={() => cardSelect(props.cardKey, props.card, draggingConst.DRAGMODE)}
+                    data-key={cardKey}
+                    draggable={isDraggable ? null : draggable}
+                    onDragStart={() => cardSelect(cardKey, card, draggingConst.DRAGMODE)}
                     onClick={handleClick}
                     onDragEnd={cardAim}
                     onContextMenu={() => setFlipped(!flipped)}
