@@ -976,9 +976,9 @@
 }
 
 .animated-card {
-    animation-direction:alternate;
+    animation-direction:alternate-reverse; 
     animation-fill-mode: backwards;
-    transform-style: preserve-3d;   
+    transform-style: preserve-3d;
 }
 
 .animated-card-0 {
@@ -1003,10 +1003,12 @@
 
 .card-animation-delay-0 {
     animation-delay: 0s;
+    animation-fill-mode: backwards;
 }
 
 .card-animation-delay-1 {
     animation-delay: 0.5s;
+    animation-fill-mode: backwards;    
 }
 
 .card-animation-delay-2 {
@@ -1022,7 +1024,7 @@
 }
 
 @keyframes deckToHand-0 {
-    0% {
+    0% { 
         transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(407px) translateY(4px);
       }
     40% {
