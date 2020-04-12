@@ -44,9 +44,7 @@ const CardPreview = (props) => {
                 <p className="card-category details-card-category">{props.card.categoryName}</p>
                 {props.card.initialpoints
                     ? (
-                        <div className={`card-points details-card-points
-                        ${cardTypeBackground}`}
-                        >
+                        <div className={`card-points details-card-points ${cardTypeBackground}`}>
                             {props.card.initialpoints}
                         </div>
                     ) : null}
@@ -64,7 +62,13 @@ const CardPreview = (props) => {
                     backgroundSize: '100% 100%',
                 }}
             >
-                <div className="details-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
+                <div
+                    className="details-card-image"
+                    style={{
+                        backgroundImage: `url(${imagesCards[props.card.id]})`,
+                        backgroundSize: '100% 100%',
+                    }}
+                />
             </div>
             <div className="card-footer details-card-footer">
                 <p>{props.card.name}</p>
