@@ -1,33 +1,36 @@
-const { screen, message, phase } = require('../constants');
+const { screen, phase } = require('../constants');
 
 
-function heroSelected(state) {
-    if (state.game.players.length === 2) {
+// eslint-disable-next-line no-unused-vars
+function overScreen(state, activeAcc) {
+    return screen.OVER;
+}
+
+// eslint-disable-next-line no-unused-vars
+function activeScreen(state, activeAcc) {
+    return screen.GAMESCREEN;
+}
+
+function selectionScreen(state, activeAcc) {
+    const playerSelected = state.players && state.players.find((p) => p.id === activeAcc);
+    if (playerSelected) {
         return screen.VERSUS;
     }
     return screen.HEROSELECT;
 }
 
-function gameScreen(state) {
-    if (state.game.phase === phase.OVER) {
-        return screen.OVER;
-    }
-    return screen.GAMESCREEN;
-}
-
-function handle(state, msg) {
-    switch (msg.type) {
-    case message.LOGIN:
-        return screen.LOGIN;
-    case message.PLAY:
-        return screen.HEROSELECT;
-    case message.HEROSELECTED:
-        return heroSelected(state);
-    case message.DEALALL:
-        return screen.GAMESCREEN;
-    case message.ACTION:
-        return gameScreen(state);
-    default: return state.screen;
+function handle(state, activeAcc) {
+    console.log('handle', activeAcc);
+    console.log('state', state);
+    switch (state.game.phase) {
+    case phase.SELECTION:
+        return selectionScreen(state, activeAcc);
+    case phase.ACTIVE:
+        return activeScreen(state, activeAcc);
+    case phase.OVER:
+        return overScreen(state, activeAcc);
+    default:
+        throw new Error(`Unknown phase ${state.game.phase}`);
     }
 }
 

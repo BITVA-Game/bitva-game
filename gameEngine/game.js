@@ -851,7 +851,9 @@ function handle(app, msg) {
         );
         const active = selectActive(playersInitital);
         const players = assignPlayersPositions(playersInitital);
-        return Object.assign(game, { active, players });
+        const gamePhase = players.length === 2 ? phase.ACTIVE : phase.SELECTION;
+
+        return Object.assign(game, { active, players, phase: gamePhase });
     }
     case message.DEALALL: {
         return Object.assign(game, { players: giveCardsToAll(game.players) });

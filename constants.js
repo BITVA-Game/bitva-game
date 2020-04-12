@@ -33,6 +33,7 @@ const message = {
 };
 
 const phase = {
+    SELECTION: 'SELECTION',
     ACTIVE: 'ACTIVE',
     OVER: 'OVER',
 };

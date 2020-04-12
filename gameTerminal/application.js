@@ -55,7 +55,6 @@ async function processMessage(msg, reply) {
     // them was marked as replacement app - we should not be sending
     // out this app reply
         sendReply = sendReply && keepApp;
-        console.log('ReProcess called', m, keepApp, sendReply);
         processMessage(m, reply);
     };
 
@@ -68,11 +67,9 @@ async function processMessage(msg, reply) {
     };
 
     if (sendReply) {
-        console.log('NEW APP', newApp);
         reply(newApp);
-    } else {
-        console.log('not sending replaced NEW APP for ', msg);
     }
+    console.log('APP', newApp);
 }
 
 async function initApplication(msg, reply) {

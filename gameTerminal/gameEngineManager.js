@@ -37,12 +37,12 @@ async function handle(app, msg, process) {
         await engine.handle({
             type: message.PLAY,
             participants: participants(app),
-        });
+        }, app.participants.player);
         break;
     case message.HEROSELECTED:
     case message.DEALALL:
     case message.ACTION:
-        await engine.handle(msg);
+        await engine.handle(msg, app.participants.player);
         break;
     // not a game-related message
     default:

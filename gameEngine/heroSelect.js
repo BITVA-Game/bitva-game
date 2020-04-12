@@ -21,37 +21,24 @@ function allHeroesWithCards() {
     return heroes;
 }
 
-function newPlayers(app, msg) {
-    const player = { id: msg.player, hero: msg.hero };
-    return app.heroSelect.players.concat(player);
-}
 
-function handle(app, msg) {
-    let activeAccount = null;
-    let selectedPlayers = [];
+function handle(app, msg, activeAccount) {
+    let selectedPlayers = (app.heroSelect || initialState).players;
 
     switch (msg.type) {
-    case message.PLAY:
-        activeAccount = app.participants.player;
-        break;
     case message.HEROSELECTED:
-        selectedPlayers = newPlayers(app, msg);
-        activeAccount = app.participants.guest;
+        selectedPlayers = selectedPlayers.concat({ id: activeAccount, hero: msg.hero });
         break;
     default:
         break;
     }
-
-    if (!activeAccount) {
-        return null;
-    }
-
     const allHeroes = allHeroesWithCards();
+    const account = Object.values(app.participants).find((p) => p.id === activeAccount);
     return {
         ...initialState,
 
-        heroes: activeAccount.heroes,
-        activePlayer: activeAccount.id,
+        heroes: account.heroes,
+        activePlayer: activeAccount,
         players: selectedPlayers,
         allHeroes,
     };

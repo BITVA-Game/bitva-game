@@ -12,8 +12,8 @@ class GameEngineRemote {
         this.address = address;
     }
 
-    async handle(message) {
-        await request.post(this.address).send({ message });
+    async handle(message, activeAccount) {
+        await request.post(this.address).send({ message, activeAccount });
     }
 
     async getState() {
@@ -28,8 +28,8 @@ class GameEngineLocalOffline {
         this.gameEngine = new GameEngine();
     }
 
-    async handle(message) {
-        this.gameEngine.handle(message);
+    async handle(message, activeAccount) {
+        this.gameEngine.handle(message, activeAccount);
         return Promise.resolve();
     }
 
@@ -45,8 +45,8 @@ class GameEngineLocalNetwork {
         this.app.listen(port, () => console.log(`Engine listening on port ${port}!`));
     }
 
-    async handle(message) {
-        this.gameEngine.handle(message);
+    async handle(message, activeAccount) {
+        this.gameEngine.handle(message, activeAccount);
         return Promise.resolve();
     }
 

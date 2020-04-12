@@ -9,18 +9,18 @@ class GameEngine {
         this.state = JSON.parse(JSON.stringify(state));
     }
 
-    handle(msg) {
-    // HACK until we init engine in prev game state
+    handle(msg, activeAccount) {
+        // HACK until we init engine in prev game state
         if (msg.type === message.PLAY) {
             this.state.participants = msg.participants;
         }
         const newState = {
             terminals: this.state.terminals,
             participants: this.state.participants,
-            heroSelect: heroSelect.handle(this.state, msg),
+            heroSelect: heroSelect.handle(this.state, msg, activeAccount),
             game: game.handle(this.state, msg),
         };
-        newState.screen = screen.handle(newState, msg);
+        newState.screen = screen.handle(newState, activeAccount);
         this.state = newState;
     }
 
