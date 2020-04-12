@@ -44,12 +44,18 @@ const Hero = (props) => {
         const heartTime = setTimeout(() => setHeartSound(true), 3000);
         return () => {
             clearTimeout(heartTime);
-            if (props.gamePhase !== 'OVER') {
-                playSound('heartBeat');
+            if (props.gamePhase !== 'OVER' && props.active) {
+                if (props.player.health.current <= 3) {
+                    playSound('heartBeatFast');
+                }
+                if (props.player.health.current <= 6 && props.player.health.current > 3) {
+                    playSound('heartBeat');
+                }
             }
+
             setHeartSound(false);
         };
-    }, [props.active, heartSound, props.gamePhase]);
+    }, [props.active, heartSound, props.gamePhase, props.player.health]);
 
     return (
         <div
