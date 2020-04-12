@@ -39,7 +39,8 @@ const HeroImage = ({ hero }) => (
 
 const Hero = (props) => {
     const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
-    const heroClass = isTarget(props.active ? target.HERO : target.OPPONENT, props.player) ? 'target' : '';
+    const activeHero = props.active ? target.HERO : target.OPPONENT;
+    const heroClass = isTarget(activeHero, props.player) ? 'target' : '';
     const [heartSound, setHeartSound] = useState(false);
 
     useEffect(() => {
@@ -63,10 +64,10 @@ const Hero = (props) => {
         <div
             className={`hero ${heroClass}`}
             style={style}
-            id={props.active ? target.HERO : target.OPPONENT}
-            onDrop={() => cardDropped(props.active ? target.HERO : target.OPPONENT, props.player)}
-            onClick={() => cardDropped(props.active ? target.HERO : target.OPPONENT, props.player)}
-            onDragOver={(e) => cardOver(e, props.active ? target.HERO : target.OPPONENT, props.player)}
+            id={activeHero}
+            onDrop={() => cardDropped(activeHero, props.player)}
+            onClick={() => cardDropped(activeHero, props.player)}
+            onDragOver={(e) => cardOver(e, activeHero, props.player)}
         >
             <HeroImage hero={props.player.hero} />
             <HealthMeter
