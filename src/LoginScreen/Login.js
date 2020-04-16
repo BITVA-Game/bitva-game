@@ -46,17 +46,25 @@ const Accounts = ({
     </div>
 );
 
-const Footer = ({ toStartScreen }) => (
+const PlayButton = ({ toStartScreen }) => (
+    <div
+        className="btn btn-play"
+        role="button"
+        onClick={toStartScreen}
+        onKeyPress={toStartScreen}
+        tabIndex="1"
+    >
+        Play
+    </div>
+);
+
+const Footer = ({
+    accountId, form, deleting, toStartScreen,
+}) => (
     <footer className="main-footer">
-        <div
-            className="btn btn-play"
-            role="button"
-            onClick={toStartScreen}
-            onKeyPress={toStartScreen}
-            tabIndex="1"
-        >
-            Play
-        </div>
+        {accountId && (form === false && deleting === false)
+            ? <PlayButton toStartScreen={toStartScreen} />
+            : null}
     </footer>
 );
 
@@ -150,6 +158,7 @@ class Login extends Component {
     }
 
     render() {
+        console.log(this.state.form, this.state.delete, this.state.accountId);
         const account = this.props.accounts.records
             ? this.props.accounts.records.find((a) => a.id === this.state.accountId)
             : null;
@@ -176,16 +185,25 @@ class Login extends Component {
                         ) : null}
                     </div>
                 </section>
-                {this.state.accountId
-                    && (this.state.form === false && this.state.delete === false) ? (
-                        <Footer toStartScreen={this.toStartScreen} />
-                    ) : null}
+                <Footer
+                    accountId={this.state.accountId}
+                    form={this.state.form}
+                    deleting={this.state.delete}
+                    toStartScreen={this.toStartScreen}
+                />
             </>
         );
     }
 }
 
+PlayButton.propTypes = {
+    toStartScreen: PropTypes.func.isRequired,
+};
+
 Footer.propTypes = {
+    accountId: PropTypes.string.isRequired,
+    form: PropTypes.bool.isRequired,
+    deleting: PropTypes.bool.isRequired,
     toStartScreen: PropTypes.func.isRequired,
 };
 
