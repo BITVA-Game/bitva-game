@@ -10,7 +10,7 @@ import {
 
 import {
     screen, message, target, card, phase, action,
-} from '../../constants';
+} from '../../src/constants';
 
 import cards from '../__data__/cards';
 

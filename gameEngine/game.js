@@ -16,7 +16,7 @@ const {
     styles,
     target: targetConst,
     action,
-} = require('../constants');
+} = require('../src/constants');
 
 const { getRandomUpTo } = require('../gameTerminal/randomFunc');
 

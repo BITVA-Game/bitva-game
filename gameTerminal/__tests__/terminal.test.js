@@ -5,7 +5,7 @@ import {
     startscreenStateP2,
 } from '../__data__/states';
 
-import { screen as scr, message } from '../../constants';
+import { screen as scr, message } from '../../src/constants';
 
 import testAccounts from '../__data__/accounts';
 import { read } from '../../gameAccounts/index';

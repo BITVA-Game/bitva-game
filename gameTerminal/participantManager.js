@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-const { message } = require('../constants');
+const { message } = require('../src/constants');
 
 function handle(app, msg) {
     let participants = { ...app.participants };

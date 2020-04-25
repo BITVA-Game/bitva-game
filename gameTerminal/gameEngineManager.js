@@ -1,4 +1,4 @@
-const { message } = require('../constants');
+const { message } = require('../src/constants');
 
 let engine = null;
 const {

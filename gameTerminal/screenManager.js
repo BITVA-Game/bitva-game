@@ -1,4 +1,4 @@
-const { screen, message } = require('../constants');
+const { screen, message } = require('../src/constants');
 
 function handle(app, msg) {
     console.log('screenManager handle', msg.type);

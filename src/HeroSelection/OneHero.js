@@ -15,6 +15,8 @@ import morevna from '../images/heroes/morevna_full.jpg';
 import hozyaika from '../images/heroes/hozyaika_full.jpg';
 import premudraya from '../images/heroes/premudraya_full.jpg';
 
+const { card: cardConst } = require('../constants');
+
 const images = {
     yaga,
     morevna,
@@ -30,44 +32,50 @@ const HeroImage = (props) => (
     </div>
 );
 
-const CardPreview = (props) => (
-    <div className={`card details-card ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
-        <div className="card-header">
-            <div className={`card-icon-container details-card-icon-container ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}>
-                <div className={`card-icon details-card-icon ${iconImg(props.card.category, props.card.type)}`} />
+const CardPreview = (props) => {
+    const cardTypeBackground = props.card.type === cardConst.ITEMCARD ? `${props.hero.background}-item` : `${props.hero.background}-action`;
+
+    return (
+        <div className={`card details-card ${cardTypeBackground}`}>
+            <div className="card-header">
+                <div className={`card-icon-container details-card-icon-container ${cardTypeBackground}`}>
+                    <div className={`card-icon details-card-icon ${iconImg(props.card.category, props.card.type)}`} />
+                </div>
+                <p className="card-category details-card-category">{props.card.categoryName}</p>
+                {props.card.initialpoints
+                    ? (
+                        <div className={`card-points details-card-points ${cardTypeBackground}`}>
+                            {props.card.initialpoints}
+                        </div>
+                    ) : null}
+                {props.card.health
+                    ? (
+                        <div className={`card-health details-card-health ${cardTypeBackground}`}>
+                            {props.card.health}
+                        </div>
+                    ) : null}
             </div>
-            <p className="card-category details-card-category">{props.card.categoryName}</p>
-            {props.card.initialpoints
-                ? (
-                    <div className={`card-points details-card-points
-                        ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
-                    >
-                        {props.card.initialpoints}
-                    </div>
-                ) : null}
-            {props.card.health
-                ? (
-                    <div className={`card-health details-card-health
-                        ${props.card.type === 'item' ? `${props.hero.background}-item` : `${props.hero.background}-action`}`}
-                    >
-                        {props.card.health}
-                    </div>
-                ) : null}
+            <div
+                className="details-card-image"
+                style={{
+                    backgroundImage: `url(${backgroundImg(props.card.category)})`,
+                    backgroundSize: '100% 100%',
+                }}
+            >
+                <div
+                    className="details-card-image"
+                    style={{
+                        backgroundImage: `url(${imagesCards[props.card.id]})`,
+                        backgroundSize: '100% 100%',
+                    }}
+                />
+            </div>
+            <div className="card-footer details-card-footer">
+                <p>{props.card.name}</p>
+            </div>
         </div>
-        <div
-            className="details-card-image"
-            style={{
-                backgroundImage: `url(${backgroundImg(props.card.category)})`,
-                backgroundSize: '100% 100%',
-            }}
-        >
-            <div className="details-card-image" style={{ backgroundImage: `url(${imagesCards[props.card.id]})`, backgroundSize: '100% 100%' }} />
-        </div>
-        <div className="card-footer details-card-footer">
-            <p>{props.card.name}</p>
-        </div>
-    </div>
-);
+    );
+};
 
 const CardsRow = (props) => (
     <>

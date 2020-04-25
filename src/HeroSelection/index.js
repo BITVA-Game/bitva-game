@@ -13,6 +13,8 @@ import '../css/Cards.css';
 
 import { sortedHeroesList } from '../rules';
 
+const { message } = require('../constants');
+
 // const clickSound1 = new UIFx(`${process.env.PUBLIC_URL}/sound/click.mp3`, { volume: 1.0 });
 const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
     volume: 1.0,
@@ -50,7 +52,7 @@ class HeroSelection extends Component {
     // console.log('PLAY MESSAGE SENT', this.state.hero);
         clickSound2.play();
         this.props.sendMessage({
-            type: 'HEROSELECTED',
+            type: message.HEROSELECTED,
             hero: this.state.hero.id,
             player: this.app.heroSelect.activePlayer,
         });

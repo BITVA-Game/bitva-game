@@ -4,6 +4,8 @@ import MainMenu from './MainMenu';
 import './css/Profile.css';
 import './css/NetworkPlay.css';
 
+const { message, screen: screenConst, role: roleConst } = require('./constants');
+
 const WaitingForHost = (props) => (
     <div className="role-selection">
         <form onSubmit={props.gameConnect}>
@@ -21,8 +23,8 @@ const SelectRole = (props) => (
             <div>
                 <input
                     type="radio"
-                    value="host"
-                    checked={props.role === 'host'}
+                    value={roleConst.HOST}
+                    checked={props.role === roleConst.HOST}
                     onChange={props.assignRole}
                 />
                 <label htmlFor="host">Host</label>
@@ -30,8 +32,8 @@ const SelectRole = (props) => (
             <div>
                 <input
                     type="radio"
-                    value="client"
-                    checked={props.role === 'client'}
+                    value={roleConst.CLIENT}
+                    checked={props.role === roleConst.CLIENT}
                     onChange={props.assignRole}
                 />
                 <label htmlFor="client">Client</label>
@@ -45,7 +47,7 @@ class NetworkPlay extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            role: 'host',
+            role: roleConst.HOST,
             screen: null,
         };
         this.assignRole = this.assignRole.bind(this);
@@ -64,7 +66,7 @@ class NetworkPlay extends Component {
         event.preventDefault();
         const ip = event.target.elements.address.value;
         this.props.sendMessage({
-            type: 'NETWORKPLAY',
+            type: message.NETWORKPLAY,
             role: this.state.role,
             network: true,
             ip,
@@ -74,28 +76,29 @@ class NetworkPlay extends Component {
     estConnection(event) {
         event.preventDefault();
         this.setState((prevState) => ({
-            screen: prevState.role === 'host' ? 'waiting' : 'selection',
+            screen: prevState.role === roleConst.HOST
+                ? screenConst.WAITINGSTATE : screenConst.SELECTIONSTATE,
         }));
     }
 
     clearSelection() {
         this.setState({
-            role: 'host',
+            role: roleConst.HOST,
             screen: null,
         });
     }
 
     renderPopup() {
         return (
-            <div>
+            <div className="role-selection" style={{ opacity: 0.8, width: 400 }}>
                 <h1>I AM POPUP</h1>
-                {this.state.screen === 'waiting' ? (
+                {this.state.screen === screenConst.WAITINGSTATE ? (
                     <h1>Waiting</h1>
                 ) : (
                     <WaitingForHost gameConnect={this.gameConnect} />
                 )}
-                <button type="button" onClick={this.clearSelection}>
-          Back
+                <button type="button" style={{ backgroundColor: 'black' }} onClick={this.clearSelection}>
+                    Back
                 </button>
             </div>
         );

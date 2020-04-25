@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './css/Profile.css';
 
-class SelectOpponent extends Component {
-    render() {
-        return (
-            <div className="profile-container app-background">
-                <button
-                    onClick={() => this.props.sendMessage({ type: 'OPPONENT', account: 'guest' })}
-                >
+const { message, role } = require('./constants');
+
+const SelectOpponent = ({ sendMessage }) => (
+    <div className="profile-container app-background">
+        <button
+            type="button"
+            onClick={() => sendMessage({ type: message.OPPONENT, account: role.GUEST })}
+        >
           MAIN BUTTON
-                </button>
-            </div>
-        );
-    }
-}
+        </button>
+    </div>
+);
+
 
 SelectOpponent.propTypes = {
     sendMessage: PropTypes.func.isRequired,

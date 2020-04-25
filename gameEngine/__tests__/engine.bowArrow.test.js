@@ -4,7 +4,7 @@ import {
 
 import {
     message, target,
-} from '../../constants';
+} from '../../src/constants';
 
 import cards from '../__data__/cards';
 

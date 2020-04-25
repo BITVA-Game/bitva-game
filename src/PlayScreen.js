@@ -5,6 +5,8 @@ import './css/VersusScreen.css';
 
 import { getAccountForPart } from './rules';
 
+const { message } = require('./constants');
+
 const PlayScreen = ({ app, sendMessage }) => (
     <div className="main-container">
         <div className="main-content">
@@ -21,7 +23,7 @@ const PlayScreen = ({ app, sendMessage }) => (
             </div>
         </div>
         <div className="main-footer">
-            <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: 'PLAY' })}>
+            <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: message.PLAY })}>
                 Play
             </button>
         </div>

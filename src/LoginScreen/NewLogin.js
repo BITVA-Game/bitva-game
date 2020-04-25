@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import faker from 'faker';
 
+const { message } = require('../constants');
+
 class NewLogin extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +18,7 @@ class NewLogin extends Component {
     createAccount(event) {
         event.preventDefault();
         this.props.sendMessage({
-            type: 'CREATEACC',
+            type: message.CREATEACC,
             account: this.state.value,
         });
         this.props.toggleForm();

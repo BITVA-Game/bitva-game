@@ -6,45 +6,44 @@ import '../css/GameScreen.css';
 import BoardContext from './BoardContext';
 import Card from './Card';
 
+const { card: cardConst, target } = require('../constants');
+
 const Item = (props) => {
     const {
         isTarget, cardDropped, cardOver,
     } = useContext(BoardContext);
+
+    const cardDropToItem = (
+        // eslint-disable-next-line no-nested-ternary
+        props.active
+            ? () => cardDropped(target.ITEMCARD, props.player)
+            : props.item
+                ? () => cardDropped(target.ITEMOPPONENT, props.player)
+                : null
+    );
+
     return (
         <div
             className={`item card-place card-like
                 ${props.player.background}
-                ${isTarget('item', props.player) ? 'target' : null}
-                ${isTarget('itemOpponent', props.player)
+                ${isTarget(target.ITEMCARD, props.player) ? 'target' : null}
+                ${isTarget(target.ITEMOPPONENT, props.player)
                 && props.item
-                && props.item.category !== 'shield'
+                && props.item.category !== cardConst.SHIELDCATEGORY
             ? 'target'
             : null
         }
             `}
-            id={props.active ? 'item' : null}
-            onDrop={
-                // eslint-disable-next-line no-nested-ternary
-                props.active
-                    ? () => cardDropped('item', props.player)
-                    : props.item
-                        ? () => cardDropped('itemOpponent', props.player)
-                        : null
-            }
-            onClick={
-                // eslint-disable-next-line no-nested-ternary
-                props.active
-                    ? () => cardDropped('item', props.player)
-                    : props.item
-                        ? () => cardDropped('itemOpponent', props.player)
-                        : null
-            }
+            id={props.active ? cardConst.ITEMCATEGORY : null}
+
+            onDrop={cardDropToItem}
+            onClick={cardDropToItem}
             onDragOver={
                 // eslint-disable-next-line no-nested-ternary
                 props.active
-                    ? (e) => cardOver(e, 'item', props.player)
+                    ? (e) => cardOver(e, target.ITEMCARD, props.player)
                     : props.item
-                        ? (e) => cardOver(e, 'itemOpponent', props.player)
+                        ? (e) => cardOver(e, target.ITEMOPPONENT, props.player)
                         : null
             }
         >

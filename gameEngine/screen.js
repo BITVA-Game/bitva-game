@@ -1,4 +1,4 @@
-const { screen, message, phase } = require('../constants');
+const { screen, message, phase } = require('../src/constants');
 
 
 function heroSelected(state) {

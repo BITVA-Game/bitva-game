@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import playSound from '../soundController';
 
+const { sound: soundConst } = require('../constants');
+
 const Birds = () => {
-    playSound('birds');
+    playSound(soundConst.BIRDS);
     return (
         <div className="animation-game-screen">
             <div className="bird-container bird-container-one">
@@ -39,7 +41,7 @@ const BirdsAnimation = () => {
         const birdsFly = !birdsAnim
             ? setTimeout(() => {
                 setBirdsAnim(true);
-                console.log('BIRDS are flying now!');
+                // console.log('BIRDS are flying now!');
             }, animationStart)
             : setTimeout(() => {
                 setBirdsAnim(false);

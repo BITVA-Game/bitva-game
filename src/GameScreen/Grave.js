@@ -8,8 +8,10 @@ import playSound from '../soundController';
 
 import graveyard from '../images/cards/graveyard.png';
 
+const { target, sound: soundConst, animation: animationConst } = require('../constants');
+
 const Animation = (props) => {
-    playSound('cardsFromGrave');
+    playSound(soundConst.CARDSFROMGRAVE);
     return (
         <div className="stack">
             <div className={`deck card-like deck-${props.background} one`} />
@@ -24,23 +26,23 @@ const Grave = (props) => {
     return (
         <div
             className={`grave card-like  grave-${props.background} ${
-                isTarget('graveyard', props.player) ? 'target' : null
+                isTarget(target.GRAVE, props.player) ? 'target' : null
             }`}
             style={{
                 backgroundImage: `url(${graveyard})`,
                 backgroundSize: '100% 100%',
             }}
-            id={props.active ? 'grave' : null}
-            onDrop={() => cardDropped('graveyard', props.player)}
-            onClick={() => cardDropped('graveyard', props.player)}
-            onDragOver={(e) => cardOver(e, 'graveyard', props.player)}
+            id={props.active ? target.GRAVE : null}
+            onDrop={() => cardDropped(target.GRAVE, props.player)}
+            onClick={() => cardDropped(target.GRAVE, props.player)}
+            onDragOver={(e) => cardOver(e, target.GRAVE, props.player)}
         >
             <div className="count">
                 {props.active
                     ? Object.keys(props.grave).length
                     : Object.keys(props.grave).length}
             </div>
-            {props.animation === 'cards' ? (
+            {props.animation === animationConst.CARDS ? (
                 <Animation background={props.background} />
             ) : null}
         </div>

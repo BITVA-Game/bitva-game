@@ -1,15 +1,15 @@
 const uuid = require('uuid/v1');
-const { message } = require('../constants');
+const { message } = require('../src/constants');
 const { read, create, remove } = require('../gameAccounts');
 
-const DELAY = 3000;
+// const DELAY = 3000;
 
 function initAccounts(process) {
     (async () => {
         const accounts = await read();
         // Use this to see the delay on frontend
         // setTimeout(() => process({ type: 'READACCOUNTS', payload: accounts.accounts }), DELAY);
-        process({ type: 'READACCOUNTS', payload: accounts.records });
+        process({ type: message.READACCOUNTS, payload: accounts.records });
     })();
 
     const result = {
@@ -28,7 +28,7 @@ function createAccount(name, process) {
         });
         // Use this to see the delay on frontend
         // setTimeout(() => process({ type: 'READACCOUNTS', payload: accounts.records }), DELAY);
-        process({ type: 'READACCOUNTS', payload: accounts.records });
+        process({ type: message.READACCOUNTS, payload: accounts.records });
     })();
 
     const result = {
@@ -43,7 +43,7 @@ function deleteAccount(id, process) {
         const accounts = await remove(id);
         // Use this to see the delay on frontend
         // setTimeout(() => process({ type: 'READACCOUNTS', payload: accounts.records }), DELAY);
-        process({ type: 'READACCOUNTS', payload: accounts.records });
+        process({ type: message.READACCOUNTS, payload: accounts.records });
     })();
 
     const result = {
@@ -57,7 +57,7 @@ function handle(app, msg, process) {
     switch (msg.type) {
     case message.INIT:
         return initAccounts(process);
-    case 'READACCOUNTS':
+    case message.READACCOUNTS:
         return { loading: false, records: msg.payload };
     case message.CREATEACC:
         return createAccount(msg.account, process);

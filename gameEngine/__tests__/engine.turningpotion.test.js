@@ -4,7 +4,7 @@ import {
 
 import {
     message, target, card, action,
-} from '../../constants';
+} from '../../src/constants';
 
 import cards from '../__data__/cards';
 // import { act } from 'react-testing-library';

@@ -4,6 +4,8 @@ import './css/App.css';
 import './css/MainMenu.css';
 import logo from './images/dark_logo.png';
 
+const { message } = require('./constants');
+
 const MenuButton = (props) => (
     <li>
         <button
@@ -59,22 +61,22 @@ class MainMenu extends Component {
                     <ul className="menu-buttons-group">
                         <MenuButton
                             name="Network Play"
-                            type="NETWORKSCREEN"
+                            type={message.NETWORKSCREEN}
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton
                             name="Player vs Player"
-                            type="LOCALPLAY"
+                            type={message.LOCALPLAY}
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton
                             name="Tournament"
-                            type="PLAY"
+                            type={message.PLAY}
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton
                             name="Daily Challenge"
-                            type="PLAY"
+                            type={message.PLAY}
                             sendMessage={this.props.sendMessage}
                         />
                     </ul>
@@ -87,17 +89,17 @@ class MainMenu extends Component {
                         />
                         <MenuButton
                             name="Profile"
-                            type="PROFILE"
+                            type={message.PROFILE}
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton
                             name="Settings"
-                            type="SETTINGS"
+                            type={message.SETTINGS}
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton
                             name="Quit"
-                            type="QUIT"
+                            type={message.QUIT}
                             sendMessage={this.props.sendMessage}
                         />
                     </ul>

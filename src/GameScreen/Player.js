@@ -16,6 +16,8 @@ import '../css/GameScreen.css';
 
 import bat from '../images/cards/batCard.png';
 
+const { animation: animationConst, card: cardConst, target: targetConst } = require('../constants');
+
 const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });
 const chainsSound = new UIFx(`${process.env.PUBLIC_URL}/sound/chains.mp3`, { volume: 1.0 });
@@ -88,20 +90,20 @@ class Player extends Component {
     // Typical usage (don't forget to compare props):
     // animation for cards deal from gravyeard to deck
         if (this.props.player.deal !== prevProps.player.deal) {
-            this.playAnimation('cards');
+            this.playAnimation(animationConst.CARDS);
         }
         // animation for Turning Potion - active player gets cards from inactive player hand
         if (
             this.props.player.turningHand !== prevProps.player.turningHand
       && this.props.player.turningHand === true
         ) {
-            this.playAnimation('potion');
+            this.playAnimation(animationConst.POTION);
         }
         if (
             this.props.player.chained !== prevProps.player.chained
             && (
-                this.props.player.chained.includes('mushroom')
-                || this.props.player.chained.includes('oven')
+                this.props.player.chained.includes(cardConst.MUSHROOMCARD)
+                || this.props.player.chained.includes(cardConst.OVENCARD)
             )
         ) {
             chainsSound.play();
@@ -109,20 +111,20 @@ class Player extends Component {
     }
 
     playAnimation(animName) {
-        console.log('We are in Animation!', animName);
+        // console.log('We are in Animation!', animName);
         this.setState({ animation: animName });
         setTimeout(() => this.setState({ animation: null }), 2000);
     }
 
     actionSound(target) {
         // we play attack sound if active player attacks opponent or its item
-        if (!this.props.active && target !== 'graveyard') {
+        if (!this.props.active && target !== targetConst.GRAVE) {
             if (this.isTarget(target, this.props.player)) {
                 attackSound.play();
             }
         }
         // we play graveyard sound if player drops card to graveyard
-        if (target === 'graveyard') {
+        if (target === targetConst.GRAVE) {
             graveyardSound.play();
         }
     }
@@ -144,7 +146,7 @@ class Player extends Component {
                     player={this.props.player}
                     active={this.props.active}
                 />
-                {this.state.animation === 'bat' ? <BatCard /> : null}
+                {this.state.animation === animationConst.BAT ? <BatCard /> : null}
                 <Deck
                     active={this.props.active}
                     cards={this.props.player.cards}
@@ -160,7 +162,7 @@ class Player extends Component {
                     hand={this.props.hand}
                     player={this.props.player}
                 />
-                {this.state.animation === 'potion' && this.props.active ? (
+                {this.state.animation === animationConst.POTION && this.props.active ? (
                     <AnimatedHand
                         inactivePlayer={this.props.inactivePlayer}
                         hand={this.props.inactivePlayer.hand}
@@ -204,7 +206,11 @@ Player.propTypes = {
 
 Hand.propTypes = {
     hand: PropTypes.object.isRequired,
-    gamePhase: PropTypes.string.isRequired,
+    gamePhase: PropTypes.string,
+};
+
+Hand.defaultProps = {
+    gamePhase: undefined,
 };
 
 AnimatedHand.propTypes = {

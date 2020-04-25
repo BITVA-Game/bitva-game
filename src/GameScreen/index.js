@@ -10,6 +10,8 @@ import { withBoardContext } from './BoardContext';
 import playSound from '../soundController';
 import BirdsAnimation from './AnimationBirds';
 
+const { phase: phaseConst } = require('../constants');
+
 class GameScreen extends Component {
     constructor(props) {
         super(props);
@@ -70,7 +72,7 @@ class GameScreen extends Component {
                     ? (<ChangeTurn app={this.props.app} />
                     ) : null}
 
-                {this.props.app.game.phase === 'OVER' ? (
+                {this.props.app.game.phase === phaseConst.OVER ? (
                     <GameOver app={this.props.app} />
                 ) : <BirdsAnimation />}
             </div>

@@ -2,7 +2,7 @@ const game = require('./game');
 const heroSelect = require('./heroSelect');
 const screen = require('./screen');
 const initialState = require('./data/initialState.json');
-const { message } = require('../constants');
+const { message } = require('../src/constants');
 
 class GameEngine {
     constructor(state = initialState) {
