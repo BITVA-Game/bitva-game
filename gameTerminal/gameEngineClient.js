@@ -13,6 +13,7 @@ class GameEngineRemote {
     }
 
     async handle(message, activeAccount) {
+        console.log('MSG TO ENGINE', message);
         await request.post(this.address).send({ message, activeAccount });
     }
 
@@ -29,6 +30,7 @@ class GameEngineLocalOffline {
     }
 
     async handle(message, activeAccount) {
+        console.log('MSG TO ENGINE', message);
         this.gameEngine.handle(message, activeAccount);
         return Promise.resolve();
     }
@@ -46,6 +48,7 @@ class GameEngineLocalNetwork {
     }
 
     async handle(message, activeAccount) {
+        console.log('MSG TO ENGINE', message);
         this.gameEngine.handle(message, activeAccount);
         return Promise.resolve();
     }

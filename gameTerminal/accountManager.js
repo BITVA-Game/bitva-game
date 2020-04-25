@@ -9,6 +9,7 @@ function initAccounts(process) {
         const accounts = await read();
         // Use this to see the delay on frontend
         // setTimeout(() => process({ type: 'READACCOUNTS', payload: accounts.accounts }), DELAY);
+        console.log('process', process);
         process({ type: 'READACCOUNTS', payload: accounts.records });
     })();
 

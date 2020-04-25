@@ -41,7 +41,6 @@ function parseApplication(app) {
 }
 
 async function processMessage(msg, reply) {
-    console.log('process', msg);
     // We need to have a way to NOT send app if message
     // is being reprocessed.
     //
@@ -50,34 +49,37 @@ async function processMessage(msg, reply) {
     // with the result of START given to reProcess function,
     // and ignore the result of original NETWORKPLAY/LOCALPLAY message.
     let sendReply = true;
-    const reProcess = (m, keepApp = true) => {
+    const reProcess = (source) => (m, keepApp = true) => {
     // if reProcess was called multiple times, and at lease one of
     // them was marked as replacement app - we should not be sending
     // out this app reply
         sendReply = sendReply && keepApp;
+        console.log(`${source} MESSAGE BACKEND TO BACKEND`, m);
         processMessage(m, reply);
     };
 
     const newApp = {
-        accounts: accountManager.handle(application, msg, reProcess),
-        participants: participantManager.handle(application, msg, reProcess),
-        manager: screenManager.handle(application, msg, reProcess),
-        engine: await gameEngineManager.handle(application, msg, reProcess),
-        system: systemManager.handle(application, msg, reProcess),
+        accounts: accountManager.handle(application, msg, reProcess('accounts')),
+        participants: participantManager.handle(application, msg, null),
+        manager: screenManager.handle(application, msg, null),
+        engine: await gameEngineManager.handle(application, msg, reProcess('engine')),
+        system: systemManager.handle(application, msg, null),
     };
 
     if (sendReply) {
         reply(newApp);
     }
-    console.log('APP', newApp);
 }
 
 async function initApplication(msg, reply) {
-    const reProcess = (m) => processMessage(m, reply);
-    const accounts = accountManager.handle({}, msg, reProcess);
-    const manager = screenManager.handle({}, msg, reProcess);
-    const participants = participantManager.handle({}, msg, reProcess);
-    const system = systemManager.handle({}, msg, reProcess);
+    const reProcess = (source) => (m) => {
+        console.log(`${source} MESSAGE BACKEND TO BACKEND`, m);
+        processMessage(m, reply);
+    };
+    const accounts = accountManager.handle({}, msg, reProcess('accounts'));
+    const manager = screenManager.handle({}, msg, null);
+    const participants = participantManager.handle({}, msg, null);
+    const system = systemManager.handle({}, msg, null);
     const newApp = {
         ...application,
         accounts,
@@ -94,9 +96,12 @@ async function initApplication(msg, reply) {
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
 async function msgReceived(msg, sendReply) {
+    console.log('MSG FROM FRONTEND', msg);
     const reply = (app) => {
         application = app;
-        sendReply(parseApplication(app));
+        const newApp = parseApplication(app);
+        console.log('APP FOR FRONTEND', newApp);
+        sendReply(newApp);
     };
 
     if (msg.type === message.INIT) {

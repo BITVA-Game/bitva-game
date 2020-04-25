@@ -50,7 +50,9 @@ async function handle(app, msg, process) {
     }
 
     // if we had a game-related message - return new game state
-    return engine.getState();
+    const currentEngingState = engine.getState();
+    console.log('RESPONSE ENGINE STATE', currentEngingState);
+    return currentEngingState;
 }
 
 function reset(newEngine = null) {
