@@ -1,31 +1,42 @@
 const game = require('./game');
 const heroSelect = require('./heroSelect');
-const screen = require('./screen');
+const terminals = require('./terminals');
+const players = require('./players');
 const initialState = require('./data/initialState.json');
-const { message } = require('../constants');
+const { message, phase } = require('../constants');
 
+function playerState(state, account) {
+    switch (state.phase) {
+    case phase.SELECTION:
+        return heroSelect.show(state, account);
+    default:
+        throw new Error(`Unknown phase ${state.phase}`);
+    }
+}
 class GameEngine {
     constructor(state = initialState) {
         this.state = JSON.parse(JSON.stringify(state));
     }
 
-    handle(msg, activeAccount) {
+    handle(msg, account) {
         // HACK until we init engine in prev game state
+        console.log('ENGINE handle message', msg, account);
         if (msg.type === message.PLAY) {
             this.state.participants = msg.participants;
         }
         const newState = {
-            terminals: this.state.terminals,
-            participants: this.state.participants,
-            heroSelect: heroSelect.handle(this.state, msg, activeAccount),
+            terminals: terminals.handle(this.state, msg, account),
+            players: players.handle(this.state, msg, account),
             game: game.handle(this.state, msg),
         };
-        newState.screen = screen.handle(newState, activeAccount);
+        newState.phase = this.state.phase;
         this.state = newState;
+        console.log('GAME ENGING STATE', this.state);
     }
 
-    getState() {
-        return this.state;
+    getState(account) {
+        console.log('GET GAME ENGING STATE', account);
+        return playerState(this.state, account);
     }
 }
 

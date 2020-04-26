@@ -1,11 +1,9 @@
 {
 	"terminals": [],
-	"game": {
-		"players": [],
-		"phase": "SELECTION",
-		"lastAction": {
-			"type": ""
-		}
-	},
-	"screen": "HEROSELECT"
+	"players": [],
+	"phase": "SELECTION",
+	"opponent": {
+		"connected": false,
+		"screen": null
+	}
 }

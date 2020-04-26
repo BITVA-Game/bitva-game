@@ -21,7 +21,7 @@ const PlayScreen = ({ app, sendMessage }) => (
             </div>
         </div>
         <div className="main-footer">
-            <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: 'PLAY' })}>
+            <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: 'JOIN' })}>
                 Play
             </button>
         </div>

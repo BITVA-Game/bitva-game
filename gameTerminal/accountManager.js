@@ -2,7 +2,7 @@ const uuid = require('uuid/v1');
 const { message } = require('../constants');
 const { read, create, remove } = require('../gameAccounts');
 
-const DELAY = 3000;
+// const DELAY = 3000;
 
 function initAccounts(process) {
     (async () => {

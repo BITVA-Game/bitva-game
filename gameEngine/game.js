@@ -845,16 +845,16 @@ function makeMove(game, msg) {
 function handle(app, msg) {
     const game = { ...app.game };
     switch (msg.type) {
-    case message.HEROSELECTED: {
-        const playersInitital = game.players.concat(
-            generatePlayer(msg.hero, msg.player),
-        );
-        const active = selectActive(playersInitital);
-        const players = assignPlayersPositions(playersInitital);
-        const gamePhase = players.length === 2 ? phase.ACTIVE : phase.SELECTION;
+    // case message.HEROSELECTED: {
+    //     const playersInitital = game.players.concat(
+    //         generatePlayer(msg.hero, msg.player),
+    //     );
+    //     const active = selectActive(playersInitital);
+    //     const players = assignPlayersPositions(playersInitital);
+    //     const gamePhase = players.length === 2 ? phase.ACTIVE : phase.SELECTION;
 
-        return Object.assign(game, { active, players, phase: gamePhase });
-    }
+    //     return Object.assign(game, { active, players, phase: gamePhase });
+    // }
     case message.DEALALL: {
         return Object.assign(game, { players: giveCardsToAll(game.players) });
     }

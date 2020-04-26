@@ -8,8 +8,9 @@ const server = require('../gameEngineServer');
 const port = 5001;
 
 class GameEngineRemote {
-    constructor(address) {
+    constructor(address, process) {
         this.address = address;
+        this.process = process;
     }
 
     async handle(message, activeAccount) {
@@ -19,14 +20,14 @@ class GameEngineRemote {
 
     async getState() {
         const result = await request.get(this.address);
-        // console.log(result.body);
+        console.log('RESPONSE ENGINE STATE', result.body);
         return result.body;
     }
 }
 
 class GameEngineLocalOffline {
-    constructor() {
-        this.gameEngine = new GameEngine();
+    constructor(process) {
+        this.gameEngine = new GameEngine(process);
     }
 
     async handle(message, activeAccount) {
@@ -35,14 +36,16 @@ class GameEngineLocalOffline {
         return Promise.resolve();
     }
 
-    async getState() {
-        return Promise.resolve(this.gameEngine.getState());
+    async getState(activeAccount) {
+        const engine = this.gameEngine.getState(activeAccount);
+        console.log('RESPONSE ENGINE STATE', engine);
+        return Promise.resolve(engine);
     }
 }
 
 class GameEngineLocalNetwork {
-    constructor() {
-        this.gameEngine = new GameEngine();
+    constructor(process) {
+        this.gameEngine = new GameEngine(process);
         this.app = server(this.gameEngine);
         this.app.listen(port, () => console.log(`Engine listening on port ${port}!`));
     }
@@ -53,8 +56,10 @@ class GameEngineLocalNetwork {
         return Promise.resolve();
     }
 
-    async getState() {
-        return Promise.resolve(this.gameEngine.getState());
+    async getState(activeAccount) {
+        const engine = this.gameEngine.getState(activeAccount);
+        console.log('RESPONSE ENGINE STATE', engine);
+        return Promise.resolve(engine);
     }
 }
 

@@ -11,6 +11,7 @@ const gameEngineManager = require('./gameEngineManager');
 const accountManager = require('./accountManager');
 const participantManager = require('./participantManager');
 const systemManager = require('./systemManager');
+const activeAccountManager = require('./activeAccountManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -27,7 +28,7 @@ const systemManager = require('./systemManager');
 // TODO This is a temporary solution, requires rewriting frontend to read from engine
 function parseApplication(app) {
     let scr = app.manager;
-    if (scr === screen.PLAY) {
+    if (app.engine && app.engine.screen) {
     // we're inside game screen playing the game
         scr = app.engine.screen;
     }
@@ -40,7 +41,7 @@ function parseApplication(app) {
     return parsedApp;
 }
 
-async function processMessage(msg, reply) {
+async function processMessage(msg, reply, oldApp) {
     // We need to have a way to NOT send app if message
     // is being reprocessed.
     //
@@ -48,33 +49,42 @@ async function processMessage(msg, reply) {
     // initialising game engine, we want to reply
     // with the result of START given to reProcess function,
     // and ignore the result of original NETWORKPLAY/LOCALPLAY message.
-    let sendReply = true;
-    const reProcess = (source) => (m, keepApp = true) => {
-    // if reProcess was called multiple times, and at lease one of
-    // them was marked as replacement app - we should not be sending
-    // out this app reply
-        sendReply = sendReply && keepApp;
-        console.log(`${source} MESSAGE BACKEND TO BACKEND`, m);
-        processMessage(m, reply);
+    // let sendReply = true;
+    const messages = [];
+    const reProcess = (source) => (m) => {
+        console.log(`${source} SCHEDULING MESSAGE BACKEND TO BACKEND`, m);
+        messages.push(m);
     };
 
-    const newApp = {
-        accounts: accountManager.handle(application, msg, reProcess('accounts')),
-        participants: participantManager.handle(application, msg, null),
-        manager: screenManager.handle(application, msg, null),
-        engine: await gameEngineManager.handle(application, msg, reProcess('engine')),
-        system: systemManager.handle(application, msg, null),
+    let newApp = {
+        accounts: accountManager.handle(oldApp, msg, reProcess('accounts')),
+        activeAccount: activeAccountManager.handle(oldApp, msg, reProcess('activeAccount')),
+        participants: participantManager.handle(oldApp, msg, null),
+        manager: screenManager.handle(oldApp, msg, null),
+        engine: await gameEngineManager.handle(oldApp, msg, reProcess('engine')),
+        system: systemManager.handle(oldApp, msg, null),
     };
 
-    if (sendReply) {
-        reply(newApp);
+    if (newApp.engine && newApp.engine.screen === screen.PAIRING) {
+        reProcess('pairing')({ type: message.SWITCHACTIVE });
     }
+
+
+    for (const m of messages) {
+        console.log('SCHEDULED MESSAGE BACKEND PROCESSING', m);
+        // eslint-disable-next-line no-await-in-loop
+        newApp = await processMessage(m, () => {}, newApp);
+    }
+
+    console.log('REPLYING WITH BACKEND STATE', newApp);
+    reply(newApp);
+    return newApp;
 }
 
 async function initApplication(msg, reply) {
     const reProcess = (source) => (m) => {
         console.log(`${source} MESSAGE BACKEND TO BACKEND`, m);
-        processMessage(m, reply);
+        processMessage(m, reply, application);
     };
     const accounts = accountManager.handle({}, msg, reProcess('accounts'));
     const manager = screenManager.handle({}, msg, null);
@@ -107,7 +117,7 @@ async function msgReceived(msg, sendReply) {
     if (msg.type === message.INIT) {
         await initApplication(msg, reply);
     } else {
-        await processMessage(msg, reply);
+        await processMessage(msg, reply, application);
     }
     // if (message.network) {
     //     newApp.network = true;

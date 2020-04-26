@@ -3,6 +3,7 @@ const screen = {
     STARTSCREEN: 'STARTSCREEN',
     PROFILE: 'PROFILE',
     PLAY: 'PLAY',
+    PAIRING: 'PAIRING',
     NETWORKPLAY: 'NETWORKPLAY',
     HEROSELECT: 'HEROSELECT',
     HEROSELECTED: 'HEROSELECTED',
@@ -30,6 +31,8 @@ const message = {
     DELETEACC: 'DELETEACC',
     START: 'START',
     OPPONENT: 'OPPONENT',
+    JOIN: 'JOIN',
+    SWITCHACTIVE: 'SWITCHACTIVE',
 };
 
 const phase = {
