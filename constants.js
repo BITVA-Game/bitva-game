@@ -33,6 +33,7 @@ const message = {
     OPPONENT: 'OPPONENT',
     JOIN: 'JOIN',
     SWITCHACTIVE: 'SWITCHACTIVE',
+    SELECTOPPONENT: 'SELECTOPPONENT',
 };
 
 const phase = {

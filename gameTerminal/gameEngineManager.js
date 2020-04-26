@@ -18,7 +18,7 @@ async function handle(app, msg, process) {
         if (!engine) {
             engine = createLocalOfflineEngine(process);
         }
-        process({ type: message.START }, false);
+        process({ type: message.JOIN });
         break;
     case message.NETWORKPLAY:
         // call game engine to calculate new game state
@@ -31,7 +31,8 @@ async function handle(app, msg, process) {
         if (!engine) {
             throw new Error('NO ENGINE!');
         }
-        process({ type: message.START }, false);
+        process({ type: message.JOIN });
+        // process({ type: message.START }, false);
         break;
     case message.PLAY:
         await engine.handle({
@@ -51,7 +52,6 @@ async function handle(app, msg, process) {
         await engine.handle(msg, app.activeAccount);
         break;
     case message.SWITCHACTIVE:
-        process({ type: message.JOIN });
         return null;
     // not a game-related message
     default:
