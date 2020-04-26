@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import '../css/GameScreen.css';
 import BoardContext from './BoardContext';
 import Card from './Card';
+import playSound from '../soundController';
 
 const { card: cardConst, target } = require('../constants');
 
@@ -21,6 +22,21 @@ const Item = (props) => {
                 ? () => cardDropped(target.ITEMOPPONENT, props.player)
                 : null
     );
+
+    const firstSound = useRef(true);
+
+    useEffect(() => {
+        if (props.item && props.item.id === cardConst.MAGICMIRRORCARD) {
+            if (firstSound.current) {
+                playSound(props.item.id);
+                firstSound.current = false;
+            }
+        }
+        if (!props.item) {
+            firstSound.current = true;
+        }
+    }, [props.item, firstSound, playSound]);
+
 
     return (
         <div
