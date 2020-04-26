@@ -2,6 +2,7 @@ const game = require('./game');
 const heroSelect = require('./heroSelect');
 const terminals = require('./terminals');
 const players = require('./players');
+const activeGame = require('./activeGame');
 const initialState = require('./data/initialState.json');
 const { message, phase } = require('../constants');
 
@@ -9,6 +10,8 @@ function playerState(state, account) {
     switch (state.phase) {
     case phase.SELECTION:
         return heroSelect.show(state, account);
+    case phase.ACTIVE:
+        return activeGame.show(state, account);
     default:
         throw new Error(`Unknown phase ${state.phase}`);
     }
@@ -30,6 +33,9 @@ class GameEngine {
             game: game.handle(this.state, msg),
         };
         newState.phase = this.state.phase;
+        if (newState.phase === phase.SELECTION && newState.players.length === 2) {
+            newState.phase = phase.ACTIVE;
+        }
         this.state = newState;
         console.log('GAME ENGING STATE', this.state);
     }

@@ -17,18 +17,22 @@ function allHeroesWithCards() {
     return heroes;
 }
 
-function pairing() {
+function opponent(app, activeAccount) {
+    const opp = app.players.find((p) => p.id !== activeAccount);
+    const scr = opp ? screen.PAIRING : null;
+    const connected = app.terminals.length === 2;
     return {
-        screen: screen.PAIRING,
+        connected, screen: scr,
     };
 }
 
-function opponentScreen(app, activeAccount) {
-    if (app.players.find((p) => p.id !== activeAccount)) {
-        return screen.PAIRING;
-    }
-    return null;
+function pairing(app, activeAccount) {
+    return {
+        screen: screen.PAIRING,
+        opponent: opponent(app, activeAccount),
+    };
 }
+
 
 function heroNotSelected(app, activeAccount) {
     const allHeroes = allHeroesWithCards();
@@ -43,10 +47,7 @@ function heroNotSelected(app, activeAccount) {
     return {
         screen: screen.HEROSELECT,
         heroSelect,
-        opponent: {
-            connected: app.terminals.length === 2,
-            screen: opponentScreen(app, activeAccount),
-        },
+        opponent: opponent(app, activeAccount),
     };
 }
 
@@ -65,7 +66,7 @@ function show(app, activeAccount) {
 
     const selected = app.players.find((p) => p.id === activeAccount);
     if (selected) {
-        return pairing();
+        return pairing(app, activeAccount);
     }
 
     return heroNotSelected(app, activeAccount);
