@@ -35,7 +35,7 @@ const Item = (props) => {
         if (!props.item) {
             firstSound.current = true;
         }
-    }, [props.item, firstSound, playSound]);
+    }, [props.item, firstSound]);
 
 
     return (
