@@ -607,9 +607,12 @@ function turningHand(player, opponent) {
         : (player.moveCounter = 1);
 }
 
-function changeMoveCounter(pActive, card) {
+function changeMoveCounter(pActive, card, pInactive) {
     if (pActive.hand[card] === undefined && pActive.turningHand === false) {
         pActive.moveCounter += 1;
+        const noClairvoyance = (player) => setTimeout(() => deleteCardsShown(player), 1000);
+        noClairvoyance(pInactive);
+        noClairvoyance(pActive);
     }
     return pActive;
 }
@@ -700,7 +703,7 @@ function playerMoveEnd(pActive, pInactive, game) {
     removeDisable(pActive);
     // we check then if any cardsShown property in opponent cards
     // and remove by calling deleteCardsShown function
-    deleteCardsShown(pInactive);
+    // setTimeout(() => deleteCardsShown(pActive), 4000);
     // we call function to give cards to players up to 5
     if (pActive.health.current > 0) {
         giveCardsTo(pActive);
@@ -814,7 +817,7 @@ function playerActs(game, cardId, target) {
     }
     // after each move we increase active player's counter for 1 if activeCard acted
     // if activeCard remains in player's hand we do not increase move Counter
-    pActive = changeMoveCounter(pActive, cardId);
+    pActive = changeMoveCounter(pActive, cardId, pInactive);
 
     // after each move of active player we check for forestMushroom in opponent's item
     Object.keys(pInactive.item).length !== 0
