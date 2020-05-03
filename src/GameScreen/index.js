@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Player from './Player';
 import '../css/App.css';
 import '../css/GameScreen.css';
-import { getActivePlayer, getInActivePlayer } from '../rules';
+import { getActivePlayer, getInActivePlayer, getActivePlayerName } from '../rules';
 import { withBoardContext } from './BoardContext';
 import playSound from '../soundController';
 import BirdsAnimation from './AnimationBirds';
@@ -81,16 +81,17 @@ class GameScreen extends Component {
 }
 
 
-const GameOver = (props) => {
-    const activePlayer = getActivePlayer(props.app);
+const GameOver = ({ app }) => {
+    const activePlayer = getActivePlayer(app);
+    const activePlayerName = getActivePlayerName(app);
     return (
         <div className="gameover">
             {/* for pvp mode: if player is active and alive, the message is 'you win' */}
             {/* <p className="gameover-message">{activePlayer && activePlayer.health.current > 0 ? 'you win' : 'you lose'}</p> */}
             <p className="gameover-message">
                 {activePlayer && activePlayer.health.current > 0
-                    ? `${activePlayer.hero} wins`
-                    : `${activePlayer.hero} loses`}
+                    ? `${activePlayerName} wins`
+                    : `${activePlayerName} loses`}
             </p>
         </div>
     );
@@ -99,7 +100,7 @@ const GameOver = (props) => {
 const ChangeTurn = ({ app }) => (
     <div className="changeturn">
         <p className="changeturn-message">
-            {`${getActivePlayer(app).hero}'s turn`}
+            {`${getActivePlayerName(app)}'s turn`}
         </p>
     </div>
 );

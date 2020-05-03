@@ -55,3 +55,8 @@ export function getInActivePlayer(app) {
 export function getAccountForPart(app, id) {
     return app.accounts.records.find((a) => a.id === id);
 }
+
+export function getActivePlayerName(app) {
+  return app.participants.guest.id === app.game.active
+    ? app.participants.guest.name : app.participants.player.name;
+}
