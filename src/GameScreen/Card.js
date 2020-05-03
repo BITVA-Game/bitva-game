@@ -59,9 +59,9 @@ export function cardOrigin(dragging, card, from) {
     }
     if (dragging !== null && card === dragging.card
         && dragging.mode === draggingConst.CLICKMODE) {
-        return { opacity: 1.0, transform: 'scale(1.1)' };
+        return { transform: 'scale(1.1)' };
     }
-    return { opacity: 1.0, transform: 'scale(1.0)' };
+    return { transform: 'scale(1.0)' };
 }
 
 const CardFront = (props) => {

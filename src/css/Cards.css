@@ -212,14 +212,14 @@
 /* GameScreen */
 
 .card-container {
-	position: relative;
+   position: relative;
 }
 
 .card-container-size {
 	background: transparent;
 	height: 172px;
 	min-width: 124px;
-    padding: 2px;
+    padding: 2px;    
     width: 124px;
 }
 
@@ -256,9 +256,9 @@
     transform: rotate(180deg);
 }
 
-.game-card-container {
+.game-card-container {   
     background: transparent;
-    perspective: 1000px;
+    perspective: 1000px;    
 }
 
 .game-card {
@@ -397,4 +397,311 @@
 
 @keyframes rotate {
     100% { transform: rotate(1turn); }
+}
+
+/* Animation Clairvoyance */
+
+.clairvoyance {
+    margin-left: 20px;
+    margin-top: 20px;
+    position: absolute;    
+}
+
+.upper {
+    animation: topOnUpper 2s 1s ease-in-out infinite;
+    left: 0;
+	top: 0;
+    z-index: 2;
+}
+
+.middle {
+    animation: topOnMid 2s 1s ease-in-out infinite;
+    left: 20px;
+	top: 20px;
+    z-index: 1;
+}
+
+.bottom {
+    animation: topOnLower 2s 1s ease-in-out infinite;
+    left: 40px;
+	top: 40px;
+	z-index: 0;
+}
+
+@keyframes topOnUpper {
+    5% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(-50px);
+        z-index: 1;
+    }
+    10% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    40% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    50% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    70% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    80% {
+        left: 0;
+        top: 0;
+        transform:  translateY(0);
+        z-index: 2;
+    }
+}
+
+@keyframes topOnMid {
+    10% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    40% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    45% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(-50px);
+        z-index: 1;
+    }
+    50% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    70% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    80% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+}
+
+@keyframes topOnLower {
+    10% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+    40% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(0);
+        z-index: 1;
+    }
+    50% {
+        left: 0;
+        top: 0;
+        transform: translateY(0);
+        z-index: 2;
+    }
+    70% {
+        left: 0;
+        top: 0;
+        transform: ranslateY(0);
+        z-index: 2;
+    }
+    75% {
+        left: 20px;
+        top: 20px;
+        transform: translateY(-50px);
+        z-index: 1;
+    }
+    80% {
+        left: 40px;
+        top: 40px;
+        transform: translateY(0);
+        z-index: 0;
+    }
+}
+
+/*Animation for Malachite box - bat card attaks opponent*/
+
+.item-attacks {
+    animation: attackOpponent 2s ease-out forwards;
+    margin-left: 444px;
+    perspective: 100px;
+    z-index: 20;
+}
+
+.player-top .bat-img {
+    transform: rotate(180deg);
+}
+
+@keyframes attackOpponent {
+    0% { 
+        opacity: 0;
+        transform: rotateX(45deg) translateX(0px) translateY(0px);
+        transform-style: preserve-3d;
+        }
+    20% {
+        opacity: 0.4; 
+        transform: rotateX(45deg) translateX(0px) translateY(0px);        
+        }
+    100%    { transform: translateX(560px) translateY(-200px) }
+}
+
+/*fix item-attacks bat card's position for bottom player*/
+.player-bottom .item-attacks {
+    animation: attackOpponentTop 2s ease-in infinite;
+    margin-bottom: -200px;
+    margin-left: 800px;
+    perspective: 100px;
+    z-index: 2000;
+}
+
+@keyframes attackOpponentTop {
+    0% { 
+        opacity: 0;
+        transform: rotateX(45deg) translateX(10px) translateY(-250px);               
+        }
+    20% {
+        opacity: 0.4; 
+        transform: rotateX(45deg) translateX(0px) translateY(-250px);          
+        }
+    100%    { transform: translateX(-560px) translateY(30px) }
+}
+
+
+/*Animation deck to hand first deal*/
+.card-back {
+    position: absolute;
+    transform: rotateY(-180deg);
+
+}
+
+.player-top .card-back {
+    transform: rotateX(180deg);
+}
+
+.animated-card {
+    animation-direction:alternate-reverse; 
+    animation-fill-mode: backwards;        
+}
+
+.animated-card-0 {
+    animation: deckToHand-0 3s ease-in;       
+}
+
+.animated-card-1 {
+    animation: deckToHand-1 3s ease-in;    
+}
+
+.animated-card-2 {
+    animation: deckToHand-2 3s ease-in;    
+}
+
+.animated-card-3 {
+    animation: deckToHand-3 3s ease-in;    
+}
+
+.animated-card-4 {
+    animation: deckToHand-4 3s ease-in;    
+}
+
+.card-animation-delay-0 {
+    animation-delay: 0s;
+    animation-fill-mode: backwards;
+}
+
+.card-animation-delay-1 {
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;    
+}
+
+.card-animation-delay-2 {
+    animation-delay: 1s;
+}
+
+.card-animation-delay-3 {
+    animation-delay: 1.5s;
+}
+
+.card-animation-delay-4 {
+    animation-delay: 2s;
+}
+
+@keyframes deckToHand-0 {
+    0% { 
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(407px) translateY(4px);
+        transform-style: preserve-3d;
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
+}
+
+@keyframes deckToHand-1 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(552px) translateY(4px);
+        transform-style: preserve-3d;
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
+}
+
+@keyframes deckToHand-2 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(697px) translateY(4px);
+        transform-style: preserve-3d;
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
+}
+
+@keyframes deckToHand-3 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(842px) translateY(4px);
+        transform-style: preserve-3d;
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
+}
+
+@keyframes deckToHand-4 {
+    0% {
+        transform: rotateY(540deg) rotateX(1080deg) translateZ(400px) translateX(987px) translateY(4px);
+        transform-style: preserve-3d;
+      }
+    40% {
+        transform: rotateY(0deg) rotateX(0) translateZ(0) translateX(0) translateY(0);
+      }
+    100% {transform: translate(0, 0)}
 }
