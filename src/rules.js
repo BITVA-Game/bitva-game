@@ -57,6 +57,6 @@ export function getAccountForPart(app, id) {
 }
 
 export function getActivePlayerName(app) {
-  return app.participants.guest.id === app.game.active
-    ? app.participants.guest.name : app.participants.player.name;
+    return app.participants.guest.id === app.game.active
+        ? app.participants.guest.name : app.participants.player.name;
 }
