@@ -13,13 +13,10 @@ import Hand from './Hand';
 import Grave from './Grave';
 import '../css/App.css';
 import '../css/GameScreen.css';
-import playSound from '../soundController';
 
 import bat from '../images/cards/batCard.png';
 
-const {
-    animation: animationConst, card: cardConst, target: targetConst, sound,
-} = require('../constants');
+const { animation: animationConst } = require('../constants');
 
 
 const AnimatedHand = ({ inactivePlayer, hand }) => (
@@ -85,7 +82,6 @@ class Player extends Component {
             animation: null,
         };
         this.playAnimation = this.playAnimation.bind(this);
-        this.actionSound = this.actionSound.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -101,13 +97,6 @@ class Player extends Component {
         ) {
             this.playAnimation(animationConst.POTION);
         }
-        if (
-            this.props.player.chained !== prevProps.player.chained
-            && (
-                this.props.player.chained.includes(cardConst.MUSHROOMCARD)
-                || this.props.player.chained.includes(cardConst.OVENCARD)
-            )
-        ) { playSound(sound.CHAINS); }
     }
 
     playAnimation(animName) {
@@ -116,18 +105,6 @@ class Player extends Component {
         setTimeout(() => this.setState({ animation: null }), 2000);
     }
 
-    actionSound(target) {
-        // we play attack sound if active player attacks opponent or its item
-        if (!this.props.active && target !== targetConst.GRAVE) {
-            if (this.isTarget(target, this.props.player)) {
-                playSound(sound.ATTACKOPPONENT);
-            }
-        }
-        // we play graveyard sound if player drops card to graveyard
-        if (target === targetConst.GRAVE) {
-            playSound(sound.GRAVEYARD);
-        }
-    }
 
     render() {
         const playerClass = this.props.active ? 'player-active' : 'player-inactive';
