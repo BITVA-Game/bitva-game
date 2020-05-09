@@ -5,10 +5,20 @@
 	background: rgb(0,0,0);
 	background: rgba(0,0,0,0.8);
 	display: flex;
+	font-family: "Ruslan Display";
 	font-size: 36px;
 	height: 60px;
+	justify-content: space-around;
 	text-align: center;
 	width: 100%;
+}
+
+.heroselection-playername {
+    color: #b74a45;
+    font-size: 26px;
+    justify-content: center;
+    padding: 0 10px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .header-menu {
@@ -17,7 +27,6 @@
 
 .heroselection-title {
 	color: #FFF;
-	font-family: "Ruslan Display";
 	margin: 0 78px 0 50px;
 }
 

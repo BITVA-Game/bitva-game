@@ -11,7 +11,7 @@ import '../css/App.css';
 import '../css/HeroSelection.css';
 import '../css/Cards.css';
 
-import { sortedHeroesList } from '../rules';
+import { sortedHeroesList, getCurrentPlayer } from '../rules';
 
 const { message } = require('../constants');
 
@@ -24,6 +24,7 @@ const Header = (props) => (
     <section className="heroselection-header">
         <div className="heroselection-title">{props.title}</div>
         {props.centre}
+        <div className="heroselection-playername">{props.playerName}</div>
     </section>
 );
 
@@ -72,7 +73,7 @@ class HeroSelection extends Component {
         );
         return (
             <div>
-                <Header title="Character Details" centre={swiper} />
+                <Header title="Character Details" centre={swiper} playerName={getCurrentPlayer(this.app)} />
                 <OneHero
                     hero={this.state.hero}
                     unselect={this.unselect}
@@ -86,7 +87,7 @@ class HeroSelection extends Component {
     renderListOfHeroes() {
         return (
             <div>
-                <Header title="Select Character" />
+                <Header title="Select Character" playerName={getCurrentPlayer(this.app)} />
                 <ListOfHeroes
                     heroesID={this.app.heroSelect.heroes}
                     allHeroes={this.heroesList()}
@@ -114,6 +115,7 @@ HeroSelection.propTypes = {
 Header.propTypes = {
     title: PropTypes.string.isRequired,
     centre: PropTypes.object,
+    playerName: PropTypes.string.isRequired,
 };
 
 Header.defaultProps = {
