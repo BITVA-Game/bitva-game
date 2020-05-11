@@ -109,13 +109,14 @@ const animation = {
 const sound = {
     ATTACKITEMS: 'attackItems',
     ATTACKOPPONENT: 'attackOpponent',
+    HEARTBEAT: 'heartBeat',
+    HEARTBEATFAST: 'heartBeatFast',
+    HEARTBEATSINGLE: 'heartBeatSingle',
     BIRDS: 'birds',
     CARD: 'card',
     CARDSFROMGRAVE: 'cardsFromGrave',
     CHAINS: 'chains',
     GRAVEYARD: 'graveyard',
-    HEARTBEAT: 'heartBeat',
-    HEARTBEATFAST: 'heartBeatFast',
 };
 
 const dragging = {
