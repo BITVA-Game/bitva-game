@@ -50,7 +50,7 @@ const Hero = (props) => {
             && props.player.moveCounter === 0 && props.player.health.current > 6) {
             setTimeout(() => playSound(soundConst.HEARTBEATSINGLE), 2000);
         }
-    }, [props.active, props.gamePhase, props.player.moveCounter]);
+    }, [props.active, props.gamePhase, props.player.moveCounter, props.player.health]);
 
     // we call repeated heart beat sound once active player has 6health pnts or less
     // after 3 health pnts of active player or less we call heartBeatFast
