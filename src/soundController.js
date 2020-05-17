@@ -14,6 +14,7 @@ const card = new UIFx(`${process.env.PUBLIC_URL}/sound/card.mp3`, { volume: 1.0 
 const heartBeat = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.03 });
 const heartBeatFast = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeatFast.mp3`, { volume: 0.5 });
 const heartBeatSingle = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.15 });
+const magicMirror = new UIFx(`${process.env.PUBLIC_URL}/sound/mirror.mp3`, { volume: 0.5 });
 
 export const action = {
     graveyard: graveyardSound,
@@ -30,6 +31,7 @@ export const action = {
     heartBeat,
     heartBeatFast,
     heartBeatSingle,
+    magicMirror,
 };
 
 function playSound(type, count) {
