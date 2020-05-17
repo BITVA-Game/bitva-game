@@ -799,6 +799,11 @@
 	z-index: 0;
 }
 
+.bottom-static {
+    left: 50px;
+    top: 90px;
+}
+
 @keyframes topOnUpper {
     5% {
         left: 20px;

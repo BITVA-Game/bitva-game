@@ -37,15 +37,18 @@ const AnimatedHand = ({ inactivePlayer, hand }) => (
 // this function create them to appear with 3 different
 // classNames for each to create different animation
 function Clairvoyance({ player }) {
-    const findPosition = (index) => {
+    const findPosition = (index, length) => {
         if (index === 2) {
             return 'upper';
         }
         if (index === 1) {
             return 'middle';
         }
-        if (index === 0) {
+        if (index === 0 && length > 1) {
             return 'bottom';
+        }
+        if (index === 0 && length === 1) {
+            return 'bottom-static';
         }
     };
 
@@ -54,7 +57,7 @@ function Clairvoyance({ player }) {
             {Object.keys(player.cardsShown).map((cardId, index) => (
                 <div
                     key={cardId}
-                    className={`card-place card-like clairvoyance ${findPosition(index)}`}
+                    className={`card-place card-like clairvoyance ${findPosition(index, Object.keys(player.cardsShown).length)}`}
                 >
                     <Card
                         cardKey={cardId}
