@@ -21,8 +21,8 @@ const morevna = new UIFx(`${process.env.PUBLIC_URL}/sound/morevna.mp3`, { volume
 const premudraya = new UIFx(`${process.env.PUBLIC_URL}/sound/premudraya.mp3`, { volume: 1.0 });
 const yaga = new UIFx(`${process.env.PUBLIC_URL}/sound/yaga.mp3`, { volume: 1.0 });
 const waterDead = new UIFx(`${process.env.PUBLIC_URL}/sound/waterDead.mp3`, { volume: 1.0 });
+const waterLiving = new UIFx(`${process.env.PUBLIC_URL}/sound/waterLiving.mp3`, { volume: 1.0 });
 const turningPotionSound = graveyardSound;
-
 
 export const action = {
     attackOpponent: attackSound,
@@ -46,6 +46,7 @@ export const action = {
     yaga,
     turningPotion: turningPotionSound,
     waterDead,
+    waterLiving,
 };
 
 function playSound(type, count) {
