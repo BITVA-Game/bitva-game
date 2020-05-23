@@ -20,6 +20,8 @@ const hozyaika = new UIFx(`${process.env.PUBLIC_URL}/sound/hozyaika.mp3`, { volu
 const morevna = new UIFx(`${process.env.PUBLIC_URL}/sound/morevna.mp3`, { volume: 1.0 });
 const premudraya = new UIFx(`${process.env.PUBLIC_URL}/sound/premudraya.mp3`, { volume: 1.0 });
 const yaga = new UIFx(`${process.env.PUBLIC_URL}/sound/yaga.mp3`, { volume: 1.0 });
+const waterDead = new UIFx(`${process.env.PUBLIC_URL}/sound/waterDead.mp3`, { volume: 1.0 });
+
 
 export const action = {
     graveyard: graveyardSound,
@@ -42,6 +44,7 @@ export const action = {
     morevna,
     premudraya,
     yaga,
+    waterDead,
 };
 
 function playSound(type, count) {
