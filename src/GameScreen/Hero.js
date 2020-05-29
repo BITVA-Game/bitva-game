@@ -46,11 +46,11 @@ const Hero = (props) => {
     // we call signle heart beat sound once with 2sec delay
     // after change of active player
     useEffect(() => {
-        if (props.gamePhase !== 'OVER' && props.active && props.player.moveCounter === 0) {
-            console.log('We are in single heartBeat');
-            setTimeout(() => playSound('heartBeatSingle'), 2000);
+        if (props.gamePhase !== phaseConst.OVER && props.active
+            && props.player.moveCounter === 0 && props.player.health.current > 6) {
+            setTimeout(() => playSound(soundConst.HEARTBEATSINGLE), 2000);
         }
-    }, [props.active, props.gamePhase, props.player.moveCounter]);
+    }, [props.active, props.gamePhase, props.player.moveCounter, props.player.health]);
 
     // we call repeated heart beat sound once active player has 6health pnts or less
     // after 3 health pnts of active player or less we call heartBeatFast
