@@ -54,8 +54,11 @@ body {
 
 .main-menu-overlay {
     height: 100vh;
-    outline: none;
     width: 0;
+}
+
+.main-menu-overlay:focus {
+    outline: none;
 }
 
 .sidebar-opened .main-menu-overlay {

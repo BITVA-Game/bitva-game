@@ -17,12 +17,13 @@
 }
 
 .header-menu {
-    align-content: center;
+    align-items: center;
     display: flex;
-    justify-items: center;
+    justify-content: center;
 }
 
 .hero-nav-menu-name {
+    background: rgb(236, 235, 235);
     background: rgba(236, 235, 235, .8);
     border-radius: 30px;
     color: #000;
@@ -371,7 +372,6 @@ button.hero-block {
     background: #ECEBEB;
     border-radius: 50%;
     height: 36px;
-    justify-self: start;
     line-height: 48px;
     padding: 0 9px 0 5px;
 }
