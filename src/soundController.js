@@ -15,14 +15,11 @@ const heartBeat = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { vo
 const heartBeatFast = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeatFast.mp3`, { volume: 0.5 });
 const heartBeatSingle = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.85 });
 const magicMirror = new UIFx(`${process.env.PUBLIC_URL}/sound/mirror.mp3`, { volume: 0.5 });
-<<<<<<< HEAD
 const attackItems = new UIFx(`${process.env.PUBLIC_URL}/sound/skullLantern.mp3`, { volume: 1.0 });
-=======
 const hozyaika = new UIFx(`${process.env.PUBLIC_URL}/sound/hozyaika.mp3`, { volume: 1.0 });
 const morevna = new UIFx(`${process.env.PUBLIC_URL}/sound/morevna.mp3`, { volume: 1.0 });
 const premudraya = new UIFx(`${process.env.PUBLIC_URL}/sound/premudraya.mp3`, { volume: 1.0 });
 const yaga = new UIFx(`${process.env.PUBLIC_URL}/sound/yaga.mp3`, { volume: 1.0 });
->>>>>>> sounds for each hero selection are added
 
 export const action = {
     graveyard: graveyardSound,
