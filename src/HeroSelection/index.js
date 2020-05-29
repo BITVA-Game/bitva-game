@@ -21,11 +21,17 @@ const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
 });
 
 const Header = (props) => (
-    <section className="heroselection-header">
-        <div className="heroselection-title">{props.title}</div>
-        {props.centre}
-        <div className="heroselection-playername">{props.playerName}</div>
-    </section>
+    <header className="main-header">
+        <div className="hs-header-item">
+            <div>{props.title}</div>
+        </div>
+        <div className="hs-header-item hs-header-item-centered">
+            {props.centre}
+        </div>
+        <div className="hs-header-item">
+            <div className="heroselection-playername">{props.playerName}</div>
+        </div>
+    </header>
 );
 
 class HeroSelection extends Component {
@@ -72,7 +78,7 @@ class HeroSelection extends Component {
             />
         );
         return (
-            <div>
+            <div className="main-container">
                 <Header title="Character Details" centre={swiper} playerName={getCurrentPlayer(this.app)} />
                 <OneHero
                     hero={this.state.hero}
@@ -86,7 +92,7 @@ class HeroSelection extends Component {
 
     renderListOfHeroes() {
         return (
-            <div>
+            <div className="main-container">
                 <Header title="Select Character" playerName={getCurrentPlayer(this.app)} />
                 <ListOfHeroes
                     heroesID={this.app.heroSelect.heroes}

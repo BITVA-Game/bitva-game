@@ -65,20 +65,27 @@ button,
   flex: 0 0 60px;
   font-family: "Ruslan Display";
   font-size: 36px;
+  padding: 0 66px;
 }
 
 .main-header {
-  padding-left: 66px;
+  font-size: 26px;
 }
 
 .main-footer {
   justify-content: center;
 }
 
+.main-header,
+.main-footer-hs {
+  justify-content: space-between;
+}
+
 .main-content {
   align-items: center;
   display: flex;
   flex: 1 1 auto;
+  flex-direction: column;
   justify-content: center;
 }
 

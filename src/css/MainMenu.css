@@ -53,12 +53,13 @@ body {
 /* overlay */
 
 .main-menu-overlay {
-    height: 90vh;
+    height: 100vh;
+    outline: none;
     width: 0;
 }
 
 .sidebar-opened .main-menu-overlay {
-    width: 90vw;
+    width: 100vw;
 }
 
 /* buttons */
