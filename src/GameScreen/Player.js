@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UIFx from 'uifx';
+
 import Hero from './Hero';
 import Card from './Card';
 import Item from './Item';
@@ -16,11 +16,8 @@ import '../css/GameScreen.css';
 
 import bat from '../images/cards/batCard.png';
 
-const { animation: animationConst, card: cardConst, target: targetConst } = require('../constants');
+const { animation: animationConst } = require('../constants');
 
-const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
-const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 0.1 });
-const chainsSound = new UIFx(`${process.env.PUBLIC_URL}/sound/chains.mp3`, { volume: 1.0 });
 
 const AnimatedHand = ({ inactivePlayer, hand }) => (
     <div className="hand card-hand">
@@ -31,7 +28,6 @@ const AnimatedHand = ({ inactivePlayer, hand }) => (
         ))}
     </div>
 );
-
 
 // Clairvoyance showed 3 1st cards from deck -from backend
 // this function create them to appear with 3 different
@@ -86,7 +82,6 @@ class Player extends Component {
             animation: null,
         };
         this.playAnimation = this.playAnimation.bind(this);
-        this.actionSound = this.actionSound.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -102,15 +97,6 @@ class Player extends Component {
         ) {
             this.playAnimation(animationConst.POTION);
         }
-        if (
-            this.props.player.chained !== prevProps.player.chained
-            && (
-                this.props.player.chained.includes(cardConst.MUSHROOMCARD)
-                || this.props.player.chained.includes(cardConst.OVENCARD)
-            )
-        ) {
-            chainsSound.play();
-        }
     }
 
     playAnimation(animName) {
@@ -119,18 +105,6 @@ class Player extends Component {
         setTimeout(() => this.setState({ animation: null }), 2000);
     }
 
-    actionSound(target) {
-        // we play attack sound if active player attacks opponent or its item
-        if (!this.props.active && target !== targetConst.GRAVE) {
-            if (this.isTarget(target, this.props.player)) {
-                attackSound.play();
-            }
-        }
-        // we play graveyard sound if player drops card to graveyard
-        if (target === targetConst.GRAVE) {
-            graveyardSound.play();
-        }
-    }
 
     render() {
         const playerClass = this.props.active ? 'player-active' : 'player-inactive';

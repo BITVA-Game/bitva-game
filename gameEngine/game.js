@@ -664,13 +664,13 @@ function pInactiveIsTarget(game, activeCard, cardId) {
         break;
     // if player attacks with card category == attackItems, we call attack items function
     // then move this attack card to gravyeard
-    case cardConst.ATTACKITEMCATEGORY:
+    case cardConst.ATTACKITEMSCATEGORY:
         attackItems(game.players);
         pActive.turningHand === true
             ? moveCardGraveyard(pInactive, cardId)
             : moveCardGraveyard(pActive, cardId);
         // after player's act we change lastAction property of the game
-        lastActionChange(game, action.ATTACKITEMOPPONENT);
+        lastActionChange(game, action.ATTACKITEMS);
         break;
     // if player attackes with clairvoyance card, we call showCards function
     // then move this attack card to gravyeard
