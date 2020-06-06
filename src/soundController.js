@@ -14,15 +14,15 @@ const healSound = new UIFx(`${process.env.PUBLIC_URL}/sound/heal.mp3`, { volume:
 const heartBeat = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.5 });
 const heartBeatFast = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeatFast.mp3`, { volume: 0.5 });
 const heartBeatSingle = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.85 });
+const hozyaika = new UIFx(`${process.env.PUBLIC_URL}/sound/hozyaika.mp3`, { volume: 1.0 });
 const itemSound = graveyardSound;
 const magicMirror = new UIFx(`${process.env.PUBLIC_URL}/sound/mirror.mp3`, { volume: 0.5 });
-const hozyaika = new UIFx(`${process.env.PUBLIC_URL}/sound/hozyaika.mp3`, { volume: 1.0 });
 const morevna = new UIFx(`${process.env.PUBLIC_URL}/sound/morevna.mp3`, { volume: 1.0 });
 const premudraya = new UIFx(`${process.env.PUBLIC_URL}/sound/premudraya.mp3`, { volume: 1.0 });
+const turningPotionSound = graveyardSound;
 const yaga = new UIFx(`${process.env.PUBLIC_URL}/sound/yaga.mp3`, { volume: 1.0 });
 const waterDead = new UIFx(`${process.env.PUBLIC_URL}/sound/waterDead.mp3`, { volume: 1.0 });
 const waterLiving = new UIFx(`${process.env.PUBLIC_URL}/sound/waterLiving.mp3`, { volume: 1.0 });
-const turningPotionSound = graveyardSound;
 
 export const action = {
     attackOpponent: attackSound,
@@ -38,15 +38,15 @@ export const action = {
     heartBeat,
     heartBeatFast,
     heartBeatSingle,
+    hozyaika,
     item: itemSound,
     magicMirror,
-    hozyaika,
     morevna,
     premudraya,
-    yaga,
     turningPotion: turningPotionSound,
     waterDead,
     waterLiving,
+    yaga,
 };
 
 function playSound(type, count) {
