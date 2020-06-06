@@ -12,6 +12,7 @@ import '../css/HeroSelection.css';
 import '../css/Cards.css';
 
 import { sortedHeroesList, getCurrentPlayer } from '../rules';
+import playSound from '../soundController';
 
 const { message } = require('../constants');
 
@@ -57,6 +58,9 @@ class HeroSelection extends Component {
             hero: this.state.hero.id,
             player: this.app.heroSelect.activePlayer,
         });
+        if (this.props.sendMessage && this.state.hero.id) {
+            playSound(this.state.hero.id);
+        }
     }
 
     heroesList() {
