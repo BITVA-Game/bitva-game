@@ -372,18 +372,17 @@ button.hero-block {
     background: #ECEBEB;
     border-radius: 50%;
     height: 36px;
+    left: 66px;
     line-height: 48px;
     padding: 0 9px 0 5px;
+    position: absolute;
+    top: 12px;
 }
 
 .btn-back-arrow {
     height: 24px;
     transform: rotate(180deg);
     width: 24px;
-}
-
-.empty {
-    width: 38px; /* back button width */
 }
 
 /* animations */

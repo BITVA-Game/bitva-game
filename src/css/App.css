@@ -64,21 +64,21 @@ button,
   display: flex;
   flex: 0 0 60px;
   font-family: "Ruslan Display";
-  font-size: 36px;
-  padding: 0 66px;
+  justify-content: space-between;
 }
 
 .main-header {
   font-size: 26px;
+  padding: 0 66px;
 }
 
 .main-footer {
+  font-size: 36px;
   justify-content: center;
 }
 
-.main-header,
 .main-footer-hs {
-  justify-content: space-between;
+  position: relative;
 }
 
 .main-content {

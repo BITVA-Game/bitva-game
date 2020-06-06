@@ -183,7 +183,6 @@ const OneHero = (props) => (
         <footer className="main-footer main-footer-hs heroselection-footer">
             <BackButton unselect={props.unselect} />
             {props.isAvailable ? <Play play={props.play} tabIndex="5" /> : null}
-            <div className="empty" />
         </footer>
     </div>
 );

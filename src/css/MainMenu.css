@@ -58,7 +58,7 @@ body {
 }
 
 .main-menu-overlay:focus {
-    outline: none;
+    outline: transparent;
 }
 
 .sidebar-opened .main-menu-overlay {
