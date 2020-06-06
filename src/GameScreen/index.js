@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Player from './Player';
+import MainMenu from '../MainMenu';
 import '../css/App.css';
 import '../css/GameScreen.css';
 import { getActivePlayer, getInActivePlayer, getActivePlayerName } from '../rules';
@@ -54,28 +55,31 @@ class GameScreen extends Component {
         const activePlayer = getActivePlayer(this.props.app);
         const inactivePlayer = getInActivePlayer(this.props.app);
         return (
-            <div className="game-table app-background">
-                {this.props.app.game.players.map((player) => (
-                    <Player
-                        active={player.id === activePlayer.id}
-                        key={player.keyHero}
-                        player={player}
-                        activePlayer={activePlayer}
-                        inactivePlayer={inactivePlayer}
-                        hand={this.playableHand(player)}
-                        sendMessage={this.props.sendMessage}
-                        gamePhase={this.props.app.game.phase}
-                    />
-                ))}
-                {activePlayer.moveCounter === 0
-                && activePlayer.health.current > 0
-                    ? (<ChangeTurn app={this.props.app} />
-                    ) : null}
+            <>
+                <div className="game-table app-background">
+                    {this.props.app.game.players.map((player) => (
+                        <Player
+                            active={player.id === activePlayer.id}
+                            key={player.keyHero}
+                            player={player}
+                            activePlayer={activePlayer}
+                            inactivePlayer={inactivePlayer}
+                            hand={this.playableHand(player)}
+                            sendMessage={this.props.sendMessage}
+                            gamePhase={this.props.app.game.phase}
+                        />
+                    ))}
+                    {activePlayer.moveCounter === 0
+                    && activePlayer.health.current > 0
+                        ? (<ChangeTurn app={this.props.app} />
+                        ) : null}
 
-                {this.props.app.game.phase === phaseConst.OVER ? (
-                    <GameOver app={this.props.app} />
-                ) : <BirdsAnimation />}
-            </div>
+                    {this.props.app.game.phase === phaseConst.OVER ? (
+                        <GameOver app={this.props.app} />
+                    ) : <BirdsAnimation />}
+                </div>
+                <MainMenu sendMessage={this.props.sendMessage} game />
+            </>
         );
     }
 }

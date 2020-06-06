@@ -12,6 +12,7 @@ const MenuButton = (props) => (
             data-testid="menu-button"
             className="menu-button"
             type="button"
+            disabled={props.disabled}
             onClick={() => props.sendMessage({ type: props.type })}
         >
             {props.name}
@@ -41,7 +42,7 @@ const ToggleButton = (props) => (
 class MainMenu extends Component {
     constructor(props) {
         super(props);
-        this.state = { opened: props.opened };
+        this.state = { opened: props.opened, game: props.game };
         this.toggle = this.toggle.bind(this);
     }
 
@@ -63,21 +64,25 @@ class MainMenu extends Component {
                             name="Network Play"
                             type={message.NETWORKSCREEN}
                             sendMessage={this.props.sendMessage}
+                            disabled={this.state.game}
                         />
                         <MenuButton
                             name="Player vs Player"
                             type={message.LOCALPLAY}
                             sendMessage={this.props.sendMessage}
+                            disabled={this.state.game}
                         />
                         <MenuButton
                             name="Tournament"
                             type={message.PLAY}
                             sendMessage={this.props.sendMessage}
+                            disabled={this.state.game}
                         />
                         <MenuButton
                             name="Daily Challenge"
                             type={message.PLAY}
                             sendMessage={this.props.sendMessage}
+                            disabled={this.state.game}
                         />
                     </ul>
                     <ToggleButton toggle={this.toggle} />
@@ -120,10 +125,12 @@ class MainMenu extends Component {
 MainMenu.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     opened: PropTypes.bool,
+    game: PropTypes.bool,
 };
 
 MainMenu.defaultProps = {
     opened: false,
+    game: false,
 };
 
 ToggleButton.propTypes = {
@@ -131,6 +138,7 @@ ToggleButton.propTypes = {
 };
 
 MenuButton.propTypes = {
+    disabled: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     sendMessage: PropTypes.func.isRequired,
