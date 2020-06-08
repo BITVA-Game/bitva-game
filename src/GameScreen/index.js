@@ -6,6 +6,7 @@ import Player from './Player';
 import MainMenu from '../MainMenu';
 import '../css/App.css';
 import '../css/GameScreen.css';
+import '../css/SnowAnimation.css';
 import { getActivePlayer, getInActivePlayer, getActivePlayerName } from '../rules';
 import { withBoardContext } from './BoardContext';
 import playSound from '../soundController';
@@ -77,13 +78,13 @@ class GameScreen extends Component {
                     {this.props.app.game.phase === phaseConst.OVER ? (
                         <GameOver app={this.props.app} />
                     ) : <BirdsAnimation />}
+                    <SnowAnimation />
                 </div>
                 <MainMenu sendMessage={this.props.sendMessage} game />
             </>
         );
     }
 }
-
 
 const GameOver = ({ app }) => {
     const activePlayer = getActivePlayer(app);
@@ -109,6 +110,16 @@ const ChangeTurn = ({ app }) => (
     </div>
 );
 
+const SnowAnimation = () => (
+    <>
+        <div className="snow layer1" />
+        <div className="snow layer1 a" />
+        <div className="snow layer2" />
+        <div className="snow layer2 a" />
+        <div className="snow layer3" />
+        <div className="snow layer3 a" />
+    </>
+);
 GameScreen.propTypes = {
     app: PropTypes.object.isRequired,
     sendMessage: PropTypes.func.isRequired,

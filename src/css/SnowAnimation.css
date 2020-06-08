@@ -1,0 +1,55 @@
+.snow {
+    animation: fall reverse linear infinite;
+    animation-delay: 3s;
+    border-radius: 50%;
+    opacity: 0.5;
+    position: absolute;
+    top: -50vh;
+}
+    
+    
+
+.layer1 {
+    animation-duration: 30s;
+    box-shadow: 51.1vw 99.6vh 0 -0.02rem#fff,49.3vw 94.4vh 0 -0.47rem#fff,13.1vw 2.5vh 0 -0.33rem#fff,17.5vw 70.1vh 0 -0.4rem#fff,36vw 57.6vh 0 -0.37rem#fff,16.1vw 22.8vh 0 -0.19rem#fff,31.3vw 47.8vh 0 -0.43rem#fff,52.8vw 40.2vh 0 -0.19rem#fff,66.7vw 67.9vh 0 -0.49rem#fff,18.6vw 29.2vh 0 -0.1rem#fff,26.9vw 26.8vh 0 -0.41rem#fff,93.9vw 53.5vh 0 -0.35rem#fff,58.6vw 61.4vh 0 -0.12rem#fff,3.6vw 92.3vh 0 -0.23rem#fff,99.1vw 39.7vh 0 -0.22rem#fff,79vw 82.5vh 0 -0.1rem#fff,38.3vw 74.2vh 0 -0.16rem#fff,11.1vw 26.7vh 0 -0.24rem#fff,84.6vw 83.3vh 0 -0.25rem#fff,96.3vw 26.8vh 0 -0.03rem#fff,31.3vw 72vh 0 -0.18rem#fff,0.7vw 29.5vh 0 -0.22rem#fff,81.3vw 51.6vh 0 -0.19rem#fff,80.4vw 61.3vh 0 -0.44rem#fff,84.3vw 69.5vh 0 -0.41rem#fff,90.9vw 83.8vh 0 -0.08rem#fff,83.4vw 85.8vh 0 -0.46rem#fff,72.7vw 72.3vh 0 -0.09rem#fff,69.6vw 4.1vh 0 -0.5rem#fff,6.6vw 49.7vh 0 -0.27rem#fff,73.5vw 48.8vh 0 -0.08rem#fff,39.3vw 91.3vh 0 -0.32rem#fff,88.2vw 94vh 0 -0.27rem#fff,79.2vw 71.4vh 0 -0.18rem#fff,51.6vw 88.2vh 0 -0.03rem#fff,6.6vw 55.8vh 0 -0.27rem#fff,10.3vw 74.5vh 0 -0.36rem#fff,95.8vw 18.6vh 0 -0.32rem#fff,86.8vw 56.5vh 0 -0.2rem#fff,63.1vw 96.5vh 0 -0.38rem#fff;
+    filter: blur(3px);
+    height: 1rem;
+    width: 1rem;
+}
+
+.layer1.a {
+    animation-delay: -3s;
+    height: 0.5rem;
+    width: 0.5rem;
+}
+.layer2 {
+    animation-duration: 40s;
+    box-shadow: 68.1vw 45.6vh 0 -0.32rem#fff,83.1vw 86.3vh 0 -0.46rem#fff,18.4vw 15.2vh 0 -0.28rem#fff,23.6vw 55.6vh 0 -0.37rem#fff,33.7vw 13vh 0 -0.32rem#fff,42.5vw 69vh 0 -0.4rem#fff,15.4vw 36.2vh 0 -0.19rem#fff,97.2vw 42.6vh 0 -0.07rem#fff,81.6vw 84.2vh 0 -0.14rem#fff,15.4vw 72.2vh 0 -0.03rem#fff,30.9vw 74.9vh 0 -0.43rem#fff,60.3vw 31.3vh 0 -0.32rem#fff,58.2vw 86.3vh 0 -0.22rem#fff,45.5vw 41.8vh 0 -0.32rem#fff,19.5vw 51.5vh 0 -0.09rem#fff,2.9vw 22.2vh 0 -0.26rem#fff,92.9vw 27.3vh 0 -0.07rem#fff,92.2vw 52.7vh 0 -0.14rem#fff,9.2vw 68.7vh 0 -0.44rem#fff,64.1vw 89.7vh 0 -0.46rem#fff,63vw 34.6vh 0 -0.24rem#fff,94.9vw 25.3vh 0 -0.38rem#fff,54.2vw 75.3vh 0 -0.37rem#fff,66.6vw 4.3vh 0 -0.1rem#fff,6.8vw 38.4vh 0 -0.24rem#fff,97.2vw 51.6vh 0 -0.15rem#fff,18.4vw 7.5vh 0 -0.2rem#fff,30.8vw 5.7vh 0 -0.13rem#fff,92.7vw 12.2vh 0 -0.46rem#fff,79.1vw 63.4vh 0 -0.08rem#fff,8.9vw 46.2vh 0 -0.07rem#fff,98.1vw 48.4vh 0 -0.38rem#fff,30.9vw 100vh 0 -0.26rem#fff,36.3vw 38.7vh 0 -0.21rem#fff,30.1vw 21vh 0 -0.26rem#fff,57.7vw 60.8vh 0 -0.31rem#fff,49.5vw 18vh 0 -0.1rem#fff,32.1vw 19.4vh 0 -0.3rem#fff,64.2vw 31.8vh 0 -0.33rem#fff,84.6vw 39.5vh 0 -0.14rem#fff;
+    filter: blur(5px);
+    height: 0.8rem;
+    width: 0.8rem;
+}
+.layer2.a {
+    animation-delay: 4s;
+}
+.layer3 {
+    animation-duration: 26s;
+    box-shadow: 36.4vw 57.6vh 0 -0.39rem#fff,53.7vw 80.2vh 0 -0.27rem#fff,57.9vw 42.1vh 0 -0.37rem#fff,6.7vw 19.8vh 0 -0.16rem#fff,86.5vw 4.1vh 0 -0.37rem#fff,82.6vw 11.4vh 0 -0.16rem#fff,58.8vw 44.9vh 0 -0.29rem#fff,94.3vw 26.8vh 0 -0.25rem#fff,97.9vw 65.7vh 0 -0.43rem#fff,21.4vw 45.7vh 0 -0.1rem#fff,19.3vw 57.7vh 0 -0.42rem#fff,18.4vw 75.6vh 0 -0.05rem#fff,6.3vw 19.2vh 0 -0.04rem#fff,89.1vw 37.4vh 0 -0.44rem#fff,96.1vw 12.6vh 0 -0.36rem#fff,14.8vw 84.8vh 0 -0.26rem#fff,10vw 18.4vh 0 -0.48rem#fff,1.7vw 77.6vh 0 -0.05rem#fff,84.9vw 16.2vh 0 -0.37rem#fff,47.4vw 13.6vh 0 -0.14rem#fff,72.2vw 55.8vh 0 -0.16rem#fff,11vw 40.5vh 0 -0.48rem#fff,74.7vw 11.1vh 0 -0.4rem#fff,37.6vw 86.5vh 0 -0.08rem#fff,74.5vw 13.1vh 0 -0.38rem#fff,37.4vw 75.1vh 0 -0.26rem#fff,96.4vw 17.3vh 0 -0.25rem#fff,14.1vw 50.5vh 0 -0.25rem#fff,86.8vw 15.9vh 0 -0.43rem#fff,24.8vw 96.5vh 0 -0.37rem#fff,41.3vw 34.7vh 0 -0.04rem#fff,93.6vw 22.6vh 0 -0.1rem#fff,90.7vw 93.9vh 0 -0.24rem#fff,12.6vw 36.3vh 0 -0.27rem#fff,96.9vw 5.1vh 0 -0.22rem#fff,73.8vw 51vh 0 -0.01rem#fff,94.2vw 36.7vh 0 -0.49rem#fff,92.1vw 57.4vh 0 -0.2rem#fff,5.4vw 49.4vh 0 -0.25rem#fff,62vw 2.9vh 0 -0.07rem#fff;
+    filter: blur(6px);
+    height: 0.8rem;
+    width: 0.8rem;
+}
+.layer3.a {
+    animation-delay: 2s;
+}
+@keyframes fall {
+    0% {
+        transform: translateX(50vh);
+    }
+    50% {
+        transform: translateY(150vh) translateX(-100vh);
+   }
+    100% {
+        transform: translateY(200vh) translateX(200vh);
+   }
+}
