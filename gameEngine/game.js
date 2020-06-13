@@ -14,7 +14,7 @@ const allCharacters = require('../gameTerminal/data/characters.json');
 const allCards = require('../gameTerminal/data/cards.json');
 
 const { removeDisable } = require('./specials');
-const { makeMove } = require('./specials');
+const { makeMove } = require('./actions');
 
 // HEROSELECTED
 

@@ -12,12 +12,19 @@ const { getRandomUpTo } = require('../gameTerminal/randomFunc');
 
 const { giveCardsTo } = require('./game');
 
-const { getActivePlayer } = require('./actions');
-const { getInActivePlayer } = require('./actions');
-const { lastActionChange } = require('./actions');
-const { moveCardGraveyard } = require('./actions');
-const { attackShield } = require('./actions');
-const { changeTurn } = require('./actions');
+const {
+    getActivePlayer,
+    getInActivePlayer,
+    lastActionChange,
+    moveCardGraveyard,
+    attackShield,
+    changeTurn,
+} = require('./actions');
+// const { getInActivePlayer } = require('./actions');
+// const { lastActionChange } = require('./actions');
+// const { moveCardGraveyard } = require('./actions');
+// const { attackShield } = require('./actions');
+// const { changeTurn } = require('./actions');
 
 // helper function to get random index for player's cards in hand
 function getRandomIndexes(cardsLength) {

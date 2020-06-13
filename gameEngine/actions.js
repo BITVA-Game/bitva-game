@@ -9,21 +9,24 @@ const {
     action,
 } = require('../src/constants');
 
-const { giveCardsTo } = require('./specials');
+const { giveCardsTo } = require('./game');
 
-const { bowArrow } = require('./specials');
-const { forestMushroom } = require('./specials');
-const { removePanic } = require('./specials');
-const { magicTree } = require('./specials');
-const { reflect } = require('./specials');
-const { waterCard } = require('./specials');
-const { malachiteBox } = require('./specials');
-const { turningHand } = require('./specials');
-const { showCards } = require('./specials');
-const { deleteCardsShown } = require('./specials');
-const { disableCards } = require('./specials');
-const { removeDisable } = require('./specials');
-const { attackItems } = require('./specials');
+const {
+    bowArrow,
+    forestMushroom,
+    removePanic,
+    magicTree,
+    reflect,
+    waterCard,
+    malachiteBox,
+    turningHand,
+    showCards,
+    deleteCardsShown,
+    disableCards,
+    removeDisable,
+    attackItems,
+} = require('./specials');
+
 
 function getActivePlayer(game) {
     return game.players.find((p) => p.id === game.active);
@@ -324,7 +327,7 @@ function playerActs(game, cardId, target) {
     // at the beggining of each player action
     // we run bowArrow function to check if opponent has bow & arrow card in item
     // and to supress attack points if any
-
+    console.log(typeof bowArrow);
     // TODO Move this out
     bowArrow(pActive, pInactive);
     let activeCard;
