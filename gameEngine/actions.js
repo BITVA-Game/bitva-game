@@ -1,30 +1,23 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-expressions */
+/* eslint-disable no-plusplus */
+const { getRandomUpTo } = require('../gameTerminal/randomFunc');
 
 const {
-    phase,
+    // phase,
     card: cardConst,
-    target: targetConst,
+    // target: targetConst,
     action,
 } = require('../src/constants');
 
-const { giveCardsTo } = require('./game');
-
 const {
-    bowArrow,
-    forestMushroom,
     removePanic,
-    magicTree,
-    reflect,
     waterCard,
-    malachiteBox,
     turningHand,
     showCards,
     deleteCardsShown,
     disableCards,
-    removeDisable,
-    attackItems,
 } = require('./specials');
 
 
@@ -120,6 +113,45 @@ function attackShield(player, itemKey, points, opponent) {
     }
 }
 
+// TODO: rename to magicMirror/plateMail or not
+// function to reflect half of the damage (or round down to integer) for magicMirror card
+// if active card has 1 attack points then each player gets 1 pnt damage
+// or in case of plateMail func reflect 1 point back to player
+// if active card has 1 attack points then no damage to both players
+function reflect(opponent, player, points) {
+    // console.log('We are in reflect function!', player);
+    const itemCard = Object.values(opponent.item)[0].id;
+    let damage;
+    if (itemCard === cardConst.MAGICMIRRORCARD) {
+        points === 1 ? (damage = 1) : (damage = Math.floor(points / 2));
+        opponent.health.current -= damage;
+    }
+    if (itemCard === cardConst.PLATEMAILCARD) {
+        points === 1 ? (damage = 0) : (damage = 1);
+        damage === 0
+            ? opponent.health.current
+            : (opponent.health.current -= points - damage);
+    }
+    if (
+        Object.keys(player.item).length === 0
+    || Object.values(player.item)[0].category !== cardConst.SHIELDCARD
+    ) {
+        player.health.current -= damage;
+    }
+    if (
+        Object.keys(player.item).length === 1
+    && Object.values(player.item)[0].category === cardConst.SHIELDCARD
+    ) {
+        attackShield(player, Object.keys(player.item)[0], damage);
+    }
+    if (player.health.current < 0) {
+        player.health.current = 0;
+    }
+    if (opponent.health.current < 0) {
+        opponent.health.current = 0;
+    }
+}
+
 // function to handle attack points deduction from opponent player health
 // depending on item card if any present
 function attackOpponent(player, opponent, points) {
@@ -171,6 +203,35 @@ function pActiveIsTarget(game, activeCard, cardId) {
     default:
         return new Error('You are under spell. Wait for redemption!');
     }
+}
+
+// TODO: rename to Skull Lantern
+// this function runs when player attacks with the card Skull Lantern which category is attackItems
+// it accept players and checks all item category cards from both players item holders and hands
+// and move such cards to players grave yards
+function attackItems(players) {
+    players.forEach((p) => {
+        if (Object.keys(p.item).length !== 0) {
+            const itemCard = Object.values(p.item)[0];
+            // we reset item card's health points to initial points
+            itemCard.healthCurrent = itemCard.health;
+            // we move any item card to graveyard
+            moveCardGraveyard(p, Object.keys(p.item)[0], cardConst.ITEMCARD);
+        }
+        // we check whether each player hand is not empty
+        if (Object.keys(p.hand).length !== 0) {
+            // and for each card in hand with type item
+            for (const cardIndex in p.hand) {
+                if (p.hand[cardIndex].type === cardConst.ITEMCARD) {
+                    // we reset item card's points to initial points
+                    p.hand[cardIndex].healthCurrent = p.hand[cardIndex].health;
+                    // we move any item card to graveyard
+                    moveCardGraveyard(p, cardIndex);
+                }
+            }
+        }
+    });
+    return { players };
 }
 
 function pInactiveIsTarget(game, activeCard, cardId) {
@@ -292,152 +353,31 @@ function changeTurn(game) {
     waterCard(game.players);
 }
 
-function playerMoveEnd(pActive, pInactive, game) {
-    // console.log(game);
-    // we call function to return disabled cards property to false if any have true
-    removeDisable(pActive);
-    // we check then if any cardsShown property in opponent cards
-    // and remove by calling deleteCardsShown function
-    // setTimeout(() => deleteCardsShown(pActive), 4000);
-    // we call function to give cards to players up to 5
-    if (pActive.health.current > 0) {
-        giveCardsTo(pActive);
-    }
-
-    // run changeTurn function
-    changeTurn(game);
-
-    //  after change of turn,  we check
-    // whether inactive player has in item holder card forest Mushroom with category panic,
-    // then we call function forestMushroom
-    Object.keys(pActive.item).length !== 0
-  && Object.values(pActive.item)[0].category === cardConst.PANICCATEGORY
-        ? forestMushroom(game, pInactive, 'afterTurn')
-        : null;
-    // we run bowArrow function to check if opponent has bow & arrow card in item
-    // and to supress attack points if any
-    bowArrow(pActive, pInactive);
-}
-
-// basic function for the game that represents each act of active player
-function playerActs(game, cardId, target) {
-    let pActive = getActivePlayer(game);
-    const pInactive = getInActivePlayer(game);
-
-    // at the beggining of each player action
-    // we run bowArrow function to check if opponent has bow & arrow card in item
-    // and to supress attack points if any
-    console.log(typeof bowArrow);
-    // TODO Move this out
-    bowArrow(pActive, pInactive);
-    let activeCard;
-
-    // Player is acting with a full moveCounter, do not approve;
-    if (pActive.moveCounter === 2) {
-        playerMoveEnd(pActive, pInactive, game);
-        return game;
-    }
-
-    pActive.turningHand !== true
-        ? (activeCard = pActive.hand[cardId])
-        : (activeCard = pInactive.hand[cardId]);
-    // If the key for the second card is graveyard
-    // We send the card that has active key to graveyard
-    // after player's act we change lastAction property of the game
-    if (target === targetConst.GRAVE) {
-        graveyardCheck(game, cardId, activeCard);
-        lastActionChange(game, action.GRAVEYARD);
-    }
-    // For all the cases when the player acts against himself
-    if (
-        target === targetConst.HERO
-    && activeCard.disabled === false
-    && activeCard.type === cardConst.ACTIONCARD
-    ) {
-        pActiveIsTarget(game, activeCard, cardId);
-    }
-    // if target is inactive player's hero - opponent, player can only attack opponent
-    // then his active card moves to graveyard. Other scenarios are not allowed
-    if (
-        target === targetConst.OPPONENT
-    && activeCard.disabled === false
-    && activeCard.type === cardConst.ACTIONCARD
-    ) {
-        pInactiveIsTarget(game, activeCard, cardId);
-    }
-
-    if (
-        target === targetConst.ITEMCARD
-    && activeCard.type === cardConst.ITEMCARD
-    ) {
-    // console.log('We are in move item case');
-        moveItem(game, pActive, cardId, pInactive);
-    }
-    // if player attacks opponent item with card type action, then
-    // if item is not empty we deduct points of attack from item card points
-    // if item card points <= 0 cards get its initial points and goes to graveyard
-    if (
-        target === targetConst.ITEMOPPONENT
-    && activeCard.category === cardConst.ATTACKCATEGORY
-    && Object.keys(pInactive.item).length !== 0
-    && Object.values(pInactive.item)[0].category !== cardConst.SHIELDCATEGORY
-    ) {
-        lastActionChange(game, action.ATTACKITEMOPPONENT);
-        const itemCard = Object.values(pInactive.item)[0];
-        itemCard.healthCurrent -= activeCard.points;
-        if (itemCard.healthCurrent <= 0) {
-            // console.log('itemCard.healthCurrent <= 0');
-            itemCard.healthCurrent = itemCard.health;
-            // console.log(opponent.hero, Object.keys(opponent.item)[0]);
-            moveCardGraveyard(
-                pInactive,
-                Object.keys(pInactive.item)[0],
-                cardConst.ITEMCARD,
-            );
+// function forestMushroom accepts opponent
+// and if opponent get 60% chance, then his/ her cards in hand
+// get panic: true property except one random card
+// so at the begginig of opponent action he can play only this card
+function forestMushroom(game, opponent) {
+    // console.log('We ate forest mushrooms!!', opponent.hero);
+    const chance = getRandomUpTo(10, 'chanceforestMushroom');
+    const opponentCards = Object.values(opponent.hand);
+    if (chance <= 6) {
+        for (let i = 0; i < Object.keys(opponent.hand).length; i++) {
+            opponentCards[i].panic = true;
         }
-        pActive.turningHand === true
-            ? moveCardGraveyard(pInactive, cardId)
-            : moveCardGraveyard(pActive, cardId);
+        Object.keys(opponent.item).length !== 0
+            ? (Object.values(opponent.item)[0].panic = true)
+            : null;
+        const index = getRandomUpTo(opponentCards.length, 'indexMushroom');
+        opponentCards[index].panic = false;
+        if (opponentCards[index].disabled === true) {
+            opponentCards[index].panic = false;
+            opponentCards[index].disabled = false;
+        }
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.CHAINS);
     }
-    // after each act we delete turningHand property for both players
-    // if active player acted after turning potion card
-    // we also turn active card's key to null as players's cards keys duplicate
-    if (
-        pActive.turningHand === true
-    && (cardId in pInactive.grave || cardId in pActive.item)
-    ) {
-        pInactive.turningHand = false;
-        pActive.turningHand = false;
-        cardId = null;
-    }
-    // after each move we increase active player's counter for 1 if activeCard acted
-    // if activeCard remains in player's hand we do not increase move Counter
-    pActive = changeMoveCounter(pActive, cardId, pInactive);
-
-    // after each move of active player we check for forestMushroom in opponent's item
-    Object.keys(pInactive.item).length !== 0
-  && Object.values(pInactive.item)[0].category === cardConst.PANICCATEGORY
-  && pActive.moveCounter === 1
-        ? forestMushroom(game, pActive)
-        : null;
-    // after each move of active player we check whether opponent has magicTree card in item
-    magicTree(game);
-    // after each move of active player we run function malachiteBox if applicable
-    malachiteBox(pActive, pInactive, target);
-    // once active player's move counter == 2
-    if (pActive.moveCounter === 2 && game.phase === phase.ACTIVE) {
-        playerMoveEnd(pActive, pInactive, game);
-    }
-    // we return the whole game to continue
-    if (pInactive.health.current <= 0 || pActive.health.current <= 0) {
-        game.phase = phase.OVER;
-    }
-    return game;
-}
-
-function makeMove(game, msg) {
-    game = playerActs(game, msg.activeCard, msg.target);
-    return game;
+    return opponentCards;
 }
 
 module.exports = {
@@ -445,7 +385,13 @@ module.exports = {
     getInActivePlayer,
     lastActionChange,
     moveCardGraveyard,
+    graveyardCheck,
     attackShield,
+    pActiveIsTarget,
+    attackItems,
+    pInactiveIsTarget,
+    moveItem,
+    changeMoveCounter,
     changeTurn,
-    makeMove,
+    forestMushroom,
 };
