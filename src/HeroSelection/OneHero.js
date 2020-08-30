@@ -96,9 +96,11 @@ const Play = (props) => (
     </div>
 );
 
-const BackButton = (props) => (
-    <div className="btn btn-back" role="button" onClick={props.unselect} onKeyPress={props.unselect} tabIndex="10">
-        ◀
+const BackButton = ({ unselect }) => (
+    <div className="btn btn-back" role="button" onClick={unselect} onKeyPress={unselect} tabIndex="10">
+        <svg className="btn-back-arrow" viewBox="0 0 24 24">
+            <path fill="none" stroke="#000" strokeWidth="2" d="M3,22.0000002 L21,12 L3,2 L3,22.0000002 Z M5,19 L17.5999998,11.9999999 L5,5 L5,19 Z M7,16 L14.1999999,12 L7,8 L7,16 Z M9,13 L10.8,12 L9,11 L9,13 Z" />
+        </svg>
     </div>
 );
 
@@ -157,14 +159,12 @@ class CardsBlock extends Component {
 
 // Info about one hero.
 const OneHero = (props) => (
-    <div>
-        <div className="heroselection-details">
+    <div className="content-container">
+        <div className="main-content heroselection-details">
             <HeroImage heroid={props.hero.id} hero={props.hero} />
             <div className="details-info-block">
                 <div className="details-description-container">
                     <div className="details-info">
-                        <div className="details-name">{props.hero.name}</div>
-                        {/* <div className="icon-text icon-heart icon-heart-description"> */}
                         <div className="details-health-container">
                             <img className="details-health" src={heart} alt="" />
                             <div className="details-health-text">{props.hero.health}</div>
@@ -180,10 +180,10 @@ const OneHero = (props) => (
                 <CardsBlock heroId={props.hero.id} cards={props.hero.cards} hero={props.hero} />
             </div>
         </div>
-        <section className="heroselection-footer">
+        <footer className="main-footer main-footer-hs heroselection-footer">
             <BackButton unselect={props.unselect} />
             {props.isAvailable ? <Play play={props.play} tabIndex="5" /> : null}
-        </section>
+        </footer>
     </div>
 );
 

@@ -68,7 +68,7 @@ const ListOfHeroes = (props) => {
 
     const heroes = props.allHeroes.slice(firstHero, firstHero + 3);
     return (
-        <div>
+        <div className="main-content">
             <div className="heroes-list">
                 <button type="button" className="hero-block left-arrow" onClick={prev} />
                 {[...heroes].map((hero) => (

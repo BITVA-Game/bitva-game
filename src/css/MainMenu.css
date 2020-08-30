@@ -53,12 +53,16 @@ body {
 /* overlay */
 
 .main-menu-overlay {
-    height: 90vh;
+    height: 100vh;
     width: 0;
 }
 
+.main-menu-overlay:focus {
+    outline: transparent;
+}
+
 .sidebar-opened .main-menu-overlay {
-    width: 90vw;
+    width: 100vw;
 }
 
 /* buttons */

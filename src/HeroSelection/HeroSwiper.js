@@ -4,8 +4,10 @@ import '../css/App.css';
 import '../css/HeroSelection.css';
 
 const HeaderHeroButton = (props) => (
-    <div className="btn" role="button" onClick={props.funct} onKeyPress={props.funct} tabIndex={props.tabIndex}>
-        {props.img}
+    <div className={`btn btn-${props.dir}`} role="button" onClick={props.funct} onKeyPress={props.funct} tabIndex={props.tabIndex}>
+        <svg viewBox="0 0 24 24">
+            <path fill="none" stroke="#ECEBEB" strokeWidth="2" d="M3,22.0000002 L21,12 L3,2 L3,22.0000002 Z M5,19 L17.5999998,11.9999999 L5,5 L5,19 Z M7,16 L14.1999999,12 L7,8 L7,16 Z M9,13 L10.8,12 L9,11 L9,13 Z" />
+        </svg>
     </div>
 );
 
@@ -18,11 +20,11 @@ const HeroSwiper = (props) => {
 
     return (
         <div className="header-menu">
-            <HeaderHeroButton funct={() => props.select(prevID)} tabIndex="1" img="◀" />
-            <div className="header-menu hero-nav-menu-name">
+            <HeaderHeroButton funct={() => props.select(prevID)} tabIndex="1" dir="prev" />
+            <div className="hero-nav-menu-name">
                 {props.hero.name}
             </div>
-            <HeaderHeroButton funct={() => props.select(nextID)} tabIndex="2" img="▶" />
+            <HeaderHeroButton funct={() => props.select(nextID)} tabIndex="2" dir="next" />
         </div>
     );
 };
@@ -30,7 +32,7 @@ const HeroSwiper = (props) => {
 HeaderHeroButton.propTypes = {
     funct: PropTypes.func.isRequired,
     tabIndex: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
+    dir: PropTypes.string.isRequired,
 };
 
 HeroSwiper.propTypes = {

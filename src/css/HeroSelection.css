@@ -1,58 +1,62 @@
 /* header */
 
-.heroselection-header {
-	align-items: center;
-	background: rgb(0,0,0);
-	background: rgba(0,0,0,0.8);
-	display: flex;
-	font-family: "Ruslan Display";
-	font-size: 36px;
-	height: 60px;
-	justify-content: space-around;
-	text-align: center;
-	width: 100%;
+.hs-header-item {
+    flex: 1 1 33.333%;
+}
+
+.hs-header-item-centered {
+    display: flex;
+    justify-content: center;
 }
 
 .heroselection-playername {
     color: #b74a45;
-    font-size: 26px;
-    justify-content: center;
-    padding: 0 10px;
+    padding-left: 50px;
+    text-align: right;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .header-menu {
-	display: flex;
-}
-
-.heroselection-title {
-	color: #FFF;
-	margin: 0 78px 0 50px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .hero-nav-menu-name {
-	padding: 0 30px;
+    background: rgb(236, 235, 235);
+    background: rgba(236, 235, 235, .8);
+    border-radius: 30px;
+    color: #000;
+    font-size: 36px;
+    line-height: 48px;
+    padding: 0 30px;
+    text-align: center;
+    width: 433px;
+}
+
+.btn-next,
+.btn-prev {
+    height: 48px;
+    width: 48px;
+}
+
+.btn-prev {
+    transform: rotate(180deg);
 }
 
 /* list of heroes */
 
 .heroes-list {
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	margin: 0 auto;
-	margin-top: 1em;
-	padding: 1em 2em;
-	width: 90%;	
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 .heroes-names {
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	margin: 0 auto;
-	margin-top: 1em;
-	width: 90%;	
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
 }
 
 .hero-name {
@@ -202,16 +206,25 @@ button.hero-block {
 
 /* hero details (OneHero) screen */
 
+.content-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 60px);
+}
+
 .heroselection-details {
-	display: flex;
-	justify-content: space-between;
-	padding: 36px 78px;
-	width: 100%;
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 36px 66px;
+    width: 100%;
 }
 
 .details-hero {
-	display: flex;
-	padding: 0;
+    display: flex;
+    flex: 1 1 30%;
+    padding: 0;
 }
 
 .details-hero-avatar {
@@ -222,11 +235,10 @@ button.hero-block {
 /* details information block */
 
 .details-info-block {
-	background: rgb(236, 235, 235);
-	background: rgba(236, 235, 235, .8);
-	flex: 1 1 766px;
-	margin-left: 78px;
-	padding: 0 34px;
+    background: rgb(236, 235, 235);
+    background: rgba(236, 235, 235, .8);
+    flex: 1 1 63%;
+    padding: 0 34px;
 }
 
 .details-description-container {
@@ -356,25 +368,21 @@ button.hero-block {
 
 /* footer */
 
-.heroselection-footer {
-	align-items: center;
-	background-color: rgb(0,0,0);
-	background-color: rgba(0,0,0,0.8);
-	display: flex;
-	font-family: "Ruslan Display";
-	font-size: 36px;
-	height: 60px;
+.btn-back {
+    background: #ECEBEB;
+    border-radius: 50%;
+    height: 36px;
+    left: 66px;
+    line-height: 48px;
+    padding: 0 9px 0 5px;
+    position: absolute;
+    top: 12px;
 }
 
-.btn-back {
-	background: #ECEBEB;
-	border-radius: 50%;
-	color: #000;
-	font-size: 28px;
-	height: 36px;
-	line-height: 48px;
-	margin: 0 520px 0 50px;
-	padding: 0 9px 0 5px;
+.btn-back-arrow {
+    height: 24px;
+    transform: rotate(180deg);
+    width: 24px;
 }
 
 /* animations */
