@@ -1,1 +1,20 @@
-{"records":[{"id":"45a283f0-3a73-11ea-8bd2-91a8965c4a78","name":"Gay Gleason","heroes":["morevna","yaga"]},{"id":"415e7c30-3a74-11ea-83c3-7b5a917ffa13","name":"Mr. Delmer Braun","heroes":["morevna","yaga"]}]}
+{
+    "records": [
+        {
+            "id": "aaa283f0-3a73-11ea-8bd2-91a8965c4a78",
+            "name": "Gay Gleason",
+            "heroes": [
+                "morevna",
+                "yaga"
+            ]
+        },
+        {
+            "id": "bbbe7c30-3a74-11ea-83c3-7b5a917ffa13",
+            "name": "Mr. Delmer Braun",
+            "heroes": [
+                "morevna",
+                "yaga"
+            ]
+        }
+    ]
+}

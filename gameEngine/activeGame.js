@@ -3,7 +3,7 @@ const { screen } = require('../constants');
 function opponent(app, activeAccount) {
     const connected = app.terminals.length === 2;
     return {
-        connected, screen: screen.VS, active: activeAccount,
+        connected, screen: 'some', data: app.players.find((p) => p.id !== activeAccount),
     };
 }
 
