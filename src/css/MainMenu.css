@@ -91,6 +91,13 @@ body {
     white-space: nowrap;
 }
 
+.menu-button:disabled,
+.menu-button:disabled:hover,
+.menu-button:disabled:focus {
+    color: gray;
+    cursor: not-allowed;
+}
+
 .menu-button:hover,
 .menu-button:focus {
     color: rgb(183, 74, 69);
