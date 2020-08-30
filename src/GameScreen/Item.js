@@ -26,7 +26,9 @@ const Item = (props) => {
     const firstSound = useRef(true);
 
     useEffect(() => {
-        if (props.item && props.item.id === cardConst.MAGICMIRRORCARD) {
+        if (props.item
+            && (props.item.id === cardConst.MAGICMIRRORCARD
+                || props.item.id === cardConst.WATERDEADCARD)) {
             if (firstSound.current) {
                 playSound(props.item.id);
                 firstSound.current = false;

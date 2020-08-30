@@ -1,47 +1,51 @@
 import UIFx from 'uifx';
-
-const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
+// temporary on top as graveyard sound is used as default for cards with no own sounds
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 1.0 });
-const chainsSound = new UIFx(`${process.env.PUBLIC_URL}/sound/chains.mp3`, { volume: 1.0 });
+
+const attackItems = new UIFx(`${process.env.PUBLIC_URL}/sound/skullLantern.mp3`, { volume: 1.0 });
 const attackItemOpponent = new UIFx(`${process.env.PUBLIC_URL}/sound/attackItemOpponent.mp3`, { volume: 0.5 });
-const cardsFromGrave = new UIFx(`${process.env.PUBLIC_URL}/sound/cards.mp3`, { volume: 0.5 });
-const healSound = new UIFx(`${process.env.PUBLIC_URL}/sound/heal.mp3`, { volume: 0.5 });
-const itemSound = graveyardSound;
-const clairvoyanceSound = graveyardSound;
-const turningPotionSound = graveyardSound;
+const attackSound = new UIFx(`${process.env.PUBLIC_URL}/sound/attack.mp3`, { volume: 1.0 });
 const birds = new UIFx(`${process.env.PUBLIC_URL}/sound/birds.mp3`, { volume: 1.0 });
 const card = new UIFx(`${process.env.PUBLIC_URL}/sound/card.mp3`, { volume: 1.0 });
+const cardsFromGrave = new UIFx(`${process.env.PUBLIC_URL}/sound/cards.mp3`, { volume: 0.5 });
+const chainsSound = new UIFx(`${process.env.PUBLIC_URL}/sound/chains.mp3`, { volume: 1.0 });
+const clairvoyanceSound = graveyardSound;
+const healSound = new UIFx(`${process.env.PUBLIC_URL}/sound/heal.mp3`, { volume: 0.5 });
 const heartBeat = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.5 });
 const heartBeatFast = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeatFast.mp3`, { volume: 0.5 });
 const heartBeatSingle = new UIFx(`${process.env.PUBLIC_URL}/sound/heartBeat.mp3`, { volume: 0.85 });
+const itemSound = graveyardSound;
 const magicMirror = new UIFx(`${process.env.PUBLIC_URL}/sound/mirror.mp3`, { volume: 0.5 });
-const attackItems = new UIFx(`${process.env.PUBLIC_URL}/sound/skullLantern.mp3`, { volume: 1.0 });
 const hozyaika = new UIFx(`${process.env.PUBLIC_URL}/sound/hozyaika.mp3`, { volume: 1.0 });
 const morevna = new UIFx(`${process.env.PUBLIC_URL}/sound/morevna.mp3`, { volume: 1.0 });
 const premudraya = new UIFx(`${process.env.PUBLIC_URL}/sound/premudraya.mp3`, { volume: 1.0 });
 const yaga = new UIFx(`${process.env.PUBLIC_URL}/sound/yaga.mp3`, { volume: 1.0 });
+const waterDead = new UIFx(`${process.env.PUBLIC_URL}/sound/waterDead.mp3`, { volume: 1.0 });
+const turningPotionSound = graveyardSound;
+
 
 export const action = {
-    graveyard: graveyardSound,
     attackOpponent: attackSound,
     attackItemOpponent,
     attackItems,
     birds,
-    chains: chainsSound,
-    heal: healSound,
-    item: itemSound,
-    clairvoyance: clairvoyanceSound,
-    turningPotion: turningPotionSound,
-    cardsFromGrave,
     card,
+    cardsFromGrave,
+    chains: chainsSound,
+    clairvoyance: clairvoyanceSound,
+    graveyard: graveyardSound,
+    heal: healSound,
     heartBeat,
     heartBeatFast,
     heartBeatSingle,
+    item: itemSound,
     magicMirror,
     hozyaika,
     morevna,
     premudraya,
     yaga,
+    turningPotion: turningPotionSound,
+    waterDead,
 };
 
 function playSound(type, count) {
