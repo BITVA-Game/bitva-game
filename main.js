@@ -55,8 +55,10 @@ function createWindow() {
     win.once('ready-to-show', async () => {
         win.show();
 
+        // Initialize independant que for the messages
+        application.startMsgQueue(sendMessage);
         // Send the message to show the first screen
-        await application.msgReceived({ type: 'INIT' }, sendMessage);
+        await application.msgReceived({ type: 'INIT' });
     });
 
     win.webContents.on('before-input-event', (s, e) => {
@@ -125,7 +127,7 @@ ipcMain.on('APP', async (event, arg) => {
     case 'QUIT':
         return app.quit();
     default:
-        return application.msgReceived(arg, sendMessage);
+        return application.msgReceived(arg);
     }
 });
 

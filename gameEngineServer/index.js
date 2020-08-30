@@ -7,12 +7,12 @@ const server = (engine) => {
     app.use(bodyParser.json());
 
     app.get('/', (req, res) => {
-        res.send(engine.getState());
+        res.send(engine.getState(req.query.activeAccount));
     });
 
     app.post('/', (req, res) => {
         console.log(new Date(), req.body);
-        engine.handle(req.body.message);
+        engine.handle(req.body.message, req.body.activeAccount);
         res.send(engine.getState());
     });
 

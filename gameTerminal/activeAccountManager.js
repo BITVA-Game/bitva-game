@@ -17,6 +17,7 @@ function handle(app, msg, process) {
     case message.SWITCHACTIVE:
         // eslint-disable-next-line no-case-declarations
         const opponent = switchActive(app);
+        console.log('opponent', opponent);
         if (!opponent) {
             process({ type: message.SELECTOPPONENT });
         } else {

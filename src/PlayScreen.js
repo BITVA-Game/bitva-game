@@ -11,12 +11,18 @@ const PlayScreen = ({ app, sendMessage }) => (
             <div className="versus-profiles-container">
                 <div className="versus-profile">
                     <div className="versus-profile-player">Player 1</div>
-                    <div className="versus-profile-name">{getAccountForPart(app, app.participants.player).name}</div>
+                    <div className="versus-profile-name">
+A
+{/*getAccountForPart(app, app.participants.player).name*/}
+</div>
                 </div>
                 <div className="vs">VS</div>
                 <div className="versus-profile">
                     <div className="versus-profile-player">Player 2</div>
-                    <div className="versus-profile-name">{getAccountForPart(app, app.participants.guest).name}</div>
+                    <div className="versus-profile-name">
+B
+{/*getAccountForPart(app, app.participants.guest).name*/}
+</div>
                 </div>
             </div>
         </div>

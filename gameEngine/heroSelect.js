@@ -19,17 +19,18 @@ function allHeroesWithCards() {
 
 function opponent(app, activeAccount) {
     const opp = app.players.find((p) => p.id !== activeAccount);
-    const scr = opp ? screen.PAIRING : null;
+    const scr = opp ? screen.VS : null;
     const connected = app.terminals.length === 2;
     return {
-        connected, screen: scr,
+        connected, screen: scr, phase: app.phase,
     };
 }
 
 function pairing(app, activeAccount) {
     return {
-        screen: screen.PAIRING,
+        screen: screen.VS,
         opponent: opponent(app, activeAccount),
+        phase: app.phase,
     };
 }
 
@@ -48,20 +49,22 @@ function heroNotSelected(app, activeAccount) {
         screen: screen.HEROSELECT,
         heroSelect,
         opponent: opponent(app, activeAccount),
+        phase: app.phase,
     };
 }
 
-function unknownAccount() {
+function unknownAccount(app) {
     return {
         screen: null,
         opponent: { connected: false },
+        phase: app.phase,
     };
 }
 
 function show(app, activeAccount) {
     const account = Object.values(app.terminals).find((t) => t.id === activeAccount);
     if (!account) {
-        return unknownAccount();
+        return unknownAccount(app);
     }
 
     const selected = app.players.find((p) => p.id === activeAccount);

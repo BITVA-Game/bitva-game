@@ -18,8 +18,8 @@ class GameEngineRemote {
         await request.post(this.address).send({ message, activeAccount });
     }
 
-    async getState() {
-        const result = await request.get(this.address);
+    async getState(activeAccount) {
+        const result = await request.get(`${this.address}/?activeAccount=${activeAccount}`);
         console.log('RESPONSE ENGINE STATE', result.body);
         return result.body;
     }

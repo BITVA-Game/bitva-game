@@ -31,6 +31,7 @@ async function handle(app, msg, process) {
         if (!engine) {
             throw new Error('NO ENGINE!');
         }
+        setInterval(() => process({ type: message.JOIN }), 500);
         process({ type: message.JOIN });
         // process({ type: message.START }, false);
         break;

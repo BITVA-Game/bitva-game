@@ -7,6 +7,17 @@ function handle(app, msg) {
     case message.INIT:
         participants = {};
         break;
+    case message.LOCALPLAY:
+        participants = {
+            player: participants.player,
+            guest: null,
+        };
+        break;
+    case message.NETWORKPLAY:
+        participants = {
+            player: participants.player,
+        };
+        break;
     case message.LOGIN:
         participants.player = msg.account;
         break;
