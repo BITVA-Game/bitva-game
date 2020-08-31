@@ -1,6 +1,4 @@
 /* eslint-disable no-plusplus */
-/* eslint func-names: ["error", "as-needed"] */
-/* eslint-disable no-unused-expressions */
 /* eslint-disable no-param-reassign */
 const keygen = require('keygenerator');
 const {
@@ -73,7 +71,7 @@ function assignCards(deck, cardsNumber) {
     return cards;
 }
 
-const generatePlayer = function (heroName, id) {
+function generatePlayer(heroName, id) {
     const player = {};
     player.id = id;
     player.hand = {};
@@ -94,14 +92,14 @@ const generatePlayer = function (heroName, id) {
     player.keyHero = keygen.number();
     keyHero[player.keyHero] = player;
     return player;
-};
+}
 
 function getRandomBool() {
     const rand = getRandomUpTo(2, 'firstPlayerActive');
     return rand === 0;
 }
 
-const selectActive = function (players) {
+function selectActive(players) {
     if (players.length < 2) {
         return null;
     }
@@ -110,9 +108,9 @@ const selectActive = function (players) {
         return players[0].id;
     }
     return players[1].id;
-};
+}
 
-const assignPlayersPositions = function (players) {
+function assignPlayersPositions(players) {
     if (players.length < 2) {
         return players;
     }
@@ -120,17 +118,14 @@ const assignPlayersPositions = function (players) {
     players[0].position = styles.BOTTOM;
     players[1].position = styles.TOP;
     return players;
-};
+}
 
 // DEALALL
 
 function playerHasCards(pActive) {
     // eslint-disable-next-line max-len
     // console.log('playerHasCards', Object.keys(pActive.cards).length, Object.keys(pActive.hand).length);
-    if (
-        Object.keys(pActive.cards).length + Object.keys(pActive.hand).length
-    >= 5
-    ) {
+    if (Object.keys(pActive.cards).length + Object.keys(pActive.hand).length >= 5) {
         return true;
     }
     return false;
@@ -195,10 +190,11 @@ function playerMoveEnd(pActive, pInactive, game) {
     //  after change of turn,  we check
     // whether inactive player has in item holder card forest Mushroom with category panic,
     // then we call function forestMushroom
-    Object.keys(pActive.item).length !== 0
-  && Object.values(pActive.item)[0].category === cardConst.PANICCATEGORY
-        ? forestMushroom(game, pInactive, 'afterTurn')
-        : null;
+    if (Object.keys(pActive.item).length !== 0) {
+        if (Object.values(pActive.item)[0].category === cardConst.PANICCATEGORY) {
+            forestMushroom(game, pInactive, 'afterTurn');
+        }
+    }
     // we run bowArrow function to check if opponent has bow & arrow card in item
     // and to supress attack points if any
     bowArrow(pActive, pInactive);
@@ -212,7 +208,9 @@ function magicTree(game) {
     const pActive = getActivePlayer(game);
     const pInactive = getInActivePlayer(game);
     const itemKey = Object.keys(pInactive.item)[0];
-    itemKey ? (itemId = pInactive.item[itemKey].id) : null;
+    if (itemKey) {
+        (itemId = pInactive.item[itemKey].id);
+    }
     if (pActive.moveCounter === 1 && itemId === cardConst.MAGICTREECARD) {
         giveCardsTo(pActive);
         changeTurn(game);
@@ -238,9 +236,11 @@ function playerActs(game, cardId, target) {
         return game;
     }
 
-    pActive.turningHand !== true
-        ? (activeCard = pActive.hand[cardId])
-        : (activeCard = pInactive.hand[cardId]);
+    if (pActive.turningHand !== true) {
+        (activeCard = pActive.hand[cardId]);
+    } else {
+        (activeCard = pInactive.hand[cardId]);
+    }
     // If the key for the second card is graveyard
     // We send the card that has active key to graveyard
     // after player's act we change lastAction property of the game
@@ -295,9 +295,11 @@ function playerActs(game, cardId, target) {
                 cardConst.ITEMCARD,
             );
         }
-        pActive.turningHand === true
-            ? moveCardGraveyard(pInactive, cardId)
-            : moveCardGraveyard(pActive, cardId);
+        if (pActive.turningHand === true) {
+            moveCardGraveyard(pInactive, cardId);
+        } else {
+            moveCardGraveyard(pActive, cardId);
+        }
     }
     // after each act we delete turningHand property for both players
     // if active player acted after turning potion card
@@ -315,11 +317,12 @@ function playerActs(game, cardId, target) {
     pActive = changeMoveCounter(pActive, cardId, pInactive);
 
     // after each move of active player we check for forestMushroom in opponent's item
-    Object.keys(pInactive.item).length !== 0
-  && Object.values(pInactive.item)[0].category === cardConst.PANICCATEGORY
-  && pActive.moveCounter === 1
-        ? forestMushroom(game, pActive)
-        : null;
+    if (Object.keys(pInactive.item).length !== 0
+        && Object.values(pInactive.item)[0].category === cardConst.PANICCATEGORY
+        && pActive.moveCounter === 1) {
+        forestMushroom(game, pActive);
+    }
+
     // after each move of active player we check whether opponent has magicTree card in item
     magicTree(game);
     // after each move of active player we run function malachiteBox if applicable
