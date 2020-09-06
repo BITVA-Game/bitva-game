@@ -39,6 +39,7 @@ const phase = {
     SELECTION: 'SELECTION',
     ACTIVE: 'ACTIVE',
     OVER: 'OVER',
+    PLAY: 'PLAY',
 };
 
 const card = {

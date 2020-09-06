@@ -13,7 +13,6 @@ const VersusStatus = ({ name, hero }) => (
 );
 
 const PlayScreen = ({ app, sendMessage }) => {
-    console.log('PlayScreen', app);
     const player = getAccountForPart(app, app.participants.player);
     return (
         <div className="main-container">
@@ -28,7 +27,7 @@ const PlayScreen = ({ app, sendMessage }) => {
                 </div>
             </div>
             <div className="main-footer">
-                <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: 'JOIN' })}>
+                <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: 'PLAY' })}>
                 Play
                 </button>
             </div>

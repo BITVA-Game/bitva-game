@@ -13,7 +13,7 @@ function handle(app, msg) {
     case message.OPPONENT:
         return screen.VS;
     case message.PLAY:
-        return screen.PLAY;
+        return screen.VERSUS;
     case message.NETWORKSCREEN:
         return screen.NETWORKSCREEN;
     default:
