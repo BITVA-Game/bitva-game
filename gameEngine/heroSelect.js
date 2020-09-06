@@ -1,9 +1,7 @@
-
 const { screen } = require('../constants');
 
 const heroes = require('../gameTerminal/data/characters.json');
 const cards = require('../gameTerminal/data/cards.json');
-
 
 function allHeroesWithCards() {
     for (const hero in heroes) {
@@ -18,11 +16,12 @@ function allHeroesWithCards() {
 }
 
 function opponent(app, activeAccount) {
-    const opp = app.players.find((p) => p.id !== activeAccount);
-    const scr = opp ? screen.VS : null;
+    const opp = app.terminals.map((t) => t.account).find((a) => a.id !== activeAccount);
+    const oppplayer = app.players.find((p) => p.id !== activeAccount);
+    const scr = oppplayer ? screen.VS : null;
     const connected = app.terminals.length === 2;
     return {
-        connected, screen: scr, phase: app.phase,
+        connected, screen: scr, phase: app.phase, opp,
     };
 }
 
@@ -31,17 +30,17 @@ function pairing(app, activeAccount) {
         screen: screen.VS,
         opponent: opponent(app, activeAccount),
         phase: app.phase,
+        players: app.players,
     };
 }
 
-
 function heroNotSelected(app, activeAccount) {
     const allHeroes = allHeroesWithCards();
-    const account = Object.values(app.terminals).find((t) => t.id === activeAccount);
+    const terminal = Object.values(app.terminals).find((t) => t.id === activeAccount);
     let heroSelect = {};
-    if (account) {
+    if (terminal) {
         heroSelect = {
-            heroes: account.data.heroes,
+            heroes: terminal.account.heroes,
             allHeroes,
         };
     }
@@ -50,6 +49,7 @@ function heroNotSelected(app, activeAccount) {
         heroSelect,
         opponent: opponent(app, activeAccount),
         phase: app.phase,
+        players: app.players,
     };
 }
 
@@ -58,6 +58,7 @@ function unknownAccount(app) {
         screen: null,
         opponent: { connected: false },
         phase: app.phase,
+        players: app.players,
     };
 }
 

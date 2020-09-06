@@ -5,7 +5,7 @@ function addTerminal(existingAccs, newAccId, newAccData) {
     if (existingAccs.find((a) => a.id === newAccId)) {
         return existingAccs;
     }
-    return existingAccs.concat({ id: newAccId, data: newAccData });
+    return existingAccs.concat({ id: newAccId, account: newAccData });
 }
 
 function handle(state, msg, account) {

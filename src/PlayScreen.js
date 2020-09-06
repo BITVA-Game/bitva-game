@@ -5,38 +5,45 @@ import './css/VersusScreen.css';
 
 import { getAccountForPart } from './rules';
 
-const VersusStatus = ({ player }) => {
-    console.log('VersusStatus', player);
-    return (
-        <div className="versus-profile">
-            <div className="versus-profile-player">{player || null}</div>
-            <div className="versus-profile-name">Some</div>
-        </div>
-    );
-};
-const PlayScreen = ({ app, sendMessage }) => (
-    <div className="main-container">
-        <div className="main-content">
-            <div className="versus-profiles-container">
-                <VersusStatus player={app.participants.player} />
-                <div className="vs">VS</div>
-                <VersusStatus player={app.opponent.data ? app.opponent.data.id : null} />
-            </div>
-        </div>
-        <div className="main-footer">
-            <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: 'JOIN' })}>
-                Play
-            </button>
-        </div>
+const VersusStatus = ({ name, hero }) => (
+    <div className="versus-profile">
+        <div className="versus-profile-player">{name || null}</div>
+        <div className="versus-profile-name">{hero || null}</div>
     </div>
 );
 
+const PlayScreen = ({ app, sendMessage }) => {
+    console.log('PlayScreen', app);
+    const player = getAccountForPart(app, app.participants.player);
+    return (
+        <div className="main-container">
+            <div className="main-content">
+                <div className="versus-profiles-container">
+                    <VersusStatus name={player.name} hero={app.players.find((p) => p.id === app.participants.player).hero} />
+                    <div className="vs">VS</div>
+                    <VersusStatus
+                        name={app.opponent.opp ? app.opponent.opp.name : null}
+                        hero={app.opponent.data ? app.opponent.data.hero : null}
+                    />
+                </div>
+            </div>
+            <div className="main-footer">
+                <button className="btn btn-play" type="button" onClick={() => sendMessage({ type: 'JOIN' })}>
+                Play
+                </button>
+            </div>
+        </div>
+    );
+};
+
 VersusStatus.propTypes = {
-    player: PropTypes.string,
+    name: PropTypes.string,
+    hero: PropTypes.string,
 };
 
 VersusStatus.defaultProps = {
-    player: null,
+    name: null,
+    hero: null,
 };
 
 PlayScreen.propTypes = {
