@@ -1,190 +1,53 @@
-/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
-const keygen = require('keygenerator');
 const {
     phase,
     message,
     card: cardConst,
     target: targetConst,
-    styles,
     action,
 } = require('../src/constants');
 
-const { getRandomUpTo } = require('../gameTerminal/randomFunc');
-
-const allCharacters = require('../gameTerminal/data/characters.json');
-const allCards = require('../gameTerminal/data/cards.json');
+const {
+    getItemId, getActivePlayer, healPlayer,
+    getInActivePlayer, setDisabledPropertyToDefault, generatePlayer, selectActive,
+    assignPlayersPositions, giveCardsTo, giveCardsToAll, lastActionChange,
+} = require('./helpers');
 
 const {
     bowArrow,
     malachiteBox,
-    removeDisable,
+    turningPotion,
+    clairvoyance,
+    russianOven,
+    skullLantern,
 } = require('./specials');
 
 const {
-    getActivePlayer,
-    getInActivePlayer,
-    graveyardCheck,
     changeTurn,
-    lastActionChange,
-    pActiveIsTarget,
-    pInactiveIsTarget,
     moveItem,
-    moveCardGraveyard,
     changeMoveCounter,
     forestMushroom,
+    attackOpponent,
 } = require('./actions');
 
-// HEROSELECTED
+const { graveyardCheck, moveCardGraveyard } = require('./graveyard');
 
-function createDeck(heroName) {
-    const cards = allCharacters[heroName].cards;
-    const deck = {};
-    let key = 0;
-    for (const cardType in cards) {
-    // take count, create a new card for this type
-        for (let i = 0; i < cards[cardType].count; i += 1) {
-            const keyId = `key${key}`;
-            deck[keyId] = { ...allCards[cardType] };
-            key += 1;
-        }
+function turningPotionEffect(pInactive, pActive, cardId) {
+    if (pActive.turningHand === true) {
+        moveCardGraveyard(pInactive, cardId);
+    } else {
+        moveCardGraveyard(pActive, cardId);
     }
-
-    return deck;
 }
-
-function assignCards(deck, cardsNumber) {
-    const d = Object.keys(deck)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, cardsNumber);
-    const cards = {};
-    d.forEach((key) => {
-        cards[key] = deck[key];
-        if (cards[key].type === cardConst.ITEMCARD) {
-            cards[key].healthCurrent = cards[key].health;
-        }
-        if (cards[key].initialpoints !== undefined) {
-            cards[key].points = cards[key].initialpoints;
-        }
-        cards[key].disabled = false;
-    });
-    return cards;
-}
-
-function generatePlayer(heroName, id) {
-    const player = {};
-    player.id = id;
-    player.hand = {};
-    player.item = {};
-    player.grave = {};
-    player.turningHand = false;
-    player.moveCounter = 0;
-    player.health = {};
-    player.deal = 0;
-    player.background = allCharacters[heroName].background;
-    player.hero = heroName;
-    player.deck = createDeck(heroName);
-    player.cards = assignCards(player.deck, allCharacters[heroName].cardsNumber);
-    player.health.current = allCharacters[heroName].health;
-    player.health.maximum = allCharacters[heroName].health;
-
-    const keyHero = Object.create(null);
-    player.keyHero = keygen.number();
-    keyHero[player.keyHero] = player;
-    return player;
-}
-
-function getRandomBool() {
-    const rand = getRandomUpTo(2, 'firstPlayerActive');
-    return rand === 0;
-}
-
-function selectActive(players) {
-    if (players.length < 2) {
-        return null;
-    }
-    const rand = getRandomBool();
-    if (rand) {
-        return players[0].id;
-    }
-    return players[1].id;
-}
-
-function assignPlayersPositions(players) {
-    if (players.length < 2) {
-        return players;
-    }
-
-    players[0].position = styles.BOTTOM;
-    players[1].position = styles.TOP;
-    return players;
-}
-
-// DEALALL
-
-function playerHasCards(pActive) {
-    // eslint-disable-next-line max-len
-    // console.log('playerHasCards', Object.keys(pActive.cards).length, Object.keys(pActive.hand).length);
-    if (Object.keys(pActive.cards).length + Object.keys(pActive.hand).length >= 5) {
-        return true;
-    }
-    return false;
-}
-
-function dealFromGraveyard(graveyard) {
-    // Shffle cards we had in graveryard;
-    return assignCards(graveyard, Object.keys(graveyard).length);
-}
-
-function giveCardsTo(player) {
-    // console.log(`PLAYER ${player.hero} HAS IN DECK `, Object.keys(player.cards).length);
-    // console.log(`PLAYER ${player.hero} HAS IN GRAVEYARD `, Object.keys(player.grave).length);
-    // console.log(`PLAYER ${player.hero} HAS IN HAND `, Object.keys(player.hand).length);
-    if (!playerHasCards(player)) {
-    // console.log('NO CARDS');
-    // Player doesn't have cards to acts
-    // Move cards from graveyard. Set deal to 1;
-        player.deal += 1;
-        player.cards = dealFromGraveyard(player.grave);
-        player.grave = {};
-    }
-    while (Object.keys(player.hand).length < 5) {
-        if (Object.keys(player.cards).length > 0) {
-            // const key = randomKey(player.cards);
-            const key = Object.keys(player.cards)[0];
-            player.hand[key] = player.cards[key];
-            delete player.cards[key];
-        } else {
-            break;
-        }
-    }
-
-    return player;
-}
-
-function giveCardsToAll(players) {
-    players.forEach((p) => {
-        giveCardsTo(p);
-        removeDisable(p);
-    });
-    return players;
-}
-
-// OTHER
 
 function playerMoveEnd(pActive, pInactive, game) {
-    // console.log(game);
     // we call function to return disabled cards property to false if any have true
-    removeDisable(pActive);
-    // we check then if any cardsShown property in opponent cards
-    // and remove by calling deleteCardsShown function
-    // setTimeout(() => deleteCardsShown(pActive), 4000);
+    setDisabledPropertyToDefault(pActive);
     // we call function to give cards to players up to 5
     if (pActive.health.current > 0) {
         giveCardsTo(pActive);
     }
 
-    // run changeTurn function
     changeTurn(game);
 
     //  after change of turn,  we check
@@ -200,22 +63,94 @@ function playerMoveEnd(pActive, pInactive, game) {
     bowArrow(pActive, pInactive);
 }
 
-// function checks whether opponent item is not empty
-// and whether opponent has magicTree card in item
+// checks if opponent item is not empty and if opponent has magicTree card in item
 // if so - function change turn runs after moveCounter === 1, active layer becomes inactive etc.
 function magicTree(game) {
-    let itemId;
     const pActive = getActivePlayer(game);
     const pInactive = getInActivePlayer(game);
-    const itemKey = Object.keys(pInactive.item)[0];
-    if (itemKey) {
-        (itemId = pInactive.item[itemKey].id);
-    }
+    const itemId = getItemId(pInactive.item);
     if (pActive.moveCounter === 1 && itemId === cardConst.MAGICTREECARD) {
         giveCardsTo(pActive);
         changeTurn(game);
     }
 }
+
+// eslint-disable-next-line consistent-return
+function pActiveIsTarget(game, activeCard, cardId) {
+    const pActive = getActivePlayer(game);
+    const pInactive = getInActivePlayer(game);
+    switch (activeCard.category) {
+    case cardConst.HEALCATEGORY:
+        healPlayer(pActive, activeCard.points);
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.HEAL);
+        if (pActive.turningHand === true) {
+            moveCardGraveyard(pInactive, cardId);
+        } else {
+            moveCardGraveyard(pActive, cardId);
+        }
+        break;
+    case cardConst.ATTACKCATEGORY:
+        break;
+    // if any mistake occurs during game process, player gets error message by default
+    default:
+        return new Error('You are under spell. Wait for redemption!');
+    }
+}
+
+// eslint-disable-next-line consistent-return
+function pInactiveIsTarget(game, activeCard, cardId) {
+    const pActive = getActivePlayer(game);
+    const pInactive = getInActivePlayer(game);
+    switch (activeCard.category) {
+    case cardConst.HEALCATEGORY:
+        break;
+    case cardConst.ATTACKCATEGORY:
+        attackOpponent(pInactive, pActive, activeCard.points);
+        turningPotionEffect(pInactive, pActive, cardId);
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.ATACKOPPONENT);
+        break;
+    // if player attacks with card category holdCard we call disableCards function
+    // then move this attack card to gravyeard
+    case cardConst.HOLDCARDCATEGORY:
+        russianOven(pInactive);
+        turningPotionEffect(pInactive, pActive, cardId);
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.CHAINS);
+        break;
+    // if player attacks with card category == attackItems, we call attack items function
+    // then move this attack card to gravyeard
+    case cardConst.ATTACKITEMSCATEGORY:
+        skullLantern(game.players);
+        turningPotionEffect(pInactive, pActive, cardId);
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.ATTACKITEMS);
+        break;
+    // if player attackes with clairvoyance card, we call showCards function
+    // then move this attack card to gravyeard
+    case cardConst.SHOWCARDSCATEGORY:
+        clairvoyance(pInactive);
+        turningPotionEffect(pInactive, pActive, cardId);
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.CLAIRVOYANCE);
+        break;
+    // if player attackes with turningPotion card, we call turningHand function
+    // then move this attack card to gravyeard
+    case cardConst.TURNINGCATEGORY:
+        turningPotion(pActive, pInactive);
+        moveCardGraveyard(pActive, cardId);
+        // after player's act we change lastAction property of the game
+        lastActionChange(game, action.TURNINGPOTION);
+        break;
+
+    // if any mistake occurs during game process, player gets error message by default
+    default:
+        return new Error('You are under spell. Wait for redemption!');
+    }
+}
+
+// GAME
 
 // basic function for the game that represents each act of active player
 function playerActs(game, cardId, target) {
@@ -225,7 +160,6 @@ function playerActs(game, cardId, target) {
     // at the beggining of each player action
     // we run bowArrow function to check if opponent has bow & arrow card in item
     // and to supress attack points if any
-    console.log(typeof bowArrow);
     // TODO Move this out
     bowArrow(pActive, pInactive);
     let activeCard;
