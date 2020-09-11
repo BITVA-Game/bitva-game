@@ -8,149 +8,28 @@ const {
 } = require('../src/constants');
 
 const {
-    getItemId, getActivePlayer, healPlayer,
-    getInActivePlayer, setDisabledPropertyToDefault, generatePlayer, selectActive,
-    assignPlayersPositions, giveCardsTo, giveCardsToAll, lastActionChange,
-} = require('./helpers');
-
-const {
-    bowArrow,
-    malachiteBox,
-    turningPotion,
-    clairvoyance,
-    russianOven,
-    skullLantern,
-} = require('./specials');
-
-const {
-    changeTurn,
-    moveItem,
     changeMoveCounter,
+    moveItem,
     forestMushroom,
-    attackOpponent,
+    magicTree,
+    playerMoveEnd,
+    pActiveIsTarget,
+    pInactiveIsTarget,
 } = require('./actions');
+
+const { bowArrow, malachiteBox } = require('./specials');
 
 const { graveyardCheck, moveCardGraveyard } = require('./graveyard');
 
-function turningPotionEffect(pInactive, pActive, cardId) {
-    if (pActive.turningHand === true) {
-        moveCardGraveyard(pInactive, cardId);
-    } else {
-        moveCardGraveyard(pActive, cardId);
-    }
-}
-
-function playerMoveEnd(pActive, pInactive, game) {
-    // we call function to return disabled cards property to false if any have true
-    setDisabledPropertyToDefault(pActive);
-    // we call function to give cards to players up to 5
-    if (pActive.health.current > 0) {
-        giveCardsTo(pActive);
-    }
-
-    changeTurn(game);
-
-    //  after change of turn,  we check
-    // whether inactive player has in item holder card forest Mushroom with category panic,
-    // then we call function forestMushroom
-    if (Object.keys(pActive.item).length !== 0) {
-        if (Object.values(pActive.item)[0].category === cardConst.PANICCATEGORY) {
-            forestMushroom(game, pInactive, 'afterTurn');
-        }
-    }
-    // we run bowArrow function to check if opponent has bow & arrow card in item
-    // and to supress attack points if any
-    bowArrow(pActive, pInactive);
-}
-
-// checks if opponent item is not empty and if opponent has magicTree card in item
-// if so - function change turn runs after moveCounter === 1, active layer becomes inactive etc.
-function magicTree(game) {
-    const pActive = getActivePlayer(game);
-    const pInactive = getInActivePlayer(game);
-    const itemId = getItemId(pInactive.item);
-    if (pActive.moveCounter === 1 && itemId === cardConst.MAGICTREECARD) {
-        giveCardsTo(pActive);
-        changeTurn(game);
-    }
-}
-
-// eslint-disable-next-line consistent-return
-function pActiveIsTarget(game, activeCard, cardId) {
-    const pActive = getActivePlayer(game);
-    const pInactive = getInActivePlayer(game);
-    switch (activeCard.category) {
-    case cardConst.HEALCATEGORY:
-        healPlayer(pActive, activeCard.points);
-        // after player's act we change lastAction property of the game
-        lastActionChange(game, action.HEAL);
-        if (pActive.turningHand === true) {
-            moveCardGraveyard(pInactive, cardId);
-        } else {
-            moveCardGraveyard(pActive, cardId);
-        }
-        break;
-    case cardConst.ATTACKCATEGORY:
-        break;
-    // if any mistake occurs during game process, player gets error message by default
-    default:
-        return new Error('You are under spell. Wait for redemption!');
-    }
-}
-
-// eslint-disable-next-line consistent-return
-function pInactiveIsTarget(game, activeCard, cardId) {
-    const pActive = getActivePlayer(game);
-    const pInactive = getInActivePlayer(game);
-    switch (activeCard.category) {
-    case cardConst.HEALCATEGORY:
-        break;
-    case cardConst.ATTACKCATEGORY:
-        attackOpponent(pInactive, pActive, activeCard.points);
-        turningPotionEffect(pInactive, pActive, cardId);
-        // after player's act we change lastAction property of the game
-        lastActionChange(game, action.ATACKOPPONENT);
-        break;
-    // if player attacks with card category holdCard we call disableCards function
-    // then move this attack card to gravyeard
-    case cardConst.HOLDCARDCATEGORY:
-        russianOven(pInactive);
-        turningPotionEffect(pInactive, pActive, cardId);
-        // after player's act we change lastAction property of the game
-        lastActionChange(game, action.CHAINS);
-        break;
-    // if player attacks with card category == attackItems, we call attack items function
-    // then move this attack card to gravyeard
-    case cardConst.ATTACKITEMSCATEGORY:
-        skullLantern(game.players);
-        turningPotionEffect(pInactive, pActive, cardId);
-        // after player's act we change lastAction property of the game
-        lastActionChange(game, action.ATTACKITEMS);
-        break;
-    // if player attackes with clairvoyance card, we call showCards function
-    // then move this attack card to gravyeard
-    case cardConst.SHOWCARDSCATEGORY:
-        clairvoyance(pInactive);
-        turningPotionEffect(pInactive, pActive, cardId);
-        // after player's act we change lastAction property of the game
-        lastActionChange(game, action.CLAIRVOYANCE);
-        break;
-    // if player attackes with turningPotion card, we call turningHand function
-    // then move this attack card to gravyeard
-    case cardConst.TURNINGCATEGORY:
-        turningPotion(pActive, pInactive);
-        moveCardGraveyard(pActive, cardId);
-        // after player's act we change lastAction property of the game
-        lastActionChange(game, action.TURNINGPOTION);
-        break;
-
-    // if any mistake occurs during game process, player gets error message by default
-    default:
-        return new Error('You are under spell. Wait for redemption!');
-    }
-}
-
-// GAME
+const {
+    getActivePlayer,
+    getInActivePlayer,
+    generatePlayer,
+    selectActive,
+    assignPlayersPositions,
+    giveCardsToAll,
+    lastActionChange,
+} = require('./helpers');
 
 // basic function for the game that represents each act of active player
 function playerActs(game, cardId, target) {

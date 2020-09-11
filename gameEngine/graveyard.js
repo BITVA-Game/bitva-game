@@ -1,11 +1,7 @@
 /* eslint-disable no-param-reassign */
 const { card: cardConst } = require('../src/constants');
 
-const {
-    getActivePlayer,
-    getInActivePlayer,
-    removePanic,
-} = require('./helpers');
+const { getActivePlayer, getInActivePlayer, removePanic } = require('./helpers');
 
 // This function takes the player and the key for his card
 // and destination = from, then moves card to graveyard via deleting the key from array

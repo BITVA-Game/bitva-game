@@ -1,7 +1,4 @@
-/* eslint-disable default-case */
 /* eslint-disable no-param-reassign */
-/* eslint-disable no-plusplus */
-/* eslint-disable no-unused-expressions */
 const {
     card: cardConst,
     target: targetConst,
@@ -29,12 +26,14 @@ function bowArrow(player, opponent) {
             const cards = Object.values(player.hand);
             const cardsKeys = Object.keys(player.hand);
             const cardsNew = [];
+            // eslint-disable-next-line no-plusplus
             for (let i = 0; i < cardsKeys.length; i++) {
                 if (cards[i].points > 1 && cards[i].type === cardConst.ACTIONCARD) {
                     cardsNew.push(cardsKeys[i]);
                 }
             }
             const indexes = getRandomIndexes(cardsNew.length);
+            // eslint-disable-next-line no-plusplus
             for (let i = 0; i < cardsKeys.length; i++) {
                 if (cardsKeys[i] === cardsNew[indexes[0]]
                     || cardsKeys[i] === cardsNew[indexes[1]]
@@ -80,7 +79,11 @@ function malachiteBox(player, opponent, target) {
 function turningPotion(player, opponent) {
     player.turningHand = true;
     opponent.turningHand = true;
-    player.moveCounter === 0 ? (player.moveCounter = 0) : (player.moveCounter = 1);
+    if (player.moveCounter === 0) {
+        player.moveCounter = 0;
+    } else {
+        player.moveCounter = 1;
+    }
 }
 
 // function to show 3 cards from opponent cards when active player attacks with claivoyance card
