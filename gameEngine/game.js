@@ -162,13 +162,13 @@ function dealFromGraveyard(graveyard) {
 }
 
 function giveCardsTo(player) {
-    // console.log(`PLAYER ${player.hero} HAS IN DECK `, Object.keys(player.cards).length);
-    // console.log(`PLAYER ${player.hero} HAS IN GRAVEYARD `, Object.keys(player.grave).length);
-    // console.log(`PLAYER ${player.hero} HAS IN HAND `, Object.keys(player.hand).length);
+    console.log(`PLAYER ${player.hero} HAS IN DECK `, Object.keys(player.cards).length);
+    console.log(`PLAYER ${player.hero} HAS IN GRAVEYARD `, Object.keys(player.grave).length);
+    console.log(`PLAYER ${player.hero} HAS IN HAND `, Object.keys(player.hand).length);
     if (!playerHasCards(player)) {
-    // console.log('NO CARDS');
-    // Player doesn't have cards to acts
-    // Move cards from graveyard. Set deal to 1;
+        console.log('NO CARDS');
+        // Player doesn't have cards to acts
+        // Move cards from graveyard. Set deal to 1;
         player.deal += 1;
         player.cards = dealFromGraveyard(player.grave);
         player.grave = {};
@@ -188,6 +188,7 @@ function giveCardsTo(player) {
 }
 
 function giveCardsToAll(players) {
+    console.log('giveCardsToAll');
     players.forEach((p) => {
         giveCardsTo(p);
         removeDisable(p);

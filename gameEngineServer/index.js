@@ -11,7 +11,7 @@ const server = (engine) => {
     });
 
     app.post('/', (req, res) => {
-        console.log(new Date(), req.body);
+        // console.log(new Date(), req.body);
         engine.handle(req.body.message, req.body.activeAccount);
         res.send(engine.getState());
     });

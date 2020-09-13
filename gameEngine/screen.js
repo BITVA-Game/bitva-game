@@ -1,6 +1,5 @@
 const { screen, phase } = require('../constants');
 
-
 // eslint-disable-next-line no-unused-vars
 function overScreen(state, activeAcc) {
     return screen.OVER;
