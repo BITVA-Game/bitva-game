@@ -5,7 +5,7 @@ const { getRandomUpTo } = require('../gameTerminal/randomFunc');
 const allCharacters = require('../gameTerminal/data/characters.json');
 const allCards = require('../gameTerminal/data/cards.json');
 
-const { card: cardConst, styles } = require('../src/constants');
+const { card: cardConst } = require('../src/constants');
 
 function getRandomBool() {
     const rand = getRandomUpTo(2, 'firstPlayerActive');
@@ -131,24 +131,25 @@ function assignCards(deck, cardsNumber) {
 }
 
 function generatePlayer(heroName, id) {
-    const player = {};
+    const keyHero = Object.create(null);
+    const initialPlayer = {
+        hand: {},
+        item: {},
+        grave: {},
+        turningHand: false,
+        moveCounter: 0,
+        health: {},
+        deal: 0,
+        keyHero: keygen.number(),
+    };
+    const player = { ...initialPlayer };
     player.id = id;
-    player.hand = {};
-    player.item = {};
-    player.grave = {};
-    player.turningHand = false;
-    player.moveCounter = 0;
-    player.health = {};
-    player.deal = 0;
     player.background = allCharacters[heroName].background;
+    player.health.current = allCharacters[heroName].health;
+    player.health.maximum = allCharacters[heroName].health;
     player.hero = heroName;
     player.deck = createDeck(heroName);
     player.cards = assignCards(player.deck, allCharacters[heroName].cardsNumber);
-    player.health.current = allCharacters[heroName].health;
-    player.health.maximum = allCharacters[heroName].health;
-
-    const keyHero = Object.create(null);
-    player.keyHero = keygen.number();
     keyHero[player.keyHero] = player;
     return player;
 }
@@ -162,16 +163,6 @@ function selectActive(players) {
         return players[0].id;
     }
     return players[1].id;
-}
-
-function assignPlayersPositions(players) {
-    if (players.length < 2) {
-        return players;
-    }
-
-    players[0].position = styles.BOTTOM;
-    players[1].position = styles.TOP;
-    return players;
 }
 
 function playerHasCards(pActive) {
@@ -251,7 +242,6 @@ module.exports = {
     removePanic,
     generatePlayer,
     selectActive,
-    assignPlayersPositions,
     giveCardsTo,
     giveCardsToAll,
     lastActionChange,

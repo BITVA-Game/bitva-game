@@ -18,7 +18,6 @@ import bat from '../images/cards/batCard.png';
 
 const { animation: animationConst } = require('../constants');
 
-
 const AnimatedHand = ({ inactivePlayer, hand }) => (
     <div className="hand card-hand">
         {Object.keys(hand).map((cardId) => (
@@ -105,10 +104,9 @@ class Player extends Component {
         setTimeout(() => this.setState({ animation: null }), 2000);
     }
 
-
     render() {
         const playerClass = this.props.active ? 'player-active' : 'player-inactive';
-        const playerPosition = this.props.player.position === 'bottom'
+        const playerPosition = this.props.active
             ? 'player player-bottom'
             : 'player player-top';
         return (
@@ -198,6 +196,5 @@ AnimatedHand.propTypes = {
 Clairvoyance.propTypes = {
     player: PropTypes.object.isRequired,
 };
-
 
 export default Player;

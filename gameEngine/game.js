@@ -26,7 +26,6 @@ const {
     getInActivePlayer,
     generatePlayer,
     selectActive,
-    assignPlayersPositions,
     giveCardsToAll,
     lastActionChange,
 } = require('./helpers');
@@ -162,11 +161,11 @@ function handle(app, msg) {
     const game = { ...app.game };
     switch (msg.type) {
     case message.HEROSELECTED: {
-        const playersInitital = game.players.concat(
+        const players = game.players.concat(
             generatePlayer(msg.hero, msg.player),
         );
-        const active = selectActive(playersInitital);
-        const players = assignPlayersPositions(playersInitital);
+        const active = selectActive(players.filter((p) => p.id));
+        // position was moved to frontend
         return Object.assign(game, { active, players });
     }
     case message.DEALALL: {
