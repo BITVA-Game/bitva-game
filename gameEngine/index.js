@@ -26,7 +26,7 @@ class GameEngine {
 
     handle(msg, account) {
         // HACK until we init engine in prev game state
-        console.log('ENGINE handle message', msg, account);
+        // console.log('ENGINE handle message', msg, account);
         if (msg.type === message.PLAY) {
             this.state.participants = msg.participants;
         }
@@ -44,7 +44,7 @@ class GameEngine {
             newState.phase = phase.ACTIVE;
         }
         this.state = newState;
-        console.log('GAME ENGING STATE', this.state);
+        // console.log('GAME ENGINE STATE', this.state);
     }
 
     getState(account) {

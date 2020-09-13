@@ -28,7 +28,7 @@ const activeAccountManager = require('./activeAccountManager');
 // }
 
 const reProcess = (source) => (m) => {
-    console.log(`${source} SCHEDULING MESSAGE BACKEND TO BACKEND`, m);
+    // console.log(`${source} SCHEDULING MESSAGE BACKEND TO BACKEND`, m);
     messages.push(m);
 };
 
@@ -95,7 +95,7 @@ async function initApplication(msg) {
 // It also sends the reply back. The reply is mocked by tests
 // so we can se what we're sending back.
 async function msgReceived(msg) {
-    console.log('MSG FROM FRONTEND', msg);
+    // console.log('MSG FROM FRONTEND', msg);
     messages.push(msg);
 }
 
@@ -112,7 +112,7 @@ function startMsgQueue(sendReply) {
             setTimeout(worker, 100);
             return;
         }
-        console.log('SCHEDULED MESSAGE BACKEND PROCESSING', m);
+        // console.log('SCHEDULED MESSAGE BACKEND PROCESSING', m);
         const newApp = m.type === message.INIT
             ? await initApplication(m)
             : await processMessage(m, application);

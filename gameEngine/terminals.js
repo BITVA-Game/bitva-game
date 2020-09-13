@@ -1,7 +1,6 @@
 const { message } = require('../constants');
 
 function addTerminal(existingAccs, newAccId, newAccData) {
-    console.log('addTerminal', existingAccs, newAccId, newAccData);
     if (existingAccs.find((a) => a.id === newAccId)) {
         return existingAccs;
     }

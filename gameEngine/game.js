@@ -187,6 +187,7 @@ function giveCardsTo(player) {
 }
 
 function giveCardsToAll(players) {
+    console.log('giveCardsToAll', players);
     players.forEach((p) => {
         giveCardsTo(p);
         removeDisable(p);
@@ -855,7 +856,12 @@ function handle(app, msg) {
 
     //     return Object.assign(game, { active, players, phase: gamePhase });
     // }
+    case message.PLAY: {
+        console.log('game.play', app);
+        return Object.assign(game, { players: app.players });
+    }
     case message.DEALALL: {
+        console.log('game.dealal', game.players);
         return Object.assign(game, { players: giveCardsToAll(game.players) });
     }
     // All actions have the same action name as they all call the same function

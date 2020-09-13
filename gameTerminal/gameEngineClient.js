@@ -14,13 +14,13 @@ class GameEngineRemote {
     }
 
     async handle(message, activeAccount) {
-        console.log('MSG TO ENGINE', message);
+        // console.log('MSG TO ENGINE', message);
         await request.post(this.address).send({ message, activeAccount });
     }
 
     async getState(activeAccount) {
         const result = await request.get(`${this.address}/?activeAccount=${activeAccount}`);
-        console.log('RESPONSE ENGINE STATE', result.body);
+        // console.log('RESPONSE ENGINE STATE', result.body);
         return result.body;
     }
 }
@@ -31,14 +31,14 @@ class GameEngineLocalOffline {
     }
 
     async handle(message, activeAccount) {
-        console.log('MSG TO ENGINE', message);
+        // console.log('MSG TO ENGINE', message);
         this.gameEngine.handle(message, activeAccount);
         return Promise.resolve();
     }
 
     async getState(activeAccount) {
         const engine = this.gameEngine.getState(activeAccount);
-        console.log('RESPONSE ENGINE STATE', engine);
+        // console.log('RESPONSE ENGINE STATE', engine);
         return Promise.resolve(engine);
     }
 }
@@ -51,14 +51,14 @@ class GameEngineLocalNetwork {
     }
 
     async handle(message, activeAccount) {
-        console.log('MSG TO ENGINE', message);
+        // console.log('MSG TO ENGINE', message);
         this.gameEngine.handle(message, activeAccount);
         return Promise.resolve();
     }
 
     async getState(activeAccount) {
         const engine = this.gameEngine.getState(activeAccount);
-        console.log('RESPONSE ENGINE STATE', engine);
+        // console.log('RESPONSE ENGINE STATE', engine);
         return Promise.resolve(engine);
     }
 }
