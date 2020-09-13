@@ -35,6 +35,10 @@ class VersusScreen extends Component {
         this.waitForIt = this.waitForIt.bind(this);
     }
 
+    componentDidMount() {
+        this.waitForIt();
+    }
+
     sendDealAllMessage() {
         console.log('send dealall');
         this.props.sendMessage({ type: 'DEALALL' });
@@ -59,7 +63,7 @@ class VersusScreen extends Component {
                         <OneHero hero={this.props.app.players[1].hero} />
                     </div>
                     <div className="versus-loading-container">
-                        <div className="versus-loading" onLoad={this.waitForIt.call(this)}>
+                        <div className="versus-loading">
                             <div className="loading" />
                         </div>
                     </div>

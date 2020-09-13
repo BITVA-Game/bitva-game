@@ -21,7 +21,7 @@ class GameScreen extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const actionType = this.props.app.game.lastAction.type;
+        const actionType = this.props.app.game.lastAction && this.props.app.game.lastAction.type;
         if (this.state.sound === '' && getActivePlayer(this.props.app).moveCounter !== getActivePlayer(prevProps.app).moveCounter) {
             this.startSound(actionType);
         } if (this.state.sound !== '') {
@@ -77,7 +77,6 @@ class GameScreen extends Component {
         );
     }
 }
-
 
 const GameOver = (props) => {
     const activePlayer = getActivePlayer(props.app);

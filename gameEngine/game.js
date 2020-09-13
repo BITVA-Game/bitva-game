@@ -121,6 +121,7 @@ const assignPlayersPositions = function (players) {
 };
 
 const generatePlayer = function (heroName, id) {
+    console.log('generatePlayer', heroName, id);
     const player = {};
     player.id = id;
     player.hand = {};
@@ -187,7 +188,6 @@ function giveCardsTo(player) {
 }
 
 function giveCardsToAll(players) {
-    console.log('giveCardsToAll', players);
     players.forEach((p) => {
         giveCardsTo(p);
         removeDisable(p);
@@ -846,22 +846,17 @@ function makeMove(game, msg) {
 function handle(app, msg) {
     const game = { ...app.game };
     switch (msg.type) {
-    // case message.HEROSELECTED: {
-    //     const playersInitital = game.players.concat(
-    //         generatePlayer(msg.hero, msg.player),
-    //     );
-    //     const active = selectActive(playersInitital);
-    //     const players = assignPlayersPositions(playersInitital);
-    //     const gamePhase = players.length === 2 ? phase.ACTIVE : phase.SELECTION;
-
-    //     return Object.assign(game, { active, players, phase: gamePhase });
-    // }
     case message.PLAY: {
-        console.log('game.play', app);
-        return Object.assign(game, { players: app.players });
+        game.players = [];
+        const playersInitital = [
+            generatePlayer(app.players[0].hero, app.players[0].id), generatePlayer(app.players[1].hero, app.players[1].id)];
+        const active = selectActive(playersInitital);
+        const players = assignPlayersPositions(playersInitital);
+        const gamePhase = players.length === 2 ? phase.ACTIVE : phase.SELECTION;
+
+        return Object.assign(game, { active, players, phase: gamePhase });
     }
     case message.DEALALL: {
-        console.log('game.dealal', game.players);
         return Object.assign(game, { players: giveCardsToAll(game.players) });
     }
     // All actions have the same action name as they all call the same function
