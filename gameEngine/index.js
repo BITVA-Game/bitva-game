@@ -36,7 +36,7 @@ class GameEngine {
             game: game.handle(this.state, msg),
         };
         newState.phase = this.state.phase;
-        if (newState.phase === phase.ACTIVE && newState.players.length === 2) {
+        if (newState.phase === phase.ACTIVE && newState.players.length === 2 && newState.players.every((p) => p.ready)) {
             newState.phase = phase.PLAY;
         }
 
