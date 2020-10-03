@@ -11,6 +11,7 @@ const gameEngineManager = require('./gameEngineManager');
 const accountManager = require('./accountManager');
 const participantManager = require('./participantManager');
 const systemManager = require('./systemManager');
+const settingsManager = require('./settingsManager');
 
 // This function will write your last game object into a file
 // To be used in debug functionality
@@ -65,6 +66,7 @@ async function processMessage(msg, reply) {
         manager: screenManager.handle(application, msg, reProcess),
         engine: await gameEngineManager.handle(application, msg, reProcess),
         system: systemManager.handle(application, msg, reProcess),
+        settings: settingsManager.handle(application, msg, reProcess),
     };
 
     if (sendReply) {

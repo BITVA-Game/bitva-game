@@ -6,6 +6,7 @@ import WebFont from 'webfontloader';
 import LoginScreen from './LoginScreen';
 import StartScreen from './StartScreen';
 import Profile from './Profile';
+import Settings from './Settings';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
@@ -69,6 +70,8 @@ class App extends Component {
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case screenConst.PROFILE:
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
+        case screenConst.SETTINGS:
+            return <Settings sendMessage={sendMessage} app={this.state.app} />;
         case screenConst.SELECTOPPONENT:
             return (
                 <LoginScreen

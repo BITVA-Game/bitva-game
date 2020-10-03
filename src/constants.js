@@ -15,6 +15,7 @@ const screen = {
     VERSUS: 'VERSUS',
     VS: 'VS',
     WAITINGSTATE: 'waiting',
+    SETTINGS: 'SETTINGS',
 };
 
 const message = {
@@ -36,6 +37,7 @@ const message = {
     SETTINGS: 'SETTINGS',
     START: 'START',
     STARTSCREEN: 'STARTSCREEN',
+    TOGGLESOUND: 'TOGGLESOUND',
 };
 
 const phase = {
@@ -130,7 +132,6 @@ const role = {
     GUEST: 'guest',
     HOST: 'host',
 };
-
 
 module.exports = {
     action,

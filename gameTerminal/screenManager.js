@@ -17,6 +17,8 @@ function handle(app, msg) {
         return screen.PLAY;
     case message.NETWORKSCREEN:
         return screen.NETWORKSCREEN;
+    case message.SETTINGS:
+        return screen.SETTINGS;
     default:
         return app.manager;
     }
