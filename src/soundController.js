@@ -1,4 +1,6 @@
 import UIFx from 'uifx';
+
+const click = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, { volume: 1.0 });
 // temporary on top as graveyard sound is used as default for cards with no own sounds
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 1.0 });
 
@@ -33,6 +35,7 @@ export const action = {
     cardsFromGrave,
     chains: chainsSound,
     clairvoyance: clairvoyanceSound,
+    click,
     graveyard: graveyardSound,
     heal: healSound,
     heartBeat,
@@ -49,18 +52,19 @@ export const action = {
     yaga,
 };
 
-function playSound(type, count) {
+function playSound(type, soundOn, count) {
     // console.log('We play Sound:', type, count);
+    const sound = soundOn ? action[type] : action[type].setVolume(0);
     if (!count) {
-        action[type].play();
+        sound.play();
     } else {
         const time = 500 * count;
-        setTimeout(() => action[type].play(), time);
+        setTimeout(() => sound.play(), time);
         const n = count - 1;
         if (n === 0) {
             return null;
         }
-        return playSound(type, n);
+        return playSound(type, soundOn, n);
     }
     return null;
 }

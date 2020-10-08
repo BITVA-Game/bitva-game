@@ -118,6 +118,7 @@ const sound = {
     CARD: 'card',
     CARDSFROMGRAVE: 'cardsFromGrave',
     CHAINS: 'chains',
+    CLICK: 'click',
     GRAVEYARD: 'graveyard',
 };
 

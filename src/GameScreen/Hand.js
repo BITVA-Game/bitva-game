@@ -1,6 +1,7 @@
 /* eslint-disable no-plusplus */
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import SettingsContext from '../SettingsContext';
 import BoardContext from './BoardContext';
 import Card, { cardOrigin } from './Card';
 import playSound from '../soundController';
@@ -34,7 +35,6 @@ const CardContainer = ({
 }) => {
     const { dragging, cardDropped } = useContext(BoardContext);
 
-
     return (
         <div className="card-container card-container-size card-place">
             <div key={index} className={`card-like card-holder deck-${background}`} />
@@ -63,6 +63,7 @@ const CardContainer = ({
 const Hand = ({
     active, background, hand, inactivePlayer, player, gamePhase,
 }) => {
+    const { soundOn } = useContext(SettingsContext);
     const handKeys = Object.keys(hand);
 
     // need key to hold the space for card container; animationDelay will change after card's shift
@@ -95,7 +96,7 @@ const Hand = ({
 
         if (!gameOver && newCardsInHand.length > 0) {
             // eslint-disable-next-line no-unused-expressions
-            playSound(soundConst.CARD, newCardsInHand.length);
+            playSound(soundConst.CARD, soundOn, newCardsInHand.length);
             // put new cards in new object
             let index = 0;
             Object.keys(cardContainers).forEach((el) => {
@@ -107,17 +108,17 @@ const Hand = ({
             });
             setCardContainers(updatedCardContainers);
         }
-    }, [handKeys, cardContainers, gameOver]);
+    }, [handKeys, cardContainers, gameOver, soundOn]);
 
     // we call useState hook in order to call sound only once for 1st cards deal
     const [firstSound, setFirstSound] = useState(true);
     // we call playSound in one hand only to avoid cards sound to be called twice
     useEffect(() => {
         if (firstSound === true && !active) {
-            playSound(soundConst.CARD, Object.keys(inactivePlayer.hand).length);
+            playSound(soundConst.CARD, soundOn, Object.keys(inactivePlayer.hand).length);
         }
         setFirstSound(false);
-    }, [firstSound, active, inactivePlayer.hand]);
+    }, [firstSound, active, inactivePlayer.hand, soundOn]);
 
     return (
         <div className={`${handClass(active, player)}`}>

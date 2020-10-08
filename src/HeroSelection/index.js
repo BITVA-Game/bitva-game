@@ -2,7 +2,6 @@
 /* eslint-disable import/no-duplicates */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UIFx from 'uifx';
 import MainMenu from '../MainMenu';
 import HeroSwiper from './HeroSwiper';
 import ListOfHeroes from './ListOfHeroes';
@@ -14,12 +13,7 @@ import '../css/Cards.css';
 import { sortedHeroesList, getCurrentPlayer } from '../rules';
 import playSound from '../soundController';
 
-const { message } = require('../constants');
-
-// const clickSound1 = new UIFx(`${process.env.PUBLIC_URL}/sound/click.mp3`, { volume: 1.0 });
-const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
-    volume: 1.0,
-});
+const { message, sound: soundConst } = require('../constants');
 
 const Header = (props) => (
     <header className="main-header">
@@ -57,15 +51,14 @@ class HeroSelection extends Component {
     }
 
     play() {
-    // console.log('PLAY MESSAGE SENT', this.state.hero);
-        clickSound2.play();
+        playSound(soundConst.CLICK, this.app.settings.soundOn);
         this.props.sendMessage({
             type: message.HEROSELECTED,
             hero: this.state.hero.id,
             player: this.app.heroSelect.activePlayer,
         });
         if (this.props.sendMessage && this.state.hero.id) {
-            playSound(this.state.hero.id);
+            playSound(this.state.hero.id, this.app.settings.soundOn);
         }
     }
 

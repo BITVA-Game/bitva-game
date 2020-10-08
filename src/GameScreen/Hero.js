@@ -4,6 +4,7 @@
 // eslint-disable-next-line object-curly-newline
 import React, { Component, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import SettingsContext from '../SettingsContext';
 import BoardContext from './BoardContext';
 
 import playSound from '../soundController';
@@ -36,8 +37,8 @@ const HeroImage = ({ hero }) => (
 
 );
 
-
 const Hero = (props) => {
+    const { soundOn } = useContext(SettingsContext);
     const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
     const activeHero = props.active ? target.HERO : target.OPPONENT;
     const heroClass = isTarget(activeHero, props.player) ? 'target' : '';
@@ -48,9 +49,9 @@ const Hero = (props) => {
     useEffect(() => {
         if (props.gamePhase !== phaseConst.OVER && props.active
             && props.player.moveCounter === 0 && props.player.health.current > 6) {
-            setTimeout(() => playSound(soundConst.HEARTBEATSINGLE), 2000);
+            setTimeout(() => playSound(soundConst.HEARTBEATSINGLE, soundOn), 2000);
         }
-    }, [props.active, props.gamePhase, props.player.moveCounter, props.player.health]);
+    }, [props.active, props.gamePhase, props.player.moveCounter, props.player.health, soundOn]);
 
     // we call repeated heart beat sound once active player has 6health pnts or less
     // after 3 health pnts of active player or less we call heartBeatFast
@@ -60,16 +61,16 @@ const Hero = (props) => {
             clearTimeout(heartTime);
             if (props.gamePhase !== phaseConst.OVER && props.active) {
                 if (props.player.health.current <= 3) {
-                    playSound(soundConst.HEARTBEATFAST);
+                    playSound(soundConst.HEARTBEATFAST, soundOn);
                 }
                 if (props.player.health.current <= 6 && props.player.health.current > 3) {
-                    playSound(soundConst.HEARTBEAT);
+                    playSound(soundConst.HEARTBEAT, soundOn);
                 }
             }
 
             setHeartSound(false);
         };
-    }, [props.active, heartSound, props.gamePhase, props.player.health]);
+    }, [props.active, heartSound, props.gamePhase, props.player.health, soundOn]);
 
     return (
         <div
