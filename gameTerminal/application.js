@@ -83,12 +83,14 @@ async function initApplication(msg, reply) {
     const manager = screenManager.handle({}, msg, reProcess);
     const participants = participantManager.handle({}, msg, reProcess);
     const system = systemManager.handle({}, msg, reProcess);
+    const settings = settingsManager.handle(application, msg, reProcess);
     const newApp = {
         ...application,
         accounts,
         manager,
         participants,
         system,
+        settings,
     };
     reply(newApp);
 }
