@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import UIFx from 'uifx';
 
@@ -68,143 +68,115 @@ const Footer = ({
     </footer>
 );
 
-class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            accountId: null,
-            form: false,
-            delete: false,
-        };
-        this.toggleAccount = this.toggleAccount.bind(this);
-        this.toStartScreen = this.toStartScreen.bind(this);
-        this.toggleForm = this.toggleForm.bind(this);
-        this.toggleDelete = this.toggleDelete.bind(this);
-    }
+const Login = (props) => {
+    const [accountId, setAccountId] = useState(null);
+    const [form, setForm] = useState(false);
+    const [deleteAcc, setDeleteAcc] = useState(false);
 
-    componentDidUpdate(prevProps) {
-        if (
-            this.props.accounts.records
-      && this.props.accounts.records.length !== prevProps.accounts.records.length
-        ) {
-            this.setState({
-                accountId: (this.props.accounts.records[0] || {}).id,
-            });
-        }
-    }
+    useEffect(() => {
+        setAccountId((props.accounts.records[0] || {}).id);
+    }, [props.accounts.records]);
 
-    toggleAccount(event) {
-        this.setState({ accountId: event.target.dataset.id });
-    }
-
-    toStartScreen() {
+    const toggleAccount = (event) => setAccountId(event.target.dataset.id);
+    const toStartScreen = () => {
         clickSound2.play();
-        this.props.sendMessage({
-            type: this.props.message,
-            account: this.state.accountId,
+        props.sendMessage({
+            type: props.message,
+            account: accountId,
         });
-    }
-
-    toggleForm() {
-        this.setState((oldState) => ({
-            form: !oldState.form,
-            delete: false,
-        }));
-    }
-
-    toggleDelete() {
-        console.log('TOGGLE DELETE', this.props.accounts.records);
-        this.setState((oldState) => ({
-            delete: !oldState.delete,
-            form: false,
-        }));
-    }
-
-    showAccounts() {
-        return (
-            <>
-                <div className="login-profiles">
-                    <Accounts
-                        accounts={this.props.accounts.records}
-                        selected={this.state.accountId}
-                        toggle={this.toggleAccount}
-                        participants={this.props.participants}
-                    />
+    };
+    const toggleForm = () => {
+        setForm(!form);
+        setDeleteAcc(false);
+    };
+    const toggleDelete = () => {
+        setDeleteAcc(!deleteAcc);
+        setForm(false);
+    };
+    const showAccounts = () => (
+        <>
+            <div className="login-profiles">
+                <Accounts
+                    accounts={props.accounts.records}
+                    selected={accountId}
+                    toggle={toggleAccount}
+                    participants={props.participants}
+                />
+            </div>
+            <div className="login-buttons">
+                <div
+                    className="login-button"
+                    role="button"
+                    onClick={toggleForm}
+                    onKeyPress={toggleForm}
+                    tabIndex="2"
+                >
+                    Create new profile
                 </div>
-                <div className="login-buttons">
+                {accountId ? (
                     <div
                         className="login-button"
                         role="button"
-                        onClick={this.toggleForm}
-                        onKeyPress={this.toggleForm}
+                        onClick={toggleDelete}
+                        onKeyPress={toggleDelete}
                         tabIndex="2"
                     >
-                        Create new profile
+                        Delete profile
                     </div>
-                    {this.state.accountId ? (
-                        <div
-                            className="login-button"
-                            role="button"
-                            onClick={this.toggleDelete}
-                            onKeyPress={this.toggleDelete}
-                            tabIndex="2"
-                        >
-                            Delete profile
-                        </div>
+                ) : null}
+            </div>
+        </>
+    );
+    const account = props.accounts.records
+        ? props.accounts.records.find((a) => a.id === accountId)
+        : null;
+
+    return (
+        <>
+            <section className="main-content">
+                <div className="login-profiles-container">
+                    {!form && !deleteAcc
+                        ? showAccounts()
+                        : null}
+                    {form ? (
+                        <NewLogin
+                            sendMessage={props.sendMessage}
+                            toggleForm={toggleForm}
+                        />
+                    ) : null}
+                    {deleteAcc && accountId ? (
+                        <DeleteLogin
+                            sendMessage={props.sendMessage}
+                            accId={account.id}
+                            accName={account.name}
+                            toggleDelete={toggleDelete}
+                        />
                     ) : null}
                 </div>
-            </>
-        );
-    }
-
-    render() {
-        console.log(this.state.form, this.state.delete, this.state.accountId);
-        const account = this.props.accounts.records
-            ? this.props.accounts.records.find((a) => a.id === this.state.accountId)
-            : null;
-        return (
-            <>
-                <section className="main-content">
-                    <div className="login-profiles-container">
-                        {!this.state.form && !this.state.delete
-                            ? this.showAccounts()
-                            : null}
-                        {this.state.form ? (
-                            <NewLogin
-                                sendMessage={this.props.sendMessage}
-                                toggleForm={this.toggleForm}
-                            />
-                        ) : null}
-                        {this.state.delete && this.state.accountId ? (
-                            <DeleteLogin
-                                sendMessage={this.props.sendMessage}
-                                accId={account.id}
-                                accName={account.name}
-                                toggleDelete={this.toggleDelete}
-                            />
-                        ) : null}
-                    </div>
-                </section>
-                <Footer
-                    accountId={this.state.accountId}
-                    form={this.state.form}
-                    deleting={this.state.delete}
-                    toStartScreen={this.toStartScreen}
-                />
-            </>
-        );
-    }
-}
+            </section>
+            <Footer
+                accountId={accountId}
+                form={form}
+                deleting={deleteAcc}
+                toStartScreen={toStartScreen}
+            />
+        </>
+    );
+};
 
 PlayButton.propTypes = {
     toStartScreen: PropTypes.func.isRequired,
 };
 
 Footer.propTypes = {
-    accountId: PropTypes.string.isRequired,
+    accountId: PropTypes.string,
     form: PropTypes.bool.isRequired,
     deleting: PropTypes.bool.isRequired,
     toStartScreen: PropTypes.func.isRequired,
+};
+
+Footer.defaultProps = {
+    accountId: null,
 };
 
 Login.propTypes = {
