@@ -1,12 +1,12 @@
 /* eslint-disable max-len */
 /* eslint-disable import/no-duplicates */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import UIFx from 'uifx';
 import MainMenu from '../MainMenu';
 import HeroSwiper from './HeroSwiper';
-import ListOfHeroes from './ListOfHeroes';
-import OneHero from './OneHero';
+import ListOfHeroesContent from './ListOfHeroes';
+import OneHeroContent from './OneHero';
 import '../css/App.css';
 import '../css/HeroSelection.css';
 import '../css/Cards.css';
@@ -35,90 +35,89 @@ const Header = (props) => (
     </header>
 );
 
-class HeroSelection extends Component {
-    constructor(props) {
-        super(props);
-        this.app = props.app;
-        this.state = {
-            hero: null,
-        };
-        this.select = this.select.bind(this);
-        this.unselect = this.unselect.bind(this);
-        this.play = this.play.bind(this);
-    }
+const OneHero = ({
+    heroesList, select, hero, unselect, play, app,
+}) => {
+    const swiper = (
+        <HeroSwiper
+            hero={hero}
+            allHeroes={heroesList()}
+            select={select}
+        />
+    );
 
-    select(heroID) {
-        const hero = this.app.heroSelect.allHeroes[heroID];
-        this.setState({ hero });
-    }
-
-    unselect() {
-        this.setState({ hero: null });
-    }
-
-    play() {
-    // console.log('PLAY MESSAGE SENT', this.state.hero);
-        clickSound2.play();
-        this.props.sendMessage({
-            type: message.HEROSELECTED,
-            hero: this.state.hero.id,
-            player: this.app.heroSelect.activePlayer,
-        });
-        if (this.props.sendMessage && this.state.hero.id) {
-            playSound(this.state.hero.id);
-        }
-    }
-
-    heroesList() {
-        return Object.values(sortedHeroesList(this.app));
-    }
-
-    renderOneHero() {
-        const swiper = (
-            <HeroSwiper
-                hero={this.state.hero}
-                allHeroes={this.heroesList()}
-                select={this.select}
+    return (
+        <div className="main-container">
+            <Header title="Character Details" centre={swiper} playerName={getCurrentPlayer(app)} />
+            <OneHeroContent
+                hero={hero}
+                unselect={unselect}
+                play={play}
+                isAvailable={app.heroSelect.heroes.includes(hero.id)}
             />
-        );
-        return (
-            <div className="main-container">
-                <Header title="Character Details" centre={swiper} playerName={getCurrentPlayer(this.app)} />
-                <OneHero
-                    hero={this.state.hero}
-                    unselect={this.unselect}
-                    play={this.play}
-                    isAvailable={this.app.heroSelect.heroes.includes(this.state.hero.id)}
-                />
-            </div>
-        );
-    }
+        </div>
+    );
+};
 
-    renderListOfHeroes() {
-        return (
-            <div className="main-container">
-                <Header title="Select Character" playerName={getCurrentPlayer(this.app)} />
-                <ListOfHeroes
-                    heroesID={this.app.heroSelect.heroes}
-                    allHeroes={this.heroesList()}
-                    select={this.select}
-                />
-            </div>
-        );
-    }
+const ListOfHeroes = ({ heroesList, select, app }) => (
+    <div className="main-container">
+        <Header title="Select Character" playerName={getCurrentPlayer(app)} />
+        <ListOfHeroesContent
+            heroesID={app.heroSelect.heroes}
+            allHeroes={heroesList()}
+            select={select}
+        />
+    </div>
+);
 
-    render() {
-        return (
-            <div>
-                {this.state.hero ? this.renderOneHero() : this.renderListOfHeroes()}
-                <MainMenu sendMessage={this.props.sendMessage} />
-            </div>
-        );
-    }
-}
+const HeroSelection = (props) => {
+    const [hero, setHero] = useState(null);
+    const { app } = props;
+    const select = (heroID) => {
+        const currentHero = app.heroSelect.allHeroes[heroID];
+        setHero(currentHero);
+    };
+    const unselect = () => setHero(null);
+    const play = () => {
+        clickSound2.play();
+        props.sendMessage({
+            type: message.HEROSELECTED,
+            hero: hero.id,
+            player: app.heroSelect.activePlayer,
+        });
+        if (props.sendMessage && hero.id) {
+            playSound(hero.id);
+        }
+    };
+    const heroesList = () => Object.values(sortedHeroesList(app));
+
+    return (
+        <div>
+            {hero
+                ? <OneHero app={app} heroesList={heroesList} select={select} unselect={unselect} play={play} hero={hero} />
+                : <ListOfHeroes app={app} heroesList={heroesList} select={select} />}
+            <MainMenu sendMessage={props.sendMessage} />
+        </div>
+    );
+};
 
 HeroSelection.propTypes = {
     sendMessage: PropTypes.func.isRequired,
+    app: PropTypes.object.isRequired,
+};
+
+OneHero.propTypes = {
+    heroesList: PropTypes.func.isRequired,
+    select: PropTypes.func.isRequired,
+    hero: PropTypes.object.isRequired,
+    unselect: PropTypes.func.isRequired,
+    play: PropTypes.func.isRequired,
+    app: PropTypes.object.isRequired,
+};
+
+ListOfHeroes.propTypes = {
+    heroesList: PropTypes.func.isRequired,
+    select: PropTypes.func.isRequired,
     app: PropTypes.object.isRequired,
 };
 
