@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import MainMenu from './MainMenu';
 import './css/Profile.css';
@@ -43,84 +43,63 @@ const SelectRole = (props) => (
     </div>
 );
 
-class NetworkPlay extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            role: roleConst.HOST,
-            screen: null,
-        };
-        this.assignRole = this.assignRole.bind(this);
-        this.estConnection = this.estConnection.bind(this);
-        this.clearSelection = this.clearSelection.bind(this);
-        this.gameConnect = this.gameConnect.bind(this);
-    }
+const RenderPopup = ({ screen, gameConnect, clearSelection }) => (
+    <div className="role-selection" style={{ opacity: 0.8, width: 400 }}>
+        <h1>I AM POPUP</h1>
+        {screen === screenConst.WAITINGSTATE ? (
+            <h1>Waiting</h1>
+        ) : (
+            <WaitingForHost gameConnect={gameConnect} />
+        )}
+        <button type="button" style={{ backgroundColor: 'black' }} onClick={clearSelection}>
+            Back
+        </button>
+    </div>
+);
 
-    assignRole(event) {
-        this.setState({
-            role: event.target.value,
-        });
-    }
-
-    gameConnect(event) {
+const NetworkPlay = (props) => {
+    const [role, setRole] = useState(roleConst.HOST);
+    const [screen, setScreen] = useState(null);
+    const assignRole = (event) => setRole(event.target.value);
+    const gameConnect = (event) => {
         event.preventDefault();
         const ip = event.target.elements.address.value;
-        this.props.sendMessage({
+        props.sendMessage({
             type: message.NETWORKPLAY,
-            role: this.state.role,
+            role,
             network: true,
             ip,
         });
-    }
-
-    estConnection(event) {
+    };
+    const estConnection = (event) => {
         event.preventDefault();
-        this.setState((prevState) => ({
-            screen: prevState.role === roleConst.HOST
-                ? screenConst.WAITINGSTATE : screenConst.SELECTIONSTATE,
-        }));
-    }
+        setScreen((prevRole) => (prevRole === roleConst.HOST
+            ? screenConst.WAITINGSTATE : screenConst.SELECTIONSTATE));
+    };
+    const clearSelection = () => {
+        setRole(roleConst.HOST);
+        setScreen(null);
+    };
 
-    clearSelection() {
-        this.setState({
-            role: roleConst.HOST,
-            screen: null,
-        });
-    }
-
-    renderPopup() {
-        return (
-            <div className="role-selection" style={{ opacity: 0.8, width: 400 }}>
-                <h1>I AM POPUP</h1>
-                {this.state.screen === screenConst.WAITINGSTATE ? (
-                    <h1>Waiting</h1>
-                ) : (
-                    <WaitingForHost gameConnect={this.gameConnect} />
-                )}
-                <button type="button" style={{ backgroundColor: 'black' }} onClick={this.clearSelection}>
-                    Back
-                </button>
-            </div>
-        );
-    }
-
-    render() {
-        return (
-            <div className="profile-container app-background">
-                {this.state.screen == null ? (
-                    <SelectRole
-                        estConnection={this.estConnection}
-                        assignRole={this.assignRole}
-                        role={this.state.role}
-                    />
-                ) : (
-                    this.renderPopup()
-                )}
-                <MainMenu sendMessage={this.props.sendMessage} />
-            </div>
-        );
-    }
-}
+    return (
+        <div className="profile-container app-background">
+            {screen == null ? (
+                <SelectRole
+                    estConnection={estConnection}
+                    assignRole={assignRole}
+                    role={role}
+                />
+            ) : (
+                <RenderPopup
+                    screen={screen}
+                    gameConnect={gameConnect}
+                    clearSelection={clearSelection}
+                />
+            )}
+            <MainMenu sendMessage={props.sendMessage} />
+        </div>
+    );
+};
 
 NetworkPlay.propTypes = {
     sendMessage: PropTypes.func.isRequired,
@@ -134,6 +113,16 @@ SelectRole.propTypes = {
     estConnection: PropTypes.func.isRequired,
     role: PropTypes.string.isRequired,
     assignRole: PropTypes.func.isRequired,
+};
+
+RenderPopup.propTypes = {
+    screen: PropTypes.string,
+    gameConnect: PropTypes.func.isRequired,
+    clearSelection: PropTypes.func.isRequired,
+};
+
+RenderPopup.defaultProps = {
+    screen: null,
 };
 
 export default NetworkPlay;
