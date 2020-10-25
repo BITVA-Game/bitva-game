@@ -58,7 +58,7 @@ export function withBoardContext(GameScreen) {
             if (itemActive && itemActive.category === cardConst.GENERATORCATEGORY
                 && activePlayer.hero === playerWithMalachiteBox) {
                 // this.playAnimation('bat');
-                playSound(soundConst.ATTACKOPPONENT);
+                playSound(soundConst.ATTACKOPPONENT, this.props.app.settings.soundOn);
             }
         }
 
@@ -74,7 +74,6 @@ export function withBoardContext(GameScreen) {
                 dragging: null,
             });
         }
-
 
         cardDropped(target, player) {
             // we run malachite box function to check

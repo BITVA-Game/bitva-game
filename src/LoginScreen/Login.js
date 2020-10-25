@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import UIFx from 'uifx';
-
+import playSound from '../soundController';
 import NewLogin from './NewLogin';
 import DeleteLogin from './DeleteLogin';
 
-const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
-    volume: 1.0,
-});
+const { sound: soundConst } = require('../constants');
 
 const Account = ({
     accId, accName, selected, toggle, disabled,
@@ -98,7 +95,7 @@ class Login extends Component {
     }
 
     toStartScreen() {
-        clickSound2.play();
+        playSound(soundConst.CLICK, this.props.settings.soundOn);
         this.props.sendMessage({
             type: this.props.message,
             account: this.state.accountId,
@@ -212,6 +209,7 @@ Login.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     message: PropTypes.string.isRequired,
     participants: PropTypes.object,
+    settings: PropTypes.object.isRequired,
 };
 
 Login.defaultProps = {

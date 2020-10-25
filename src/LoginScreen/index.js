@@ -10,7 +10,7 @@ const Header = () => (
 );
 
 const LoginScreen = ({
-    accounts, sendMessage, message, participants,
+    accounts, sendMessage, message, participants, settings,
 }) => (
     <div className="main-container">
         <div>
@@ -35,6 +35,7 @@ const LoginScreen = ({
                 sendMessage={sendMessage}
                 message={message}
                 participants={participants}
+                settings={settings}
             />
         )}
     </div>
@@ -45,6 +46,7 @@ LoginScreen.propTypes = {
     sendMessage: PropTypes.func.isRequired,
     message: PropTypes.string.isRequired,
     participants: PropTypes.object,
+    settings: PropTypes.object.isRequired,
 };
 
 LoginScreen.defaultProps = {

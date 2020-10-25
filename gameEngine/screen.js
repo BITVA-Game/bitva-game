@@ -1,6 +1,5 @@
 const { screen, message, phase } = require('../src/constants');
 
-
 function heroSelected(state) {
     if (state.game.players.length === 2) {
         return screen.VERSUS;
@@ -27,6 +26,8 @@ function handle(state, msg) {
         return screen.GAMESCREEN;
     case message.ACTION:
         return gameScreen(state);
+    case message.SETTINGS:
+        return screen.SETTINGS;
     default: return state.screen;
     }
 }

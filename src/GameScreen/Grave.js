@@ -2,16 +2,19 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import '../css/GameScreen.css';
+import SettingsContext from '../SettingsContext';
 import BoardContext from './BoardContext';
 import playSound from '../soundController';
+import '../css/GameScreen.css';
 
 import graveyard from '../images/cards/graveyard.png';
 
 const { target, sound: soundConst, animation: animationConst } = require('../constants');
 
 const Animation = (props) => {
-    playSound(soundConst.CARDSFROMGRAVE);
+    const { soundOn } = useContext(SettingsContext);
+    playSound(soundConst.CARDSFROMGRAVE, soundOn);
+
     return (
         <div className="stack">
             <div className={`deck card-like deck-${props.background} one`} />

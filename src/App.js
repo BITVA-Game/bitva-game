@@ -3,9 +3,12 @@ import { CSSTransition } from 'react-transition-group';
 import './css/App.css';
 import WebFont from 'webfontloader';
 
+import SettingsContext from './SettingsContext';
+
 import LoginScreen from './LoginScreen';
 import StartScreen from './StartScreen';
 import Profile from './Profile';
+import Settings from './Settings';
 import HeroSelection from './HeroSelection';
 import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
@@ -63,12 +66,15 @@ class App extends Component {
                     sendMessage={sendMessage}
                     accounts={this.state.app.accounts}
                     message={messageConst.LOGIN}
+                    settings={this.state.app.settings}
                 />
             );
         case screenConst.STARTSCREEN:
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case screenConst.PROFILE:
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
+        case screenConst.SETTINGS:
+            return <Settings sendMessage={sendMessage} app={this.state.app} />;
         case screenConst.SELECTOPPONENT:
             return (
                 <LoginScreen
@@ -76,6 +82,7 @@ class App extends Component {
                     accounts={this.state.app.accounts}
                     message={messageConst.OPPONENT}
                     participants={this.state.app.participants}
+                    settings={this.state.app.settings}
                 />
             );
         case screenConst.HEROSELECT:
@@ -112,36 +119,38 @@ class App extends Component {
         const { loaded } = this.state;
         const needAdjustment = this.state.app.system === 768;
         return (
-            <div className={needAdjustment ? 'app-768' : ''}>
-                <div id="background" className="start-screen">
-                    <CSSTransition classNames="moveForest" in={loaded} timeout={5000}>
-                        <div>
-                            <img alt="hut" src={hutImage} className="background-hut" />
-                            <img
-                                alt="grey tree 1"
-                                src={greyTreeL}
-                                className="background-greyTreeL"
-                            />
-                            <img
-                                alt="grey tree 2"
-                                src={greyTreeR}
-                                className="background-greyTreeR"
-                            />
-                            <img
-                                alt="black tree 1"
-                                src={blackTreeL}
-                                className="background-blackTreeL"
-                            />
-                            <img
-                                alt="black tree 2"
-                                src={blackTreeR}
-                                className="background-blackTreeR"
-                            />
-                        </div>
-                    </CSSTransition>
+            <SettingsContext.Provider value={this.state.app.settings}>
+                <div className={needAdjustment ? 'app-768' : ''}>
+                    <div id="background" className="start-screen">
+                        <CSSTransition classNames="moveForest" in={loaded} timeout={5000}>
+                            <div>
+                                <img alt="hut" src={hutImage} className="background-hut" />
+                                <img
+                                    alt="grey tree 1"
+                                    src={greyTreeL}
+                                    className="background-greyTreeL"
+                                />
+                                <img
+                                    alt="grey tree 2"
+                                    src={greyTreeR}
+                                    className="background-greyTreeR"
+                                />
+                                <img
+                                    alt="black tree 1"
+                                    src={blackTreeL}
+                                    className="background-blackTreeL"
+                                />
+                                <img
+                                    alt="black tree 2"
+                                    src={blackTreeR}
+                                    className="background-blackTreeR"
+                                />
+                            </div>
+                        </CSSTransition>
+                    </div>
+                    {this.showApplication()}
                 </div>
-                {this.showApplication()}
-            </div>
+            </SettingsContext.Provider>
         );
     }
 }

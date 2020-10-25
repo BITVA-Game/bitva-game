@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import '../css/GameScreen.css';
+import SettingsContext from '../SettingsContext';
 import BoardContext from './BoardContext';
 import Card from './Card';
 import playSound from '../soundController';
@@ -10,6 +11,7 @@ import playSound from '../soundController';
 const { card: cardConst, target } = require('../constants');
 
 const Item = (props) => {
+    const { soundOn } = useContext(SettingsContext);
     const {
         isTarget, cardDropped, cardOver,
     } = useContext(BoardContext);
@@ -31,15 +33,14 @@ const Item = (props) => {
                 || props.item.id === cardConst.WATERDEADCARD
                 || props.item.id === cardConst.WATERLIVINGCARD)) {
             if (firstSound.current) {
-                playSound(props.item.id);
+                playSound(props.item.id, soundOn);
                 firstSound.current = false;
             }
         }
         if (!props.item) {
             firstSound.current = true;
         }
-    }, [props.item, firstSound]);
-
+    }, [props.item, firstSound, soundOn]);
 
     return (
         <div

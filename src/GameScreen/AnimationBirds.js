@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import SettingsContext from '../SettingsContext';
 import playSound from '../soundController';
 
 const { sound: soundConst } = require('../constants');
 
 const Birds = () => {
-    playSound(soundConst.BIRDS);
+    const { soundOn } = useContext(SettingsContext);
+    playSound(soundConst.BIRDS, soundOn);
+
     return (
         <div className="animation-game-screen">
             <div className="bird-container bird-container-one">
