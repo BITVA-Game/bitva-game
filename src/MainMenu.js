@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/MainMenu.css';
@@ -35,92 +35,82 @@ const ToggleButton = (props) => (
         onKeyDown={props.toggle}
         tabIndex="-1"
     >
-    ▶
+        ▶
     </div>
 );
 
-class MainMenu extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { opened: props.opened, game: props.game };
-        this.toggle = this.toggle.bind(this);
-    }
+const MainMenu = ({ opened, game, sendMessage }) => {
+    const [open, setOpen] = useState(opened);
+    const toggle = () => setOpen(!open);
 
-    toggle() {
-        const opened = this.state.opened;
-        this.setState({ opened: !opened });
-    }
-
-    render() {
-        return (
-            <div
-                data-testid="main-menu"
-                className={this.state.opened ? 'main-menu sidebar-opened' : 'main-menu'}
-            >
-                <LogoBlock />
-                <div className="menu-buttons-container">
-                    <ul className="menu-buttons-group">
-                        <MenuButton
-                            name="Network Play"
-                            type={message.NETWORKSCREEN}
-                            sendMessage={this.props.sendMessage}
-                            disabled={this.state.game}
-                        />
-                        <MenuButton
-                            name="Player vs Player"
-                            type={message.LOCALPLAY}
-                            sendMessage={this.props.sendMessage}
-                            disabled={this.state.game}
-                        />
-                        <MenuButton
-                            name="Tournament"
-                            type={message.PLAY}
-                            sendMessage={this.props.sendMessage}
-                            disabled={this.state.game}
-                        />
-                        <MenuButton
-                            name="Daily Challenge"
-                            type={message.PLAY}
-                            sendMessage={this.props.sendMessage}
-                            disabled={this.state.game}
-                        />
-                    </ul>
-                    <ToggleButton toggle={this.toggle} />
-                    <ul className="menu-buttons-group">
-                        <MenuButton
-                            name="Store"
-                            type=""
-                            sendMessage={this.props.sendMessage}
-                        />
-                        <MenuButton
-                            name="Profile"
-                            type={message.PROFILE}
-                            sendMessage={this.props.sendMessage}
-                        />
-                        <MenuButton
-                            name="Settings"
-                            type={message.SETTINGS}
-                            sendMessage={this.props.sendMessage}
-                        />
-                        <MenuButton
-                            name="Quit"
-                            type={message.QUIT}
-                            sendMessage={this.props.sendMessage}
-                        />
-                    </ul>
-                </div>
-                <div
-                    data-testid="open-menu-btn"
-                    className="main-menu-overlay"
-                    role="button"
-                    onClick={this.toggle}
-                    onKeyPress={this.toggle}
-                    tabIndex="-1"
-                />
+    return (
+        <div
+            data-testid="main-menu"
+            className={open ? 'main-menu sidebar-opened' : 'main-menu'}
+        >
+            <LogoBlock />
+            <div className="menu-buttons-container">
+                <ul className="menu-buttons-group">
+                    <MenuButton
+                        name="Network Play"
+                        type={message.NETWORKSCREEN}
+                        sendMessage={sendMessage}
+                        disabled={game}
+                    />
+                    <MenuButton
+                        name="Player vs Player"
+                        type={message.LOCALPLAY}
+                        sendMessage={sendMessage}
+                        disabled={game}
+                    />
+                    <MenuButton
+                        name="Tournament"
+                        type={message.PLAY}
+                        sendMessage={sendMessage}
+                        disabled={game}
+                    />
+                    <MenuButton
+                        name="Daily Challenge"
+                        type={message.PLAY}
+                        sendMessage={sendMessage}
+                        disabled={game}
+                    />
+                </ul>
+                <ToggleButton toggle={toggle} />
+                <ul className="menu-buttons-group">
+                    <MenuButton
+                        name="Store"
+                        type=""
+                        sendMessage={sendMessage}
+                    />
+                    <MenuButton
+                        name="Profile"
+                        type={message.PROFILE}
+                        sendMessage={sendMessage}
+                    />
+                    <MenuButton
+                        name="Settings"
+                        type={message.SETTINGS}
+                        sendMessage={sendMessage}
+                    />
+                    <MenuButton
+                        name="Quit"
+                        type={message.QUIT}
+                        sendMessage={sendMessage}
+                    />
+                </ul>
             </div>
-        );
-    }
-}
+            <div
+                data-testid="open-menu-btn"
+                className="main-menu-overlay"
+                role="button"
+                onClick={toggle}
+                onKeyPress={toggle}
+                tabIndex="-1"
+            />
+        </div>
+    );
+};
 
 MainMenu.propTypes = {
     sendMessage: PropTypes.func.isRequired,
