@@ -82,21 +82,25 @@ const MainMenu = ({ opened, game, sendMessage }) => {
                         name="Store"
                         type=""
                         sendMessage={sendMessage}
+                        disabled={game}
                     />
                     <MenuButton
                         name="Profile"
                         type={message.PROFILE}
                         sendMessage={sendMessage}
+                        disabled={game}
                     />
                     <MenuButton
                         name="Settings"
                         type={message.SETTINGS}
                         sendMessage={sendMessage}
+                        disabled={game}
                     />
                     <MenuButton
                         name="Quit"
                         type={message.QUIT}
                         sendMessage={sendMessage}
+                        disabled={game}
                     />
                 </ul>
             </div>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/VersusScreen.css';
@@ -29,45 +29,31 @@ const OneHero = (props) => (
     </div>
 );
 
-class VersusScreen extends Component {
-    constructor(props) {
-        super(props);
+const VersusScreen = (props) => {
+    const sendDealAllMessage = () => props.sendMessage({ type: message.DEALALL });
+    const waitForIt = () => setTimeout(() => { sendDealAllMessage(); }, 5000);
 
-        this.sendDealAllMessage = this.sendDealAllMessage.bind(this);
-        this.waitForIt = this.waitForIt.bind(this);
-    }
-
-    sendDealAllMessage() {
-        this.props.sendMessage({ type: message.DEALALL });
-    }
-
-    waitForIt() {
-        setTimeout(this.sendDealAllMessage, 5000);
-    }
-
-    render() {
-        return (
-            <div className="main-container">
-                <div className="versus-container">
-                    <div className="versus-heroes-container">
-                        <OneHero hero={this.props.app.game.players[0].hero} />
-                        <div className="vs">
-                            <p>
-                                VS
-                            </p>
-                        </div>
-                        <OneHero hero={this.props.app.game.players[1].hero} />
+    return (
+        <div className="main-container">
+            <div className="versus-container">
+                <div className="versus-heroes-container">
+                    <OneHero hero={props.app.game.players[0].hero} />
+                    <div className="vs">
+                        <p>
+                            VS
+                        </p>
                     </div>
-                    <div className="versus-loading-container">
-                        <div className="versus-loading" onLoad={this.waitForIt.call(this)}>
-                            <div className="loading" />
-                        </div>
+                    <OneHero hero={props.app.game.players[1].hero} />
+                </div>
+                <div className="versus-loading-container">
+                    <div className="versus-loading" onLoad={waitForIt()}>
+                        <div className="loading" />
                     </div>
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 VersusScreen.propTypes = {
     app: PropTypes.object.isRequired,
