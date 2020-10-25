@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../css/App.css';
 import '../css/HeroSelection.css';
@@ -104,58 +104,45 @@ const BackButton = ({ unselect }) => (
     </div>
 );
 
-
-class CardsBlock extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { cardIndex: 0 };
-        this.changeRowNext = this.changeRowNext.bind(this);
-        this.changeRowPrev = this.changeRowPrev.bind(this);
-    }
-
-    changeRowNext() {
-        // console.log('changeRow ', this.state.cardIndex);
-        const maxRotation = this.deck.length - 1;
-        const currentRow = this.state.cardIndex;
+const CardsBlock = (props) => {
+    const [cardIndex, setCardIndex] = useState(0);
+    // get the array of all cards of current character
+    const deck = Object.keys(props.cards);
+    const changeRowNext = () => {
+        const maxRotation = deck.length - 1;
+        const currentRow = cardIndex;
         if (currentRow === maxRotation) {
-            this.setState({ cardIndex: 0 });
+            setCardIndex(0);
         } else {
-            this.setState({ cardIndex: currentRow + 1 });
+            setCardIndex(currentRow + 1);
         }
-    }
-
-    changeRowPrev() {
-        // console.log('changeRow ', this.state.cardIndex);
+    };
+    const changeRowPrev = () => {
         const minRotation = 0;
-        const currentRow = this.state.cardIndex;
+        const currentRow = cardIndex;
         if (currentRow === minRotation) {
-            this.setState({ cardIndex: this.deck.length - 1 });
+            setCardIndex(deck.length - 1);
         } else {
-            this.setState({ cardIndex: currentRow - 1 });
+            setCardIndex(currentRow - 1);
         }
-    }
+    };
 
-    render() {
-        // get the array of all cards of current character
-        this.deck = Object.keys(this.props.cards);
-        // console.log(this.props.cards, this.deck);
-        return (
-            <div className="details-cards-container">
-                <div className="details-cards">
-                    <CardsRow heroId={this.props.heroId} currentCard={this.deck[this.state.cardIndex]} cards={this.props.cards} hero={this.props.hero} />
+    return (
+        <div className="details-cards-container">
+            <div className="details-cards">
+                <CardsRow heroId={props.heroId} currentCard={deck[cardIndex]} cards={props.cards} hero={props.hero} />
+            </div>
+            <div className="details-cards-buttons">
+                <div className="btn cards-btn" role="button" onClick={changeRowPrev} onKeyPress={changeRowPrev} tabIndex="5">
+                    ◀
                 </div>
-                <div className="details-cards-buttons">
-                    <div className="btn cards-btn" role="button" onClick={this.changeRowPrev} onKeyPress={this.changeRow} tabIndex="5">
-                        ◀
-                    </div>
-                    <div className="btn cards-btn" role="button" onClick={this.changeRowNext} onKeyPress={this.changeRow} tabIndex="6">
-                        ▶
-                    </div>
+                <div className="btn cards-btn" role="button" onClick={changeRowNext} onKeyPress={changeRowPrev} tabIndex="6">
+                    ▶
                 </div>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 // Info about one hero.
 const OneHero = (props) => (
