@@ -1,6 +1,6 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable max-len */
-import React, { Component } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Player from './Player';
 import MainMenu from '../MainMenu';
@@ -14,35 +14,35 @@ import BirdsAnimation from './AnimationBirds';
 
 const { phase: phaseConst } = require('../constants');
 
-class GameScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sound: '',
-        };
-        this.playableHand = this.playableHand.bind(this);
-        this.startSound = this.startSound.bind(this);
-    }
+const GameScreen = ({ sendMessage, app }) => {
+    const [sound, setSound] = useState('');
+    const activePlayer = getActivePlayer(app);
+    const inactivePlayer = getInActivePlayer(app);
+    // custom hook for getting previous value
+    const usePrevious = (value) => {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    };
+    const prevMoveCounter = usePrevious(activePlayer.moveCounter);
 
-    componentDidUpdate(prevProps) {
-        const actionType = this.props.app.game.lastAction.type;
-        if (this.state.sound === '' && getActivePlayer(this.props.app).moveCounter !== getActivePlayer(prevProps.app).moveCounter) {
-            this.startSound(actionType);
-        } if (this.state.sound !== '') {
+    useEffect(() => {
+        const actionType = app.game.lastAction.type;
+        console.log('OUR SOUND IS:', sound);
+
+        if (sound === '' && prevMoveCounter !== activePlayer.moveCounter) {
+            setSound(actionType);
+        } if (sound !== '') {
             playSound(actionType);
             setTimeout(() => {
-                this.setState({ sound: '' });
+                setSound('');
             }, 1000);
         }
-    }
+    }, [activePlayer.moveCounter, sound]);
 
-    startSound(actionType) {
-        this.setState({ sound: actionType });
-    }
-
-    playableHand(player) {
-        const activePlayer = getActivePlayer(this.props.app);
-        const inactivePlayer = getInActivePlayer(this.props.app);
+    const playableHand = (player) => {
         if (player === activePlayer && activePlayer.turningHand === true) {
             return inactivePlayer.hand;
         }
@@ -50,41 +50,37 @@ class GameScreen extends Component {
             return activePlayer.hand;
         }
         return inactivePlayer.hand;
-    }
+    };
 
-    render() {
-        const activePlayer = getActivePlayer(this.props.app);
-        const inactivePlayer = getInActivePlayer(this.props.app);
-        return (
-            <>
-                <div className="game-table app-background">
-                    {this.props.app.game.players.map((player) => (
-                        <Player
-                            active={player.id === activePlayer.id}
-                            key={player.keyHero}
-                            player={player}
-                            activePlayer={activePlayer}
-                            inactivePlayer={inactivePlayer}
-                            hand={this.playableHand(player)}
-                            sendMessage={this.props.sendMessage}
-                            gamePhase={this.props.app.game.phase}
-                        />
-                    ))}
-                    {activePlayer.moveCounter === 0
-                    && activePlayer.health.current > 0
-                        ? (<ChangeTurn app={this.props.app} />
-                        ) : null}
+    return (
+        <>
+            <div className="game-table app-background">
+                {app.game.players.map((player) => (
+                    <Player
+                        active={player.id === activePlayer.id}
+                        key={player.keyHero}
+                        player={player}
+                        activePlayer={activePlayer}
+                        inactivePlayer={inactivePlayer}
+                        hand={playableHand(player)}
+                        sendMessage={sendMessage}
+                        gamePhase={app.game.phase}
+                    />
+                ))}
+                {activePlayer.moveCounter === 0
+                && activePlayer.health.current > 0
+                    ? (<ChangeTurn app={app} />
+                    ) : null}
 
-                    {this.props.app.game.phase === phaseConst.OVER ? (
-                        <GameOver app={this.props.app} />
-                    ) : <BirdsAnimation />}
-                    <SnowAnimation />
-                </div>
-                <MainMenu sendMessage={this.props.sendMessage} game />
-            </>
-        );
-    }
-}
+                {app.game.phase === phaseConst.OVER ? (
+                    <GameOver app={app} />
+                ) : <BirdsAnimation />}
+                <SnowAnimation />
+            </div>
+            <MainMenu sendMessage={sendMessage} game />
+        </>
+    );
+};
 
 const GameOver = ({ app }) => {
     const activePlayer = getActivePlayer(app);
