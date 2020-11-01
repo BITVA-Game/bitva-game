@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import rules, { getActivePlayer } from '../rules';
 import playSound from '../soundController';
@@ -11,37 +11,19 @@ const {
 } = require('../constants');
 
 export function withBoardContext(GameScreen) {
-    const Board = class extends Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                dragging: null,
-            };
-            this.cardAim = this.cardAim.bind(this);
-            this.cardSelect = this.cardSelect.bind(this);
-            this.cardAct = this.cardAct.bind(this);
-            this.cardDropped = this.cardDropped.bind(this);
-            this.isTarget = this.isTarget.bind(this);
-            this.cardOver = this.cardOver.bind(this);
-        }
-
-        cardAim() {
-            this.setState({
-                dragging: null,
-            });
-        }
-
-        cardSelect(key, card, mode) {
-            this.setState((oldState) => {
-                if (oldState.dragging && mode === draggingConst.CLICKMODE) {
-                    return { dragging: null };
+    const Board = (props) => {
+        const [dragging, setDragging] = useState(null);
+        const cardAim = () => setDragging(null);
+        const cardSelect = (key, card, mode) => {
+            setDragging((prevDragging) => {
+                if (prevDragging && mode === draggingConst.CLICKMODE) {
+                    return null;
                 }
-                return { dragging: { key, card, mode } };
+                return { key, card, mode };
             });
-        }
-
-        malachiteBox() {
-            const activePlayer = getActivePlayer(this.props.app);
+        };
+        const malachiteBox = () => {
+            const activePlayer = getActivePlayer(props.app);
             // we define item of active player if any
             let itemActive;
             if (Object.keys(activePlayer.item) !== undefined) {
@@ -60,66 +42,55 @@ export function withBoardContext(GameScreen) {
                 // this.playAnimation('bat');
                 playSound(soundConst.ATTACKOPPONENT);
             }
-        }
-
-        cardAct(target) {
-            this.malachiteBox();
-            this.props.sendMessage({
+        };
+        const cardAct = (target) => {
+            malachiteBox();
+            props.sendMessage({
                 type: message.ACTION,
-                activeCard: this.state.dragging.key,
+                activeCard: dragging.key,
                 target,
             });
-
-            this.setState({
-                dragging: null,
-            });
-        }
-
-
-        cardDropped(target, player) {
-            // we run malachite box function to check
-            // this card and execute it if any
-            this.malachiteBox();
-
-            if (!this.isTarget(target, player)) {
-                return;
-            }
-            this.cardAct(target);
-        }
-
-        isTarget(target, player) {
-            const activePlayer = getActivePlayer(this.props.app);
+            setDragging(null);
+        };
+        const isTarget = (target, player) => {
+            const activePlayer = getActivePlayer(props.app);
             return rules(
                 target,
-                this.state.dragging,
+                dragging,
                 player.id === activePlayer.id,
                 player,
             );
-        }
+        };
+        const cardDropped = (target, player) => {
+            // we run malachite box function to check
+            // this card and execute it if any
+            malachiteBox();
 
-        cardOver(event, target, player) {
-            if (!this.isTarget(target, player)) {
+            if (!isTarget(target, player)) {
+                return;
+            }
+            cardAct(target);
+        };
+        const cardOver = (event, target, player) => {
+            if (!isTarget(target, player)) {
                 return;
             }
             event.preventDefault();
-        }
-
-        render() {
-            const value = {
-                dragging: this.state.dragging,
-                cardSelect: this.cardSelect,
-                cardAct: this.cardAct,
-                isTarget: this.isTarget,
-                cardDropped: this.cardDropped,
-                cardOver: this.cardOver,
-                cardAim: this.cardAim,
-            };
-            return (
-                <BoardContext.Provider value={value}>
-                    <GameScreen sendMessage={this.props.sendMessage} app={this.props.app} />
-                </BoardContext.Provider>
-            );
-        }
+        };
+        const value = {
+            dragging,
+            cardSelect,
+            cardAct,
+            isTarget,
+            cardDropped,
+            cardOver,
+            cardAim,
+        };
+        return (
+            <BoardContext.Provider value={value}>
+                <GameScreen sendMessage={props.sendMessage} app={props.app} />
+            </BoardContext.Provider>
+        );
     };
 
     Board.propTypes = {

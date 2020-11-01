@@ -3,7 +3,7 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-duplicates */
 
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Hero from './Hero';
@@ -13,8 +13,8 @@ import Hand from './Hand';
 import Grave from './Grave';
 import '../css/App.css';
 import '../css/GameScreen.css';
-
 import bat from '../images/cards/batCard.png';
+import usePrevious from './usePrevious';
 
 const { animation: animationConst } = require('../constants');
 
@@ -74,86 +74,75 @@ const BatCard = () => (
     </div>
 );
 
-class Player extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            animation: null,
-        };
-        this.playAnimation = this.playAnimation.bind(this);
-    }
+const Player = (props) => {
+    const [animation, setAnimation] = useState(null);
+    const prevDeal = usePrevious(props.player.deal);
+    const prevTurningHand = usePrevious(props.player.turningHand);
+    const playerClass = props.active ? 'player-active' : 'player-inactive';
+    const playerPosition = props.active ? 'player player-bottom' : 'player player-top';
+    const playAnimation = (animName) => {
+        setAnimation(animName);
+        setTimeout(() => setAnimation(null), 2000);
+    };
 
-    componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
     // animation for cards deal from gravyeard to deck
-        if (this.props.player.deal !== prevProps.player.deal) {
-            this.playAnimation(animationConst.CARDS);
+    useEffect(() => {
+        if (prevDeal !== undefined && props.player.deal !== prevDeal) {
+            playAnimation(animationConst.CARDS);
         }
-        // animation for Turning Potion - active player gets cards from inactive player hand
-        if (
-            this.props.player.turningHand !== prevProps.player.turningHand
-      && this.props.player.turningHand === true
-        ) {
-            this.playAnimation(animationConst.POTION);
+    }, [props.player.deal, playAnimation]);
+
+    // animation for Turning Potion - active player gets cards from inactive player hand
+    useEffect(() => {
+        if (props.player.turningHand !== prevTurningHand && props.player.turningHand === true) {
+            playAnimation(animationConst.POTION);
         }
-    }
+    }, [props.player.turningHand, playAnimation]);
 
-    playAnimation(animName) {
-        // console.log('We are in Animation!', animName);
-        this.setState({ animation: animName });
-        setTimeout(() => this.setState({ animation: null }), 2000);
-    }
-
-    render() {
-        const playerClass = this.props.active ? 'player-active' : 'player-inactive';
-        const playerPosition = this.props.active
-            ? 'player player-bottom'
-            : 'player player-top';
-        return (
-            <div className={`${playerPosition} ${playerClass}`}>
-                <Hero
-                    player={this.props.player}
-                    active={this.props.active}
-                    gamePhase={this.props.gamePhase}
+    return (
+        <div className={`${playerPosition} ${playerClass}`}>
+            <Hero
+                player={props.player}
+                active={props.active}
+                gamePhase={props.gamePhase}
+            />
+            <Item
+                item={Object.values(props.player.item)[0]}
+                player={props.player}
+                active={props.active}
+            />
+            {animation === animationConst.BAT ? <BatCard /> : null}
+            <Deck
+                active={props.active}
+                cards={props.player.cards}
+                background={props.player.background}
+            />
+            {props.player.cardsShown ? (
+                <Clairvoyance player={props.player} active={props.active} />
+            ) : null}
+            <Hand
+                active={props.active}
+                inactivePlayer={props.inactivePlayer}
+                background={props.player.background}
+                hand={props.hand}
+                player={props.player}
+            />
+            {animation === animationConst.POTION && props.active ? (
+                <AnimatedHand
+                    inactivePlayer={props.inactivePlayer}
+                    hand={props.inactivePlayer.hand}
                 />
-                <Item
-                    item={Object.values(this.props.player.item)[0]}
-                    player={this.props.player}
-                    active={this.props.active}
-                />
-                {this.state.animation === animationConst.BAT ? <BatCard /> : null}
-                <Deck
-                    active={this.props.active}
-                    cards={this.props.player.cards}
-                    background={this.props.player.background}
-                />
-                {this.props.player.cardsShown ? (
-                    <Clairvoyance player={this.props.player} active={this.props.active} />
-                ) : null}
-                <Hand
-                    active={this.props.active}
-                    inactivePlayer={this.props.inactivePlayer}
-                    background={this.props.player.background}
-                    hand={this.props.hand}
-                    player={this.props.player}
-                />
-                {this.state.animation === animationConst.POTION && this.props.active ? (
-                    <AnimatedHand
-                        inactivePlayer={this.props.inactivePlayer}
-                        hand={this.props.inactivePlayer.hand}
-                    />
-                ) : null}
-                <Grave
-                    player={this.props.player}
-                    active={this.props.active}
-                    grave={this.props.player.grave}
-                    background={this.props.player.background}
-                    animation={this.state.animation}
-                />
-            </div>
-        );
-    }
-}
+            ) : null}
+            <Grave
+                player={props.player}
+                active={props.active}
+                grave={props.player.grave}
+                background={props.player.background}
+                animation={animation}
+            />
+        </div>
+    );
+};
 
 const Deck = (props) => (
     <div className={`deck card-like deck-${props.background}`}>

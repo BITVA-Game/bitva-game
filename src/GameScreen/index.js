@@ -1,6 +1,6 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable max-len */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Player from './Player';
 import MainMenu from '../MainMenu';
@@ -11,6 +11,7 @@ import { getActivePlayer, getInActivePlayer, getActivePlayerName } from '../rule
 import { withBoardContext } from './BoardContext';
 import playSound from '../soundController';
 import BirdsAnimation from './AnimationBirds';
+import usePrevious from './usePrevious';
 
 const { phase: phaseConst } = require('../constants');
 
@@ -18,19 +19,10 @@ const GameScreen = ({ sendMessage, app }) => {
     const [sound, setSound] = useState('');
     const activePlayer = getActivePlayer(app);
     const inactivePlayer = getInActivePlayer(app);
-    // custom hook for getting previous value
-    const usePrevious = (value) => {
-        const ref = useRef();
-        useEffect(() => {
-            ref.current = value;
-        });
-        return ref.current;
-    };
     const prevMoveCounter = usePrevious(activePlayer.moveCounter);
 
     useEffect(() => {
         const actionType = app.game.lastAction.type;
-        console.log('OUR SOUND IS:', sound);
 
         if (sound === '' && prevMoveCounter !== activePlayer.moveCounter) {
             setSound(actionType);
