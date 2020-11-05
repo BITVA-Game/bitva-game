@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './css/App.css';
 import './css/VersusScreen.css';
@@ -30,8 +30,13 @@ const OneHero = (props) => (
 );
 
 const VersusScreen = (props) => {
-    const sendDealAllMessage = () => props.sendMessage({ type: message.DEALALL });
-    const waitForIt = () => setTimeout(() => { sendDealAllMessage(); }, 5000);
+    useEffect(() => {
+        const dealAllmessage = setTimeout(() => {
+            props.sendMessage({ type: message.DEALALL });
+        }, 5000);
+
+        return () => clearTimeout(dealAllmessage);
+    }, []);
 
     return (
         <div className="main-container">
@@ -46,7 +51,7 @@ const VersusScreen = (props) => {
                     <OneHero hero={props.app.game.players[1].hero} />
                 </div>
                 <div className="versus-loading-container">
-                    <div className="versus-loading" onLoad={waitForIt()}>
+                    <div className="versus-loading">
                         <div className="loading" />
                     </div>
                 </div>
