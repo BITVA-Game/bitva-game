@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './css/App.css';
 import WebFont from 'webfontloader';
@@ -29,121 +29,109 @@ function sendMessage(msg) {
     ipcRenderer.send('APP', msg);
 }
 
-class App extends Component {
+const App = () => {
     // Set the initial state, before contacting backend.
-    // Bind the function to send messages
-    constructor(props) {
-        super(props);
-        this.state = { loaded: false, app: { manager: { screen: screenConst.LOADING } } };
-        this.loadAnimation = this.loadAnimation.bind(this);
-    }
+    const [loaded, setLoaded] = useState(false);
+    const [app, setApp] = useState({ manager: { screen: screenConst.LOADING } });
+    const loadAnimation = () => {
+        setLoaded((oldLoaded) => !oldLoaded);
+    };
 
     // When the page loads, get GSO from backend, save it to state.
-    componentDidMount() {
-        ipcRenderer.on('APP', (event, arg) => {
-            // console.log({ app: arg });
-            this.setState({ app: arg });
-        });
+    useEffect(() => {
+        ipcRenderer.on('APP', (event, arg) => setApp(arg));
         sendMessage({ type: messageConst.INIT });
-        setTimeout(() => this.loadAnimation(), 0);
-    }
+        setTimeout(() => loadAnimation(), 0);
+    }, []);
 
-    loadAnimation() {
-        this.setState((oldState) => ({ loaded: !oldState.loaded }));
-    }
-
-    showApplication() {
-        console.log('APP: ', this.state.app.manager.screen, this.state.app);
-        switch (this.state.app.manager.screen) {
+    const showApplication = () => {
+        console.log('APP: ', app.manager.screen, app);
+        switch (app.manager.screen) {
         case screenConst.LOADING:
             return screenConst.LOADING;
         case screenConst.LOGIN:
             return (
                 <LoginScreen
                     sendMessage={sendMessage}
-                    accounts={this.state.app.accounts}
+                    accounts={app.accounts}
                     message={messageConst.LOGIN}
                 />
             );
         case screenConst.STARTSCREEN:
-            return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
+            return <StartScreen sendMessage={sendMessage} app={app} />;
         case screenConst.PROFILE:
-            return <Profile sendMessage={sendMessage} app={this.state.app} />;
+            return <Profile sendMessage={sendMessage} app={app} />;
         case screenConst.SELECTOPPONENT:
             return (
                 <LoginScreen
                     sendMessage={sendMessage}
-                    accounts={this.state.app.accounts}
+                    accounts={app.accounts}
                     message={messageConst.OPPONENT}
-                    participants={this.state.app.participants}
+                    participants={app.participants}
                 />
             );
         case screenConst.HEROSELECT:
             return (
                 <HeroSelection
                     sendMessage={sendMessage}
-                    app={this.state.app}
-                    key={this.state.app.heroSelect.activePlayer}
+                    app={app}
+                    key={app.heroSelect.activePlayer}
                 />
             );
         case screenConst.VS:
-            return <PlayScreen sendMessage={sendMessage} app={this.state.app} />;
+            return <PlayScreen sendMessage={sendMessage} app={app} />;
         case screenConst.VERSUS:
-            return <VersusScreen sendMessage={sendMessage} app={this.state.app} />;
+            return <VersusScreen sendMessage={sendMessage} app={app} />;
         case screenConst.GAMESCREEN:
-            return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
+            return <GameScreen sendMessage={sendMessage} app={app} />;
         case screenConst.OVER:
-            return <GameScreen sendMessage={sendMessage} app={this.state.app} />;
+            return <GameScreen sendMessage={sendMessage} app={app} />;
         case screenConst.NETWORKSCREEN:
-            return <NetworkPlay sendMessage={sendMessage} app={this.state.app} />;
+            return <NetworkPlay sendMessage={sendMessage} app={app} />;
         default:
-            return `UNKNOWN SCREEN NAME ${this.state.app.manager.screen}`;
+            return `UNKNOWN SCREEN NAME ${app.manager.screen}`;
         }
-    }
+    };
+    WebFont.load({
+        custom: {
+            families: ['Ruslan Display', 'Sedan SC'],
+            urls: ['fonts/RuslanDisplay.css', 'fonts/Sedan-SC.css'],
+        },
+    });
+    const needAdjustment = app.system === 768;
 
-    render() {
-    // console.log('APP ', this.state.app);
-        WebFont.load({
-            custom: {
-                families: ['Ruslan Display', 'Sedan SC'],
-                urls: ['fonts/RuslanDisplay.css', 'fonts/Sedan-SC.css'],
-            },
-        });
-        const { loaded } = this.state;
-        const needAdjustment = this.state.app.system === 768;
-        return (
-            <div className={needAdjustment ? 'app-768' : ''}>
-                <div id="background" className="start-screen">
-                    <CSSTransition classNames="moveForest" in={loaded} timeout={5000}>
-                        <div>
-                            <img alt="hut" src={hutImage} className="background-hut" />
-                            <img
-                                alt="grey tree 1"
-                                src={greyTreeL}
-                                className="background-greyTreeL"
-                            />
-                            <img
-                                alt="grey tree 2"
-                                src={greyTreeR}
-                                className="background-greyTreeR"
-                            />
-                            <img
-                                alt="black tree 1"
-                                src={blackTreeL}
-                                className="background-blackTreeL"
-                            />
-                            <img
-                                alt="black tree 2"
-                                src={blackTreeR}
-                                className="background-blackTreeR"
-                            />
-                        </div>
-                    </CSSTransition>
-                </div>
-                {this.showApplication()}
+    return (
+        <div className={needAdjustment ? 'app-768' : ''}>
+            <div id="background" className="start-screen">
+                <CSSTransition classNames="moveForest" in={loaded} timeout={5000}>
+                    <div>
+                        <img alt="hut" src={hutImage} className="background-hut" />
+                        <img
+                            alt="grey tree 1"
+                            src={greyTreeL}
+                            className="background-greyTreeL"
+                        />
+                        <img
+                            alt="grey tree 2"
+                            src={greyTreeR}
+                            className="background-greyTreeR"
+                        />
+                        <img
+                            alt="black tree 1"
+                            src={blackTreeL}
+                            className="background-blackTreeL"
+                        />
+                        <img
+                            alt="black tree 2"
+                            src={blackTreeR}
+                            className="background-blackTreeR"
+                        />
+                    </div>
+                </CSSTransition>
             </div>
-        );
-    }
-}
+            {showApplication()}
+        </div>
+    );
+};
 
 export default App;
