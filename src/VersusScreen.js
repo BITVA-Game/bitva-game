@@ -23,32 +23,32 @@ const images = {
     });
 }; */
 
-const OneHero = (props) => (
+const OneHero = ({ hero }) => (
     <div className="versus-one-hero">
-        <img src={images[props.hero]} alt={props.hero} />
+        <img src={images[hero]} alt={hero} />
     </div>
 );
 
-const VersusScreen = (props) => {
+const VersusScreen = ({ sendMessage, app }) => {
     useEffect(() => {
         const dealAllmessage = setTimeout(() => {
-            props.sendMessage({ type: message.DEALALL });
+            sendMessage({ type: message.DEALALL });
         }, 5000);
 
         return () => clearTimeout(dealAllmessage);
-    }, []);
+    }, [sendMessage]);
 
     return (
         <div className="main-container">
             <div className="versus-container">
                 <div className="versus-heroes-container">
-                    <OneHero hero={props.app.game.players[0].hero} />
+                    <OneHero hero={app.game.players[0].hero} />
                     <div className="vs">
                         <p>
                             VS
                         </p>
                     </div>
-                    <OneHero hero={props.app.game.players[1].hero} />
+                    <OneHero hero={app.game.players[1].hero} />
                 </div>
                 <div className="versus-loading-container">
                     <div className="versus-loading">
