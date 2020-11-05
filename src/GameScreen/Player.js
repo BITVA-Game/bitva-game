@@ -90,14 +90,14 @@ const Player = (props) => {
         if (prevDeal !== undefined && props.player.deal !== prevDeal) {
             playAnimation(animationConst.CARDS);
         }
-    }, [props.player.deal, playAnimation]);
+    }, [props.player.deal, playAnimation, prevDeal]);
 
     // animation for Turning Potion - active player gets cards from inactive player hand
     useEffect(() => {
         if (props.player.turningHand !== prevTurningHand && props.player.turningHand === true) {
             playAnimation(animationConst.POTION);
         }
-    }, [props.player.turningHand, playAnimation]);
+    }, [props.player.turningHand, playAnimation, prevTurningHand]);
 
     return (
         <div className={`${playerPosition} ${playerClass}`}>

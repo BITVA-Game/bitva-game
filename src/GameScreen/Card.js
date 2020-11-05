@@ -179,7 +179,7 @@ const Card = ({
 };
 
 Card.propTypes = {
-    active: PropTypes.bool.isRequired,
+    active: PropTypes.bool,
     card: PropTypes.object.isRequired,
     draggable: PropTypes.bool,
     cardKey: PropTypes.string,
@@ -189,6 +189,7 @@ Card.propTypes = {
 Card.defaultProps = {
     draggable: null,
     cardKey: null,
+    active: undefined,
 };
 
 CardFront.propTypes = {

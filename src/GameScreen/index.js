@@ -20,10 +20,9 @@ const GameScreen = ({ sendMessage, app }) => {
     const activePlayer = getActivePlayer(app);
     const inactivePlayer = getInActivePlayer(app);
     const prevMoveCounter = usePrevious(activePlayer.moveCounter);
+    const actionType = app.game.lastAction.type;
 
     useEffect(() => {
-        const actionType = app.game.lastAction.type;
-
         if (sound === '' && prevMoveCounter !== activePlayer.moveCounter) {
             setSound(actionType);
         } if (sound !== '') {
@@ -32,7 +31,7 @@ const GameScreen = ({ sendMessage, app }) => {
                 setSound('');
             }, 1000);
         }
-    }, [activePlayer.moveCounter, sound]);
+    }, [activePlayer.moveCounter, sound, actionType, prevMoveCounter]);
 
     const playableHand = (player) => {
         if (player === activePlayer && activePlayer.turningHand === true) {
