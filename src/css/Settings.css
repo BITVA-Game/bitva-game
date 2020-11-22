@@ -1,0 +1,40 @@
+.slider-container {
+margin: 20px;
+color: black;
+display: flex;
+align-items: center;
+}
+
+.slider-container label {
+    margin-right: 30px;
+}
+
+.slider-container input[type=range] {   
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    background: transparent; /* Otherwise white in Chrome */  
+    outline: none;  
+  }
+
+.slider-container input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 1px solid black;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: rgb(183, 74, 69);    
+    cursor: pointer;
+    margin-top: -7px; /*You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+
+  }
+  
+.slider-container input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    background: #ffffff;
+    border-radius: 30px;
+    border: 0.2px solid #010101;
+  }
+  
