@@ -1,6 +1,6 @@
 import UIFx from 'uifx';
 
-const click = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, { volume: 1.0 });
+const click = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, { volume: 1 });
 // temporary on top as graveyard sound is used as default for cards with no own sounds
 const graveyardSound = new UIFx(`${process.env.PUBLIC_URL}/sound/graveyard.mp3`, { volume: 1.0 });
 

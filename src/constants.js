@@ -20,6 +20,7 @@ const screen = {
 
 const message = {
     ACTION: 'ACTION',
+    CHANGEVOLUME: 'CHANGEVOLUME',
     CREATEACC: 'CREATEACC',
     DEALALL: 'DEALALL',
     DELETEACC: 'DELETEACC',
