@@ -193,10 +193,15 @@ function pInactiveIsTarget(game, activeCard, cardId) {
     case cardConst.HEALCATEGORY:
         break;
     case cardConst.ATTACKCATEGORY:
+        // after player's act we change lastAction property of the game
+        if (Object.keys(pInactive.item).length !== 0
+        && Object.values(pInactive.item)[0].category === cardConst.SHIELDCATEGORY) {
+            lastActionChange(game, action.ATTACKITEMOPPONENT);
+        } else {
+            lastActionChange(game, action.ATACKOPPONENT);
+        }
         attackOpponent(pInactive, pActive, activeCard.points);
         turningPotionEffect(pInactive, pActive, cardId);
-        // after player's act we change lastAction property of the game
-        lastActionChange(game, action.ATACKOPPONENT);
         break;
     // if player attacks with card category holdCard we call disableCards function
     // then move this attack card to gravyeard
