@@ -1,7 +1,7 @@
 const { message } = require('../src/constants');
 
 function handle(app, msg) {
-    const initSound = { soundOn: true, volume: 0 };
+    const initSound = { soundOn: true, volume: 1 };
     switch (msg.type) {
     case message.INIT:
         return initSound;
