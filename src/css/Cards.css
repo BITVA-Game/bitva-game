@@ -268,6 +268,138 @@
     transition: transform 0.4s;
     width: 100%;
 }
+/* path animation for tutorial */
+.card-arrow {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    /*background-color: #C8DF34;*/
+    top: -155px;
+    left: 195px;
+/*    transition: all 2s;*/
+    transform: rotate(45deg);
+    display: none;
+}
+
+.card-like:hover .card-arrow {
+  /* top: -500px;
+   left: 500px;*/ 
+   display: block;
+}
+/* path animation for tutorial */
+@keyframes leaf-odd-grow {
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+}
+
+@keyframes leaf-even-grow {
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+
+.leaf {
+  position: absolute;
+  
+  width: 15px;
+  height: 15px;
+  
+  border-radius: 75% 0 75% 0;
+  background: linear-gradient(to right, rgb(57,57,57), #b74a45);
+}
+
+.leaf:nth-child(odd) {
+  left: 50%;
+  
+  transform-origin: 0% 100%;
+  animation-name: leaf-odd-grow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.leaf:nth-child(even) {  
+  left: -50%;
+  
+  transform-origin: 50% 100%;
+  animation-name: leaf-even-grow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite; 
+  animation-fill-mode: both;
+}
+
+.leaf:nth-child(1) {
+  top: 5px;
+  animation-iteration-count: infinite;
+  animation-delay: 3.0s;
+}
+
+.leaf:nth-child(2) {
+  top: 25px;
+  animation-iteration-count: infinite;
+  animation-delay: 2.7s;
+}
+
+.leaf:nth-child(3) {
+  top: 45px;
+  animation-iteration-count: infinite;
+  animation-delay: 2.4s;
+}
+
+.leaf:nth-child(4) {
+  top: 65px;
+  animation-iteration-count: infinite;
+  animation-delay: 2.1s;
+}
+
+.leaf:nth-child(5) {
+  top: 85px;
+  animation-iteration-count: infinite;
+  animation-delay: 1.8s;
+}
+
+.leaf:nth-child(6) {
+  top: 105px;
+  animation-iteration-count: infinite;
+  animation-delay: 1.5s;
+}
+
+.leaf:nth-child(7) {
+  top: 125px;
+  animation-iteration-count: infinite;
+  animation-delay: 1.2s;
+}
+
+.leaf:nth-child(8) {
+  top: 145px;
+  animation-iteration-count: infinite;
+  animation-delay: 0.9s;
+}
+
+.leaf:nth-child(9) {
+  top: 165px;
+  animation-iteration-count: infinite;
+  animation-delay: 0.6s;
+}
+
+.leaf:nth-child(10) {
+  top: 185px;
+  animation-iteration-count: infinite;
+  animation-delay: 0.3s;
+}
+
+/*end of animation */ 
 
 .player-top .card {
     transform: rotate(180deg);

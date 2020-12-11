@@ -173,6 +173,18 @@ const Card = ({
                         />
                     )}
                 </div>
+                <div className="card-arrow">               
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                    <div className="leaf"></div>
+                </div>
             </div>
         </>
     );
