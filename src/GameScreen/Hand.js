@@ -50,6 +50,7 @@ const CardContainer = ({
                         inactivePlayer={inactivePlayer}
                         cardKey={cardId}
                         card={card}
+                        index={index}
                         draggable={active}
                         player={player}
                         style={cardDropped ? cardOrigin(dragging, card) : null}

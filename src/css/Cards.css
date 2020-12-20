@@ -268,24 +268,129 @@
     transition: transform 0.4s;
     width: 100%;
 }
+
+/* card number 2 (shield)*/
+
+.card-arrow-shield {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    /*background-color: #C8DF34;*/
+    top: -95px;
+    left: -10px;
+/*    transition: all 2s;*/
+    transform: rotate(-45deg);
+    /*display: none;*/
+}
+
+
+
 /* path animation for tutorial */
+@keyframes shield-odd-grow {
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+}
+
+@keyframes shield-even-grow {
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+
+.indicator-shield {
+  position: absolute;
+  
+  width: 15px;
+  height: 15px;
+  
+  border-radius: 75% 0 75% 0;
+  background: linear-gradient(to right, rgb(57,57,57), #b74a45);
+}
+
+.indicator-shield:nth-child(odd) {
+  left: 50%;
+  
+  transform-origin: 0% 100%;
+  animation-name: shield-odd-grow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.indicator-shield:nth-child(even) {  
+  left: -50%;
+  
+  transform-origin: 50% 100%;
+  animation-name: shield-even-grow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite; 
+  animation-fill-mode: both;
+}
+
+.indicator-shield:nth-child(1) {
+  top: 5px;
+  animation-iteration-count: infinite;
+  animation-delay: 3.0s;
+}
+
+.indicator-shield:nth-child(2) {
+  top: 25px;
+  animation-iteration-count: infinite;
+  animation-delay: 2.7s;
+}
+
+.indicator-shield:nth-child(3) {
+  top: 45px;
+  animation-iteration-count: infinite;
+  animation-delay: 2.4s;
+}
+
+.indicator-shield:nth-child(4) {
+  top: 65px;
+  animation-iteration-count: infinite;
+  animation-delay: 2.1s;
+}
+
+.indicator-shield:nth-child(5) {
+  top: 85px;
+  animation-iteration-count: infinite;
+  animation-delay: 1.8s;
+}
+
+/* path animation for tutorial 
+card number 3 in hand (attack) */
 .card-arrow {
     position: absolute;
     height: 20px;
     width: 20px;
     /*background-color: #C8DF34;*/
-    top: -155px;
-    left: 195px;
+    top: -175px;
+    left: 205px;
 /*    transition: all 2s;*/
     transform: rotate(45deg);
-    display: none;
+    /*display: none;*/
 }
 
-.card-like:hover .card-arrow {
-  /* top: -500px;
-   left: 500px;*/ 
+/*
+.card-like:active .card-arrow {
+   top: -500px;
+   left: 500px; 
    display: block;
+
 }
+*/
+
 /* path animation for tutorial */
 @keyframes leaf-odd-grow {
   0% {
@@ -309,7 +414,7 @@
 }
 
 
-.leaf {
+.indicator-attack-opp {
   position: absolute;
   
   width: 15px;
@@ -319,7 +424,7 @@
   background: linear-gradient(to right, rgb(57,57,57), #b74a45);
 }
 
-.leaf:nth-child(odd) {
+.indicator-attack-opp:nth-child(odd) {
   left: 50%;
   
   transform-origin: 0% 100%;
@@ -329,7 +434,7 @@
   animation-fill-mode: both;
 }
 
-.leaf:nth-child(even) {  
+.indicator-attack-opp:nth-child(even) {  
   left: -50%;
   
   transform-origin: 50% 100%;
@@ -339,65 +444,72 @@
   animation-fill-mode: both;
 }
 
-.leaf:nth-child(1) {
-  top: 5px;
+.indicator-attack-opp:nth-child(1) {
+  top: 15px;
   animation-iteration-count: infinite;
   animation-delay: 3.0s;
 }
 
-.leaf:nth-child(2) {
+.indicator-attack-opp:nth-child(2) {
   top: 25px;
   animation-iteration-count: infinite;
   animation-delay: 2.7s;
 }
 
-.leaf:nth-child(3) {
+.indicator-attack-opp:nth-child(3) {
   top: 45px;
   animation-iteration-count: infinite;
   animation-delay: 2.4s;
 }
 
-.leaf:nth-child(4) {
+.indicator-attack-opp:nth-child(4) {
   top: 65px;
   animation-iteration-count: infinite;
   animation-delay: 2.1s;
 }
 
-.leaf:nth-child(5) {
+.indicator-attack-opp:nth-child(5) {
   top: 85px;
   animation-iteration-count: infinite;
   animation-delay: 1.8s;
 }
 
-.leaf:nth-child(6) {
+.indicator-attack-opp:nth-child(6) {
   top: 105px;
   animation-iteration-count: infinite;
   animation-delay: 1.5s;
 }
 
-.leaf:nth-child(7) {
+.indicator-attack-opp:nth-child(7) {
   top: 125px;
   animation-iteration-count: infinite;
   animation-delay: 1.2s;
 }
 
-.leaf:nth-child(8) {
+.indicator-attack-opp:nth-child(8) {
   top: 145px;
   animation-iteration-count: infinite;
   animation-delay: 0.9s;
 }
 
-.leaf:nth-child(9) {
+.indicator-attack-opp:nth-child(9) {
   top: 165px;
   animation-iteration-count: infinite;
   animation-delay: 0.6s;
 }
 
-.leaf:nth-child(10) {
+.indicator-attack-opp:nth-child(10) {
   top: 185px;
   animation-iteration-count: infinite;
   animation-delay: 0.3s;
 }
+
+.indicator-attack-opp:nth-child(11) {
+  top: 205px;
+  animation-iteration-count: infinite;
+  animation-delay: 0.3s;
+}
+
 
 /*end of animation */ 
 

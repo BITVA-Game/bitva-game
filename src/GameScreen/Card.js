@@ -112,7 +112,7 @@ const CardBack = ({ backgroundColor, info, name }) => (
 );
 
 const Card = ({
-    active, card, cardKey, draggable, player,
+    active, card, cardKey, draggable, player, index,
 }) => {
     const {
         id, name, info, type, disabled, panic, category,
@@ -173,18 +173,32 @@ const Card = ({
                         />
                     )}
                 </div>
-                <div className="card-arrow">               
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
-                    <div className="leaf"></div>
+
+                {index == 1 && draggable &&
+                <div className="card-arrow-shield">               
+                    <div className="indicator-shield"></div>
+                    <div className="indicator-shield"></div>
+                    <div className="indicator-shield"></div>
+                    <div className="indicator-shield"></div>
+                    <div className="indicator-shield"></div>
                 </div>
+                 }
+
+                {index == 2 && draggable &&
+                <div className="card-arrow">               
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                    <div className="indicator-attack-opp"></div>
+                </div>
+                 }
             </div>
         </>
     );
