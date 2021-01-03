@@ -199,6 +199,20 @@ const Card = ({
                     <div className="indicator-attack-opp"></div>
                 </div>
                  }
+
+
+                {index == 0 && draggable &&
+                <div className="card-arrow-heal">               
+                    {/* <div className="indicator-heal"></div> */}
+                    {/* <div className="indicator-heal"></div> */}
+                    {/* <div className="indicator-heal"></div> */}
+                    <div className="indicator-heal"></div>
+                    <div className="indicator-heal"></div>
+                    <div className="indicator-heal"></div>
+                    <div className="indicator-heal"></div>
+                    <div className="indicator-heal"></div>
+                </div>
+                 }
             </div>
         </>
     );

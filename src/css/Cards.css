@@ -285,7 +285,7 @@
 
 
 
-/* path animation for tutorial */
+/* path shield animation for tutorial */
 @keyframes shield-odd-grow {
   0% {
     transform: rotate(-45deg) scale(0);
@@ -391,7 +391,7 @@ card number 3 in hand (attack) */
 }
 */
 
-/* path animation for tutorial */
+/* path attack animation for tutorial */
 @keyframes leaf-odd-grow {
   0% {
     transform: rotate(-45deg) scale(0);
@@ -509,6 +509,105 @@ card number 3 in hand (attack) */
   animation-iteration-count: infinite;
   animation-delay: 0.3s;
 }
+
+
+
+
+/* path heal animation for tutorial */
+.card-arrow-heal {
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    /*background-color: #C8DF34;*/
+    top: -8px;
+    left:-80px;
+/*    transition: all 2s;*/
+    transform: rotate(-45deg);
+    /*display: none;*/
+}
+
+@keyframes leaf-odd-grow {
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+}
+
+@keyframes leaf-even-grow {
+  0% {
+    transform: rotate(-45deg) scale(0);
+  }
+  100% {
+    transform: rotate(-45deg) scale(1);
+  }
+}
+
+
+.indicator-heal {
+  position: absolute;
+  
+  width: 15px;
+  height: 15px;
+  
+  border-radius: 75% 0 75% 0;
+  background: linear-gradient(to right, rgb(57,57,57), #b74a45);
+}
+
+.indicator-heal:nth-child(odd) {
+  left: 50%;
+  
+  transform-origin: 0% 100%;
+  animation-name: leaf-odd-grow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+.indicator-heal:nth-child(even) {  
+  left: -50%;
+  
+  transform-origin: 50% 100%;
+  animation-name: leaf-even-grow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite; 
+  animation-fill-mode: both;
+}
+
+.indicator-heal:nth-child(1) {
+  top: 0px;
+  animation-iteration-count: infinite;
+  animation-delay: 2.4s;
+}
+
+.indicator-heal:nth-child(2) {
+  top: 20px;
+  animation-iteration-count: infinite;
+  animation-delay: 2.1s;
+}
+
+.indicator-heal:nth-child(3) {
+  top: 40px;
+  animation-iteration-count: infinite;
+  animation-delay: 1.8s;
+}
+
+.indicator-heal:nth-child(4) {
+  top: 60px;
+  animation-iteration-count: infinite;
+  animation-delay: 1.5s;
+}
+
+.indicator-heal:nth-child(5) {
+  top: 80px;
+  animation-iteration-count: infinite;
+  animation-delay: 1.2s;
+}
+
 
 
 /*end of animation */ 
