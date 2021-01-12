@@ -12,8 +12,8 @@ import graveyard from '../images/cards/graveyard.png';
 const { target, sound: soundConst, animation: animationConst } = require('../constants');
 
 const Animation = (props) => {
-    const { soundOn } = useContext(SettingsContext);
-    playSound(soundConst.CARDSFROMGRAVE, soundOn);
+    const { soundOn, volume } = useContext(SettingsContext);
+    playSound(soundConst.CARDSFROMGRAVE, soundOn, volume);
 
     return (
         <div className="stack">

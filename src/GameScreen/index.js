@@ -29,7 +29,7 @@ class GameScreen extends Component {
         if (this.state.sound === '' && getActivePlayer(this.props.app).moveCounter !== getActivePlayer(prevProps.app).moveCounter) {
             this.startSound(actionType);
         } if (this.state.sound !== '') {
-            playSound(actionType, this.props.app.settings.soundOn);
+            playSound(actionType, this.props.app.settings.soundOn, this.props.app.settings.volume);
             setTimeout(() => {
                 this.setState({ sound: '' });
             }, 1000);

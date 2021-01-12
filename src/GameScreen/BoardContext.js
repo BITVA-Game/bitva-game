@@ -58,7 +58,11 @@ export function withBoardContext(GameScreen) {
             if (itemActive && itemActive.category === cardConst.GENERATORCATEGORY
                 && activePlayer.hero === playerWithMalachiteBox) {
                 // this.playAnimation('bat');
-                playSound(soundConst.ATTACKOPPONENT, this.props.app.settings.soundOn);
+                playSound(
+                    soundConst.ATTACKOPPONENT,
+                    this.props.app.settings.soundOn,
+                    this.props.app.settings.volume,
+                );
             }
         }
 

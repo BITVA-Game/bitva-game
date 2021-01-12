@@ -51,14 +51,14 @@ class HeroSelection extends Component {
     }
 
     play() {
-        playSound(soundConst.CLICK, this.app.settings.soundOn);
+        playSound(soundConst.CLICK, this.app.settings.soundOn, this.app.settings.volume);
         this.props.sendMessage({
             type: message.HEROSELECTED,
             hero: this.state.hero.id,
             player: this.app.heroSelect.activePlayer,
         });
         if (this.props.sendMessage && this.state.hero.id) {
-            playSound(this.state.hero.id, this.app.settings.soundOn);
+            playSound(this.state.hero.id, this.app.settings.soundOn, this.app.settings.volume);
         }
     }
 

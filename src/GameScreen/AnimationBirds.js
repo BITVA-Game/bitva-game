@@ -5,8 +5,8 @@ import playSound from '../soundController';
 const { sound: soundConst } = require('../constants');
 
 const Birds = () => {
-    const { soundOn } = useContext(SettingsContext);
-    playSound(soundConst.BIRDS, soundOn);
+    const { soundOn, volume } = useContext(SettingsContext);
+    playSound(soundConst.BIRDS, soundOn, volume);
 
     return (
         <div className="animation-game-screen">

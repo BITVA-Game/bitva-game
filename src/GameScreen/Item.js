@@ -11,7 +11,7 @@ import playSound from '../soundController';
 const { card: cardConst, target } = require('../constants');
 
 const Item = (props) => {
-    const { soundOn } = useContext(SettingsContext);
+    const { soundOn, volume } = useContext(SettingsContext);
     const {
         isTarget, cardDropped, cardOver,
     } = useContext(BoardContext);
@@ -33,14 +33,14 @@ const Item = (props) => {
                 || props.item.id === cardConst.WATERDEADCARD
                 || props.item.id === cardConst.WATERLIVINGCARD)) {
             if (firstSound.current) {
-                playSound(props.item.id, soundOn);
+                playSound(props.item.id, soundOn, volume);
                 firstSound.current = false;
             }
         }
         if (!props.item) {
             firstSound.current = true;
         }
-    }, [props.item, firstSound, soundOn]);
+    }, [props.item, firstSound, soundOn, volume]);
 
     return (
         <div

@@ -95,7 +95,7 @@ class Login extends Component {
     }
 
     toStartScreen() {
-        playSound(soundConst.CLICK, this.props.settings.soundOn);
+        playSound(soundConst.CLICK, this.props.settings.soundOn, this.props.settings.volume);
         this.props.sendMessage({
             type: this.props.message,
             account: this.state.accountId,

@@ -52,9 +52,9 @@ export const action = {
     yaga,
 };
 
-function playSound(type, soundOn, count) {
+function playSound(type, soundOn, volume, count) {
     // console.log('We play Sound:', type, count);
-    const sound = soundOn ? action[type] : action[type].setVolume(0);
+    const sound = soundOn ? action[type].setVolume(volume * 1) : action[type].setVolume(0);
     if (!count) {
         sound.play();
     } else {

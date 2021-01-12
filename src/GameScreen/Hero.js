@@ -38,7 +38,7 @@ const HeroImage = ({ hero }) => (
 );
 
 const Hero = (props) => {
-    const { soundOn } = useContext(SettingsContext);
+    const { soundOn, volume } = useContext(SettingsContext);
     const { isTarget, cardDropped, cardOver } = useContext(BoardContext);
     const activeHero = props.active ? target.HERO : target.OPPONENT;
     const heroClass = isTarget(activeHero, props.player) ? 'target' : '';
@@ -49,7 +49,7 @@ const Hero = (props) => {
     useEffect(() => {
         if (props.gamePhase !== phaseConst.OVER && props.active
             && props.player.moveCounter === 0 && props.player.health.current > 6) {
-            setTimeout(() => playSound(soundConst.HEARTBEATSINGLE, soundOn), 2000);
+            setTimeout(() => playSound(soundConst.HEARTBEATSINGLE, soundOn, volume), 2000);
         }
     }, [props.active, props.gamePhase, props.player.moveCounter, props.player.health, soundOn]);
 
@@ -61,10 +61,10 @@ const Hero = (props) => {
             clearTimeout(heartTime);
             if (props.gamePhase !== phaseConst.OVER && props.active) {
                 if (props.player.health.current <= 3) {
-                    playSound(soundConst.HEARTBEATFAST, soundOn);
+                    playSound(soundConst.HEARTBEATFAST, soundOn, volume);
                 }
                 if (props.player.health.current <= 6 && props.player.health.current > 3) {
-                    playSound(soundConst.HEARTBEAT, soundOn);
+                    playSound(soundConst.HEARTBEAT, soundOn, volume);
                 }
             }
 

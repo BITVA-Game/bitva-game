@@ -63,7 +63,7 @@ const CardContainer = ({
 const Hand = ({
     active, background, hand, inactivePlayer, player, gamePhase,
 }) => {
-    const { soundOn } = useContext(SettingsContext);
+    const { soundOn, volume } = useContext(SettingsContext);
     const handKeys = Object.keys(hand);
 
     // need key to hold the space for card container; animationDelay will change after card's shift
@@ -96,7 +96,7 @@ const Hand = ({
 
         if (!gameOver && newCardsInHand.length > 0) {
             // eslint-disable-next-line no-unused-expressions
-            playSound(soundConst.CARD, soundOn, newCardsInHand.length);
+            playSound(soundConst.CARD, soundOn, volume, newCardsInHand.length);
             // put new cards in new object
             let index = 0;
             Object.keys(cardContainers).forEach((el) => {
@@ -115,7 +115,7 @@ const Hand = ({
     // we call playSound in one hand only to avoid cards sound to be called twice
     useEffect(() => {
         if (firstSound === true && !active) {
-            playSound(soundConst.CARD, soundOn, Object.keys(inactivePlayer.hand).length);
+            playSound(soundConst.CARD, soundOn, volume, Object.keys(inactivePlayer.hand).length);
         }
         setFirstSound(false);
     }, [firstSound, active, inactivePlayer.hand, soundOn]);
