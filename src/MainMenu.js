@@ -32,7 +32,7 @@ const ToggleButton = (props) => (
         onKeyDown={props.toggle}
         tabIndex="-1"
     >
-    ▶
+        ▶
     </div>
 );
 
@@ -68,6 +68,11 @@ class MainMenu extends Component {
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton
+                            name="Tutorial"
+                            type="TUTORIAL"
+                            sendMessage={this.props.sendMessage}
+                        />
+                        <MenuButton
                             name="Tournament"
                             type="PLAY"
                             sendMessage={this.props.sendMessage}
@@ -88,11 +93,6 @@ class MainMenu extends Component {
                         <MenuButton
                             name="Profile"
                             type="PROFILE"
-                            sendMessage={this.props.sendMessage}
-                        />
-                        <MenuButton
-                            name="Tutorial"
-                            type="TUTORIAL"
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton

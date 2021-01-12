@@ -8,6 +8,8 @@ function handle(app, msg) {
         return screen.STARTSCREEN;
     case message.PROFILE:
         return screen.PROFILE;
+    case message.TUTORIAL:
+        return screen.TUTORIAL;
     case message.SELECTOPPONENT:
         return screen.SELECTOPPONENT;
     case message.OPPONENT:

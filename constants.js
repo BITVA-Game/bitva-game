@@ -12,6 +12,7 @@ const screen = {
     VS: 'VS',
     NETWORKSCREEN: 'NETWORKSCREEN',
     SELECTOPPONENT: 'SELECTOPPONENT',
+    TUTORIAL: 'TUTORIAL',
 };
 
 const message = {
@@ -33,6 +34,7 @@ const message = {
     JOIN: 'JOIN',
     SWITCHACTIVE: 'SWITCHACTIVE',
     SELECTOPPONENT: 'SELECTOPPONENT',
+    TUTORIAL: 'TUTORIAL',
 };
 
 const phase = {

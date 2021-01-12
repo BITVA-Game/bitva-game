@@ -11,6 +11,7 @@ import VersusScreen from './VersusScreen';
 import GameScreen from './GameScreen';
 import NetworkPlay from './NetworkPlay';
 import PlayScreen from './PlayScreen';
+import Tutorial from './Tutorial';
 
 import hutImage from './images/backgrounds/Background_hut.png';
 import greyTreeL from './images/backgrounds/GreyTree_2.png';
@@ -67,6 +68,8 @@ class App extends Component {
             return <StartScreen sendMessage={sendMessage} app={this.state.app} />;
         case 'PROFILE':
             return <Profile sendMessage={sendMessage} app={this.state.app} />;
+            case 'TUTORIAL':
+                return <Tutorial sendMessage={sendMessage} app={this.state.app} />;
         case 'SELECTOPPONENT':
             return (
                 <LoginScreen
