@@ -91,6 +91,11 @@ class MainMenu extends Component {
                             sendMessage={this.props.sendMessage}
                         />
                         <MenuButton
+                            name="Tutorial"
+                            type="TUTORIAL"
+                            sendMessage={this.props.sendMessage}
+                        />
+                        <MenuButton
                             name="Settings"
                             type="SETTINGS"
                             sendMessage={this.props.sendMessage}
