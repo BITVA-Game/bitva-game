@@ -4,6 +4,7 @@ import UIFx from 'uifx';
 
 import NewLogin from './NewLogin';
 import DeleteLogin from './DeleteLogin';
+import SkinInfo from '../layout/SkinInfo';
 
 const clickSound2 = new UIFx(`${process.env.PUBLIC_URL}/sound/fin.mp3`, {
     volume: 1.0,
@@ -155,27 +156,27 @@ class Login extends Component {
             : null;
         return (
             <>
-                <section className="main-content">
-                    <div className="login-profiles-container">
-                        {!this.state.form && !this.state.delete
-                            ? this.showAccounts()
-                            : null}
-                        {this.state.form ? (
-                            <NewLogin
-                                sendMessage={this.props.sendMessage}
-                                toggleForm={this.toggleForm}
-                            />
-                        ) : null}
-                        {this.state.delete && this.state.accountId ? (
-                            <DeleteLogin
-                                sendMessage={this.props.sendMessage}
-                                accId={account.id}
-                                accName={account.name}
-                                toggleDelete={this.toggleDelete}
-                            />
-                        ) : null}
-                    </div>
-                </section>
+
+                <SkinInfo>
+                    {!this.state.form && !this.state.delete
+                        ? this.showAccounts()
+                        : null}
+                    {this.state.form ? (
+                        <NewLogin
+                            sendMessage={this.props.sendMessage}
+                            toggleForm={this.toggleForm}
+                        />
+                    ) : null}
+                    {this.state.delete && this.state.accountId ? (
+                        <DeleteLogin
+                            sendMessage={this.props.sendMessage}
+                            accId={account.id}
+                            accName={account.name}
+                            toggleDelete={this.toggleDelete}
+                        />
+                    ) : null}
+                </SkinInfo>
+
                 {this.state.accountId
                     && (this.state.form === false && this.state.delete === false) ? (
                         <Footer toStartScreen={this.toStartScreen} />

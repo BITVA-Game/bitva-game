@@ -4,6 +4,7 @@
     font-size: 36px;
     min-height: 440px;
     min-width: 676px;
+    max-width:  676px;
 }
 
 .login-profiles {
