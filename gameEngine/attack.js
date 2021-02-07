@@ -60,14 +60,20 @@ function reflect(opponent, player, points) {
 // function to handle attack points deduction from opponent player health
 // depending on item card if any present
 function attackOpponent(player, opponent, points) {
-    // console.log('attackOpponent ', player, points);
+    // console.log('attackOpponent ', opponent);
     let itemCategory;
     const itemKey = Object.keys(player.item)[0];
+    let itemOpponentCategory;
+    const itemOpponentKey = Object.keys(opponent.item)[0];
     if (itemKey) {
         itemCategory = player.item[itemKey].category;
+    } if (itemOpponentKey) {
+        itemOpponentCategory = opponent.item[itemOpponentKey].category;
     }
     // we check if item holder is not empty and item card does not have shield category
     const itemLength = Object.keys(player.item).length;
+    const itemOpponentLength = Object.keys(opponent.item).length;
+    
     if (itemLength === 0 || itemCategory !== cardConst.SHIELDCATEGORY) {
     // and if item card does not have 'reflect' category (e.g. magicMirror card)
     // we descrease hero health for attack card points
@@ -86,6 +92,10 @@ function attackOpponent(player, opponent, points) {
         if (player.health.current <= 0) {
             player.health.current = 0;
         }
+    }
+    if (itemOpponentLength === 1 && itemOpponentCategory === cardConst.ATTACKCATEGORY) {
+        // console.log('KLADENETS', opponent);
+        player.health.current -= 1;
     } else if (itemLength === 1 && itemCategory === cardConst.SHIELDCATEGORY) {
     // console.log('Were in attack shield');
     // console.log(itemKey);

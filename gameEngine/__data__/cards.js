@@ -247,6 +247,18 @@ const forestMushroom = {
     disabled: false,
 };
 
+const kladenets = {
+    id: 'kladenets',
+    name: 'Magic Sword Kladenets',
+    type: 'item',
+    icon: 'skull',
+    category: 'attack',
+    categoryName: 'attack',
+    description: "Magic sword, the only bogatyr's weapon that can defeat the dark creatures of evil.",
+    health: 2,
+    healthCurrent: 2,
+    disabled: false,
+};
 
 export default {
     apple,
@@ -254,6 +266,7 @@ export default {
     bowArrow,
     clairvoyance,
     forestMushroom,
+    kladenets,
     magicMirror,
     magicTree,
     malachiteBox,
