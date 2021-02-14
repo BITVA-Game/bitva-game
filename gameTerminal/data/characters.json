@@ -7,6 +7,10 @@
     "cardsNumber": 15,
     "img": "character_ex.png",
     "cards": {
+      "kladenets": {
+        "id": "kladenets",
+        "count": 10
+      },
       "bulat": {
         "id": "bulat",
         "count": 5
