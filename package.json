@@ -15,7 +15,7 @@
     "keygenerator": "^1.0.4",
     "prop-types": "^15.6.2",
     "react": "^16.13.1",
-    "react-dev-utils": "^9.1.0",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.3",
     "react-transition-group": "^4.4.1",
