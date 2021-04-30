@@ -26,10 +26,12 @@ const Item = (props) => {
     const firstSound = useRef(true);
 
     useEffect(() => {
+        console.log("???",props.item);
         if (props.item
             && (props.item.id === cardConst.MAGICMIRRORCARD
                 || props.item.id === cardConst.WATERDEADCARD
-                || props.item.id === cardConst.WATERLIVINGCARD)) {
+                || props.item.id === cardConst.WATERLIVINGCARD
+                || props.item.id === cardConst.PLATEMAILCARD)) {
             if (firstSound.current) {
                 playSound(props.item.id);
                 firstSound.current = false;

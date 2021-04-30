@@ -23,6 +23,7 @@ const turningPotionSound = graveyardSound;
 const yaga = new UIFx(`${process.env.PUBLIC_URL}/sound/yaga.mp3`, { volume: 1.0 });
 const waterDead = new UIFx(`${process.env.PUBLIC_URL}/sound/waterDead.mp3`, { volume: 1.0 });
 const waterLiving = new UIFx(`${process.env.PUBLIC_URL}/sound/waterLiving.mp3`, { volume: 1.0 });
+const plateMail = new UIFx(`${process.env.PUBLIC_URL}/sound/plateMail.mp3`, { volume: 1.0 });
 
 export const action = {
     attackOpponent: attackSound,
@@ -42,6 +43,7 @@ export const action = {
     item: itemSound,
     magicMirror,
     morevna,
+    plateMail,
     premudraya,
     turningPotion: turningPotionSound,
     waterDead,
