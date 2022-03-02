@@ -63,7 +63,7 @@
     "jsdoc": "^3.6.5",
     "nock": "^11.9.1",
     "supertest": "^4.0.2",
-    "url-parse": "^1.4.7",
+    "url-parse": "^1.5.9",
     "wait-on": "^3.3.0"
   },
   "jest": {
