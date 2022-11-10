@@ -7,7 +7,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "caniuse-lite": "^1.0.30001120",
-    "electron": "^7.2.4",
+    "electron": "^18.3.7",
     "electron-devtools-installer": "^2.2.4",
     "express": "^4.17.1",
     "faker": "^4.1.0",
