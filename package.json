@@ -9,7 +9,7 @@
     "caniuse-lite": "^1.0.30001120",
     "electron": "^7.2.4",
     "electron-devtools-installer": "^2.2.4",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "faker": "^4.1.0",
     "google-spreadsheet-to-json": "^1.0.0",
     "keygenerator": "^1.0.4",
